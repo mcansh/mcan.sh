@@ -1,0 +1,28 @@
+{
+  "name": "mcansh",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "node server.js",
+    "build": "next build",
+    "start": "NODE_ENV=production node server.js"
+  },
+  "main": "pages/index.js",
+  "dependencies": {
+    "babel-plugin-styled-components": "^1.1.4",
+    "babel-preset-stage-0": "^6.24.1",
+    "next": "^3.0.0-beta6",
+    "styled-components": "^2.0.0",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "express": "^4.14.0",
+    "react-twitter-widgets": "^1.3.0"
+  },
+  "repository": "https://github.com/mcansh/mcan.sh",
+  "homepage": "https://mcansh",
+  "author": {
+    "name": "Logan McAnsh",
+    "email": "logan@mcan.sh",
+    "url": "https://mcan.sh"
+  },
+  "license": "MIT"
+}
