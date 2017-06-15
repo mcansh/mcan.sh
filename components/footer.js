@@ -1,38 +1,37 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import PropTypes from 'prop-types';
 
-const FooterContainer = styled.footer`
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 50px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  z-index: -1;
-`
+const Footer = props => (
+  <footer>
+    <div>
+      {props.children}
+    </div>
+    <style jsx>{`
+      footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: -1;
+      }
 
-const FooterContent = styled.div`
-  max-width: 600px;
-  width: 80%;
-  margin: 0 auto;
-  text-align: center;
-  z-index: -1;
-`
+      div {
+        max-width: 600px;
+        width: 80%;
+        margin: 0 auto;
+        text-align: center;
+        z-index: -1;
+      }
+    `}</style>
+  </footer>
+);
 
-const Footer = (props) => {
-  return(
-    <FooterContainer>
-      <FooterContent>&copy; 2017 Logan McAnsh</FooterContent>
-    </FooterContainer>
-  )
-}
+Footer.propTypes = {
+  children: PropTypes.node.isRequired
+};
 
-export default Footer
+export default Footer;
