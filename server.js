@@ -1,22 +1,17 @@
-const express = require('express');
+const { createServer } = require('http');
 const next = require('next');
-const { join } = require('path');
 
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
-app.prepare().then(() => {
-  const server = express();
-
-  server.get('*', (req, res) => {
-    return handle(req, res);
-  });
-
-  server.listen(3000, err => {
-    if (err) {
-      throw err
-    }
-    console.log('→ Ready on http://localhost:3000');
+app.prepare()
+.then(() => {
+  createServer((req, res) => {
+    handle(req, res);
+  })
+  .listen(3000, (err) => {
+    if (err) throw err;
+    console.log('> Ready on http://localhost:3000');
   });
 });
