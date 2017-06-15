@@ -6,12 +6,15 @@
     "build": "next build",
     "start": "NODE_ENV=production node server.js"
   },
+  "now": {
+    "alias": "loganmcansh.com"
+  },
   "main": "pages/index.js",
   "dependencies": {
     "next": "^3.0.0-beta13",
     "prop-types": "^15.5.10",
-    "react": "^15.6.0",
-    "react-dom": "^15.6.0"
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
   },
   "devDependencies": {
     "eslint": "^3.19.0",
