@@ -1,7 +1,22 @@
-import styled from 'styled-components'
+import React from 'react';
+import PropTypes from 'prop-types';
 
-const Heading = styled.h2`
-  text-align: center;
-  font-size: 2.5rem;
-`
-export default Heading
+const H2 = props => (
+  <h2>
+    {props.children}
+    <style jsx>{`
+      h2 {
+        text-align: center;
+        font-size: 2.5rem;
+        font-weight: 400;
+        margin: 20px 0;
+      }
+    `}</style>
+  </h2>
+);
+
+H2.propTypes = {
+  children: PropTypes.node.isRequired
+};
+
+export default H2;

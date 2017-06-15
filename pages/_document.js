@@ -1,30 +1,30 @@
-import Document, { Head, Main, NextScript } from 'next/document'
-import { ServerStyleSheet } from 'styled-components'
+import React from 'react';
+import Document, { Head, Main, NextScript } from 'next/document';
 
 export default class MyDocument extends Document {
-  render () {
-    // Hack to prevent unstyled flash with styled-components.
-    // From https://github.com/zeit/next.js/blob/master/examples/with-styled-components/pages/_document.js
-    const sheet = new ServerStyleSheet();
-    const main = sheet.collectStyles(<Main />);
-    const styleTags = sheet.getStyleElement();
+  static async getInitialProps({ renderPage }) {
+    const page = renderPage();
+    return { ...page };
+  }
+
+  render() {
     return (
-      <html>
+      <html lang="en">
         <Head>
-          <meta name="viewport" content="initial-scale=1.0, width=device-width" />
           <title>Logan McAnsh</title>
-          <link rel="author" type="text/plain" href="/humans.txt" />
-          <link rel="canonical" href="https://mcan.sh" />
-          <link rel="stylesheet" type="text/css" href="/static/style.css" />
-          {styleTags}
+          <meta charSet="utf-8" />
+          <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+          <link rel="shortcut icon" href="/static/images/favicon.png" />
+          <link rel="stylesheet" href="/static/css/style.css" />
         </Head>
         <body>
-          <div className='root'>
-            {main}
+          <Main />
+          <div>
+            <NextScript />
           </div>
-          <NextScript />
+          <script src="/static/js/main.js" />
         </body>
       </html>
-    )
+    );
   }
 }

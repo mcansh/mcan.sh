@@ -1,6 +1,10 @@
 @import "font.css";
 @import "normalize.css";
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: "gotham pro", sans-serif;
   line-height: 1.3;
@@ -8,33 +12,17 @@ body {
   margin: 0;
 }
 
-* {
-  box-sizing: border-box;
-}
-
-h1,h2,h3,h4,h5,h6 {
-  font-weight: 400;
-  margin: 20px 0;
-}
-
-p {
-  font-size: 1.1em;
-  margin: 0
-}
-
 a {
   position: relative;
   text-decoration: none;
   color: #E53A40;
-  -webkit-transition: 300ms all ease-in-out;
   transition: 300ms all ease-in-out;
   outline: none;
 }
 
 a::after {
-  -webkit-transition: 300ms all ease-in-out;
   transition: 300ms all ease-in-out;
-  content: "";
+  content: '';
   display: block;
   width: 100%;
   height: 1px;
@@ -42,13 +30,10 @@ a::after {
   bottom: -3px;
   left: 0;
   background: #E53A40;
-  -webkit-transform-origin: left center;
   transform-origin: left center;
-  -webkit-transform: scaleX(0);
   transform: scaleX(0);
 }
 
 a:hover::after {
-  -webkit-transform: scaleX(1);
   transform: scaleX(1);
 }
