@@ -7,9 +7,9 @@ const H2 = props => (
     <style jsx>{`
       h2 {
         text-align: center;
-        font-size: 2.5rem;
+        font-size: 4rem;
         font-weight: 400;
-        margin: 20px 0;
+        margin: 2rem 0;
       }
     `}</style>
   </h2>

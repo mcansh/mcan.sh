@@ -1,13 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-const Headshot = props => (
+const Headshot = () => (
   <div>
-    {props.children}
     <style jsx>{`
       div {
-        height: 150px;
-        width: 150px;
+        height: 15rem;
+        width: 15rem;
         background-image: url(/static/images/11698668.jpg);
         background-size: cover;
         background-position: center;
@@ -17,9 +15,5 @@ const Headshot = props => (
     `}</style>
   </div>
 );
-
-Headshot.propTypes = {
-  children: PropTypes.node.isRequired
-};
 
 export default Headshot;

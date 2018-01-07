@@ -6,7 +6,7 @@ const P = props => (
     {props.children}
     <style jsx>{`
       p {
-        font-size: 1.1em;
+        font-size: 1.8rem;
         margin: 0;
       }
     `}</style>

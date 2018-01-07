@@ -2,33 +2,33 @@
   "name": "mcansh",
   "version": "1.0.0",
   "scripts": {
-    "dev": "node server.js",
+    "dev": "next",
     "build": "next build",
-    "start": "NODE_ENV=production node server.js"
+    "start": "NODE_ENV=production node -r @std/esm server"
   },
-  "now": {
-    "alias": "loganmcansh.com"
-  },
-  "main": "pages/index.js",
   "dependencies": {
-    "next": "^3.0.0-beta13",
+    "@std/esm": "^0.19.1",
+    "express": "^4.16.2",
+    "next": "^4.3.0-canary.1",
     "prop-types": "^15.5.10",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "sw-precache-webpack-plugin": "^0.11.4",
+    "webpack": "^3.10.0"
   },
   "devDependencies": {
-    "eslint": "^3.19.0",
-    "eslint-config-airbnb": "^15.0.1",
+    "babel-eslint": "latest",
+    "eslint": "^4.15.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-prettier": "latest",
     "eslint-plugin-import": "^2.3.0",
-    "eslint-plugin-jsx-a11y": "^5.0.3",
-    "eslint-plugin-react": "^7.1.0"
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-prettier": "latest",
+    "eslint-plugin-react": "^7.1.0",
+    "prettier": "^1.9.2"
   },
   "repository": "https://github.com/mcansh/mcan.sh-nextjs",
-  "homepage": "https://loganmcansh.com",
-  "author": {
-    "name": "Logan McAnsh",
-    "email": "logan@mcan.sh",
-    "url": "https://mcan.sh"
-  },
+  "homepage": "https://mcan.sh",
+  "author": "Logan McAnsh <logan@mcan.sh> (https://mcan.sh)",
   "license": "MIT"
 }
