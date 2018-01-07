@@ -2,6 +2,9 @@ const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const { name } = require('./package.json');
 
 module.exports = {
+  exportPathMap: () => ({
+    '/': { page: '/' }
+  }),
   webpack: config => {
     if (process.env.NODE_ENV === 'production') {
       config.plugins.push(
