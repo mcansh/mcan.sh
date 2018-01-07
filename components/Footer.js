@@ -1,13 +1,10 @@
 import React from 'react';
-import { author } from '../package.json';
 
 const Footer = () => {
   const year = new Date().getFullYear();
   return (
     <footer>
-      <div>
-        &copy; {year} {author}
-      </div>
+      <div>&copy; {year} Logan McAnsh</div>
       <style jsx>{`
         footer {
           position: fixed;
