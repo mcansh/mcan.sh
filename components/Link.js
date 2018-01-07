@@ -6,7 +6,7 @@ import style from '../style';
 const CustomLink = ({ href, children }) => {
   const external = href.startsWith('http://') || href.startsWith('https://');
   return (
-    <Link href={href} prefetch>
+    <Link href={href} prefetch={external}>
       <a rel={external ? 'noopener' : ''} target={external ? '_blank' : ''}>
         {children}
         <style jsx>{`
