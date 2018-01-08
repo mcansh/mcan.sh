@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@std/esm": "^0.19.1",
+    "babel-plugin-inline-dotenv": "^1.1.2",
     "express": "^4.16.2",
     "next": "^4.3.0-canary.1",
     "prop-types": "^15.5.10",
