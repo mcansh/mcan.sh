@@ -5,7 +5,6 @@ import { version } from '../package.json';
 
 class Page extends Component {
   componentDidMount() {
-    console.log(process.env.NODE_ENV);
     if (process.env.NODE_ENV === 'production') {
       if (process.env.SENTRY) {
         Raven.config(process.env.SENTRY, {
