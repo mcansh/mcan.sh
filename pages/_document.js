@@ -12,7 +12,10 @@ class Page extends Document {
             name="viewport"
             content="initial-scale=1.0, width=device-width, viewport-fit=cover"
           />
-          <link rel="shortcut icon" href="/static/images/favicon.png" />
+          <link
+            rel="shortcut icon"
+            href="https://mcan.sh/assets/img/favicon.png"
+          />
         </Head>
         <body>
           <Main />
