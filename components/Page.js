@@ -36,7 +36,7 @@ class Page extends Component {
             flex-direction: column;
             min-height: 100vh;
             max-width: 60rem;
-            width: 80%;
+            width: 90%;
             margin: 0 auto 5rem auto;
             background: #f3f4f6;
           }
