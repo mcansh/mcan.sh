@@ -3,6 +3,34 @@ import PropTypes from 'prop-types';
 import Raven from 'raven-js';
 import { version } from '../package.json';
 
+const fontPath = 'https://mcan.sh/assets/fonts/Gotham';
+const fonts = [
+  { name: 'GothamPro', weight: 'normal', style: 'normal' },
+  { name: 'GothamPro-LightItalic', weight: '300', style: 'italic' },
+  { name: 'GothamPro-MediumItalic', weight: '500', style: 'italic' },
+  { name: 'GothamPro-BlackItalic', weight: '900', style: 'italic' },
+  { name: 'GothamPro-BoldItalic', weight: 'bold', style: 'italic' },
+  { name: 'GothamPro-Light', weight: '300', style: 'normal' },
+  { name: 'GothamPro-Bold', weight: 'bold', style: 'normal' },
+  { name: 'GothamPro-Black', weight: '900', style: 'normal' },
+  { name: 'GothamPro-Medium', weight: '500', style: 'normal' },
+  { name: 'GothamPro-Italic', weight: 'normal', style: 'italic' }
+];
+
+const fontFace = fonts.map(
+  font => `@font-face {
+		font-family: 'Gotham Pro';
+		src: url('${fontPath}/${font}.eot');
+		src: url('${fontPath}/${font}.eot?#iefix') format('embedded-opentype'),
+         url('${fontPath}/${font}.woff2') format('woff2'),
+			   url('${fontPath}/${font}.woff') format('woff'),
+			   url('${fontPath}/${font}.ttf') format('truetype'),
+			   url('${fontPath}/${font}.svg#GothamPro-Bold') format('svg');
+		font-weight: normal;
+		font-style: normal;
+	}`
+);
+
 class Page extends Component {
   componentDidMount() {
     if (process.env.NODE_ENV === 'production') {
@@ -57,211 +85,10 @@ class Page extends Component {
             line-height: 1.3;
             background: #f3f4f6;
             font-family: 'gotham pro', sans-serif;
+            text-align: center;
           }
 
-          @font-face {
-            font-family: 'Gotham Pro';
-            src: url('https://mcan.sh/assets/fonts/Gotham/GothamPro-Bold.eot');
-            src: url('https://mcan.sh/assets/fonts/Gotham/GothamPro-Bold.eot?#iefix')
-                format('embedded-opentype'),
-              url('https://mcan.sh/assets/fonts/Gotham/GothamPro-Bold.woff2')
-                format('woff2'),
-              url('https://mcan.sh/assets/fonts/Gotham/GothamPro-Bold.woff')
-                format('woff'),
-              url('https://mcan.sh/assets/fonts/Gotham/GothamPro-Bold.ttf')
-                format('truetype'),
-              url('https://mcan.sh/assets/fonts/Gotham/GothamPro-Bold.svg#GothamPro-Bold')
-                format('svg');
-            font-weight: bold;
-            font-style: normal;
-          }
-
-          @font-face {
-            font-family: 'Gotham Pro';
-            src: url('https://mcan.sh/assets/fonts/Gotham/GothamPro.eot');
-            src: url('https://mcan.sh/assets/fonts/Gotham/GothamPro.eot?#iefix')
-                format('embedded-opentype'),
-              url('https://mcan.sh/assets/fonts/Gotham/GothamPro.woff2')
-                format('woff2'),
-              url('https://mcan.sh/assets/fonts/Gotham/GothamPro.woff')
-                format('woff'),
-              url('https://mcan.sh/assets/fonts/Gotham/GothamPro.ttf')
-                format('truetype'),
-              url('https://mcan.sh/assets/fonts/Gotham/GothamPro.svg#GothamPro')
-                format('svg');
-            font-weight: normal;
-            font-style: normal;
-          }
-
-          @font-face {
-            font-family: 'Gotham Pro';
-            src: url('https://mcan.sh/assets/fonts/Gotham/GothamPro-BlackItalic.eot');
-            src: url('https://mcan.sh/assets/fonts/Gotham/GothamPro-BlackItalic.eot?#iefix')
-                format('embedded-opentype'),
-              url('https://mcan.sh/assets/fonts/Gotham/GothamPro-BlackItalic.woff2')
-                format('woff2'),
-              url('https://mcan.sh/assets/fonts/Gotham/GothamPro-BlackItalic.woff')
-                format('woff'),
-              url('https://mcan.sh/assets/fonts/Gotham/GothamPro-BlackItalic.ttf')
-                format('truetype'),
-              url('https://mcan.sh/assets/fonts/Gotham/GothamPro-BlackItalic.svg#GothamPro-BlackItalic')
-                format('svg');
-            font-weight: 900;
-            font-style: italic;
-          }
-
-          @font-face {
-            font-family: 'Gotham Pro Narrow';
-            src: url('https://mcan.sh/assets/fonts/Gotham/GothamProNarrow-Bold.eot');
-            src: url('https://mcan.sh/assets/fonts/Gotham/GothamProNarrow-Bold.eot?#iefix')
-                format('embedded-opentype'),
-              url('https://mcan.sh/assets/fonts/Gotham/GothamProNarrow-Bold.woff2')
-                format('woff2'),
-              url('https://mcan.sh/assets/fonts/Gotham/GothamProNarrow-Bold.woff')
-                format('woff'),
-              url('https://mcan.sh/assets/fonts/Gotham/GothamProNarrow-Bold.ttf')
-                format('truetype'),
-              url('https://mcan.sh/assets/fonts/Gotham/GothamProNarrow-Bold.svg#GothamProNarrow-Bold')
-                format('svg');
-            font-weight: bold;
-            font-style: normal;
-          }
-
-          @font-face {
-            font-family: 'Gotham Pro';
-            src: url('https://mcan.sh/assets/fonts/Gotham/GothamPro-BoldItalic.eot');
-            src: url('https://mcan.sh/assets/fonts/Gotham/GothamPro-BoldItalic.eot?#iefix')
-                format('embedded-opentype'),
-              url('https://mcan.sh/assets/fonts/Gotham/GothamPro-BoldItalic.woff2')
-                format('woff2'),
-              url('https://mcan.sh/assets/fonts/Gotham/GothamPro-BoldItalic.woff')
-                format('woff'),
-              url('https://mcan.sh/assets/fonts/Gotham/GothamPro-BoldItalic.ttf')
-                format('truetype'),
-              url('https://mcan.sh/assets/fonts/Gotham/GothamPro-BoldItalic.svg#GothamPro-BoldItalic')
-                format('svg');
-            font-weight: bold;
-            font-style: italic;
-          }
-
-          @font-face {
-            font-family: 'Gotham Pro Narrow';
-            src: url('https://mcan.sh/assets/fonts/Gotham/GothamProNarrow-Medium.eot');
-            src: url('https://mcan.sh/assets/fonts/Gotham/GothamProNarrow-Medium.eot?#iefix')
-                format('embedded-opentype'),
-              url('https://mcan.sh/assets/fonts/Gotham/GothamProNarrow-Medium.woff2')
-                format('woff2'),
-              url('https://mcan.sh/assets/fonts/Gotham/GothamProNarrow-Medium.woff')
-                format('woff'),
-              url('https://mcan.sh/assets/fonts/Gotham/GothamProNarrow-Medium.ttf')
-                format('truetype'),
-              url('https://mcan.sh/assets/fonts/Gotham/GothamProNarrow-Medium.svg#GothamProNarrow-Medium')
-                format('svg');
-            font-weight: 500;
-            font-style: normal;
-          }
-
-          @font-face {
-            font-family: 'Gotham Pro';
-            src: url('https://mcan.sh/assets/fonts/Gotham/GothamPro-Italic.eot');
-            src: url('https://mcan.sh/assets/fonts/Gotham/GothamPro-Italic.eot?#iefix')
-                format('embedded-opentype'),
-              url('https://mcan.sh/assets/fonts/Gotham/GothamPro-Italic.woff2')
-                format('woff2'),
-              url('https://mcan.sh/assets/fonts/Gotham/GothamPro-Italic.woff')
-                format('woff'),
-              url('https://mcan.sh/assets/fonts/Gotham/GothamPro-Italic.ttf')
-                format('truetype'),
-              url('https://mcan.sh/assets/fonts/Gotham/GothamPro-Italic.svg#GothamPro-Italic')
-                format('svg');
-            font-weight: normal;
-            font-style: italic;
-          }
-
-          @font-face {
-            font-family: 'Gotham Pro';
-            src: url('https://mcan.sh/assets/fonts/Gotham/GothamPro-Light.eot');
-            src: url('https://mcan.sh/assets/fonts/Gotham/GothamPro-Light.eot?#iefix')
-                format('embedded-opentype'),
-              url('https://mcan.sh/assets/fonts/Gotham/GothamPro-Light.woff2')
-                format('woff2'),
-              url('https://mcan.sh/assets/fonts/Gotham/GothamPro-Light.woff')
-                format('woff'),
-              url('https://mcan.sh/assets/fonts/Gotham/GothamPro-Light.ttf')
-                format('truetype'),
-              url('https://mcan.sh/assets/fonts/Gotham/GothamPro-Light.svg#GothamPro-Light')
-                format('svg');
-            font-weight: 300;
-            font-style: normal;
-          }
-
-          @font-face {
-            font-family: 'Gotham Pro';
-            src: url('https://mcan.sh/assets/fonts/Gotham/GothamPro-Black.eot');
-            src: url('https://mcan.sh/assets/fonts/Gotham/GothamPro-Black.eot?#iefix')
-                format('embedded-opentype'),
-              url('https://mcan.sh/assets/fonts/Gotham/GothamPro-Black.woff2')
-                format('woff2'),
-              url('https://mcan.sh/assets/fonts/Gotham/GothamPro-Black.woff')
-                format('woff'),
-              url('https://mcan.sh/assets/fonts/Gotham/GothamPro-Black.ttf')
-                format('truetype'),
-              url('https://mcan.sh/assets/fonts/Gotham/GothamPro-Black.svg#GothamPro-Black')
-                format('svg');
-            font-weight: 900;
-            font-style: normal;
-          }
-
-          @font-face {
-            font-family: 'Gotham Pro';
-            src: url('https://mcan.sh/assets/fonts/Gotham/GothamPro-Medium.eot');
-            src: url('https://mcan.sh/assets/fonts/Gotham/GothamPro-Medium.eot?#iefix')
-                format('embedded-opentype'),
-              url('https://mcan.sh/assets/fonts/Gotham/GothamPro-Medium.woff2')
-                format('woff2'),
-              url('https://mcan.sh/assets/fonts/Gotham/GothamPro-Medium.woff')
-                format('woff'),
-              url('https://mcan.sh/assets/fonts/Gotham/GothamPro-Medium.ttf')
-                format('truetype'),
-              url('https://mcan.sh/assets/fonts/Gotham/GothamPro-Medium.svg#GothamPro-Medium')
-                format('svg');
-            font-weight: 500;
-            font-style: normal;
-          }
-
-          @font-face {
-            font-family: 'Gotham Pro';
-            src: url('https://mcan.sh/assets/fonts/Gotham/GothamPro-LightItalic.eot');
-            src: url('https://mcan.sh/assets/fonts/Gotham/GothamPro-LightItalic.eot?#iefix')
-                format('embedded-opentype'),
-              url('https://mcan.sh/assets/fonts/Gotham/GothamPro-LightItalic.woff2')
-                format('woff2'),
-              url('https://mcan.sh/assets/fonts/Gotham/GothamPro-LightItalic.woff')
-                format('woff'),
-              url('https://mcan.sh/assets/fonts/Gotham/GothamPro-LightItalic.ttf')
-                format('truetype'),
-              url('https://mcan.sh/assets/fonts/Gotham/GothamPro-LightItalic.svg#GothamPro-LightItalic')
-                format('svg');
-            font-weight: 300;
-            font-style: italic;
-          }
-
-          @font-face {
-            font-family: 'Gotham Pro';
-            src: url('https://mcan.sh/assets/fonts/Gotham/GothamPro-MediumItalic.eot');
-            src: url('https://mcan.sh/assets/fonts/Gotham/GothamPro-MediumItalic.eot?#iefix')
-                format('embedded-opentype'),
-              url('https://mcan.sh/assets/fonts/Gotham/GothamPro-MediumItalic.woff2')
-                format('woff2'),
-              url('https://mcan.sh/assets/fonts/Gotham/GothamPro-MediumItalic.woff')
-                format('woff'),
-              url('https://mcan.sh/assets/fonts/Gotham/GothamPro-MediumItalic.ttf')
-                format('truetype'),
-              url('https://mcan.sh/assets/fonts/Gotham/GothamPro-MediumItalic.svg#GothamPro-MediumItalic')
-                format('svg');
-            font-weight: 500;
-            font-style: italic;
-          }
+          ${fontFace.join('')};
         `}</style>
       </main>
     );
