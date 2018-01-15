@@ -1,5 +1,7 @@
 # mcan.sh
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/mcansh/mcan.sh.svg)](https://greenkeeper.io/)
+
 This is my [website](https://mcan.sh). It's pretty simple.
 
 ## Running Locally
