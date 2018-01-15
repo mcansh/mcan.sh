@@ -4,7 +4,7 @@
   "version": "1.0.1",
   "scripts": {
     "dev": "next",
-    "build": "next build && next export",
+    "build": "next build && next export && cp .next/sw.js ./out",
     "start": "NODE_ENV=production node -r @std/esm server"
   },
   "dependencies": {
