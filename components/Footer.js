@@ -17,6 +17,8 @@ const Footer = () => {
           align-items: center;
           z-index: -1;
           font-size: 1.6rem;
+          padding-bottom: constant(safe-area-inset-bottom);
+          padding-bottom: env(safe-area-inset-bottom);
         }
 
         div {
