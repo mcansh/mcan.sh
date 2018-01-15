@@ -20,12 +20,12 @@ const fonts = [
 const fontFace = fonts.map(
   font => `@font-face {
 		font-family: 'Gotham Pro';
-		src: url('${fontPath}/${font}.eot');
-		src: url('${fontPath}/${font}.eot?#iefix') format('embedded-opentype'),
-         url('${fontPath}/${font}.woff2') format('woff2'),
-			   url('${fontPath}/${font}.woff') format('woff'),
-			   url('${fontPath}/${font}.ttf') format('truetype'),
-			   url('${fontPath}/${font}.svg#GothamPro-Bold') format('svg');
+		src: url('${fontPath}/${font.name}.eot');
+		src: url('${fontPath}/${font.name}.eot?#iefix') format('embedded-opentype'),
+         url('${fontPath}/${font.name}.woff2') format('woff2'),
+			   url('${fontPath}/${font.name}.woff') format('woff'),
+			   url('${fontPath}/${font.name}.ttf') format('truetype'),
+			   url('${fontPath}/${font.name}.svg#GothamPro-Bold') format('svg');
 		font-weight: normal;
 		font-style: normal;
 	}`
