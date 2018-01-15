@@ -1,7 +1,7 @@
 {
   "name": "mcansh",
   "description": "personal website",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "scripts": {
     "dev": "next",
     "build": "next build && next export && cp .next/sw.js ./out",
