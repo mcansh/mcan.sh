@@ -88,7 +88,7 @@ class Page extends Component {
             text-align: center;
           }
 
-          ${fontFace.join('')};
+          ${fontFace};
         `}</style>
       </main>
     );
