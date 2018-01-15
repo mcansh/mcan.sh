@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import style from '../style';
+import { colors } from '../style';
 
 const CustomLink = ({ href, children }) => {
   const external = href.startsWith('http://') || href.startsWith('https://');
@@ -14,7 +14,7 @@ const CustomLink = ({ href, children }) => {
             a {
               position: relative;
               text-decoration: none;
-              color: ${style.primary};
+              color: ${colors.primary};
             }
 
             a:hover {
@@ -34,7 +34,7 @@ const CustomLink = ({ href, children }) => {
           a {
             position: relative;
             text-decoration: none;
-            color: ${style.primary};
+            color: ${colors.primary};
           }
 
           a:hover {

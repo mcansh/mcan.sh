@@ -2,34 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Raven from 'raven-js';
 import { version } from '../package.json';
-
-const fontPath = 'https://mcan.sh/assets/fonts/Gotham';
-const fonts = [
-  { name: 'GothamPro', weight: 'normal', style: 'normal' },
-  { name: 'GothamPro-LightItalic', weight: '300', style: 'italic' },
-  { name: 'GothamPro-MediumItalic', weight: '500', style: 'italic' },
-  { name: 'GothamPro-BlackItalic', weight: '900', style: 'italic' },
-  { name: 'GothamPro-BoldItalic', weight: 'bold', style: 'italic' },
-  { name: 'GothamPro-Light', weight: '300', style: 'normal' },
-  { name: 'GothamPro-Bold', weight: 'bold', style: 'normal' },
-  { name: 'GothamPro-Black', weight: '900', style: 'normal' },
-  { name: 'GothamPro-Medium', weight: '500', style: 'normal' },
-  { name: 'GothamPro-Italic', weight: 'normal', style: 'italic' }
-];
-
-const fontFace = fonts.map(
-  font => `@font-face {
-		font-family: 'Gotham Pro';
-		src: url('${fontPath}/${font.name}.eot');
-		src: url('${fontPath}/${font.name}.eot?#iefix') format('embedded-opentype'),
-         url('${fontPath}/${font.name}.woff2') format('woff2'),
-			   url('${fontPath}/${font.name}.woff') format('woff'),
-			   url('${fontPath}/${font.name}.ttf') format('truetype'),
-			   url('${fontPath}/${font.name}.svg#GothamPro-Bold') format('svg');
-		font-weight: normal;
-		font-style: normal;
-	}`
-);
+import { fontFace } from '../style';
 
 class Page extends Component {
   componentDidMount() {
@@ -84,12 +57,13 @@ class Page extends Component {
           body {
             line-height: 1.3;
             background: #f3f4f6;
-            font-family: 'gotham pro', sans-serif;
+            font-family: 'Gotham Pro', sans-serif;
             text-align: center;
           }
-
-          ${fontFace};
         `}</style>
+        <style jsx global>
+          {fontFace}
+        </style>
       </main>
     );
   }
