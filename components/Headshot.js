@@ -1,19 +1,19 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 const Headshot = () => (
-  <div>
+  <Fragment>
+    <img src="/static/images/11698668.jpg" alt="me 💁‍♂️" />
     <style jsx>{`
-      div {
+      img {
         height: 15rem;
         width: 15rem;
-        background-image: url(/static/images/11698668.jpg);
-        background-size: cover;
-        background-position: center;
+        object-fit: cover;
         border-radius: 50%;
         margin: 0 auto;
+        font-family: 'object-fit: cover;';
       }
     `}</style>
-  </div>
+  </Fragment>
 );
 
 export default Headshot;
