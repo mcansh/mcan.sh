@@ -21,13 +21,13 @@
     "webpack": "^3.10.0"
   },
   "devDependencies": {
-    "babel-eslint": "latest",
+    "babel-eslint": "^8.2.1",
     "eslint": "^4.15.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-prettier": "latest",
     "eslint-plugin-import": "^2.3.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-prettier": "latest",
+    "eslint-plugin-prettier": "^2.5.0",
     "eslint-plugin-react": "^7.1.0",
     "prettier": "^1.9.2"
   },
