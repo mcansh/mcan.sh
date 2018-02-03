@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import Link from 'next/link';
 import styled from 'styled-components';
 import { colors } from '../style';
+import isExternal from '../lib/isExternal';
 
-const Anchor = styled.a`
+const Anchor = styled(Link)`
   position: relative;
   text-decoration: none;
   color: ${colors.primary};
@@ -16,20 +17,18 @@ const Anchor = styled.a`
 `;
 
 const CustomLink = ({ href, children }) => {
-  const external = href.startsWith('http://') || href.startsWith('https://');
+  const external = isExternal(href);
   if (external) {
     return (
-      <Link href={href}>
-        <Anchor rel="noopener" target="_blank">
-          {children}
-        </Anchor>
-      </Link>
+      <Anchor href={href} rel="noopener" target="_blank">
+        {children}
+      </Anchor>
     );
   }
   return (
-    <Link href={href} prefetch>
-      <Anchor>{children}</Anchor>
-    </Link>
+    <Anchor href={href} prefetch>
+      {children}
+    </Anchor>
   );
 };
 
