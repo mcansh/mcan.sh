@@ -2,33 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { colors } from '../style';
+import isExternal from '../lib/isExternal';
 
 const CustomLink = ({ href, children }) => {
-  const external = href.startsWith('http://') || href.startsWith('https://');
-  if (external) {
-    return (
-      <Link href={href}>
-        <a rel="noopener" target="_blank">
-          {children}
-          <style jsx>{`
-            a {
-              position: relative;
-              text-decoration: none;
-              color: ${colors.primary};
-            }
-
-            a:hover {
-              text-decoration: underline;
-              text-decoration-skip-ink: auto;
-            }
-          `}</style>
-        </a>
-      </Link>
-    );
-  }
+  const internalURL = !isExternal(href);
   return (
-    <Link href={href} prefetch>
-      <a>
+    <Link href={href} prefetch={internalURL}>
+      <a
+        rel={internalURL ? '' : 'noopener'}
+        target={internalURL ? '' : '_blank'}
+      >
         {children}
         <style jsx>{`
           a {
