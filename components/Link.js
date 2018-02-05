@@ -2,16 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { colors } from '../style';
-import isExternal from '../lib/isExternal';
 
 const CustomLink = ({ href, children }) => {
-  const internalURL = !isExternal(href);
+  const isExternal = /^https?:\/\//.test(href);
   return (
-    <Link href={href} prefetch={internalURL}>
-      <a
-        rel={internalURL ? '' : 'noopener'}
-        target={internalURL ? '' : '_blank'}
-      >
+    <Link href={href} prefetch={!isExternal}>
+      <a rel={isExternal ? 'noopener' : ''} target={isExternal ? '_blank' : ''}>
         {children}
         <style jsx>{`
           a {
@@ -19,7 +15,6 @@ const CustomLink = ({ href, children }) => {
             text-decoration: none;
             color: ${colors.primary};
           }
-
           a:hover {
             text-decoration: underline;
             text-decoration-skip-ink: auto;
