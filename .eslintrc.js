@@ -10,6 +10,13 @@ module.exports = {
     'jsx-a11y/href-no-hash': 0,
     'react/jsx-closing-tag-location': 0,
     'react/jsx-curly-brace-presence': 0,
-    'jsx-a11y/anchor-is-valid': 0
+    'jsx-a11y/anchor-is-valid': 0,
+    'prettier/prettier': [
+      'error',
+      {
+        trailingComma: 'es5',
+        singleQuote: true
+      }
+    ]
   }
 };
