@@ -34,5 +34,9 @@
   "repository": "https://github.com/mcansh/mcan.sh-nextjs",
   "homepage": "https://mcan.sh",
   "author": "Logan McAnsh <logan@mcan.sh> (https://mcan.sh)",
-  "license": "MIT"
+  "license": "MIT",
+  "@std/esm": {
+    "esm": "js",
+    "cjs": true
+  }
 }

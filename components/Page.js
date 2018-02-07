@@ -10,7 +10,7 @@ class Page extends Component {
       if (process.env.SENTRY) {
         Raven.config(process.env.SENTRY, {
           release: version,
-          environment: process.env.NODE_ENV
+          environment: process.env.NODE_ENV,
         }).install();
       }
 
@@ -70,7 +70,7 @@ class Page extends Component {
 }
 
 Page.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 };
 
 export default Page;
