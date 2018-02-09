@@ -1,5 +1,7 @@
 import React, { Fragment, Component } from 'react';
 import objectFitImages from 'object-fit-images';
+import { connect } from 'unistore/react';
+import { actions } from '../store';
 
 class Headshot extends Component {
   componentDidMount = () => {
@@ -7,9 +9,14 @@ class Headshot extends Component {
   };
 
   render() {
+    const { toggleDark } = this.props;
     return (
       <Fragment>
-        <img src="/static/images/11698668.jpg" alt="me 💁‍♂️" />
+        <img
+          src="/static/images/11698668.jpg"
+          alt="me 💁‍♂️"
+          onDoubleClick={toggleDark}
+        />
         <style jsx>{`
           img {
             height: 15rem;
@@ -25,4 +32,4 @@ class Headshot extends Component {
   }
 }
 
-export default Headshot;
+export default connect('dark', actions)(Headshot);
