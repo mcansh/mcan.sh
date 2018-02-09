@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
+import { connect } from 'unistore/react';
+import { actions } from '../store';
 import { colors } from '../style';
 
-const CustomLink = ({ href, children }) => {
+const CustomLink = ({ href, children, dark }) => {
   const isExternal = /^https?:\/\//.test(href);
   return (
     <Link href={href} prefetch={!isExternal}>
@@ -13,7 +15,7 @@ const CustomLink = ({ href, children }) => {
           a {
             position: relative;
             text-decoration: none;
-            color: ${colors.primary};
+            color: ${dark ? colors.primaryInDarkMode : colors.primary};
           }
           a:hover {
             text-decoration: underline;
@@ -30,4 +32,4 @@ CustomLink.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default CustomLink;
+export default connect('dark', actions)(CustomLink);
