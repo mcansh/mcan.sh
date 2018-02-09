@@ -1,5 +1,5 @@
 export const colors = {
-  primary: '#6c16c7'
+  primary: '#6c16c7',
 };
 
 const fontPath = 'https://mcan.sh/assets/fonts/';
@@ -9,8 +9,8 @@ const fonts = [
     family: 'Gotham Pro',
     name: 'GothamPro',
     weight: 'normal',
-    style: 'normal'
-  }
+    style: 'normal',
+  },
 ];
 
 /* prettier-ignore */
