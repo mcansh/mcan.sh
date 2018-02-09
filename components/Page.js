@@ -30,6 +30,7 @@ const App = connect('dark', actions)(({ dark, children }) => (
 
       html {
         font-size: 10px;
+        touch-action: manipulation;
       }
 
       body {

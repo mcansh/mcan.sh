@@ -1,9 +1,14 @@
 import React, { Fragment, Component } from 'react';
 import objectFitImages from 'object-fit-images';
+import PropTypes from 'prop-types';
 import { connect } from 'unistore/react';
 import { actions } from '../store';
 
 class Headshot extends Component {
+  static propTypes = {
+    toggleDark: PropTypes.func.isRequired,
+  };
+
   componentDidMount = () => {
     objectFitImages();
   };
