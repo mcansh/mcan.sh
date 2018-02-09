@@ -1,5 +1,6 @@
 export const colors = {
   primary: '#6c16c7',
+  primaryInDarkMode: '#9240ea',
 };
 
 const fontPath = 'https://mcan.sh/assets/fonts/';
