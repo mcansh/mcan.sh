@@ -1,6 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'unistore/react';
+import { actions } from '../store';
 
-const Footer = () => {
+const Footer = ({ dark }) => {
   const year = new Date().getFullYear();
   return (
     <footer>
@@ -19,6 +22,7 @@ const Footer = () => {
           font-size: 1.6rem;
           padding-bottom: constant(safe-area-inset-bottom);
           padding-bottom: env(safe-area-inset-bottom);
+          color: ${dark ? 'white' : 'black'};
         }
 
         div {
@@ -33,4 +37,8 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+Footer.propTypes = {
+  dark: PropTypes.bool.isRequired,
+};
+
+export default connect('dark', actions)(Footer);
