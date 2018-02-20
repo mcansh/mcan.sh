@@ -12,7 +12,7 @@
     "start": "NODE_ENV=production node -r @std/esm server"
   },
   "dependencies": {
-    "@std/esm": "^0.21.0",
+    "@std/esm": "^0.22.0",
     "babel-plugin-inline-dotenv": "^1.1.2",
     "express": "^4.16.2",
     "next": "^5.0.1-canary.2",
