@@ -8,14 +8,12 @@ class Page extends Document {
         <Head>
           <title>Logan McAnsh</title>
           <meta charSet="utf-8" />
+          <meta httpEquiv="x-ua-compatible" content="ie=edge" />
           <meta
             name="viewport"
             content="initial-scale=1.0, width=device-width, viewport-fit=cover"
           />
-          <link
-            rel="shortcut icon"
-            href="https://mcan.sh/assets/img/favicon.png"
-          />
+          <link rel="shortcut icon" href="/static/images/favicon.png" />
         </Head>
         <body>
           <Main />
