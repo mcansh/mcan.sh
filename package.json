@@ -12,18 +12,18 @@
     "start": "NODE_ENV=production node -r @std/esm server"
   },
   "dependencies": {
-    "@std/esm": "0.23.0",
+    "@std/esm": "0.23.4",
     "babel-plugin-inline-dotenv": "1.1.2",
     "express": "4.16.2",
     "next": "5.0.0",
     "object-fit-images": "3.2.3",
-    "prop-types": "15.5.10",
-    "raven-js": "3.22.3",
+    "prop-types": "15.6.1",
+    "raven-js": "3.23.1",
     "react": "16.2.0",
     "react-dom": "16.2.0",
     "sw-precache-webpack-plugin": "0.11.4",
     "unistore": "3.0.4",
-    "webpack": "4.0.0"
+    "webpack": "4.0.1"
   },
   "devDependencies": {
     "babel-eslint": "8.2.2",
@@ -34,7 +34,7 @@
     "eslint-plugin-jsx-a11y": "6.0.3",
     "eslint-plugin-prettier": "2.6.0",
     "eslint-plugin-react": "7.7.0",
-    "prettier": "1.9.2"
+    "prettier": "1.11.1"
   },
   "@std/esm": {
     "esm": "js",
