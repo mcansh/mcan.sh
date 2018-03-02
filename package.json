@@ -8,6 +8,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "next",
+    "prebuild": "node -r @std/esm scripts/compress",
     "build": "next build && next export && cp .next/sw.js ./out",
     "start": "NODE_ENV=production node -r @std/esm server"
   },
@@ -15,6 +16,10 @@
     "@std/esm": "0.23.4",
     "babel-plugin-inline-dotenv": "1.1.2",
     "express": "4.16.2",
+    "imagemin": "5.3.1",
+    "imagemin-mozjpeg": "7.0.0",
+    "imagemin-pngquant": "5.0.1",
+    "imagemin-webp": "4.1.0",
     "next": "5.0.0",
     "object-fit-images": "3.2.3",
     "prop-types": "15.6.1",
