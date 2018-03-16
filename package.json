@@ -9,8 +9,9 @@
   "scripts": {
     "dev": "next",
     "prebuild": "node -r esm scripts/compress",
-    "build": "next build && next export && cp .next/sw.js ./out",
-    "start": "NODE_ENV=production node -r esm server"
+    "build": "next build && next export",
+    "postbuild": "cp .next/sw.js ./out",
+    "start": "yarn start"
   },
   "dependencies": {
     "babel-plugin-inline-dotenv": "1.1.2",
