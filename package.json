@@ -8,13 +8,13 @@
   "license": "MIT",
   "scripts": {
     "dev": "next",
-    "prebuild": "node -r @std/esm scripts/compress",
+    "prebuild": "node -r esm scripts/compress",
     "build": "next build && next export && cp .next/sw.js ./out",
-    "start": "NODE_ENV=production node -r @std/esm server"
+    "start": "NODE_ENV=production node -r esm server"
   },
   "dependencies": {
-    "@std/esm": "0.24.0",
     "babel-plugin-inline-dotenv": "1.1.2",
+    "esm": "3.0.6",
     "express": "4.16.2",
     "imagemin": "5.3.1",
     "imagemin-mozjpeg": "7.0.0",
@@ -42,8 +42,8 @@
     "eslint-plugin-react": "7.7.0",
     "prettier": "1.11.1"
   },
-  "@std/esm": {
-    "esm": "js",
+  "esm": {
+    "mode": "auto",
     "cjs": true
   }
 }
