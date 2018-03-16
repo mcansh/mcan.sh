@@ -20,7 +20,7 @@
     "imagemin-mozjpeg": "7.0.0",
     "imagemin-pngquant": "5.0.1",
     "imagemin-webp": "4.1.0",
-    "next": "5.0.0",
+    "next": "5.0.1-canary.16",
     "object-fit-images": "3.2.3",
     "prop-types": "15.6.1",
     "raven-js": "3.23.1",
