@@ -1,5 +1,22 @@
 {
   "extends": [
     "config:base"
+  ],
+  "minor": {
+    "automerge": true
+  },
+  "patch": {
+    "automerge": true
+  },
+  "automergeType": "pr",
+  "commitBody": "Signed-off-by: {{{gitAuthor}}}",
+  "packageRules": [
+    {
+      "extends": [
+        "packages:linters"
+      ],
+      "automerge": true,
+      "automergeType": "branch-push"
+    }
   ]
 }
