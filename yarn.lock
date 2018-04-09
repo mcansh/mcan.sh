@@ -1391,9 +1391,9 @@ camelcase@^4.0.0, camelcase@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-4.1.0.tgz#d545635be1e33c542649c69173e5de6acfae34dd"
 
-caniuse-lite@^1.0.30000792:
-  version "1.0.30000823"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000823.tgz#b79842a5b5a48eaa416b73f5a5d7a23f52d26014"
+caniuse-lite@^1.0.30000821:
+  version "1.0.30000824"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000824.tgz#de3bc1ba0bff4937302f8cb2a8632a8cc1c07f9a"
 
 capture-stack-trace@^1.0.0:
   version "1.0.0"
@@ -2194,7 +2194,7 @@ ee-first@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
 
-electron-to-chromium@^1.3.30:
+electron-to-chromium@^1.3.41:
   version "1.3.42"
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.42.tgz#95c33bf01d0cc405556aec899fe61fd4d76ea0f9"
 
@@ -2504,9 +2504,9 @@ eslint@4.19.1:
     table "4.0.2"
     text-table "~0.2.0"
 
-esm@3.0.16:
-  version "3.0.16"
-  resolved "https://registry.yarnpkg.com/esm/-/esm-3.0.16.tgz#7874cc2f92694460029e66640a67a06f8e408930"
+esm@3.0.17:
+  version "3.0.17"
+  resolved "https://registry.yarnpkg.com/esm/-/esm-3.0.17.tgz#09ff38ed2a5317821372322909063f6a4271a083"
 
 espree@^3.5.4:
   version "3.5.4"
