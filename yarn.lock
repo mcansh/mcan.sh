@@ -660,14 +660,6 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
-"@zeit/check-updates@1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@zeit/check-updates/-/check-updates-1.1.1.tgz#1bee858fd3f9b8633b0fc23dff53cb17343331c0"
-  dependencies:
-    chalk "2.3.2"
-    ms "2.1.1"
-    update-notifier "2.3.0"
-
 abbrev@1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
@@ -781,12 +773,6 @@ ansi-styles@^2.2.1:
 ansi-styles@^3.1.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/ansi-styles/-/ansi-styles-3.2.0.tgz#c159b8d5be0f9e5a6f346dab94f16ce022161b88"
-  dependencies:
-    color-convert "^1.9.0"
-
-ansi-styles@^3.2.1:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/ansi-styles/-/ansi-styles-3.2.1.tgz#41fbb20243e50b12be0f04b8dedbf07520ce841d"
   dependencies:
     color-convert "^1.9.0"
 
@@ -1432,14 +1418,6 @@ center-align@^0.1.1:
   dependencies:
     align-text "^0.1.3"
     lazy-cache "^1.0.3"
-
-chalk@2.3.2:
-  version "2.3.2"
-  resolved "https://registry.yarnpkg.com/chalk/-/chalk-2.3.2.tgz#250dc96b07491bfd601e648d66ddf5f60c7a5c65"
-  dependencies:
-    ansi-styles "^3.2.1"
-    escape-string-regexp "^1.0.5"
-    supports-color "^5.3.0"
 
 chalk@^1.0.0, chalk@^1.1.1, chalk@^1.1.3:
   version "1.1.3"
@@ -3286,10 +3264,6 @@ has-flag@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/has-flag/-/has-flag-2.0.0.tgz#e8207af1cc7b30d446cc70b734b5e8be18f88d51"
 
-has-flag@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/has-flag/-/has-flag-3.0.0.tgz#b5d454dc2199ae225699f3467e5a07f3b955bafd"
-
 has-gulplog@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/has-gulplog/-/has-gulplog-0.1.0.tgz#6414c82913697da51590397dafb12f22967811ce"
@@ -4475,10 +4449,6 @@ ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
 
-ms@2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.1.tgz#30a5864eb3ebb0a66f2ebe6d727af06a09d86e0a"
-
 multipipe@^0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/multipipe/-/multipipe-0.1.2.tgz#2a8f2ddf70eed564dff2d57f1e1a137d9f05078b"
@@ -4518,9 +4488,9 @@ neo-async@^2.5.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.5.0.tgz#76b1c823130cca26acfbaccc8fbaf0a2fa33b18f"
 
-next@6.0.0-canary.5:
-  version "6.0.0-canary.5"
-  resolved "https://registry.yarnpkg.com/next/-/next-6.0.0-canary.5.tgz#bb55e74f2306843384bfd84ecf46b96cd56e1456"
+next@6.0.0-canary.6:
+  version "6.0.0-canary.6"
+  resolved "https://registry.yarnpkg.com/next/-/next-6.0.0-canary.6.tgz#e37df6c6365413673c619e3c10c41295ad554ff4"
   dependencies:
     "@babel/core" "7.0.0-beta.42"
     "@babel/plugin-proposal-class-properties" "7.0.0-beta.42"
@@ -4532,7 +4502,6 @@ next@6.0.0-canary.5:
     "@babel/preset-react" "7.0.0-beta.42"
     "@babel/runtime" "7.0.0-beta.42"
     "@babel/template" "7.0.0-beta.42"
-    "@zeit/check-updates" "1.1.1"
     ansi-html "0.0.7"
     babel-core "7.0.0-bridge.0"
     babel-loader "8.0.0-beta.2"
@@ -4557,7 +4526,7 @@ next@6.0.0-canary.5:
     path-to-regexp "2.1.0"
     prop-types "15.6.0"
     prop-types-exact "1.1.1"
-    react-hot-loader "4.0.1"
+    react-hot-loader "4.1.1"
     recursive-copy "2.0.6"
     resolve "1.5.0"
     send "0.16.1"
@@ -4566,6 +4535,7 @@ next@6.0.0-canary.5:
     touch "3.1.0"
     uglifyjs-webpack-plugin "1.1.6"
     unfetch "3.0.0"
+    update-check "1.3.2"
     url "0.11.0"
     uuid "3.1.0"
     walk "2.3.9"
@@ -5245,15 +5215,20 @@ react-dom@16.3.2:
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
-react-hot-loader@4.0.1:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/react-hot-loader/-/react-hot-loader-4.0.1.tgz#48284350ae5d7ba07dac872bd5bbc6e477352593"
+react-hot-loader@4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/react-hot-loader/-/react-hot-loader-4.1.1.tgz#693499a6414b6dc6880287e254322a9d3155e944"
   dependencies:
     fast-levenshtein "^2.0.6"
     global "^4.3.0"
     hoist-non-react-statics "^2.5.0"
     prop-types "^15.6.1"
+    react-lifecycles-compat "^2.0.0"
     shallowequal "^1.0.2"
+
+react-lifecycles-compat@^2.0.0:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-2.0.2.tgz#00a23160eec17a43b94dd74f95d44a1a2c3c5ec1"
 
 react@16.3.2:
   version "16.3.2"
@@ -5410,6 +5385,13 @@ regexpu-core@^4.1.3:
     unicode-match-property-ecmascript "^1.0.3"
     unicode-match-property-value-ecmascript "^1.0.1"
 
+registry-auth-token@3.3.2:
+  version "3.3.2"
+  resolved "https://registry.yarnpkg.com/registry-auth-token/-/registry-auth-token-3.3.2.tgz#851fd49038eecb586911115af845260eec983f20"
+  dependencies:
+    rc "^1.1.6"
+    safe-buffer "^5.0.1"
+
 registry-auth-token@^3.0.1:
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/registry-auth-token/-/registry-auth-token-3.3.1.tgz#fb0d3289ee0d9ada2cbb52af5dfe66cb070d3006"
@@ -5417,7 +5399,7 @@ registry-auth-token@^3.0.1:
     rc "^1.1.6"
     safe-buffer "^5.0.1"
 
-registry-url@^3.0.3:
+registry-url@3.1.0, registry-url@^3.0.3:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/registry-url/-/registry-url-3.1.0.tgz#3d4ef870f73dde1d77f0cf9a381432444e174942"
   dependencies:
@@ -6066,12 +6048,6 @@ supports-color@^4.0.0, supports-color@^4.2.1:
   dependencies:
     has-flag "^2.0.0"
 
-supports-color@^5.3.0:
-  version "5.3.0"
-  resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-5.3.0.tgz#5b24ac15db80fa927cf5227a4a33fd3c4c7676c0"
-  dependencies:
-    has-flag "^3.0.0"
-
 sw-precache-webpack-plugin@0.11.5:
   version "0.11.5"
   resolved "https://registry.yarnpkg.com/sw-precache-webpack-plugin/-/sw-precache-webpack-plugin-0.11.5.tgz#9b53f65a4966e3adc298e256b3cef7a55c73fdfd"
@@ -6482,7 +6458,14 @@ upath@^1.0.0:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/upath/-/upath-1.0.4.tgz#ee2321ba0a786c50973db043a50b7bcba822361d"
 
-update-notifier@2.3.0, update-notifier@^2.3.0:
+update-check@1.3.2:
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/update-check/-/update-check-1.3.2.tgz#460f9e9ab24820367f3edbeb4d4142d9936ff171"
+  dependencies:
+    registry-auth-token "3.3.2"
+    registry-url "3.1.0"
+
+update-notifier@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/update-notifier/-/update-notifier-2.3.0.tgz#4e8827a6bb915140ab093559d7014e3ebb837451"
   dependencies:
