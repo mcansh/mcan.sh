@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
+import isAbsoluteUrl from 'is-absolute-url';
 import { connect } from 'unistore/react';
 import { actions } from '../store';
 import { colors } from '../style';
 
 const CustomLink = ({ href, children, dark }) => {
-  const isExternal = /^https?:\/\//.test(href);
+  const isExternal = isAbsoluteUrl(href);
   return (
     <Link href={href} prefetch={!isExternal}>
       <a rel={isExternal ? 'noopener' : ''} target={isExternal ? '_blank' : ''}>
@@ -30,6 +31,7 @@ const CustomLink = ({ href, children, dark }) => {
 CustomLink.propTypes = {
   href: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
+  dark: PropTypes.bool.isRequired,
 };
 
 export default connect('dark', actions)(CustomLink);
