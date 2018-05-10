@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "babel-plugin-inline-dotenv": "1.1.2",
-    "esm": "3.0.33",
+    "esm": "3.0.34",
     "imagemin": "5.3.1",
     "imagemin-mozjpeg": "7.0.0",
     "imagemin-pngquant": "5.1.0",
