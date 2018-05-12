@@ -2471,9 +2471,9 @@ eslint-config-airbnb@16.1.0, eslint-config-airbnb@>=16.1.0:
   dependencies:
     eslint-config-airbnb-base "^12.1.0"
 
-eslint-config-mcansh@1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/eslint-config-mcansh/-/eslint-config-mcansh-1.0.5.tgz#2ac8131619cd122e0ea1f13411dc782747dd0b17"
+eslint-config-mcansh@1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/eslint-config-mcansh/-/eslint-config-mcansh-1.0.7.tgz#da3d234286214a51a4d797da4d049658673e0b47"
   optionalDependencies:
     eslint-config-airbnb ">=16.1.0"
     eslint-config-airbnb-base ">=12.1.0"
