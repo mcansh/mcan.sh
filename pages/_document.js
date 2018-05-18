@@ -29,6 +29,7 @@ class Page extends Document {
             content="initial-scale=1.0, width=device-width, viewport-fit=cover"
           />
           <link rel="shortcut icon" href="/static/images/favicon.png" />
+          {this.props.styleTags}
         </Head>
         <body>
           <Main />
