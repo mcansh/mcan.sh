@@ -1,29 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import Link from 'next/link';
 import isAbsoluteUrl from 'is-absolute-url';
 import { connect } from 'unistore/react';
 import { actions } from '../store';
-import { colors } from '../style';
+
+const StyledLink = styled.a`
+  position: relative;
+  text-decoration: none;
+  color: ${props => props.theme[props.color].links};
+
+  &:hover {
+    text-decoration: underline;
+    text-decoration-skip-ink: auto;
+  }
+`;
 
 const CustomLink = ({ href, children, dark }) => {
   const isExternal = isAbsoluteUrl(href);
   return (
-    <Link href={href} prefetch={!isExternal}>
-      <a rel={isExternal ? 'noopener' : ''} target={isExternal ? '_blank' : ''}>
+    <Link href={href} prefetch={!isExternal} passHref>
+      <StyledLink
+        color={dark ? 'dark' : 'light'}
+        rel={isExternal ? 'noopener' : ''}
+        target={isExternal ? '_blank' : ''}
+      >
         {children}
-        <style jsx>{`
-          a {
-            position: relative;
-            text-decoration: none;
-            color: ${dark ? colors.primaryInDarkMode : colors.primary};
-          }
-          a:hover {
-            text-decoration: underline;
-            text-decoration-skip-ink: auto;
-          }
-        `}</style>
-      </a>
+      </StyledLink>
     </Link>
   );
 };

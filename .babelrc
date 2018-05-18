@@ -1,4 +1,16 @@
 {
-  "presets": ["next/babel"],
-  "plugins": ["inline-dotenv"]
+  "presets": [
+    "next/babel"
+  ],
+  "plugins": [
+    [
+      "styled-components",
+      {
+        "ssr": true,
+        "displayName": true,
+        "preprocess": false
+      }
+    ],
+    "inline-dotenv"
+  ]
 }
