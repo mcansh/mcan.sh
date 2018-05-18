@@ -1,5 +1,4 @@
-import React from 'react';
-import Page from '../components/Page';
+import React, { Fragment } from 'react';
 import Link from '../components/Link';
 import Headshot from '../components/Headshot';
 import H2 from '../components/Heading';
@@ -7,7 +6,7 @@ import P from '../components/Paragraph';
 import Footer from '../components/Footer';
 
 const Index = () => (
-  <Page>
+  <Fragment>
     <Headshot />
     <H2>Logan McAnsh</H2>
     <P>
@@ -18,7 +17,7 @@ const Index = () => (
       </Link>.
     </P>
     <Footer />
-  </Page>
+  </Fragment>
 );
 
 export default Index;

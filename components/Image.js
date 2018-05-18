@@ -1,7 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import objectFitImages from 'object-fit-images';
 import webp from '../utils/webp';
+
+const StyledImage = styled.img`
+  height: 15rem;
+  width: 15rem;
+  object-fit: cover;
+  border-radius: 50%;
+  margin: 0 auto;
+  font-family: 'object-fit: cover;';
+`;
 
 class Image extends Component {
   static propTypes = {
@@ -19,17 +29,7 @@ class Image extends Component {
       <picture {...props}>
         <source srcSet={webp(source).url} type="image/webp" />
         <source srcSet={source} type={`image/${webp(source).type}`} />
-        <img src={source} alt={alt} />
-        <style jsx>{`
-          img {
-            height: 15rem;
-            width: 15rem;
-            object-fit: cover;
-            border-radius: 50%;
-            margin: 0 auto;
-            font-family: 'object-fit: cover;';
-          }
-        `}</style>
+        <StyledImage src={source} alt={alt} />
       </picture>
     );
   }
