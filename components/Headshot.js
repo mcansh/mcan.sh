@@ -7,9 +7,10 @@ import Image from './Image';
 const Headshot = ({ toggleDark }) => (
   <Fragment>
     <Image
-      source="/static/images/11698668.jpg"
+      source="/static/images/11698668.png"
       alt="me 💁‍♂️"
       onDoubleClick={toggleDark}
+      onContextMenu={toggleDark}
     />
   </Fragment>
 );
