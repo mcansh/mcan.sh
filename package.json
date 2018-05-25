@@ -29,7 +29,7 @@
     "styled-theming": "2.2.0",
     "sw-precache-webpack-plugin": "0.11.5",
     "unistore": "3.0.6",
-    "webpack": "4.9.0"
+    "webpack": "4.9.1"
   },
   "devDependencies": {
     "babel-eslint": "8.2.3",
