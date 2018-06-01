@@ -16,20 +16,20 @@
   "dependencies": {
     "babel-plugin-inline-dotenv": "1.1.2",
     "babel-plugin-styled-components": "1.5.1",
-    "esm": "3.0.34",
+    "esm": "3.0.43",
     "is-absolute-url": "2.1.0",
     "mime": "2.3.1",
     "next": "6.0.3",
     "object-fit-images": "3.2.3",
     "prop-types": "15.6.1",
     "raven-js": "3.25.2",
-    "react": "16.3.2",
-    "react-dom": "16.3.2",
-    "styled-components": "3.2.6",
+    "react": "16.4.0",
+    "react-dom": "16.4.0",
+    "styled-components": "3.3.0",
     "styled-theming": "2.2.0",
     "sw-precache-webpack-plugin": "0.11.5",
-    "unistore": "3.0.5",
-    "webpack": "4.8.3"
+    "unistore": "3.0.6",
+    "webpack": "4.10.2"
   },
   "devDependencies": {
     "babel-eslint": "8.2.3",
@@ -45,7 +45,7 @@
     "imagemin-mozjpeg": "7.0.0",
     "imagemin-pngquant": "5.1.0",
     "imagemin-webp": "4.1.0",
-    "prettier": "1.12.1"
+    "prettier": "1.13.4"
   },
   "esm": {
     "mode": "auto",
