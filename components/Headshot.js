@@ -4,19 +4,28 @@ import { connect } from 'unistore/react';
 import { actions } from '../store';
 import Image from './Image';
 
-const Headshot = ({ toggleDark }) => (
-  <Fragment>
-    <Image
-      source="/static/images/11698668.png"
-      alt="me 💁‍♂️"
-      onDoubleClick={toggleDark}
-      onContextMenu={toggleDark}
-    />
-  </Fragment>
-);
+class Headshot extends React.PureComponent {
+  static propTypes = {
+    toggleDark: PropTypes.func.isRequired,
+  };
 
-Headshot.propTypes = {
-  toggleDark: PropTypes.func.isRequired,
-};
+  actuallyToggleDark = e => {
+    e.preventDefault();
+    this.props.toggleDark();
+  };
+
+  render() {
+    return (
+      <Fragment>
+        <Image
+          source="/static/images/11698668.png"
+          alt="me 💁‍♂️"
+          onDoubleClick={this.actuallyToggleDark}
+          onContextMenu={this.actuallyToggleDark}
+        />
+      </Fragment>
+    );
+  }
+}
 
 export default connect('dark', actions)(Headshot);
