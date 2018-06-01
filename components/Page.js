@@ -34,7 +34,6 @@ const Main = styled.main`
   align-items: center;
   flex-direction: column;
   min-height: 100vh;
-  max-width: 60rem;
   width: 100%;
   margin-bottom: 5rem;
   background: ${props => props.theme[props.backgroundColor].background};

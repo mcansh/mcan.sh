@@ -10,6 +10,7 @@ const Heading = styled.h2`
   font-weight: 400;
   margin: 2rem 0;
   color: ${props => props.theme[props.textColor].text};
+  max-width: 60rem;
 `;
 
 const H2 = ({ children, dark }) => (

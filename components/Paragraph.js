@@ -8,6 +8,7 @@ const Text = styled.p`
   font-size: 1.8rem;
   margin: 0;
   color: ${props => props.theme[props.textColor].text};
+  max-width: 60rem;
 `;
 
 const P = ({ children, dark }) => (
