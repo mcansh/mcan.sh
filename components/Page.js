@@ -1,32 +1,6 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import styled, { injectGlobal } from 'styled-components';
-import { Provider, connect } from 'unistore/react';
-import { store, actions } from '../store';
-import { fontFace } from '../style';
-
-injectGlobal`
-  *,
-  *::before,
-  *::after {
-    box-sizing: border-box;
-    margin: 0;
-  }
-
-  html {
-    font-size: 10px;
-    touch-action: manipulation;
-  }
-
-  body {
-    line-height: 1.3;
-    font-family: 'Gotham Pro', sans-serif;
-    text-align: center;
-    min-height: 100vh;
-  }
-
-  ${fontFace};
-`;
+import { node } from 'prop-types';
+import styled from 'styled-components';
 
 const Main = styled.main`
   display: flex;
@@ -36,14 +10,14 @@ const Main = styled.main`
   min-height: 100vh;
   width: 100%;
   margin-bottom: 5rem;
-  background: ${props => props.theme[props.backgroundColor].background};
+  background: ${props => props.theme.background};
 `;
 
-const App = connect('dark', actions)(({ dark, children }) => (
-  <Main backgroundColor={dark ? 'dark' : 'light'}>{children}</Main>
-));
-
 class Page extends Component {
+  static propTypes = {
+    children: node.isRequired,
+  };
+
   componentDidMount() {
     if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
       /* eslint-disable no-console */
@@ -55,16 +29,8 @@ class Page extends Component {
     }
   }
   render() {
-    return (
-      <Provider store={store}>
-        <App {...this.props} />
-      </Provider>
-    );
+    return <Main>{this.props.children}</Main>;
   }
 }
-
-Page.propTypes = {
-  children: PropTypes.node.isRequired,
-};
 
 export default Page;
