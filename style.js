@@ -1,14 +1,24 @@
+import theme from 'styled-theming';
+
+const links = theme('mode', {
+  light: '#6c16c7',
+  dark: '#9240ea',
+});
+
+const background = theme('mode', {
+  light: '#f3f4f6',
+  dark: 'black',
+});
+
+const text = theme('mode', {
+  light: 'black',
+  dark: 'white',
+});
+
 export const colors = {
-  light: {
-    links: '#6c16c7',
-    background: '#f3f4f6',
-    text: 'black',
-  },
-  dark: {
-    links: '#9240ea',
-    background: 'black',
-    text: 'white',
-  },
+  links,
+  background,
+  text,
 };
 
 const fontPath = 'https://mcan.sh/assets/fonts/';

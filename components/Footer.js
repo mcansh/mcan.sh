@@ -1,8 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { connect } from 'unistore/react';
-import { actions } from '../store';
 
 const StyledFooter = styled.footer`
   position: fixed;
@@ -17,8 +14,7 @@ const StyledFooter = styled.footer`
   font-size: 1.6rem;
   padding-bottom: constant(safe-area-inset-bottom);
   padding-bottom: env(safe-area-inset-bottom);
-  color: ${props => props.theme[props.colors].text};
-  background: ${props => props.theme[props.colors].background};
+  background: ${props => props.theme.background};
 `;
 
 const Text = styled.div`
@@ -29,17 +25,13 @@ const Text = styled.div`
   z-index: -1;
 `;
 
-const Footer = ({ dark }) => {
+const Footer = () => {
   const year = new Date().getFullYear();
   return (
-    <StyledFooter colors={dark ? 'dark' : 'light'}>
+    <StyledFooter>
       <Text>&copy; {year} Logan McAnsh</Text>
     </StyledFooter>
   );
 };
 
-Footer.propTypes = {
-  dark: PropTypes.bool.isRequired,
-};
-
-export default connect('dark', actions)(Footer);
+export default Footer;
