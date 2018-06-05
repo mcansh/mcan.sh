@@ -2,12 +2,12 @@ import theme from 'styled-theming';
 
 const links = theme('mode', {
   light: '#6c16c7',
-  dark: '#9240ea',
+  dark: '#a047ff',
 });
 
 const background = theme('mode', {
   light: '#f3f4f6',
-  dark: 'black',
+  dark: '#222',
 });
 
 const text = theme('mode', {
