@@ -20,7 +20,7 @@ injectGlobal`
 
   body {
     line-height: 1.3;
-    font-family: 'Gotham Pro', sans-serif;
+    font-family: 'Gotham Pro', -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
     text-align: center;
     min-height: 100vh;
   }

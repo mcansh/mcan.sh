@@ -46,6 +46,7 @@ export const fontFace = fonts
              url('${fontPath}/${font.folder}/${font.name}.svg#${font.name}') format('svg');
         font-weight: normal;
         font-style: normal;
+        font-display: swap;
       }
     `
   )
