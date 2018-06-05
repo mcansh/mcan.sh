@@ -1,7 +1,7 @@
 {
   "name": "mcansh",
   "description": "personal website",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "repository": "mcansh/mcan.sh",
   "homepage": "https://mcan.sh",
   "author": "Logan McAnsh <logan@mcan.sh> (https://mcan.sh)",
@@ -39,7 +39,7 @@
     "eslint-plugin-import": "2.12.0",
     "eslint-plugin-jsx-a11y": "6.0.3",
     "eslint-plugin-prettier": "2.6.0",
-    "eslint-plugin-react": "7.8.2",
+    "eslint-plugin-react": "7.9.1",
     "imagemin": "5.3.1",
     "imagemin-mozjpeg": "7.0.0",
     "imagemin-pngquant": "5.1.0",
