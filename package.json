@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "babel-eslint": "8.2.5",
-    "eslint": "4.19.1",
+    "eslint": "5.0.1",
     "eslint-config-airbnb": "17.0.0",
     "eslint-config-mcansh": "1.0.7",
     "eslint-config-prettier": "latest",
