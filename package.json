@@ -31,7 +31,7 @@
     "webpack": "4.16.0"
   },
   "devDependencies": {
-    "babel-eslint": "8.2.5",
+    "babel-eslint": "8.2.6",
     "eslint": "5.1.0",
     "eslint-config-airbnb": "17.0.0",
     "eslint-config-mcansh": "1.0.7",
