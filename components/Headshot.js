@@ -10,6 +10,7 @@ const Headshot = () => (
 
         context.toggleTheme();
       };
+
       return (
         <Fragment>
           <Image
