@@ -44,7 +44,7 @@
     "imagemin-mozjpeg": "7.0.0",
     "imagemin-pngquant": "6.0.0",
     "imagemin-webp": "4.1.0",
-    "prettier": "1.13.7"
+    "prettier": "1.14.0"
   },
   "esm": {
     "mode": "auto",
