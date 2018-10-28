@@ -11,7 +11,7 @@ const Heading = styled.h2`
   color: ${props => props.theme.text};
 `;
 
-const H2 = ({ children }) => <Heading textColor={'light'}>{children}</Heading>;
+const H2 = ({ children }) => <Heading>{children}</Heading>;
 
 H2.propTypes = {
   children: PropTypes.node.isRequired,

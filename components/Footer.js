@@ -10,26 +10,26 @@ const StyledFooter = styled.footer`
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: -1;
   font-size: 1.6rem;
   padding-bottom: constant(safe-area-inset-bottom);
   padding-bottom: env(safe-area-inset-bottom);
   background: ${props => props.theme.background};
-`;
+  color: ${props => props.theme.text};
 
-const Text = styled.div`
-  max-width: 60rem;
-  width: 80%;
-  margin: 0 auto;
-  text-align: center;
-  z-index: -1;
+  p {
+    max-width: 60rem;
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    z-index: -1;
+  }
 `;
 
 const Footer = () => {
   const year = new Date().getFullYear();
   return (
     <StyledFooter>
-      <Text>&copy; {year} Logan McAnsh</Text>
+      <p>&copy; {year} Logan McAnsh</p>
     </StyledFooter>
   );
 };
