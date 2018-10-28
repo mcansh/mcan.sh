@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import Link from '../components/Link';
 import Headshot from '../components/Headshot';
 import H2 from '../components/Heading';
@@ -6,7 +6,7 @@ import Text from '../components/Paragraph';
 import Footer from '../components/Footer';
 
 const Index = () => (
-  <Fragment>
+  <div>
     <Headshot />
     <H2>Logan McAnsh</H2>
     <Text>
@@ -14,10 +14,11 @@ const Index = () => (
       Student at{' '}
       <Link href="https://flatironschool.com/programs/online-web-developer-career-course/">
         Learn.co
-      </Link>.
+      </Link>
+      .
     </Text>
     <Footer />
-  </Fragment>
+  </div>
 );
 
 export default Index;

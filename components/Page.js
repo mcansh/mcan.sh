@@ -9,8 +9,6 @@ const Main = styled.main`
   flex-direction: column;
   min-height: 100vh;
   width: 100%;
-  margin-bottom: 5rem;
-  background: ${props => props.theme.background};
 `;
 
 class Page extends Component {
@@ -19,13 +17,15 @@ class Page extends Component {
   };
 
   componentDidMount() {
-    if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
-      /* eslint-disable no-console */
-      navigator.serviceWorker
-        .register('/sw.js')
-        .then(console.log('service worker registration successful'))
-        .catch(err => console.warn(err));
-      /* eslint-enable no-console */
+    if (process.env.NODE_ENV === 'production') {
+      if ('serviceWorker' in navigator) {
+        /* eslint-disable no-console */
+        navigator.serviceWorker
+          .register('/sw.js')
+          .then(console.log('service worker registration successful'))
+          .catch(err => console.warn(err));
+        /* eslint-enable no-console */
+      }
     }
   }
   render() {

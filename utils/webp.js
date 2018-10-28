@@ -1,9 +1,16 @@
-const mime = require('mime/lite');
+import mime from 'mime/lite';
+import { parse } from 'path';
 
 const webp = image => {
-  const imageRegex = /png|jpg/;
-  const url = image.replace(imageRegex, 'webp');
+  const { name } = parse(image);
+
   const type = mime.getType(image);
+
+  if (type == null) {
+    throw new Error(`Image: ${image}, doesn't have a mimetype`);
+  }
+
+  const url = `${name}.webp`;
 
   return { url, type };
 };

@@ -1,11 +1,12 @@
 import React from 'react';
+import Head from 'next/head';
 import App, { Container } from 'next/app';
-import { ThemeProvider, injectGlobal } from 'styled-components';
+import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import { version, repository } from '../package.json';
 import Page from '../components/Page';
-import { colors, fontFace } from '../style';
+import { theme, fontFace } from '../style';
 
-injectGlobal`
+const GlobalStyle = createGlobalStyle`
   *,
   *::before,
   *::after {
@@ -22,7 +23,7 @@ injectGlobal`
     line-height: 1.3;
     font-family: 'Gotham Pro', -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
     text-align: center;
-    min-height: 100vh;
+    background: ${props => props.theme.background};
   }
 
   ${fontFace};
@@ -37,8 +38,6 @@ if (global.document) {
   info.forEach(message => console.log(message));
 }
 
-export const { Consumer, Provider } = React.createContext();
-
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
     let pageProps = {};
@@ -50,29 +49,28 @@ class MyApp extends App {
     return { pageProps };
   }
 
-  state = {
-    theme: 'light',
-  };
-
-  toggleTheme = e => {
-    if (e) {
-      e.preventDefault();
-    }
-
-    this.setState({ theme: this.state.theme === 'light' ? 'dark' : 'light' });
-  };
-
   render() {
     const { Component, pageProps } = this.props;
 
     return (
       <Container>
-        <ThemeProvider theme={{ mode: this.state.theme, ...colors }}>
-          <Provider value={{ toggleTheme: this.toggleTheme }}>
+        <ThemeProvider theme={theme}>
+          <div>
+            <Head>
+              <title>Logan McAnsh</title>
+              <meta charSet="utf-8" />
+              <meta httpEquiv="x-ua-compatible" content="ie=edge" />
+              <meta
+                name="viewport"
+                content="initial-scale=1.0, width=device-width, viewport-fit=cover"
+              />
+              <link rel="shortcut icon" href="/static/images/favicon.png" />
+            </Head>
+            <GlobalStyle />
             <Page>
               <Component {...pageProps} />
             </Page>
-          </Provider>
+          </div>
         </ThemeProvider>
       </Container>
     );
