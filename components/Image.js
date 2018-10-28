@@ -25,10 +25,12 @@ class Image extends Component {
 
   render() {
     const { source, alt, ...props } = this.props;
+    const { url, type } = webp(source);
+
     return (
       <picture {...props}>
-        <source srcSet={webp(source).url} type="image/webp" />
-        <source srcSet={source} type={`image/${webp(source).type}`} />
+        <source srcSet={url} type="image/webp" />
+        <source srcSet={source} type={`image/${type}`} />
         <StyledImage src={source} alt={alt} />
       </picture>
     );
