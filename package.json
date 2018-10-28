@@ -10,7 +10,6 @@
     "dev": "next",
     "prebuild": "node -r esm scripts/compress",
     "build": "next build && next export",
-    "postbuild": "cp .next/sw.js ./out",
     "start": "next start"
   },
   "browser": {
