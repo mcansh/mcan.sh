@@ -2,7 +2,7 @@ import mime from 'mime/lite';
 import path from 'isomorphic-path';
 
 const webp = image => {
-  const { name } = path.parse(image);
+  const { name, dir } = path.parse(image);
 
   const type = mime.getType(image);
 
@@ -10,7 +10,7 @@ const webp = image => {
     throw new Error(`Image: ${image}, doesn't have a mimetype`);
   }
 
-  const url = `${name}.webp`;
+  const url = `${dir}/${name}.webp`;
 
   return { url, type };
 };
