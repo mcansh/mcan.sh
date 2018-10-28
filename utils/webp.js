@@ -1,8 +1,8 @@
 import mime from 'mime/lite';
-import { parse } from 'path';
+import path from 'isomorphic-path';
 
 const webp = image => {
-  const { name } = parse(image);
+  const { name } = path.parse(image);
 
   const type = mime.getType(image);
 
