@@ -13,8 +13,11 @@ const StyledFooter = styled.footer`
   font-size: 1.6rem;
   padding-bottom: constant(safe-area-inset-bottom);
   padding-bottom: env(safe-area-inset-bottom);
-  background: ${props => props.theme.background};
   color: ${props => props.theme.text};
+
+  @media (prefers-color-scheme: light) {
+    color: black;
+  }
 
   p {
     max-width: 60rem;
