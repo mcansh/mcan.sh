@@ -8,9 +8,11 @@
   "license": "MIT",
   "scripts": {
     "dev": "next",
+    "build": "next build",
     "prebuild": "node -r esm scripts/compress",
-    "build": "next build && next export",
-    "start": "next start"
+    "export": "next export -o dist",
+    "start": "next start",
+    "now-build": "yarn build && yarn export"
   },
   "browser": {
     "path": "isomorphic-path"
