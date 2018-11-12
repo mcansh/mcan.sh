@@ -23,6 +23,11 @@ const GlobalStyle = createGlobalStyle`
     line-height: 1.3;
     font-family: 'Gotham Pro', -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
     text-align: center;
+
+    @media (prefers-color-scheme: light) {
+      background: #f3f4f6;
+    }
+
     background: ${props => props.theme.background};
   }
 

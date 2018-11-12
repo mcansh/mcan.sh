@@ -5,6 +5,10 @@ const Text = styled.p`
   margin: 0;
   max-width: 60rem;
   color: ${props => props.theme.text};
+
+  @media (prefers-color-scheme: light) {
+    color: black;
+  }
 `;
 
 export default Text;

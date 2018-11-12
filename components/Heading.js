@@ -9,6 +9,9 @@ const Heading = styled.h2`
   margin: 2rem 0;
   max-width: 60rem;
   color: ${props => props.theme.text};
+  @media (prefers-color-scheme: light) {
+    color: black;
+  }
 `;
 
 const H2 = ({ children }) => <Heading>{children}</Heading>;
