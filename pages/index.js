@@ -6,7 +6,7 @@ import Text from '../components/Paragraph';
 import Footer from '../components/Footer';
 
 const Index = () => (
-  <div>
+  <>
     <Headshot />
     <H2>Logan McAnsh</H2>
     <Text>
@@ -18,7 +18,7 @@ const Index = () => (
       .
     </Text>
     <Footer />
-  </div>
+  </>
 );
 
 export default Index;

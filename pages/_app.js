@@ -19,6 +19,10 @@ const GlobalStyle = createGlobalStyle`
     touch-action: manipulation;
   }
 
+  html, body, #__next {
+    height: 100%;
+  }
+
   body {
     line-height: 1.3;
     font-family: 'Gotham Pro', -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
@@ -60,7 +64,7 @@ class MyApp extends App {
     return (
       <Container>
         <ThemeProvider theme={theme}>
-          <div>
+          <>
             <Head>
               <title>Logan McAnsh</title>
               <meta charSet="utf-8" />
@@ -75,7 +79,7 @@ class MyApp extends App {
             <Page>
               <Component {...pageProps} />
             </Page>
-          </div>
+          </>
         </ThemeProvider>
       </Container>
     );
