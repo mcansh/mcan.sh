@@ -2,7 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import App, { Container } from 'next/app';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
-import { version, repository } from '../package.json';
+import { version, repository, description } from '../package.json';
 import Page from '../components/Page';
 import { theme, fontFace } from '../style';
 
@@ -67,6 +67,7 @@ class MyApp extends App {
           <>
             <Head>
               <title>Logan McAnsh</title>
+              <meta name="description" content={description} />
               <meta charSet="utf-8" />
               <meta httpEquiv="x-ua-compatible" content="ie=edge" />
               <meta
