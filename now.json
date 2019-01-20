@@ -10,13 +10,5 @@
       "src": "package.json",
       "use": "@now/static-build"
     }
-  ],
-  "routes": [
-    {
-      "src": "**/static/**",
-      "headers": {
-        "Cache-Control": "public, max-age=31536000, immutable"
-      }
-    }
   ]
 }
