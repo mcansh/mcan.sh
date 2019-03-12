@@ -1,7 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Link from 'next/link';
+import Link, { LinkProps } from 'next/link';
 import isAbsoluteUrl from 'is-absolute-url';
 
 const StyledLink = styled.a`
@@ -15,8 +14,12 @@ const StyledLink = styled.a`
   }
 `;
 
-const CustomLink = ({ href, children }) => {
-  const isExternal = isAbsoluteUrl(href);
+interface Props extends Omit<LinkProps, 'children'> {
+  children: React.ReactNode;
+}
+
+const CustomLink = ({ href, children }: Props) => {
+  const isExternal = isAbsoluteUrl(href.toString());
   return (
     <Link href={href} prefetch={!isExternal} passHref>
       <StyledLink
@@ -27,11 +30,6 @@ const CustomLink = ({ href, children }) => {
       </StyledLink>
     </Link>
   );
-};
-
-CustomLink.propTypes = {
-  href: PropTypes.string.isRequired,
-  children: PropTypes.node.isRequired,
 };
 
 export default CustomLink;

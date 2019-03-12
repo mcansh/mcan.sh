@@ -1,5 +1,5 @@
 import React from 'react';
-import Image from './Image';
+import Image from './image';
 
 const Headshot = () => (
   <Image source="/static/images/11698668.png" alt="me 💁‍♂️" />
