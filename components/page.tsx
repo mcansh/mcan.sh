@@ -7,7 +7,7 @@ import Link from '~/components/link';
 import Footer from '~/components/footer';
 import Head from 'next/head';
 import GlobalStyle from './global-style';
-import { theme } from '~/style';
+import theme from '~/style';
 
 const Main = styled.main`
   display: flex;

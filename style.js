@@ -5,4 +5,4 @@ const theme = {
   text: '#eef1f5',
 };
 
-export { theme };
+module.exports = theme;
