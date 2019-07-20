@@ -13,9 +13,9 @@
   ],
   "routes": [
     {
-      "src": "**/static/**",
+      "src": "/_next(/static/(?:[^/]+/pages|chunks|runtime)/.+)",
       "headers": {
-        "Cache-Control": "public, max-age=31536000, immutable"
+        "Cache-Control": "max-age=31536000, immutable"
       }
     }
   ]
