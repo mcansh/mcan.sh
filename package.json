@@ -18,7 +18,7 @@
     "path": "isomorphic-path"
   },
   "dependencies": {
-    "esm": "3.0.84",
+    "esm": "3.1.0",
     "is-absolute-url": "2.1.0",
     "isomorphic-path": "0.0.5",
     "mime": "2.3.1",
