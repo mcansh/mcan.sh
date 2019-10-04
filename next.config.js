@@ -1,39 +1,25 @@
-const fs = require('fs');
-const { join } = require('path');
-const { promisify } = require('util');
-const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
-const { name } = require('./package.json');
-
-const copyFile = promisify(fs.copyFile);
+const pkgJSON = require('./package.json');
 
 module.exports = {
-  exportPathMap: async (defaultPathMap, { dev, dir, outDir }) => {
-    if (dev) return defaultPathMap;
-
-    await copyFile(join(dir, '.next', 'sw.js'), join(outDir, 'sw.js'));
-    return defaultPathMap;
+  crossOrigin: 'anonymous',
+  target: 'serverless',
+  env: {
+    SENTRY: '',
+    VERSION: pkgJSON.version,
+    DESCRIPTION: pkgJSON.description,
+    REPO: `https://github.com/${pkgJSON.repository}`,
   },
-  webpack: config => {
-    if (process.env.NODE_ENV === 'production') {
-      config.plugins.push(
-        new SWPrecacheWebpackPlugin({
-          cacheId: name,
-          minify: true,
-          filename: 'sw.js',
-          verbose: true,
-          staticFileGlobs: [
-            'static/**/*', // Precache all static files by default
-          ],
-          staticFileGlobsIgnorePatterns: [/\.next\//],
-          runtimeCaching: [
-            {
-              handler: 'networkFirst',
-              urlPattern: /^https?.*/,
-            },
-          ],
-        })
-      );
-    }
+  experimental: {
+    publicDirectory: true,
+    granularChunks: true,
+    modern: true,
+  },
+  webpack: (config, { buildId, webpack }) => {
+    config.plugins.push(
+      new webpack.DefinePlugin({
+        'process.env.BUILD_ID': JSON.stringify(buildId),
+      })
+    );
     return config;
   },
 };
