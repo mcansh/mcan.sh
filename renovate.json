@@ -1,7 +1,5 @@
 {
-  "extends": [
-    "config:base"
-  ],
+  "extends": ["config:base"],
   "minor": {
     "automerge": true
   },
@@ -12,9 +10,7 @@
   "commitBody": "Signed-off-by: {{{gitAuthor}}}",
   "packageRules": [
     {
-      "extends": [
-        "packages:linters"
-      ],
+      "extends": ["packages:linters"],
       "automerge": true,
       "automergeType": "branch-push"
     }

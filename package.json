@@ -6,55 +6,64 @@
   "homepage": "https://mcan.sh",
   "author": "Logan McAnsh <logan@mcan.sh> (https://mcan.sh)",
   "license": "MIT",
+  "prettier": "eslint-config-mcansh/prettier.config.js",
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "prebuild": "node -r esm scripts/compress",
-    "export": "next export -o dist",
     "start": "next start",
-    "now-build": "yarn build && yarn export"
-  },
-  "browser": {
-    "path": "isomorphic-path"
+    "type-check": "tsc",
+    "lint": "eslint . --ext \".js,.ts,.tsx\"",
+    "format": "prettier --write \"**/*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|md|graphql|mdx)\"",
+    "validate": "yarn lint && yarn format && yarn type-check"
   },
   "dependencies": {
-    "esm": "3.2.25",
-    "is-absolute-url": "2.1.0",
-    "isomorphic-path": "0.0.5",
-    "mime": "2.3.1",
-    "next": "7.0.2",
-    "object-fit-images": "3.2.4",
-    "polished": "2.3.0",
-    "prop-types": "15.6.2",
-    "raven-js": "3.27.0",
-    "react": "16.6.3",
-    "react-dom": "16.6.3",
-    "styled-components": "4.1.1",
-    "sw-precache-webpack-plugin": "0.11.5",
-    "webpack": "4.26.1"
+    "next": "9.0.7",
+    "polished": "3.4.1",
+    "react": "16.10.1",
+    "react-dom": "16.10.1",
+    "react-simple-img": "2.3.6",
+    "styled-components": "4.4.0"
   },
   "devDependencies": {
-    "babel-eslint": "10.0.1",
-    "babel-plugin-inline-dotenv": "1.2.0",
+    "@types/node": "12.7.9",
+    "@types/react": "16.9.4",
+    "@types/react-dom": "16.9.1",
+    "@types/styled-components": "4.1.19",
+    "@typescript-eslint/eslint-plugin": "2.3.2",
+    "@typescript-eslint/parser": "2.3.2",
     "babel-plugin-polished": "1.1.0",
-    "babel-plugin-styled-components": "1.9.0",
-    "eslint": "5.9.0",
-    "eslint-config-airbnb": "17.1.0",
-    "eslint-config-mcansh": "1.0.9",
-    "eslint-config-prettier": "3.3.0",
-    "eslint-plugin-import": "2.14.0",
-    "eslint-plugin-jsx-a11y": "6.1.2",
-    "eslint-plugin-prettier": "3.0.0",
-    "eslint-plugin-promise": "4.0.1",
-    "eslint-plugin-react": "7.11.1",
-    "imagemin": "6.0.0",
-    "imagemin-mozjpeg": "8.0.0",
-    "imagemin-pngquant": "6.0.0",
-    "imagemin-webp": "4.1.0",
-    "prettier": "1.15.2"
+    "babel-plugin-root-import": "6.4.1",
+    "babel-plugin-styled-components": "1.10.6",
+    "eslint": "6.5.1",
+    "eslint-config-airbnb": "18.0.1",
+    "eslint-config-kentcdodds": "14.4.1",
+    "eslint-config-mcansh": "2.1.1",
+    "eslint-import-resolver-babel-plugin-root-import": "1.1.1",
+    "eslint-import-resolver-typescript": "1.1.1",
+    "eslint-plugin-import": "2.18.2",
+    "eslint-plugin-jsx-a11y": "6.2.3",
+    "eslint-plugin-promise": "4.2.1",
+    "eslint-plugin-react": "7.15.1",
+    "eslint-plugin-react-hooks": "2.1.1",
+    "husky": "3.0.8",
+    "lint-staged": "9.4.1",
+    "prettier": "1.18.2",
+    "typescript": "3.7.0-beta"
   },
-  "esm": {
-    "mode": "auto",
-    "cjs": true
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.+(js|jsx|ts|tsx)": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|md|graphql|mdx)": [
+      "sh scripts/ts-precommit.bash",
+      "prettier --write",
+      "git add"
+    ]
   }
 }
