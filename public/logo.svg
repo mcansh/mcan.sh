@@ -1,15 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="1024px" height="1024px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="background: #000000;">
-    <!-- Generator: Sketch 40.3 (33839) - http://www.bohemiancoding.com/sketch -->
-    <title>website_icon</title>
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="square">
-        <g id="website_icon" stroke="#FFFFFF">
-            <g id="Group" transform="translate(424.000000, 269.000000)">
-                <path d="M0,471 L237.951691,471" id="Line" stroke-width="57"></path>
-                <path d="M2,0.5 L1.5081265,416.10666" id="Line" stroke-width="60"></path>
-            </g>
-        </g>
-    </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1024" height="1024" version="1.1" viewBox="0 0 1024 1024" style="background:#000"><title>website_icon</title><desc>Created with Sketch.</desc><g id="Page-1" fill="none" fill-rule="evenodd" stroke="none" stroke-linecap="square" stroke-width="1"><g id="website_icon" stroke="#FFF"><g id="Group" transform="translate(424.000000, 269.000000)"><path id="Line" stroke-width="57" d="M0,471 L237.951691,471"/><path id="Line" stroke-width="60" d="M2,0.5 L1.5081265,416.10666"/></g></g></g></svg>
