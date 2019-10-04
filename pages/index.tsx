@@ -2,6 +2,9 @@ import React from 'react';
 import { NextPage } from 'next';
 import { SimpleImg } from 'react-simple-img';
 
+import { Link } from '~/components/link';
+import { StyledLink } from '~/components/style/styled-link';
+
 const Index: NextPage = () => (
   <div
     css={{
@@ -31,6 +34,7 @@ const Index: NextPage = () => (
     <h1
       css={{
         fontSize: '4rem',
+        fontWeight: 'normal',
       }}
     >
       Logan McAnsh
@@ -42,36 +46,20 @@ const Index: NextPage = () => (
         '@media (max-width: 400px)': {
           fontSize: '1.8rem',
         },
-        a: {
-          textDecoration: 'none',
-          position: 'relative',
-          zIndex: 1,
-          color: 'currentColor',
-          '&::before': {
-            content: "''",
-            position: 'absolute',
-            zIndex: -1,
-            top: 0,
-            left: '0',
-            height: '100%',
-            width: '100%',
-            backgroundColor: 'var(--links)',
-            transformOrigin: 'bottom center',
-            transform: 'scaleY(0.1)',
-            transition: 'all 0.1s ease-in-out',
-          },
-          '&:hover::before': {
-            transform: 'scaleY(1)',
-            backgroundColor: 'hsla(341, 97%, 59%, 0.75)',
-          },
-        },
       }}
     >
       Making{' '}
-      <a href="https://blog.powerley.com/utilities-are-giving-the-home-a-voice-and-a-brain/?utm_source=mcan.sh">
-        Advisor
-      </a>{' '}
-      and Home Profile for <a href="https://www.powerley.com">Powerley</a>.
+      <Link
+        href="https://blog.powerley.com/utilities-are-giving-the-home-a-voice-and-a-brain/?utm_source=mcan.sh"
+        passHref
+      >
+        <StyledLink>Advisor</StyledLink>
+      </Link>{' '}
+      and Home Profile for{' '}
+      <Link href="https://www.powerley.com" passHref>
+        <StyledLink>Powerley</StyledLink>
+      </Link>
+      .
     </p>
   </div>
 );
