@@ -19,14 +19,14 @@
   "dependencies": {
     "next": "9.0.7",
     "polished": "3.4.1",
-    "react": "16.10.1",
-    "react-dom": "16.10.1",
+    "react": "16.10.2",
+    "react-dom": "16.10.2",
     "react-simple-img": "2.3.6",
     "styled-components": "4.4.0"
   },
   "devDependencies": {
-    "@types/node": "12.7.9",
-    "@types/react": "16.9.4",
+    "@types/node": "12.7.11",
+    "@types/react": "16.9.5",
     "@types/react-dom": "16.9.1",
     "@types/styled-components": "4.1.19",
     "@typescript-eslint/eslint-plugin": "2.3.2",
@@ -44,7 +44,7 @@
     "eslint-plugin-jsx-a11y": "6.2.3",
     "eslint-plugin-promise": "4.2.1",
     "eslint-plugin-react": "7.15.1",
-    "eslint-plugin-react-hooks": "2.1.1",
+    "eslint-plugin-react-hooks": "2.1.2",
     "husky": "3.0.8",
     "lint-staged": "9.4.1",
     "prettier": "1.18.2",
