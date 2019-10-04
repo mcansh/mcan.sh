@@ -3029,10 +3029,10 @@ eslint-config-kentcdodds@14.4.1:
     semver "^6.3.0"
     webpack "^4.39.3"
 
-eslint-config-mcansh@2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/eslint-config-mcansh/-/eslint-config-mcansh-2.1.1.tgz#b1ca79c5435cb9a41e6d6b4254693b0dd22a96fd"
-  integrity sha512-g+tBKeMut4eeb4MrtBCE/2DCSJNAnVeRHhfyS+zDdOAL/XZwJM30AzVB62CVcypoFg+LIiAKmdD/m++eeoEBNw==
+eslint-config-mcansh@2.2.0-canary.0:
+  version "2.2.0-canary.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-mcansh/-/eslint-config-mcansh-2.2.0-canary.0.tgz#43daba5da39ab248c73319134d391f2cbeaa3206"
+  integrity sha512-fC3bJNKlOXA0s0czuPuUItfadpaK97NBkwY63oVHK03QMlfZHzzMW6re56LdISKSiL/gPjcUMRrpFyAaQuyMoQ==
 
 eslint-config-prettier@^6.2.0:
   version "6.3.0"
