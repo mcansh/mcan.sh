@@ -1,8 +1,8 @@
 import React from 'react';
 import { NextPage } from 'next';
 import { SimpleImg } from 'react-simple-img';
+import { Link } from '@mcansh/custom-next-link';
 
-import { Link } from '~/components/link';
 import { StyledLink } from '~/components/style/styled-link';
 
 const Index: NextPage = () => (

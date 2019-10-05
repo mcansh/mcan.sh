@@ -17,6 +17,7 @@
     "validate": "yarn lint && yarn format && yarn type-check"
   },
   "dependencies": {
+    "@mcansh/custom-next-link": "0.1.0",
     "next": "9.0.7",
     "polished": "3.4.1",
     "react": "16.10.2",
