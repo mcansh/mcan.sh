@@ -2,11 +2,12 @@ import React from 'react';
 import { NextPage } from 'next';
 import { SimpleImg } from 'react-simple-img';
 import { Link } from '@mcansh/custom-next-link';
+import { motion } from 'framer-motion';
 
 import { StyledLink } from '~/components/style/styled-link';
 
 const Index: NextPage = () => (
-  <div
+  <motion.div
     css={{
       maxWidth: 768,
       marginLeft: 'auto',
@@ -22,14 +23,23 @@ const Index: NextPage = () => (
       alignItems: 'center',
       height: '100%',
     }}
+    initial={{ y: -80, opacity: 0 }}
+    animate={{ y: 0, opacity: 1 }}
+    transition={{
+      type: 'spring',
+      damping: 40,
+      stiffness: 200,
+    }}
   >
     <SimpleImg
       src="/me.jpg"
       alt="Why it's me, Logan McAnsh"
       height={240}
       width={240}
-      placeholder={false}
-      imgStyle={{ borderRadius: '50%', marginBottom: '1rem' }}
+      // placeholder={false}
+      placeholder="transparent"
+      imgStyle={{ borderRadius: '50%' }}
+      style={{ marginBottom: '1rem' }}
     />
     <h1
       css={{
@@ -61,7 +71,7 @@ const Index: NextPage = () => (
       </Link>
       .
     </p>
-  </div>
+  </motion.div>
 );
 
 export default Index;
