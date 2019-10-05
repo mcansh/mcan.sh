@@ -904,6 +904,11 @@
   resolved "https://registry.yarnpkg.com/@emotion/unitless/-/unitless-0.7.3.tgz#6310a047f12d21a1036fb031317219892440416f"
   integrity sha512-4zAPlpDEh2VwXswwr/t8xGNDGg8RQiPxtxZ3qQEXyQsBV39ptTdESCjuBvGze1nLMVrxmTIKmnO/nAV8Tqjjzg==
 
+"@mcansh/custom-next-link@0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@mcansh/custom-next-link/-/custom-next-link-0.1.0.tgz#b250a30bf2991c4259296e4c49b005373706e292"
+  integrity sha512-aIHlsJ7uFvQYvVivJE/dhC/r5WF1MVgEn9nxr2BeRwBefiruiujL7Nkw1FDLFGfrE1hAO9ltb2n+npLcc/cT5Q==
+
 "@nodelib/fs.scandir@2.1.2":
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/@nodelib/fs.scandir/-/fs.scandir-2.1.2.tgz#1f981cd5b83e85cfdeb386fc693d4baab392fa54"

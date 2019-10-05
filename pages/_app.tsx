@@ -2,7 +2,9 @@ import React from 'react';
 import Head from 'next/head';
 import App from 'next/app';
 import { ThemeProvider } from 'styled-components';
-import { GlobalStyle } from '../components/style/global-style';
+import { LinkProvider } from '@mcansh/custom-next-link';
+
+import { GlobalStyle } from '~/components/style/global-style';
 import { version, repository, description } from '~/package.json';
 import { theme } from '~/config';
 
@@ -19,12 +21,12 @@ if (typeof window !== 'undefined') {
 }
 
 class MyApp extends App {
-  render() {
+  public render() {
     const { Component, pageProps } = this.props;
 
     return (
       <ThemeProvider theme={theme}>
-        <>
+        <LinkProvider value="https://mcan.sh">
           <Head>
             <title>Logan McAnsh</title>
             <meta name="description" content={description} />
@@ -55,7 +57,7 @@ class MyApp extends App {
           </Head>
           <GlobalStyle />
           <Component {...pageProps} />
-        </>
+        </LinkProvider>
       </ThemeProvider>
     );
   }
