@@ -5,6 +5,7 @@ const StyledLink = styled.a`
   position: relative;
   z-index: 1;
   color: currentColor;
+  display: inline-block;
 
   &::before {
     content: '';
