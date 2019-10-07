@@ -10,9 +10,9 @@ module.exports = {
     REPO: `https://github.com/${pkgJSON.repository}`,
   },
   experimental: {
-    publicDirectory: true,
     granularChunks: true,
     modern: true,
+    publicDirectory: true,
   },
   webpack: (config, { buildId, webpack }) => {
     config.plugins.push(
