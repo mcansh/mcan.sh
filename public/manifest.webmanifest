@@ -26,6 +26,10 @@
     {
       "src": "/static/images/logo/logo-256.png",
       "sizes": "256x256"
+    },
+    {
+      "src": "/static/images/logo/favicon.png",
+      "sizes": "512x512"
     }
   ]
 }
