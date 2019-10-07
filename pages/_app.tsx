@@ -34,7 +34,8 @@ class MyApp extends App {
               name="viewport"
               content="initial-scale=1.0, width=device-width, viewport-fit=cover"
             />
-            <link rel="mask-icon" href="/logo.svg" color="#0448f8" />
+            <link rel="manifest" href="/manifest.webmanifest" />
+            <link rel="mask-icon" href="/logo.svg" color="#ea567c" />
             {/* <link rel="manifest" key="manifest" href={manifest} /> */}
             {/* <meta name="theme-color" content={colors.primary} /> */}
             <meta
@@ -43,12 +44,13 @@ class MyApp extends App {
             />
             <link rel="icon" href="/favicon.png" />
             <link rel="icon" href="/favicon.ico" />
+            <meta name="theme-color" content="#1d2330" />
             {iconSizes.map(icon => {
               const size = `${icon}x${icon}`;
               return (
                 <link
                   key={size}
-                  rel="apple-touch-icon-precomposed"
+                  rel="apple-touch-icon"
                   sizes={size}
                   href={`/static/images/logo/logo-${icon}.png`}
                 />

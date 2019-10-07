@@ -8,7 +8,7 @@ import { StyledLink } from '~/components/style/styled-link';
 
 const Index: NextPage = () => (
   <motion.div
-    css={{
+    style={{
       maxWidth: 768,
       marginLeft: 'auto',
       marginRight: 'auto',
