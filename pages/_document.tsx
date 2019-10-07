@@ -1,8 +1,14 @@
 import React from 'react';
-import Document, { DocumentContext } from 'next/document';
+import Document, {
+  DocumentContext,
+  Html,
+  Head,
+  NextScript,
+  Main,
+} from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 
-export default class MyDocument extends Document {
+class MyDocument extends Document {
   public static async getInitialProps(ctx: DocumentContext) {
     const sheet = new ServerStyleSheet();
 
@@ -21,4 +27,18 @@ export default class MyDocument extends Document {
       ],
     };
   }
+
+  public render() {
+    return (
+      <Html lang="en">
+        <Head />
+        <body>
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
+    );
+  }
 }
+
+export default MyDocument;
