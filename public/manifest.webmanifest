@@ -1,0 +1,31 @@
+{
+  "name": "Logan McAnsh",
+  "short_name": "LM",
+  "description": "personal website for logan mcansh",
+  "start_url": "/?homescreen=1",
+  "background_color": "#e53a40",
+  "theme_color": "#e53a40",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "/static/images/logo/logo-72.png",
+      "sizes": "72x72"
+    },
+    {
+      "src": "/static/images/logo/logo-96.png",
+      "sizes": "96x96"
+    },
+    {
+      "src": "/static/images/logo/logo-128.png",
+      "sizes": "128x128"
+    },
+    {
+      "src": "/static/images/logo/logo-144.png",
+      "sizes": "144x144"
+    },
+    {
+      "src": "/static/images/logo/logo-256.png",
+      "sizes": "256x256"
+    }
+  ]
+}
