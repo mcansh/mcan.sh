@@ -36,7 +36,6 @@ const Index: NextPage = () => (
       alt="Why it's me, Logan McAnsh"
       height={240}
       width={240}
-      // placeholder={false}
       placeholder="transparent"
       imgStyle={{ borderRadius: '50%' }}
       style={{ marginBottom: '1rem' }}
