@@ -1,10 +1,9 @@
 import { createGlobalStyle } from 'styled-components';
-import { darken } from 'polished';
+import { darken, normalize } from 'polished';
 
 const GlobalStyle = createGlobalStyle`
-  *,
-  *::before,
-  *::after {
+  ${normalize()};
+  * {
     box-sizing: border-box;
     margin: 0;
   }
@@ -37,6 +36,15 @@ const GlobalStyle = createGlobalStyle`
     transition: background-color 0.2s ease 0s, color 0.2s ease 0s;
     background: var(--background);
     color: var(--text);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: normal;
   }
 `;
 
