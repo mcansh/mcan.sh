@@ -11,7 +11,7 @@ import { Heading } from '~/components/style/heading';
 const Index: NextPage = () => (
   <Container css={{ height: '100%' }}>
     <motion.div
-      css={{
+      style={{
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
