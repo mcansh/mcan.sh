@@ -4,12 +4,12 @@ module.exports = {
   crossOrigin: 'anonymous',
   target: 'serverless',
   env: {
-    SENTRY: '',
     VERSION: pkgJSON.version,
     DESCRIPTION: pkgJSON.description,
     REPO: `https://github.com/${pkgJSON.repository}`,
   },
   experimental: {
+    deferScripts: true,
     granularChunks: true,
     modern: true,
   },
