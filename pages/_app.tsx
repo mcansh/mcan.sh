@@ -36,8 +36,6 @@ class MyApp extends App {
             />
             <link rel="manifest" href="/manifest.webmanifest" />
             <link rel="mask-icon" href="/logo.svg" color="#ea567c" />
-            {/* <link rel="manifest" key="manifest" href={manifest} /> */}
-            {/* <meta name="theme-color" content={colors.primary} /> */}
             <meta
               name="apple-mobile-web-app-status-bar-style"
               content="black-translucent"

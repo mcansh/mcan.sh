@@ -6,7 +6,6 @@ import { motion } from 'framer-motion';
 
 import { Container } from '~/components/style/container';
 import { StyledLink } from '~/components/style/styled-link';
-import { Heading } from '~/components/style/heading';
 
 const Index: NextPage = () => (
   <Container css={{ height: '100%' }}>
@@ -35,7 +34,14 @@ const Index: NextPage = () => (
         imgStyle={{ borderRadius: '50%' }}
         style={{ marginBottom: '1rem' }}
       />
-      <Heading>Logan McAnsh</Heading>
+      <h1
+        css={`
+          font-size: 4rem;
+          margin: 0;
+        `}
+      >
+        Logan McAnsh
+      </h1>
       <p
         css={{
           fontSize: '2rem',
