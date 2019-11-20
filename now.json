@@ -1,14 +1,12 @@
 {
   "name": "mcan.sh",
   "version": 2,
+  "build": {
+    "env": {
+      "NPM_TOKEN": "@blog_github_token"
+    }
+  },
   "routes": [
-    {
-      "src": "/blog",
-      "status": 301,
-      "headers": {
-        "Location": "https://mcansh.blog"
-      }
-    },
     {
       "src": "/_next(/static/(?:[^/]+/pages|chunks|runtime)/.+)",
       "headers": {

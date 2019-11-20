@@ -12,6 +12,13 @@ module.exports = {
     deferScripts: true,
     granularChunks: true,
     modern: true,
+    redirects: () => [
+      {
+        source: '/blog',
+        status: 301,
+        destination: 'https://mcansh.blog',
+      },
+    ],
   },
   webpack: (config, { buildId, webpack }) => {
     config.plugins.push(
