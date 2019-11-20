@@ -21,6 +21,7 @@
     "next": "9.1.4",
     "polished": "3.4.2",
     "react": "16.12.0",
+    "react-div-100vh": "0.3.4",
     "react-dom": "16.12.0",
     "react-simple-img": "2.3.7",
     "styled-components": "4.4.1"
@@ -29,6 +30,7 @@
     "@mcansh/eslint-config": "2.3.1-canary.0",
     "@types/node": "12.12.11",
     "@types/react": "16.9.11",
+    "@types/react-div-100vh": "0.3.0",
     "@types/react-dom": "16.9.4",
     "@types/styled-components": "4.4.0",
     "@typescript-eslint/eslint-plugin": "2.8.0",
@@ -59,11 +61,12 @@
   },
   "lint-staged": {
     "*.+(js|jsx|ts|tsx)": [
+      "sh scripts/ts-precommit.bash",
+      "prettier --write",
       "eslint --fix",
       "git add"
     ],
-    "*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|md|graphql|mdx)": [
-      "sh scripts/ts-precommit.bash",
+    "*.+(json|yml|yaml|css|less|scss|md|graphql|mdx)": [
       "prettier --write",
       "git add"
     ]
