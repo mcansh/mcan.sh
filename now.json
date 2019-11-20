@@ -3,7 +3,7 @@
   "version": 2,
   "build": {
     "env": {
-      "NPM_TOKEN": "@blog_github_token"
+      "NPM_RC": "@npmrc"
     }
   },
   "routes": [
