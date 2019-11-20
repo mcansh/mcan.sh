@@ -3,6 +3,7 @@ import { darken, normalize } from 'polished';
 
 const GlobalStyle = createGlobalStyle`
   ${normalize()};
+
   * {
     box-sizing: border-box;
     margin: 0;
