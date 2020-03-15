@@ -118,7 +118,7 @@ const Resume: NextPage = () => {
             </li>
             <li>
               <a
-                href="education"
+                href="#education"
                 className={activeSection === '#education' ? 'active' : ''}
               >
                 Education
@@ -126,7 +126,7 @@ const Resume: NextPage = () => {
             </li>
             <li>
               <a
-                href="information"
+                href="#information"
                 className={activeSection === '#information' ? 'active' : ''}
               >
                 Information
