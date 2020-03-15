@@ -6,12 +6,4 @@
       "NPM_RC": "@npmrc"
     }
   },
-  "routes": [
-    {
-      "src": "/_next(/static/(?:[^/]+/pages|chunks|runtime)/.+)",
-      "headers": {
-        "Cache-Control": "max-age=31536000, immutable"
-      }
-    }
-  ]
 }
