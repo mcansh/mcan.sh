@@ -17,7 +17,7 @@ module.exports = {
     redirects: () => [
       {
         source: '/blog',
-        status: 301,
+        permanent: true,
         destination: 'https://mcansh.blog',
       },
     ],
