@@ -1,0 +1,68 @@
+==================================================================
+https://keybase.io/loganmcansh
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://mcan.sh
+  * I am loganmcansh (https://keybase.io/loganmcansh) on keybase.
+  * I have a public key with fingerprint ADE4 9096 BA29 0737 ED87  D1FC 29FD FABF F3C4 3C79
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "0101768949757462b1e20aa391366a48b304ead283f31a3ec3d06ff8e62f49e9e0420a",
+      "fingerprint": "ade49096ba290737ed87d1fc29fdfabff3c43c79",
+      "host": "keybase.io",
+      "key_id": "29fdfabff3c43c79",
+      "kid": "0101768949757462b1e20aa391366a48b304ead283f31a3ec3d06ff8e62f49e9e0420a",
+      "uid": "59878d50d03a1c49ec1b9b21a8a90700",
+      "username": "loganmcansh"
+    },
+    "service": {
+      "hostname": "mcan.sh",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 1
+  },
+  "ctime": 1585699345,
+  "expire_in": 157680000,
+  "prev": "28005b306db0cf01be604149220ae2dfa5384e80090a4eba868051eecd261a72",
+  "seqno": 28,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.1.13
+Comment: https://keybase.io/crypto
+
+yMInAnicrZJbSBRRGMfXLtJuGmpBQmQ1+6Lbamfuc7YrFUu6dIMoKnE7M3Nmd8qd
+2Z0ZtxULrCWxhwKNypKItWwDqZculAXdjS7US6IVkgShPkRPSURUZ6Teeuy8HM53
+fv/v/L8/53HxdI+vYG1ZLlPRFksVvHhwqsnTkH1X2kLJptpMhVqofXhqw40qtp3o
+Pl2lQhSgAS0KEuSgyIucwMg0ZgBCLKRZQUCcJLOAw0hlJFZjacRihVWBoGkSFhiN
+gxhiwBGeClKabsSwlbR0wyFtkYo5CKAgIwYCkRWxKokqrSkM1FQNyZrGKhyriJAI
+46btKog5Gdm4RjdJjRyiU/b+wf9n301T7XgoiZLKAxWwiFYIoNAylBkaSYj4B8AF
+bWwZKIEJ3WjGkJFQkGHHqYNBilykdQW72brD/IHc+xoCBKmkZTqmYjaSYtxxknbI
+FTnNSZfaj+XoH31U1g2VpEgUaWzZumlQIZqQiqO7DWle4gUIWY4PUjiT1C0c1V2C
+JzEAstx3cNrNjBx5Mr+gykDRAC1jAXA0BxkyMGZInDwrcZhAECAOy0giep7GWFEZ
+gUYiQ7kTpQyTCjES8YlipKetxwzkNFmYOvjwfv0MT4HPUzhzmvu9PD5vyd9PN1gz
+y9N/vrfq/Wf/p4YFGyMv0+Xzv8VWvc77qjcvPMR0JatOvnszI7LaOlN5tqPyOvTd
+s1IrhvT+HbXXvJmjQ37hfuTGzLnZkr78rtYNB7y3B7wj2b6B3HBqaWd/0bPJfMvQ
+4pV353+dt8ju/AXK2/MV6fHyC2+37lGHewee5I5v6pkdvRXeueRpNXvk6rLIWF/D
+3Ird4jGr6CZfX5s43LqrbsWVk9szxee+JNZuGLn6vGzy45zuUaZu7/LwCS2wzFea
+HVvzavejddkrgQn/YP/oy9PsxS2XM98X315fGKR/xMc7tgl33wQa9+fufGgPVYUL
+6+t62vzdOyYCbeEfr5Z3/bw02sr9BhXlNYM=
+=oll/
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/loganmcansh
+
+==================================================================
