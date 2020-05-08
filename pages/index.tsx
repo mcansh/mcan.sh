@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 
 import { Container } from '~/components/style/container';
 import { StyledLink } from '~/components/style/styled-link';
+import Chevron from '~/public/chevron.svg';
 
 const Index: NextPage = () => (
   <Container css={{ height: '100%' }}>
@@ -56,13 +57,18 @@ const Index: NextPage = () => (
           href="https://blog.powerley.com/utilities-are-giving-the-home-a-voice-and-a-brain/?utm_source=mcan.sh"
           passHref
         >
-          <StyledLink>Advisor</StyledLink>
+          <StyledLink>
+            <span>Advisor</span>
+            <Chevron />
+          </StyledLink>
         </Link>{' '}
         and Home Profile for{' '}
         <Link href="https://www.powerley.com" passHref>
-          <StyledLink>Powerley</StyledLink>
+          <StyledLink>
+            <span>Powerley</span>
+            <Chevron />
+          </StyledLink>
         </Link>
-        .
       </p>
     </motion.div>
   </Container>
