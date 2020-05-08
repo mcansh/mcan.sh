@@ -29,6 +29,31 @@ module.exports = {
         'process.env.BUILD_ID': JSON.stringify(buildId),
       })
     );
+
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: [
+        {
+          loader: '@svgr/webpack',
+          options: {
+            svgoConfig: {
+              plugins: [
+                { removeViewBox: false },
+                { removeDimensions: true },
+                {
+                  prefixIds: {
+                    delim: '_',
+                    prefixIds: true,
+                    prefixClassNames: false,
+                  },
+                },
+              ],
+            },
+          },
+        },
+      ],
+    });
+
     return config;
   },
 };
