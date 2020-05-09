@@ -8,6 +8,8 @@ module.exports = {
     VERSION: pkgJSON.version,
     DESCRIPTION: pkgJSON.description,
     REPO: `https://github.com/${pkgJSON.repository}`,
+    FATHOM_SUBDOMAIN: 'https://kiwi.mcan.sh',
+    FATHOM_SITEID: 'EPVCGNZL',
   },
 
   experimental: {
