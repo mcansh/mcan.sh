@@ -3,8 +3,6 @@ import Head from 'next/head';
 import { AppProps } from 'next/app';
 import { ThemeProvider } from 'styled-components';
 import { LinkProvider } from '@mcansh/custom-next-link';
-import Router from 'next/router';
-import * as Fathom from 'fathom-client';
 
 import { GlobalStyle } from '~/components/style/global-style';
 import { version, repository, description } from '~/package.json';
@@ -12,17 +10,15 @@ import { theme } from '~/config';
 
 const iconSizes = [32, 57, 72, 96, 120, 128, 144, 152, 195, 228];
 
-Router.events.on('routeChangeComplete', () => {
-  Fathom.trackPageview();
-});
-
 const App: React.FC<AppProps> = ({ Component, pageProps }) => {
   React.useEffect(() => {
-    if (process.env.NODE_ENV === 'production') {
-      Fathom.load();
-      Fathom.setSiteId('EPVCGNZL');
-      Fathom.trackPageview();
-    }
+    const tracker = window.document.createElement('script');
+    const firstScript = window.document.getElementsByTagName('script')[0];
+    tracker.defer = true;
+    tracker.setAttribute('site', process.env.FATHOM_SITEID);
+    tracker.setAttribute('spa', 'auto');
+    tracker.src = `${process.env.FATHOM_SUBDOMAIN}/script.js`;
+    firstScript.parentNode?.insertBefore(tracker, firstScript);
   }, []);
 
   React.useEffect(() => {
