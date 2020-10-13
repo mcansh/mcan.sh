@@ -1,6 +1,6 @@
 const pkgJSON = require('./package.json');
 
-module.exports = {
+const nextConfig = {
   crossOrigin: 'anonymous',
   target: 'serverless',
 
@@ -12,17 +12,16 @@ module.exports = {
     FATHOM_SITEID: 'EPVCGNZL',
   },
 
+  redirects: () => [
+    {
+      source: '/blog',
+      permanent: false,
+      destination: 'https://mcansh.blog',
+    },
+  ],
+
   experimental: {
-    deferScripts: true,
-    granularChunks: true,
     modern: true,
-    redirects: () => [
-      {
-        source: '/blog',
-        permanent: false,
-        destination: 'https://mcansh.blog',
-      },
-    ],
   },
 
   webpack: (config, { buildId, webpack }) => {
@@ -59,3 +58,5 @@ module.exports = {
     return config;
   },
 };
+
+module.exports = nextConfig;
