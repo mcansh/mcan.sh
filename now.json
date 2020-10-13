@@ -1,9 +1,0 @@
-{
-  "name": "mcan.sh",
-  "version": 2,
-  "build": {
-    "env": {
-      "NPM_RC": "@npmrc"
-    }
-  }
-}
