@@ -4,7 +4,11 @@ module.exports = {
     'import/no-extraneous-dependencies': [
       'error',
       {
-        devDependencies: ['next.config.js', 'prettier.config.js'],
+        devDependencies: [
+          'next.config.js',
+          'prettier.config.js',
+          'tailwind.config.js',
+        ],
       },
     ],
   },
