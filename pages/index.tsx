@@ -1,23 +1,15 @@
 import React from 'react';
-import { NextPage } from 'next';
-import { SimpleImg } from 'react-simple-img';
+import type { NextPage } from 'next';
+import Image from 'next/image';
 import { Link } from '@mcansh/custom-next-link';
 import { motion } from 'framer-motion';
 
-import { Container } from '~/components/style/container';
-import { StyledLink } from '~/components/style/styled-link';
-import Chevron from '~/public/chevron.svg';
+import { FunHoverLink } from '~/components/style/styled-link';
 
 const Index: NextPage = () => (
-  <Container css={{ height: '100%' }}>
+  <div className="h-full max-w-screen-md px-4 py-8 mx-auto">
     <motion.div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100%',
-      }}
+      className="flex flex-col items-center justify-center h-full"
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{
@@ -26,52 +18,30 @@ const Index: NextPage = () => (
         stiffness: 200,
       }}
     >
-      <SimpleImg
+      <Image
         src="/me.jpg"
         alt="Why it's me, Logan McAnsh"
         height={240}
         width={240}
         placeholder="transparent"
-        imgStyle={{ borderRadius: '50%' }}
-        style={{ marginBottom: '1rem' }}
+        className="rounded-full"
       />
-      <h1
-        css={`
-          font-size: 4rem;
-          margin: 0;
-        `}
-      >
-        Logan McAnsh
-      </h1>
-      <p
-        css={{
-          fontSize: '2rem',
-          textAlign: 'center',
-          '@media (max-width: 400px)': {
-            fontSize: '1.8rem',
-          },
-        }}
-      >
+      <h1 className="mt-4 text-4xl">Logan McAnsh</h1>
+      <p className="text-lg text-center sm:text-xl">
         Making{' '}
         <Link
           href="https://blog.powerley.com/utilities-are-giving-the-home-a-voice-and-a-brain/?utm_source=mcan.sh"
           passHref
         >
-          <StyledLink>
-            <span>Advisor</span>
-            <Chevron />
-          </StyledLink>
+          <FunHoverLink>Advisor</FunHoverLink>
         </Link>{' '}
         and Home Profile for{' '}
         <Link href="https://www.powerley.com" passHref>
-          <StyledLink>
-            <span>Powerley</span>
-            <Chevron />
-          </StyledLink>
+          <FunHoverLink>Powerley</FunHoverLink>
         </Link>
       </p>
     </motion.div>
-  </Container>
+  </div>
 );
 
 export default Index;
