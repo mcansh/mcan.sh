@@ -7,17 +7,17 @@ import { motion } from 'framer-motion';
 import { FunHoverLink } from '~/components/style/styled-link';
 
 const Index: NextPage = () => (
-  <div className="h-full max-w-screen-md px-4 py-8 mx-auto">
-    <motion.div
-      className="flex flex-col items-center justify-center h-full"
-      initial={{ y: -80, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{
-        type: 'spring',
-        damping: 40,
-        stiffness: 200,
-      }}
-    >
+  <motion.div
+    className="flex flex-col items-center justify-center h-full max-w-screen-md px-4 py-8 mx-auto "
+    initial={{ y: -80, opacity: 0 }}
+    animate={{ y: 0, opacity: 1 }}
+    transition={{
+      type: 'spring',
+      damping: 40,
+      stiffness: 200,
+    }}
+  >
+    <div className="flex flex-col items-center justify-center flex-1">
       <Image
         src="/me.jpg"
         alt="Why it's me, Logan McAnsh"
@@ -40,8 +40,11 @@ const Index: NextPage = () => (
           <FunHoverLink>Powerley</FunHoverLink>
         </Link>
       </p>
-    </motion.div>
-  </div>
+    </div>
+    <Link href="https://resume.mcan.sh">
+      <FunHoverLink>Resume</FunHoverLink>
+    </Link>
+  </motion.div>
 );
 
 export default Index;
