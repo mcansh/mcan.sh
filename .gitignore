@@ -1,6 +1,7 @@
-.next
 node_modules
 *.log
 .DS_Store
-
 .vercel
+/.cache
+/server/build
+/public/build

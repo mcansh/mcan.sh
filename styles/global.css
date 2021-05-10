@@ -30,7 +30,3 @@
     color: #fff;
   }
 }
-
-#__next {
-  @apply h-full;
-}
