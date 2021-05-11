@@ -10,15 +10,15 @@
   "scripts": {
     "dev": "pm2-dev pm2.config.js",
     "clean": "del .cache app/styles server/build public/build",
-    "prebuild": "npm run clean",
+    "prebuild": "run-s clean type-check",
     "build": "run-s build:*",
     "build:css": "postcss styles --base styles --dir app/styles --env production",
     "build:remix": "remix build",
     "start": "vercel dev",
-    "type-check": "tsc",
-    "lint": "eslint . --ext \".js,.ts,.tsx\"",
+    "type-check": "tsc --project app",
+    "lint": "eslint . --ext \".js,.ts,.tsx\" --fix",
     "format": "prettier --write \"**/*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|md|graphql|mdx)\"",
-    "validate": "yarn lint && yarn format && yarn type-check",
+    "validate": "run-p lint format type-check",
     "prepare": "husky install"
   },
   "dependencies": {
