@@ -1,12 +1,23 @@
-import React from 'react';
-import type { NextPage } from 'next';
-import Image from 'next/image';
-import { Link } from '@mcansh/custom-next-link';
+import type { MetaFunction, LinksFunction, RouteComponent } from 'remix';
+import { block } from 'remix';
 import { motion } from 'framer-motion';
 
-import { FunHoverLink } from '~/components/style/styled-link';
+import { FunHoverLink } from '../components/fun-hover-link';
 
-const Index: NextPage = () => (
+const meta: MetaFunction = () => ({
+  title: 'Logan McAnsh',
+  description: 'personal website for logan mcansh',
+});
+
+const links: LinksFunction = () => [
+  block({
+    rel: 'preload',
+    as: 'image',
+    href: '/me.jpg',
+  }),
+];
+
+const IndexPage: RouteComponent = () => (
   <motion.div
     className="flex flex-col items-center justify-center h-full max-w-screen-md px-4 py-8 mx-auto "
     initial={{ y: -80, opacity: 0 }}
@@ -18,7 +29,7 @@ const Index: NextPage = () => (
     }}
   >
     <div className="flex flex-col items-center justify-center flex-1">
-      <Image
+      <img
         src="/me.jpg"
         alt="Why it's me, Logan McAnsh"
         height={240}
@@ -29,22 +40,26 @@ const Index: NextPage = () => (
       <h1 className="mt-4 text-4xl">Logan McAnsh</h1>
       <p className="text-lg text-center sm:text-xl">
         Making{' '}
-        <Link
+        <FunHoverLink
           href="https://blog.powerley.com/utilities-are-giving-the-home-a-voice-and-a-brain/?utm_source=mcan.sh"
-          passHref
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          <FunHoverLink>Advisor</FunHoverLink>
-        </Link>{' '}
+          Advisor
+        </FunHoverLink>{' '}
         and Home Profile for{' '}
-        <Link href="https://www.powerley.com" passHref>
-          <FunHoverLink>Powerley</FunHoverLink>
-        </Link>
+        <FunHoverLink
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.powerley.com"
+        >
+          Powerley
+        </FunHoverLink>
       </p>
     </div>
-    <Link href="https://resume.mcan.sh">
-      <FunHoverLink>Resume</FunHoverLink>
-    </Link>
+    <FunHoverLink href="/resume">Resume</FunHoverLink>
   </motion.div>
 );
 
-export default Index;
+export default IndexPage;
+export { meta, links };
