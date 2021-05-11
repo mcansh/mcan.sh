@@ -8,11 +8,15 @@ import type {
 } from '@remix-run/react/routeModules';
 import * as Fathom from 'fathom-client';
 
-import stylesUrl from './styles/global.css';
+import tailwindUrl from './styles/global.css';
+import interUrl from './styles/inter.css';
 
 const iconSizes = [32, 57, 72, 96, 120, 128, 144, 152, 195, 228];
 
-const links: LinksFunction = () => [{ rel: 'stylesheet', href: stylesUrl }];
+const links: LinksFunction = () => [
+  { rel: 'stylesheet', href: tailwindUrl },
+  { rel: 'stylesheet', href: interUrl },
+];
 
 const Document: React.FC = ({ children }) => {
   const location = useLocation();
@@ -40,7 +44,7 @@ const Document: React.FC = ({ children }) => {
           content="initial-scale=1.0, width=device-width, viewport-fit=cover"
         />
         <link rel="manifest" href="/manifest.webmanifest" />
-        <link rel="mask-icon" href="/logo.svg" color="#ea567c" />
+        <link rel="mask-icon" href="/logo.svg" color="#4f46e5" />
         <meta
           name="apple-mobile-web-app-status-bar-style"
           content="black-translucent"
