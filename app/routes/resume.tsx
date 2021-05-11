@@ -113,15 +113,17 @@ const ResumePage: RouteComponent = () => {
               <li>
                 <div className="space-y-2">
                   <div>
-                    <h3 className="text-xl font-medium">Powerley</h3>
-                    <span>
-                      <span className="block text-lg sm:mr-2 sm:inline-block">
-                        Web Developer
+                    <h3 className="flex flex-col py-2 sm:space-y-0 sm:space-x-2 sm:items-baseline sm:flex-row">
+                      <span className="text-xl font-medium">Powerley</span>
+                      <span className="text-lg">Web Developer</span>
+                      <span>
+                        <time dateTime="2016-05-04T00:00:00.000Z">
+                          May 2016 -
+                        </time>{' '}
+                        <time dateTime={data.date}>Present</time>
                       </span>
-                      <time dateTime="2016-05-04T00:00:00.000Z">May 2016</time>{' '}
-                      - <time dateTime={data.date}>Present</time>
-                    </span>
-                    <ul className="pl-6 list-disc">
+                    </h3>
+                    <ul className="pl-6 space-y-1 list-disc">
                       <li>First member of the web team</li>
                       <li>
                         Created and maintained a suite of modern white label web
