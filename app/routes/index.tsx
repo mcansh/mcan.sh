@@ -15,6 +15,10 @@ const links: LinksFunction = () => [
     as: 'image',
     href: '/me.jpg',
   }),
+  {
+    rel: 'stylesheet',
+    href: FunHoverLink.styles,
+  },
 ];
 
 const IndexPage: RouteComponent = () => (

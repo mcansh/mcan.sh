@@ -10,23 +10,4 @@
   body {
     @apply min-h-full;
   }
-
-  .fun-link {
-    @apply relative text-current no-underline bg-no-repeat;
-
-    --line: #ea567c;
-    --size: 2px;
-    --background-size: 100%;
-    --background-delay: 0.15s;
-    background-image: linear-gradient(0deg, var(--line) 0%, var(--line) 100%);
-    background-position: 100% 100%;
-    background-size: 100% var(--size);
-    transition: background-size 0.2s linear var(--background-delay),
-      color 0.2s linear 0.2s;
-  }
-
-  .fun-link:hover {
-    --size: 100%;
-    color: #fff;
-  }
 }
