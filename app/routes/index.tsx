@@ -21,7 +21,7 @@ const links: LinksFunction = () => [
 ];
 
 const IndexPage: RouteComponent = () => (
-  <div className="flex flex-col items-center justify-center h-full max-w-screen-md px-4 py-8 mx-auto animate-fall">
+  <div className="flex flex-col items-center justify-center h-full max-w-screen-md px-4 py-8 mx-auto motion-safe:animate-fall">
     <div className="flex flex-col items-center justify-center flex-1">
       <img
         src="/me.jpg"
