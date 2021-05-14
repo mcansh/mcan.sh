@@ -1,4 +1,9 @@
-import type { MetaFunction, LinksFunction, RouteComponent } from 'remix';
+import type {
+  MetaFunction,
+  LinksFunction,
+  RouteComponent,
+  HeadersFunction,
+} from 'remix';
 import { block } from 'remix';
 
 import { FunHoverLink } from '../components/fun-hover-link';
@@ -6,6 +11,11 @@ import { FunHoverLink } from '../components/fun-hover-link';
 const meta: MetaFunction = () => ({
   title: 'Logan McAnsh',
   description: 'personal website for logan mcansh',
+});
+
+const headers: HeadersFunction = () => ({
+  'Cache-Control':
+    'public, max-age=3600, s-maxage=3600, stale-while-revalidate=3600',
 });
 
 const links: LinksFunction = () => [
@@ -56,4 +66,4 @@ const IndexPage: RouteComponent = () => (
 );
 
 export default IndexPage;
-export { meta, links };
+export { headers, meta, links };
