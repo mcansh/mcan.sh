@@ -1,6 +1,5 @@
 import type { MetaFunction, LinksFunction, RouteComponent } from 'remix';
 import { block } from 'remix';
-import { motion } from 'framer-motion';
 
 import { FunHoverLink } from '../components/fun-hover-link';
 
@@ -22,16 +21,7 @@ const links: LinksFunction = () => [
 ];
 
 const IndexPage: RouteComponent = () => (
-  <motion.div
-    className="flex flex-col items-center justify-center h-full max-w-screen-md px-4 py-8 mx-auto "
-    initial={{ y: -80, opacity: 0 }}
-    animate={{ y: 0, opacity: 1 }}
-    transition={{
-      type: 'spring',
-      damping: 40,
-      stiffness: 200,
-    }}
-  >
+  <div className="flex flex-col items-center justify-center h-full max-w-screen-md px-4 py-8 mx-auto animate-fall">
     <div className="flex flex-col items-center justify-center flex-1">
       <img
         src="/me.jpg"
@@ -62,7 +52,7 @@ const IndexPage: RouteComponent = () => (
       </p>
     </div>
     <FunHoverLink href="/resume">Resume</FunHoverLink>
-  </motion.div>
+  </div>
 );
 
 export default IndexPage;
