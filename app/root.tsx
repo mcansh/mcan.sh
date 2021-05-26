@@ -16,6 +16,12 @@ const iconSizes = [32, 57, 72, 96, 120, 128, 144, 152, 195, 228];
 const links: LinksFunction = () => [
   { rel: 'stylesheet', href: tailwindUrl },
   { rel: 'stylesheet', href: interUrl },
+  {
+    rel: 'preload',
+    href: '/inter-3.18/Inter-roman.var.woff2?v=3.18',
+    type: 'font/woff2',
+    as: 'font',
+  },
 ];
 
 const Document: React.FC = ({ children }) => {
