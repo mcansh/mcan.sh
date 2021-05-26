@@ -1,8 +1,10 @@
+const { PORT = 3000 } = process.env;
+
 module.exports = {
   apps: [
     {
       name: 'Vercel',
-      script: 'vc dev --listen $PORT',
+      script: `vc dev --listen ${PORT}`,
       ignore_watch: ['.'],
     },
     {
