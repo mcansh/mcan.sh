@@ -7,15 +7,6 @@ module.exports = {
   darkMode: 'media',
   theme: {
     extend: {
-      animation: {
-        fall: 'fall 500ms ease-out',
-      },
-      keyframes: {
-        fall: {
-          '0%': { transform: 'translateY(-120px)', opacity: 0 },
-          '100%': { transform: 'translateY(0)', opacity: 1 },
-        },
-      },
       screens: {
         print: { raw: 'print' },
       },
