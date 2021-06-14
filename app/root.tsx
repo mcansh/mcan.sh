@@ -72,7 +72,7 @@ const Document: React.FC = ({ children }) => {
         <Meta />
         <Links />
       </head>
-      <body className="h-full bg-white dark:bg-gray-800 dark:text-white">
+      <body className="min-h-full bg-white dark:bg-gray-800 dark:text-white">
         {children}
         <Scripts />
         {process.env.NODE_ENV === 'development' && <LiveReload />}

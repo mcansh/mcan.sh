@@ -10,4 +10,12 @@
   body {
     @apply min-h-full;
   }
+
+  .h-inherit {
+    height: inherit;
+  }
+
+  .min-h-inherit {
+    min-height: inherit;
+  }
 }
