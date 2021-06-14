@@ -10,6 +10,7 @@
     "noEmit": true,
     "isolatedModules": true,
     "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "types": ["react/next", "react-dom/next"]
   }
 }
