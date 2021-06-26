@@ -18,7 +18,7 @@ const links: LinksFunction = () => [
   { rel: 'stylesheet', href: interUrl },
   {
     rel: 'preload',
-    href: '/inter-3.18/Inter-roman.var.woff2?v=3.18',
+    href: '/inter/Inter-roman.var.woff2?v=3.19',
     type: 'font/woff2',
     as: 'font',
   },
