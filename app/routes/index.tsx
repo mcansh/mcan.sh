@@ -4,7 +4,6 @@ import type {
   RouteComponent,
   HeadersFunction,
 } from 'remix';
-import { block } from 'remix';
 
 import { FunHoverLink } from '../components/fun-hover-link';
 
@@ -19,11 +18,6 @@ const headers: HeadersFunction = () => ({
 });
 
 const links: LinksFunction = () => [
-  block({
-    rel: 'preload',
-    as: 'image',
-    href: '/me.jpg',
-  }),
   {
     rel: 'stylesheet',
     href: FunHoverLink.styles,
@@ -34,7 +28,7 @@ const IndexPage: RouteComponent = () => (
   <div className="flex flex-col items-center justify-center h-screen max-w-screen-md px-4 mx-auto py-8-safe">
     <div className="flex flex-col items-center justify-center flex-1">
       <img
-        src="/me.jpg"
+        src="https://res.cloudinary.com/dof0zryca/image/upload/c_fill,f_auto,h_480,w_480/v1624726775/me.jpg"
         alt="Why it's me, Logan McAnsh"
         height={240}
         width={240}

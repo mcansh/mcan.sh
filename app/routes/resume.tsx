@@ -64,7 +64,7 @@ const ResumePage: RouteComponent = () => {
             <div className="w-full h-full scale-125 bg-cover" />
             <img
               alt="Logan McAnsh"
-              src="/11698668.jpg"
+              src="https://res.cloudinary.com/dof0zryca/image/upload/c_fill,f_auto,w_340/v1624726620/11698668.jpg"
               height={160}
               width={160}
               className="absolute top-0 left-0 w-full h-full"
