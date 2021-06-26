@@ -50,14 +50,26 @@ const Document: React.FC = ({ children }) => {
           content="initial-scale=1.0, width=device-width, viewport-fit=cover"
         />
         <link rel="manifest" href="/manifest.webmanifest" />
-        <link rel="mask-icon" href="/logo.svg" color="#4f46e5" />
+        <link rel="mask-icon" href="/logo.svg" color="#1d2330" />
         <meta
           name="apple-mobile-web-app-status-bar-style"
           content="black-translucent"
         />
         <link rel="icon" href="/favicon.png" />
         <link rel="icon" href="/favicon.ico" />
-        <meta name="theme-color" content="#1d2330" />
+
+        <meta
+          name="theme-color"
+          content="#fff"
+          // @ts-expect-error Safari 15 supports this
+          media="(prefers-color-scheme: light)"
+        />
+        <meta
+          name="theme-color"
+          content="#1d2330"
+          // @ts-expect-error Safari 15 supports this
+          media="(prefers-color-scheme: dark)"
+        />
         {iconSizes.map(icon => {
           const size = `${icon}x${icon}`;
           return (
