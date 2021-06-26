@@ -114,13 +114,31 @@ const ResumePage: RouteComponent = () => {
                 <div className="space-y-2">
                   <div>
                     <h3 className="flex flex-col py-2 sm:space-y-0 sm:space-x-2 sm:items-baseline sm:flex-row">
+                      <span className="text-xl font-medium">Remix Run</span>
+                      <span className="text-lg">Software Engineer</span>
+                      <span>
+                        <time dateTime="2021-08-02T00:00:00.000Z">
+                          August 2021 -
+                        </time>{' '}
+                        <time dateTime={data.date}>Present</time>
+                      </span>
+                    </h3>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div className="space-y-2">
+                  <div>
+                    <h3 className="flex flex-col py-2 sm:space-y-0 sm:space-x-2 sm:items-baseline sm:flex-row">
                       <span className="text-xl font-medium">Powerley</span>
                       <span className="text-lg">Web Developer</span>
                       <span>
                         <time dateTime="2016-05-04T00:00:00.000Z">
                           May 2016 -
                         </time>{' '}
-                        <time dateTime={data.date}>Present</time>
+                        <time dateTime="2021-07-16T00:00:00.000Z">
+                          July 2021
+                        </time>
                       </span>
                     </h3>
                     <ul className="pl-6 space-y-1 list-disc">
@@ -128,8 +146,8 @@ const ResumePage: RouteComponent = () => {
                       <li>
                         Created and maintained a suite of modern white label web
                         applications with Next.js to be included in our mobile
-                        apps for 7+ clients, which quickly became the second
-                        most used area of the app
+                        apps for 7+ clients, which quickly became the most used
+                        areas of the app
                       </li>
                       <li>
                         Implemented a suite of utility functions used across our
