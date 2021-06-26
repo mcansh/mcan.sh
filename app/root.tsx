@@ -41,7 +41,7 @@ const Document: React.FC = ({ children }) => {
   }, [location.pathname]);
 
   return (
-    <html lang="en" className="h-full">
+    <html lang="en" className="h-screen">
       <head>
         <meta charSet="utf-8" />
         <link rel="icon" href="/favicon.png" type="image/png" />
@@ -83,7 +83,7 @@ const Document: React.FC = ({ children }) => {
         <Meta />
         <Links />
       </head>
-      <body className="min-h-full bg-white dark:bg-gray-800 dark:text-white">
+      <body className="h-screen bg-white dark:bg-gray-800 dark:text-white">
         {children}
         <Scripts />
         {process.env.NODE_ENV === 'development' && <LiveReload />}
