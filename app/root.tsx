@@ -50,7 +50,6 @@ const Document: React.FC = ({ children }) => {
           content="initial-scale=1.0, width=device-width, viewport-fit=cover"
         />
         <link rel="manifest" href="/manifest.webmanifest" />
-        <link rel="mask-icon" href="/logo.svg" color="#1d2330" />
         <meta
           name="apple-mobile-web-app-status-bar-style"
           content="black-translucent"
