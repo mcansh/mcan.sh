@@ -145,9 +145,33 @@ const ResumePage: RouteComponent = () => {
           <div>
             <h2 className="text-2xl font-semibold">Certificates</h2>
             <ul className="pl-6 list-disc">
-              <li>CIW Internet Business Associate (2014)</li>
-              <li>CIW Web Site Development Associate (2015)</li>
-              <li>Testing JavaScript (2019)</li>
+              <li>
+                <a
+                  className="text-indigo-600"
+                  href="https://www.ciwcertified.com/ciw-certifications/web-foundations-series/internet-business-associate"
+                >
+                  CIW Internet Business Associate
+                </a>{' '}
+                (2014)
+              </li>
+              <li>
+                <a
+                  className="text-indigo-600"
+                  href="https://www.ciwcertified.com/ciw-certifications/web-foundations-series/site-development-associate"
+                >
+                  CIW Web Site Development Associate
+                </a>{' '}
+                (2015)
+              </li>
+              <li>
+                <a
+                  className="text-indigo-600"
+                  href="https://testingjavascript.com"
+                >
+                  Testing JavaScript
+                </a>{' '}
+                (2019, 2021)
+              </li>
             </ul>
           </div>
         </div>
