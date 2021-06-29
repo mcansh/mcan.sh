@@ -15,6 +15,7 @@ export default function handleRequest(
   return new Response(`<!DOCTYPE html>${markup}`, {
     status: responseStatusCode,
     headers: {
+      // @ts-expect-error headers are iterable
       ...Object.fromEntries(responseHeaders),
       'Content-Type': 'text/html',
     },
