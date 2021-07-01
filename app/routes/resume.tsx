@@ -73,7 +73,7 @@ const ResumePage: RouteComponent = () => {
           <div>
             <h1 className="text-4xl font-semibold">Logan McAnsh</h1>
             <a
-              className="transition-colors duration-75 ease-in-out text-blue-gray-600 hover:text-blue-gray-300"
+              className="transition-colors duration-75 ease-in-out text-blue-gray-600 hover:text-blue-gray-300 dark:text-blue-gray-200 dark:hover:text-blue-gray-200 dark:hover:underline"
               href="mailto:logan+resume@mcan.sh"
             >
               logan+resume@mcan.sh
@@ -147,7 +147,7 @@ const ResumePage: RouteComponent = () => {
             <ul className="pl-6 list-disc">
               <li>
                 <a
-                  className="text-indigo-600"
+                  className="text-indigo-600 dark:text-white dark:hover:underline"
                   href="https://www.ciwcertified.com/ciw-certifications/web-foundations-series/internet-business-associate"
                 >
                   CIW Internet Business Associate
@@ -156,7 +156,7 @@ const ResumePage: RouteComponent = () => {
               </li>
               <li>
                 <a
-                  className="text-indigo-600"
+                  className="text-indigo-600 dark:text-white dark:hover:underline"
                   href="https://www.ciwcertified.com/ciw-certifications/web-foundations-series/site-development-associate"
                 >
                   CIW Web Site Development Associate
@@ -165,7 +165,7 @@ const ResumePage: RouteComponent = () => {
               </li>
               <li>
                 <a
-                  className="text-indigo-600"
+                  className="text-indigo-600 dark:text-white dark:hover:underline"
                   href="https://testingjavascript.com"
                 >
                   Testing JavaScript
