@@ -11,3 +11,4 @@ node_modules
 /public/workbox-*.js.map
 app/styles
 .eslintcache
+tsconfig.tsbuildinfo
