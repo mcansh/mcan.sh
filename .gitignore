@@ -10,3 +10,4 @@ node_modules
 /public/workbox-*.js
 /public/workbox-*.js.map
 app/styles
+.eslintcache
