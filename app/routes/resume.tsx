@@ -21,7 +21,7 @@ const meta: MetaFunction = () => ({
 });
 
 const headers: HeadersFunction = () => ({
-  'cache-control': 'max-age=600',
+  'Cache-Control': `public, max-age=3600, s-maxage=3600, stale-while-revalidate=3600`,
   'x-hello-recruiters': '1',
 });
 
