@@ -18,7 +18,7 @@
     "build:remix": "remix build",
     "start": "vercel dev",
     "type-check": "tsc --project app",
-    "lint": "eslint . --ext \".js,.ts,.tsx\" --fix",
+    "lint": "eslint --cache --fix --ext \".js,.ts,.tsx\" .",
     "format": "prettier --write \"**/*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|md|graphql|mdx)\"",
     "validate": "run-p lint format type-check",
     "prepare": "husky install"
