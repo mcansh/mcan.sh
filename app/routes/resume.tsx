@@ -1,19 +1,5 @@
 import * as React from 'react';
-import type {
-  RouteComponent,
-  LoaderFunction,
-  MetaFunction,
-  HeadersFunction,
-} from 'remix';
-import { useRouteData } from 'remix';
-import { json } from 'remix-utils';
-
-interface RouteData {
-  date: string;
-}
-
-const loader: LoaderFunction = () =>
-  json<RouteData>({ date: new Date().toISOString() });
+import type { RouteComponent, MetaFunction, HeadersFunction } from 'remix';
 
 const meta: MetaFunction = () => ({
   title: 'Resume | Logan McAnsh',
@@ -23,6 +9,11 @@ const meta: MetaFunction = () => ({
 const headers: HeadersFunction = () => ({
   'cache-control': 'max-age=600',
   'x-hello-recruiters': '1',
+});
+
+const date = new Intl.DateTimeFormat('en-US', {
+  month: 'long',
+  year: 'numeric',
 });
 
 const skills: Array<string> = [
@@ -41,9 +32,46 @@ const skills: Array<string> = [
   'Automated Testing',
 ];
 
-const ResumePage: RouteComponent = () => {
-  const data = useRouteData<RouteData>();
+interface BaseExperience {
+  company: string;
+  title: string;
+  start: Date;
+  duties: Array<string>;
+}
 
+interface PastExperience extends BaseExperience {
+  end: Date;
+  current?: never;
+}
+
+interface CurrentExperience extends BaseExperience {
+  end?: never;
+  current: true;
+}
+
+const experiences: Array<CurrentExperience | PastExperience> = [
+  {
+    company: 'Remix Run',
+    title: 'Software Engineer',
+    start: new Date(2021, 7, 2),
+    current: true,
+    duties: [],
+  },
+  {
+    company: 'Powerley',
+    title: 'Frontend Web Developer',
+    start: new Date(2016, 4, 4),
+    end: new Date(2021, 6, 23),
+    duties: [
+      'First member of the web team',
+      'Created and maintained a suite of modern white label web applications with Next.js to be included in our mobile apps for 7+ clients, which quickly became the most used areas of the app',
+      'Implemented a suite of utility functions used across our web experiences',
+      'Designed Sketch plugins',
+    ],
+  },
+];
+
+const ResumePage: RouteComponent = () => {
   React.useEffect(() => {
     const redirectToPDF = (event: KeyboardEvent) => {
       if (event.metaKey && event.key === 'p') {
@@ -86,11 +114,10 @@ const ResumePage: RouteComponent = () => {
             <h2 className="text-2xl font-semibold">Summary</h2>
             <p>
               Experienced Full Stack Web Developer, primarily using React and
-              Node.js.{' '}
-              <span className="block">
-                Self taught with experience working solo and with a team, both
-                in person and remote settings.
-              </span>
+              Node.js.
+              <br />
+              Self taught with experience working solo and with a team, both in
+              person and remote settings.
             </p>
           </div>
           <div>
@@ -110,54 +137,45 @@ const ResumePage: RouteComponent = () => {
           <div>
             <h2 className="text-2xl font-semibold">Experience</h2>
             <ul>
-              <li>
-                <div className="space-y-2">
+              {experiences.map(experience => (
+                <div
+                  className="space-y-2"
+                  key={`${experience.company}-${experience.start}`}
+                >
                   <div>
                     <h3 className="flex flex-col py-2 sm:space-y-0 sm:space-x-2 sm:items-baseline sm:flex-row">
-                      <span className="text-xl font-medium">Remix Run</span>
-                      <span className="text-lg">Software Engineer</span>
-                      <span>
-                        <time dateTime="2021-08-02T00:00:00.000Z">
-                          August 2021 -
-                        </time>{' '}
-                        <time dateTime={data.date}>Present</time>
+                      <span className="text-xl font-medium">
+                        {experience.company}
                       </span>
-                    </h3>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div className="space-y-2">
-                  <div>
-                    <h3 className="flex flex-col py-2 sm:space-y-0 sm:space-x-2 sm:items-baseline sm:flex-row">
-                      <span className="text-xl font-medium">Powerley</span>
-                      <span className="text-lg">Web Developer</span>
+                      <span className="text-lg">{experience.title}</span>
                       <span>
-                        <time dateTime="2016-05-04T00:00:00.000Z">
-                          May 2016 -
-                        </time>{' '}
-                        <time dateTime="2021-07-16T00:00:00.000Z">
-                          July 2021
+                        <time dateTime={experience.start.toISOString()}>
+                          {date.format(experience.start)}
+                        </time>
+                        {' - '}
+                        <time
+                          dateTime={
+                            experience.current
+                              ? new Date().toISOString()
+                              : experience.end.toISOString()
+                          }
+                        >
+                          {experience.current
+                            ? 'Present'
+                            : date.format(experience.end)}
                         </time>
                       </span>
                     </h3>
-                    <ul className="pl-6 space-y-1 list-disc">
-                      <li>First member of the web team</li>
-                      <li>
-                        Created and maintained a suite of modern white label web
-                        applications with Next.js to be included in our mobile
-                        apps for 7+ clients, which quickly became the most used
-                        areas of the app
-                      </li>
-                      <li>
-                        Implemented a suite of utility functions used across our
-                        web experiences
-                      </li>
-                      <li>Designed Sketch plugins</li>
-                    </ul>
+                    {experience.duties.length > 0 && (
+                      <ul className="pl-6 space-y-1 list-disc">
+                        {experience.duties.map(duty => (
+                          <li key={duty}>{duty}</li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
                 </div>
-              </li>
+              ))}
             </ul>
           </div>
           <div>
@@ -175,4 +193,4 @@ const ResumePage: RouteComponent = () => {
 };
 
 export default ResumePage;
-export { headers, loader, meta };
+export { headers, meta };
