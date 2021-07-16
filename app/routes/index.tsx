@@ -36,19 +36,19 @@ const IndexPage: RouteComponent = () => (
       />
       <h1 className="mt-4 text-4xl">Logan McAnsh</h1>
       <p className="mt-2 text-lg text-center sm:text-xl">
-        Making{' '}
+        Working on{' '}
         <FunHoverLink
-          href="https://blog.powerley.com/utilities-are-giving-the-home-a-voice-and-a-brain/?utm_source=mcan.sh"
+          href="https://remix.run"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Advisor
-        </FunHoverLink>{' '}
-        and Home Profile for{' '}
+          Remix
+        </FunHoverLink>
+        , previously{' '}
         <FunHoverLink
+          href="https://powerley.com"
           target="_blank"
           rel="noopener noreferrer"
-          href="https://www.powerley.com"
         >
           Powerley
         </FunHoverLink>

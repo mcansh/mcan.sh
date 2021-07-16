@@ -39,7 +39,6 @@ export default function handleRequest(
     status: responseStatusCode,
     headers: {
       // @ts-expect-error i think @types/web are borked
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       ...Object.fromEntries(responseHeaders),
       'Content-Type': `text/html`,
       // https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
