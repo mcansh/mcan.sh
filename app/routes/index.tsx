@@ -45,6 +45,14 @@ const IndexPage: RouteComponent = () => (
         >
           Remix
         </FunHoverLink>
+        , previously{' '}
+        <FunHoverLink
+          href="https://powerley.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Powerley
+        </FunHoverLink>
       </p>
     </div>
     <div className="pb-8-safe">
