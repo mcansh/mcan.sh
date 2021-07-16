@@ -19,4 +19,5 @@ if (process.env.NODE_ENV === 'production') {
     });
   }
 }
+
 ReactDOM.createRoot(document, { hydrate: true }).render(<RemixBrowser />);
