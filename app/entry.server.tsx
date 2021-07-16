@@ -30,11 +30,9 @@ export default function handleRequest(
   }
 
   const markup = ReactDOMServer.renderToString(
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
     <RemixServer context={remixContext} url={request.url} />
   );
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
   return new Response(`<!DOCTYPE html>${markup}`, {
     status: responseStatusCode,
     headers: {
