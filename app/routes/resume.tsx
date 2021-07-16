@@ -7,7 +7,7 @@ const meta: MetaFunction = () => ({
 });
 
 const headers: HeadersFunction = () => ({
-  'cache-control': 'max-age=600',
+  'Cache-Control': `public, max-age=3600, s-maxage=3600, stale-while-revalidate=3600`,
   'x-hello-recruiters': '1',
 });
 
@@ -92,7 +92,7 @@ const ResumePage: RouteComponent = () => {
             <div className="w-full h-full scale-125 bg-cover" />
             <img
               alt="Logan McAnsh"
-              src="/11698668.jpg"
+              src="https://res.cloudinary.com/dof0zryca/image/upload/c_fill,f_auto,w_340/v1624726620/11698668.jpg"
               height={160}
               width={160}
               className="absolute top-0 left-0 w-full h-full"
@@ -101,7 +101,7 @@ const ResumePage: RouteComponent = () => {
           <div>
             <h1 className="text-4xl font-semibold">Logan McAnsh</h1>
             <a
-              className="transition-colors duration-75 ease-in-out text-blue-gray-600 hover:text-blue-gray-300"
+              className="transition-colors duration-75 ease-in-out text-blue-gray-600 hover:text-blue-gray-300 dark:text-blue-gray-200 dark:hover:text-blue-gray-200 dark:hover:underline"
               href="mailto:logan+resume@mcan.sh"
             >
               logan+resume@mcan.sh
@@ -181,9 +181,33 @@ const ResumePage: RouteComponent = () => {
           <div>
             <h2 className="text-2xl font-semibold">Certificates</h2>
             <ul className="pl-6 list-disc">
-              <li>CIW Internet Business Associate (2014)</li>
-              <li>CIW Web Site Development Associate (2015)</li>
-              <li>Testing JavaScript (2019)</li>
+              <li>
+                <a
+                  className="text-indigo-600 dark:text-white dark:hover:underline"
+                  href="https://www.ciwcertified.com/ciw-certifications/web-foundations-series/internet-business-associate"
+                >
+                  CIW Internet Business Associate
+                </a>{' '}
+                (2014)
+              </li>
+              <li>
+                <a
+                  className="text-indigo-600 dark:text-white dark:hover:underline"
+                  href="https://www.ciwcertified.com/ciw-certifications/web-foundations-series/site-development-associate"
+                >
+                  CIW Web Site Development Associate
+                </a>{' '}
+                (2015)
+              </li>
+              <li>
+                <a
+                  className="text-indigo-600 dark:text-white dark:hover:underline"
+                  href="https://testingjavascript.com"
+                >
+                  Testing JavaScript
+                </a>{' '}
+                (2019, 2021)
+              </li>
             </ul>
           </div>
         </div>
