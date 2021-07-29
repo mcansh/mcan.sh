@@ -23,7 +23,7 @@ const links: LinksFunction = () => [
   },
 ];
 
-const Document: React.FC = ({ children }) => (
+const Document: React.FC<{ className: string }> = ({ children, className }) => (
   <html lang="en" className="h-screen">
     <head>
       <meta charSet="utf-8" />
@@ -66,7 +66,7 @@ const Document: React.FC = ({ children }) => (
       <Meta />
       <Links />
     </head>
-    <body className="h-screen bg-white dark:bg-gray-800 dark:text-white">
+    <body className={className}>
       {children}
       <Scripts />
       {process.env.NODE_ENV === 'development' && <LiveReload />}
@@ -75,18 +75,26 @@ const Document: React.FC = ({ children }) => (
 );
 
 const App: RouteComponent = () => (
-  <Document>
+  <Document className="h-screen bg-white dark:bg-gray-800 dark:text-white">
     <Outlet />
   </Document>
 );
 
 const ErrorBoundary: ErrorBoundaryComponent = ({ error }) => (
-  <Document>
-    <h1>App Error</h1>
-    <pre>{error.message}</pre>
+  <Document className="bg-[#0827f5] min-h-screen w-[90%] max-w-5xl mx-auto pt-20 space-y-4 font-mono text-center text-white">
+    <h1 className="inline-block text-3xl font-bold bg-white text-[#0827f5]">
+      Uncaught Exception!
+    </h1>
     <p>
-      Replace this UI with what you want users to see when your app throws
-      uncaught errors.
+      If you are not the developer, please click back in your browser and try
+      again.
+    </p>
+    <pre className="px-4 py-2 overflow-auto border-4 border-white">
+      {error.message}
+    </pre>
+    <p>
+      There was an uncaught exception in your application. Check the browser
+      console and/or the server console to inspect the error.
     </p>
   </Document>
 );
