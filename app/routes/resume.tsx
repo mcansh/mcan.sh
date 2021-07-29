@@ -1,5 +1,12 @@
 import * as React from 'react';
-import type { RouteComponent, MetaFunction, HeadersFunction } from 'remix';
+import type {
+  RouteComponent,
+  MetaFunction,
+  HeadersFunction,
+  LoaderFunction,
+} from 'remix';
+import { useRouteData } from 'remix';
+import { json } from 'remix-utils';
 
 const meta: MetaFunction = () => ({
   title: 'Resume | Logan McAnsh',
@@ -16,76 +23,98 @@ const date = new Intl.DateTimeFormat('en-US', {
   year: 'numeric',
 });
 
-const skills: Array<string> = [
-  'Node.js',
-  'Rest APIs',
-  'GraphQL',
-  'React',
-  'Next.js',
-  'Remix Run',
-  'TypeScript',
-  'TailwindCSS',
-  'Accessibility',
-  'Performance',
-  'ES2015+',
-  'Git',
-  'Automated Testing',
-];
-
 interface BaseExperience {
   company: string;
   title: string;
-  start: Date;
+  start: string;
+  end: string;
   duties: Array<string>;
 }
 
 interface PastExperience extends BaseExperience {
-  end: Date;
   current?: never;
 }
 
 interface CurrentExperience extends BaseExperience {
-  end?: never;
   current: true;
 }
 
-const experiences: Array<CurrentExperience | PastExperience> = [
-  {
-    company: 'Remix Run',
-    title: 'Software Engineer',
-    start: new Date(2021, 7, 2),
-    current: true,
-    duties: [],
-  },
-  {
-    company: 'Powerley',
-    title: 'Frontend Web Developer',
-    start: new Date(2016, 4, 4),
-    end: new Date(2021, 6, 23),
-    duties: [
-      'First member of the web team',
-      'Created and maintained a suite of modern white label web applications with Next.js to be included in our mobile apps for 7+ clients, which quickly became the most used areas of the app',
-      'Implemented a suite of utility functions used across our web experiences',
-      'Designed Sketch plugins',
+interface RouteData {
+  skills: Array<string>;
+  experiences: Array<CurrentExperience | PastExperience>;
+  certifications: Array<{
+    label: string;
+    link: string;
+    year: Array<number> | number;
+  }>;
+}
+
+const loader: LoaderFunction = () =>
+  json<RouteData>({
+    certifications: [
+      {
+        link: 'https://www.ciwcertified.com/ciw-certifications/web-foundations-series/internet-business-associate',
+        label: 'CIW Internet Business Associate',
+        year: 2014,
+      },
+      {
+        link: 'https://www.ciwcertified.com/ciw-certifications/web-foundations-series/site-development-associate',
+        label: 'CIW Web Site Development Associate',
+        year: 2015,
+      },
+      {
+        link: 'https://testingjavascript.com',
+        label: 'Testing JavaScript',
+        year: [2019, 2021],
+      },
     ],
-  },
-];
+    skills: [
+      'Node.js',
+      'Rest APIs',
+      'GraphQL',
+      'React',
+      'Next.js',
+      'Remix Run',
+      'TypeScript',
+      'TailwindCSS',
+      'Accessibility',
+      'Performance',
+      'ES2015+',
+      'Git',
+      'Automated Testing',
+    ],
+    experiences: [
+      {
+        company: 'Remix Run',
+        title: 'Software Engineer',
+        start: new Date(2021, 7, 2).toISOString(),
+        end: new Date().toISOString(),
+        current: true,
+        duties: [],
+      },
+      {
+        company: 'Powerley',
+        title: 'Frontend Web Developer',
+        start: new Date(2016, 4, 4).toISOString(),
+        end: new Date(2021, 6, 23).toISOString(),
+        duties: [
+          'First member of the web team',
+          'Created and maintained a suite of modern white label web applications with Next.js to be included in our mobile apps for 7+ clients, which quickly became the most used areas of the app',
+          'Implemented a suite of utility functions used across our web experiences',
+          'Designed Sketch plugins',
+        ],
+      },
+    ],
+  });
 
 const ResumePage: RouteComponent = () => {
-  React.useEffect(() => {
-    const redirectToPDF = (event: KeyboardEvent) => {
-      if (event.metaKey && event.key === 'p') {
-        event.preventDefault();
-        window.location.assign('/resume.pdf');
-      }
-    };
-
-    document.addEventListener('keydown', redirectToPDF);
-    return () => document.removeEventListener('keydown', redirectToPDF);
-  }, []);
+  const { experiences, skills, certifications } = useRouteData<RouteData>();
 
   return (
-    <div className="h-full border-t-8 border-indigo-600 border-solid pb-8-safe">
+    <div className="relative h-full border-t-8 border-indigo-600 border-solid pb-8-safe">
+      <button className="absolute top-0 right-0" type="button">
+        Print
+      </button>
       <div className="py-4 mx-auto max-w-prose">
         <header className="flex flex-col items-center px-4 pb-2 mb-2 space-x-4 space-y-1 text-center sm:flex-row sm:text-left">
           <div className="relative w-32 h-32 overflow-hidden rounded-full sm:w-40 sm:h-40">
@@ -149,20 +178,14 @@ const ResumePage: RouteComponent = () => {
                       </span>
                       <span className="text-lg">{experience.title}</span>
                       <span>
-                        <time dateTime={experience.start.toISOString()}>
-                          {date.format(experience.start)}
+                        <time dateTime={experience.start}>
+                          {date.format(new Date(experience.start))}
                         </time>
                         {' - '}
-                        <time
-                          dateTime={
-                            experience.current
-                              ? new Date().toISOString()
-                              : experience.end.toISOString()
-                          }
-                        >
+                        <time dateTime={experience.end}>
                           {experience.current
                             ? 'Present'
-                            : date.format(experience.end)}
+                            : date.format(new Date(experience.end))}
                         </time>
                       </span>
                     </h3>
@@ -181,33 +204,21 @@ const ResumePage: RouteComponent = () => {
           <div>
             <h2 className="text-2xl font-semibold">Certificates</h2>
             <ul className="pl-6 list-disc">
-              <li>
-                <a
-                  className="text-indigo-600 dark:text-white dark:hover:underline"
-                  href="https://www.ciwcertified.com/ciw-certifications/web-foundations-series/internet-business-associate"
-                >
-                  CIW Internet Business Associate
-                </a>{' '}
-                (2014)
-              </li>
-              <li>
-                <a
-                  className="text-indigo-600 dark:text-white dark:hover:underline"
-                  href="https://www.ciwcertified.com/ciw-certifications/web-foundations-series/site-development-associate"
-                >
-                  CIW Web Site Development Associate
-                </a>{' '}
-                (2015)
-              </li>
-              <li>
-                <a
-                  className="text-indigo-600 dark:text-white dark:hover:underline"
-                  href="https://testingjavascript.com"
-                >
-                  Testing JavaScript
-                </a>{' '}
-                (2019, 2021)
-              </li>
+              {certifications.map(certificate => (
+                <li key={certificate.label}>
+                  <a
+                    className="text-indigo-600 dark:text-white dark:hover:underline"
+                    href={certificate.link}
+                  >
+                    {certificate.label}
+                  </a>{' '}
+                  (
+                  {Array.isArray(certificate.year)
+                    ? certificate.year.join(', ')
+                    : certificate.year}
+                  )
+                </li>
+              ))}
             </ul>
           </div>
         </div>
@@ -217,4 +228,4 @@ const ResumePage: RouteComponent = () => {
 };
 
 export default ResumePage;
-export { headers, meta };
+export { headers, loader, meta };
