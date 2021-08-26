@@ -4,7 +4,6 @@
     "esModuleInterop": true,
     "jsx": "react-jsx",
     "moduleResolution": "node",
-    "module": "ES2020",
     "target": "ES2019",
     "strict": true,
     "skipLibCheck": true,
