@@ -1,16 +1,31 @@
 import * as React from 'react';
-import { Meta, Links, Scripts, LiveReload } from 'remix';
-import type { LinksFunction } from 'remix';
-import { Outlet } from 'react-router-dom';
+import { Meta, Links, Scripts, LiveReload, useRouteData } from 'remix';
 import type {
+  LinksFunction,
+  LoaderFunction,
   ErrorBoundaryComponent,
   RouteComponent,
-} from '@remix-run/react/routeModules';
+} from 'remix';
+import { Outlet } from 'react-router-dom';
+import type { PackageJson } from 'type-fest';
 
 import tailwindUrl from './styles/global.css';
 import interUrl from './styles/inter.css';
 
 const iconSizes = [32, 57, 72, 96, 120, 128, 144, 152, 195, 228];
+
+const loader: LoaderFunction = async () => {
+  const pkgJSONString = await import('remix/package.json');
+
+  const pkgJSON: PackageJson =
+    typeof pkgJSONString === 'string'
+      ? (JSON.parse(pkgJSONString) as PackageJson)
+      : (pkgJSONString as PackageJson);
+
+  return {
+    remixVersion: pkgJSON.version,
+  };
+};
 
 const links: LinksFunction = () => [
   { rel: 'stylesheet', href: tailwindUrl },
@@ -72,11 +87,19 @@ const Document: React.FC<{ className: string }> = ({ children, className }) => (
   </html>
 );
 
-const App: RouteComponent = () => (
-  <Document className="h-screen bg-white dark:bg-gray-800 dark:text-white">
-    <Outlet />
-  </Document>
-);
+const App: RouteComponent = () => {
+  const data = useRouteData<{ remixVersion: string }>();
+  return (
+    <Document className="min-h-screen bg-white dark:bg-gray-800 dark:text-white">
+      <Outlet />
+      {data.remixVersion && (
+        <div className="px-4 py-4 text-sm md:bottom-0 md:left-0 md:fixed text-black/50 dark:text-white/50">
+          Remix Version: {data.remixVersion}
+        </div>
+      )}
+    </Document>
+  );
+};
 
 const ErrorBoundary: ErrorBoundaryComponent = ({ error }) => (
   <Document className="bg-[#0827f5] min-h-screen w-[90%] max-w-5xl mx-auto pt-20 space-y-4 font-mono text-center text-white">
@@ -98,4 +121,4 @@ const ErrorBoundary: ErrorBoundaryComponent = ({ error }) => (
 );
 
 export default App;
-export { ErrorBoundary, links };
+export { ErrorBoundary, loader, links };
