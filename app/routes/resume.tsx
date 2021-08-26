@@ -112,9 +112,6 @@ const ResumePage: RouteComponent = () => {
 
   return (
     <div className="relative h-full border-t-8 border-indigo-600 border-solid pb-8-safe">
-      <button className="absolute top-0 right-0" type="button">
-        Print
-      </button>
       <div className="py-4 mx-auto max-w-prose">
         <header className="flex flex-col items-center px-4 pb-2 mb-2 space-x-4 space-y-1 text-center sm:flex-row sm:text-left">
           <div className="relative w-32 h-32 overflow-hidden rounded-full sm:w-40 sm:h-40">
