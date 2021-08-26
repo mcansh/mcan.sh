@@ -43,13 +43,11 @@ const Document: React.FC<{ className: string }> = ({ children, className }) => (
       <meta
         name="theme-color"
         content="#fff"
-        // @ts-expect-error Safari 15 supports this
         media="(prefers-color-scheme: light)"
       />
       <meta
         name="theme-color"
         content="#1d2330"
-        // @ts-expect-error Safari 15 supports this
         media="(prefers-color-scheme: dark)"
       />
       {iconSizes.map(icon => {
