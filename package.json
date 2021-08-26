@@ -13,7 +13,6 @@
     "clean": "del .cache app/styles server/build public/build",
     "prebuild": "run-s clean type-check",
     "build": "run-s build:*",
-    "postbuild": "workbox generateSW workbox-config.js",
     "build:css": "postcss styles --base styles --dir app/styles --env production",
     "build:remix": "remix build",
     "start": "vercel dev",
@@ -60,8 +59,7 @@
     "prettier": "2.3.2",
     "tailwindcss": "2.2.7",
     "tailwindcss-padding-safe": "1.0.5",
-    "typescript": "4.3.5",
-    "workbox-cli": "6.2.4"
+    "typescript": "4.3.5"
   },
   "lint-staged": {
     "*.+(js|jsx|ts|tsx)": [
