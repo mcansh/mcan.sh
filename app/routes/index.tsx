@@ -36,21 +36,13 @@ const IndexPage: RouteComponent = () => (
       />
       <h1 className="mt-4 text-4xl">Logan McAnsh</h1>
       <p className="mt-2 text-lg text-center sm:text-xl">
-        Working on{' '}
+        Software Engineer at{' '}
         <FunHoverLink
           href="https://remix.run"
           target="_blank"
           rel="noopener noreferrer"
         >
           Remix
-        </FunHoverLink>
-        , previously{' '}
-        <FunHoverLink
-          href="https://powerley.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powerley
         </FunHoverLink>
       </p>
     </div>
