@@ -33,26 +33,31 @@ export default function handleRequest(
     <RemixServer context={remixContext} url={request.url} />
   );
 
+  responseHeaders.set('Content-Type', 'text/html');
+
+  // https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
+  responseHeaders.set('Content-Security-Policy', contentSecurityPolicy);
+  // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy
+  responseHeaders.set('Referrer-Policy', `origin-when-cross-origin`);
+  // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options
+  responseHeaders.set('X-Frame-Options', `DENY`);
+  // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options
+  responseHeaders.set('X-Content-Type-Options', `nosniff`);
+  // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-DNS-Prefetch-Control
+  responseHeaders.set('X-DNS-Prefetch-Control', `on`);
+  // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security
+  responseHeaders.set(
+    'Strict-Transport-Security',
+    `max-age=31536000; includeSubDomains; preload`
+  );
+  // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Feature-Policy
+  responseHeaders.set(
+    'Permissions-Policy',
+    `camera=(), microphone=(), geolocation=()`
+  );
+
   return new Response(`<!DOCTYPE html>${markup}`, {
     status: responseStatusCode,
-    headers: {
-      // @ts-expect-error i think @types/web are borked
-      ...Object.fromEntries(responseHeaders),
-      'Content-Type': `text/html`,
-      // https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
-      'Content-Security-Policy': contentSecurityPolicy,
-      // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy
-      'Referrer-Policy': `origin-when-cross-origin`,
-      // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options
-      'X-Frame-Options': `DENY`,
-      // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options
-      'X-Content-Type-Options': `nosniff`,
-      // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-DNS-Prefetch-Control
-      'X-DNS-Prefetch-Control': `on`,
-      // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security
-      'Strict-Transport-Security': `max-age=31536000; includeSubDomains; preload`,
-      // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Feature-Policy
-      'Permissions-Policy': `camera=(), microphone=(), geolocation=()`,
-    },
+    headers: responseHeaders,
   });
 }
