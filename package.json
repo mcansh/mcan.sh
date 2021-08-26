@@ -20,7 +20,8 @@
     "lint": "eslint --cache --fix --ext \".js,.ts,.tsx\" .",
     "format": "prettier --write \"**/*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|md|graphql|mdx)\"",
     "validate": "run-p lint format type-check",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "postinstall": "remix setup"
   },
   "dependencies": {
     "@remix-run/node": "0.18.0-pre.1",
