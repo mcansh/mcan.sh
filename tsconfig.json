@@ -1,6 +1,7 @@
 {
+  "include": ["remix.env.d.ts", "**/*.ts", "**/*.tsx", "remix.config.js"],
   "compilerOptions": {
-    "lib": ["ES2019"],
+    "lib": ["DOM", "DOM.Iterable", "ES2019"],
     "esModuleInterop": true,
     "jsx": "react-jsx",
     "moduleResolution": "node",
@@ -8,9 +9,12 @@
     "strict": true,
     "skipLibCheck": true,
     "noEmit": true,
-    "isolatedModules": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "incremental": true
+    "incremental": true,
+    "allowJs": true,
+    "paths": {
+      "~/*": ["./app/*"]
+    }
   }
 }

@@ -16,7 +16,7 @@
     "build:css": "postcss styles --base styles --dir app/styles --env production",
     "build:remix": "remix build",
     "start": "vercel dev",
-    "type-check": "tsc --project app",
+    "type-check": "tsc",
     "lint": "eslint --cache --fix --ext \".js,.ts,.tsx\" .",
     "format": "prettier --write \"**/*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|md|graphql|mdx)\"",
     "validate": "run-p lint format type-check",
