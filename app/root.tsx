@@ -20,6 +20,7 @@ const links: LinksFunction = () => [
     href: '/inter/Inter-roman.var.woff2?v=3.19',
     type: 'font/woff2',
     as: 'font',
+    crossOrigin: 'anonymous',
   },
 ];
 
