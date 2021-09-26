@@ -6,6 +6,7 @@ import { RemixServer } from 'remix';
 const cspSettings = {
   'default-src': ["'self'"],
   'img-src': [
+    "'self'",
     'https://res.cloudinary.com/dof0zryca/image/upload/',
     'https://kiwi.mcan.sh',
   ],
