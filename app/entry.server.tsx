@@ -1,6 +1,6 @@
 import ReactDOMServer from 'react-dom/server';
 import type { EntryContext } from 'remix';
-import { RemixServer } from 'remix';
+import { RemixServer, redirect } from 'remix';
 
 // https://securityheaders.com
 const cspSettings = {
@@ -26,6 +26,11 @@ export default function handleRequest(
   responseHeaders: Headers,
   remixContext: EntryContext
 ) {
+  let url = new URL(request.url)
+  if (url.hostname === "resume.mcan.sh") {
+    return redirect("/resume")
+  }
+
   if (process.env.NODE_ENV === 'development') {
     responseHeaders.set('Cache-Control', 'no-cache');
   }
