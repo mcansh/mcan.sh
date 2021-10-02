@@ -28,7 +28,7 @@ export default function handleRequest(
 ) {
   let url = new URL(request.url)
   if (url.hostname === "resume.mcan.sh") {
-    return redirect("/resume")
+    return redirect("https://mcan.sh/resume")
   }
 
   if (process.env.NODE_ENV === 'development') {
