@@ -127,7 +127,7 @@ const ResumePage: RouteComponent = () => {
           <div>
             <h1 className="text-4xl font-semibold">Logan McAnsh</h1>
             <a
-              className="transition-colors duration-75 ease-in-out text-blue-gray-600 hover:text-blue-gray-300 dark:text-blue-gray-200 dark:hover:text-blue-gray-200 dark:hover:underline"
+              className="transition-colors duration-75 ease-in-out text-slate-600 hover:text-slate-300 dark:text-slate-200 dark:hover:text-slate-200 dark:hover:underline"
               href="mailto:logan+resume@mcan.sh"
             >
               logan+resume@mcan.sh

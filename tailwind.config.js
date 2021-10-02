@@ -1,10 +1,8 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
-const colors = require('tailwindcss/colors');
 const plugin = require('tailwindcss/plugin');
 
 module.exports = {
-  mode: 'jit',
-  purge: ['app/**/*.tsx'],
+  content: ['app/**/*.tsx'],
   darkMode: 'media',
   theme: {
     extend: {
@@ -12,8 +10,6 @@ module.exports = {
         print: { raw: 'print' },
       },
       colors: {
-        gray: colors.coolGray,
-        'blue-gray': colors.blueGray,
         blue: {
           screen: '#1000f2',
         },
