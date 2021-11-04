@@ -4,7 +4,7 @@ import * as Fathom from 'fathom-client';
 
 Fathom.load('EPVCGNZL', {
   excludedDomains: ['localhost'],
-  url: 'https://kiwi.mcan.sh/script.js',
+  url: 'https://thirtyseven-active.b-cdn.net/script.js',
   spa: 'auto',
 });
 
