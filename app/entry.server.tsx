@@ -8,9 +8,9 @@ const cspSettings = {
   'img-src': [
     "'self'",
     'https://res.cloudinary.com/dof0zryca/image/upload/',
-    'https://kiwi.mcan.sh',
+    'https://thirtyseven-active.b-cdn.net',
   ],
-  'script-src': ["'self'", "'unsafe-inline'", 'https://kiwi.mcan.sh/script.js'],
+  'script-src': ["'self'", "'unsafe-inline'", 'https://thirtyseven-active.b-cdn.net/script.js'],
   'style-src': ["'self'", "'unsafe-inline'"],
   'media-src': ["'none'"],
   'connect-src': ['*'],
