@@ -1,12 +1,10 @@
-import * as React from 'react';
 import type {
   RouteComponent,
   MetaFunction,
   HeadersFunction,
   LoaderFunction,
 } from 'remix';
-import { useRouteData } from 'remix';
-import { json } from 'remix-utils';
+import { json, useLoaderData } from 'remix';
 
 const meta: MetaFunction = () => ({
   title: 'Resume | Logan McAnsh',
@@ -49,8 +47,8 @@ interface RouteData {
   }>;
 }
 
-const loader: LoaderFunction = () =>
-  json<RouteData>({
+const loader: LoaderFunction = () => {
+  const data: RouteData = {
     certifications: [
       {
         link: 'https://www.ciwcertified.com/ciw-certifications/web-foundations-series/internet-business-associate',
@@ -105,10 +103,13 @@ const loader: LoaderFunction = () =>
         ],
       },
     ],
-  });
+  };
+
+  return json(data);
+};
 
 const ResumePage: RouteComponent = () => {
-  const { experiences, skills, certifications } = useRouteData<RouteData>();
+  const { experiences, skills, certifications } = useLoaderData<RouteData>();
 
   return (
     <div className="relative h-full border-t-8 border-indigo-600 border-solid pb-8-safe">

@@ -30,7 +30,6 @@
     "react": "18.0.0-beta-c1220ebdd-20211123",
     "react-dom": "18.0.0-beta-c1220ebdd-20211123",
     "remix": "1.0.5",
-    "remix-utils": "2.1.0",
     "type-fest": "2.6.0"
   },
   "devDependencies": {
