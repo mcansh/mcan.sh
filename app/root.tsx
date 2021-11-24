@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { Meta, Links, Scripts, LiveReload, useCatch } from 'remix';
+import { Meta, Links, Scripts, LiveReload, useCatch, Outlet } from 'remix';
 import type { LinksFunction, LinkDescriptor, MetaFunction } from 'remix';
-import { Outlet } from 'react-router-dom';
 import type {
   ErrorBoundaryComponent,
   RouteComponent,
