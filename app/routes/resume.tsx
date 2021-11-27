@@ -165,7 +165,7 @@ const ResumePage: RouteComponent = () => {
             <h2 className="text-2xl font-semibold">Experience</h2>
             <ul>
               {experiences.map(experience => (
-                <div
+                <li
                   className="space-y-2"
                   key={`${experience.company}-${experience.start}`}
                 >
@@ -195,7 +195,7 @@ const ResumePage: RouteComponent = () => {
                       </ul>
                     )}
                   </div>
-                </div>
+                </li>
               ))}
             </ul>
           </div>

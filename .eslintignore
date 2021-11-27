@@ -1,5 +1,5 @@
 !.*.js
-server/build
+api/build
 public/build
 /public/sw.js
 /public/sw.js.map
