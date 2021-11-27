@@ -10,7 +10,11 @@ const cspSettings = {
     'https://res.cloudinary.com/dof0zryca/image/upload/',
     'https://thirtyseven-active.b-cdn.net',
   ],
-  'script-src': ["'self'", "'unsafe-inline'", 'https://thirtyseven-active.b-cdn.net/script.js'],
+  'script-src': [
+    "'self'",
+    "'unsafe-inline'",
+    'https://thirtyseven-active.b-cdn.net/script.js',
+  ],
   'style-src': ["'self'", "'unsafe-inline'"],
   'media-src': ["'none'"],
   'connect-src': ['*'],
@@ -20,7 +24,7 @@ const contentSecurityPolicy = `${Object.entries(cspSettings)
   .map(([key, val]) => `${key} ${val.filter(Boolean).join(' ')}`)
   .join(';')}`;
 
-export default function handleRequest(
+function handleRequest(
   request: Request,
   responseStatusCode: number,
   responseHeaders: Headers,
@@ -67,3 +71,5 @@ export default function handleRequest(
     headers: responseHeaders,
   });
 }
+
+export default handleRequest;
