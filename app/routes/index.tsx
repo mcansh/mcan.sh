@@ -5,7 +5,10 @@ import type {
   HeadersFunction,
 } from 'remix';
 
-import { FunHoverLink } from '../components/fun-hover-link';
+import {
+  FunHoverLink,
+  styles as funHoverLinkStyles,
+} from '../components/fun-hover-link';
 
 const meta: MetaFunction = () => ({
   title: 'Logan McAnsh',
@@ -19,7 +22,7 @@ const headers: HeadersFunction = () => ({
 const links: LinksFunction = () => [
   {
     rel: 'stylesheet',
-    href: FunHoverLink.styles,
+    href: funHoverLinkStyles,
   },
 ];
 
