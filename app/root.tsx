@@ -1,13 +1,23 @@
 import * as React from 'react';
-import { Meta, Links, Scripts, LiveReload, useCatch, Outlet } from 'remix';
+import {
+  Meta,
+  Links,
+  Scripts,
+  LiveReload,
+  useCatch,
+  Outlet,
+  useMatches,
+} from 'remix';
 import type { LinksFunction, LinkDescriptor, MetaFunction } from 'remix';
 import type {
   ErrorBoundaryComponent,
   RouteComponent,
 } from '@remix-run/react/routeModules';
+import clsx from 'clsx';
 
 import tailwindUrl from './styles/global.css';
 import interUrl from './styles/inter.css';
+import type { Match } from './@types/handle';
 
 const meta: MetaFunction = () => ({
   viewport: 'initial-scale=1.0, width=device-width, viewport-fit=cover',
@@ -43,40 +53,51 @@ const links: LinksFunction = () => {
 };
 
 interface DocumentProps {
-  className?: string;
+  bodyClassName?: string;
   title?: string;
 }
 
-const Document: React.FC<DocumentProps> = ({ children, className, title }) => (
-  <html lang="en" className="h-screen">
-    <head>
-      {title && <title>{title}</title>}
-      <meta charSet="utf-8" />
+const Document: React.FC<DocumentProps> = ({
+  children,
+  bodyClassName,
+  title,
+}) => {
+  const matches = useMatches() as unknown as Array<Match>;
+  const handleBodyClassName = matches
+    .filter(match => match.handle?.bodyClassName)
+    .map(match => match.handle?.bodyClassName);
 
-      <meta
-        name="theme-color"
-        content="#fff"
-        media="(prefers-color-scheme: light)"
-      />
-      <meta
-        name="theme-color"
-        content="#1d2330"
-        media="(prefers-color-scheme: dark)"
-      />
+  return (
+    <html lang="en" className="h-screen">
+      <head>
+        {title && <title>{title}</title>}
+        <meta charSet="utf-8" />
 
-      <Meta />
-      <Links />
-    </head>
-    <body className={className}>
-      {children}
-      <Scripts />
-      {process.env.NODE_ENV === 'development' && <LiveReload />}
-    </body>
-  </html>
-);
+        <meta
+          name="theme-color"
+          content="#fff"
+          media="(prefers-color-scheme: light)"
+        />
+        <meta
+          name="theme-color"
+          content="#1d2330"
+          media="(prefers-color-scheme: dark)"
+        />
+
+        <Meta />
+        <Links />
+      </head>
+      <body className={clsx(bodyClassName, handleBodyClassName)}>
+        {children}
+        <Scripts />
+        <LiveReload />
+      </body>
+    </html>
+  );
+};
 
 const App: RouteComponent = () => (
-  <Document className="h-screen bg-white dark:bg-gray-800 dark:text-white">
+  <Document bodyClassName="h-min-screen">
     <Outlet />
   </Document>
 );
@@ -87,7 +108,7 @@ const ErrorBoundary: ErrorBoundaryComponent = ({ error }) => {
   return (
     <Document
       title="Uh-oh!"
-      className="bg-[#0827f5] min-h-screen w-[90%] max-w-5xl mx-auto pt-20 space-y-4 font-mono text-center text-white"
+      bodyClassName="bg-[#0827f5] min-h-screen w-[90%] max-w-5xl mx-auto pt-20 space-y-4 font-mono text-center text-white"
     >
       <h1 className="inline-block text-3xl font-bold bg-white text-[#0827f5]">
         Uncaught Exception!
