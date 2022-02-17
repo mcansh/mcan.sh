@@ -4,7 +4,7 @@
 /.vercel
 /.cache
 /.output
-/api/_build
+/build
 /public/build
 /public/sw.js
 /public/sw.js.map
