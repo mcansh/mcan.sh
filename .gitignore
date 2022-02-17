@@ -4,6 +4,7 @@
 /.vercel
 /.cache
 /.output
+/api/index.js
 /build
 /public/build
 /public/sw.js
