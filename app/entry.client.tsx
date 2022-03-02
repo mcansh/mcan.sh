@@ -8,4 +8,4 @@ Fathom.load('EPVCGNZL', {
   spa: 'auto',
 });
 
-ReactDOM.createRoot(document, { hydrate: true }).render(<RemixBrowser />);
+ReactDOM.hydrate(<RemixBrowser />, document);
