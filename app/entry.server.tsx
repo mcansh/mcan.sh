@@ -1,7 +1,13 @@
-import ReactDOMServer from 'react-dom/server';
-import type { EntryContext } from 'remix';
-import { RemixServer, redirect } from 'remix';
+import { PassThrough } from 'stream';
+
+// @ts-expect-error types need updating
+import { renderToPipeableStream } from 'react-dom/server';
+import type { EntryContext, Headers } from '@remix-run/node';
+import { redirect, Response } from '@remix-run/node';
+import { RemixServer } from '@remix-run/react';
 import { createSecureHeaders } from '@mcansh/remix-secure-headers';
+
+const ABORT_DELAY = 5_000;
 
 const securityheaders = createSecureHeaders({
   'Content-Security-Policy': {
@@ -48,23 +54,43 @@ function handleRequest(
     return redirect('https://mcan.sh/resume');
   }
 
-  if (process.env.NODE_ENV === 'development') {
-    responseHeaders.set('Cache-Control', 'no-cache');
-  }
+  return new Promise(resolve => {
+    let didError = false;
+    const { pipe, abort } = renderToPipeableStream(
+      <RemixServer context={remixContext} url={request.url} />,
+      {
+        onShellReady() {
+          // if you want to wait for everything and not render placeholders
+          // onAllReady() {
+          const body = new PassThrough();
 
-  const markup = ReactDOMServer.renderToString(
-    <RemixServer context={remixContext} url={request.url} />
-  );
+          if (process.env.NODE_ENV === 'development') {
+            responseHeaders.set('Cache-Control', 'no-cache');
+          }
 
-  responseHeaders.set('Content-Type', 'text/html');
+          responseHeaders.set('Content-Type', 'text/html');
+          for (const header of securityheaders) {
+            responseHeaders.set(...header);
+          }
 
-  for (const header of securityheaders) {
-    responseHeaders.set(...header);
-  }
+          resolve(
+            new Response(body, {
+              status: didError ? 500 : responseStatusCode,
+              headers: responseHeaders,
+            })
+          );
+          pipe(body);
+        },
+        onError(error: Error) {
+          didError = true;
+          console.error(error);
+        },
+      }
+    );
 
-  return new Response(`<!DOCTYPE html>${markup}`, {
-    status: responseStatusCode,
-    headers: responseHeaders,
+    /* same reason as the typescript ignore */
+    /* eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-implied-eval */
+    setTimeout(abort, ABORT_DELAY);
   });
 }
 

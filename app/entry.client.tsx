@@ -1,5 +1,5 @@
-import ReactDOM from 'react-dom';
-import { RemixBrowser } from 'remix';
+import ReactDOM from 'react-dom/client';
+import { RemixBrowser } from '@remix-run/react';
 import * as Fathom from 'fathom-client';
 
 Fathom.load('EPVCGNZL', {
@@ -8,4 +8,4 @@ Fathom.load('EPVCGNZL', {
   spa: 'auto',
 });
 
-ReactDOM.hydrate(<RemixBrowser />, document);
+ReactDOM.hydrateRoot(document, <RemixBrowser />);
