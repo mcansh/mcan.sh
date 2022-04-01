@@ -6,6 +6,7 @@ import type { EntryContext, Headers } from '@remix-run/node';
 import { redirect, Response } from '@remix-run/node';
 import { RemixServer } from '@remix-run/react';
 import { createSecureHeaders } from '@mcansh/remix-secure-headers';
+import isbot from 'isbot';
 
 const ABORT_DELAY = 5_000;
 
@@ -43,7 +44,7 @@ const securityheaders = createSecureHeaders({
   },
 });
 
-function handleRequest(
+export default function handleDocumentRequest(
   request: Request,
   responseStatusCode: number,
   responseHeaders: Headers,
@@ -54,14 +55,17 @@ function handleRequest(
     return redirect('https://mcan.sh/resume');
   }
 
+  const callbackName = isbot(request.headers.get('user-agent'))
+    ? 'onAllReady'
+    : 'onShellReady';
+
   return new Promise(resolve => {
     let didError = false;
+
     const { pipe, abort } = renderToPipeableStream(
       <RemixServer context={remixContext} url={request.url} />,
       {
-        onShellReady() {
-          // if you want to wait for everything and not render placeholders
-          // onAllReady() {
+        [callbackName]() {
           const body = new PassThrough();
 
           if (process.env.NODE_ENV === 'development') {
@@ -87,11 +91,8 @@ function handleRequest(
         },
       }
     );
-
     /* same reason as the typescript ignore */
-    /* eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-implied-eval */
+    /* eslint-disable-next-line @typescript-eslint/no-implied-eval, @typescript-eslint/no-unsafe-argument */
     setTimeout(abort, ABORT_DELAY);
   });
 }
-
-export default handleRequest;
