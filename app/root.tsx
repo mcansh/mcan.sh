@@ -16,6 +16,7 @@ import {
   useMatches,
 } from '@remix-run/react';
 import clsx from 'clsx';
+import * as Fathom from 'fathom-client';
 
 import tailwindUrl from './styles/global.css';
 import interUrl from './styles/inter.css';
@@ -82,6 +83,14 @@ const Document: React.FC<DocumentProps> = ({
   const handleBodyClassName = matches
     .filter(match => match.handle?.bodyClassName)
     .map(match => match.handle?.bodyClassName);
+
+  React.useEffect(() => {
+    Fathom.load('EPVCGNZL', {
+      excludedDomains: ['localhost'],
+      url: 'https://thirtyseven-active.b-cdn.net/script.js',
+      spa: 'auto',
+    });
+  }, []);
 
   return (
     <html lang="en" className="h-screen">

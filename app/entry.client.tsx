@@ -1,11 +1,4 @@
-import ReactDOM from 'react-dom';
-import { RemixBrowser } from 'remix';
-import * as Fathom from 'fathom-client';
+import { hydrateRoot } from 'react-dom/client';
+import { RemixBrowser } from '@remix-run/react';
 
-Fathom.load('EPVCGNZL', {
-  excludedDomains: ['localhost'],
-  url: 'https://thirtyseven-active.b-cdn.net/script.js',
-  spa: 'auto',
-});
-
-ReactDOM.hydrate(<RemixBrowser />, document);
+hydrateRoot(document, <RemixBrowser />);
