@@ -1,18 +1,20 @@
 import * as React from 'react';
-import {
-  Meta,
-  Links,
-  Scripts,
-  LiveReload,
-  useCatch,
-  Outlet,
-  useMatches,
-} from 'remix';
-import type { LinksFunction, LinkDescriptor, MetaFunction } from 'remix';
 import type {
   ErrorBoundaryComponent,
+  LinkDescriptor,
+  LinksFunction,
+  MetaFunction,
   RouteComponent,
-} from '@remix-run/react/routeModules';
+} from '@remix-run/node';
+import {
+  Links,
+  LiveReload,
+  Meta,
+  Outlet,
+  Scripts,
+  useCatch,
+  useMatches,
+} from '@remix-run/react';
 import clsx from 'clsx';
 
 import tailwindUrl from './styles/global.css';
@@ -22,6 +24,20 @@ import type { Match } from './@types/handle';
 const meta: MetaFunction = () => ({
   viewport: 'initial-scale=1.0, width=device-width, viewport-fit=cover',
   'apple-mobile-web-app-status-bar-style': 'black-translucent',
+  'apple-mobile-web-app-capable': 'yes',
+  charset: 'utf-8',
+  'theme-color': [
+    {
+      name: 'theme-color',
+      content: '#fff',
+      media: '(prefers-color-scheme: light)',
+    },
+    {
+      name: 'theme-color',
+      content: '#1d2330',
+      media: '(prefers-color-scheme: dark)',
+    },
+  ],
 });
 
 const iconSizes = [32, 57, 72, 96, 120, 128, 144, 152, 195, 228];
@@ -71,19 +87,6 @@ const Document: React.FC<DocumentProps> = ({
     <html lang="en" className="h-screen">
       <head>
         {title && <title>{title}</title>}
-        <meta charSet="utf-8" />
-
-        <meta
-          name="theme-color"
-          content="#fff"
-          media="(prefers-color-scheme: light)"
-        />
-        <meta
-          name="theme-color"
-          content="#1d2330"
-          media="(prefers-color-scheme: dark)"
-        />
-
         <Meta />
         <Links />
       </head>

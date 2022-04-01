@@ -1,17 +1,17 @@
 import type {
-  RouteComponent,
-  MetaFunction,
   HeadersFunction,
   LoaderFunction,
-} from 'remix';
-import { json, useLoaderData } from 'remix';
+  MetaFunction,
+} from '@remix-run/node';
+import { json } from '@remix-run/node';
+import { useLoaderData } from '@remix-run/react';
 
-const meta: MetaFunction = () => ({
+export const meta: MetaFunction = () => ({
   title: 'Resume | Logan McAnsh',
   description: "Logan McAnsh's Resume",
 });
 
-const headers: HeadersFunction = () => ({
+export const headers: HeadersFunction = () => ({
   'Cache-Control': `public, max-age=3600, s-maxage=3600, stale-while-revalidate`,
   'x-hello-recruiters': '1',
 });
@@ -47,8 +47,8 @@ interface RouteData {
   }>;
 }
 
-const loader: LoaderFunction = () => {
-  const data: RouteData = {
+export const loader: LoaderFunction = () => {
+  return json<RouteData>({
     certifications: [
       {
         link: 'https://www.ciwcertified.com/ciw-certifications/web-foundations-series/internet-business-associate',
@@ -103,12 +103,10 @@ const loader: LoaderFunction = () => {
         ],
       },
     ],
-  };
-
-  return json(data);
+  });
 };
 
-const ResumePage: RouteComponent = () => {
+export default function ResumePage() {
   const { experiences, skills, certifications } = useLoaderData<RouteData>();
 
   return (
@@ -223,7 +221,4 @@ const ResumePage: RouteComponent = () => {
       </div>
     </div>
   );
-};
-
-export default ResumePage;
-export { headers, loader, meta };
+}

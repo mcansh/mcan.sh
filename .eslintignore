@@ -1,6 +1,7 @@
-!.*.js
-api/_build
-public/build
+
+/api/index.js
+/build
+/public/build
 /public/sw.js
 /public/sw.js.map
 /public/workbox-*.js

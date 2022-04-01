@@ -1,9 +1,9 @@
 import type {
-  MetaFunction,
-  LinksFunction,
-  RouteComponent,
   HeadersFunction,
-} from 'remix';
+  LinksFunction,
+  MetaFunction,
+  RouteComponent,
+} from '@remix-run/node';
 
 import {
   FunHoverLink,

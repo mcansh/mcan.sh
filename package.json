@@ -19,7 +19,7 @@
     "lint": "eslint --cache --fix --ext \".js,.ts,.tsx,.jsx,.mts,.cts\" .",
     "format": "prettier --write \"**/*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|cts|mts|md|graphql|mdx)\"",
     "validate": "run-p lint format type-check",
-    "prepare": "husky install && remix setup node"
+    "prepare": "husky install"
   },
   "dependencies": {
     "@mcansh/remix-secure-headers": "0.3.0",
