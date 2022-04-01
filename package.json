@@ -30,7 +30,6 @@
     "fathom-client": "3.4.1",
     "react": "18.0.0",
     "react-dom": "18.0.0",
-    "remix": "1.3.4",
     "type-fest": "2.12.2"
   },
   "devDependencies": {
