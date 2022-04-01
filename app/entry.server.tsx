@@ -1,7 +1,14 @@
-import ReactDOMServer from 'react-dom/server';
-import type { EntryContext } from 'remix';
-import { RemixServer, redirect } from 'remix';
+import { PassThrough } from 'stream';
+
+// @ts-expect-error types need updating
+import { renderToPipeableStream } from 'react-dom/server';
+import type { EntryContext, Headers } from '@remix-run/node';
+import { redirect, Response } from '@remix-run/node';
+import { RemixServer } from '@remix-run/react';
 import { createSecureHeaders } from '@mcansh/remix-secure-headers';
+import isbot from 'isbot';
+
+const ABORT_DELAY = 5_000;
 
 const securityheaders = createSecureHeaders({
   'Content-Security-Policy': {
@@ -37,7 +44,7 @@ const securityheaders = createSecureHeaders({
   },
 });
 
-function handleRequest(
+export default function handleDocumentRequest(
   request: Request,
   responseStatusCode: number,
   responseHeaders: Headers,
@@ -48,24 +55,44 @@ function handleRequest(
     return redirect('https://mcan.sh/resume');
   }
 
-  if (process.env.NODE_ENV === 'development') {
-    responseHeaders.set('Cache-Control', 'no-cache');
-  }
+  const callbackName = isbot(request.headers.get('user-agent'))
+    ? 'onAllReady'
+    : 'onShellReady';
 
-  const markup = ReactDOMServer.renderToString(
-    <RemixServer context={remixContext} url={request.url} />
-  );
+  return new Promise(resolve => {
+    let didError = false;
 
-  responseHeaders.set('Content-Type', 'text/html');
+    const { pipe, abort } = renderToPipeableStream(
+      <RemixServer context={remixContext} url={request.url} />,
+      {
+        [callbackName]() {
+          const body = new PassThrough();
 
-  for (const header of securityheaders) {
-    responseHeaders.set(...header);
-  }
+          if (process.env.NODE_ENV === 'development') {
+            responseHeaders.set('Cache-Control', 'no-cache');
+          }
 
-  return new Response(`<!DOCTYPE html>${markup}`, {
-    status: responseStatusCode,
-    headers: responseHeaders,
+          responseHeaders.set('Content-Type', 'text/html');
+          for (const header of securityheaders) {
+            responseHeaders.set(...header);
+          }
+
+          resolve(
+            new Response(body, {
+              status: didError ? 500 : responseStatusCode,
+              headers: responseHeaders,
+            })
+          );
+          pipe(body);
+        },
+        onError(error: Error) {
+          didError = true;
+          console.error(error);
+        },
+      }
+    );
+    /* same reason as the typescript ignore */
+    /* eslint-disable-next-line @typescript-eslint/no-implied-eval, @typescript-eslint/no-unsafe-argument */
+    setTimeout(abort, ABORT_DELAY);
   });
 }
-
-export default handleRequest;
