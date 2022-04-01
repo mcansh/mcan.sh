@@ -11,5 +11,6 @@ const FunHoverLink: React.FC<Props> = ({ children, ...rest }) => (
   </a>
 );
 
+// eslint-disable-next-line import/extensions
 export { default as styles } from '~/styles/fun-hover-link.css';
 export { FunHoverLink };
