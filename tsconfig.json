@@ -13,6 +13,7 @@
     "noFallthroughCasesInSwitch": true,
     "incremental": true,
     "allowJs": true,
+    "baseUrl": ".",
     "paths": {
       "~/*": ["./app/*"]
     }

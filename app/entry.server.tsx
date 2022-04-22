@@ -1,6 +1,5 @@
 import { PassThrough } from 'stream';
 
-// @ts-expect-error types need updating
 import { renderToPipeableStream } from 'react-dom/server';
 import type { EntryContext, Headers } from '@remix-run/node';
 import { redirect, Response } from '@remix-run/node';
@@ -62,6 +61,7 @@ export default function handleDocumentRequest(
   return new Promise(resolve => {
     let didError = false;
 
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     const { pipe, abort } = renderToPipeableStream(
       <RemixServer context={remixContext} url={request.url} />,
       {
@@ -85,14 +85,14 @@ export default function handleDocumentRequest(
           );
           pipe(body);
         },
-        onError(error: Error) {
+        onError(error) {
           didError = true;
           console.error(error);
         },
       }
     );
     /* same reason as the typescript ignore */
-    /* eslint-disable-next-line @typescript-eslint/no-implied-eval, @typescript-eslint/no-unsafe-argument */
+
     setTimeout(abort, ABORT_DELAY);
   });
 }

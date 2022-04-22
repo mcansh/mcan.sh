@@ -1,10 +1,8 @@
 import * as React from 'react';
 import type {
-  ErrorBoundaryComponent,
   LinkDescriptor,
   LinksFunction,
   MetaFunction,
-  RouteComponent,
 } from '@remix-run/node';
 import {
   Links,
@@ -18,32 +16,34 @@ import {
 import clsx from 'clsx';
 import * as Fathom from 'fathom-client';
 
-import tailwindUrl from './styles/global.css';
-import interUrl from './styles/inter.css';
-import type { Match } from './@types/handle';
+import tailwindUrl from '~/styles/global.css';
+import interUrl from '~/styles/inter.css';
+import type { Match } from '~/@types/handle';
 
-const meta: MetaFunction = () => ({
-  viewport: 'initial-scale=1.0, width=device-width, viewport-fit=cover',
-  'apple-mobile-web-app-status-bar-style': 'black-translucent',
-  'apple-mobile-web-app-capable': 'yes',
-  charset: 'utf-8',
-  'theme-color': [
-    {
-      name: 'theme-color',
-      content: '#fff',
-      media: '(prefers-color-scheme: light)',
-    },
-    {
-      name: 'theme-color',
-      content: '#1d2330',
-      media: '(prefers-color-scheme: dark)',
-    },
-  ],
-});
+export const meta: MetaFunction = () => {
+  return {
+    viewport: 'initial-scale=1.0, width=device-width, viewport-fit=cover',
+    'apple-mobile-web-app-status-bar-style': 'black-translucent',
+    'apple-mobile-web-app-capable': 'yes',
+    charset: 'utf-8',
+    'theme-color': [
+      {
+        name: 'theme-color',
+        content: '#fff',
+        media: '(prefers-color-scheme: light)',
+      },
+      {
+        name: 'theme-color',
+        content: '#1d2330',
+        media: '(prefers-color-scheme: dark)',
+      },
+    ],
+  };
+};
 
 const iconSizes = [32, 57, 72, 96, 120, 128, 144, 152, 195, 228];
 
-const links: LinksFunction = () => {
+export const links: LinksFunction = () => {
   const appleTouchIcons: Array<LinkDescriptor> = iconSizes.map(icon => {
     const size = `${icon}x${icon}`;
     return {
@@ -72,13 +72,10 @@ const links: LinksFunction = () => {
 interface DocumentProps {
   bodyClassName?: string;
   title?: string;
+  children: React.ReactNode;
 }
 
-const Document: React.FC<DocumentProps> = ({
-  children,
-  bodyClassName,
-  title,
-}) => {
+function Document({ children, bodyClassName, title }: DocumentProps) {
   const matches = useMatches() as unknown as Array<Match>;
   const handleBodyClassName = matches
     .filter(match => match.handle?.bodyClassName)
@@ -102,19 +99,21 @@ const Document: React.FC<DocumentProps> = ({
       <body className={clsx(bodyClassName, handleBodyClassName)}>
         {children}
         <Scripts />
-        <LiveReload />
+        <LiveReload port={Number(process.env.REMIX_DEV_SERVER_WS_PORT)} />
       </body>
     </html>
   );
-};
+}
 
-const App: RouteComponent = () => (
-  <Document bodyClassName="h-min-screen">
-    <Outlet />
-  </Document>
-);
+export default function App() {
+  return (
+    <Document bodyClassName="h-min-screen">
+      <Outlet />
+    </Document>
+  );
+}
 
-const ErrorBoundary: ErrorBoundaryComponent = ({ error }) => {
+export function ErrorBoundary({ error }: { error: Error }) {
   console.error(error);
 
   return (
@@ -138,9 +137,9 @@ const ErrorBoundary: ErrorBoundaryComponent = ({ error }) => {
       </p>
     </Document>
   );
-};
+}
 
-const CatchBoundary: React.VFC = () => {
+export function CatchBoundary() {
   const caught = useCatch();
 
   switch (caught.status) {
@@ -159,7 +158,4 @@ const CatchBoundary: React.VFC = () => {
         `Unexpected caught response with status: ${caught.status}`
       );
   }
-};
-
-export default App;
-export { CatchBoundary, ErrorBoundary, links, meta };
+}
