@@ -9,7 +9,7 @@ import isbot from 'isbot';
 
 const ABORT_DELAY = 5_000;
 
-const securityheaders = createSecureHeaders({
+const securityHeaders = createSecureHeaders({
   'Content-Security-Policy': {
     'default-src': ["'self'"],
     'img-src': [
@@ -26,11 +26,10 @@ const securityheaders = createSecureHeaders({
     'media-src': ["'none'"],
     'connect-src': ['*'],
   },
-  'Referrer-Policy': `origin-when-cross-origin`,
-  'X-Frame-Options': `DENY`,
-  'X-Content-Type-Options': `nosniff`,
-  'X-DNS-Prefetch-Control': `on`,
-
+  'Referrer-Policy': 'origin-when-cross-origin',
+  'X-Frame-Options': 'DENY',
+  'X-Content-Type-Options': 'nosniff',
+  'X-DNS-Prefetch-Control': 'on',
   'Strict-Transport-Security': {
     maxAge: 31536000,
     includeSubDomains: true,
@@ -61,8 +60,7 @@ export default function handleDocumentRequest(
   return new Promise(resolve => {
     let didError = false;
 
-    // eslint-disable-next-line @typescript-eslint/unbound-method
-    const { pipe, abort } = renderToPipeableStream(
+    const pipeableStream = renderToPipeableStream(
       <RemixServer context={remixContext} url={request.url} />,
       {
         [callbackName]() {
@@ -73,7 +71,7 @@ export default function handleDocumentRequest(
           }
 
           responseHeaders.set('Content-Type', 'text/html');
-          for (const header of securityheaders) {
+          for (const header of securityHeaders) {
             responseHeaders.set(...header);
           }
 
@@ -83,7 +81,7 @@ export default function handleDocumentRequest(
               headers: responseHeaders,
             })
           );
-          pipe(body);
+          pipeableStream.pipe(body);
         },
         onError(error) {
           didError = true;
@@ -91,8 +89,7 @@ export default function handleDocumentRequest(
         },
       }
     );
-    /* same reason as the typescript ignore */
 
-    setTimeout(abort, ABORT_DELAY);
+    setTimeout(() => pipeableStream.abort(), ABORT_DELAY);
   });
 }
