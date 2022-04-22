@@ -23,9 +23,9 @@
   },
   "dependencies": {
     "@mcansh/remix-secure-headers": "0.4.0",
-    "@remix-run/node": "1.4.1",
-    "@remix-run/react": "1.4.1",
-    "@remix-run/vercel": "1.4.1",
+    "@remix-run/node": "nightly",
+    "@remix-run/react": "nightly",
+    "@remix-run/vercel": "nightly",
     "clsx": "1.1.1",
     "fathom-client": "3.4.1",
     "isbot": "3.4.6",
@@ -35,8 +35,8 @@
   },
   "devDependencies": {
     "@mcansh/eslint-config": "4.0.0",
-    "@remix-run/dev": "1.4.1",
-    "@remix-run/serve": "1.4.1",
+    "@remix-run/dev": "nightly",
+    "@remix-run/serve": "nightly",
     "@types/node": "17.0.25",
     "@types/react": "18.0.6",
     "@types/react-dom": "18.0.2",
