@@ -126,7 +126,7 @@ export default function ResumePage() {
           <div>
             <h1 className="text-4xl font-semibold">Logan McAnsh</h1>
             <a
-              className="transition-colors duration-75 ease-in-out text-slate-600 hover:text-slate-300 dark:text-slate-200 dark:hover:text-slate-200 dark:hover:underline"
+              className="transition-colors duration-75 ease-in-out text-slate-600 hover:text-slate-300 hover:underline"
               href="mailto:logan+resume@mcan.sh"
             >
               logan+resume@mcan.sh
@@ -203,7 +203,7 @@ export default function ResumePage() {
               {certifications.map(certificate => (
                 <li key={certificate.label}>
                   <a
-                    className="text-indigo-600 dark:text-white dark:hover:underline"
+                    className="text-indigo-600 hover:underline"
                     href={certificate.link}
                   >
                     {certificate.label}
