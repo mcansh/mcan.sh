@@ -28,6 +28,7 @@
     "@remix-run/vercel": "nightly",
     "clsx": "1.1.1",
     "fathom-client": "3.4.1",
+    "is-ci": "3.0.1",
     "isbot": "3.4.6",
     "react": "18.1.0",
     "react-dom": "18.1.0",
