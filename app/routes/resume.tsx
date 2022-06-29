@@ -6,6 +6,8 @@ import type {
 import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 
+import type { SerializeType } from '~/typed-response';
+
 export const meta: MetaFunction = () => ({
   title: 'Resume | Logan McAnsh',
   description: "Logan McAnsh's Resume",
@@ -24,85 +26,112 @@ const date = new Intl.DateTimeFormat('en-US', {
 interface BaseExperience {
   company: string;
   title: string;
-  start: string;
-  end: string;
+  start: Date;
   duties: Array<string>;
 }
 
 interface PastExperience extends BaseExperience {
   current?: never;
+  end: Date;
 }
 
 interface CurrentExperience extends BaseExperience {
   current: true;
+  end?: never;
 }
 
-interface RouteData {
-  skills: Array<string>;
-  experiences: Array<CurrentExperience | PastExperience>;
-  certifications: Array<{
-    label: string;
-    link: string;
-    year: Array<number> | number;
-  }>;
-}
+type Experience = CurrentExperience | PastExperience;
+
+type Skill = string;
+
+type Certification = {
+  label: string;
+  link: string;
+  year: Array<number> | number;
+};
+
+type RouteData = SerializeType<{
+  skills: Array<Skill>;
+  experiences: Array<Experience>;
+  certifications: Array<Certification>;
+}>;
 
 export const loader: LoaderFunction = () => {
+  const skills: Array<Skill> = [
+    'Node.js',
+    'React',
+    'Remix',
+    'React Router',
+    'TypeScript',
+    'TailwindCSS',
+    'Accessibility',
+    'Performance',
+    'ES2015+',
+    'Git',
+    'Automated Testing',
+    'GitHub Actions',
+    'Continuous Integration',
+    'Continuous Delivery',
+    'Prisma',
+  ];
+
+  const experiences: Array<Experience> = [
+    {
+      company: 'Remix Software',
+      title: 'Software Engineer',
+      start: new Date(2021, 7, 2),
+      current: true,
+      duties: [],
+    },
+    {
+      company: 'Powerley',
+      title: 'Frontend Web Developer',
+      start: new Date(2016, 4, 4),
+      end: new Date(2021, 6, 23),
+      duties: [
+        'First member of the web team',
+        'Created and maintained a suite of modern white label web applications with Next.js to be included in our mobile apps for 7+ clients, which quickly became the most used areas of the app',
+        'Implemented a suite of utility functions used across our web experiences',
+        'Designed Sketch plugins',
+      ],
+    },
+  ];
+
+  const jsonExperiences = experiences.map(experience => {
+    return experience.end
+      ? {
+          ...experience,
+          start: date.format(experience.start),
+          end: date.format(experience.end),
+        }
+      : {
+          ...experience,
+          start: date.format(experience.start),
+        };
+  });
+
+  const certifications: Array<Certification> = [
+    {
+      link: 'https://www.ciwcertified.com/ciw-certifications/web-foundations-series/internet-business-associate',
+      label: 'CIW Internet Business Associate',
+      year: 2014,
+    },
+    {
+      link: 'https://www.ciwcertified.com/ciw-certifications/web-foundations-series/site-development-associate',
+      label: 'CIW Web Site Development Associate',
+      year: 2015,
+    },
+    {
+      link: 'https://testingjavascript.com',
+      label: 'Testing JavaScript',
+      year: [2019, 2021],
+    },
+  ];
+
   return json<RouteData>({
-    certifications: [
-      {
-        link: 'https://www.ciwcertified.com/ciw-certifications/web-foundations-series/internet-business-associate',
-        label: 'CIW Internet Business Associate',
-        year: 2014,
-      },
-      {
-        link: 'https://www.ciwcertified.com/ciw-certifications/web-foundations-series/site-development-associate',
-        label: 'CIW Web Site Development Associate',
-        year: 2015,
-      },
-      {
-        link: 'https://testingjavascript.com',
-        label: 'Testing JavaScript',
-        year: [2019, 2021],
-      },
-    ],
-    skills: [
-      'Node.js',
-      'Rest APIs',
-      'GraphQL',
-      'React',
-      'Next.js',
-      'Remix Run',
-      'TypeScript',
-      'TailwindCSS',
-      'Accessibility',
-      'Performance',
-      'ES2015+',
-      'Git',
-      'Automated Testing',
-    ],
-    experiences: [
-      {
-        company: 'Remix Run',
-        title: 'Software Engineer',
-        start: new Date(2021, 7, 2).toISOString(),
-        end: new Date().toISOString(),
-        current: true,
-        duties: [],
-      },
-      {
-        company: 'Powerley',
-        title: 'Frontend Web Developer',
-        start: new Date(2016, 4, 4).toISOString(),
-        end: new Date(2021, 6, 23).toISOString(),
-        duties: [
-          'First member of the web team',
-          'Created and maintained a suite of modern white label web applications with Next.js to be included in our mobile apps for 7+ clients, which quickly became the most used areas of the app',
-          'Implemented a suite of utility functions used across our web experiences',
-          'Designed Sketch plugins',
-        ],
-      },
-    ],
+    certifications,
+    skills,
+    experiences: jsonExperiences,
   });
 };
 
@@ -175,23 +204,25 @@ export default function ResumePage() {
                       <span className="text-lg">{experience.title}</span>
                       <span>
                         <time dateTime={experience.start}>
-                          {date.format(new Date(experience.start))}
+                          {experience.start}
                         </time>
                         {' - '}
-                        <time dateTime={experience.end}>
-                          {experience.current
-                            ? 'Present'
-                            : date.format(new Date(experience.end))}
-                        </time>
+                        {'current' in experience ? (
+                          <span>Present</span>
+                        ) : (
+                          <time dateTime={experience.end}>
+                            {experience.end}
+                          </time>
+                        )}
                       </span>
                     </h3>
-                    {experience.duties.length > 0 && (
+                    {experience.duties.length > 0 ? (
                       <ul className="pl-6 space-y-1 list-disc">
                         {experience.duties.map(duty => (
                           <li key={duty}>{duty}</li>
                         ))}
                       </ul>
-                    )}
+                    ) : null}
                   </div>
                 </li>
               ))}
