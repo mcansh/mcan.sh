@@ -4,14 +4,11 @@
 /.vercel
 /.cache
 /.output
+api/_assets
 /api/index.js
 /api/index.js.map
 /build
 /public/build
-/public/sw.js
-/public/sw.js.map
-/public/workbox-*.js
-/public/workbox-*.js.map
 app/styles
 .eslintcache
 tsconfig.tsbuildinfo
