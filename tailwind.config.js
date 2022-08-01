@@ -1,6 +1,7 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 const plugin = require('tailwindcss/plugin');
 
+/** @type {import("tailwindcss").Config} */
 module.exports = {
   content: ['app/**/*.tsx'],
   darkMode: 'media',
@@ -23,7 +24,7 @@ module.exports = {
     extend: {},
   },
   plugins: [
-    require('tailwindcss-padding-safe')(),
+    require('tailwindcss-padding-safe'),
     plugin(({ addVariant, e, postcss }) => {
       addVariant('supports-gap', ({ container, separator }) => {
         const supportsRule = postcss.atRule({
