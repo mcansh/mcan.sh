@@ -1,12 +1,6 @@
-import type {
-  HeadersFunction,
-  LoaderFunction,
-  MetaFunction,
-} from '@remix-run/node';
+import type { HeadersFunction, MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
-
-import type { SerializeType } from '~/typed-response';
 
 export const meta: MetaFunction = () => ({
   title: 'Resume | Logan McAnsh',
@@ -18,21 +12,16 @@ export const headers: HeadersFunction = () => ({
   'x-hello-recruiters': '1',
 });
 
-const date = new Intl.DateTimeFormat('en-US', {
-  month: 'long',
-  year: 'numeric',
-});
-
 interface BaseExperience {
   company: string;
   title: string;
-  start: Date;
+  start: string;
   duties: Array<string>;
 }
 
 interface PastExperience extends BaseExperience {
   current?: never;
-  end: Date;
+  end: string;
 }
 
 interface CurrentExperience extends BaseExperience {
@@ -50,13 +39,12 @@ type Certification = {
   year: Array<number> | number;
 };
 
-type RouteData = SerializeType<{
-  skills: Array<Skill>;
-  experiences: Array<Experience>;
-  certifications: Array<Certification>;
-}>;
+export const loader = () => {
+  const date = new Intl.DateTimeFormat('en-US', {
+    month: 'long',
+    year: 'numeric',
+  });
 
-export const loader: LoaderFunction = () => {
   const skills: Array<Skill> = [
     'Node.js',
     'React',
@@ -73,21 +61,22 @@ export const loader: LoaderFunction = () => {
     'Continuous Integration',
     'Continuous Delivery',
     'Prisma',
+    'Center Stack',
   ];
 
   const experiences: Array<Experience> = [
     {
       company: 'Remix Software',
       title: 'Software Engineer',
-      start: new Date(2021, 7, 2),
+      start: date.format(new Date(2021, 7, 2)),
       current: true,
       duties: [],
     },
     {
       company: 'Powerley',
       title: 'Frontend Web Developer',
-      start: new Date(2016, 4, 4),
-      end: new Date(2021, 6, 23),
+      start: date.format(new Date(2016, 4, 4)),
+      end: date.format(new Date(2021, 6, 23)),
       duties: [
         'First member of the web team',
         'Created and maintained a suite of modern white label web applications with Next.js to be included in our mobile apps for 7+ clients, which quickly became the most used areas of the app',
@@ -96,19 +85,6 @@ export const loader: LoaderFunction = () => {
       ],
     },
   ];
-
-  const jsonExperiences = experiences.map(experience => {
-    return experience.end
-      ? {
-          ...experience,
-          start: date.format(experience.start),
-          end: date.format(experience.end),
-        }
-      : {
-          ...experience,
-          start: date.format(experience.start),
-        };
-  });
 
   const certifications: Array<Certification> = [
     {
@@ -128,15 +104,15 @@ export const loader: LoaderFunction = () => {
     },
   ];
 
-  return json<RouteData>({
+  return json({
     certifications,
-    skills,
-    experiences: jsonExperiences,
+    skills: skills.sort(() => Math.random() - 0.5),
+    experiences,
   });
 };
 
 export default function ResumePage() {
-  const { experiences, skills, certifications } = useLoaderData<RouteData>();
+  const data = useLoaderData<typeof loader>();
 
   return (
     <div className="relative h-full border-t-8 border-indigo-600 border-solid pb-8-safe">
@@ -178,7 +154,7 @@ export default function ResumePage() {
             <h2 className="text-2xl font-semibold">Skills</h2>
             {/* safari doesn't support gap on flex containers, so we need to add a margin to each flex child and set a negative margin on the parent */}
             <ul className="flex flex-row flex-wrap -mx-1 supports-gap:gap-2 supports-gap:mx-0 supports-gap:my-1">
-              {skills.map(skill => (
+              {data.skills.map(skill => (
                 <li
                   key={skill}
                   className="px-2 py-1 m-1 tracking-wide text-white bg-indigo-600 rounded-md supports-gap:m-0"
@@ -191,7 +167,7 @@ export default function ResumePage() {
           <div>
             <h2 className="text-2xl font-semibold">Experience</h2>
             <ul>
-              {experiences.map(experience => (
+              {data.experiences.map(experience => (
                 <li
                   className="space-y-2"
                   key={`${experience.company}-${experience.start}`}
@@ -231,7 +207,7 @@ export default function ResumePage() {
           <div>
             <h2 className="text-2xl font-semibold">Certificates</h2>
             <ul className="pl-6 list-disc">
-              {certifications.map(certificate => (
+              {data.certifications.map(certificate => (
                 <li key={certificate.label}>
                   <a
                     className="text-indigo-600 hover:underline"
