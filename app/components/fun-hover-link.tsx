@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 
 type Props = React.DetailedHTMLProps<
   React.AnchorHTMLAttributes<HTMLAnchorElement>,
@@ -11,5 +11,5 @@ const FunHoverLink: React.FC<Props> = ({ children, ...rest }) => (
   </a>
 );
 
-export { default as styles } from '~/styles/fun-hover-link.css';
+export { default as styles } from "~/styles/fun-hover-link.css";
 export { FunHoverLink };
