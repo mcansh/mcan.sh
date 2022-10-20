@@ -1,15 +1,15 @@
-import type { HeadersFunction, MetaFunction } from '@remix-run/node';
-import { json } from '@remix-run/node';
-import { useLoaderData } from '@remix-run/react';
+import type { HeadersFunction, MetaFunction } from "@remix-run/node";
+import { json } from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
 
 export const meta: MetaFunction = () => ({
-  title: 'Resume | Logan McAnsh',
+  title: "Resume | Logan McAnsh",
   description: "Logan McAnsh's Resume",
 });
 
 export const headers: HeadersFunction = () => ({
-  'Cache-Control': `public, max-age=3600, s-maxage=3600, stale-while-revalidate`,
-  'x-hello-recruiters': '1',
+  "Cache-Control": `public, max-age=3600, s-maxage=3600, stale-while-revalidate`,
+  "x-hello-recruiters": "1",
 });
 
 interface BaseExperience {
@@ -40,66 +40,66 @@ type Certification = {
 };
 
 export const loader = () => {
-  const date = new Intl.DateTimeFormat('en-US', {
-    month: 'long',
-    year: 'numeric',
+  let date = new Intl.DateTimeFormat("en-US", {
+    month: "long",
+    year: "numeric",
   });
 
-  const skills: Array<Skill> = [
-    'Node.js',
-    'React',
-    'Remix',
-    'React Router',
-    'TypeScript',
-    'TailwindCSS',
-    'Accessibility',
-    'Performance',
-    'ES2015+',
-    'Git',
-    'Automated Testing',
-    'GitHub Actions',
-    'Continuous Integration',
-    'Continuous Delivery',
-    'Prisma',
-    'Center Stack',
+  let skills: Array<Skill> = [
+    "Node.js",
+    "React",
+    "Remix",
+    "React Router",
+    "TypeScript",
+    "TailwindCSS",
+    "Accessibility",
+    "Performance",
+    "ES2015+",
+    "Git",
+    "Automated Testing",
+    "GitHub Actions",
+    "Continuous Integration",
+    "Continuous Delivery",
+    "Prisma",
+    "Center Stack",
   ];
 
-  const experiences: Array<Experience> = [
+  let experiences: Array<Experience> = [
     {
-      company: 'Remix Software',
-      title: 'Software Engineer',
+      company: "Remix Software",
+      title: "Software Engineer",
       start: date.format(new Date(2021, 7, 2)),
       current: true,
       duties: [],
     },
     {
-      company: 'Powerley',
-      title: 'Frontend Web Developer',
+      company: "Powerley",
+      title: "Frontend Web Developer",
       start: date.format(new Date(2016, 4, 4)),
       end: date.format(new Date(2021, 6, 23)),
       duties: [
-        'First member of the web team',
-        'Created and maintained a suite of modern white label web applications with Next.js to be included in our mobile apps for 7+ clients, which quickly became the most used areas of the app',
-        'Implemented a suite of utility functions used across our web experiences',
-        'Designed Sketch plugins',
+        "First member of the web team",
+        "Created and maintained a suite of modern white label web applications with Next.js to be included in our mobile apps for 7+ clients, which quickly became the most used areas of the app",
+        "Implemented a suite of utility functions used across our web experiences",
+        "Designed Sketch plugins",
       ],
     },
   ];
 
-  const certifications: Array<Certification> = [
+  let certifications: Array<Certification> = [
     {
-      link: 'https://www.ciwcertified.com/ciw-certifications/web-foundations-series/internet-business-associate',
-      label: 'CIW Internet Business Associate',
+      link: "https://www.ciwcertified.com/ciw-certifications/web-foundations-series/internet-business-associate",
+      label: "CIW Internet Business Associate",
       year: 2014,
     },
     {
-      link: 'https://www.ciwcertified.com/ciw-certifications/web-foundations-series/site-development-associate',
-      label: 'CIW Web Site Development Associate',
+      link: "https://www.ciwcertified.com/ciw-certifications/web-foundations-series/site-development-associate",
+      label: "CIW Web Site Development Associate",
       year: 2015,
     },
     {
-      link: 'https://testingjavascript.com',
-      label: 'Testing JavaScript',
+      link: "https://testingjavascript.com",
+      label: "Testing JavaScript",
       year: [2019, 2021],
     },
   ];
@@ -112,7 +112,7 @@ export const loader = () => {
 };
 
 export default function ResumePage() {
-  const data = useLoaderData<typeof loader>();
+  let data = useLoaderData<typeof loader>();
 
   return (
     <div className="relative h-full border-t-8 border-indigo-600 border-solid pb-8-safe">
@@ -154,7 +154,7 @@ export default function ResumePage() {
             <h2 className="text-2xl font-semibold">Skills</h2>
             {/* safari doesn't support gap on flex containers, so we need to add a margin to each flex child and set a negative margin on the parent */}
             <ul className="flex flex-row flex-wrap -mx-1 supports-gap:gap-2 supports-gap:mx-0 supports-gap:my-1">
-              {data.skills.map(skill => (
+              {data.skills.map((skill) => (
                 <li
                   key={skill}
                   className="px-2 py-1 m-1 tracking-wide text-white bg-indigo-600 rounded-md supports-gap:m-0"
@@ -167,7 +167,7 @@ export default function ResumePage() {
           <div>
             <h2 className="text-2xl font-semibold">Experience</h2>
             <ul>
-              {data.experiences.map(experience => (
+              {data.experiences.map((experience) => (
                 <li
                   className="space-y-2"
                   key={`${experience.company}-${experience.start}`}
@@ -182,8 +182,8 @@ export default function ResumePage() {
                         <time dateTime={experience.start}>
                           {experience.start}
                         </time>
-                        {' - '}
-                        {'current' in experience ? (
+                        {" - "}
+                        {"current" in experience ? (
                           <span>Present</span>
                         ) : (
                           <time dateTime={experience.end}>
@@ -194,7 +194,7 @@ export default function ResumePage() {
                     </h3>
                     {experience.duties.length > 0 ? (
                       <ul className="pl-6 space-y-1 list-disc">
-                        {experience.duties.map(duty => (
+                        {experience.duties.map((duty) => (
                           <li key={duty}>{duty}</li>
                         ))}
                       </ul>
@@ -207,17 +207,17 @@ export default function ResumePage() {
           <div>
             <h2 className="text-2xl font-semibold">Certificates</h2>
             <ul className="pl-6 list-disc">
-              {data.certifications.map(certificate => (
+              {data.certifications.map((certificate) => (
                 <li key={certificate.label}>
                   <a
                     className="text-indigo-600 hover:underline"
                     href={certificate.link}
                   >
                     {certificate.label}
-                  </a>{' '}
+                  </a>{" "}
                   (
                   {Array.isArray(certificate.year)
-                    ? certificate.year.join(', ')
+                    ? certificate.year.join(", ")
                     : certificate.year}
                   )
                 </li>

@@ -1,9 +1,9 @@
-import * as React from 'react';
+import * as React from "react";
 import type {
   LinkDescriptor,
   LinksFunction,
   MetaFunction,
-} from '@remix-run/node';
+} from "@remix-run/node";
 import {
   Links,
   LiveReload,
@@ -12,30 +12,30 @@ import {
   Scripts,
   useCatch,
   useMatches,
-} from '@remix-run/react';
-import clsx from 'clsx';
-import * as Fathom from 'fathom-client';
+} from "@remix-run/react";
+import clsx from "clsx";
+import * as Fathom from "fathom-client";
+import type { Match } from "~/@types/handle";
 
-import tailwindUrl from '~/styles/global.css';
-import interUrl from '~/styles/inter.css';
-import type { Match } from '~/@types/handle';
+import tailwindUrl from "~/styles/global.css";
+import interUrl from "~/styles/inter.css";
 
 export const meta: MetaFunction = () => {
   return {
-    viewport: 'initial-scale=1.0, width=device-width, viewport-fit=cover',
-    'apple-mobile-web-app-status-bar-style': 'black-translucent',
-    'apple-mobile-web-app-capable': 'yes',
-    charset: 'utf-8',
-    'theme-color': [
+    viewport: "initial-scale=1.0, width=device-width, viewport-fit=cover",
+    "apple-mobile-web-app-status-bar-style": "black-translucent",
+    "apple-mobile-web-app-capable": "yes",
+    charset: "utf-8",
+    "theme-color": [
       {
-        name: 'theme-color',
-        content: '#fff',
-        media: '(prefers-color-scheme: light)',
+        name: "theme-color",
+        content: "#fff",
+        media: "(prefers-color-scheme: light)",
       },
       {
-        name: 'theme-color',
-        content: '#1d2330',
-        media: '(prefers-color-scheme: dark)',
+        name: "theme-color",
+        content: "#1d2330",
+        media: "(prefers-color-scheme: dark)",
       },
     ],
   };
@@ -44,28 +44,28 @@ export const meta: MetaFunction = () => {
 const iconSizes = [32, 57, 72, 96, 120, 128, 144, 152, 195, 228];
 
 export const links: LinksFunction = () => {
-  const appleTouchIcons: Array<LinkDescriptor> = iconSizes.map(icon => {
-    const size = `${icon}x${icon}`;
+  let appleTouchIcons: Array<LinkDescriptor> = iconSizes.map((icon) => {
+    let size = `${icon}x${icon}`;
     return {
       href: `/static/images/logo/logo-${icon}.png`,
       sizes: size,
-      rel: 'apple-touch-icon',
+      rel: "apple-touch-icon",
     };
   });
 
   return [
-    { rel: 'stylesheet', href: tailwindUrl },
-    { rel: 'stylesheet', href: interUrl },
+    { rel: "stylesheet", href: tailwindUrl },
+    { rel: "stylesheet", href: interUrl },
     {
-      rel: 'preload',
-      href: '/inter/Inter-roman.var.woff2?v=3.19',
-      type: 'font/woff2',
-      as: 'font',
-      crossOrigin: 'anonymous',
+      rel: "preload",
+      href: "/inter/Inter-roman.var.woff2?v=3.19",
+      type: "font/woff2",
+      as: "font",
+      crossOrigin: "anonymous",
     },
-    { rel: 'icon', href: '/favicon.png', type: 'image/png' },
-    { rel: 'icon', href: '/favicon.ico' },
-    { rel: 'manifest', href: '/manifest.webmanifest' },
+    { rel: "icon", href: "/favicon.png", type: "image/png" },
+    { rel: "icon", href: "/favicon.ico" },
+    { rel: "manifest", href: "/manifest.webmanifest" },
     ...appleTouchIcons,
   ];
 };
@@ -77,23 +77,23 @@ interface DocumentProps {
 }
 
 function Document({ children, bodyClassName, title }: DocumentProps) {
-  const matches = useMatches() as unknown as Array<Match>;
-  const handleBodyClassName = matches
-    .filter(match => match.handle?.bodyClassName)
-    .map(match => match.handle?.bodyClassName);
+  let matches = useMatches() as unknown as Array<Match>;
+  let handleBodyClassName = matches
+    .filter((match) => match.handle?.bodyClassName)
+    .map((match) => match.handle?.bodyClassName);
 
   React.useEffect(() => {
-    Fathom.load('EPVCGNZL', {
-      excludedDomains: ['localhost'],
-      url: 'https://thirtyseven-active.b-cdn.net/script.js',
-      spa: 'auto',
+    Fathom.load("EPVCGNZL", {
+      excludedDomains: ["localhost"],
+      url: "https://thirtyseven-active.b-cdn.net/script.js",
+      spa: "auto",
     });
   }, []);
 
   return (
     <html lang="en" className="h-screen">
       <head>
-        {title && <title>{title}</title>}
+        {title ? <title>{title}</title> : null}
         <Meta />
         <Links />
       </head>
@@ -141,7 +141,7 @@ export function ErrorBoundary({ error }: { error: Error }) {
 }
 
 export function CatchBoundary() {
-  const caught = useCatch();
+  let caught = useCatch();
 
   switch (caught.status) {
     case 401:

@@ -3,18 +3,18 @@ const { PORT = 3000 } = process.env;
 module.exports = {
   apps: [
     {
-      name: 'CSS',
+      name: "CSS",
       script:
-        'TAILWIND_MODE=watch postcss styles --base styles --dir app/styles -w',
-      ignore_watch: ['.'],
+        "TAILWIND_MODE=watch postcss styles --base styles --dir app/styles -w",
+      ignore_watch: ["."],
       env: {
-        NODE_ENV: 'development',
+        NODE_ENV: "development",
       },
     },
     {
-      name: 'Vercel',
+      name: "Vercel",
       script: `vc dev --listen ${PORT}`,
-      ignore_watch: ['.'],
+      ignore_watch: ["."],
     },
   ],
 };

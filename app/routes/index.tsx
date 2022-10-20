@@ -2,24 +2,24 @@ import type {
   HeadersFunction,
   LinksFunction,
   MetaFunction,
-} from '@remix-run/node';
+} from "@remix-run/node";
 
 import {
   FunHoverLink,
   styles as funHoverLinkStyles,
-} from '../components/fun-hover-link';
+} from "../components/fun-hover-link";
 
 export const meta: MetaFunction = () => ({
-  title: 'Logan McAnsh',
-  description: 'personal website for logan mcansh',
+  title: "Logan McAnsh",
+  description: "personal website for logan mcansh",
 });
 
 export const headers: HeadersFunction = () => ({
-  'Cache-Control': `public, max-age=3600, s-maxage=3600, stale-while-revalidate`,
+  "Cache-Control": `public, max-age=3600, s-maxage=3600, stale-while-revalidate`,
 });
 
 export const links: LinksFunction = () => {
-  return [{ rel: 'stylesheet', href: funHoverLinkStyles }];
+  return [{ rel: "stylesheet", href: funHoverLinkStyles }];
 };
 
 export default function IndexPage() {
@@ -36,7 +36,7 @@ export default function IndexPage() {
         />
         <h1 className="mt-4 text-4xl">Logan McAnsh</h1>
         <p className="mt-2 text-lg text-center sm:text-xl">
-          Software Engineer at{' '}
+          Software Engineer at{" "}
           <FunHoverLink
             href="https://remix.run"
             target="_blank"
