@@ -1,12 +1,7 @@
-import { PassThrough } from "stream";
-import { renderToPipeableStream } from "react-dom/server";
-import type { EntryContext, Headers } from "@remix-run/node";
-import { redirect, Response } from "@remix-run/node";
+import type { EntryContext } from "@remix-run/node";
+import { redirect } from "@remix-run/node";
 import { RemixServer } from "@remix-run/react";
 import { createSecureHeaders } from "@mcansh/remix-secure-headers";
-import isbot from "isbot";
-
-const ABORT_DELAY = 5_000;
 
 const securityHeaders = createSecureHeaders({
   "Content-Security-Policy": {
@@ -81,43 +76,18 @@ export default function handleDocumentRequest(
     return redirect("https://mcan.sh/resume");
   }
 
-  let callbackName = isbot(request.headers.get("user-agent"))
-    ? "onAllReady"
-    : "onShellReady";
+  let markup = <RemixServer context={remixContext} url={request.url} />;
+  if (process.env.NODE_ENV === "development") {
+    responseHeaders.set("Cache-Control", "no-cache");
+  }
 
-  return new Promise((resolve) => {
-    let didError = false;
+  responseHeaders.set("Content-Type", "text/html");
+  for (let header of securityHeaders) {
+    responseHeaders.set(...header);
+  }
 
-    let pipeableStream = renderToPipeableStream(
-      <RemixServer context={remixContext} url={request.url} />,
-      {
-        [callbackName]() {
-          let body = new PassThrough();
-
-          if (process.env.NODE_ENV === "development") {
-            responseHeaders.set("Cache-Control", "no-cache");
-          }
-
-          responseHeaders.set("Content-Type", "text/html");
-          for (let header of securityHeaders) {
-            responseHeaders.set(...header);
-          }
-
-          resolve(
-            new Response(body, {
-              status: didError ? 500 : responseStatusCode,
-              headers: responseHeaders,
-            })
-          );
-          pipeableStream.pipe(body);
-        },
-        onError(error) {
-          didError = true;
-          console.error(error);
-        },
-      }
-    );
-
-    setTimeout(() => pipeableStream.abort(), ABORT_DELAY);
+  return new Response("<!DOCTYPE html>" + markup, {
+    status: responseStatusCode,
+    headers: responseHeaders,
   });
 }
