@@ -2,6 +2,7 @@ import type { EntryContext } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { RemixServer } from "@remix-run/react";
 import { createSecureHeaders } from "@mcansh/remix-secure-headers";
+import { renderToString } from "react-dom/server";
 
 const securityHeaders = createSecureHeaders({
   "Content-Security-Policy": {
@@ -76,7 +77,9 @@ export default function handleDocumentRequest(
     return redirect("https://mcan.sh/resume");
   }
 
-  let markup = <RemixServer context={remixContext} url={request.url} />;
+  let markup = renderToString(
+    <RemixServer context={remixContext} url={request.url} />
+  );
   if (process.env.NODE_ENV === "development") {
     responseHeaders.set("Cache-Control", "no-cache");
   }
