@@ -80,6 +80,7 @@ export default function handleDocumentRequest(
   let markup = renderToString(
     <RemixServer context={remixContext} url={request.url} />
   );
+
   if (process.env.NODE_ENV === "development") {
     responseHeaders.set("Cache-Control", "no-cache");
   }
