@@ -1,5 +1,4 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
-const plugin = require("tailwindcss/plugin");
 
 /** @type {import("tailwindcss").Config} */
 module.exports = {
@@ -23,22 +22,5 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [
-    require("tailwindcss-padding-safe"),
-    plugin(({ addVariant, e, postcss }) => {
-      addVariant("supports-gap", ({ container, separator }) => {
-        let supportsRule = postcss.atRule({
-          name: "supports",
-          params: "(gap: 0)",
-        });
-        supportsRule.append(container.nodes);
-        container.append(supportsRule);
-        supportsRule.walkRules((rule) => {
-          rule.selector = `.${e(
-            `supports-gap${separator}${rule.selector.slice(1)}`
-          )}`;
-        });
-      });
-    }),
-  ],
+  plugins: [require("tailwindcss-padding-safe")],
 };

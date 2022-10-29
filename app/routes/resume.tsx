@@ -154,11 +154,11 @@ export default function ResumePage() {
           <div>
             <h2 className="text-2xl font-semibold">Skills</h2>
             {/* safari doesn't support gap on flex containers, so we need to add a margin to each flex child and set a negative margin on the parent */}
-            <ul className="flex flex-row flex-wrap -mx-1 supports-gap:gap-2 supports-gap:mx-0 supports-gap:my-1">
+            <ul className="flex flex-row flex-wrap -mx-1 supports-[gap]:gap-2 supports-[gap]:mx-0 supports-[gap]:my-1">
               {data.skills.map((skill) => (
                 <li
                   key={skill}
-                  className="px-2 py-1 m-1 tracking-wide text-white bg-indigo-600 rounded-md supports-gap:m-0"
+                  className="px-2 py-1 m-1 tracking-wide text-white bg-indigo-600 rounded-md supports-[gap]:m-0"
                 >
                   {skill}
                 </li>
