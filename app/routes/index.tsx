@@ -16,6 +16,7 @@ export const meta: MetaFunction = () => ({
 
 export const headers: HeadersFunction = () => ({
   "Cache-Control": `public, max-age=3600, s-maxage=3600, stale-while-revalidate`,
+  Link: "<https://res.cloudinary.com>; rel=preconnect",
 });
 
 export const links: LinksFunction = () => {
@@ -28,7 +29,7 @@ export default function IndexPage() {
       <div className="flex flex-col items-center justify-center flex-1">
         <img
           src="https://res.cloudinary.com/dof0zryca/image/upload/c_fill,f_auto,h_480,w_480/v1624726775/me.jpg"
-          alt="Why it's me, Logan McAnsh"
+          alt="Me sitting on a oversized wooden chair at Comerica Park"
           height={240}
           width={240}
           placeholder="transparent"
