@@ -4,6 +4,7 @@ import type {
   LinksFunction,
   MetaFunction,
 } from "@remix-run/node";
+import type { ThrownResponse } from "@remix-run/react";
 import {
   Links,
   LiveReload,
@@ -15,6 +16,7 @@ import {
 } from "@remix-run/react";
 import clsx from "clsx";
 import * as Fathom from "fathom-client";
+import type { RequireExactlyOne } from "type-fest";
 
 import type { Match } from "~/@types/handle";
 import appStylesHref from "~/styles/app.css";
@@ -70,18 +72,7 @@ export const links: LinksFunction = () => {
   ];
 };
 
-interface DocumentProps {
-  bodyClassName?: string;
-  title?: string;
-  children: React.ReactNode;
-}
-
-function Document({ children, bodyClassName, title }: DocumentProps) {
-  let matches = useMatches() as unknown as Array<Match>;
-  let handleBodyClassName = matches
-    .filter((match) => match.handle?.bodyClassName)
-    .map((match) => match.handle?.bodyClassName);
-
+function useFathom() {
   React.useEffect(() => {
     Fathom.load("EPVCGNZL", {
       excludedDomains: ["localhost"],
@@ -89,16 +80,28 @@ function Document({ children, bodyClassName, title }: DocumentProps) {
       spa: "auto",
     });
   }, []);
+}
 
+function useHandleBodyClassName() {
+  let matches = useMatches() as unknown as Array<Match>;
+  let handleBodyClassName = matches
+    .filter((match) => match.handle?.bodyClassName)
+    .map((match) => match.handle?.bodyClassName);
+
+  return handleBodyClassName;
+}
+
+export default function App() {
+  let handleBodyClassName = useHandleBodyClassName();
+  useFathom();
   return (
     <html lang="en" className="h-full">
       <head>
-        {title ? <title>{title}</title> : null}
         <Meta />
         <Links />
       </head>
-      <body className={clsx(bodyClassName, handleBodyClassName)}>
-        {children}
+      <body className={clsx("h-full", handleBodyClassName)}>
+        <Outlet />
         <Scripts />
         <LiveReload port={Number(process.env.REMIX_DEV_SERVER_WS_PORT)} />
       </body>
@@ -106,57 +109,66 @@ function Document({ children, bodyClassName, title }: DocumentProps) {
   );
 }
 
-export default function App() {
-  return (
-    <Document bodyClassName="min-h-screen">
-      <Outlet />
-    </Document>
-  );
-}
-
 export function ErrorBoundary({ error }: { error: Error }) {
   console.error(error);
-
-  return (
-    <Document
-      title="Uh-oh!"
-      bodyClassName="bg-[#0827f5] min-h-screen w-[90%] max-w-5xl mx-auto pt-20 space-y-4 font-mono text-center text-white"
-    >
-      <h1 className="inline-block text-3xl font-bold bg-white text-[#0827f5]">
-        Uncaught Exception!
-      </h1>
-      <p>
-        If you are not the developer, please click back in your browser and try
-        again.
-      </p>
-      <pre className="px-4 py-2 overflow-auto border-4 border-white">
-        {error.message}
-      </pre>
-      <p>
-        There was an uncaught exception in your application. Check the browser
-        console and/or the server console to inspect the error.
-      </p>
-    </Document>
-  );
+  return <BlueScreenOfDeath error={error} />;
 }
 
 export function CatchBoundary() {
   let caught = useCatch();
+  return <BlueScreenOfDeath caughtResponse={caught} />;
+}
 
-  switch (caught.status) {
-    case 401:
-    case 404:
-      return (
-        <Document title={`${caught.status} ${caught.statusText}`}>
-          <h1>
-            {caught.status} {caught.statusText}
+interface BlueScreenOfDeathProps {
+  caughtResponse: ThrownResponse<number, any>;
+  error: Error;
+}
+
+function BlueScreenOfDeath({
+  error,
+  caughtResponse,
+}: RequireExactlyOne<BlueScreenOfDeathProps>) {
+  useFathom();
+  let handleBodyClassName = useHandleBodyClassName();
+
+  return (
+    <html lang="en" className="h-full">
+      <head>
+        <title>Uh-oh!</title>
+        <Meta />
+        <Links />
+      </head>
+      <body
+        className={clsx(
+          "bg-[#0827f5] min-h-screen w-[90%] max-w-5xl mx-auto pt-20 space-y-4 font-mono text-center text-white",
+          handleBodyClassName
+        )}
+      >
+        {error ? (
+          <>
+            <h1 className="inline-block text-3xl font-bold bg-white text-[#0827f5]">
+              Uncaught Exception!
+            </h1>
+            <p>
+              If you are not the developer, please click back in your browser
+              and try again.
+            </p>
+            <pre className="px-4 py-2 overflow-auto border-4 border-white">
+              {error.message}
+            </pre>
+            <p>
+              There was an uncaught exception in your application. Check the
+              browser console and/or the server console to inspect the error.
+            </p>
+          </>
+        ) : (
+          <h1 className="inline-block text-3xl font-bold bg-white text-[#0827f5]">
+            {caughtResponse.status} {caughtResponse.statusText}
           </h1>
-        </Document>
-      );
-
-    default:
-      throw new Error(
-        `Unexpected caught response with status: ${caught.status}`
-      );
-  }
+        )}
+        <Scripts />
+        <LiveReload port={Number(process.env.REMIX_DEV_SERVER_WS_PORT)} />
+      </body>
+    </html>
+  );
 }

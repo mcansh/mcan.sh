@@ -2,16 +2,20 @@ import type { HeadersFunction, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 
-export const meta: MetaFunction = () => ({
-  title: "Resume | Logan McAnsh",
-  description: "Logan McAnsh's Resume",
-});
+export const meta: MetaFunction = () => {
+  return {
+    title: "Resume | Logan McAnsh",
+    description: "Logan McAnsh's Resume",
+  };
+};
 
-export const headers: HeadersFunction = () => ({
-  "Cache-Control": `public, max-age=3600, s-maxage=3600, stale-while-revalidate`,
-  "x-hello-recruiters": "1",
-  Link: "<https://res.cloudinary.com>; rel=preconnect",
-});
+export const headers: HeadersFunction = () => {
+  return {
+    "Cache-Control": `public, max-age=3600, s-maxage=3600, stale-while-revalidate`,
+    "x-hello-recruiters": "1",
+    Link: "<https://res.cloudinary.com>; rel=preconnect",
+  };
+};
 
 interface BaseExperience {
   company: string;
