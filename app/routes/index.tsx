@@ -9,15 +9,19 @@ import {
   styles as funHoverLinkStyles,
 } from "../components/fun-hover-link";
 
-export const meta: MetaFunction = () => ({
-  title: "Logan McAnsh",
-  description: "personal website for logan mcansh",
-});
+export const meta: MetaFunction = () => {
+  return {
+    title: "Logan McAnsh",
+    description: "personal website for logan mcansh",
+  };
+};
 
-export const headers: HeadersFunction = () => ({
-  "Cache-Control": `public, max-age=3600, s-maxage=3600, stale-while-revalidate`,
-  Link: "<https://res.cloudinary.com>; rel=preconnect",
-});
+export const headers: HeadersFunction = () => {
+  return {
+    "Cache-Control": `public, max-age=3600, s-maxage=3600, stale-while-revalidate`,
+    Link: "<https://res.cloudinary.com>; rel=preconnect",
+  };
+};
 
 export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: funHoverLinkStyles }];
