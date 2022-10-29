@@ -10,6 +10,7 @@ export const meta: MetaFunction = () => ({
 export const headers: HeadersFunction = () => ({
   "Cache-Control": `public, max-age=3600, s-maxage=3600, stale-while-revalidate`,
   "x-hello-recruiters": "1",
+  Link: "<https://res.cloudinary.com>; rel=preconnect",
 });
 
 interface BaseExperience {
@@ -121,7 +122,7 @@ export default function ResumePage() {
           <div className="relative w-32 h-32 overflow-hidden rounded-full sm:w-40 sm:h-40">
             <div className="w-full h-full scale-125 bg-cover" />
             <img
-              alt="Logan McAnsh"
+              alt="Me standing on a rock in front of an American flag with a beer in hand"
               src="https://res.cloudinary.com/dof0zryca/image/upload/c_fill,f_auto,w_340/v1624726620/11698668.jpg"
               height={160}
               width={160}
