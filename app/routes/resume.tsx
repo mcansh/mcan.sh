@@ -68,7 +68,7 @@ export const loader = () => {
   let experiences: Array<Experience> = [
     {
       company: "Remix Software",
-      title: "Software Engineer",
+      title: "Senior Software Engineer",
       start: date.format(new Date(2021, 7, 2)),
       current: true,
       duties: [],

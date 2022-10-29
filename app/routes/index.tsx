@@ -36,8 +36,16 @@ export default function IndexPage() {
           className="mx-auto rounded-full"
         />
         <h1 className="mt-4 text-4xl">Logan McAnsh</h1>
-        <p className="mt-2 text-lg text-center sm:text-xl">
-          Software Engineer at{" "}
+        <p className="mt-2 text-lg text-center sm:text-xl max-w-xs md:max-w-sm">
+          Senior Software Engineer at{" "}
+          <FunHoverLink
+            href="https://shopify.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Shopify
+          </FunHoverLink>{" "}
+          working on{" "}
           <FunHoverLink
             href="https://remix.run"
             target="_blank"
