@@ -1,5 +1,4 @@
 .fun-link {
-  @apply relative text-current no-underline bg-no-repeat;
   --line: #ea567c;
   --size: 2px;
   --background-size: 100%;
