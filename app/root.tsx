@@ -15,10 +15,10 @@ import {
 } from "@remix-run/react";
 import clsx from "clsx";
 import * as Fathom from "fathom-client";
-import type { Match } from "~/@types/handle";
 
-import tailwindUrl from "~/styles/global.css";
-import interUrl from "~/styles/inter.css";
+import type { Match } from "~/@types/handle";
+import appStylesHref from "~/styles/app.css";
+import interStylesHref from "~/styles/inter.css";
 
 export const meta: MetaFunction = () => {
   return {
@@ -54,8 +54,8 @@ export const links: LinksFunction = () => {
   });
 
   return [
-    { rel: "stylesheet", href: tailwindUrl },
-    { rel: "stylesheet", href: interUrl },
+    { rel: "stylesheet", href: appStylesHref },
+    { rel: "stylesheet", href: interStylesHref },
     {
       rel: "preload",
       href: "/inter/Inter-roman.var.woff2?v=3.19",
@@ -91,7 +91,7 @@ function Document({ children, bodyClassName, title }: DocumentProps) {
   }, []);
 
   return (
-    <html lang="en" className="h-screen">
+    <html lang="en" className="h-full">
       <head>
         {title ? <title>{title}</title> : null}
         <Meta />
@@ -108,7 +108,7 @@ function Document({ children, bodyClassName, title }: DocumentProps) {
 
 export default function App() {
   return (
-    <Document bodyClassName="h-min-screen">
+    <Document bodyClassName="min-h-screen">
       <Outlet />
     </Document>
   );
