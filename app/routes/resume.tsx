@@ -17,40 +17,13 @@ export const headers: HeadersFunction = () => {
   };
 };
 
-interface BaseExperience {
-  company: string;
-  title: string;
-  start: string;
-  duties: Array<string>;
-}
-
-interface PastExperience extends BaseExperience {
-  current?: never;
-  end: string;
-}
-
-interface CurrentExperience extends BaseExperience {
-  current: true;
-  end?: never;
-}
-
-type Experience = CurrentExperience | PastExperience;
-
-type Skill = string;
-
-type Certification = {
-  label: string;
-  link: string;
-  year: Array<number> | number;
-};
-
 export const loader = () => {
   let date = new Intl.DateTimeFormat("en-US", {
     month: "long",
     year: "numeric",
   });
 
-  let skills: Array<Skill> = [
+  let skills = [
     "Node.js",
     "React",
     "Remix",
@@ -69,19 +42,25 @@ export const loader = () => {
     "Center Stack",
   ];
 
-  let experiences: Array<Experience> = [
+  let experiences = [
+    {
+      company: "Shopify",
+      title: "Senior Software Engineer",
+      start: new Date(2022, 7, 29),
+      duties: ["working on Remix"],
+    },
     {
       company: "Remix Software",
       title: "Senior Software Engineer",
-      start: date.format(new Date(2021, 7, 2)),
-      current: true,
-      duties: [],
+      start: new Date(2021, 7, 2),
+      end: new Date(2022, 7, 28),
+      duties: ["Core Team"],
     },
     {
       company: "Powerley",
       title: "Frontend Web Developer",
-      start: date.format(new Date(2016, 4, 4)),
-      end: date.format(new Date(2021, 6, 23)),
+      start: new Date(2016, 4, 4),
+      end: new Date(2021, 6, 23),
       duties: [
         "First member of the web team",
         "Created and maintained a suite of modern white label web applications with Next.js to be included in our mobile apps for 7+ clients, which quickly became the most used areas of the app",
@@ -89,9 +68,18 @@ export const loader = () => {
         "Designed Sketch plugins",
       ],
     },
-  ];
+  ].map((exp) => {
+    return {
+      ...exp,
+      start: date.format(exp.start),
+      end: exp.end ? date.format(exp.end) : undefined,
+      startISO: exp.start.toISOString().slice(0, 7),
+      endISO: exp.end?.toISOString().slice(0, 7),
+      current: exp.end ? undefined : true,
+    };
+  });
 
-  let certifications: Array<Certification> = [
+  let certifications = [
     {
       link: "https://www.ciwcertified.com/ciw-certifications/web-foundations-series/internet-business-associate",
       label: "CIW Internet Business Associate",
@@ -184,14 +172,14 @@ export default function ResumePage() {
                       </span>
                       <span className="text-lg">{experience.title}</span>
                       <span>
-                        <time dateTime={experience.start}>
+                        <time dateTime={experience.startISO}>
                           {experience.start}
                         </time>
                         {" - "}
                         {"current" in experience ? (
                           <span>Present</span>
                         ) : (
-                          <time dateTime={experience.end}>
+                          <time dateTime={experience.endISO}>
                             {experience.end}
                           </time>
                         )}
