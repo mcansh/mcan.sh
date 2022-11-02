@@ -3,12 +3,12 @@ lockfileVersion: 5.4
 specifiers:
   '@babel/core': 7.19.6
   '@mcansh/remix-secure-headers': 0.6.2
-  '@remix-run/dev': 1.7.4
-  '@remix-run/eslint-config': ^1.7.4
-  '@remix-run/node': 1.7.4
-  '@remix-run/react': 1.7.4
-  '@remix-run/serve': 1.7.4
-  '@remix-run/vercel': 1.7.4
+  '@remix-run/dev': 1.7.5-pre.0
+  '@remix-run/eslint-config': 1.7.5-pre.0
+  '@remix-run/node': 1.7.5-pre.0
+  '@remix-run/react': 1.7.5-pre.0
+  '@remix-run/serve': 1.7.5-pre.0
+  '@remix-run/vercel': 1.7.5-pre.0
   '@types/node': 18.11.9
   '@types/react': 18.0.24
   '@types/react-dom': 18.0.8
@@ -20,7 +20,7 @@ specifiers:
   clsx: 1.2.1
   del-cli: 5.0.0
   eslint: 8.26.0
-  eslint-plugin-prefer-let: ^3.0.1
+  eslint-plugin-prefer-let: 3.0.1
   fathom-client: 3.5.0
   husky: 8.0.1
   is-ci: 3.0.1
@@ -38,9 +38,9 @@ specifiers:
 
 dependencies:
   '@mcansh/remix-secure-headers': 0.6.2
-  '@remix-run/node': 1.7.4_biqbaboplfbrettd7655fr4n2y
-  '@remix-run/react': 1.7.4_biqbaboplfbrettd7655fr4n2y
-  '@remix-run/vercel': 1.7.4_i4dm2q4jiaqsjpijmydxyrkc6m
+  '@remix-run/node': 1.7.5-pre.0_biqbaboplfbrettd7655fr4n2y
+  '@remix-run/react': 1.7.5-pre.0_biqbaboplfbrettd7655fr4n2y
+  '@remix-run/vercel': 1.7.5-pre.0_i4dm2q4jiaqsjpijmydxyrkc6m
   '@vercel/node': 2.5.26
   clsx: 1.2.1
   fathom-client: 3.5.0
@@ -51,9 +51,9 @@ dependencies:
 
 devDependencies:
   '@babel/core': 7.19.6
-  '@remix-run/dev': 1.7.4_uroeops6y5plvzrhwx7fnuiija
-  '@remix-run/eslint-config': 1.7.4_lmezopescv3nnfjcfgbaewnf6i
-  '@remix-run/serve': 1.7.4_biqbaboplfbrettd7655fr4n2y
+  '@remix-run/dev': 1.7.5-pre.0_3zwkx4vrywkm4a6h6a6kxfuxzu
+  '@remix-run/eslint-config': 1.7.5-pre.0_lmezopescv3nnfjcfgbaewnf6i
+  '@remix-run/serve': 1.7.5-pre.0_biqbaboplfbrettd7655fr4n2y
   '@types/node': 18.11.9
   '@types/react': 18.0.24
   '@types/react-dom': 18.0.8
@@ -1626,12 +1626,12 @@ packages:
       tslib: 2.4.1
     dev: true
 
-  /@remix-run/dev/1.7.4_uroeops6y5plvzrhwx7fnuiija:
-    resolution: {integrity: sha512-VZCZMd3mmIKfXKOsbCiNMuyAt0U68NKwPwJmgpqbjKrbWcupOku0yjR5uDC7HYN5jkJJygBu4R1L+PWb6k/okQ==}
+  /@remix-run/dev/1.7.5-pre.0_3zwkx4vrywkm4a6h6a6kxfuxzu:
+    resolution: {integrity: sha512-9lmu7VdjCMjm3jTCnblNsUXc6kw+anFy6/gui4bnVeUHb13fqI3fEjK87YQH1WGDu71qYi2DUQjFUmNStGv0IA==}
     engines: {node: '>=14'}
     hasBin: true
     peerDependencies:
-      '@remix-run/serve': 1.7.4
+      '@remix-run/serve': 1.7.5-pre.0
     peerDependenciesMeta:
       '@remix-run/serve':
         optional: true
@@ -1642,8 +1642,8 @@ packages:
       '@babel/preset-typescript': 7.18.6_@babel+core@7.19.6
       '@esbuild-plugins/node-modules-polyfill': 0.1.4_esbuild@0.14.51
       '@npmcli/package-json': 2.0.0
-      '@remix-run/serve': 1.7.4_biqbaboplfbrettd7655fr4n2y
-      '@remix-run/server-runtime': 1.7.4_biqbaboplfbrettd7655fr4n2y
+      '@remix-run/serve': 1.7.5-pre.0_biqbaboplfbrettd7655fr4n2y
+      '@remix-run/server-runtime': 1.7.5-pre.0_biqbaboplfbrettd7655fr4n2y
       '@yarnpkg/esbuild-plugin-pnp': 3.0.0-rc.11_esbuild@0.14.51
       arg: 5.0.2
       cacache: 15.3.0
@@ -1687,8 +1687,8 @@ packages:
       - utf-8-validate
     dev: true
 
-  /@remix-run/eslint-config/1.7.4_lmezopescv3nnfjcfgbaewnf6i:
-    resolution: {integrity: sha512-1E/UR6vdEJP5a/r1OdZAL2f1OM/TwbNAyryYUQoOAF8zrm1hI8JVsOi1MrNlJVadYCl66HHfTM96iJcjMWVpHQ==}
+  /@remix-run/eslint-config/1.7.5-pre.0_lmezopescv3nnfjcfgbaewnf6i:
+    resolution: {integrity: sha512-n5Q8fBcTWBXxv80Y5Fyv+qebNGxlDcp1CIqrp0XMZMbgTMATrIfgSIpl7Yxv9PsigsNxIah4d5YpQH4Iy6hvIw==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
       eslint: ^8.0.0
@@ -1723,24 +1723,24 @@ packages:
       - supports-color
     dev: true
 
-  /@remix-run/express/1.7.4_cwk4saenierp7pa7l5cpbeswge:
-    resolution: {integrity: sha512-/k04bpui/s88wgeTNjs2snVJTEPdJ+WgZU9y/QxxinVOqvNyWBpytBv7gMm1wLUFpkDRKwksQVhoeq7RGa42JA==}
+  /@remix-run/express/1.7.5-pre.0_cwk4saenierp7pa7l5cpbeswge:
+    resolution: {integrity: sha512-+V9mMk4y2BogWb+rjO30SW7S5nCT3tDmOPEc7rG+CHJSDxvgLxm0wVlqnOIYGOS2M1Bdtni8couIJBcZfRlNPA==}
     engines: {node: '>=14'}
     peerDependencies:
       express: ^4.17.1
     dependencies:
-      '@remix-run/node': 1.7.4_biqbaboplfbrettd7655fr4n2y
+      '@remix-run/node': 1.7.5-pre.0_biqbaboplfbrettd7655fr4n2y
       express: 4.18.2
     transitivePeerDependencies:
       - react
       - react-dom
     dev: true
 
-  /@remix-run/node/1.7.4_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-kZSW2lLk89QTrdveS3ZCmvvmSmeC1suFKFC+r8wd6BgE0P64rWNTILnmLbcd37EexMqzGNIjXkWFbsmU3azA5g==}
+  /@remix-run/node/1.7.5-pre.0_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-6n4w3GAcWxTqzJfUy0FWuACu2/ukLWsPc6HUmm8xRpNoe1LXqVHP2dU1DjcWmuDiyuoBgPQPCpk5rt2XWhEhKg==}
     engines: {node: '>=14'}
     dependencies:
-      '@remix-run/server-runtime': 1.7.4_biqbaboplfbrettd7655fr4n2y
+      '@remix-run/server-runtime': 1.7.5-pre.0_biqbaboplfbrettd7655fr4n2y
       '@remix-run/web-fetch': 4.3.1
       '@remix-run/web-file': 3.0.2
       '@remix-run/web-stream': 1.0.3
@@ -1753,8 +1753,8 @@ packages:
       - react
       - react-dom
 
-  /@remix-run/react/1.7.4_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-oLbcaeiSgnd1CL28Y97ddapPmfOjRV+sAzipQr+69xqok0O+3Cj+7LN7JWDfaf/rzEm8NB+39kqJTfUjwStMXQ==}
+  /@remix-run/react/1.7.5-pre.0_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-iFhxUgo5FHO8AZM4gDo12bIiD56fMnwsVs82U1eeFpdxqagyMd0pBgq+5R5rhKdtNfJ9YZDQOhyTCY4WqrBHPQ==}
     engines: {node: '>=14'}
     peerDependencies:
       react: '>=16.8'
@@ -1766,12 +1766,12 @@ packages:
       react-router-dom: 6.3.0_biqbaboplfbrettd7655fr4n2y
     dev: false
 
-  /@remix-run/serve/1.7.4_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-mBinAkPcK1UuEQrsm5ds40/tT6zvcfsAqlzEYLiwfRS0MGf/fm1LyQfABG7JKszW/f+MYZbaoKQOPQPKjPjXCQ==}
+  /@remix-run/serve/1.7.5-pre.0_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-x7YmvQjM5TnB27d+1/SSk3Ao2T0eVUq4Sl27NcICPzAslDYRWxI8nJx0AIGDZBIWatuf+Y3fQyQHZX7bGFyxSg==}
     engines: {node: '>=14'}
     hasBin: true
     dependencies:
-      '@remix-run/express': 1.7.4_cwk4saenierp7pa7l5cpbeswge
+      '@remix-run/express': 1.7.5-pre.0_cwk4saenierp7pa7l5cpbeswge
       compression: 1.7.4
       express: 4.18.2
       morgan: 1.10.0
@@ -1781,8 +1781,8 @@ packages:
       - supports-color
     dev: true
 
-  /@remix-run/server-runtime/1.7.4_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-zGM1HI8sS73SPAXGFR7unV9ZlYPefbCokeXmLNB0lZevPeQ/ZBCNvNCZIeS7Fyal/FykCG9cB4Rd/pzdUbHCUA==}
+  /@remix-run/server-runtime/1.7.5-pre.0_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-U0CGog1r7FhVznAWvz4N3Wd5F2vzt98EHyk5njByNMO5P2GdQ0yJzmNuhRC6HHKTX1XnUc+TiyEfG8GrmdohjA==}
     engines: {node: '>=14'}
     peerDependencies:
       react: '>=16.8'
@@ -1797,13 +1797,13 @@ packages:
       set-cookie-parser: 2.5.1
       source-map: 0.7.4
 
-  /@remix-run/vercel/1.7.4_i4dm2q4jiaqsjpijmydxyrkc6m:
-    resolution: {integrity: sha512-Ww2mRa95Cd4oOthLQewS/A10S8h22jCuh+4PYH2jHazGWy6gDm4FxFCTaAUmzNJvEfzP2BTUnxiavlv5XlnFlw==}
+  /@remix-run/vercel/1.7.5-pre.0_i4dm2q4jiaqsjpijmydxyrkc6m:
+    resolution: {integrity: sha512-6tG+GHCXTpeBT1Sy+1JtIObfwK3JqHBPAJ6JDUm6hokhrylMbB243T1hb+NqnVe/nDg8CDKgyom9qEDPLHmBHw==}
     engines: {node: '>=14'}
     peerDependencies:
       '@vercel/node': ^1.8.3 || ^2.4.0
     dependencies:
-      '@remix-run/node': 1.7.4_biqbaboplfbrettd7655fr4n2y
+      '@remix-run/node': 1.7.5-pre.0_biqbaboplfbrettd7655fr4n2y
       '@vercel/node': 2.5.26
     transitivePeerDependencies:
       - react
@@ -3493,6 +3493,7 @@ packages:
       string.prototype.trimend: 1.0.5
       string.prototype.trimstart: 1.0.5
       unbox-primitive: 1.0.2
+    dev: true
 
   /es-abstract/1.20.4:
     resolution: {integrity: sha512-0UtvRN79eMe2L+UNEF1BwRe364sj/DXhQ/k5FmivgoSdpM90b8Jc0mDzKMGo7QS0BVbOP/bTwBKNnDc9rNzaPA==}
@@ -3546,7 +3547,7 @@ packages:
     resolution: {integrity: sha512-QCOllgZJtaUo9miYBcLChTUaHNjJF3PYs1VidD7AwiEj1kYxKeQTctLAezAOH5ZKRH0g2IgPn6KwB4IT8iRpvA==}
     engines: {node: '>= 0.4'}
     dependencies:
-      is-callable: 1.2.4
+      is-callable: 1.2.7
       is-date-object: 1.0.5
       is-symbol: 1.0.4
 
@@ -4777,7 +4778,7 @@ packages:
     dependencies:
       call-bind: 1.0.2
       define-properties: 1.1.4
-      es-abstract: 1.20.1
+      es-abstract: 1.20.4
       functions-have-names: 1.2.3
 
   /functions-have-names/1.2.3:
@@ -4824,7 +4825,7 @@ packages:
     engines: {node: '>= 0.4'}
     dependencies:
       call-bind: 1.0.2
-      get-intrinsic: 1.1.2
+      get-intrinsic: 1.1.3
 
   /get-tsconfig/4.2.0:
     resolution: {integrity: sha512-X8u8fREiYOE6S8hLbq99PeykTDoLVnxvF4DjWKJmz9xy2nNRdUcV8ZN9tniJFeKyTU3qnC9lL8n4Chd6LmVKHg==}
@@ -4900,7 +4901,7 @@ packages:
       '@types/glob': 7.2.0
       array-union: 2.1.0
       dir-glob: 3.0.1
-      fast-glob: 3.2.11
+      fast-glob: 3.2.12
       glob: 7.2.3
       ignore: 5.2.0
       merge2: 1.4.1
@@ -4992,7 +4993,7 @@ packages:
   /has-property-descriptors/1.0.0:
     resolution: {integrity: sha512-62DVLZGoiEBDHQyqG4w9xCuZ7eJEwNmJRWw2VY84Oedb7WFcA27fiEVe8oUQx9hAUJ4ekurquucTGwsyO1XGdQ==}
     dependencies:
-      get-intrinsic: 1.1.2
+      get-intrinsic: 1.1.3
 
   /has-symbols/1.0.3:
     resolution: {integrity: sha512-l3LCuF6MgDNwTDKkdYGEihYjt5pRPbEg46rtlmnSPlUbgmB8LOIrKJbYYFBSbnPaJexMKtiPO8hmeRjRz2Td+A==}
@@ -5225,7 +5226,7 @@ packages:
     resolution: {integrity: sha512-O0DB1JC/sPyZl7cIo78n5dR7eUSwwpYPiXRhTzNxZVAMUuB8vlnRFyLxdrVToks6XPLVnFfbzaVd5WLjhgg+vA==}
     engines: {node: '>= 0.4'}
     dependencies:
-      get-intrinsic: 1.1.2
+      get-intrinsic: 1.1.3
       has: 1.0.3
       side-channel: 1.0.4
 
@@ -5309,6 +5310,7 @@ packages:
   /is-callable/1.2.4:
     resolution: {integrity: sha512-nsuwtxZfMX67Oryl9LCQ+upnC0Z0BgpwntpS89m1H/TLF0zNfzfLMV/9Wa/6MZsj0acpEjAO0KF1xT6ZdLl95w==}
     engines: {node: '>= 0.4'}
+    dev: true
 
   /is-callable/1.2.7:
     resolution: {integrity: sha512-1BC0BVFhS/p0qtw6enp8e+8OD0UrK0oFLztSjNzhcKA3WDuJxxAPXzPuPtKkjEY9UUoEWlX/8fgKeu2S8i9JTA==}
@@ -5320,12 +5322,6 @@ packages:
     dependencies:
       ci-info: 3.3.2
     dev: false
-
-  /is-core-module/2.10.0:
-    resolution: {integrity: sha512-Erxj2n/LDAZ7H8WNJXd9tw38GYM3dv8rk8Zcs+jJuxYTW7sozH+SS8NtrSjVL1/vpLvWi1hxy96IzjJ3EHTJJg==}
-    dependencies:
-      has: 1.0.3
-    dev: true
 
   /is-core-module/2.11.0:
     resolution: {integrity: sha512-RRjxlvLDkD1YJwDbroBHMb+cukurkDWNyHx7D3oNB5x9rb5ogcksMC5wHCadcXoo67gVr/+3GFySh3134zi6rw==}
@@ -6697,7 +6693,7 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       hosted-git-info: 4.1.0
-      is-core-module: 2.10.0
+      is-core-module: 2.11.0
       semver: 7.3.8
       validate-npm-package-license: 3.0.4
     dev: true
@@ -8183,14 +8179,14 @@ packages:
     dependencies:
       call-bind: 1.0.2
       define-properties: 1.1.4
-      es-abstract: 1.20.1
+      es-abstract: 1.20.4
 
   /string.prototype.trimstart/1.0.5:
     resolution: {integrity: sha512-THx16TJCGlsN0o6dl2o6ncWUsdgnLRSA23rRE5pyGBw/mLr3Ej/R2LaqCtgP8VNMGZsvMWnf9ooZPyY2bHvUFg==}
     dependencies:
       call-bind: 1.0.2
       define-properties: 1.1.4
-      es-abstract: 1.20.1
+      es-abstract: 1.20.4
 
   /string_decoder/0.10.31:
     resolution: {integrity: sha512-ev2QzSzWPYmy9GuqfIVildA4OdcGLeFZQrq5ys6RtiuF+RQQiZWr8TZNyAcuVXyQRYfEO+MsoB/1BuQVhOJuoQ==}
