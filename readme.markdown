@@ -6,15 +6,21 @@ This is my [website](https://mcan.sh). It's pretty simple.
 
 Get the source:
 
-    $ git clone https://github.com/mcansh/mcan.sh
-    $ cd mcan.sh
+```sh
+$ git clone https://github.com/mcansh/mcan.sh
+$ cd mcan.sh
+```
 
 Get the dependencies:
 
-    $ npm install
+```sh
+$ npm install
+```
 
 Now you can start the server:
 
-    $ npm run dev
+```sh
+$ npm run dev
+```
 
 Then open <http://localhost:3000> in your browser to see it running.
