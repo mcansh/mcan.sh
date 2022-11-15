@@ -9,12 +9,19 @@ export const meta: MetaFunction = () => {
   };
 };
 
-export const headers: HeadersFunction = () => {
-  return {
-    "Cache-Control": `public, max-age=3600, s-maxage=3600, stale-while-revalidate`,
-    "x-hello-recruiters": "1",
-    Link: "<https://res.cloudinary.com>; rel=preconnect",
-  };
+export const headers: HeadersFunction = ({ loaderHeaders }) => {
+  let routeHeaders = new Headers();
+
+  routeHeaders.set("x-hello-recruiters", "1");
+  routeHeaders.set("Link", "<https://res.cloudinary.com>; rel=preconnect");
+
+  let cacheControl = loaderHeaders.get("Cache-Control");
+
+  if (cacheControl) {
+    routeHeaders.set("Cache-Control", cacheControl);
+  }
+
+  return routeHeaders;
 };
 
 export const loader = () => {
@@ -97,11 +104,18 @@ export const loader = () => {
     },
   ];
 
-  return json({
-    certifications,
-    skills: skills.sort(() => Math.random() - 0.5),
-    experiences,
-  });
+  return json(
+    {
+      certifications,
+      skills: skills.sort(() => Math.random() - 0.5),
+      experiences,
+    },
+    {
+      headers: {
+        "Cache-Control": `public, max-age=3600, s-maxage=3600, stale-while-revalidate`,
+      },
+    }
+  );
 };
 
 export default function ResumePage() {
