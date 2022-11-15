@@ -20,10 +20,12 @@ const securityHeaders = createSecureHeaders({
     ],
     styleSrc: ["'self'", "'unsafe-inline'"],
     manifestSrc: ["'self'"],
-    connectSrc:
-      process.env.NODE_ENV === "development"
+    connectSrc: [
+      "'self'",
+      ...(process.env.NODE_ENV === "development"
         ? [`ws://localhost:${process.env.REMIX_DEV_SERVER_WS_PORT}`]
-        : [],
+        : []),
+    ],
   },
   "Referrer-Policy": "origin-when-cross-origin",
   "X-Frame-Options": "DENY",
