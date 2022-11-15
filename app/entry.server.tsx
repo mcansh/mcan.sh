@@ -6,20 +6,24 @@ import { renderToString } from "react-dom/server";
 
 const securityHeaders = createSecureHeaders({
   "Content-Security-Policy": {
-    "default-src": ["'self'"],
-    "img-src": [
+    defaultSrc: ["'none'"],
+    fontSrc: ["'self'"],
+    imgSrc: [
       "'self'",
       "https://res.cloudinary.com/dof0zryca/image/upload/",
       "https://thirtyseven-active.b-cdn.net",
     ],
-    "script-src": [
+    scriptSrc: [
       "'self'",
       "'unsafe-inline'",
       "https://thirtyseven-active.b-cdn.net/script.js",
     ],
-    "style-src": ["'self'", "'unsafe-inline'"],
-    "media-src": [""],
-    "connect-src": ["*"],
+    styleSrc: ["'self'", "'unsafe-inline'"],
+    manifestSrc: ["'self'"],
+    connectSrc:
+      process.env.NODE_ENV === "development"
+        ? [`ws://localhost:${process.env.REMIX_DEV_SERVER_WS_PORT}`]
+        : [],
   },
   "Referrer-Policy": "origin-when-cross-origin",
   "X-Frame-Options": "DENY",
