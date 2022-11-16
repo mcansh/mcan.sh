@@ -37,7 +37,7 @@ export const links: LinksFunction = () => {
   let appleTouchIcons: Array<LinkDescriptor> = iconSizes.map((icon) => {
     let size = `${icon}x${icon}`;
     return {
-      href: `/static/images/logo/logo-${icon}.png`,
+      href: `/logo-${icon}.png`,
       sizes: size,
       rel: "apple-touch-icon",
     };
