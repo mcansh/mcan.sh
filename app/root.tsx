@@ -1,9 +1,5 @@
 import * as React from "react";
-import type {
-  LinkDescriptor,
-  LinksFunction,
-  MetaFunction,
-} from "@remix-run/node";
+import type { LinksFunction, MetaFunction } from "@remix-run/node";
 import type { ThrownResponse } from "@remix-run/react";
 import {
   Links,
@@ -44,15 +40,7 @@ export const meta: MetaFunction = () => {
 };
 
 export const links: LinksFunction = () => {
-  let iconSizes = [32, 57, 72, 96, 120, 128, 144, 152, 195, 228];
-  let appleTouchIcons: Array<LinkDescriptor> = iconSizes.map((icon) => {
-    let size = `${icon}x${icon}`;
-    return {
-      href: `/logo-${icon}.png`,
-      sizes: size,
-      rel: "apple-touch-icon",
-    };
-  });
+  let iconSizes: Array<number> = [32, 57, 72, 96, 120, 128, 144, 152, 195, 228];
 
   return [
     { rel: "stylesheet", href: appStylesHref },
@@ -67,7 +55,13 @@ export const links: LinksFunction = () => {
     { rel: "manifest", href: "/manifest.webmanifest" },
     { rel: "icon", href: "/favicon.png", type: "image/png" },
     { rel: "icon", href: "/favicon.ico" },
-    ...appleTouchIcons,
+    ...iconSizes.map((icon) => {
+      return {
+        href: `/logo-${icon}.png`,
+        sizes: `${icon}x${icon}`,
+        rel: "apple-touch-icon",
+      };
+    }),
   ];
 };
 
@@ -93,6 +87,7 @@ function useHandleBodyClassName() {
 export default function App() {
   let handleBodyClassName = useHandleBodyClassName();
   useFathom();
+
   return (
     <html lang="en" className="h-full dark:bg-slate-900 dark:text-white">
       <head>
@@ -128,8 +123,8 @@ function BlueScreenOfDeath({
   caughtResponse,
 }: RequireExactlyOne<BlueScreenOfDeathProps>) {
   useFathom();
-  let handleBodyClassName = useHandleBodyClassName();
 
+  let handleBodyClassName = useHandleBodyClassName();
   let headingClassName = `inline-block text-3xl font-bold bg-white text-[#0827f5]`;
   let boxClassName = `px-4 py-2 overflow-auto border-4 border-white`;
 
