@@ -28,18 +28,6 @@ export const meta: MetaFunction = () => {
     "apple-mobile-web-app-status-bar-style": "black-translucent",
     "apple-mobile-web-app-capable": "yes",
     charset: "utf-8",
-    "theme-color": [
-      {
-        name: "theme-color",
-        content: "#fff",
-        media: "(prefers-color-scheme: light)",
-      },
-      {
-        name: "theme-color",
-        content: "#1d2330",
-        media: "(prefers-color-scheme: dark)",
-      },
-    ],
   };
 };
 
