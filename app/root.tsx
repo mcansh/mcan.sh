@@ -95,7 +95,7 @@ export default function App() {
   let handleBodyClassName = useHandleBodyClassName();
   useFathom();
   return (
-    <html lang="en" className="h-full">
+    <html lang="en" className="h-full dark:bg-slate-900 dark:text-white">
       <head>
         <Meta />
         <Links />
@@ -143,7 +143,7 @@ function BlueScreenOfDeath({
       </head>
       <body
         className={clsx(
-          "bg-[#0827f5] min-h-screen w-[90%] max-w-5xl mx-auto pt-20 space-y-4 font-mono text-center text-white",
+          "mx-auto min-h-screen w-[90%] max-w-5xl space-y-4 bg-[#0827f5] pt-20 text-center font-mono text-white",
           handleBodyClassName
         )}
       >
