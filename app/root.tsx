@@ -28,12 +28,23 @@ export const meta: MetaFunction = () => {
     "apple-mobile-web-app-status-bar-style": "black-translucent",
     "apple-mobile-web-app-capable": "yes",
     charset: "utf-8",
+    "theme-color": [
+      {
+        name: "theme-color",
+        content: "#fff",
+        media: "(prefers-color-scheme: light)",
+      },
+      {
+        name: "theme-color",
+        content: "var(--slate-900)",
+        media: "(prefers-color-scheme: dark)",
+      },
+    ],
   };
 };
 
-const iconSizes = [32, 57, 72, 96, 120, 128, 144, 152, 195, 228];
-
 export const links: LinksFunction = () => {
+  let iconSizes = [32, 57, 72, 96, 120, 128, 144, 152, 195, 228];
   let appleTouchIcons: Array<LinkDescriptor> = iconSizes.map((icon) => {
     let size = `${icon}x${icon}`;
     return {
@@ -53,9 +64,9 @@ export const links: LinksFunction = () => {
       as: "font",
       crossOrigin: "anonymous",
     },
+    { rel: "manifest", href: "/manifest.webmanifest" },
     { rel: "icon", href: "/favicon.png", type: "image/png" },
     { rel: "icon", href: "/favicon.ico" },
-    { rel: "manifest", href: "/manifest.webmanifest" },
     ...appleTouchIcons,
   ];
 };

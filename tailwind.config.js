@@ -1,4 +1,6 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
+const plugin = require("tailwindcss/plugin");
+const flattenColorPalette = require("tailwindcss/lib/util/flattenColorPalette");
 
 /** @type {import("tailwindcss").Config} */
 module.exports = {
@@ -22,5 +24,24 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [require("tailwindcss-padding-safe")],
+  plugins: [
+    require("tailwindcss-padding-safe"),
+    tailwindColorsCustomProperties(),
+  ],
 };
+
+function tailwindColorsCustomProperties() {
+  return plugin(({ addBase, theme }) => {
+    let colors = flattenColorPalette.default(theme("colors"));
+    let colorKeys = Object.keys(colors);
+    let colorProperties = colorKeys.reduce((acc, key) => {
+      let value = colors[key];
+      return {
+        ...acc,
+        [`--${key}`]: value,
+      };
+    }, {});
+
+    addBase({ ":root": colorProperties });
+  });
+}
