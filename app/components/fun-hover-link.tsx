@@ -8,7 +8,7 @@ type Props = React.DetailedHTMLProps<
 const FunHoverLink: React.FC<Props> = ({ children, ...rest }) => (
   <a
     {...rest}
-    className="fun-link relative text-current no-underline bg-no-repeat"
+    className="fun-link relative bg-no-repeat text-current no-underline"
   >
     {children}
   </a>

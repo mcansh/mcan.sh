@@ -1,2 +1,4 @@
-/** @type {import('prettier').Options} */
-module.exports = {};
+/** @type {import('prettier').Config} */
+module.exports = {
+  plugins: [require("prettier-plugin-tailwindcss")],
+};

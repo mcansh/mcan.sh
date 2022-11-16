@@ -29,8 +29,8 @@ export const links: LinksFunction = () => {
 
 export default function IndexPage() {
   return (
-    <div className="flex flex-col items-center justify-between h-screen max-w-screen-md px-4 mx-auto text-center">
-      <div className="flex flex-col items-center justify-center flex-1">
+    <div className="mx-auto flex h-screen max-w-screen-md flex-col items-center justify-between px-4 text-center">
+      <div className="flex flex-1 flex-col items-center justify-center">
         <img
           src="https://res.cloudinary.com/dof0zryca/image/upload/c_fill,f_auto,h_480,w_480/v1624726775/me.jpg"
           alt="Me sitting on a oversized wooden chair at Comerica Park"
@@ -40,7 +40,7 @@ export default function IndexPage() {
           className="mx-auto rounded-full"
         />
         <h1 className="mt-4 text-4xl">Logan McAnsh</h1>
-        <p className="mt-2 text-lg text-center sm:text-xl max-w-xs md:max-w-sm">
+        <p className="mt-2 max-w-xs text-center text-lg sm:text-xl md:max-w-sm">
           Senior Software Engineer at{" "}
           <FunHoverLink
             href="https://shopify.com"

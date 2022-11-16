@@ -122,23 +122,23 @@ export default function ResumePage() {
   let data = useLoaderData<typeof loader>();
 
   return (
-    <div className="relative h-full border-t-8 border-indigo-600 border-solid pb-8-safe">
-      <div className="py-4 mx-auto max-w-prose">
-        <header className="flex flex-col items-center px-4 pb-2 mb-2 space-x-4 space-y-1 text-center sm:flex-row sm:text-left">
-          <div className="relative w-32 h-32 overflow-hidden rounded-full sm:w-40 sm:h-40">
-            <div className="w-full h-full scale-125 bg-cover" />
+    <div className="relative h-full border-t-8 border-solid border-indigo-600 pb-8-safe">
+      <div className="mx-auto max-w-prose py-4">
+        <header className="mb-2 flex flex-col items-center space-x-4 space-y-1 px-4 pb-2 text-center sm:flex-row sm:text-left">
+          <div className="relative h-32 w-32 overflow-hidden rounded-full sm:h-40 sm:w-40">
+            <div className="h-full w-full scale-125 bg-cover" />
             <img
               alt="Me standing on a rock in front of an American flag with a beer in hand"
               src="https://res.cloudinary.com/dof0zryca/image/upload/c_fill,f_auto,w_340/v1624726620/11698668.jpg"
               height={160}
               width={160}
-              className="absolute top-0 left-0 w-full h-full"
+              className="absolute top-0 left-0 h-full w-full"
             />
           </div>
           <div>
             <h1 className="text-4xl font-semibold">Logan McAnsh</h1>
             <a
-              className="transition-colors duration-75 ease-in-out text-slate-600 hover:text-slate-300 hover:underline"
+              className="text-slate-600 transition-colors duration-75 ease-in-out hover:text-slate-300 hover:underline dark:text-slate-400"
               href="mailto:logan+resume@mcan.sh"
             >
               logan+resume@mcan.sh
@@ -146,7 +146,7 @@ export default function ResumePage() {
           </div>
         </header>
 
-        <div className="px-4 space-y-8">
+        <div className="space-y-8 px-4">
           <div>
             <h2 className="text-2xl font-semibold">Summary</h2>
             <p>
@@ -160,11 +160,11 @@ export default function ResumePage() {
           <div>
             <h2 className="text-2xl font-semibold">Skills</h2>
             {/* safari doesn't support gap on flex containers, so we need to add a margin to each flex child and set a negative margin on the parent */}
-            <ul className="flex flex-row flex-wrap -mx-1 supports-[gap]:gap-2 supports-[gap]:mx-0 supports-[gap]:my-1">
+            <ul className="-mx-1 flex flex-row flex-wrap supports-[gap]:mx-0 supports-[gap]:my-1 supports-[gap]:gap-2">
               {data.skills.map((skill) => (
                 <li
                   key={skill}
-                  className="px-2 py-1 m-1 tracking-wide text-white bg-indigo-600 rounded-md supports-[gap]:m-0"
+                  className="m-1 rounded-md bg-indigo-600 px-2 py-1 tracking-wide text-white supports-[gap]:m-0"
                 >
                   {skill}
                 </li>
@@ -180,7 +180,7 @@ export default function ResumePage() {
                   key={`${experience.company}-${experience.start}`}
                 >
                   <div>
-                    <h3 className="flex flex-col py-2 sm:space-y-0 sm:space-x-2 sm:items-baseline sm:flex-row">
+                    <h3 className="flex flex-col py-2 sm:flex-row sm:items-baseline sm:space-y-0 sm:space-x-2">
                       <span className="text-xl font-medium">
                         {experience.company}
                       </span>
@@ -200,7 +200,7 @@ export default function ResumePage() {
                       </span>
                     </h3>
                     {experience.duties.length > 0 ? (
-                      <ul className="pl-6 space-y-1 list-disc">
+                      <ul className="list-disc space-y-1 pl-6">
                         {experience.duties.map((duty) => (
                           <li key={duty}>{duty}</li>
                         ))}
@@ -213,11 +213,11 @@ export default function ResumePage() {
           </div>
           <div>
             <h2 className="text-2xl font-semibold">Certificates</h2>
-            <ul className="pl-6 list-disc">
+            <ul className="list-disc pl-6">
               {data.certifications.map((certificate) => (
                 <li key={certificate.label}>
                   <a
-                    className="text-indigo-600 hover:underline"
+                    className="text-indigo-600 hover:underline dark:text-indigo-300"
                     href={certificate.link}
                   >
                     {certificate.label}
