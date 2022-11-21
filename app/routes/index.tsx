@@ -43,7 +43,7 @@ export default function IndexPage() {
         <p className="mt-2 max-w-xs text-center text-lg sm:text-xl md:max-w-sm">
           Senior Software Engineer at{" "}
           <FunHoverLink
-            href="https://shopify.com"
+            to="https://shopify.com"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -51,7 +51,7 @@ export default function IndexPage() {
           </FunHoverLink>{" "}
           working on{" "}
           <FunHoverLink
-            href="https://remix.run"
+            to="https://remix.run"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -60,7 +60,7 @@ export default function IndexPage() {
         </p>
       </div>
       <div className="pb-8-safe">
-        <FunHoverLink href="/resume">Resume</FunHoverLink>
+        <FunHoverLink to="/resume">Resume</FunHoverLink>
       </div>
     </div>
   );
