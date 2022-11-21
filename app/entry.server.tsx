@@ -20,6 +20,7 @@ const securityHeaders = createSecureHeaders({
     ],
     styleSrc: ["'self'", "'unsafe-inline'"],
     manifestSrc: ["'self'"],
+    prefetchSrc: ["'self'"],
     connectSrc: [
       "'self'",
       ...(process.env.NODE_ENV === "development"
