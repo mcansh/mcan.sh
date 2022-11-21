@@ -1,4 +1,4 @@
-import type { EntryContext } from "@remix-run/node";
+import type { EntryContext, HandleDataRequestFunction } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { RemixServer } from "@remix-run/react";
 import { createSecureHeaders } from "@mcansh/remix-secure-headers";
@@ -87,11 +87,12 @@ export default function handleDocumentRequest(
     <RemixServer context={remixContext} url={request.url} />
   );
 
+  responseHeaders.set("Content-Type", "text/html");
+
   if (process.env.NODE_ENV === "development") {
     responseHeaders.set("Cache-Control", "no-cache");
   }
 
-  responseHeaders.set("Content-Type", "text/html");
   for (let header of securityHeaders) {
     responseHeaders.set(...header);
   }
@@ -101,3 +102,15 @@ export default function handleDocumentRequest(
     headers: responseHeaders,
   });
 }
+
+export const handleDataRequest: HandleDataRequestFunction = (response) => {
+  if (process.env.NODE_ENV === "development") {
+    response.headers.set("Cache-Control", "no-cache");
+  }
+
+  for (let header of securityHeaders) {
+    response.headers.set(...header);
+  }
+
+  return response;
+};
