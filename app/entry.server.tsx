@@ -3,6 +3,7 @@ import { redirect } from "@remix-run/node";
 import { RemixServer } from "@remix-run/react";
 import { createSecureHeaders } from "@mcansh/remix-secure-headers";
 import { renderToString } from "react-dom/server";
+import etag from "etag";
 
 const securityHeaders = createSecureHeaders({
   "Content-Security-Policy": {
@@ -98,16 +99,23 @@ export default function handleDocumentRequest(
     responseHeaders.set(...header);
   }
 
+  responseHeaders.set("ETag", etag(markup));
+
+  if (request.headers.get("If-None-Match") === responseHeaders.get("ETag")) {
+    return new Response("", { status: 304, headers: responseHeaders });
+  }
+
   return new Response("<!DOCTYPE html>" + markup, {
     status: responseStatusCode,
     headers: responseHeaders,
   });
 }
 
-export const handleDataRequest: HandleDataRequestFunction = (
+export const handleDataRequest: HandleDataRequestFunction = async (
   response,
   { request }
 ) => {
+  let clonedResponse = response.clone();
   let isGet = request.method.toLowerCase() === "get";
 
   let purpose =
@@ -123,6 +131,15 @@ export const handleDataRequest: HandleDataRequestFunction = (
   // we will cache for 10 seconds only on the browser
   if (isGet && isPrefetch && !response.headers.has("Cache-Control")) {
     response.headers.set("Cache-Control", "private, max-age=10");
+  }
+
+  if (isGet) {
+    let body = await clonedResponse.text();
+    response.headers.set("etag", etag(body));
+
+    if (request.headers.get("If-None-Match") === response.headers.get("ETag")) {
+      return new Response("", { status: 304, headers: response.headers });
+    }
   }
 
   if (process.env.NODE_ENV === "development") {
