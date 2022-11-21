@@ -8,6 +8,7 @@ specifiers:
   '@remix-run/react': 1.8.0-pre.1
   '@remix-run/serve': 1.8.0-pre.1
   '@remix-run/vercel': 1.8.0-pre.1
+  '@types/etag': ^1.8.1
   '@types/node': 18.11.9
   '@types/react': 18.0.25
   '@types/react-dom': 18.0.9
@@ -18,6 +19,7 @@ specifiers:
   del-cli: 5.0.0
   eslint: 8.28.0
   eslint-plugin-prefer-let: 3.0.1
+  etag: ^1.8.1
   fathom-client: 3.5.0
   husky: 8.0.2
   is-ci: 3.0.1
@@ -41,6 +43,7 @@ dependencies:
   '@remix-run/vercel': 1.8.0-pre.1_lplf4c5c6rnz4qhkbn46yx7ery
   '@vercel/node': 2.6.3
   clsx: 1.2.1
+  etag: 1.8.1
   fathom-client: 3.5.0
   is-ci: 3.0.1
   react: 18.2.0
@@ -51,6 +54,7 @@ devDependencies:
   '@remix-run/dev': 1.8.0-pre.1_ej6eruayp23ib2qczku6uhy3xm
   '@remix-run/eslint-config': 1.8.0-pre.1_tty5jzdb2vdusfh2ebxkvntpay
   '@remix-run/serve': 1.8.0-pre.1_biqbaboplfbrettd7655fr4n2y
+  '@types/etag': 1.8.1
   '@types/node': 18.11.9
   '@types/react': 18.0.25
   '@types/react-dom': 18.0.9
@@ -1893,6 +1897,12 @@ packages:
 
   /@types/estree/1.0.0:
     resolution: {integrity: sha512-WulqXMDUTYAXCjZnk6JtIHPigp55cVtDgDrO2gHRwhyJto21+1zbVCtOYB2L1F9w4qCQ0rOGWBnBe0FNTiEJIQ==}
+    dev: true
+
+  /@types/etag/1.8.1:
+    resolution: {integrity: sha512-bsKkeSqN7HYyYntFRAmzcwx/dKW4Wa+KVMTInANlI72PWLQmOpZu96j0OqHZGArW4VQwCmJPteQlXaUDeOB0WQ==}
+    dependencies:
+      '@types/node': 18.11.9
     dev: true
 
   /@types/glob/7.2.0:
@@ -4378,7 +4388,6 @@ packages:
   /etag/1.8.1:
     resolution: {integrity: sha512-aIL5Fx7mawVa300al2BnEE4iNvo1qETxLrPI/o05L7z6go7fCw1J6EQmbK4FmJ2AS7kgVF/KEZWufBfdClMcPg==}
     engines: {node: '>= 0.6'}
-    dev: true
 
   /event-target-shim/5.0.1:
     resolution: {integrity: sha512-i/2XbnSz/uxRCU6+NdVJgKWDTM427+MqYbkQzD321DuCQJUqOuJKIA0IM2+W2xtYHdKOmZ4dR6fExsd4SXL+WQ==}
