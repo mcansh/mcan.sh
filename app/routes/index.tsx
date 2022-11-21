@@ -60,7 +60,9 @@ export default function IndexPage() {
         </p>
       </div>
       <div className="pb-8-safe">
-        <FunHoverLink to="/resume">Resume</FunHoverLink>
+        <FunHoverLink to="/resume" prefetch="intent">
+          Resume
+        </FunHoverLink>
       </div>
     </div>
   );
