@@ -104,7 +104,27 @@ export default function handleDocumentRequest(
   });
 }
 
-export const handleDataRequest: HandleDataRequestFunction = (response) => {
+export const handleDataRequest: HandleDataRequestFunction = (
+  response,
+  { request }
+) => {
+  let isGet = request.method.toLowerCase() === "get";
+
+  let purpose =
+    request.headers.get("Purpose") ||
+    request.headers.get("X-Purpose") ||
+    request.headers.get("Sec-Purpose") ||
+    request.headers.get("Sec-Fetch-Purpose") ||
+    request.headers.get("Moz-Purpose");
+  let isPrefetch = purpose === "prefetch";
+
+  // if it's a GET request and it's a prefetch request
+  // and it doesn't already have a Cache-Control header
+  // we will cache for 10 seconds only on the browser
+  if (isGet && isPrefetch && !response.headers.has("Cache-Control")) {
+    response.headers.set("Cache-Control", "private, max-age=10");
+  }
+
   if (process.env.NODE_ENV === "development") {
     response.headers.set("Cache-Control", "no-cache");
   }
