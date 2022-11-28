@@ -1,12 +1,13 @@
-import type { HeadersFunction, MetaFunction } from "@remix-run/node";
+import type { HeadersFunction } from "@remix-run/node";
+import type { V2_MetaFunction } from "@remix-run/react/dist/routeModules";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 
-export const meta: MetaFunction = () => {
-  return {
-    title: "Resume | Logan McAnsh",
-    description: "Logan McAnsh's Resume",
-  };
+export const meta: V2_MetaFunction = () => {
+  return [
+    { title: "Resume | Logan McAnsh" },
+    { name: "description", content: "Logan McAnsh's Resume" },
+  ];
 };
 
 export const headers: HeadersFunction = ({ loaderHeaders }) => {
