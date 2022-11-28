@@ -2,12 +2,12 @@ lockfileVersion: 5.4
 
 specifiers:
   '@mcansh/remix-secure-headers': 0.6.2
-  '@remix-run/dev': 1.8.0-pre.1
-  '@remix-run/eslint-config': 1.8.0-pre.1
-  '@remix-run/node': 1.8.0-pre.1
-  '@remix-run/react': 1.8.0-pre.1
-  '@remix-run/serve': 1.8.0-pre.1
-  '@remix-run/vercel': 1.8.0-pre.1
+  '@remix-run/dev': 1.8.0-pre.2
+  '@remix-run/eslint-config': 1.8.0-pre.2
+  '@remix-run/node': 1.8.0-pre.2
+  '@remix-run/react': 1.8.0-pre.2
+  '@remix-run/serve': 1.8.0-pre.2
+  '@remix-run/vercel': 1.8.0-pre.2
   '@types/etag': ^1.8.1
   '@types/node': 18.11.9
   '@types/react': 18.0.25
@@ -38,9 +38,9 @@ specifiers:
 
 dependencies:
   '@mcansh/remix-secure-headers': 0.6.2
-  '@remix-run/node': 1.8.0-pre.1_biqbaboplfbrettd7655fr4n2y
-  '@remix-run/react': 1.8.0-pre.1_biqbaboplfbrettd7655fr4n2y
-  '@remix-run/vercel': 1.8.0-pre.1_lplf4c5c6rnz4qhkbn46yx7ery
+  '@remix-run/node': 1.8.0-pre.2_biqbaboplfbrettd7655fr4n2y
+  '@remix-run/react': 1.8.0-pre.2_biqbaboplfbrettd7655fr4n2y
+  '@remix-run/vercel': 1.8.0-pre.2_lplf4c5c6rnz4qhkbn46yx7ery
   '@vercel/node': 2.6.3
   clsx: 1.2.1
   etag: 1.8.1
@@ -51,9 +51,9 @@ dependencies:
   type-fest: 3.2.0
 
 devDependencies:
-  '@remix-run/dev': 1.8.0-pre.1_ej6eruayp23ib2qczku6uhy3xm
-  '@remix-run/eslint-config': 1.8.0-pre.1_tty5jzdb2vdusfh2ebxkvntpay
-  '@remix-run/serve': 1.8.0-pre.1_biqbaboplfbrettd7655fr4n2y
+  '@remix-run/dev': 1.8.0-pre.2_uxiy73jvyoav2j53msf74ql5sq
+  '@remix-run/eslint-config': 1.8.0-pre.2_tty5jzdb2vdusfh2ebxkvntpay
+  '@remix-run/serve': 1.8.0-pre.2_biqbaboplfbrettd7655fr4n2y
   '@types/etag': 1.8.1
   '@types/node': 18.11.9
   '@types/react': 18.0.25
@@ -1583,12 +1583,12 @@ packages:
       tslib: 2.4.1
     dev: true
 
-  /@remix-run/dev/1.8.0-pre.1_ej6eruayp23ib2qczku6uhy3xm:
-    resolution: {integrity: sha512-3iqTcCYySMwOG0QeZa9UVtva9Tg7hK2cUVqY6VtYeMjeOe2Y7sxenRB/nHspKpiekricPYrm8Y4xnkjm0n2V5g==}
+  /@remix-run/dev/1.8.0-pre.2_uxiy73jvyoav2j53msf74ql5sq:
+    resolution: {integrity: sha512-vYXX+cmuj4aaf2aW9KOst4BuVc82GUIoAEMLWufyHLSjRmK1Nfa6QBjKi5PqbBQJU0feAt0BAhQ2r2angFGi8Q==}
     engines: {node: '>=14'}
     hasBin: true
     peerDependencies:
-      '@remix-run/serve': 1.8.0-pre.1
+      '@remix-run/serve': 1.8.0-pre.2
     peerDependenciesMeta:
       '@remix-run/serve':
         optional: true
@@ -1601,8 +1601,8 @@ packages:
       '@babel/types': 7.20.2
       '@esbuild-plugins/node-modules-polyfill': 0.1.4_esbuild@0.15.12
       '@npmcli/package-json': 2.0.0
-      '@remix-run/serve': 1.8.0-pre.1_biqbaboplfbrettd7655fr4n2y
-      '@remix-run/server-runtime': 1.8.0-pre.1_biqbaboplfbrettd7655fr4n2y
+      '@remix-run/serve': 1.8.0-pre.2_biqbaboplfbrettd7655fr4n2y
+      '@remix-run/server-runtime': 1.8.0-pre.2_biqbaboplfbrettd7655fr4n2y
       arg: 5.0.2
       cacache: 15.3.0
       chalk: 4.1.2
@@ -1647,8 +1647,8 @@ packages:
       - utf-8-validate
     dev: true
 
-  /@remix-run/eslint-config/1.8.0-pre.1_tty5jzdb2vdusfh2ebxkvntpay:
-    resolution: {integrity: sha512-JQ2TMtuK6WEDZ0gIQaRTs0IT4aESP/1jN/4I9DNlMYePnvvPqrO/mTj9RZyCI73pWcnOx+jnSi61G60DwSm+WA==}
+  /@remix-run/eslint-config/1.8.0-pre.2_tty5jzdb2vdusfh2ebxkvntpay:
+    resolution: {integrity: sha512-1GLIGDwOD0QTXIzz34iJnBiPLcidEO3zzgAi6bO+zzh/bYRJk+6KjKAmdWChiglp6h3Q/kDq9fKHMyoXQeXs1w==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
       eslint: ^8.0.0
@@ -1683,24 +1683,24 @@ packages:
       - supports-color
     dev: true
 
-  /@remix-run/express/1.8.0-pre.1_cwk4saenierp7pa7l5cpbeswge:
-    resolution: {integrity: sha512-4hT2MxbSZunaPuO5f/xyQPgSyjdmf6Mpwi7dDlO2yM2V5ZNtYtDO8zjBmGEcmAECeWnJY0PlCdJmHATCpWthlg==}
+  /@remix-run/express/1.8.0-pre.2_cwk4saenierp7pa7l5cpbeswge:
+    resolution: {integrity: sha512-yVGMtiBft+CMpQfvzOlgofAc4U/w6csvWzaIvm1sgZEYQi2JLggY/vgnJM3AJl4vdXqtQSwrtk2Sa01601mWkQ==}
     engines: {node: '>=14'}
     peerDependencies:
       express: ^4.17.1
     dependencies:
-      '@remix-run/node': 1.8.0-pre.1_biqbaboplfbrettd7655fr4n2y
+      '@remix-run/node': 1.8.0-pre.2_biqbaboplfbrettd7655fr4n2y
       express: 4.18.2
     transitivePeerDependencies:
       - react
       - react-dom
     dev: true
 
-  /@remix-run/node/1.8.0-pre.1_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-IxjjEhsH8ExQ+lyW1TZMXgqTNL45YvhW0LYy/4zCCm90CD5KiVzTQgypNvuitoW8HuAyd2o13I4NnpaU4jo9iQ==}
+  /@remix-run/node/1.8.0-pre.2_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-6O8yQ7+Xbt4Hze+hSdegpubfSL4nv0CnQJbPt2zJqKjM8usTCJpyxxt2ZGtkvCun36WC5nXAzhSbkc0Ww+509w==}
     engines: {node: '>=14'}
     dependencies:
-      '@remix-run/server-runtime': 1.8.0-pre.1_biqbaboplfbrettd7655fr4n2y
+      '@remix-run/server-runtime': 1.8.0-pre.2_biqbaboplfbrettd7655fr4n2y
       '@remix-run/web-fetch': 4.3.2
       '@remix-run/web-file': 3.0.2
       '@remix-run/web-stream': 1.0.3
@@ -1713,8 +1713,8 @@ packages:
       - react
       - react-dom
 
-  /@remix-run/react/1.8.0-pre.1_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-SIv5UiKvXnNqozhYPBc8uBaVp1OG6xnaEyJOpJeR58MqTwg1nIixn4WJx9n+Tk74tm1GunQf0lF+BKoW/bmb9A==}
+  /@remix-run/react/1.8.0-pre.2_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-DK/Xja9fbBRMs34vFnwS6dkg7vNrxrJLdd4bxa1G4mqGO6XvErSwQdZve55fCi7V94o0eNx04TjM3zSTXeqdKA==}
     engines: {node: '>=14'}
     peerDependencies:
       react: '>=16.8'
@@ -1726,12 +1726,16 @@ packages:
       react-router-dom: 6.3.0_biqbaboplfbrettd7655fr4n2y
     dev: false
 
-  /@remix-run/serve/1.8.0-pre.1_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-MDGl7aUh2foW7qLAChs/yuSr5avoO6B/FNJS7oGbW741q3DtdpbbVs/yzmPGJ6y0eGMODymuZIIp+teyY5nLUw==}
+  /@remix-run/router/1.0.4-pre.0:
+    resolution: {integrity: sha512-gKzu5SESxxEwzLTi1J9V5akGwmy6ePkuauZQg5r/tgb/iMryCzkIVwXCMtWnDOMfYUHutPhvdmCrk7YWWw5q8Q==}
+    engines: {node: '>=14'}
+
+  /@remix-run/serve/1.8.0-pre.2_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-Giu8cyaMwlwVCQVJZcLpEk+SRTD6d9omEg2nvoFw+fArzplauzpAZG6HNcObPdcqnvOBmaO05FiQIeDO6BKjdA==}
     engines: {node: '>=14'}
     hasBin: true
     dependencies:
-      '@remix-run/express': 1.8.0-pre.1_cwk4saenierp7pa7l5cpbeswge
+      '@remix-run/express': 1.8.0-pre.2_cwk4saenierp7pa7l5cpbeswge
       compression: 1.7.4
       express: 4.18.2
       morgan: 1.10.0
@@ -1741,13 +1745,14 @@ packages:
       - supports-color
     dev: true
 
-  /@remix-run/server-runtime/1.8.0-pre.1_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-Hw0IHkNmr6c0tYiS88rKa+1CmzLyxSt2sqcbhWRzQ5mny/u656JhSrc/sx0Y3hqvDX51ve726RFt3DkIQMkymA==}
+  /@remix-run/server-runtime/1.8.0-pre.2_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-m3T73aTctfg4fkf1vlrfP/CKuSX7Jfeuc2WtZSMKTOtv5qxvtLlqTZsC/UdIbi+Gp885drdnmNct1pI264zdQw==}
     engines: {node: '>=14'}
     peerDependencies:
       react: '>=16.8'
       react-dom: '>=16.8'
     dependencies:
+      '@remix-run/router': 1.0.4-pre.0
       '@types/cookie': 0.4.1
       '@web3-storage/multipart-parser': 1.0.0
       cookie: 0.4.2
@@ -1757,13 +1762,13 @@ packages:
       set-cookie-parser: 2.5.1
       source-map: 0.7.4
 
-  /@remix-run/vercel/1.8.0-pre.1_lplf4c5c6rnz4qhkbn46yx7ery:
-    resolution: {integrity: sha512-e8LT1nAAkMBd9Dn69lZH+O9xkWnBfnYBJ90e+u7a28E+3Wc6u+InCAVZDVHhNqXm6OfqrZAnNQGiPWRfbT52WA==}
+  /@remix-run/vercel/1.8.0-pre.2_lplf4c5c6rnz4qhkbn46yx7ery:
+    resolution: {integrity: sha512-Tob2B8xSsDUqP13/rlLqBPEWraByLvYj0YxjGi5i1PZqNPWwVZu+aVps48i380WygWVy0kpSWaX9oV+mSuIYEw==}
     engines: {node: '>=14'}
     peerDependencies:
       '@vercel/node': ^1.8.3 || ^2.4.0
     dependencies:
-      '@remix-run/node': 1.8.0-pre.1_biqbaboplfbrettd7655fr4n2y
+      '@remix-run/node': 1.8.0-pre.2_biqbaboplfbrettd7655fr4n2y
       '@vercel/node': 2.6.3
     transitivePeerDependencies:
       - react
