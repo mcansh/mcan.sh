@@ -1,19 +1,16 @@
-import type {
-  HeadersFunction,
-  LinksFunction,
-  MetaFunction,
-} from "@remix-run/node";
+import type { HeadersFunction, LinksFunction } from "@remix-run/node";
+import type { V2_MetaFunction } from "@remix-run/react/dist/routeModules";
 
 import {
   FunHoverLink,
   styles as funHoverLinkStyles,
 } from "../components/fun-hover-link";
 
-export const meta: MetaFunction = () => {
-  return {
-    title: "Logan McAnsh",
-    description: "personal website for logan mcansh",
-  };
+export const meta: V2_MetaFunction = () => {
+  return [
+    { title: "Logan McAnsh" },
+    { name: "description", content: "personal website for logan mcansh" },
+  ];
 };
 
 export const headers: HeadersFunction = () => {

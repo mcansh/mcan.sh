@@ -1,5 +1,6 @@
 import * as React from "react";
-import type { LinksFunction, MetaFunction } from "@remix-run/node";
+import type { LinksFunction } from "@remix-run/node";
+import type { V2_MetaFunction } from "@remix-run/react/dist/routeModules";
 import type { ThrownResponse } from "@remix-run/react";
 import {
   Links,
@@ -15,28 +16,32 @@ import * as Fathom from "fathom-client";
 import type { RequireExactlyOne } from "type-fest";
 
 import type { Match } from "~/@types/handle";
-import appStylesHref from "~/styles/app.css";
 import interStylesHref from "~/styles/inter.css";
+import appStylesHref from "~/styles/app.css";
 
-export const meta: MetaFunction = () => {
-  return {
-    viewport: "initial-scale=1.0, width=device-width, viewport-fit=cover",
-    "apple-mobile-web-app-status-bar-style": "black-translucent",
-    "apple-mobile-web-app-capable": "yes",
-    charset: "utf-8",
-    "theme-color": [
-      {
-        name: "theme-color",
-        content: "#fff",
-        media: "(prefers-color-scheme: light)",
-      },
-      {
-        name: "theme-color",
-        content: "var(--slate-900)",
-        media: "(prefers-color-scheme: dark)",
-      },
-    ],
-  };
+export const meta: V2_MetaFunction = () => {
+  return [
+    {
+      name: "viewport",
+      content: "initial-scale=1.0, width=device-width, viewport-fit=cover",
+    },
+    {
+      name: "apple-mobile-web-app-status-bar-style",
+      content: "black-translucent",
+    },
+    { name: "apple-mobile-web-app-capable", content: "yes" },
+    { charSet: "utf-8" },
+    {
+      name: "theme-color",
+      content: "#fff",
+      media: "(prefers-color-scheme: light)",
+    },
+    {
+      name: "theme-color",
+      content: "var(--slate-900)",
+      media: "(prefers-color-scheme: dark)",
+    },
+  ];
 };
 
 export const links: LinksFunction = () => {
