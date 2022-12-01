@@ -72,6 +72,7 @@ const securityHeaders = createSecureHeaders({
     "web-share": [],
     "xr-spatial-tracking": [],
   },
+  "Cross-Origin-Opener-Policy": "same-origin",
 });
 
 export default function handleDocumentRequest(
