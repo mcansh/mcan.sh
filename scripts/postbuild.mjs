@@ -5,7 +5,12 @@ import { spawnSync } from "node:child_process";
 
 async function uploadSourceMapsToSentry() {
   let proposedVersion = process.env.VERCEL_GIT_COMMIT_SHA;
-  if (!process.env.VERCEL_GIT_COMMIT_SHA) {
+  if (process.env.VERCEL) {
+    proposedVersion =
+      process.env.VERCEL_GIT_COMMIT_REF +
+      "-" +
+      process.env.VERCEL_GIT_COMMIT_SHA;
+  } else {
     let proposedVersionResult = spawnSync(
       "sentry-cli",
       ["releases", "propose-version"],
