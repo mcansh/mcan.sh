@@ -6,6 +6,7 @@ import { cacheHeader } from "pretty-cache-header";
 import { mergeMeta } from "~/meta";
 
 export function loader() {
+  throw new Error("kaboom");
   let { format: formatDate } = new Intl.DateTimeFormat("en-US", {
     month: "long",
     year: "numeric",
