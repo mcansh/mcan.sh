@@ -1,15 +1,20 @@
 import fsp from "node:fs/promises";
+import { spawnSync } from "node:child_process";
 import replace from "replace-in-file";
 import glob from "glob";
-import { spawnSync } from "node:child_process";
+import slugify from "@sindresorhus/slugify";
 
 async function uploadSourceMapsToSentry() {
   let proposedVersion = process.env.VERCEL_GIT_COMMIT_SHA;
   if (process.env.VERCEL) {
-    proposedVersion =
+    proposedVersion = slugify(
       process.env.VERCEL_GIT_COMMIT_REF +
-      "-" +
-      process.env.VERCEL_GIT_COMMIT_SHA;
+        "-" +
+        process.env.VERCEL_GIT_COMMIT_SHA,
+      {
+        lower: true,
+      }
+    );
   } else {
     let proposedVersionResult = spawnSync(
       "sentry-cli",
