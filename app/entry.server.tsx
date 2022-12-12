@@ -30,6 +30,7 @@ const securityHeaders = createSecureHeaders({
     prefetchSrc: ["'self'"],
     connectSrc: [
       "'self'",
+      "https://o74198.ingest.sentry.io",
       ...(process.env.NODE_ENV === "development"
         ? [`ws://localhost:${process.env.REMIX_DEV_SERVER_WS_PORT}`]
         : []),
