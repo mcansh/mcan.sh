@@ -6,6 +6,7 @@ import { hydrateRoot } from "react-dom/client";
 Sentry.init({
   dsn: "https://4b455db031a845c3aefc7540b16e3a16@o74198.ingest.sentry.io/268464",
   tracesSampleRate: 1,
+  environment: process.env.NODE_ENV,
   integrations: [
     new Sentry.BrowserTracing({
       routingInstrumentation: Sentry.remixRouterInstrumentation(
