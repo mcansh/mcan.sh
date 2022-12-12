@@ -36,6 +36,9 @@ const securityHeaders = createSecureHeaders({
         ? [`ws://localhost:${process.env.REMIX_DEV_SERVER_WS_PORT}`]
         : []),
     ],
+    reportUri: [
+      "https://o74198.ingest.sentry.io/api/268464/security/?sentry_key=4b455db031a845c3aefc7540b16e3a16",
+    ],
   },
   "Referrer-Policy": "origin-when-cross-origin",
   "X-Frame-Options": "DENY",
