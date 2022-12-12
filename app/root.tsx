@@ -14,6 +14,7 @@ import {
 import clsx from "clsx";
 import * as Fathom from "fathom-client";
 import type { RequireExactlyOne } from "type-fest";
+import { withSentry } from "@sentry/remix";
 
 import type { Match } from "~/@types/handle";
 import appStylesHref from "~/styles/app.css";
@@ -102,7 +103,9 @@ function useHandleBodyClassName() {
   return handleBodyClassName;
 }
 
-export default function App() {
+export default withSentry(App);
+
+function App() {
   let handleBodyClassName = useHandleBodyClassName();
   useFathom();
 

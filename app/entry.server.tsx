@@ -4,6 +4,12 @@ import { RemixServer } from "@remix-run/react";
 import { createSecureHeaders } from "@mcansh/remix-secure-headers";
 import { renderToString } from "react-dom/server";
 import etag from "etag";
+import * as Sentry from "@sentry/remix";
+
+Sentry.init({
+  dsn: "https://4b455db031a845c3aefc7540b16e3a16@o74198.ingest.sentry.io/268464",
+  tracesSampleRate: 1,
+});
 
 const securityHeaders = createSecureHeaders({
   "Content-Security-Policy": {

@@ -1,0 +1,6 @@
+[auth]
+token=2e3168c2de554aadb11e3c8cf97938b2711e556f0c4e4a0388c476cd78788aa6
+
+[defaults]
+org=mcansh
+project=personal-website
