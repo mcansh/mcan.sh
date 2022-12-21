@@ -23,9 +23,9 @@
   "dependencies": {
     "@mcansh/remix-secure-headers": "0.6.2",
     "@mcansh/tailwind-var": "^0.1.0",
-    "@remix-run/node": "1.9.0",
-    "@remix-run/react": "1.9.0",
-    "@remix-run/vercel": "1.9.0",
+    "@remix-run/node": "1.10.0-pre.0",
+    "@remix-run/react": "1.10.0-pre.0",
+    "@remix-run/vercel": "1.10.0-pre.0",
     "@vercel/node": "2.8.1",
     "clsx": "1.2.1",
     "etag": "^1.8.1",
@@ -36,9 +36,9 @@
     "type-fest": "3.4.0"
   },
   "devDependencies": {
-    "@remix-run/dev": "1.9.0",
-    "@remix-run/eslint-config": "1.9.0",
-    "@remix-run/serve": "1.9.0",
+    "@remix-run/dev": "1.10.0-pre.0",
+    "@remix-run/eslint-config": "1.10.0-pre.0",
+    "@remix-run/serve": "1.10.0-pre.0",
     "@types/etag": "^1.8.1",
     "@types/node": "18.11.16",
     "@types/react": "18.0.26",
