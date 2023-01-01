@@ -27,7 +27,10 @@ export const headers: HeadersFunction = () => {
 };
 
 export const links: LinksFunction = () => {
-  return [{ rel: "stylesheet", href: funHoverLinkStyles }];
+  return [
+    { rel: "preload", href: funHoverLinkStyles, as: "style" },
+    { rel: "stylesheet", href: funHoverLinkStyles },
+  ];
 };
 
 export default function IndexPage() {

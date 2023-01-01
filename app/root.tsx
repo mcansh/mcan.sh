@@ -48,6 +48,8 @@ export const links: LinksFunction = () => {
   let iconSizes: Array<number> = [32, 57, 72, 96, 120, 128, 144, 152, 195, 228];
 
   return [
+    { rel: "preload", href: appStylesHref, as: "style" },
+    { rel: "preload", href: interStylesHref, as: "style" },
     { rel: "stylesheet", href: appStylesHref },
     { rel: "stylesheet", href: interStylesHref },
     {
