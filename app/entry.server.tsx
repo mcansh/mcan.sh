@@ -90,6 +90,31 @@ export default function handleDocumentRequest(
     <RemixServer context={remixContext} url={request.url} />
   );
 
+  // Add Link header for HTTP/2 Server Push
+  let modules = Object.entries(remixContext.manifest.routes);
+  let http2PushLinksHeaders = remixContext.staticHandlerContext.matches
+    .flatMap((match) => {
+      let routeMatch = modules.find((m) => m[0] === match.route.id);
+      if (!routeMatch) return [];
+      let routeImports = routeMatch[1].imports ?? [];
+      return [routeMatch[1].module, ...routeImports];
+    })
+    .filter(Boolean)
+    .concat([
+      remixContext.manifest.url,
+      remixContext.manifest.entry.module,
+      ...remixContext.manifest.entry.imports,
+    ]);
+
+  responseHeaders.set(
+    "Link",
+    http2PushLinksHeaders
+      .map((link) => `<${link}>; rel=preload; as=script; crossorigin=anonymous`)
+      .concat(responseHeaders.get("Link") ?? "")
+      .filter(Boolean)
+      .join()
+  );
+
   responseHeaders.set("Content-Type", "text/html");
 
   if (process.env.NODE_ENV === "development") {
