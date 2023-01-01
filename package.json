@@ -6,7 +6,7 @@
   "license": "MIT",
   "sideEffects": false,
   "scripts": {
-    "clean": "del .cache app/styles/app.css api public/build",
+    "clean": "./scripts/clean.mjs",
     "dev": "npm run clean && run-p dev:*",
     "dev:css": "npm run css -- --watch",
     "dev:remix": "remix dev",
@@ -45,7 +45,7 @@
     "@types/react-dom": "18.0.10",
     "@typescript/lib-dom": "npm:@types/web@0.0.79",
     "autoprefixer": "10.4.13",
-    "del-cli": "5.0.0",
+    "del": "7.0.0",
     "eslint": "8.31.0",
     "eslint-plugin-prefer-let": "3.0.1",
     "husky": "8.0.2",
