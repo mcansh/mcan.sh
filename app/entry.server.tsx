@@ -199,6 +199,9 @@ function prefetchAssets(context: EntryContext, headers: Headers) {
     });
 
   for (let link of links) {
-    headers.append("Link", `<${link.href}>; rel=preload; as=${link.as}`);
+    headers.append(
+      "Link",
+      `<${link.href}>; rel=preload; as=${link.as}; crossorigin=anonymous`
+    );
   }
 }
