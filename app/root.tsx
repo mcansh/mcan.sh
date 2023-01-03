@@ -54,7 +54,7 @@ export const links: LinksFunction = () => {
     { rel: "stylesheet", href: interStylesHref },
     {
       rel: "preload",
-      href: "/inter/Inter-roman.var.woff2?v=3.19",
+      href: "/inter/Inter.var.woff2?v=4.0-beta7",
       type: "font/woff2",
       as: "font",
       crossOrigin: "anonymous",
