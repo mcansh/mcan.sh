@@ -16,8 +16,9 @@ import * as Fathom from "fathom-client";
 import type { RequireExactlyOne } from "type-fest";
 
 import type { Match } from "~/@types/handle";
-import interStylesHref from "~/styles/inter.css";
 import appStylesHref from "~/styles/app.css";
+import interFontHref from "~/inter/Inter.var.woff2";
+import interStylesHref from "~/inter/inter.css";
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -54,7 +55,7 @@ export const links: LinksFunction = () => {
     { rel: "stylesheet", href: interStylesHref },
     {
       rel: "preload",
-      href: "/inter/Inter.var.woff2?v=4.0-beta7",
+      href: interFontHref,
       type: "font/woff2",
       as: "font",
       crossOrigin: "anonymous",
