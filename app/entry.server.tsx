@@ -157,30 +157,48 @@ export const handleDataRequest: HandleDataRequestFunction = async (
 };
 
 function prefetchAssets(context: EntryContext, headers: Headers) {
-	let links = context.matches
-		.flatMap((match) => {
-			let route = context.routeModules[match.route.id];
-			if (route.links instanceof Function) return route.links();
-			return [];
-		})
-		.map((link) => {
-			if ("as" in link && "href" in link) {
-				return { href: link.href, as: link.as } as const;
-			}
-			if ("rel" in link && "href" in link) {
-				if (link.rel === "stylesheet")
-					return { href: link.href, as: "style" } as const;
-			}
-			return null;
-		})
-		.filter((link: any): link is { href: string; as: string } => {
-			return link && "href" in link;
-		})
-		.filter((item, index, list) => {
-			return index === list.findIndex((link) => link.href === item.href);
-		});
+  let modules = Object.entries(context.manifest.routes);
 
-	for (let link of links) {
-		headers.append("Link", `<${link.href}>; rel=preload; as=${link.as}`);
-	}
+  let links = context.staticHandlerContext.matches
+    .flatMap((match) => {
+      let routeMatch = modules.find((m) => m[0] === match.route.id);
+      let routeImports = routeMatch?.[1].imports ?? [];
+      let routeModule = routeMatch?.[1].module;
+
+      let route = context.routeModules[match.route.id];
+      let links = typeof route.links === "function" ? route.links() : [];
+      let imports = [
+        routeModule,
+        ...routeImports,
+        context.manifest.url,
+        context.manifest.entry.module,
+        ...context.manifest.entry.imports,
+      ]
+        .filter((i: any): i is string => i !== undefined)
+        .map((i) => {
+          return { href: i, as: "script" } as const;
+        });
+      return [...links, ...imports];
+    })
+    .map((link) => {
+      if ("as" in link && "href" in link) {
+        return { href: link.href, as: link.as } as const;
+      }
+      if ("rel" in link && "href" in link) {
+        if (link.rel === "stylesheet") {
+          return { href: link.href, as: "style" } as const;
+        }
+      }
+      return null;
+    })
+    .filter((link: any): link is { href: string; as: string } => {
+      return link && "href" in link;
+    })
+    .filter((item, index, list) => {
+      return index === list.findIndex((link) => link.href === item.href);
+    });
+
+  for (let link of links) {
+    headers.append("Link", `<${link.href}>; rel=preload; as=${link.as}`);
+  }
 }
