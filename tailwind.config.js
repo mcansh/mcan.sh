@@ -16,7 +16,7 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans: ["Inter var", ...defaultTheme.fontFamily.sans],
+        sans: ["InterVar", ...defaultTheme.fontFamily.sans],
       },
     },
   },
