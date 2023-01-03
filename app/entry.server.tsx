@@ -90,30 +90,7 @@ export default function handleDocumentRequest(
     <RemixServer context={remixContext} url={request.url} />
   );
 
-  // Add Link header for HTTP/2 Server Push
-  let modules = Object.entries(remixContext.manifest.routes);
-  let http2PushLinksHeaders = remixContext.staticHandlerContext.matches
-    .flatMap((match) => {
-      let routeMatch = modules.find((m) => m[0] === match.route.id);
-      if (!routeMatch) return [];
-      let routeImports = routeMatch[1].imports ?? [];
-      return [routeMatch[1].module, ...routeImports];
-    })
-    .filter(Boolean)
-    .concat([
-      remixContext.manifest.url,
-      remixContext.manifest.entry.module,
-      ...remixContext.manifest.entry.imports,
-    ]);
-
-  responseHeaders.set(
-    "Link",
-    http2PushLinksHeaders
-      .map((link) => `<${link}>; rel=preload; as=script; crossorigin=anonymous`)
-      .concat(responseHeaders.get("Link") ?? "")
-      .filter(Boolean)
-      .join()
-  );
+  prefetchAssets(remixContext, responseHeaders);
 
   responseHeaders.set("Content-Type", "text/html");
 
@@ -178,3 +155,32 @@ export const handleDataRequest: HandleDataRequestFunction = async (
 
   return response;
 };
+
+function prefetchAssets(context: EntryContext, headers: Headers) {
+	let links = context.matches
+		.flatMap((match) => {
+			let route = context.routeModules[match.route.id];
+			if (route.links instanceof Function) return route.links();
+			return [];
+		})
+		.map((link) => {
+			if ("as" in link && "href" in link) {
+				return { href: link.href, as: link.as } as const;
+			}
+			if ("rel" in link && "href" in link) {
+				if (link.rel === "stylesheet")
+					return { href: link.href, as: "style" } as const;
+			}
+			return null;
+		})
+		.filter((link: any): link is { href: string; as: string } => {
+			return link && "href" in link;
+		})
+		.filter((item, index, list) => {
+			return index === list.findIndex((link) => link.href === item.href);
+		});
+
+	for (let link of links) {
+		headers.append("Link", `<${link.href}>; rel=preload; as=${link.as}`);
+	}
+}
