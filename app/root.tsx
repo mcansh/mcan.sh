@@ -22,6 +22,7 @@ import interStylesHref from "~/inter/inter.css";
 
 export const meta: V2_MetaFunction = () => {
   return [
+    { charSet: "utf-8" },
     {
       name: "viewport",
       content: "initial-scale=1.0, width=device-width, viewport-fit=cover",
@@ -31,7 +32,6 @@ export const meta: V2_MetaFunction = () => {
       content: "black-translucent",
     },
     { name: "apple-mobile-web-app-capable", content: "yes" },
-    { charSet: "utf-8" },
     {
       name: "theme-color",
       content: "#fff",
