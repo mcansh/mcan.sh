@@ -1,8 +1,8 @@
-import type { HeadersFunction, LinksFunction } from "@remix-run/node";
 import type {
-  V2_HtmlMetaDescriptor,
+  HeadersFunction,
+  LinksFunction,
   V2_MetaFunction,
-} from "@remix-run/react/dist/routeModules";
+} from "@remix-run/node";
 
 import {
   FunHoverLink,
@@ -10,12 +10,15 @@ import {
 } from "../components/fun-hover-link";
 
 export const meta: V2_MetaFunction = ({ matches }) => {
+  let metaToMerge = matches
+    .filter((match) => match.meta)
+    .flatMap((match) => match.meta)
+    .filter((meta) => !("title" in meta));
+
   return [
-    ...(matches.map(
-      (match) => match.meta
-    ) as unknown as V2_HtmlMetaDescriptor[]),
     { title: "Logan McAnsh" },
     { name: "description", content: "personal website for logan mcansh" },
+    ...metaToMerge,
   ];
 };
 

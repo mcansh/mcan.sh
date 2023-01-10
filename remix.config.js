@@ -15,5 +15,6 @@ module.exports = {
   server: process.env.NODE_ENV === "development" ? undefined : "./server.js",
   future: {
     v2_meta: true,
+    v2_routeConvention: true,
   },
 };

@@ -1,18 +1,17 @@
-import type { HeadersFunction } from "@remix-run/node";
-import type {
-  V2_HtmlMetaDescriptor,
-  V2_MetaFunction,
-} from "@remix-run/react/dist/routeModules";
+import type { HeadersFunction, V2_MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 
 export const meta: V2_MetaFunction = ({ matches }) => {
+  let metaToMerge = matches
+    .filter((match) => match.meta)
+    .flatMap((match) => match.meta)
+    .filter((meta) => !("title" in meta));
+
   return [
-    ...(matches.map(
-      (match) => match.meta
-    ) as unknown as V2_HtmlMetaDescriptor[]),
     { title: "Resume | Logan McAnsh" },
     { name: "description", content: "Logan McAnsh's Resume" },
+    ...metaToMerge,
   ];
 };
 
