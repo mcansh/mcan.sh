@@ -3,6 +3,7 @@
 import fsp from "node:fs/promises";
 import path from "node:path";
 import { deleteAsync } from "del";
+import kleur from "kleur";
 
 async function clean() {
   let gitignorePath = path.join(process.cwd(), ".gitignore");
@@ -12,22 +13,20 @@ async function clean() {
     .filter((line) => line && !line.startsWith("#"))
     .map((line) => line.replace(/\/$/, ""));
 
-  let keep = [".vercel", "node_modules"].map((k) =>
-    path.join(process.cwd(), k)
-  );
+  let relativePatterns = patterns.map((pattern) => {
+    let noLeadingSlash = pattern.startsWith("/") ? pattern.slice(1) : pattern;
+    return path.join(process.cwd(), noLeadingSlash);
+  });
 
-  let relativePatterns = patterns
-    .map((pattern) => {
-      let noLeadingSlash = pattern.startsWith("/") ? pattern.slice(1) : pattern;
-      return path.join(process.cwd(), noLeadingSlash);
-    })
-    .filter((pattern) => {
-      return !keep.includes(pattern);
-    });
+  let deleted = await deleteAsync(relativePatterns, {
+    ignore: [".vercel", "node_modules"].map((p) => path.join(process.cwd(), p)),
+  });
 
-  await deleteAsync(relativePatterns);
-
-  console.log("✨");
+  if (deleted.length > 0) {
+    let deletedPaths = deleted.map((d) => path.relative(process.cwd(), d));
+    console.log(`✨ Deleted the following files and directories`);
+    console.log(kleur.red(deletedPaths.join("\n") + "\n"));
+  }
 }
 
 clean().then(
