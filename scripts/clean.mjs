@@ -1,31 +1,37 @@
 #!/usr/bin/env node
 
-import fsp from "node:fs/promises";
 import path from "node:path";
+import { promisify } from "node:util";
 import { deleteAsync } from "del";
 import kleur from "kleur";
+import Gitignore from "gitignore-fs";
+import glob from "glob";
+
+let asyncGlob = promisify(glob);
 
 async function clean() {
-  let gitignorePath = path.join(process.cwd(), ".gitignore");
-  let gitignore = await fsp.readFile(gitignorePath, "utf8");
-  let patterns = gitignore
-    .split("\n")
-    .filter((line) => line && !line.startsWith("#"))
-    .map((line) => line.replace(/\/$/, ""));
+  let cwd = process.cwd();
+  let gitignore = new Gitignore();
 
-  let relativePatterns = patterns.map((pattern) => {
-    let noLeadingSlash = pattern.startsWith("/") ? pattern.slice(1) : pattern;
-    return path.join(process.cwd(), noLeadingSlash);
+  let files = await asyncGlob("**/*", {
+    absolute: true,
+    ignore: ["node_modules/**/*", ".vercel/**/*"],
+    nodir: true,
+    cwd,
   });
 
-  let deleted = await deleteAsync(relativePatterns, {
-    ignore: [".vercel", "node_modules"].map((p) => path.join(process.cwd(), p)),
+  let filesToDelete = files.filter((file) => {
+    return gitignore.ignoresSync(file);
   });
+
+  let deleted = await deleteAsync(filesToDelete);
 
   if (deleted.length > 0) {
-    let deletedPaths = deleted.map((d) => path.relative(process.cwd(), d));
+    let deletedPaths = deleted.map((file) => path.relative(cwd, file));
     console.log(`✨ Deleted the following files and directories`);
-    console.log(kleur.red(deletedPaths.join("\n") + "\n"));
+    console.log(
+      kleur.red(deletedPaths.map((file) => "👉 " + file).join("\n") + "\n")
+    );
   }
 }
 
