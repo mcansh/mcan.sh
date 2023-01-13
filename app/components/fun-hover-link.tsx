@@ -26,7 +26,10 @@ export function FunHoverLink({
           {children}
         </a>
         {shouldPrefetch ? (
-          <link rel="prefetch" as="document" href={href} />
+          <>
+            <link rel="prerender" href={href} />
+            <link rel="dns-prefetch" href={href} />
+          </>
         ) : null}
       </>
     );
