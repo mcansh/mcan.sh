@@ -51,19 +51,11 @@ export default function IndexPage() {
         <h1 className="mt-4 text-4xl">Logan McAnsh</h1>
         <p className="mt-2 max-w-xs text-center text-lg sm:text-xl md:max-w-sm">
           Senior Software Engineer at{" "}
-          <FunHoverLink
-            to="https://shopify.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <FunHoverLink to="https://shopify.com" prefetch="intent">
             Shopify
           </FunHoverLink>{" "}
           working on{" "}
-          <FunHoverLink
-            to="https://remix.run"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <FunHoverLink to="https://remix.run" prefetch="intent">
             Remix
           </FunHoverLink>
         </p>
