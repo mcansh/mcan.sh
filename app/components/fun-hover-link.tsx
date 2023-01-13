@@ -1,39 +1,58 @@
 import * as React from "react";
-import type { LinkProps } from "@remix-run/react";
+import type { LinkProps, Path } from "@remix-run/react";
 import { Link } from "@remix-run/react";
 
 export { default as styles } from "~/styles/fun-hover-link.css";
 
-export function FunHoverLink({
+function createPath({ pathname = "/", search = "", hash = "" }: Partial<Path>) {
+  if (search && search !== "?")
+    pathname += search.charAt(0) === "?" ? search : "?" + search;
+  if (hash && hash !== "#")
+    pathname += hash.charAt(0) === "#" ? hash : "#" + hash;
+  return pathname;
+}
+
+function ExternalLink({
   children,
   to,
   prefetch = "none",
   ...props
-}: LinkProps) {
-  let href = to.toString();
-  let isExternal = /^[a-z]+:/.test(href);
+}: Omit<LinkProps, "to"> & { to: string }) {
   let [shouldPrefetch, prefetchHandlers] = usePrefetchBehavior(prefetch, props);
+
+  return (
+    <>
+      <a
+        {...props}
+        className="fun-link relative bg-no-repeat text-current no-underline"
+        href={to}
+        {...prefetchHandlers}
+      >
+        {children}
+      </a>
+      {shouldPrefetch ? (
+        <>
+          <link rel="prerender" href={to} />
+          <link rel="dns-prefetch" href={to} />
+        </>
+      ) : null}
+    </>
+  );
+}
+
+export function FunHoverLink({ children, to, ...props }: LinkProps) {
+  let href = typeof to === "string" ? to : createPath(to);
+
+  let isExternal = href.startsWith("//") || /^[a-z]+:/.test(href);
 
   if (isExternal) {
     return (
-      <>
-        <a
-          {...props}
-          className="fun-link relative bg-no-repeat text-current no-underline"
-          href={href}
-          {...prefetchHandlers}
-        >
-          {children}
-        </a>
-        {shouldPrefetch ? (
-          <>
-            <link rel="prerender" href={href} />
-            <link rel="dns-prefetch" href={href} />
-          </>
-        ) : null}
-      </>
+      <ExternalLink to={href} {...props}>
+        {children}
+      </ExternalLink>
     );
   }
+
   return (
     <Link
       {...props}
