@@ -1,14 +1,14 @@
 import * as React from "react";
-import type { LinksFunction } from "@remix-run/node";
-import type { V2_MetaFunction } from "@remix-run/react/dist/routeModules";
+import type { LinksFunction, V2_MetaFunction } from "@remix-run/node";
 import type { ThrownResponse } from "@remix-run/react";
+import { isRouteErrorResponse } from "@remix-run/react";
 import {
   Links,
   LiveReload,
   Meta,
   Outlet,
   Scripts,
-  useCatch,
+  useRouteError,
   useMatches,
 } from "@remix-run/react";
 import clsx from "clsx";
@@ -111,14 +111,15 @@ export default function App() {
   );
 }
 
-export function ErrorBoundary({ error }: { error: Error }) {
+export function ErrorBoundary() {
+  let error = useRouteError();
   console.error(error);
-  return <BlueScreenOfDeath error={error} />;
-}
 
-export function CatchBoundary() {
-  let caught = useCatch();
-  return <BlueScreenOfDeath caughtResponse={caught} />;
+  return isRouteErrorResponse(error) ? (
+    <BlueScreenOfDeath caughtResponse={error} />
+  ) : (
+    <BlueScreenOfDeath error={error as Error} />
+  );
 }
 
 interface BlueScreenOfDeathProps {
@@ -170,9 +171,11 @@ function BlueScreenOfDeath({
             )}
           </>
         ) : (
-          <h1 className={headingClassName}>
-            {caughtResponse.status} {caughtResponse.statusText}
-          </h1>
+          <>
+            <h1 className={headingClassName}>
+              {caughtResponse.status} {caughtResponse.statusText}
+            </h1>
+          </>
         )}
         <Scripts />
         <LiveReload port={Number(process.env.REMIX_DEV_SERVER_WS_PORT)} />
