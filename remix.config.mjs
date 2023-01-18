@@ -1,10 +1,17 @@
 import path from "node:path";
 
+export const cacheDirectory = path.join(
+  process.cwd(),
+  "node_modules",
+  ".cache",
+  "remix"
+);
+
 /**
  * @type {import('@remix-run/dev').AppConfig}
  */
 export default {
-  cacheDirectory: path.join(process.cwd(), "node_modules", ".cache", "remix"),
+  cacheDirectory,
   serverBuildTarget: "vercel",
   appDirectory: "app",
   assetsBuildDirectory: "public/build",
