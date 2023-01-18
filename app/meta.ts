@@ -13,16 +13,17 @@ export const mergeMeta = (
     // replace any parent meta with the same name or property with the override
     let overrides = overrideFn(arg);
     for (let override of overrides) {
-      let index = mergedMeta.findIndex(
-        (meta) =>
-          ("name" in meta &&
-            "name" in override &&
-            meta.name === override.name) ||
-          ("property" in meta &&
-            "property" in override &&
-            meta.property === override.property) ||
-          ("title" in meta && "title" in override)
-      );
+      let index = mergedMeta.findIndex((meta) => {
+        let name =
+          "name" in meta && "name" in override && meta.name === override.name;
+        let property =
+          "property" in meta &&
+          "property" in override &&
+          meta.property === override.property;
+        let title = "title" in meta && "title" in override;
+        return name || property || title;
+      });
+
       if (index !== -1) {
         mergedMeta.splice(index, 1, override);
       }
