@@ -4,23 +4,23 @@ import type {
   V2_MetaFunction,
 } from "@remix-run/node";
 
+import { mergeMeta } from "~/meta";
+
 import {
   FunHoverLink,
   styles as funHoverLinkStyles,
 } from "../components/fun-hover-link";
 
-export const meta: V2_MetaFunction = ({ matches }) => {
-  let metaToMerge = matches
-    .filter((match) => match.meta)
-    .flatMap((match) => match.meta)
-    .filter((meta) => !("title" in meta));
-
-  return [
-    { title: "Logan McAnsh" },
-    { name: "description", content: "personal website for logan mcansh" },
-    ...metaToMerge,
-  ];
-};
+export const meta: V2_MetaFunction = mergeMeta(
+  // these will override the parent meta
+  () => {
+    return [];
+  },
+  // these will be appended to the parent meta
+  () => {
+    return [{ title: "Logan McAnsh" }];
+  }
+);
 
 export const headers: HeadersFunction = () => {
   return {
