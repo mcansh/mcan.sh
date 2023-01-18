@@ -28,6 +28,10 @@ export const meta: V2_MetaFunction = () => {
       content: "initial-scale=1.0, width=device-width, viewport-fit=cover",
     },
     {
+      name: "description",
+      content: "personal website for logan mcansh",
+    },
+    {
       name: "apple-mobile-web-app-status-bar-style",
       content: "black-translucent",
     },

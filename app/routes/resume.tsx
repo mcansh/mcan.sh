@@ -2,18 +2,27 @@ import type { HeadersFunction, V2_MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 
-export const meta: V2_MetaFunction = ({ matches }) => {
-  let metaToMerge = matches
-    .filter((match) => match.meta)
-    .flatMap((match) => match.meta)
-    .filter((meta) => !("title" in meta));
+import { mergeMeta } from "~/meta";
 
-  return [
-    { title: "Resume | Logan McAnsh" },
-    { name: "description", content: "Logan McAnsh's Resume" },
-    ...metaToMerge,
-  ];
-};
+export const meta: V2_MetaFunction = mergeMeta(
+  // these will override the parent meta
+  () => {
+    return [
+      {
+        name: "description",
+        content: "Logan McAnsh's Resume",
+      },
+    ];
+  },
+  // these will be appended to the parent meta
+  () => {
+    return [
+      {
+        title: "Resume | Logan McAnsh",
+      },
+    ];
+  }
+);
 
 export const headers: HeadersFunction = ({ loaderHeaders }) => {
   let routeHeaders = new Headers();
