@@ -1,7 +1,7 @@
 /node_modules
 *.log
 .DS_Store
-/.vercel
+.vercel
 /.cache
 /.output
 /api/index.js
