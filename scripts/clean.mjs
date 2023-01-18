@@ -7,6 +7,8 @@ import kleur from "kleur";
 import Gitignore from "gitignore-fs";
 import glob from "glob";
 
+import { cacheDirectory } from "../remix.config.mjs";
+
 let asyncGlob = promisify(glob);
 
 async function clean() {
@@ -24,7 +26,7 @@ async function clean() {
     return gitignore.ignoresSync(file);
   });
 
-  let deleted = await deleteAsync(filesToDelete);
+  let deleted = await deleteAsync([...filesToDelete, cacheDirectory]);
 
   if (deleted.length > 0) {
     let deletedPaths = deleted.map((file) => path.relative(cwd, file));
