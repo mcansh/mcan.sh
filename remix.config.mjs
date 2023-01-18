@@ -16,6 +16,8 @@ export default {
   appDirectory: "app",
   assetsBuildDirectory: "public/build",
   publicPath: "/build/",
+  serverBuildPath: "build/index.js",
+  serverBuildDirectory: "build",
   // When running locally in development mode, we use the built in remix
   // server. This does not understand the vercel lambda module format,
   // so we default back to the standard build output.
