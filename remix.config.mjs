@@ -7,7 +7,7 @@ export default {
   cacheDirectory: path.join(process.cwd(), "node_modules", ".cache", "remix"),
   serverBuildTarget: "vercel",
   appDirectory: "app",
-  browserBuildDirectory: "public/build",
+  assetsBuildDirectory: "public/build",
   publicPath: "/build/",
   // When running locally in development mode, we use the built in remix
   // server. This does not understand the vercel lambda module format,

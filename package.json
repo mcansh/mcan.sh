@@ -23,9 +23,9 @@
   "dependencies": {
     "@mcansh/remix-secure-headers": "^0.6.2",
     "@mcansh/tailwind-var": "^0.1.0",
-    "@remix-run/node": "0.0.0-nightly-d593e4a-20230114",
-    "@remix-run/react": "0.0.0-nightly-d593e4a-20230114",
-    "@remix-run/vercel": "0.0.0-nightly-d593e4a-20230114",
+    "@remix-run/node": "0.0.0-nightly-d593e4a-20230117",
+    "@remix-run/react": "0.0.0-nightly-d593e4a-20230117",
+    "@remix-run/vercel": "0.0.0-nightly-d593e4a-20230117",
     "clsx": "^1.2.1",
     "etag": "^1.8.1",
     "fathom-client": "^3.5.0",
@@ -36,9 +36,9 @@
     "type-fest": "^3.5.1"
   },
   "devDependencies": {
-    "@remix-run/dev": "0.0.0-nightly-d593e4a-20230114",
-    "@remix-run/eslint-config": "0.0.0-nightly-d593e4a-20230114",
-    "@remix-run/serve": "0.0.0-nightly-d593e4a-20230114",
+    "@remix-run/dev": "0.0.0-nightly-d593e4a-20230117",
+    "@remix-run/eslint-config": "0.0.0-nightly-d593e4a-20230117",
+    "@remix-run/serve": "0.0.0-nightly-d593e4a-20230117",
     "@types/etag": "^1.8.1",
     "@types/node": "^18.11.18",
     "@types/react": "^18.0.26",
