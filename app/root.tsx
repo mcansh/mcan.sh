@@ -41,7 +41,13 @@ export const meta: V2_MetaFunction = () => {
     },
     {
       name: "theme-color",
-      content: "#fff",
+      content: "#ffffff",
+      media: "(prefers-color-scheme: light)",
+    },
+    {
+      name: "theme-color",
+      content: "#0f172a",
+      media: "(prefers-color-scheme: dark)",
     },
   ];
 };
