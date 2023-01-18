@@ -35,16 +35,13 @@ export const meta: V2_MetaFunction = () => {
       name: "apple-mobile-web-app-status-bar-style",
       content: "black-translucent",
     },
-    { name: "apple-mobile-web-app-capable", content: "yes" },
     {
-      name: "theme-color",
-      content: "#fff",
-      media: "(prefers-color-scheme: light)",
+      name: "apple-mobile-web-app-capable",
+      content: "yes",
     },
     {
       name: "theme-color",
-      content: "var(--slate-900)",
-      media: "(prefers-color-scheme: dark)",
+      content: "#fff",
     },
   ];
 };
