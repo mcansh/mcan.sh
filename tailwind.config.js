@@ -1,5 +1,4 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
-const { addVariablesForColors } = require("@mcansh/tailwind-var");
 
 /** @type {import("tailwindcss").Config} */
 module.exports = {
@@ -23,5 +22,5 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [require("tailwindcss-padding-safe"), addVariablesForColors()],
+  plugins: [require("tailwindcss-padding-safe")],
 };
