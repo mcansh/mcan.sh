@@ -28,6 +28,9 @@ export const meta: V2_MetaFunction = () => {
       content: "initial-scale=1.0, width=device-width, viewport-fit=cover",
     },
     {
+      title: "Logan McAnsh",
+    },
+    {
       name: "description",
       content: "personal website for logan mcansh",
     },

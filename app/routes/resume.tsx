@@ -9,16 +9,11 @@ export const meta: V2_MetaFunction = mergeMeta(
   () => {
     return [
       {
+        title: "Resume | Logan McAnsh",
+      },
+      {
         name: "description",
         content: "Logan McAnsh's Resume",
-      },
-    ];
-  },
-  // these will be appended to the parent meta
-  () => {
-    return [
-      {
-        title: "Resume | Logan McAnsh",
       },
     ];
   }
