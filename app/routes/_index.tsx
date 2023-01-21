@@ -1,4 +1,5 @@
 import type { HeadersFunction, LinksFunction } from "@remix-run/node";
+import { cacheHeader } from "pretty-cache-header";
 
 import {
   FunHoverLink,
@@ -7,7 +8,12 @@ import {
 
 export const headers: HeadersFunction = () => {
   return {
-    "Cache-Control": `public, max-age=3600, s-maxage=3600, stale-while-revalidate`,
+    "Cache-Control": cacheHeader({
+      public: true,
+      maxAge: "1 hour",
+      staleWhileRevalidate: "2 hours",
+      sMaxage: "1 hour",
+    }),
     Link: "<https://res.cloudinary.com>; rel=preconnect",
   };
 };
