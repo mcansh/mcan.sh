@@ -4,14 +4,17 @@ export const mergeMeta = (
   overrideFn: V2_MetaFunction,
   appendFn?: V2_MetaFunction
 ): V2_MetaFunction => {
-  return (arg) => {
+  return (args) => {
     // get meta from parent routes
-    let mergedMeta = arg.matches.reduce((acc, match) => {
-      return acc.concat(match.meta || []);
-    }, [] as V2_HtmlMetaDescriptor[]);
+    let mergedMeta = args.matches.reduce<V2_HtmlMetaDescriptor[]>(
+      (acc, match) => {
+        return acc.concat(match.meta || []);
+      },
+      []
+    );
 
     // replace any parent meta with the same name or property with the override
-    let overrides = overrideFn(arg);
+    let overrides = overrideFn(args);
     for (let override of overrides) {
       let index = mergedMeta.findIndex((meta) => {
         let name =
@@ -30,8 +33,8 @@ export const mergeMeta = (
     }
 
     // append any additional meta
-    if (appendFn) {
-      mergedMeta = mergedMeta.concat(appendFn(arg));
+    if (typeof appendFn === "function") {
+      mergedMeta = mergedMeta.concat(appendFn(args));
     }
 
     return mergedMeta;

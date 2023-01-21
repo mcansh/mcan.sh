@@ -1,41 +1,12 @@
 import type { HeadersFunction, V2_MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
+import { cacheHeader } from "pretty-cache-header";
 
 import { mergeMeta } from "~/meta";
 
-export const meta: V2_MetaFunction = mergeMeta(
-  // these will override the parent meta
-  () => {
-    return [
-      {
-        title: "Resume | Logan McAnsh",
-      },
-      {
-        name: "description",
-        content: "Logan McAnsh's Resume",
-      },
-    ];
-  }
-);
-
-export const headers: HeadersFunction = ({ loaderHeaders }) => {
-  let routeHeaders = new Headers();
-
-  routeHeaders.set("x-hello-recruiters", "1");
-  routeHeaders.set("Link", "<https://res.cloudinary.com>; rel=preconnect");
-
-  let cacheControl = loaderHeaders.get("Cache-Control");
-
-  if (cacheControl) {
-    routeHeaders.set("Cache-Control", cacheControl);
-  }
-
-  return routeHeaders;
-};
-
-export const loader = () => {
-  let date = new Intl.DateTimeFormat("en-US", {
+export function loader() {
+  let { format: formatDate } = new Intl.DateTimeFormat("en-US", {
     month: "long",
     year: "numeric",
   });
@@ -88,8 +59,8 @@ export const loader = () => {
   ].map((exp) => {
     return {
       ...exp,
-      start: date.format(exp.start),
-      end: exp.end ? date.format(exp.end) : undefined,
+      start: formatDate(exp.start),
+      end: exp.end ? formatDate(exp.end) : undefined,
       startISO: exp.start.toISOString().slice(0, 7),
       endISO: exp.end?.toISOString().slice(0, 7),
       current: exp.end ? undefined : true,
@@ -122,10 +93,45 @@ export const loader = () => {
     },
     {
       headers: {
-        "Cache-Control": `public, max-age=3600, s-maxage=3600, stale-while-revalidate`,
+        "Cache-Control": cacheHeader({
+          public: true,
+          maxAge: "1 hour",
+          staleWhileRevalidate: "2 hours",
+          sMaxage: "1 hour",
+        }),
       },
     }
   );
+}
+
+export const meta: V2_MetaFunction<typeof loader> = mergeMeta(
+  // these will override the parent meta
+  () => {
+    return [
+      {
+        title: "Resume | Logan McAnsh",
+      },
+      {
+        name: "description",
+        content: "Logan McAnsh's Resume",
+      },
+    ];
+  }
+);
+
+export const headers: HeadersFunction = ({ loaderHeaders }) => {
+  let routeHeaders = new Headers();
+
+  routeHeaders.set("x-hello-recruiters", "1");
+  routeHeaders.set("Link", "<https://res.cloudinary.com>; rel=preconnect");
+
+  let cacheControl = loaderHeaders.get("Cache-Control");
+
+  if (cacheControl) {
+    routeHeaders.set("Cache-Control", cacheControl);
+  }
+
+  return routeHeaders;
 };
 
 export default function ResumePage() {
