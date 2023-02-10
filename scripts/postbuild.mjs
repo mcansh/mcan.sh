@@ -5,29 +5,17 @@ import glob from "glob";
 import slugify from "@sindresorhus/slugify";
 
 async function uploadSourceMapsToSentry() {
-  let proposedVersion = process.env.VERCEL_GIT_COMMIT_SHA;
-  if (process.env.VERCEL) {
-    proposedVersion = slugify(
-      process.env.VERCEL_GIT_COMMIT_REF +
-        "-" +
-        process.env.VERCEL_GIT_COMMIT_SHA,
-      {
-        lower: true,
-      }
-    );
-  } else {
-    let proposedVersionResult = spawnSync(
-      "sentry-cli",
-      ["releases", "propose-version"],
-      { encoding: "utf-8" }
-    );
-    if (proposedVersionResult.status !== 0) {
-      console.error("Error proposing version");
-      console.error(proposedVersionResult.stderr);
-      process.exit(1);
-    }
-    proposedVersion = proposedVersionResult.stdout.trim();
+  if (
+    !process.env.VERCEL &&
+    !process.env.VERCEL_GIT_COMMIT_REF &&
+    !process.env.VERCEL_GIT_COMMIT_SHA
+  ) {
+    console.log("Not on Vercel, skipping Sentry release creation");
+    return;
   }
+  let proposedVersion = slugify(
+    process.env.VERCEL_GIT_COMMIT_REF + "-" + process.env.VERCEL_GIT_COMMIT_SHA
+  );
   let browserUpload = spawnSync(
     "sentry-cli",
     ["releases", "files", proposedVersion, "upload-sourcemaps", "public/build"],
