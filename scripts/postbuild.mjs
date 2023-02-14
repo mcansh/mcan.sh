@@ -6,8 +6,8 @@ import slugify from "@sindresorhus/slugify";
 
 async function uploadSourceMapsToSentry() {
   if (
-    !process.env.VERCEL &&
-    !process.env.VERCEL_GIT_COMMIT_REF &&
+    !process.env.VERCEL ||
+    !process.env.VERCEL_GIT_COMMIT_REF ||
     !process.env.VERCEL_GIT_COMMIT_SHA
   ) {
     console.log("Not on Vercel, skipping Sentry release creation");
