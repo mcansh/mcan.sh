@@ -9,6 +9,5 @@
 /api/_assets
 /build
 /public/build
-app/styles/app.css
 .eslintcache
 tsconfig.tsbuildinfo
