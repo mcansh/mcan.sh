@@ -1,6 +1,6 @@
 import { PassThrough } from "node:stream";
 import type { EntryContext, HandleDataRequestFunction } from "@remix-run/node";
-import { Response, redirect } from "@remix-run/node";
+import { Response } from "@remix-run/node";
 import { RemixServer } from "@remix-run/react";
 import { createSecureHeaders } from "@mcansh/remix-secure-headers";
 import { renderToPipeableStream } from "react-dom/server";
@@ -85,11 +85,6 @@ export default function handleRequest(
   responseHeaders: Headers,
   remixContext: EntryContext
 ) {
-  let url = new URL(request.url);
-  if (url.hostname === "resume.mcan.sh") {
-    return redirect("https://mcan.sh/resume");
-  }
-
   let callback = isbot(request.headers.get("user-agent"))
     ? "onAllReady"
     : "onShellReady";
