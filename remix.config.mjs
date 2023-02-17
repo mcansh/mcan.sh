@@ -5,15 +5,17 @@ import path from "node:path";
  */
 export default {
   appDirectory: "app",
-  assetsBuildDirectory: "public/build",
   cacheDirectory: path.join(process.cwd(), "node_modules", ".cache", "remix"),
+  assetsBuildDirectory: "public/build",
   publicPath: "/build/",
-  serverBuildPath: "api/index.js",
+  server: "./server.js",
+  serverBuildPath: ".netlify/functions-internal/server.js",
   future: {
+    unstable_dev: true,
+    unstable_postcss: true,
+    unstable_tailwind: true,
+    v2_errorBoundary: true,
     v2_meta: true,
     v2_routeConvention: true,
-    v2_errorBoundary: true,
-    unstable_tailwind: true,
-    unstable_postcss: true,
   },
 };
