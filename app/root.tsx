@@ -14,9 +14,9 @@ import {
 import clsx from "clsx";
 import * as Fathom from "fathom-client";
 import type { RequireExactlyOne } from "type-fest";
+import appStylesHref from "tailwindcss/tailwind.css";
 
 import type { Match } from "~/@types/handle";
-import appStylesHref from "~/styles/app.css";
 import interFontHref from "~/inter/Inter.var.woff2";
 import interStylesHref from "~/inter/inter.css";
 
