@@ -1,9 +1,13 @@
+import { PassThrough } from "node:stream";
 import type { EntryContext, HandleDataRequestFunction } from "@remix-run/node";
-import { redirect } from "@remix-run/node";
+import { Response, redirect } from "@remix-run/node";
 import { RemixServer } from "@remix-run/react";
 import { createSecureHeaders } from "@mcansh/remix-secure-headers";
-import { renderToString } from "react-dom/server";
-import etag from "etag";
+import { renderToPipeableStream } from "react-dom/server";
+import { isPrefetch, preloadRouteAssets } from "remix-utils";
+import isbot from "isbot";
+
+const ABORT_DELAY = 5_000;
 
 const securityHeaders = createSecureHeaders({
   "Content-Security-Policy": {
@@ -25,7 +29,7 @@ const securityHeaders = createSecureHeaders({
     connectSrc: [
       "'self'",
       ...(process.env.NODE_ENV === "development"
-        ? [`ws://localhost:${process.env.REMIX_DEV_SERVER_WS_PORT}`]
+        ? [`ws://localhost:3001`]
         : []),
     ],
   },
@@ -75,7 +79,7 @@ const securityHeaders = createSecureHeaders({
   "Cross-Origin-Opener-Policy": "same-origin",
 });
 
-export default function handleDocumentRequest(
+export default function handleRequest(
   request: Request,
   responseStatusCode: number,
   responseHeaders: Headers,
@@ -86,31 +90,49 @@ export default function handleDocumentRequest(
     return redirect("https://mcan.sh/resume");
   }
 
-  let markup = renderToString(
-    <RemixServer context={remixContext} url={request.url} />
-  );
+  let callback = isbot(request.headers.get("user-agent"))
+    ? "onAllReady"
+    : "onShellReady";
 
-  prefetchAssets(remixContext, responseHeaders);
+  preloadRouteAssets(remixContext, responseHeaders);
 
-  responseHeaders.set("Content-Type", "text/html");
+  return new Promise((resolve, reject) => {
+    let { pipe, abort } = renderToPipeableStream(
+      <RemixServer context={remixContext} url={request.url} />,
+      {
+        [callback]() {
+          let body = new PassThrough();
 
-  if (process.env.NODE_ENV === "development") {
-    responseHeaders.set("Cache-Control", "no-cache");
-  }
+          responseHeaders.set("Content-Type", "text/html");
 
-  for (let header of securityHeaders) {
-    responseHeaders.set(...header);
-  }
+          if (process.env.NODE_ENV === "development") {
+            responseHeaders.set("Cache-Control", "no-cache");
+          }
 
-  responseHeaders.set("ETag", etag(markup));
+          for (let header of securityHeaders) {
+            responseHeaders.set(...header);
+          }
 
-  if (request.headers.get("If-None-Match") === responseHeaders.get("ETag")) {
-    return new Response("", { status: 304, headers: responseHeaders });
-  }
+          resolve(
+            new Response(body, {
+              headers: responseHeaders,
+              status: responseStatusCode,
+            })
+          );
 
-  return new Response("<!DOCTYPE html>" + markup, {
-    status: responseStatusCode,
-    headers: responseHeaders,
+          pipe(body);
+        },
+        onShellError(error: unknown) {
+          reject(error);
+        },
+        onError(error: unknown) {
+          console.error(error);
+          responseStatusCode = 500;
+        },
+      }
+    );
+
+    setTimeout(abort, ABORT_DELAY);
   });
 }
 
@@ -118,31 +140,15 @@ export const handleDataRequest: HandleDataRequestFunction = async (
   response,
   { request }
 ) => {
-  let clonedResponse = response.clone();
-  let isGet = request.method.toLowerCase() === "get";
-
-  let purpose =
-    request.headers.get("Purpose") ||
-    request.headers.get("X-Purpose") ||
-    request.headers.get("Sec-Purpose") ||
-    request.headers.get("Sec-Fetch-Purpose") ||
-    request.headers.get("Moz-Purpose");
-  let isPrefetch = purpose === "prefetch";
-
   // if it's a GET request and it's a prefetch request
   // and it doesn't already have a Cache-Control header
   // we will cache for 10 seconds only on the browser
-  if (isGet && isPrefetch && !response.headers.has("Cache-Control")) {
+  if (
+    request.method.toLowerCase() === "get" &&
+    isPrefetch(request) &&
+    !response.headers.has("Cache-Control")
+  ) {
     response.headers.set("Cache-Control", "private, max-age=10");
-  }
-
-  if (isGet) {
-    let body = await clonedResponse.text();
-    response.headers.set("etag", etag(body));
-
-    if (request.headers.get("If-None-Match") === response.headers.get("ETag")) {
-      return new Response("", { status: 304, headers: response.headers });
-    }
   }
 
   if (process.env.NODE_ENV === "development") {
@@ -155,53 +161,3 @@ export const handleDataRequest: HandleDataRequestFunction = async (
 
   return response;
 };
-
-function prefetchAssets(context: EntryContext, headers: Headers) {
-  let modules = Object.entries(context.manifest.routes);
-
-  let links = context.staticHandlerContext.matches
-    .flatMap((match) => {
-      let routeMatch = modules.find((m) => m[0] === match.route.id);
-      let routeImports = routeMatch?.[1].imports ?? [];
-      let routeModule = routeMatch?.[1].module;
-
-      let route = context.routeModules[match.route.id];
-      let links = typeof route.links === "function" ? route.links() : [];
-      let imports = [
-        routeModule,
-        ...routeImports,
-        context.manifest.url,
-        context.manifest.entry.module,
-        ...context.manifest.entry.imports,
-      ]
-        .filter((i: any): i is string => i !== undefined)
-        .map((i) => {
-          return { href: i, as: "script" } as const;
-        });
-      return [...links, ...imports];
-    })
-    .map((link) => {
-      if ("as" in link && "href" in link) {
-        return { href: link.href, as: link.as } as const;
-      }
-      if ("rel" in link && "href" in link) {
-        if (link.rel === "stylesheet") {
-          return { href: link.href, as: "style" } as const;
-        }
-      }
-      return null;
-    })
-    .filter((link: any): link is { href: string; as: string } => {
-      return link && "href" in link;
-    })
-    .filter((item, index, list) => {
-      return index === list.findIndex((link) => link.href === item.href);
-    });
-
-  for (let link of links) {
-    headers.append(
-      "Link",
-      `<${link.href}>; rel=preload; as=${link.as}; crossorigin=anonymous`
-    );
-  }
-}
