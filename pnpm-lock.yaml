@@ -8,7 +8,6 @@ specifiers:
   '@remix-run/dev': 1.13.0
   '@remix-run/eslint-config': 1.13.0
   '@remix-run/react': 1.13.0
-  '@types/node': ^18.13.0
   '@types/react': ^18.0.28
   '@types/react-dom': ^18.0.11
   '@typescript/lib-dom': npm:@types/web@^0.0.91
@@ -60,7 +59,6 @@ dependencies:
 devDependencies:
   '@remix-run/dev': 1.13.0
   '@remix-run/eslint-config': 1.13.0_km5ddj7uwb23cqeymeyvzjsfb4
-  '@types/node': 18.13.0
   '@types/react': 18.0.28
   '@types/react-dom': 18.0.11
   '@typescript/lib-dom': /@types/web/0.0.91
@@ -72,7 +70,7 @@ devDependencies:
   husky: 8.0.3
   kleur: 4.1.5
   lint-staged: 13.1.2
-  netlify-cli: 12.13.1_@types+node@18.13.0
+  netlify-cli: 12.13.1
   npm-run-all: 4.1.5
   postcss: 8.4.21
   postcss-100vh-fix: 1.0.2_postcss@8.4.21
@@ -1862,7 +1860,7 @@ packages:
     resolution: {integrity: sha512-4wMPu9iN3/HL97QblBsBay3E1etIciR84izI3U+4iALY+JHCrI+a2jO0qbAZ/nxKoegypYEaiiqWXylm+/zfrw==}
     dev: true
 
-  /@netlify/build/29.5.8_@types+node@18.13.0:
+  /@netlify/build/29.5.8:
     resolution: {integrity: sha512-bZQ38RY4yB+rvGG9JLr1vCvGFcT15IOkAUy+vhyPFNnT1XTkRZHW7KzwG0U+fyqADHR21FhQE9MGeja4o6ranQ==}
     engines: {node: ^14.16.0 || >=16.0.0}
     hasBin: true
@@ -1915,7 +1913,7 @@ packages:
       supports-color: 9.3.1
       terminal-link: 3.0.0
       tmp-promise: 3.0.3
-      ts-node: 10.9.1_4bewfcp2iebiwuold25d6rgcsy
+      ts-node: 10.9.1_typescript@4.9.5
       typescript: 4.9.5
       uuid: 8.3.2
       yargs: 17.7.0
@@ -9864,14 +9862,14 @@ packages:
     resolution: {integrity: sha512-9iN1ka/9zmX1ZvLV9ewJYEk9h7RyRRtqdK0woXcqohu8EWIerfPUjYJPg0ULy0UqP7cslmdGc8xKDJcojlKiaw==}
     dev: true
 
-  /netlify-cli/12.13.1_@types+node@18.13.0:
+  /netlify-cli/12.13.1:
     resolution: {integrity: sha512-xqjPqT4bDCdauJvf75kcS6Z/55rz/R91FpC7wKYSIIfWnvLVRY4uik2lw9aOORNruEfVPDs0TjB9sTI4dDRTFA==}
     engines: {node: ^14.16.0 || >=16.0.0}
     hasBin: true
     requiresBuild: true
     dependencies:
       '@fastify/static': 6.9.0
-      '@netlify/build': 29.5.8_@types+node@18.13.0
+      '@netlify/build': 29.5.8
       '@netlify/config': 20.3.3
       '@netlify/edge-bundler': 8.7.0
       '@netlify/framework-info': 9.8.2
@@ -13029,7 +13027,7 @@ packages:
     resolution: {integrity: sha512-AqTiAOLcj85xS7vQ8QkAV41hPDIJ71XJB4RCUrzo/1GM2CQwhkJGaf9Hgr7BOugMRpgGUrqRg/DrBDl4H40+8g==}
     dev: true
 
-  /ts-node/10.9.1_4bewfcp2iebiwuold25d6rgcsy:
+  /ts-node/10.9.1_typescript@4.9.5:
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
     peerDependencies:
@@ -13048,7 +13046,6 @@ packages:
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.3
-      '@types/node': 18.13.0
       acorn: 8.8.2
       acorn-walk: 8.2.0
       arg: 4.1.3
