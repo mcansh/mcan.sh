@@ -1,4 +1,7 @@
-import type { V2_HtmlMetaDescriptor, V2_MetaFunction } from "@remix-run/node";
+import type {
+  V2_HtmlMetaDescriptor,
+  V2_MetaFunction,
+} from "@remix-run/server-runtime";
 
 export const mergeMeta = (
   overrideFn: V2_MetaFunction,

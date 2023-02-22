@@ -1,5 +1,7 @@
-import type { EntryContext, HandleDataRequestFunction } from "@remix-run/node";
-import { Response } from "@remix-run/node";
+import type {
+  EntryContext,
+  HandleDataRequestFunction,
+} from "@netlify/remix-runtime";
 import { RemixServer } from "@remix-run/react";
 import { createSecureHeaders } from "@mcansh/remix-secure-headers";
 import { renderToReadableStream } from "react-dom/server";
