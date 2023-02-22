@@ -1,13 +1,12 @@
-import { PassThrough } from "node:stream";
-import type { EntryContext, HandleDataRequestFunction } from "@remix-run/node";
-import { Response } from "@remix-run/node";
+import type {
+  EntryContext,
+  HandleDataRequestFunction,
+} from "@netlify/remix-runtime";
 import { RemixServer } from "@remix-run/react";
 import { createSecureHeaders } from "@mcansh/remix-secure-headers";
-import { renderToPipeableStream } from "react-dom/server";
+import { renderToReadableStream } from "react-dom/server";
 import { isPrefetch, preloadRouteAssets } from "remix-utils";
 import isbot from "isbot";
-
-const ABORT_DELAY = 5_000;
 
 const securityHeaders = createSecureHeaders({
   "Content-Security-Policy": {
@@ -79,55 +78,41 @@ const securityHeaders = createSecureHeaders({
   "Cross-Origin-Opener-Policy": "same-origin",
 });
 
-export default function handleRequest(
+export default async function handleRequest(
   request: Request,
   responseStatusCode: number,
   responseHeaders: Headers,
   remixContext: EntryContext
 ) {
-  let callback = isbot(request.headers.get("user-agent"))
-    ? "onAllReady"
-    : "onShellReady";
-
   preloadRouteAssets(remixContext, responseHeaders);
 
-  return new Promise((resolve, reject) => {
-    let { pipe, abort } = renderToPipeableStream(
-      <RemixServer context={remixContext} url={request.url} />,
-      {
-        [callback]() {
-          let body = new PassThrough();
+  let body = await renderToReadableStream(
+    <RemixServer context={remixContext} url={request.url} />,
+    {
+      onError(error) {
+        responseStatusCode = 500;
+        console.error(error);
+      },
+    }
+  );
 
-          responseHeaders.set("Content-Type", "text/html");
+  if (isbot(request.headers.get("user-agent"))) {
+    await body.allReady;
+  }
 
-          if (process.env.NODE_ENV === "development") {
-            responseHeaders.set("Cache-Control", "no-cache");
-          }
+  responseHeaders.set("Content-Type", "text/html");
 
-          for (let header of securityHeaders) {
-            responseHeaders.set(...header);
-          }
+  if (process.env.NODE_ENV === "development") {
+    responseHeaders.set("Cache-Control", "no-cache");
+  }
 
-          resolve(
-            new Response(body, {
-              headers: responseHeaders,
-              status: responseStatusCode,
-            })
-          );
+  for (let header of securityHeaders) {
+    responseHeaders.set(...header);
+  }
 
-          pipe(body);
-        },
-        onShellError(error: unknown) {
-          reject(error);
-        },
-        onError(error: unknown) {
-          console.error(error);
-          responseStatusCode = 500;
-        },
-      }
-    );
-
-    setTimeout(abort, ABORT_DELAY);
+  return new Response(body, {
+    headers: responseHeaders,
+    status: responseStatusCode,
   });
 }
 

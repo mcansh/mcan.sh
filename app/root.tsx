@@ -1,5 +1,6 @@
 import * as React from "react";
-import type { LinksFunction, V2_MetaFunction } from "@remix-run/node";
+import type { V2_MetaFunction } from "@remix-run/server-runtime";
+import type { LinksFunction } from "@netlify/remix-runtime";
 import type { ThrownResponse } from "@remix-run/react";
 import { isRouteErrorResponse } from "@remix-run/react";
 import {

@@ -1,5 +1,6 @@
-import type { HeadersFunction, V2_MetaFunction } from "@remix-run/node";
-import { json } from "@remix-run/node";
+import type { HeadersFunction } from "@netlify/remix-runtime";
+import { json } from "@netlify/remix-runtime";
+import type { V2_MetaFunction } from "@remix-run/server-runtime";
 import { useLoaderData } from "@remix-run/react";
 import { cacheHeader } from "pretty-cache-header";
 
