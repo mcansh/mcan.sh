@@ -11,7 +11,7 @@
     "build": "run-s clean type-check && remix build",
     "type-check": "tsc",
     "lint": "eslint --ignore-path .gitignore --cache --fix .",
-    "format": "prettier --ignore-path .gitignore --write .",
+    "format": "prettier --ignore-path .gitignore --ignore-unknown --write .",
     "validate": "run-p lint format type-check",
     "prepare": "is-ci || husky install"
   },
