@@ -58,7 +58,7 @@
   },
   "lint-staged": {
     "*.+(js|jsx|ts|tsx|cts|mts)": [
-      "eslint --fix"
+      "eslint --cache --fix"
     ],
     "*": [
       "prettier --write --ignore-unknown"
