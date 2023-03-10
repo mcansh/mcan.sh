@@ -102,13 +102,7 @@ export default async function handleRequest(
 
   responseHeaders.set("Content-Type", "text/html");
 
-  if (process.env.NODE_ENV === "development") {
-    responseHeaders.set("Cache-Control", "no-cache");
-  }
-
-  for (let header of securityHeaders) {
-    responseHeaders.set(...header);
-  }
+  applySecurityHeaders(responseHeaders);
 
   return new Response(body, {
     headers: responseHeaders,
@@ -131,13 +125,17 @@ export const handleDataRequest: HandleDataRequestFunction = async (
     response.headers.set("Cache-Control", "private, max-age=10");
   }
 
-  if (process.env.NODE_ENV === "development") {
-    response.headers.set("Cache-Control", "no-cache");
-  }
-
-  for (let header of securityHeaders) {
-    response.headers.set(...header);
-  }
+  applySecurityHeaders(response.headers);
 
   return response;
 };
+
+function applySecurityHeaders(responseHeaders: Headers) {
+  if (process.env.NODE_ENV === "development") {
+    responseHeaders.set("Cache-Control", "no-cache");
+  }
+
+  for (let header of securityHeaders) {
+    responseHeaders.set(...header);
+  }
+}
