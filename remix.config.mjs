@@ -6,7 +6,7 @@ import path from "node:path";
 export default {
   appDirectory: "app",
   cacheDirectory: path.join(process.cwd(), "node_modules", ".cache", "remix"),
-  serverBuildPath: "build/index.js",
+  serverBuildPath: ".netlify/edge-functions/server.js",
   serverConditions: ["deno", "worker"],
   serverDependenciesToBundle: "all",
   serverMainFields: ["module", "main"],
