@@ -2,15 +2,16 @@ import * as React from "react";
 import type { V2_MetaFunction } from "@remix-run/server-runtime";
 import type { LinksFunction } from "@netlify/remix-runtime";
 import type { ThrownResponse } from "@remix-run/react";
-import { isRouteErrorResponse } from "@remix-run/react";
 import {
+  isRouteErrorResponse,
   Links,
   LiveReload,
   Meta,
   Outlet,
   Scripts,
-  useRouteError,
+  ScrollRestoration,
   useMatches,
+  useRouteError,
 } from "@remix-run/react";
 import clsx from "clsx";
 import * as Fathom from "fathom-client";
@@ -20,6 +21,8 @@ import appStylesHref from "tailwindcss/tailwind.css";
 import type { Match } from "~/@types/handle";
 import interFontHref from "~/inter/Inter.var.woff2";
 import interStylesHref from "~/inter/inter.css";
+
+import { NonceContext } from "./components/nonce";
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -105,6 +108,7 @@ function useHandleBodyClassName() {
 
 export default function App() {
   let handleBodyClassName = useHandleBodyClassName();
+  let nonce = React.useContext(NonceContext);
   useFathom();
 
   return (
@@ -115,8 +119,12 @@ export default function App() {
       </head>
       <body className={clsx("h-full", handleBodyClassName)}>
         <Outlet />
-        <Scripts />
-        <LiveReload port={Number(process.env.REMIX_DEV_SERVER_WS_PORT)} />
+        <ScrollRestoration nonce={nonce} />
+        <Scripts nonce={nonce} />
+        <LiveReload
+          nonce={nonce}
+          port={Number(process.env.REMIX_DEV_SERVER_WS_PORT)}
+        />
       </body>
     </html>
   );
