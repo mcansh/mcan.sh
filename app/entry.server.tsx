@@ -8,75 +8,7 @@ import { renderToReadableStream } from "react-dom/server";
 import { isPrefetch, preloadRouteAssets } from "remix-utils";
 import isbot from "isbot";
 
-const securityHeaders = createSecureHeaders({
-  "Content-Security-Policy": {
-    defaultSrc: ["'none'"],
-    fontSrc: ["'self'"],
-    imgSrc: [
-      "'self'",
-      "https://res.cloudinary.com/dof0zryca/image/upload/",
-      "https://thirtyseven-active.b-cdn.net",
-    ],
-    scriptSrc: [
-      "'self'",
-      "'unsafe-inline'",
-      "https://thirtyseven-active.b-cdn.net/script.js",
-    ],
-    styleSrc: ["'self'", "'unsafe-inline'"],
-    manifestSrc: ["'self'"],
-    prefetchSrc: ["'self'"],
-    connectSrc: [
-      "'self'",
-      ...(process.env.NODE_ENV === "development"
-        ? [`ws://localhost:3001`]
-        : []),
-    ],
-  },
-  "Referrer-Policy": "origin-when-cross-origin",
-  "X-Frame-Options": "DENY",
-  "X-Content-Type-Options": "nosniff",
-  "X-DNS-Prefetch-Control": "on",
-  "Strict-Transport-Security": {
-    maxAge: 31536000,
-    includeSubDomains: true,
-    preload: true,
-  },
-  "Permissions-Policy": {
-    accelerometer: [],
-    "ambient-light-sensor": [],
-    autoplay: [],
-    battery: [],
-    camera: [],
-    "display-capture": [],
-    "document-domain": [],
-    "encrypted-media": [],
-    "execution-while-not-rendered": [],
-    "execution-while-out-of-viewport": [],
-    fullscreen: [],
-    gamepad: [],
-    geolocation: [],
-    gyroscope: [],
-    "layout-animations": [],
-    "legacy-image-formats": [],
-    magnetometer: [],
-    microphone: [],
-    midi: [],
-    "navigation-override": [],
-    "oversized-images": [],
-    payment: [],
-    "picture-in-picture": [],
-    "publickey-credentials-get": [],
-    "speaker-selection": [],
-    "sync-xhr": [],
-    "unoptimized-images": [],
-    "unsized-media": [],
-    usb: [],
-    "screen-wake-lock": [],
-    "web-share": [],
-    "xr-spatial-tracking": [],
-  },
-  "Cross-Origin-Opener-Policy": "same-origin",
-});
+import { NonceContext } from "./components/nonce";
 
 export default async function handleRequest(
   request: Request,
@@ -86,9 +18,14 @@ export default async function handleRequest(
 ) {
   preloadRouteAssets(remixContext, responseHeaders);
 
+  let nonce = applySecurityHeaders(responseHeaders);
+
   let body = await renderToReadableStream(
-    <RemixServer context={remixContext} url={request.url} />,
+    <NonceContext.Provider value={nonce}>
+      <RemixServer context={remixContext} url={request.url} />
+    </NonceContext.Provider>,
     {
+      nonce,
       onError(error) {
         responseStatusCode = 500;
         console.error(error);
@@ -101,8 +38,6 @@ export default async function handleRequest(
   }
 
   responseHeaders.set("Content-Type", "text/html");
-
-  applySecurityHeaders(responseHeaders);
 
   return new Response(body, {
     headers: responseHeaders,
@@ -135,7 +70,80 @@ function applySecurityHeaders(responseHeaders: Headers) {
     responseHeaders.set("Cache-Control", "no-cache");
   }
 
+  let nonce = btoa(crypto.getRandomValues(new Uint32Array(2)).toString());
+  let securityHeaders = createSecureHeaders({
+    "Content-Security-Policy": {
+      defaultSrc: ["'none'"],
+      fontSrc: ["'self'"],
+      imgSrc: [
+        "'self'",
+        "https://res.cloudinary.com/dof0zryca/image/upload/",
+        "https://thirtyseven-active.b-cdn.net",
+      ],
+      scriptSrc: [
+        "'self'",
+        "https://thirtyseven-active.b-cdn.net/script.js",
+        `'nonce-${nonce}'`,
+      ],
+      styleSrc: ["'self'"],
+      manifestSrc: ["'self'"],
+      prefetchSrc: ["'self'"],
+      connectSrc: [
+        "'self'",
+        ...(process.env.NODE_ENV === "development"
+          ? [`ws://localhost:3001`]
+          : []),
+      ],
+    },
+    "Referrer-Policy": "origin-when-cross-origin",
+    "X-Frame-Options": "DENY",
+    "X-Content-Type-Options": "nosniff",
+    "X-DNS-Prefetch-Control": "on",
+    "Strict-Transport-Security": {
+      maxAge: 31536000,
+      includeSubDomains: true,
+      preload: true,
+    },
+    "Permissions-Policy": {
+      accelerometer: [],
+      "ambient-light-sensor": [],
+      autoplay: [],
+      battery: [],
+      camera: [],
+      "display-capture": [],
+      "document-domain": [],
+      "encrypted-media": [],
+      "execution-while-not-rendered": [],
+      "execution-while-out-of-viewport": [],
+      fullscreen: [],
+      gamepad: [],
+      geolocation: [],
+      gyroscope: [],
+      "layout-animations": [],
+      "legacy-image-formats": [],
+      magnetometer: [],
+      microphone: [],
+      midi: [],
+      "navigation-override": [],
+      "oversized-images": [],
+      payment: [],
+      "picture-in-picture": [],
+      "publickey-credentials-get": [],
+      "speaker-selection": [],
+      "sync-xhr": [],
+      "unoptimized-images": [],
+      "unsized-media": [],
+      usb: [],
+      "screen-wake-lock": [],
+      "web-share": [],
+      "xr-spatial-tracking": [],
+    },
+    "Cross-Origin-Opener-Policy": "same-origin",
+  });
+
   for (let header of securityHeaders) {
     responseHeaders.set(...header);
   }
+
+  return nonce;
 }
