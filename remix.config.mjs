@@ -4,17 +4,12 @@ import path from "node:path";
  * @type {import('@remix-run/dev').AppConfig}
  */
 export default {
+  ignoredRouteFiles: ["**/.*"],
   appDirectory: "app",
-  cacheDirectory: path.join(process.cwd(), "node_modules", ".cache", "remix"),
-  serverBuildPath: ".netlify/edge-functions/server.js",
-  serverConditions: ["deno", "worker"],
-  serverDependenciesToBundle: "all",
-  serverMainFields: ["module", "main"],
-  serverModuleFormat: "esm",
-  serverPlatform: "neutral",
-  server: "./server.js",
   assetsBuildDirectory: "public/build",
+  cacheDirectory: path.join(process.cwd(), "node_modules", ".cache", "remix"),
   publicPath: "/build/",
+  serverBuildPath: "build/index.js",
   future: {
     unstable_dev: true,
     unstable_postcss: true,
