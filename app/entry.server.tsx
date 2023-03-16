@@ -1,14 +1,15 @@
-import type {
-  EntryContext,
-  HandleDataRequestFunction,
-} from "@netlify/remix-runtime";
+import { PassThrough } from "node:stream";
+import type { EntryContext, HandleDataRequestFunction } from "@remix-run/node";
+import { Response } from "@remix-run/node";
 import { RemixServer } from "@remix-run/react";
 import { createSecureHeaders } from "@mcansh/remix-secure-headers";
-import { renderToReadableStream } from "react-dom/server";
+import { renderToPipeableStream } from "react-dom/server";
 import { isPrefetch, preloadRouteAssets } from "remix-utils";
 import isbot from "isbot";
 
 import { NonceContext } from "./components/nonce";
+
+const ABORT_DELAY = 5_000;
 
 export default async function handleRequest(
   request: Request,
@@ -17,35 +18,51 @@ export default async function handleRequest(
   remixContext: EntryContext
 ) {
   preloadRouteAssets(remixContext, responseHeaders);
+  let callback = isbot(request.headers.get("user-agent"))
+    ? "onAllReady"
+    : "onShellReady";
 
   let nonce = applySecurityHeaders(responseHeaders);
 
-  let body = await renderToReadableStream(
-    <NonceContext.Provider value={nonce}>
-      <RemixServer context={remixContext} url={request.url} />
-    </NonceContext.Provider>,
-    {
-      nonce,
-      onError(error) {
-        responseStatusCode = 500;
-        console.error(error);
-      },
-    }
-  );
+  return new Promise((resolve, reject) => {
+    let { pipe, abort } = renderToPipeableStream(
+      <NonceContext.Provider value={nonce}>
+        <RemixServer
+          context={remixContext}
+          url={request.url}
+          abortDelay={ABORT_DELAY}
+        />
+      </NonceContext.Provider>,
+      {
+        [callback]() {
+          let body = new PassThrough();
 
-  if (isbot(request.headers.get("user-agent"))) {
-    await body.allReady;
-  }
+          responseHeaders.set("Content-Type", "text/html");
 
-  responseHeaders.set("Content-Type", "text/html");
+          resolve(
+            new Response(body, {
+              headers: responseHeaders,
+              status: responseStatusCode,
+            })
+          );
 
-  return new Response(body, {
-    headers: responseHeaders,
-    status: responseStatusCode,
+          pipe(body);
+        },
+        onShellError(error: unknown) {
+          reject(error);
+        },
+        onError(error: unknown) {
+          console.error(error);
+          responseStatusCode = 500;
+        },
+      }
+    );
+
+    setTimeout(abort, ABORT_DELAY);
   });
 }
 
-export const handleDataRequest: HandleDataRequestFunction = async (
+export let handleDataRequest: HandleDataRequestFunction = async (
   response,
   { request }
 ) => {

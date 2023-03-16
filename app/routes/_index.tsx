@@ -1,4 +1,4 @@
-import type { HeadersFunction, LinksFunction } from "@netlify/remix-runtime";
+import type { HeadersFunction, LinksFunction } from "@remix-run/node";
 import { cacheHeader } from "pretty-cache-header";
 
 import {

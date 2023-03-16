@@ -1,7 +1,6 @@
 /node_modules
 *.log
 .DS_Store
-/.netlify
 /.cache
 /.output
 /api/index.js
