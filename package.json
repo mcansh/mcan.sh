@@ -19,7 +19,7 @@
     "prepare": "is-ci || husky install"
   },
   "dependencies": {
-    "@mcansh/remix-fastify": "^2.6.1",
+    "@mcansh/remix-fastify": "^2.6.2",
     "@mcansh/remix-secure-headers": "^0.6.2",
     "@remix-run/node": "^1.14.3",
     "@remix-run/react": "^1.14.3",
