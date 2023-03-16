@@ -25,35 +25,12 @@ import { NonceContext } from "./components/nonce";
 
 export const meta: V2_MetaFunction = () => {
   return [
-    { charSet: "utf-8" },
-    {
-      name: "viewport",
-      content: "initial-scale=1.0, width=device-width, viewport-fit=cover",
-    },
     {
       title: "Logan McAnsh",
     },
     {
       name: "description",
       content: "personal website for logan mcansh",
-    },
-    {
-      name: "apple-mobile-web-app-status-bar-style",
-      content: "black-translucent",
-    },
-    {
-      name: "apple-mobile-web-app-capable",
-      content: "yes",
-    },
-    {
-      name: "theme-color",
-      content: "#ffffff",
-      media: "(prefers-color-scheme: light)",
-    },
-    {
-      name: "theme-color",
-      content: "#0f172a",
-      media: "(prefers-color-scheme: dark)",
     },
   ];
 };
@@ -113,6 +90,26 @@ export default function App() {
   return (
     <html lang="en" className="h-full dark:bg-slate-900 dark:text-white">
       <head>
+        <meta charSet="utf-8" />
+        <meta
+          name="viewport"
+          content="initial-scale=1.0, width=device-width, viewport-fit=cover"
+        />
+        <meta
+          name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent"
+        />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta
+          name="theme-color"
+          content="#ffffff"
+          media="(prefers-color-scheme: light)"
+        />
+        <meta
+          name="theme-color"
+          content="#0f172a"
+          media="(prefers-color-scheme: dark)"
+        />
         <Meta />
         <Links />
       </head>
