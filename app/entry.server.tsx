@@ -1,3 +1,4 @@
+import crypto from "node:crypto";
 import { PassThrough } from "node:stream";
 import type { EntryContext, HandleDataRequestFunction } from "@remix-run/node";
 import { Response } from "@remix-run/node";
@@ -87,7 +88,7 @@ function applySecurityHeaders(responseHeaders: Headers) {
     responseHeaders.set("Cache-Control", "no-cache");
   }
 
-  let nonce = btoa(crypto.getRandomValues(new Uint32Array(2)).toString());
+  let nonce = crypto.randomBytes(16).toString("base64");
   let securityHeaders = createSecureHeaders({
     "Content-Security-Policy": {
       defaultSrc: ["'none'"],
