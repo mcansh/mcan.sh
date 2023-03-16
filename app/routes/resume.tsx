@@ -36,7 +36,7 @@ export function loader() {
       company: "Shopify",
       title: "Senior Software Engineer",
       start: new Date(2022, 7, 29),
-      duties: ["working on Remix"],
+      duties: ["Remix Core Team"],
     },
     {
       company: "Remix Software",
@@ -53,7 +53,7 @@ export function loader() {
       duties: [
         "First member of the web team",
         "Created and maintained a suite of modern white label web applications with Next.js to be included in our mobile apps for 7+ clients, which quickly became the most used areas of the app",
-        "Implemented a suite of utility functions used across our web experiences",
+        "Implemented a set of utility functions used across our web experiences",
         "Designed Sketch plugins",
       ],
     },
