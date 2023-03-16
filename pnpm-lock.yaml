@@ -1,7 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
-  "@mcansh/remix-fastify": ^2.6.2
+  "@mcansh/remix-fastify": ^2.6.3
   "@mcansh/remix-secure-headers": ^0.6.2
   "@remix-run/dev": ^1.14.3
   "@remix-run/eslint-config": ^1.14.3
@@ -40,7 +40,7 @@ specifiers:
   typescript: ^4.9.5
 
 dependencies:
-  "@mcansh/remix-fastify": 2.6.2_5ubds34erbj5aem7akp25s3ism
+  "@mcansh/remix-fastify": 2.6.3_5ubds34erbj5aem7akp25s3ism
   "@mcansh/remix-secure-headers": 0.6.2
   "@remix-run/node": 1.14.3
   "@remix-run/react": 1.14.3_biqbaboplfbrettd7655fr4n2y
@@ -2738,10 +2738,10 @@ packages:
     engines: { node: ">=8" }
     dev: false
 
-  /@mcansh/remix-fastify/2.6.2_5ubds34erbj5aem7akp25s3ism:
+  /@mcansh/remix-fastify/2.6.3_5ubds34erbj5aem7akp25s3ism:
     resolution:
       {
-        integrity: sha512-QrpyQ6nCrfZW7kNNNwRee3mUuz3c3/3v3Gx9FsM23slYcarummtg1FXYB/1r69Bgn7lPltGsN1zOl2DmnUDcZg==,
+        integrity: sha512-I14HPQpE0rKAKc63ZSVZ2ZmbBhApjb5bEzT1xRAstWflIEzAn3EiHMw/DMRFVuTukmk/2PBs4yu9RRbF8caaZA==,
       }
     peerDependencies:
       "@remix-run/node": ^1.6.0
