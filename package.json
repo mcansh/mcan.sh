@@ -16,7 +16,7 @@
     "lint": "eslint --ignore-path .gitignore --cache --fix .",
     "format": "prettier --ignore-path .gitignore --ignore-unknown --write .",
     "validate": "run-p lint format type-check",
-    "prepare": "is-ci || husky install"
+    "prepare": "husky install"
   },
   "dependencies": {
     "@mcansh/remix-fastify": "^2.6.3",
@@ -27,7 +27,6 @@
     "fastify": "^4.14.1",
     "fathom-client": "^3.5.0",
     "glob": "^9.3.0",
-    "is-ci": "^3.0.1",
     "isbot": "^3.6.7",
     "pretty-cache-header": "^1.0.0",
     "react": "^18.2.0",

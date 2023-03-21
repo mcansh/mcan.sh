@@ -1,12 +1,13 @@
-FROM jarredsumner/bun:edge as deps
+FROM oven/bun:0.5 as deps
 WORKDIR /workdir/
 
 COPY package.json bun.lockb ./
+ENV HUSKY=0
 RUN bun install
 
 ################################################################################
 
-FROM jarredsumner/bun:edge as build
+FROM oven/bun:0.5 as build
 WORKDIR /workdir/
 
 COPY --from=deps /workdir/node_modules /workdir/node_modules
@@ -16,7 +17,7 @@ RUN bun run build
 
 ################################################################################
 
-FROM jarredsumner/bun:edge
+FROM oven/bun:0.5
 WORKDIR /workdir/
 
 COPY --from=deps /workdir/node_modules /workdir/node_modules
