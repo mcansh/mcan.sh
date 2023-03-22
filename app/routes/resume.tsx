@@ -1,10 +1,8 @@
 import type { HeadersFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import type { V2_MetaFunction } from "@remix-run/server-runtime";
+import type { V2_MetaFunction } from "@remix-run/react";
 import { useLoaderData } from "@remix-run/react";
 import { cacheHeader } from "pretty-cache-header";
-
-import { mergeMeta } from "~/meta";
 
 export function loader() {
   let { format: formatDate } = new Intl.DateTimeFormat("en-US", {
@@ -105,20 +103,17 @@ export function loader() {
   );
 }
 
-export const meta: V2_MetaFunction<typeof loader> = mergeMeta(
-  // these will override the parent meta
-  () => {
-    return [
-      {
-        title: "Resume | Logan McAnsh",
-      },
-      {
-        name: "description",
-        content: "Logan McAnsh's Resume",
-      },
-    ];
-  }
-);
+export const meta: V2_MetaFunction<typeof loader> = () => {
+  return [
+    {
+      title: "Resume | Logan McAnsh",
+    },
+    {
+      name: "description",
+      content: "Logan McAnsh's Resume",
+    },
+  ];
+};
 
 export const headers: HeadersFunction = ({ loaderHeaders }) => {
   let routeHeaders = new Headers();
@@ -139,7 +134,7 @@ export default function ResumePage() {
   let data = useLoaderData<typeof loader>();
 
   return (
-    <div className="relative h-full border-t-8 border-solid border-indigo-600 pb-8-safe">
+    <div className="pb-8-safe relative h-full border-t-8 border-solid border-indigo-600">
       <div className="mx-auto max-w-prose py-4">
         <header className="mb-2 flex flex-col items-center space-x-4 space-y-1 px-4 pb-2 text-center sm:flex-row sm:text-left">
           <div className="relative h-32 w-32 overflow-hidden rounded-full sm:h-40 sm:w-40">
@@ -149,7 +144,7 @@ export default function ResumePage() {
               src="https://res.cloudinary.com/dof0zryca/image/upload/c_fill,f_auto,w_340/v1624726620/11698668.jpg"
               height={160}
               width={160}
-              className="absolute top-0 left-0 h-full w-full"
+              className="absolute left-0 top-0 h-full w-full"
             />
           </div>
           <div>
@@ -197,7 +192,7 @@ export default function ResumePage() {
                   key={`${experience.company}-${experience.start}`}
                 >
                   <div>
-                    <h3 className="flex flex-col py-2 sm:flex-row sm:items-baseline sm:space-y-0 sm:space-x-2">
+                    <h3 className="flex flex-col py-2 sm:flex-row sm:items-baseline sm:space-x-2 sm:space-y-0">
                       <span className="text-xl font-medium">
                         {experience.company}
                       </span>
