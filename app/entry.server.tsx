@@ -163,5 +163,11 @@ function applySecurityHeaders(responseHeaders: Headers) {
     responseHeaders.set(...header);
   }
 
+  let permissionsPolicy = responseHeaders.get("Permissions-Policy");
+
+  if (permissionsPolicy) {
+    responseHeaders.set("Feature-Policy", permissionsPolicy);
+  }
+
   return nonce;
 }
