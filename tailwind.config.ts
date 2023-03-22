@@ -1,8 +1,9 @@
-const defaultTheme = require("tailwindcss/defaultTheme");
+import defaultTheme from "tailwindcss/defaultTheme";
+import type { Config } from "tailwindcss";
+import tailwindcssPaddingSafe from "tailwindcss-padding-safe";
 
-/** @type {import("tailwindcss").Config} */
-module.exports = {
-  content: ["app/**/*.tsx"],
+let config: Config = {
+  content: ["app/**/*.{ts,tsx,js,jsx}"],
   darkMode: "media",
   theme: {
     extend: {
@@ -22,5 +23,7 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [require("tailwindcss-padding-safe")],
+  plugins: [tailwindcssPaddingSafe],
 };
+
+export default config;
