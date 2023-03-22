@@ -19,10 +19,10 @@
     "prepare": "is-ci || husky install"
   },
   "dependencies": {
-    "@mcansh/remix-fastify": "^2.6.3",
+    "@mcansh/remix-fastify": "^2.6.4",
     "@mcansh/remix-secure-headers": "^0.6.2",
-    "@remix-run/node": "^1.14.3",
-    "@remix-run/react": "^1.14.3",
+    "@remix-run/node": "0.0.0-nightly-d6c9737-20230322",
+    "@remix-run/react": "0.0.0-nightly-d6c9737-20230322",
     "clsx": "^1.2.1",
     "fastify": "^4.15.0",
     "fathom-client": "^3.5.0",
@@ -36,8 +36,8 @@
     "type-fest": "^3.6.1"
   },
   "devDependencies": {
-    "@remix-run/dev": "^1.14.3",
-    "@remix-run/eslint-config": "^1.14.3",
+    "@remix-run/dev": "0.0.0-nightly-d6c9737-20230322",
+    "@remix-run/eslint-config": "0.0.0-nightly-d6c9737-20230322",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@typescript/lib-dom": "npm:@types/web@^0.0.99",
@@ -55,7 +55,7 @@
     "postcss-100vh-fix": "^1.0.2",
     "prettier": "^2.8.6",
     "prettier-plugin-tailwindcss": "^0.2.5",
-    "tailwindcss": "^3.2.7",
+    "tailwindcss": "0.0.0-insiders.eadd6e5",
     "tailwindcss-padding-safe": "^1.0.6",
     "typescript": "^5.0.2"
   },
