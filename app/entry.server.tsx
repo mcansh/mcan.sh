@@ -91,6 +91,7 @@ function applySecurityHeaders(responseHeaders: Headers) {
   let nonce = crypto.randomBytes(16).toString("base64");
   let securityHeaders = createSecureHeaders({
     "Content-Security-Policy": {
+      upgradeInsecureRequests: true,
       defaultSrc: ["'none'"],
       fontSrc: ["'self'"],
       imgSrc: [
@@ -163,7 +164,7 @@ function applySecurityHeaders(responseHeaders: Headers) {
     responseHeaders.set(...header);
   }
 
-  let permissionsPolicy = responseHeaders.get("Permissions-Policy");
+  let permissionsPolicy = securityHeaders.get("Permissions-Policy");
 
   if (permissionsPolicy) {
     responseHeaders.set("Feature-Policy", permissionsPolicy);
