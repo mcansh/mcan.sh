@@ -2,7 +2,7 @@ import defaultTheme from "tailwindcss/defaultTheme";
 import type { Config } from "tailwindcss";
 import tailwindcssPaddingSafe from "tailwindcss-padding-safe";
 
-let config: Config = {
+export default {
   content: ["app/**/*.{ts,tsx,js,jsx}"],
   darkMode: "media",
   theme: {
@@ -24,6 +24,4 @@ let config: Config = {
     extend: {},
   },
   plugins: [tailwindcssPaddingSafe],
-};
-
-export default config;
+} satisfies Config;
