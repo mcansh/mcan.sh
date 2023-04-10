@@ -11,6 +11,7 @@ async function start() {
     build: path.join(process.cwd(), "build/index.js"),
     mode: MODE,
     purgeRequireCacheInDevelopment: false,
+    unstable_earlyHints: true,
   });
 
   let port = Number(process.env.PORT) || 3000;
