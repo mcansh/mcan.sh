@@ -19,7 +19,7 @@
     "prepare": "is-ci || husky install"
   },
   "dependencies": {
-    "@mcansh/remix-fastify": "^2.7.0",
+    "@mcansh/remix-fastify": "^2.7.1",
     "@mcansh/remix-secure-headers": "^0.7.1",
     "@remix-run/node": "^1.15.0",
     "@remix-run/react": "^1.15.0",
@@ -27,7 +27,7 @@
     "cross-env": "^7.0.3",
     "fastify": "^4.15.0",
     "fathom-client": "^3.5.0",
-    "glob": "^9.3.4",
+    "glob": "^10.0.0",
     "is-ci": "^3.0.1",
     "isbot": "^3.6.8",
     "pretty-cache-header": "^1.0.0",
@@ -39,12 +39,12 @@
   "devDependencies": {
     "@remix-run/dev": "^1.15.0",
     "@remix-run/eslint-config": "^1.15.0",
-    "@types/react": "^18.0.33",
+    "@types/react": "^18.0.34",
     "@types/react-dom": "^18.0.11",
     "@typescript/lib-dom": "npm:@types/web@^0.0.99",
     "autoprefixer": "^10.4.14",
     "del": "^7.0.0",
-    "eslint": "^8.37.0",
+    "eslint": "^8.38.0",
     "eslint-plugin-prefer-let": "^3.0.1",
     "gitignore-fs": "^2.2.2",
     "husky": "^8.0.3",
