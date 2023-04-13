@@ -1,6 +1,5 @@
 import * as React from "react";
 import type { LinksFunction, V2_MetaFunction } from "@remix-run/node";
-import type { ThrownResponse } from "@remix-run/react";
 import {
   isRouteErrorResponse,
   Links,
@@ -14,7 +13,6 @@ import {
 } from "@remix-run/react";
 import clsx from "clsx";
 import * as Fathom from "fathom-client";
-import type { RequireExactlyOne } from "type-fest";
 import appStylesHref from "tailwindcss/tailwind.css";
 
 import type { Match } from "~/types/handle";
@@ -129,22 +127,6 @@ export function ErrorBoundary() {
   let error = useRouteError();
   console.error(error);
 
-  return isRouteErrorResponse(error) ? (
-    <BlueScreenOfDeath caughtResponse={error} />
-  ) : (
-    <BlueScreenOfDeath error={error as Error} />
-  );
-}
-
-interface BlueScreenOfDeathProps {
-  caughtResponse: ThrownResponse<number, any>;
-  error: Error;
-}
-
-function BlueScreenOfDeath({
-  error,
-  caughtResponse,
-}: RequireExactlyOne<BlueScreenOfDeathProps>) {
   useFathom();
 
   let handleBodyClassName = useHandleBodyClassName();
@@ -164,7 +146,13 @@ function BlueScreenOfDeath({
           handleBodyClassName
         )}
       >
-        {error ? (
+        {isRouteErrorResponse(error) ? (
+          <>
+            <h1 className={headingClassName}>
+              {error.status} {error.statusText}
+            </h1>
+          </>
+        ) : error instanceof Error ? (
           <>
             <h1 className={headingClassName}>Uncaught Exception!</h1>
             <p>
@@ -186,9 +174,12 @@ function BlueScreenOfDeath({
           </>
         ) : (
           <>
-            <h1 className={headingClassName}>
-              {caughtResponse.status} {caughtResponse.statusText}
-            </h1>
+            <h1 className={headingClassName}>Unknown Error!</h1>
+            <p>
+              If you are not the developer, please click back in your browser
+              and try again.
+            </p>
+            <pre className={boxClassName}>{String(error)}</pre>
           </>
         )}
         <Scripts />
