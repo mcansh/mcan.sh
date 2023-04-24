@@ -183,7 +183,7 @@ export function ErrorBoundary() {
           </>
         )}
         <Scripts />
-        <LiveReload port={Number(process.env.REMIX_DEV_SERVER_WS_PORT)} />
+        <LiveReload />
       </body>
     </html>
   );
