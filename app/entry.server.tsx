@@ -88,29 +88,37 @@ function applySecurityHeaders(responseHeaders: Headers) {
     responseHeaders.set("Cache-Control", "no-cache");
   }
 
+  function applyDevServer(options: Array<string>) {
+    if (process.env.NODE_ENV === "development") {
+      options.push("localhost:3001");
+    }
+
+    return options;
+  }
+
   let nonce = crypto.randomBytes(16).toString("base64");
   let securityHeaders = createSecureHeaders({
     "Content-Security-Policy": {
       upgradeInsecureRequests: true,
       defaultSrc: ["'none'"],
-      fontSrc: ["'self'"],
+      fontSrc: applyDevServer(["'self'"]),
       imgSrc: [
         "'self'",
         "https://res.cloudinary.com/dof0zryca/image/upload/",
         "https://thirtyseven-active.b-cdn.net",
       ],
-      scriptSrc: [
+      scriptSrc: applyDevServer([
         "'self'",
         "https://thirtyseven-active.b-cdn.net/script.js",
         `'nonce-${nonce}'`,
-      ],
-      styleSrc: ["'self'"],
+      ]),
+      styleSrc: applyDevServer(["'self'"]),
       manifestSrc: ["'self'"],
       prefetchSrc: ["'self'"],
       connectSrc: [
         "'self'",
         ...(process.env.NODE_ENV === "development"
-          ? [`ws://localhost:3001`]
+          ? [`ws://localhost:3002`]
           : []),
       ],
     },

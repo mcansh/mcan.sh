@@ -8,9 +8,7 @@
   "scripts": {
     "build": "run-s clean type-check && remix build",
     "clean": "./scripts/clean.mjs",
-    "dev": "npm-run-all clean --parallel dev:*",
-    "dev:remix": "remix dev",
-    "dev:server": "cross-env NODE_ENV=development node --require dotenv/config --watch ./server.js",
+    "dev": "remix dev -c 'node --require dotenv/config --watch ./server.js'",
     "start": "cross-env NODE_ENV=production node ./server.js",
     "type-check": "tsc",
     "lint": "eslint --ignore-path .gitignore --cache --fix .",
@@ -21,9 +19,9 @@
   "dependencies": {
     "@mcansh/remix-fastify": "^2.7.2",
     "@mcansh/remix-secure-headers": "^0.7.1",
-    "@remix-run/node": "0.0.0-nightly-b35bbf9-20230419",
-    "@remix-run/react": "0.0.0-nightly-b35bbf9-20230419",
-    "@remix-run/server-runtime": "0.0.0-nightly-b35bbf9-20230419",
+    "@remix-run/node": "0.0.0-nightly-b2df1c7-20230426",
+    "@remix-run/react": "0.0.0-nightly-b2df1c7-20230426",
+    "@remix-run/server-runtime": "0.0.0-nightly-b2df1c7-20230426",
     "clsx": "^1.2.1",
     "cross-env": "^7.0.3",
     "fastify": "^4.15.0",
@@ -37,8 +35,8 @@
     "remix-utils": "^6.1.0"
   },
   "devDependencies": {
-    "@remix-run/dev": "0.0.0-nightly-b35bbf9-20230419",
-    "@remix-run/eslint-config": "0.0.0-nightly-b35bbf9-20230419",
+    "@remix-run/dev": "0.0.0-nightly-b2df1c7-20230426",
+    "@remix-run/eslint-config": "0.0.0-nightly-b2df1c7-20230426",
     "@types/react": "^18.0.38",
     "@types/react-dom": "^18.0.11",
     "@typescript/lib-dom": "npm:@types/web@^0.0.99",
