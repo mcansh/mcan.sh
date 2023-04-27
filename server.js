@@ -1,6 +1,6 @@
 let fastify = require("fastify");
 let { remixFastifyPlugin } = require("@mcansh/remix-fastify");
-let { devReady } = require("@remix-run/node");
+let { broadcastDevReady } = require("@remix-run/node");
 
 let serverBuild = require("./build/index.js");
 
@@ -20,7 +20,7 @@ async function start() {
 
   let address = await app.listen({ port, host: "0.0.0.0" });
   if (MODE === "development") {
-    devReady(serverBuild);
+    broadcastDevReady(serverBuild);
   }
   console.log(`✅ app ready: ${address}`);
 }
