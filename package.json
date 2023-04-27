@@ -20,9 +20,9 @@
   "dependencies": {
     "@mcansh/remix-fastify": "^2.7.2",
     "@mcansh/remix-secure-headers": "^0.7.1",
-    "@remix-run/node": "1.16.0-pre.1",
-    "@remix-run/react": "1.16.0-pre.1",
-    "@remix-run/server-runtime": "1.16.0-pre.1",
+    "@remix-run/node": "1.16.0-pre.2",
+    "@remix-run/react": "1.16.0-pre.2",
+    "@remix-run/server-runtime": "1.16.0-pre.2",
     "clsx": "^1.2.1",
     "cross-env": "^7.0.3",
     "fastify": "^4.17.0",
@@ -36,8 +36,8 @@
     "remix-utils": "^6.1.0"
   },
   "devDependencies": {
-    "@remix-run/dev": "1.16.0-pre.1",
-    "@remix-run/eslint-config": "1.16.0-pre.1",
+    "@remix-run/dev": "1.16.0-pre.2",
+    "@remix-run/eslint-config": "1.16.0-pre.2",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.1",
     "@typescript/lib-dom": "npm:@types/web@^0.0.99",
@@ -65,12 +65,5 @@
     "*": [
       "prettier --write --ignore-unknown"
     ]
-  },
-  "overrides": {
-    "@remix-run/node": "0.0.0-nightly-4be6e9d-20230413",
-    "@remix-run/react": "0.0.0-nightly-4be6e9d-20230413",
-    "@remix-run/dev": "0.0.0-nightly-4be6e9d-20230413",
-    "@remix-run/eslint-config": "0.0.0-nightly-4be6e9d-20230413",
-    "@remix-run/server-runtime": "0.0.0-nightly-4be6e9d-20230413"
   }
 }
