@@ -8,7 +8,7 @@
   "type": "module",
   "scripts": {
     "build": "run-s clean type-check && remix build",
-    "clean": "./scripts/clean.mjs",
+    "clean": "./scripts/clean.js",
     "dev": "remix dev -c 'node --require dotenv/config --watch ./server.js'",
     "start": "cross-env NODE_ENV=production node ./server.js",
     "type-check": "tsc",
