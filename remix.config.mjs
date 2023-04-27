@@ -12,6 +12,7 @@ export default {
   tailwind: true,
   postcss: true,
   serverBuildPath: "build/index.js",
+  serverModuleFormat: "esm",
   future: {
     unstable_dev: true,
     v2_errorBoundary: true,
