@@ -114,10 +114,7 @@ export default function App() {
         <Outlet />
         <ScrollRestoration nonce={nonce} />
         <Scripts nonce={nonce} />
-        <LiveReload
-          nonce={nonce}
-          port={Number(process.env.REMIX_DEV_SERVER_WS_PORT)}
-        />
+        <LiveReload nonce={nonce} />
       </body>
     </html>
   );
@@ -125,6 +122,7 @@ export default function App() {
 
 export function ErrorBoundary() {
   let error = useRouteError();
+  let nonce = React.useContext(NonceContext);
   console.error(error);
 
   useFathom();
@@ -182,8 +180,9 @@ export function ErrorBoundary() {
             <pre className={boxClassName}>{String(error)}</pre>
           </>
         )}
-        <Scripts />
-        <LiveReload />
+        <ScrollRestoration nonce={nonce} />
+        <Scripts nonce={nonce} />
+        <LiveReload nonce={nonce} />
       </body>
     </html>
   );
