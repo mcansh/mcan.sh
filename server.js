@@ -1,8 +1,8 @@
-let fastify = require("fastify");
-let { remixFastifyPlugin } = require("@mcansh/remix-fastify");
-let { broadcastDevReady } = require("@remix-run/node");
+import fastify from "fastify";
+import { remixFastifyPlugin } from "@mcansh/remix-fastify";
+import { broadcastDevReady } from "@remix-run/node";
 
-let serverBuild = require("./build/index.js");
+import * as serverBuild from "./build/index.js";
 
 let MODE = process.env.NODE_ENV;
 
