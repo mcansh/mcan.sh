@@ -34,6 +34,7 @@ export function loader() {
       company: "Shopify",
       title: "Senior Software Engineer",
       start: new Date(2022, 7, 29),
+      end: new Date(2023, 4, 4),
       duties: ["Remix Core Team"],
     },
     {
