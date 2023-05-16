@@ -23,10 +23,12 @@ async function clean() {
     return gitignore.ignoresSync(file);
   });
 
-  let deleted = await deleteAsync([
-    ...filesToDelete,
-    remixConfig.cacheDirectory,
-  ]);
+  if (process.env.NO_CACHE) {
+    let rel = path.relative(cwd, remixConfig.cacheDirectory);
+    filesToDelete.push(`${rel}/**/*`);
+  }
+
+  let deleted = await deleteAsync(filesToDelete);
 
   if (deleted.length > 0) {
     let deletedPaths = deleted.map((file) => path.relative(cwd, file));
