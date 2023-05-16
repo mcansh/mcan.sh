@@ -16,19 +16,14 @@ import * as Fathom from "fathom-client";
 import appStylesHref from "tailwindcss/tailwind.css";
 
 import type { Match } from "~/types/handle";
-import interFontHref from "~/inter/Inter.var.woff2";
-import interStylesHref from "~/inter/inter.css";
+import interFontHref from "~/fonts/inter/Inter.var.woff2";
+import interStylesHref from "~/fonts/inter/inter.css";
 import { NonceContext } from "~/components/nonce";
 
 export const meta: V2_MetaFunction = () => {
   return [
-    {
-      title: "Logan McAnsh",
-    },
-    {
-      name: "description",
-      content: "personal website for logan mcansh",
-    },
+    { title: "Logan McAnsh" },
+    { name: "description", content: "personal website for logan mcansh" },
   ];
 };
 
