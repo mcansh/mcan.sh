@@ -25,6 +25,8 @@ export function loader() {
     "Continuous Integration",
     "Continuous Delivery",
     "Prisma",
+    "GraphQL",
+    "Rest APIs",
   ];
 
   let experiences = [
