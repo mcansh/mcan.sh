@@ -99,7 +99,7 @@ function applySecurityHeaders(responseHeaders: Headers) {
   let nonce = crypto.randomBytes(16).toString("base64");
   let securityHeaders = createSecureHeaders({
     "Content-Security-Policy": {
-      upgradeInsecureRequests: true,
+      upgradeInsecureRequests: process.env.NODE_ENV === "production",
       defaultSrc: ["'none'"],
       fontSrc: applyDevServer(["'self'"]),
       imgSrc: [
