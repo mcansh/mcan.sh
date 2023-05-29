@@ -1,12 +1,29 @@
-import type { HeadersFunction, LinksFunction } from "@remix-run/node";
+import {
+  json,
+  type HeadersFunction,
+  type LinksFunction,
+} from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
 import { cacheHeader } from "pretty-cache-header";
 
+import { getCloudinaryURL } from "~/cloudinary.server";
 import {
   FunHoverLink,
   styles as funHoverLinkStyles,
 } from "~/components/fun-hover-link";
 import berkeleyMonoStylesHref from "~/fonts/berkeley-mono/berkeley-mono.css";
 import berkeleyMonoFontHref from "~/fonts/berkeley-mono/BerkeleyMonoVariable-Regular.woff2";
+
+export function loader() {
+  let me = getCloudinaryURL("website/me", {
+    resize: {
+      height: 480,
+      width: 480,
+      type: "fill",
+    },
+  });
+  return json({ me });
+}
 
 export const headers: HeadersFunction = () => {
   return {
@@ -36,11 +53,13 @@ export const links: LinksFunction = () => {
 };
 
 export default function IndexPage() {
+  let data = useLoaderData<typeof loader>();
+
   return (
     <div className="mx-auto flex h-screen max-w-screen-md flex-col items-center justify-between px-4 text-center">
       <div className="flex flex-1 flex-col items-center justify-center">
         <img
-          src="https://res.cloudinary.com/dof0zryca/image/upload/c_fill,f_auto,h_480,w_480/v1624726775/me.jpg"
+          src={data.me}
           alt="Me sitting on a oversized wooden chair at Comerica Park"
           height={240}
           width={240}
