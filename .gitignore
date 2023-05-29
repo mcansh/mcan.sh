@@ -11,3 +11,4 @@
 .eslintcache
 tsconfig.tsbuildinfo
 /.sst
+.env
