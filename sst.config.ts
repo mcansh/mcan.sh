@@ -2,8 +2,7 @@ import type { SSTConfig } from "sst";
 import { RemixSite } from "sst/constructs";
 import { Certificate } from "aws-cdk-lib/aws-certificatemanager";
 import type { SsrDomainProps } from "sst/constructs/SsrSite.js";
-
-import { env } from "~/env.server";
+import { z } from "zod";
 
 export default {
   config(_input) {
@@ -17,15 +16,22 @@ export default {
       let customDomain: SsrDomainProps | undefined = undefined;
 
       if (stack.stage === "prod") {
+        let envSchema = z.object({
+          CLOUDINARY_CLOUD_NAME: z.string(),
+          AWS_CERTIFICATE_ARN: z.string(),
+          AWS_DOMAIN: z.string(),
+        });
+
+        let sst = envSchema.parse(process.env);
         customDomain = {
           isExternalDomain: true,
-          domainName: `www.${env.AWS_DOMAIN}`,
-          alternateNames: [env.AWS_DOMAIN],
+          domainName: `www.${sst.AWS_DOMAIN}`,
+          alternateNames: [sst.AWS_DOMAIN],
           cdk: {
             certificate: Certificate.fromCertificateArn(
               stack,
               "MyCert",
-              env.AWS_CERTIFICATE_ARN
+              sst.AWS_CERTIFICATE_ARN
             ),
           },
         };
