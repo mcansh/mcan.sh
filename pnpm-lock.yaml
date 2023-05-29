@@ -49,6 +49,9 @@ dependencies:
   remix-utils:
     specifier: ^6.3.0
     version: 6.3.0(@remix-run/react@1.16.1)(@remix-run/server-runtime@1.16.1)(react@18.2.0)(typescript@5.1.0-beta)(zod@3.21.4)
+  zod:
+    specifier: 3.21.4
+    version: 3.21.4
 
 devDependencies:
   "@remix-run/dev":
