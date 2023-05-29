@@ -54,3 +54,6 @@ jobs:
         if: ${{ github.ref == 'refs/heads/main' }}
         run: |
           pnpm sst deploy --stage prod
+        env:
+          AWS_DOMAIN: ${{ secrets.AWS_DOMAIN }}
+          AWS_CERTIFICATE_ARN: ${{ secrets.AWS_CERTIFICATE_ARN }}
