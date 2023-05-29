@@ -1,14 +1,8 @@
 import type { SSTConfig } from "sst";
 import { RemixSite } from "sst/constructs";
 import { Certificate } from "aws-cdk-lib/aws-certificatemanager";
+import type { SsrDomainProps } from "sst/constructs/SsrSite.js";
 import { z } from "zod";
-
-let config = z.object({
-  AWS_DOMAIN: z.string(),
-  AWS_CERTIFICATE_ARN: z.string(),
-});
-
-let result = config.parse(process.env);
 
 export default {
   config(_input) {
@@ -19,24 +13,36 @@ export default {
   },
   stacks(app) {
     app.stack(function Site({ stack }) {
+      let customDomain: SsrDomainProps | undefined = undefined;
+
+      if (stack.stage === "prod") {
+        let envSchema = z.object({
+          CLOUDINARY_CLOUD_NAME: z.string(),
+          AWS_CERTIFICATE_ARN: z.string(),
+          AWS_DOMAIN: z.string(),
+        });
+
+        let sst = envSchema.parse(process.env);
+        customDomain = {
+          isExternalDomain: true,
+          domainName: `www.${sst.AWS_DOMAIN}`,
+          alternateNames: [sst.AWS_DOMAIN],
+          cdk: {
+            certificate: Certificate.fromCertificateArn(
+              stack,
+              "MyCert",
+              sst.AWS_CERTIFICATE_ARN
+            ),
+          },
+        };
+      }
+
       let site = new RemixSite(stack, "site", {
         runtime: "nodejs18.x",
-        customDomain:
-          stack.stage === "prod"
-            ? {
-                isExternalDomain: true,
-                domainName: `www.${result.AWS_DOMAIN}`,
-                alternateNames: [result.AWS_DOMAIN],
-                cdk: {
-                  certificate: Certificate.fromCertificateArn(
-                    stack,
-                    "MyCert",
-                    result.AWS_CERTIFICATE_ARN
-                  ),
-                },
-              }
-            : undefined,
+        edge: true,
+        customDomain,
       });
+
       stack.addOutputs({ url: site.customDomainUrl || site.url });
     });
   },
