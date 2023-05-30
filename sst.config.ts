@@ -1,6 +1,8 @@
 import type { SSTConfig } from "sst";
 import { Config, RemixSite } from "sst/constructs";
-import { Certificate } from "aws-cdk-lib/aws-certificatemanager";
+import * as acm from "aws-cdk-lib/aws-certificatemanager";
+import * as cdk from "aws-cdk-lib";
+import * as cf from "aws-cdk-lib/aws-cloudfront";
 import type { SsrDomainProps } from "sst/constructs/SsrSite.js";
 import { z } from "zod";
 
@@ -33,7 +35,7 @@ export default {
           domainName: `www.${sst.AWS_DOMAIN}`,
           alternateNames: [sst.AWS_DOMAIN],
           cdk: {
-            certificate: Certificate.fromCertificateArn(
+            certificate: acm.Certificate.fromCertificateArn(
               stack,
               "MyCert",
               sst.AWS_CERTIFICATE_ARN
@@ -41,10 +43,25 @@ export default {
           },
         };
       }
+
+      let serverCachePolicy = new cf.CachePolicy(stack, "ServerCache", {
+        queryStringBehavior: cf.CacheQueryStringBehavior.all(),
+        headerBehavior: cf.CacheHeaderBehavior.allowList("Vary"),
+        cookieBehavior: cf.CacheCookieBehavior.all(),
+        defaultTtl: cdk.Duration.days(0),
+        maxTtl: cdk.Duration.days(365),
+        minTtl: cdk.Duration.days(0),
+        enableAcceptEncodingBrotli: true,
+        enableAcceptEncodingGzip: true,
+      });
+
       let site = new RemixSite(stack, "site", {
         runtime: "nodejs18.x",
         customDomain,
         bind: [CLOUDINARY_CLOUD_NAME],
+        cdk: {
+          serverCachePolicy,
+        },
       });
 
       stack.addOutputs({ url: site.customDomainUrl || site.url });
