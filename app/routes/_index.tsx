@@ -22,6 +22,7 @@ export function loader() {
       type: "fill",
     },
   });
+
   return json({ me });
 }
 
