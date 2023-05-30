@@ -14,7 +14,7 @@ export default {
     };
   },
   stacks(app) {
-    app.stack(function Site({ stack }) {
+    app.stack(({ stack }) => {
       let CLOUDINARY_CLOUD_NAME = new Config.Secret(
         stack,
         "CLOUDINARY_CLOUD_NAME"
@@ -28,16 +28,17 @@ export default {
           AWS_DOMAIN: z.string(),
         });
 
-        let sst = envSchema.parse(process.env);
+        let env = envSchema.parse(process.env);
+
         customDomain = {
           isExternalDomain: true,
-          domainName: `www.${sst.AWS_DOMAIN}`,
-          alternateNames: [sst.AWS_DOMAIN],
+          domainName: `www.${env.AWS_DOMAIN}`,
+          alternateNames: [env.AWS_DOMAIN],
           cdk: {
             certificate: acm.Certificate.fromCertificateArn(
               stack,
               "MyCert",
-              sst.AWS_CERTIFICATE_ARN
+              env.AWS_CERTIFICATE_ARN
             ),
           },
         };
@@ -61,6 +62,7 @@ export default {
         cdk: {
           serverCachePolicy,
         },
+        nodejs: { format: "cjs" },
       });
 
       stack.addOutputs({ url: site.customDomainUrl || site.url });
