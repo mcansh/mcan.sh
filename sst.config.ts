@@ -1,5 +1,5 @@
 import type { SSTConfig } from "sst";
-import { RemixSite } from "sst/constructs";
+import { Config, RemixSite } from "sst/constructs";
 import { Certificate } from "aws-cdk-lib/aws-certificatemanager";
 import type { SsrDomainProps } from "sst/constructs/SsrSite.js";
 import { z } from "zod";
@@ -13,6 +13,11 @@ export default {
   },
   stacks(app) {
     app.stack(function Site({ stack }) {
+      let CLOUDINARY_CLOUD_NAME = new Config.Secret(
+        stack,
+        "CLOUDINARY_CLOUD_NAME"
+      );
+
       let customDomain: SsrDomainProps | undefined = undefined;
 
       if (stack.stage === "prod") {
@@ -36,11 +41,10 @@ export default {
           },
         };
       }
-
       let site = new RemixSite(stack, "site", {
         runtime: "nodejs18.x",
-        edge: true,
         customDomain,
+        bind: [CLOUDINARY_CLOUD_NAME],
       });
 
       stack.addOutputs({ url: site.customDomainUrl || site.url });
