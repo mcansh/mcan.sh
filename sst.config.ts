@@ -9,7 +9,7 @@ import { z } from "zod";
 export default {
   config(_input) {
     return {
-      name: "website",
+      name: "personal-website",
       region: "us-east-1",
     };
   },
