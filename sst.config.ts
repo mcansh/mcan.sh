@@ -1,5 +1,5 @@
 import type { SSTConfig } from "sst";
-import { Config, RemixSite } from "sst/constructs";
+import { RemixSite } from "sst/constructs";
 import * as acm from "aws-cdk-lib/aws-certificatemanager";
 import * as cdk from "aws-cdk-lib";
 import * as cf from "aws-cdk-lib/aws-cloudfront";
@@ -15,11 +15,6 @@ export default {
   },
   stacks(app) {
     app.stack(({ stack }) => {
-      let CLOUDINARY_CLOUD_NAME = new Config.Secret(
-        stack,
-        "CLOUDINARY_CLOUD_NAME"
-      );
-
       let customDomain: SsrDomainProps | undefined = undefined;
 
       if (stack.stage === "prod") {
@@ -58,10 +53,7 @@ export default {
       let site = new RemixSite(stack, "site", {
         runtime: "nodejs18.x",
         customDomain,
-        bind: [CLOUDINARY_CLOUD_NAME],
-        cdk: {
-          serverCachePolicy,
-        },
+        cdk: { serverCachePolicy },
         nodejs: { format: "cjs" },
       });
 
