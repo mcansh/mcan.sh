@@ -43,6 +43,7 @@ export function loader() {
         "Converted our integration tests from Puppeteer to Playwright",
         "Deployment target testing infrastructure for each of our first party targets",
         "Built and helped build adapters for our first party targets as well as a few community targets",
+        "Implemented a new \"flat route\" routing convention"
       ],
     },
     {
