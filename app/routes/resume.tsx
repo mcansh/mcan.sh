@@ -45,7 +45,8 @@ export function loader() {
         "Converted our integration tests from Puppeteer to Playwright",
         "Deployment target testing infrastructure for each of our first party targets",
         "Built and helped build adapters for our first party targets as well as a few community targets",
-        "Implemented a new \"flat route\" routing convention"
+        'Implemented a new "flat route" routing convention',
+        "Created `@remix-run/testing` to allow unit testing components using Remix's Link, Form, Fetchers, etc",
       ],
     },
     {
@@ -124,13 +125,8 @@ export function loader() {
 
 export const meta: V2_MetaFunction<typeof loader> = () => {
   return [
-    {
-      title: "Resume | Logan McAnsh",
-    },
-    {
-      name: "description",
-      content: "Logan McAnsh's Resume",
-    },
+    { title: "Resume | Logan McAnsh" },
+    { name: "description", content: "Logan McAnsh's Resume" },
   ];
 };
 
