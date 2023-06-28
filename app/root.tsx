@@ -82,26 +82,7 @@ export default function App() {
   return (
     <html lang="en" className="h-full dark:bg-slate-900 dark:text-white">
       <head>
-        <meta charSet="utf-8" />
-        <meta
-          name="viewport"
-          content="initial-scale=1.0, width=device-width, viewport-fit=cover"
-        />
-        <meta
-          name="apple-mobile-web-app-status-bar-style"
-          content="black-translucent"
-        />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta
-          name="theme-color"
-          content="#ffffff"
-          media="(prefers-color-scheme: light)"
-        />
-        <meta
-          name="theme-color"
-          content="#0f172a"
-          media="(prefers-color-scheme: dark)"
-        />
+        <DefaultMeta />
         <Meta />
         <Links />
       </head>
@@ -130,6 +111,7 @@ export function ErrorBoundary() {
     <html lang="en" className="h-full">
       <head>
         <title>Uh-oh!</title>
+        <DefaultMeta />
         <Meta />
         <Links />
       </head>
@@ -180,5 +162,32 @@ export function ErrorBoundary() {
         <LiveReload nonce={nonce} />
       </body>
     </html>
+  );
+}
+
+function DefaultMeta() {
+  return (
+    <>
+      <meta charSet="utf-8" />
+      <meta
+        name="viewport"
+        content="initial-scale=1.0, width=device-width, viewport-fit=cover"
+      />
+      <meta
+        name="apple-mobile-web-app-status-bar-style"
+        content="black-translucent"
+      />
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+      <meta
+        name="theme-color"
+        content="#ffffff"
+        media="(prefers-color-scheme: light)"
+      />
+      <meta
+        name="theme-color"
+        content="#0f172a"
+        media="(prefers-color-scheme: dark)"
+      />
+    </>
   );
 }
