@@ -4,6 +4,8 @@ import type { V2_MetaFunction } from "@remix-run/react";
 import { useLoaderData } from "@remix-run/react";
 import { cacheHeader } from "pretty-cache-header";
 
+import { getCloudinaryURL } from "~/cloudinary.server";
+
 export function loader() {
   let { format: formatDate } = new Intl.DateTimeFormat("en-US", {
     month: "long",
@@ -99,6 +101,13 @@ export function loader() {
       certifications,
       skills: skills.sort(() => Math.random() - 0.5),
       experiences,
+      me: getCloudinaryURL("website/11698668", {
+        resize: {
+          height: 480,
+          width: 480,
+          type: "fill",
+        },
+      }),
     },
     {
       headers: {
@@ -151,7 +160,7 @@ export default function ResumePage() {
             <div className="h-full w-full scale-125 bg-cover" />
             <img
               alt="Me standing on a rock in front of an American flag with a beer in hand"
-              src="https://res.cloudinary.com/dof0zryca/image/upload/c_fill,f_auto,w_340/v1624726620/11698668.jpg"
+              src={data.me}
               height={160}
               width={160}
               className="absolute left-0 top-0 h-full w-full"
@@ -212,13 +221,13 @@ export default function ResumePage() {
                           {experience.start}
                         </time>
                         {" - "}
-                        {"current" in experience ? (
-                          <span>Present</span>
-                        ) : (
+                        {experience.end && experience.endISO ? (
                           <time dateTime={experience.endISO}>
                             {experience.end}
                           </time>
-                        )}
+                        ) : "current" in experience ? (
+                          <span>Present</span>
+                        ) : null}
                       </span>
                     </h3>
                     {experience.duties.length > 0 ? (
