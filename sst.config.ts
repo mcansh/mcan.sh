@@ -40,9 +40,9 @@ export default {
       }
 
       let serverCachePolicy = new cf.CachePolicy(stack, "ServerCache", {
-        queryStringBehavior: cf.CacheQueryStringBehavior.all(),
-        headerBehavior: cf.CacheHeaderBehavior.allowList("Vary"),
-        cookieBehavior: cf.CacheCookieBehavior.all(),
+        queryStringBehavior: cf.CacheQueryStringBehavior.none(),
+        headerBehavior: cf.CacheHeaderBehavior.none(),
+        cookieBehavior: cf.CacheCookieBehavior.none(),
         defaultTtl: cdk.Duration.days(0),
         maxTtl: cdk.Duration.days(365),
         minTtl: cdk.Duration.days(0),
