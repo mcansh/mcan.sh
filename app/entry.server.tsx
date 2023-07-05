@@ -118,8 +118,12 @@ function applySecurityHeaders(responseHeaders: Headers) {
       connectSrc: [
         "'self'",
         ...(process.env.NODE_ENV === "development"
-          ? [`ws://localhost:3002`]
+          ? [`ws://localhost:3001`]
           : []),
+      ],
+      workerSrc: ["blob:"],
+      reportUri: [
+        "https://o74198.ingest.sentry.io/api/268464/security/?sentry_key=4b455db031a845c3aefc7540b16e3a16",
       ],
     },
     "Referrer-Policy": "origin-when-cross-origin",
@@ -177,6 +181,11 @@ function applySecurityHeaders(responseHeaders: Headers) {
   if (permissionsPolicy) {
     responseHeaders.set("Feature-Policy", permissionsPolicy);
   }
+
+  responseHeaders.set(
+    `Expect-CT`,
+    `report-uri="https://o74198.ingest.sentry.io/api/268464/security/?sentry_key=4b455db031a845c3aefc7540b16e3a16"`
+  );
 
   return nonce;
 }
