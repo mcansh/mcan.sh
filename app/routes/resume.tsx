@@ -119,7 +119,7 @@ export function loader() {
           sMaxage: "1 hour",
         }),
       },
-    }
+    },
   );
 }
 

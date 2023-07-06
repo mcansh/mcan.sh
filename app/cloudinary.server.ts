@@ -10,7 +10,7 @@ let env = envSchema.parse(process.env);
 
 export function getCloudinaryURL(
   publicId: string,
-  transformations: TransformerOption
+  transformations: TransformerOption,
 ) {
   return buildUrl(publicId, {
     cloud: { cloudName: env.CLOUDINARY_CLOUD_NAME },

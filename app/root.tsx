@@ -118,7 +118,7 @@ export function ErrorBoundary() {
       <body
         className={clsx(
           "mx-auto min-h-screen w-[90%] max-w-5xl space-y-4 bg-[#0827f5] pt-20 text-center font-mono text-white",
-          handleBodyClassName
+          handleBodyClassName,
         )}
       >
         {isRouteErrorResponse(error) ? (
