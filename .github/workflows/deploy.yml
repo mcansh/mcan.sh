@@ -64,3 +64,11 @@ jobs:
         if: ${{ github.ref == 'refs/heads/main' }}
         run: |
           aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_CF_DISTRIBUTION_ID }} --paths "/*"
+
+      - name: ♻️ Purge Cloudflare cache
+        if: ${{ github.ref == 'refs/heads/main' }}
+        uses: jakejarvis/cloudflare-purge-action@v0.3.0
+        env:
+          CLOUDFLARE_ZONE: ${{ secrets.CLOUDFLARE_ZONE }}
+          CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_TOKEN }}
+          PURGE_URLS: '["https://${{ secrets.AWS_DOMAIN }}", "https://${{ secrets.AWS_DOMAIN }}/resume", "https://${{ secrets.AWS_DOMAIN }}/resume.pdf"]'
