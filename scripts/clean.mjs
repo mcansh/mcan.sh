@@ -9,42 +9,42 @@ import { globSync } from "glob";
 import remixConfig from "../remix.config.js";
 
 async function clean() {
-  let cwd = process.cwd();
-  let gitignore = new Gitignore();
+	let cwd = process.cwd();
+	let gitignore = new Gitignore();
 
-  let files = globSync("**/*", {
-    absolute: true,
-    ignore: ["node_modules/**/*", ".vercel/**/*"],
-    nodir: true,
-    cwd,
-  });
+	let files = globSync("**/*", {
+		absolute: true,
+		ignore: ["node_modules/**/*", ".vercel/**/*"],
+		nodir: true,
+		cwd,
+	});
 
-  let filesToDelete = files.filter((file) => {
-    return gitignore.ignoresSync(file);
-  });
+	let filesToDelete = files.filter((file) => {
+		return gitignore.ignoresSync(file);
+	});
 
-  if (process.env.NO_CACHE) {
-    let rel = path.relative(cwd, remixConfig.cacheDirectory);
-    filesToDelete.push(`${rel}/**/*`);
-  }
+	if (process.env.NO_CACHE) {
+		let rel = path.relative(cwd, remixConfig.cacheDirectory);
+		filesToDelete.push(`${rel}/**/*`);
+	}
 
-  let deleted = await deleteAsync(filesToDelete);
+	let deleted = await deleteAsync(filesToDelete);
 
-  if (deleted.length > 0) {
-    let deletedPaths = deleted.map((file) => path.relative(cwd, file));
-    console.log(`✨ Deleted the following files and directories`);
-    console.log(
-      kleur.red(deletedPaths.map((file) => "👉 " + file).join("\n") + "\n"),
-    );
-  }
+	if (deleted.length > 0) {
+		let deletedPaths = deleted.map((file) => path.relative(cwd, file));
+		console.log(`✨ Deleted the following files and directories`);
+		console.log(
+			kleur.red(deletedPaths.map((file) => "👉 " + file).join("\n") + "\n"),
+		);
+	}
 }
 
 clean().then(
-  () => {
-    process.exit(0);
-  },
-  (error) => {
-    console.error(error);
-    process.exit(1);
-  },
+	() => {
+		process.exit(0);
+	},
+	(error) => {
+		console.error(error);
+		process.exit(1);
+	},
 );

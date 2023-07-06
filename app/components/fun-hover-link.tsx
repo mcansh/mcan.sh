@@ -5,13 +5,13 @@ import { Link } from "@remix-run/react";
 export { default as styles } from "~/styles/fun-hover-link.css";
 
 export function FunHoverLink({ children, to, ...props }: LinkProps) {
-  return (
-    <Link
-      {...props}
-      className="fun-link relative bg-no-repeat text-current no-underline"
-      to={to}
-    >
-      {children}
-    </Link>
-  );
+	return (
+		<Link
+			{...props}
+			className="fun-link relative bg-no-repeat text-current no-underline"
+			to={to}
+		>
+			{children}
+		</Link>
+	);
 }
