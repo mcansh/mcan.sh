@@ -32,7 +32,7 @@ export default {
             certificate: acm.Certificate.fromCertificateArn(
               stack,
               "MyCert",
-              env.AWS_CERTIFICATE_ARN
+              env.AWS_CERTIFICATE_ARN,
             ),
           },
         };

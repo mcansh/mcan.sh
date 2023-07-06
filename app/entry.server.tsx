@@ -16,7 +16,7 @@ export default async function handleRequest(
   request: Request,
   responseStatusCode: number,
   responseHeaders: Headers,
-  remixContext: EntryContext
+  remixContext: EntryContext,
 ) {
   preloadRouteAssets(remixContext, responseHeaders);
   let callback = isbot(request.headers.get("user-agent"))
@@ -44,7 +44,7 @@ export default async function handleRequest(
             new Response(body, {
               headers: responseHeaders,
               status: responseStatusCode,
-            })
+            }),
           );
 
           pipe(body);
@@ -56,7 +56,7 @@ export default async function handleRequest(
           console.error(error);
           responseStatusCode = 500;
         },
-      }
+      },
     );
 
     setTimeout(abort, ABORT_DELAY);
@@ -65,7 +65,7 @@ export default async function handleRequest(
 
 export let handleDataRequest: HandleDataRequestFunction = async (
   response,
-  { request }
+  { request },
 ) => {
   // if it's a GET request and it's a prefetch request
   // and it doesn't already have a Cache-Control header
@@ -184,7 +184,7 @@ function applySecurityHeaders(responseHeaders: Headers) {
 
   responseHeaders.set(
     `Expect-CT`,
-    `report-uri="https://o74198.ingest.sentry.io/api/268464/security/?sentry_key=4b455db031a845c3aefc7540b16e3a16"`
+    `report-uri="https://o74198.ingest.sentry.io/api/268464/security/?sentry_key=4b455db031a845c3aefc7540b16e3a16"`,
   );
 
   return nonce;
