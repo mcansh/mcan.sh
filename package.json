@@ -7,7 +7,7 @@
 	"sideEffects": false,
 	"type": "commonjs",
 	"scripts": {
-		"build": "run-s clean type-check && remix build",
+		"build": "run-s type-check && remix build",
 		"clean": "./scripts/clean.mjs",
 		"dev": "sst bind \"remix dev -c 'node --require dotenv/config --watch ./server.mjs'\"",
 		"start": "cross-env NODE_ENV=production node ./server.mjs",
