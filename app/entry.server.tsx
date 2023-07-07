@@ -26,6 +26,7 @@ export default async function handleRequest(
 	let nonce = applySecurityHeaders(responseHeaders);
 
 	return new Promise((resolve, reject) => {
+		let shellRendered = false;
 		let { pipe, abort } = renderToPipeableStream(
 			<NonceContext.Provider value={nonce}>
 				<RemixServer
@@ -36,6 +37,7 @@ export default async function handleRequest(
 			</NonceContext.Provider>,
 			{
 				[callback]() {
+					shellRendered = true;
 					let body = new PassThrough();
 
 					responseHeaders.set("Content-Type", "text/html");
@@ -49,12 +51,17 @@ export default async function handleRequest(
 
 					pipe(body);
 				},
-				onShellError(error: unknown) {
+				onShellError(error) {
 					reject(error);
 				},
-				onError(error: unknown) {
-					console.error(error);
+				onError(error) {
 					responseStatusCode = 500;
+					// Log streaming rendering errors from inside the shell.  Don't log
+					// errors encountered during initial shell rendering since they'll
+					// reject and get logged in handleDocumentRequest.
+					if (shellRendered) {
+						console.error(error);
+					}
 				},
 			},
 		);
