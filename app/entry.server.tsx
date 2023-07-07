@@ -95,39 +95,35 @@ function applySecurityHeaders(responseHeaders: Headers) {
 		responseHeaders.set("Cache-Control", "no-cache");
 	}
 
-	function applyDevServer(options: Array<string>) {
-		if (process.env.NODE_ENV === "development") {
-			options.push("localhost:3001");
-		}
+	let connectSrc = ["'self'"];
 
-		return options;
+	if (process.env.NODE_ENV === "development") {
+		let remixDevOrigin = new URL(process.env.REMIX_DEV_ORIGIN!);
+		remixDevOrigin.protocol = "ws:";
+		connectSrc.push(remixDevOrigin.href);
 	}
 
 	let nonce = crypto.randomBytes(16).toString("base64");
 	let securityHeaders = createSecureHeaders({
 		"Content-Security-Policy": {
 			upgradeInsecureRequests: process.env.NODE_ENV === "production",
+			baseUri: ["'self'"],
 			defaultSrc: ["'none'"],
-			fontSrc: applyDevServer(["'self'"]),
+			fontSrc: ["'self'"],
 			imgSrc: [
 				"'self'",
 				"https://res.cloudinary.com/dof0zryca/image/upload/",
 				"https://thirtyseven-active.b-cdn.net",
 			],
-			scriptSrc: applyDevServer([
+			scriptSrc: [
 				"'self'",
 				"https://thirtyseven-active.b-cdn.net/script.js",
 				`'nonce-${nonce}'`,
-			]),
-			styleSrc: applyDevServer(["'self'"]),
+			],
+			styleSrc: ["'self'"],
 			manifestSrc: ["'self'"],
 			prefetchSrc: ["'self'"],
-			connectSrc: [
-				"'self'",
-				...(process.env.NODE_ENV === "development"
-					? [`ws://localhost:3001`]
-					: []),
-			],
+			connectSrc,
 			workerSrc: ["blob:"],
 			reportUri: [
 				"https://o74198.ingest.sentry.io/api/268464/security/?sentry_key=4b455db031a845c3aefc7540b16e3a16",
