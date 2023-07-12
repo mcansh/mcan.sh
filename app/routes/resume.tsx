@@ -217,13 +217,13 @@ export default function ResumePage() {
 													{experience.start}
 												</time>
 												{" - "}
-												{experience.end && experience.endISO ? (
+												{"current" in experience ? (
+													<span>Present</span>
+												) : (
 													<time dateTime={experience.endISO}>
 														{experience.end}
 													</time>
-												) : "current" in experience ? (
-													<span>Present</span>
-												) : null}
+												)}
 											</span>
 										</h3>
 										{experience.duties.length > 0 ? (

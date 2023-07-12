@@ -1,6 +1,5 @@
 import fastify from "fastify";
 import { remixFastifyPlugin } from "@mcansh/remix-fastify";
-import { broadcastDevReady } from "@remix-run/node";
 
 import * as serverBuild from "./build/index.js";
 
@@ -20,6 +19,7 @@ async function start() {
 
 	let address = await app.listen({ port, host: "0.0.0.0" });
 	if (MODE === "development") {
+		let { broadcastDevReady } = await import("@remix-run/node");
 		broadcastDevReady(serverBuild);
 	}
 	console.log(`✅ app ready: ${address}`);
