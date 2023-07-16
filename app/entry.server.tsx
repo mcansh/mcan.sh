@@ -18,6 +18,7 @@ export default async function handleRequest(
 	responseHeaders: Headers,
 	remixContext: EntryContext,
 ) {
+	// @ts-expect-error - newer versions of remix have a `serializeError` function on context
 	preloadRouteAssets(remixContext, responseHeaders);
 	let callback = isbot(request.headers.get("user-agent"))
 		? "onAllReady"
@@ -56,8 +57,8 @@ export default async function handleRequest(
 				},
 				onError(error) {
 					responseStatusCode = 500;
-					// Log streaming rendering errors from inside the shell.  Don't log
-					// errors encountered during initial shell rendering since they'll
+					// Log streaming rendering errors from inside the shell.
+					// Don't log errors encountered during initial shell rendering since they'll
 					// reject and get logged in handleDocumentRequest.
 					if (shellRendered) {
 						console.error(error);
@@ -95,14 +96,6 @@ function applySecurityHeaders(responseHeaders: Headers) {
 		responseHeaders.set("Cache-Control", "no-cache");
 	}
 
-	let connectSrc = ["'self'"];
-
-	if (process.env.NODE_ENV === "development") {
-		let remixDevOrigin = new URL(process.env.REMIX_DEV_ORIGIN!);
-		remixDevOrigin.protocol = "ws:";
-		connectSrc.push(remixDevOrigin.href);
-	}
-
 	let nonce = crypto.randomBytes(16).toString("base64");
 	let securityHeaders = createSecureHeaders({
 		"Content-Security-Policy": {
@@ -123,7 +116,7 @@ function applySecurityHeaders(responseHeaders: Headers) {
 			styleSrc: ["'self'"],
 			manifestSrc: ["'self'"],
 			prefetchSrc: ["'self'"],
-			connectSrc,
+			connectSrc: process.env.NODE_ENV === "development" ? ["ws:", "'self'"] : ["'self'"],
 			workerSrc: ["blob:"],
 			reportUri: [
 				"https://o74198.ingest.sentry.io/api/268464/security/?sentry_key=4b455db031a845c3aefc7540b16e3a16",
