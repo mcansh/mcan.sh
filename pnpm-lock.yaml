@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   "@mcansh/remix-fastify":
-    specifier: ^2.7.4
-    version: 2.7.4(@remix-run/node@0.0.0-nightly-accd20c-20230714)(fastify@4.19.2)
+    specifier: ^2.8.0
+    version: 2.8.0(@remix-run/node@0.0.0-nightly-accd20c-20230714)(fastify@4.20.0)
   "@mcansh/remix-secure-headers":
     specifier: ^0.7.1
     version: 0.7.1
@@ -27,8 +27,8 @@ dependencies:
     specifier: ^7.0.3
     version: 7.0.3
   fastify:
-    specifier: ^4.19.2
-    version: 4.19.2
+    specifier: ^4.20.0
+    version: 4.20.0
   fathom-client:
     specifier: ^3.5.0
     version: 3.5.0
@@ -125,8 +125,8 @@ devDependencies:
     specifier: ^0.4.1
     version: 0.4.1(prettier@3.0.0)
   sst:
-    specifier: 2.21.8
-    version: 2.21.8(@types/react@18.2.15)
+    specifier: 2.22.1
+    version: 2.22.1(@types/react@18.2.15)
   tailwindcss:
     specifier: ^3.3.3
     version: 3.3.3
@@ -4368,13 +4368,6 @@ packages:
       process-warning: 2.2.0
     dev: false
 
-  /@fastify/error@3.2.0:
-    resolution:
-      {
-        integrity: sha512-KAfcLa+CnknwVi5fWogrLXgidLic+GXnLjijXdpl8pvkvbXU5BGa37iZO9FGvsh9ZL4y+oFi5cbHBm5UOG+dmQ==,
-      }
-    dev: false
-
   /@fastify/error@3.2.1:
     resolution:
       {
@@ -4655,10 +4648,10 @@ packages:
     engines: { node: ">=8" }
     dev: false
 
-  /@mcansh/remix-fastify@2.7.4(@remix-run/node@0.0.0-nightly-accd20c-20230714)(fastify@4.19.2):
+  /@mcansh/remix-fastify@2.8.0(@remix-run/node@0.0.0-nightly-accd20c-20230714)(fastify@4.20.0):
     resolution:
       {
-        integrity: sha512-iASfAkcFMB+PL6jGad3resBbZP/tjNyywMXqOddP28wy8aWQWAXmu+GiyppiIqJyG2Puun+uiIMwZ1Jhf574Yg==,
+        integrity: sha512-tQiruEtXrdLo677NL9/lnNL7ispcI+/M7E7+cOmA31cw1l7GlnUBXpq7WWPlVCrVVTpwues5V6H2i8kV/FfWrA==,
       }
     peerDependencies:
       "@remix-run/node": ^1.6.0
@@ -4667,8 +4660,8 @@ packages:
       "@fastify/early-hints": 1.0.1
       "@fastify/static": 6.10.2
       "@remix-run/node": 0.0.0-nightly-accd20c-20230714
-      "@remix-run/router": 1.6.2
-      fastify: 4.19.2
+      "@remix-run/router": 1.7.1
+      fastify: 4.20.0
       fastify-plugin: 4.5.0
       fastify-racing: 1.1.0
       glob: 10.3.3
@@ -4969,14 +4962,6 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       react-router-dom: 6.14.2-pre.0(react-dom@18.2.0)(react@18.2.0)
-    dev: false
-
-  /@remix-run/router@1.6.2:
-    resolution:
-      {
-        integrity: sha512-LzqpSrMK/3JBAVBI9u3NWtOhWNw5AMQfrUFYB0+bDHTSw17z++WJLsPsxAuK+oSddsxk4d7F/JcdDPM1M5YAhA==,
-      }
-    engines: { node: ">=14" }
     dev: false
 
   /@remix-run/router@1.7.1:
@@ -8001,7 +7986,7 @@ packages:
       }
     dependencies:
       no-case: 3.0.4
-      tslib: 2.5.3
+      tslib: 2.6.0
 
   /dot-prop@6.0.1:
     resolution:
@@ -9209,14 +9194,14 @@ packages:
       }
     engines: { node: ">=16.0.0" }
     dependencies:
-      "@fastify/error": 3.2.0
+      "@fastify/error": 3.2.1
       fastify-plugin: 4.5.0
     dev: false
 
-  /fastify@4.19.2:
+  /fastify@4.20.0:
     resolution:
       {
-        integrity: sha512-2unheeIRWFf9/Jjcz7djOpKuXCTzZjlyFfiBwKqpldkHMN2rfTLu/f9pYTdwlhzC9Cdj0S2H12zlug0Kd5uZ1w==,
+        integrity: sha512-zWWi5KGAb1YZ6fyrnFnA1CA1EZHkGM6YuELgB3QpS3l4lLRy14W1cc16b4KGPH/zQ98WCSdS+T41JkHY3eq1oA==,
       }
     dependencies:
       "@fastify/ajv-compiler": 3.5.0
@@ -12849,7 +12834,7 @@ packages:
       }
     dependencies:
       lower-case: 2.0.2
-      tslib: 2.5.3
+      tslib: 2.6.0
 
   /node-addon-api@1.7.2:
     resolution:
@@ -15483,10 +15468,10 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /sst@2.21.8(@types/react@18.2.15):
+  /sst@2.22.1(@types/react@18.2.15):
     resolution:
       {
-        integrity: sha512-fioE43utN/DxqQy+dF4nMyNY/ffOtJ2uG+H2b3GiKjIsQLSBeF6YudNkC+pcre6bfAQyshCnY25qusqimyJgzw==,
+        integrity: sha512-ECBefZGnBKdxc62zF5569l21IoeF6UeePUU/fT74bTkxMsKR00L50dHjrsmL6br3XceapkZNLzi7erkVdIkPhA==,
       }
     hasBin: true
     peerDependencies:

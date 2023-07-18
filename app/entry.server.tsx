@@ -116,7 +116,8 @@ function applySecurityHeaders(responseHeaders: Headers) {
 			styleSrc: ["'self'"],
 			manifestSrc: ["'self'"],
 			prefetchSrc: ["'self'"],
-			connectSrc: process.env.NODE_ENV === "development" ? ["ws:", "'self'"] : ["'self'"],
+			connectSrc:
+				process.env.NODE_ENV === "development" ? ["ws:", "'self'"] : ["'self'"],
 			workerSrc: ["blob:"],
 			reportUri: [
 				"https://o74198.ingest.sentry.io/api/268464/security/?sentry_key=4b455db031a845c3aefc7540b16e3a16",
