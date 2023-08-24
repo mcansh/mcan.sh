@@ -40,13 +40,13 @@ export function loader() {
 			duties: [
 				"Remix Core Team",
 				"Set up the nightly release pipeline so we can ship Remix nightly builds to npm",
-				"Published a custom GitHub Action to automatically comment on issues and PRs that were fixed in a nightly/pre/stable release",
-				"Set up the initial docs website infrastructure that used a SQLite DB to store the generated html from markdown and updated when docs were updated",
+				"Set up the initial docs website infrastructure that used a SQLite DB to store the generated html from markdown and updated when docs were updated on GitHub",
 				"Converted our integration tests from Puppeteer to Playwright",
 				"Deployment target testing infrastructure for each of our first party targets",
-				"Built and helped build adapters for our first party targets as well as a few community targets",
+				"Built adapters for our first party targets as well as a few community ones",
 				'Implemented a new "flat route" routing convention',
 				"Created `@remix-run/testing` to allow unit testing components using Remix's Link, Form, Fetchers, etc",
+				"Published a custom GitHub Action to automatically comment on issues and PRs that were fixed in a nightly/pre/stable release",
 			],
 		},
 		{
