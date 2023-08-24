@@ -51,6 +51,7 @@ jobs:
         env:
           AWS_DOMAIN: ${{ secrets.AWS_DOMAIN }}
           AWS_CERTIFICATE_ARN: ${{ secrets.AWS_CERTIFICATE_ARN }}
+          CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
 
       - name: 🚀 Deploy Production
         if: ${{ github.ref == 'refs/heads/main' }}
@@ -59,6 +60,7 @@ jobs:
         env:
           AWS_DOMAIN: ${{ secrets.AWS_DOMAIN }}
           AWS_CERTIFICATE_ARN: ${{ secrets.AWS_CERTIFICATE_ARN }}
+          CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
 
       - name: ♻️ Purge Cloudfront cache
         if: ${{ github.ref == 'refs/heads/main' }}
