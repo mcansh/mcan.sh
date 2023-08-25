@@ -52,6 +52,8 @@ jobs:
           AWS_DOMAIN: ${{ secrets.AWS_DOMAIN }}
           AWS_CERTIFICATE_ARN: ${{ secrets.AWS_CERTIFICATE_ARN }}
           CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
+          SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+          SENTRY_REPORT_URL: ${{ secrets.SENTRY_REPORT_URL }}
 
       - name: 🚀 Deploy Production
         if: ${{ github.ref == 'refs/heads/main' }}
@@ -61,6 +63,8 @@ jobs:
           AWS_DOMAIN: ${{ secrets.AWS_DOMAIN }}
           AWS_CERTIFICATE_ARN: ${{ secrets.AWS_CERTIFICATE_ARN }}
           CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
+          SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+          SENTRY_REPORT_URL: ${{ secrets.SENTRY_REPORT_URL }}
 
       - name: ♻️ Purge Cloudfront cache
         if: ${{ github.ref == 'refs/heads/main' }}
