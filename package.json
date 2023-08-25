@@ -9,8 +9,7 @@
 	"scripts": {
 		"build": "run-s type-check && remix build",
 		"clean": "./scripts/clean.mjs",
-		"dev": "sst bind \"remix dev -c 'node --require dotenv/config --watch ./server.mjs'\"",
-		"start": "cross-env NODE_ENV=production node ./server.mjs",
+		"dev": "sst bind \"remix dev\"",
 		"type-check": "tsc",
 		"lint": "eslint --ignore-path .gitignore --cache --fix .",
 		"format": "prettier --ignore-path .gitignore --ignore-unknown --write .",
@@ -20,16 +19,13 @@
 		"sst:dev": "sst dev"
 	},
 	"dependencies": {
-		"@mcansh/remix-fastify": "^2.8.0",
 		"@mcansh/remix-secure-headers": "^0.7.2",
 		"@remix-run/node": "1.19.1",
 		"@remix-run/react": "1.19.1",
 		"cloudinary-build-url": "^0.2.4",
 		"clsx": "^2.0.0",
 		"cross-env": "^7.0.3",
-		"fastify": "^4.20.0",
 		"fathom-client": "^3.5.0",
-		"glob": "^10.3.3",
 		"is-ci": "^3.0.1",
 		"isbot": "^3.6.13",
 		"pretty-cache-header": "^1.0.0",
@@ -53,6 +49,7 @@
 		"eslint": "^8.45.0",
 		"eslint-plugin-prefer-let": "^3.0.1",
 		"gitignore-fs": "^2.2.2",
+		"glob": "^10.3.3",
 		"husky": "^8.0.3",
 		"kleur": "^4.1.5",
 		"lint-staged": "^13.2.3",
@@ -61,7 +58,7 @@
 		"postcss-100vh-fix": "^1.0.2",
 		"prettier": "^3.0.0",
 		"prettier-plugin-tailwindcss": "^0.4.1",
-		"sst": "2.22.5",
+		"sst": "2.22.6",
 		"tailwindcss": "^3.3.3",
 		"tailwindcss-padding-safe": "^1.0.6",
 		"typescript": "5.2.0-dev.20230628"

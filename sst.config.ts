@@ -16,13 +16,21 @@ export default {
 		app.stack(({ stack }) => {
 			let customDomain: SsrDomainProps | undefined = undefined;
 
+			let envSchema = z.object({
+				CLOUDINARY_CLOUD_NAME: z.string().min(1),
+				SENTRY_DSN: z.string().min(1),
+				SENTRY_REPORT_URL: z.string().url(),
+			});
+
+			let environment = envSchema.parse(process.env);
+
 			if (stack.stage === "prod") {
-				let envSchema = z.object({
+				let productionEnvSchema = z.object({
 					AWS_CERTIFICATE_ARN: z.string(),
 					AWS_DOMAIN: z.string(),
 				});
 
-				let env = envSchema.parse(process.env);
+				let env = productionEnvSchema.parse(process.env);
 
 				customDomain = {
 					isExternalDomain: true,
@@ -42,10 +50,18 @@ export default {
 				runtime: "nodejs18.x",
 				customDomain,
 				cdk: { serverCachePolicy: cf.CachePolicy.CACHING_DISABLED },
-				nodejs: { format: "cjs" },
+				nodejs: {
+					format: "esm",
+					minify: process.env.NODE_ENV === "production",
+					sourcemap: true,
+				},
+				edge: true,
+				environment,
 			});
 
-			stack.addOutputs({ url: site.customDomainUrl || site.url });
+			stack.addOutputs({
+				url: site.customDomainUrl || site.url || "localhost",
+			});
 		});
 	},
 } satisfies SSTConfig;

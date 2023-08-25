@@ -100,7 +100,7 @@ export function loader() {
 	return json(
 		{
 			certifications,
-			skills: skills.sort(() => Math.random() - 0.5),
+			skills,
 			experiences,
 			me: getCloudinaryURL("website/11698668", {
 				resize: {
@@ -149,7 +149,7 @@ export default function ResumePage() {
 	let data = useLoaderData<typeof loader>();
 
 	return (
-		<div className="relative h-full border-t-8 border-solid border-indigo-600 pb-8-safe media-standalone:border-none media-standalone:pt-10">
+		<div className="relative h-full border-t-8 border-solid border-indigo-600 pb-8-safe print:border-none media-standalone:border-none media-standalone:pt-10">
 			<div className="mx-auto max-w-prose py-4">
 				<header className="mb-2 flex flex-col items-center space-x-4 space-y-1 px-4 pb-2 text-center sm:flex-row sm:text-left">
 					<div className="relative h-32 w-32 overflow-hidden rounded-full sm:h-40 sm:w-40">

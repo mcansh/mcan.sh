@@ -18,7 +18,6 @@ export default async function handleRequest(
 	responseHeaders: Headers,
 	remixContext: EntryContext,
 ) {
-	// @ts-expect-error - newer versions of remix have a `serializeError` function on context
 	preloadRouteAssets(remixContext, responseHeaders);
 	let callback = isbot(request.headers.get("user-agent"))
 		? "onAllReady"
@@ -37,6 +36,7 @@ export default async function handleRequest(
 				/>
 			</NonceContext.Provider>,
 			{
+				nonce,
 				[callback]() {
 					shellRendered = true;
 					let body = new PassThrough();
