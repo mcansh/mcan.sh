@@ -15,7 +15,7 @@ import berkeleyMonoStylesHref from "~/fonts/berkeley-mono/berkeley-mono.css";
 import berkeleyMonoFontHref from "~/fonts/berkeley-mono/BerkeleyMonoVariable-Regular.woff2";
 
 export function loader() {
-	let me = getCloudinaryURL("website/me", {
+	let me = getCloudinaryURL("website/FullSizeRender", {
 		resize: {
 			height: 480,
 			width: 480,

@@ -102,7 +102,7 @@ export function loader() {
 			certifications,
 			skills,
 			experiences,
-			me: getCloudinaryURL("website/11698668", {
+			me: getCloudinaryURL("website/FullSizeRender", {
 				resize: {
 					height: 480,
 					width: 480,

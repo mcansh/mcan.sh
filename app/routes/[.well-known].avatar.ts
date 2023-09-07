@@ -11,7 +11,7 @@ export function loader({ request }: DataFunctionArgs) {
 	if (width && !height) height = width;
 	if (height && !width) width = height;
 
-	let image = getCloudinaryURL("website/11698668", {
+	let image = getCloudinaryURL("website/FullSizeRender", {
 		resize: width && height ? { width, height } : undefined,
 	});
 
