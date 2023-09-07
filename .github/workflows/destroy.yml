@@ -22,13 +22,10 @@ jobs:
         with:
           node-version: 16
 
-      - name: 🟧 Setup pnpm
-        uses: pnpm/action-setup@v2
+      - name: 🍞 Setup bun
+        uses: oven-sh/setup-bun@v1
         with:
-          version: 8
-          run_install: |
-            - recursive: true
-              args: [--frozen-lockfile, --strict-peer-dependencies]
+          bun-version: "0.8.1"
 
       - name: 🤝 Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
@@ -39,6 +36,7 @@ jobs:
 
       - name: Remove PR Preview
         run: |
+<<<<<<< HEAD
           pnpm sst remove --stage prod
         env:
           AWS_DOMAIN: ${{ secrets.AWS_DOMAIN }}
@@ -46,3 +44,6 @@ jobs:
           CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
           SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
           SENTRY_REPORT_URL: ${{ secrets.SENTRY_REPORT_URL }}
+=======
+          bunx sst remove --stage pr${{ github.event.number }}
+>>>>>>> 6ad48e7 (chore: migrate to bun)
