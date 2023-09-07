@@ -23,13 +23,10 @@ jobs:
         with:
           node-version: 16
 
-      - name: 🟧 Setup pnpm
-        uses: pnpm/action-setup@v2
+      - name: 🍞 Setup bun
+        uses: oven-sh/setup-bun@v1
         with:
-          version: 8
-          run_install: |
-            - recursive: true
-              args: [--frozen-lockfile, --strict-peer-dependencies]
+          bun-version: "0.8.1"
 
       - name: 🤝 Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
@@ -40,4 +37,4 @@ jobs:
 
       - name: Remove PR Preview
         run: |
-          pnpm sst remove --stage pr${{ github.event.number }}
+          bunx sst remove --stage pr${{ github.event.number }}
