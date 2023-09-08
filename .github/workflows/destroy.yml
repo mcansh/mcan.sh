@@ -37,6 +37,7 @@ jobs:
       - name: Remove PR Preview
         run: |
 <<<<<<< HEAD
+<<<<<<< HEAD
           pnpm sst remove --stage prod
         env:
           AWS_DOMAIN: ${{ secrets.AWS_DOMAIN }}
@@ -47,3 +48,6 @@ jobs:
 =======
           bunx sst remove --stage pr${{ github.event.number }}
 >>>>>>> 6ad48e7 (chore: migrate to bun)
+=======
+          bun run sst:remove --stage pr${{ github.event.number }}
+>>>>>>> 257c3b9 (ci: update commands)
