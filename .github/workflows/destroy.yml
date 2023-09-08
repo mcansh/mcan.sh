@@ -37,4 +37,4 @@ jobs:
 
       - name: Remove PR Preview
         run: |
-          bunx sst remove --stage pr${{ github.event.number }}
+          bun run sst:remove --stage pr${{ github.event.number }}

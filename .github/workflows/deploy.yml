@@ -44,7 +44,7 @@ jobs:
       - name: 🚀 Deploy PR Preview
         if: github.event_name == 'pull_request'
         run: |
-          bunx sst deploy --stage pr${{ github.event.number }}
+          bun run sst:deploy --stage pr${{ github.event.number }}
         env:
           AWS_DOMAIN: ${{ secrets.AWS_DOMAIN }}
           AWS_CERTIFICATE_ARN: ${{ secrets.AWS_CERTIFICATE_ARN }}
@@ -55,7 +55,7 @@ jobs:
       - name: 🚀 Deploy Production
         if: ${{ github.ref == 'refs/heads/main' }}
         run: |
-          bunx sst deploy --stage prod
+          bun run sst:deploy --stage prod
         env:
           AWS_DOMAIN: ${{ secrets.AWS_DOMAIN }}
           AWS_CERTIFICATE_ARN: ${{ secrets.AWS_CERTIFICATE_ARN }}

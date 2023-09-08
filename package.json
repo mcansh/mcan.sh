@@ -16,7 +16,8 @@
 		"validate": "run-p lint format type-check",
 		"prepare": "is-ci || husky install",
 		"sst:deploy": "sst deploy",
-		"sst:dev": "sst dev"
+		"sst:dev": "sst dev",
+		"sst:remove": "sst remove"
 	},
 	"dependencies": {
 		"@mcansh/remix-secure-headers": "^0.7.2",
