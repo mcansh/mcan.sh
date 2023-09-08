@@ -32,7 +32,7 @@ jobs:
       - name: 🍞 Setup bun
         uses: oven-sh/setup-bun@v1
         with:
-          bun-version: "0.8.1"
+          bun-version: "1.0.0"
 
       - name: 🤝 Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
