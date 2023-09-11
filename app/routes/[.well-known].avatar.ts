@@ -1,4 +1,4 @@
-import type { DataFunctionArgs } from "@remix-run/node";
+import type { DataFunctionArgs } from "@remix-run/server-runtime";
 
 import { getCloudinaryURL } from "~/cloudinary.server";
 
