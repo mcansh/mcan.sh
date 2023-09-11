@@ -1,8 +1,7 @@
 name: 🗑️ Remove PR Preview
 
 on:
-  pull_request:
-    types: [closed]
+  push
 
 permissions:
   actions: write
@@ -40,4 +39,4 @@ jobs:
 
       - name: Remove PR Preview
         run: |
-          pnpm sst remove --stage pr${{ github.event.number }}
+          pnpm sst remove --stage prod
