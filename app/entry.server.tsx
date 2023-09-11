@@ -1,5 +1,5 @@
 import crypto from "node:crypto";
-import { PassThrough } from "node:stream";
+import { Readable } from "node:stream";
 import type { EntryContext, HandleDataRequestFunction } from "@remix-run/node";
 import { Response } from "@remix-run/node";
 import { RemixServer } from "@remix-run/react";
@@ -39,12 +39,12 @@ export default async function handleRequest(
 				nonce,
 				[callback]() {
 					shellRendered = true;
-					let body = new PassThrough();
+					let body = new Readable.PassThrough();
 
 					responseHeaders.set("Content-Type", "text/html");
 
 					resolve(
-						new Response(body, {
+						new Response(Readable.toWeb(body) as ReadableStream, {
 							headers: responseHeaders,
 							status: responseStatusCode,
 						}),

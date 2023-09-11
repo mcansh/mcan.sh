@@ -9,15 +9,12 @@
 	"scripts": {
 		"build": "run-s type-check && remix build",
 		"clean": "./scripts/clean.mjs",
-		"dev": "sst bind \"remix dev\"",
+		"dev": "remix dev",
 		"type-check": "tsc",
 		"lint": "eslint --ignore-path .gitignore --cache --fix .",
 		"format": "prettier --ignore-path .gitignore --ignore-unknown --write .",
 		"validate": "run-p lint format type-check",
-		"prepare": "is-ci || husky install",
-		"sst:deploy": "sst deploy",
-		"sst:dev": "sst dev",
-		"sst:remove": "sst remove"
+		"prepare": "is-ci || husky install"
 	},
 	"dependencies": {
 		"@mcansh/remix-secure-headers": "^0.7.2",
@@ -62,7 +59,6 @@
 		"postcss-100vh-fix": "^1.0.2",
 		"prettier": "^3.0.3",
 		"prettier-plugin-tailwindcss": "^0.5.4",
-		"sst": "2.24.27",
 		"tailwindcss": "^3.3.3",
 		"tailwindcss-padding-safe": "^1.0.6",
 		"typescript": "5.2.2"
