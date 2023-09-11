@@ -10,6 +10,7 @@ import isbot from "isbot";
 import { renderToReadableStream } from "react-dom/server";
 
 import { NonceContext } from "./components/nonce";
+import { env } from "./env.server";
 
 export default async function handleRequest(
 	request: Request,
@@ -94,9 +95,7 @@ function applySecurityHeaders(responseHeaders: Headers) {
 			connectSrc:
 				process.env.NODE_ENV === "development" ? ["ws:", "'self'"] : ["'self'"],
 			workerSrc: ["blob:"],
-			reportUri: [
-				"https://o74198.ingest.sentry.io/api/268464/security/?sentry_key=4b455db031a845c3aefc7540b16e3a16",
-			],
+			reportUri: [env.SENTRY_REPORT_URL],
 		},
 		"Referrer-Policy": "origin-when-cross-origin",
 		"X-Frame-Options": "DENY",
