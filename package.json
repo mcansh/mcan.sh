@@ -9,13 +9,13 @@
 	"scripts": {
 		"build": "run-s type-check && remix build",
 		"clean": "./scripts/clean.mjs",
-		"dev": "remix dev -c \"bun server.ts\"",
+		"dev": "remix dev -c \"bun run --hot server.ts\"",
 		"type-check": "tsc",
 		"lint": "eslint --ignore-path .gitignore --cache --fix .",
 		"format": "prettier --ignore-path .gitignore --ignore-unknown --write .",
 		"validate": "run-p lint format type-check",
 		"prepare": "is-ci || husky install",
-		"start": "bun server.ts"
+		"start": "bun run server.ts"
 	},
 	"dependencies": {
 		"@mcansh/remix-secure-headers": "^0.7.2",

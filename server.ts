@@ -1,24 +1,39 @@
 import type { ServerBuild } from "@remix-run/server-runtime";
 import { createRequestHandler, logDevReady } from "@remix-run/server-runtime";
 import path from "node:path";
-import { type Serve } from "bun";
+import fs from "node:fs";
 
 // @ts-expect-error - ServerBuild
 import * as build from "./build/index.js";
 
 let serverBuild = build as unknown as ServerBuild;
 
-if (Bun.env.NODE_ENV === "development") logDevReady(serverBuild);
+let NODE_ENV = Bun.env.NODE_ENV || "production";
 
-let __dirname = path.dirname(new URL(import.meta.url).pathname);
+if (NODE_ENV === "development") logDevReady(serverBuild);
 
-export default {
+let __dirname = import.meta.dir;
+
+let server = Bun.serve({
+	development: NODE_ENV === "development",
 	port: Bun.env.PORT || 3000,
 	async fetch(request) {
 		let url = new URL(request.url);
 		let publicFilePath = path.join(__dirname, "public", url.pathname);
-		let file = Bun.file(publicFilePath);
-		if (await file.exists()) return new Response(file);
-		return createRequestHandler(serverBuild, Bun.env.NODE_ENV)(request);
+
+		let file = fs.statSync(publicFilePath);
+
+		if (file.isFile()) {
+			let bunFile = Bun.file(publicFilePath);
+			return new Response(bunFile);
+		}
+
+		if (file.isDirectory() && url.pathname !== "/") {
+			return new Response(null, { status: 400 });
+		}
+
+		return createRequestHandler(serverBuild, NODE_ENV)(request);
 	},
-} satisfies Serve;
+});
+
+console.log(`✅ app ready: http://${server.hostname}:${server.port}`);
