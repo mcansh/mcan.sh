@@ -14,7 +14,8 @@
 		"lint": "eslint --ignore-path .gitignore --cache --fix .",
 		"format": "prettier --ignore-path .gitignore --ignore-unknown --write .",
 		"validate": "run-p lint format type-check",
-		"prepare": "is-ci || husky install"
+		"prepare": "is-ci || husky install",
+		"start": "bun server.ts"
 	},
 	"dependencies": {
 		"@mcansh/remix-secure-headers": "^0.7.2",
