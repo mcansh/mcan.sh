@@ -1,38 +1,63 @@
-import type { ServerBuild } from "@remix-run/server-runtime";
-import { createRequestHandler, logDevReady } from "@remix-run/server-runtime";
-import path from "node:path";
+import * as Bun from "bun";
 import fs from "node:fs";
+import {
+	broadcastDevReady,
+	createRequestHandler,
+} from "@remix-run/server-runtime";
+import { cacheHeader } from "pretty-cache-header";
 
-// @ts-expect-error - ServerBuild
-import * as build from "./build/index.js";
+const BUILD_PATH = "./build/index.js";
+const STATIC_PATH = "./public";
+const STATIC_BUILD_PATH = "/build/";
 
-let serverBuild = build as unknown as ServerBuild;
-
-let NODE_ENV = Bun.env.NODE_ENV || "production";
-
-if (NODE_ENV === "development") logDevReady(serverBuild);
-
-let __dirname = import.meta.dir;
+let build = await import(BUILD_PATH);
+if (build.dev) broadcastDevReady(build);
 
 let server = Bun.serve({
-	development: NODE_ENV === "development",
 	port: Bun.env.PORT || 3000,
 	async fetch(request) {
 		let url = new URL(request.url);
-		let publicFilePath = path.join(__dirname, "public", url.pathname);
 
-		let file = fs.statSync(publicFilePath);
+		try {
+			let filePath = STATIC_PATH + url.pathname;
+			if (fs.statSync(filePath).isFile()) {
+				let file = Bun.file(filePath);
 
-		if (file.isFile()) {
-			let bunFile = Bun.file(publicFilePath);
-			return new Response(bunFile);
-		}
+				let cacheControl: string;
 
-		if (file.isDirectory() && url.pathname !== "/") {
-			return new Response(null, { status: 400 });
-		}
+				if (url.pathname.startsWith(STATIC_BUILD_PATH)) {
+					cacheControl = cacheHeader({
+						immutable: true,
+						maxAge: "1y",
+						public: true,
+						sMaxage: "1y",
+					});
+				} else {
+					cacheControl = cacheHeader({
+						maxAge: "1h",
+						sMaxage: "1h",
+						public: true,
+					});
+				}
+				return new Response(file, {
+					headers: { "Cache-Control": cacheControl },
+				});
+			}
+		} catch {}
 
-		return createRequestHandler(serverBuild, NODE_ENV)(request);
+		build = await import(BUILD_PATH);
+		let handler = createRequestHandler(build, process.env.NODE_ENV);
+
+		let loadContext = {};
+
+		let response = await handler(request, loadContext);
+		return new Response(response.body, {
+			status: response.status,
+			headers: response.headers,
+		});
+	},
+	error() {
+		return new Response(null, { status: 404 });
 	},
 });
 

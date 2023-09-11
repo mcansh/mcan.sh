@@ -9,16 +9,17 @@
 	"scripts": {
 		"build": "run-s type-check && remix build",
 		"clean": "./scripts/clean.mjs",
-		"dev": "remix dev -c \"bun run --hot server.ts\"",
+		"dev": "remix dev -c \"bun run --hot ./server.ts\"",
 		"type-check": "tsc",
 		"lint": "eslint --ignore-path .gitignore --cache --fix .",
 		"format": "prettier --ignore-path .gitignore --ignore-unknown --write .",
 		"validate": "run-p lint format type-check",
 		"prepare": "is-ci || husky install",
-		"start": "bun run server.ts"
+		"start": "cross-env NODE_ENV=production bun run ./server.ts"
 	},
 	"dependencies": {
 		"@mcansh/remix-secure-headers": "^0.7.2",
+		"@remix-run/node": "^1.19.3",
 		"@remix-run/react": "1.19.3",
 		"@remix-run/server-runtime": "1.19.3",
 		"cloudinary-build-url": "^0.2.4",
@@ -66,5 +67,8 @@
 		"*": [
 			"prettier --write --ignore-unknown"
 		]
+	},
+	"engines": {
+		"node": ">=18.0.0"
 	}
 }
