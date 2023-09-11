@@ -2,8 +2,8 @@
 	"exclude": ["./build", "./public/build"],
 	"include": ["remix.env.d.ts", "**/*.ts", "**/*.tsx"],
 	"compilerOptions": {
-		"allowJs": true,
-		"checkJs": true,
+		"allowJs": false,
+		"checkJs": false,
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
 		"incremental": true,

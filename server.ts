@@ -3,6 +3,7 @@ import { createRequestHandler, logDevReady } from "@remix-run/server-runtime";
 import path from "node:path";
 import { type Serve } from "bun";
 
+// @ts-expect-error - ServerBuild
 import * as build from "./build/index.js";
 
 let serverBuild = build as unknown as ServerBuild;
