@@ -1,14 +1,24 @@
+/**
+ * By default, Remix will handle generating the HTTP Response for you.
+ * You are free to delete this file if you'd like to, but if you ever want it revealed again, you can run `npx remix reveal` ✨
+ * For more information, see https://remix.run/file-conventions/entry.server
+ */
+
 import crypto from "node:crypto";
-import { PassThrough } from "node:stream";
-import type { EntryContext, HandleDataRequestFunction } from "@remix-run/node";
+import type {
+	AppLoadContext,
+	EntryContext,
+	HandleDataRequestFunction,
+} from "@remix-run/node";
 import { Response } from "@remix-run/node";
 import { RemixServer } from "@remix-run/react";
 import { createSecureHeaders } from "@mcansh/remix-secure-headers";
-import { renderToPipeableStream } from "react-dom/server";
 import { isPrefetch, preloadRouteAssets } from "remix-utils";
 import isbot from "isbot";
+import { renderToReadableStream } from "react-dom/server";
 
 import { NonceContext } from "./components/nonce";
+import { env } from "./env.server";
 
 const ABORT_DELAY = 5_000;
 
@@ -17,57 +27,38 @@ export default async function handleRequest(
 	responseStatusCode: number,
 	responseHeaders: Headers,
 	remixContext: EntryContext,
+	loadContext: AppLoadContext,
 ) {
 	preloadRouteAssets(remixContext, responseHeaders);
-	let callback = isbot(request.headers.get("user-agent"))
-		? "onAllReady"
-		: "onShellReady";
 
 	let nonce = applySecurityHeaders(responseHeaders);
 
-	return new Promise((resolve, reject) => {
-		let shellRendered = false;
-		let { pipe, abort } = renderToPipeableStream(
-			<NonceContext.Provider value={nonce}>
-				<RemixServer
-					context={remixContext}
-					url={request.url}
-					abortDelay={ABORT_DELAY}
-				/>
-			</NonceContext.Provider>,
-			{
-				nonce,
-				[callback]() {
-					shellRendered = true;
-					let body = new PassThrough();
-
-					responseHeaders.set("Content-Type", "text/html");
-
-					resolve(
-						new Response(body, {
-							headers: responseHeaders,
-							status: responseStatusCode,
-						}),
-					);
-
-					pipe(body);
-				},
-				onShellError(error) {
-					reject(error);
-				},
-				onError(error) {
-					responseStatusCode = 500;
-					// Log streaming rendering errors from inside the shell.
-					// Don't log errors encountered during initial shell rendering since they'll
-					// reject and get logged in handleDocumentRequest.
-					if (shellRendered) {
-						console.error(error);
-					}
-				},
+	let stream = await renderToReadableStream(
+		<NonceContext.Provider value={nonce}>
+			<RemixServer
+				context={remixContext}
+				url={request.url}
+				abortDelay={ABORT_DELAY}
+			/>
+		</NonceContext.Provider>,
+		{
+			nonce,
+			onError(error, errorInfo) {
+				// log streaming render errors from inside the shell
+				console.error(error, errorInfo);
+				responseStatusCode = 500;
 			},
-		);
+		},
+	);
 
-		setTimeout(abort, ABORT_DELAY);
+	if (isbot(request.headers.get("user-agent"))) {
+		await stream.allReady;
+	}
+
+	responseHeaders.set("Content-Type", "text/html");
+	return new Response(stream, {
+		status: responseStatusCode,
+		headers: responseHeaders,
 	});
 }
 
@@ -119,9 +110,7 @@ function applySecurityHeaders(responseHeaders: Headers) {
 			connectSrc:
 				process.env.NODE_ENV === "development" ? ["ws:", "'self'"] : ["'self'"],
 			workerSrc: ["blob:"],
-			reportUri: [
-				"https://o74198.ingest.sentry.io/api/268464/security/?sentry_key=4b455db031a845c3aefc7540b16e3a16",
-			],
+			reportUri: [env.SENTRY_REPORT_URL],
 		},
 		"Referrer-Policy": "origin-when-cross-origin",
 		"X-Frame-Options": "DENY",
