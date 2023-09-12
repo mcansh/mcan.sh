@@ -14,7 +14,7 @@ async function clean() {
 
 	let files = globSync("**/*", {
 		absolute: true,
-		ignore: ["node_modules/**/*", ".vercel/**/*"],
+		ignore: ["node_modules/**/*"],
 		nodir: true,
 		cwd,
 	});

@@ -2,7 +2,7 @@ import {
 	json,
 	type HeadersFunction,
 	type LinksFunction,
-} from "@remix-run/node";
+} from "@remix-run/server-runtime";
 import { useLoaderData } from "@remix-run/react";
 import { cacheHeader } from "pretty-cache-header";
 

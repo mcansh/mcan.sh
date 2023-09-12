@@ -1,7 +1,7 @@
-const path = require("node:path");
+import path from "node:path";
 
 /** @type {import('@remix-run/dev').AppConfig}*/
-module.exports = {
+export default {
 	ignoredRouteFiles: ["**/.*"],
 	appDirectory: "app",
 	assetsBuildDirectory: "public/build",
@@ -10,7 +10,7 @@ module.exports = {
 	tailwind: true,
 	postcss: true,
 	serverBuildPath: "build/index.js",
-	serverModuleFormat: "cjs",
+	serverModuleFormat: "esm",
 	future: {
 		v2_dev: true,
 		v2_errorBoundary: true,

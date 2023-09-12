@@ -10,5 +10,4 @@
 /public/build
 .eslintcache
 tsconfig.tsbuildinfo
-/.sst
 .env
