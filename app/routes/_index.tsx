@@ -6,7 +6,7 @@ import {
 import { useLoaderData } from "@remix-run/react";
 import { cacheHeader } from "pretty-cache-header";
 
-import { getCloudinaryURL } from "~/cloudinary.server";
+import { getCloudinaryURL, MUGSHOT } from "~/cloudinary.server";
 import {
 	FunHoverLink,
 	styles as funHoverLinkStyles,
@@ -15,12 +15,8 @@ import berkeleyMonoStylesHref from "~/fonts/berkeley-mono/berkeley-mono.css";
 import berkeleyMonoFontHref from "~/fonts/berkeley-mono/BerkeleyMonoVariable-Regular.woff2";
 
 export function loader() {
-	let me = getCloudinaryURL("website/FullSizeRender", {
-		resize: {
-			height: 480,
-			width: 480,
-			type: "fill",
-		},
+	let me = getCloudinaryURL(MUGSHOT, {
+		resize: { height: 480, width: 480, type: "fill" },
 	});
 
 	return json({ me });

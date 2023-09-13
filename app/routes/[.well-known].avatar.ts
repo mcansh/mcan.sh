@@ -1,6 +1,7 @@
+import type { TransformerOption } from "@cld-apis/types";
 import type { DataFunctionArgs } from "@remix-run/server-runtime";
 
-import { getCloudinaryURL } from "~/cloudinary.server";
+import { getCloudinaryURL, MUGSHOT } from "~/cloudinary.server";
 
 export function loader({ request }: DataFunctionArgs) {
 	let url = new URL(request.url);
@@ -11,9 +12,15 @@ export function loader({ request }: DataFunctionArgs) {
 	if (width && !height) height = width;
 	if (height && !width) width = height;
 
-	let image = getCloudinaryURL("website/FullSizeRender", {
-		resize: width && height ? { width, height } : undefined,
-	});
+	let transform: TransformerOption = { resize: { type: "fill" } };
+
+	if (width && height) {
+		transform.resize ||= { type: "fill" };
+		transform.resize.width = width;
+		transform.resize.height = height;
+	}
+
+	let image = getCloudinaryURL(MUGSHOT, transform);
 
 	return fetch(image);
 }
