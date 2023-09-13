@@ -18,10 +18,10 @@
 		"start": "cross-env NODE_ENV=production bun run ./server.ts"
 	},
 	"dependencies": {
-		"@mcansh/remix-secure-headers": "^0.7.2",
-		"@remix-run/node": "pre",
-		"@remix-run/react": "pre",
-		"@remix-run/server-runtime": "pre",
+		"@mcansh/remix-secure-headers": "^0.8.1",
+		"@remix-run/node": "2.0.0-pre.10",
+		"@remix-run/react": "2.0.0-pre.10",
+		"@remix-run/server-runtime": "2.0.0-pre.10",
 		"cloudinary-build-url": "^0.2.4",
 		"clsx": "^2.0.0",
 		"cross-env": "^7.0.3",
@@ -31,13 +31,13 @@
 		"pretty-cache-header": "^1.0.0",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
-		"remix-utils": "next",
+		"remix-utils": "7.0.0-pre.3",
 		"zod": "^3.22.2"
 	},
 	"devDependencies": {
 		"@cld-apis/types": "^0.1.6",
-		"@remix-run/dev": "pre",
-		"@remix-run/eslint-config": "pre",
+		"@remix-run/dev": "2.0.0-pre.10",
+		"@remix-run/eslint-config": "2.0.0-pre.10",
 		"@types/react": "^18.2.21",
 		"@types/react-dom": "^18.2.7",
 		"@typescript/lib-dom": "npm:@types/web@^0.0.114",
