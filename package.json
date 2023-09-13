@@ -8,7 +8,7 @@
 	"type": "module",
 	"scripts": {
 		"build": "run-s type-check && remix build",
-		"clean": "./scripts/clean.mjs",
+		"clean": "./scripts/clean.js",
 		"dev": "remix dev -c \"bun run --hot ./server.ts\"",
 		"type-check": "tsc",
 		"lint": "eslint --ignore-path .gitignore --cache --fix .",
