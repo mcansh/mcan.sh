@@ -11,7 +11,7 @@ import type {
 	HandleDataRequestFunction,
 } from "@remix-run/node";
 import { RemixServer } from "@remix-run/react";
-import { createSecureHeaders } from "@mcansh/remix-secure-headers";
+import { createSecureHeaders } from "@mcansh/http-helmet";
 import isbot from "isbot";
 import { renderToReadableStream } from "react-dom/server";
 import { isPrefetch } from "remix-utils/is-prefetch";
