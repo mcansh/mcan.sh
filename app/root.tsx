@@ -1,7 +1,7 @@
 import * as React from "react";
 import type {
 	LinksFunction,
-	V2_ServerRuntimeMetaFunction as V2_MetaFunction,
+	ServerRuntimeMetaFunction as MetaFunction,
 } from "@remix-run/server-runtime";
 import {
 	isRouteErrorResponse,
@@ -23,7 +23,7 @@ import interFontHref from "~/fonts/inter/Inter.var.woff2";
 import interStylesHref from "~/fonts/inter/inter.css";
 import { NonceContext } from "~/components/nonce";
 
-export const meta: V2_MetaFunction = () => {
+export const meta: MetaFunction = () => {
 	return [
 		{ title: "Logan McAnsh" },
 		{ name: "description", content: "personal website for logan mcansh" },
