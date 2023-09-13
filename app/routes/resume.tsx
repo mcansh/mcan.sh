@@ -4,7 +4,7 @@ import type { MetaFunction } from "@remix-run/react";
 import { useLoaderData } from "@remix-run/react";
 import { cacheHeader } from "pretty-cache-header";
 
-import { getCloudinaryURL } from "~/cloudinary.server";
+import { getCloudinaryURL, MUGSHOT } from "~/cloudinary.server";
 
 export function loader() {
 	let { format: formatDate } = new Intl.DateTimeFormat("en-US", {
@@ -102,12 +102,8 @@ export function loader() {
 			certifications,
 			skills,
 			experiences,
-			me: getCloudinaryURL("website/FullSizeRender", {
-				resize: {
-					height: 480,
-					width: 480,
-					type: "fill",
-				},
+			me: getCloudinaryURL(MUGSHOT, {
+				resize: { height: 480, width: 480, type: "fill" },
 			}),
 		},
 		{

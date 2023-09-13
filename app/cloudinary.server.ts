@@ -16,3 +16,5 @@ export function getCloudinaryURL(
 		},
 	});
 }
+
+export let MUGSHOT = "website/FullSizeRender" as const;
