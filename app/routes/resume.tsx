@@ -1,6 +1,6 @@
 import type { HeadersFunction } from "@remix-run/server-runtime";
 import { json } from "@remix-run/server-runtime";
-import type { V2_MetaFunction } from "@remix-run/react";
+import type { MetaFunction } from "@remix-run/react";
 import { useLoaderData } from "@remix-run/react";
 import { cacheHeader } from "pretty-cache-header";
 
@@ -123,7 +123,7 @@ export function loader() {
 	);
 }
 
-export const meta: V2_MetaFunction<typeof loader> = () => {
+export const meta: MetaFunction<typeof loader> = () => {
 	return [
 		{ title: "Resume | Logan McAnsh" },
 		{ name: "description", content: "Logan McAnsh's Resume" },

@@ -10,12 +10,12 @@ import type {
 	EntryContext,
 	HandleDataRequestFunction,
 } from "@remix-run/node";
-import { Response } from "@remix-run/node";
 import { RemixServer } from "@remix-run/react";
 import { createSecureHeaders } from "@mcansh/remix-secure-headers";
-import { isPrefetch, preloadRouteAssets } from "remix-utils";
 import isbot from "isbot";
 import { renderToReadableStream } from "react-dom/server";
+import { isPrefetch } from "remix-utils/is-prefetch";
+import { preloadRouteAssets } from "remix-utils/preload-route-assets";
 
 import { NonceContext } from "./components/nonce";
 import { env } from "./env.server";
