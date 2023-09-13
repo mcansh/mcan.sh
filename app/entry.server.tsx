@@ -107,8 +107,11 @@ function applySecurityHeaders(responseHeaders: Headers) {
 			styleSrc: ["'self'"],
 			manifestSrc: ["'self'"],
 			prefetchSrc: ["'self'"],
-			connectSrc:
-				process.env.NODE_ENV === "development" ? ["ws:", "'self'"] : ["'self'"],
+			connectSrc: [
+				...(process.env.NODE_ENV === "production"
+					? ["'self'"]
+					: ["'self'", "ws:"]),
+			],
 			workerSrc: ["blob:"],
 			reportUri: [env.SENTRY_REPORT_URL],
 		},
@@ -168,10 +171,7 @@ function applySecurityHeaders(responseHeaders: Headers) {
 		responseHeaders.set("Feature-Policy", permissionsPolicy);
 	}
 
-	responseHeaders.set(
-		`Expect-CT`,
-		`report-uri="https://o74198.ingest.sentry.io/api/268464/security/?sentry_key=4b455db031a845c3aefc7540b16e3a16"`,
-	);
+	responseHeaders.set(`Expect-CT`, `report-uri="${env.SENTRY_REPORT_URL}"`);
 
 	return nonce;
 }

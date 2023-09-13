@@ -46,7 +46,7 @@ let server = Bun.serve({
 		} catch {}
 
 		build = await import(BUILD_PATH);
-		let handler = createRequestHandler(build, process.env.NODE_ENV);
+		let handler = createRequestHandler(build, Bun.env.NODE_ENV);
 
 		let loadContext = {};
 
