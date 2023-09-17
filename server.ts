@@ -4,14 +4,16 @@ import {
 	broadcastDevReady,
 	createRequestHandler,
 } from "@remix-run/server-runtime";
+import type { ServerBuild } from "@remix-run/node";
 import { cacheHeader } from "pretty-cache-header";
 
 const BUILD_PATH = "./build/index.js";
 const STATIC_PATH = "./public";
 const STATIC_BUILD_PATH = "/build/";
 
-let build = await import(BUILD_PATH);
-if (build.dev) broadcastDevReady(build);
+let build: ServerBuild = await import(BUILD_PATH);
+
+if (build.mode === "development") broadcastDevReady(build);
 
 let server = Bun.serve({
 	port: Bun.env.PORT || 3000,
@@ -46,7 +48,7 @@ let server = Bun.serve({
 		} catch {}
 
 		build = await import(BUILD_PATH);
-		let handler = createRequestHandler(build, Bun.env.NODE_ENV);
+		let handler = createRequestHandler(build, build.mode);
 
 		let loadContext = {};
 
