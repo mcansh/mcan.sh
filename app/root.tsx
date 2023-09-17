@@ -107,8 +107,8 @@ export function ErrorBoundary() {
 	useFathom();
 
 	let handleBodyClassName = useHandleBodyClassName();
-	let headingClassName = `inline-block text-3xl font-bold bg-white text-[#0827f5]`;
-	let boxClassName = `px-4 py-2 overflow-auto border-4 border-white`;
+	let headingClassName = `w-fit mx-auto inline-block text-3xl font-bold bg-white text-[#0827f5]`;
+	let boxClassName = `w-full px-4 py-2 overflow-auto border-4 border-white`;
 
 	return (
 		<html lang="en" className="h-full">
@@ -120,7 +120,7 @@ export function ErrorBoundary() {
 			</head>
 			<body
 				className={clsx(
-					"mx-auto min-h-screen w-[90%] max-w-5xl space-y-4 bg-[#0827f5] pt-20 text-center font-mono text-white",
+					"mx-auto flex min-h-screen w-[90%] max-w-5xl flex-col justify-center space-y-4 bg-[#0827f5] pt-20 text-center font-mono text-white",
 					handleBodyClassName,
 				)}
 			>
