@@ -11,3 +11,4 @@
 .eslintcache
 tsconfig.tsbuildinfo
 .env
+app/components/sprite

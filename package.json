@@ -9,7 +9,7 @@
 	"scripts": {
 		"build": "run-s type-check && remix build",
 		"clean": "./scripts/clean.js",
-		"dev": "remix dev -c \"bun run --hot ./server.ts\"",
+		"dev": "remix dev -c \"bun run ./server.ts\"",
 		"type-check": "tsc",
 		"lint": "eslint --ignore-path .gitignore --cache --fix .",
 		"format": "prettier --ignore-path .gitignore --ignore-unknown --write .",
@@ -46,6 +46,7 @@
 		"del": "^7.1.0",
 		"eslint": "^8.50.0",
 		"eslint-plugin-prefer-let": "^3.0.1",
+		"fs-extra": "^11.1.1",
 		"gitignore-fs": "^2.2.2",
 		"glob": "^10.3.10",
 		"husky": "^8.0.3",
@@ -56,6 +57,7 @@
 		"postcss-100vh-fix": "^1.0.2",
 		"prettier": "^3.0.3",
 		"prettier-plugin-tailwindcss": "^0.5.4",
+		"svgstore": "^3.0.1",
 		"tailwindcss": "^3.3.3",
 		"tailwindcss-padding-safe": "^1.0.6",
 		"typescript": "5.2.2"
