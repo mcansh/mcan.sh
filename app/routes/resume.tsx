@@ -5,6 +5,7 @@ import { useLoaderData } from "@remix-run/react";
 import { cacheHeader } from "pretty-cache-header";
 
 import { getCloudinaryURL, MUGSHOT } from "~/cloudinary.server";
+import { Svg } from "~/components/sprite";
 
 export function loader() {
 	let { format: formatDate } = new Intl.DateTimeFormat("en-US", {
@@ -79,6 +80,24 @@ export function loader() {
 		};
 	});
 
+	let links = [
+		{
+			link: "https://github.com/mcansh",
+			label: "GitHub",
+			icon: "github-mark",
+		},
+		{
+			label: "LinkedIn",
+			link: "https://www.linkedin.com/in/loganmcansh",
+			icon: "linkedin",
+		},
+		{
+			label: "X",
+			link: "https://x.com/loganmcansh",
+			icon: "x",
+		},
+	] as const;
+
 	let certifications = [
 		{
 			link: "https://www.ciwcertified.com/ciw-certifications/web-foundations-series/internet-business-associate",
@@ -101,6 +120,7 @@ export function loader() {
 		{
 			certifications,
 			skills,
+			links,
 			experiences,
 			me: getCloudinaryURL(MUGSHOT, {
 				resize: { height: 480, width: 480, type: "fill" },
@@ -180,6 +200,7 @@ export default function ResumePage() {
 							person and remote settings.
 						</p>
 					</div>
+
 					<div>
 						<h2 className="text-2xl font-semibold">Skills</h2>
 						{/* safari doesn't support gap on flex containers, so we need to add a margin to each flex child and set a negative margin on the parent */}
@@ -253,6 +274,21 @@ export default function ResumePage() {
 								</li>
 							))}
 						</ul>
+					</div>
+
+					<div className="flex items-center justify-center space-x-4">
+						{data.links.map((link) => {
+							return (
+								<a
+									key={link.label}
+									href={link.link}
+									className="hover:opacity-80"
+								>
+									<div className="sr-only">{link.label}</div>
+									<Svg name={link.icon} className="h-8 w-8" />
+								</a>
+							);
+						})}
 					</div>
 				</div>
 			</div>
