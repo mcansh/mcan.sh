@@ -3,6 +3,7 @@ import { json } from "@remix-run/server-runtime";
 import type { MetaFunction } from "@remix-run/react";
 import { useLoaderData } from "@remix-run/react";
 import { cacheHeader } from "pretty-cache-header";
+import { renderToStaticMarkup } from "react-dom/server";
 
 import { getCloudinaryURL, MUGSHOT } from "~/cloudinary.server";
 import { Svg } from "~/components/sprite";
@@ -40,14 +41,72 @@ export function loader() {
 			end: new Date(2023, 4, 4),
 			duties: [
 				"Remix Core Team",
-				"Set up the nightly release pipeline so we can ship Remix nightly builds to npm",
-				"Set up the initial docs website infrastructure that used a SQLite DB to store the generated html from markdown and updated when docs were updated on GitHub",
+				renderToStaticMarkup(
+					<>
+						Set up the{" "}
+						<a
+							className="text-indigo-600 hover:underline dark:text-indigo-300"
+							href="https://github.com/remix-run/remix/blob/main/.github/workflows/nightly.yml"
+						>
+							nightly release pipeline
+						</a>{" "}
+						so we can ship Remix nightly builds to npm
+					</>,
+				),
+				renderToStaticMarkup(
+					<>
+						Set up the{" "}
+						<a
+							className="text-indigo-600 hover:underline dark:text-indigo-300"
+							href="https://github.com/remix-run/react-router-website/tree/dc45120e7b7523dc91437c655a28e10b481e1d6f"
+						>
+							initial docs website infrastructure
+						</a>{" "}
+						that used a SQLite DB to store the generated html from markdown and
+						updated when docs were updated on GitHub
+					</>,
+				),
 				"Converted our integration tests from Puppeteer to Playwright",
 				"Deployment target testing infrastructure for each of our first party targets",
 				"Built adapters to convert to/from proprietary request/response objects to native Request/Response objects",
-				"Implemented a new `flat route` routing convention",
-				"Created `@remix-run/testing` to allow unit testing components using Remix's Link, Form, Fetchers, etc",
-				"Published a custom GitHub Action to automatically comment on issues and PRs that were fixed in a nightly/pre/stable release",
+				renderToStaticMarkup(
+					<>
+						Implemented a new{" "}
+						<a
+							className="text-indigo-600 hover:underline dark:text-indigo-300"
+							href="https://github.com/remix-run/remix/discussions/4482"
+						>
+							flat route
+						</a>{" "}
+						routing convention
+					</>,
+				),
+				renderToStaticMarkup(
+					<>
+						Created{" "}
+						<a
+							className="text-indigo-600 hover:underline dark:text-indigo-300"
+							href="https://github.com/remix-run/remix/tree/main/packages/remix-testing"
+						>
+							@remix-run/testing
+						</a>{" "}
+						to allow unit testing components using Remix's Link, Form, Fetchers,
+						etc
+					</>,
+				),
+				renderToStaticMarkup(
+					<>
+						Published a custom{" "}
+						<a
+							className="text-indigo-600 hover:underline dark:text-indigo-300"
+							href="https://github.com/remix-run/release-comment-action"
+						>
+							GitHub Action
+						</a>{" "}
+						to automatically comment on issues and PRs that were fixed in a
+						nightly/pre/stable release
+					</>,
+				),
 			],
 		},
 		{
@@ -246,7 +305,12 @@ export default function ResumePage() {
 										{experience.duties.length > 0 ? (
 											<ul className="list-disc space-y-1 pl-6">
 												{experience.duties.map((duty) => (
-													<li key={duty}>{duty}</li>
+													<li
+														key={duty}
+														dangerouslySetInnerHTML={{
+															__html: duty,
+														}}
+													></li>
 												))}
 											</ul>
 										) : null}
