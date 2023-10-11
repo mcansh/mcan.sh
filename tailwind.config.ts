@@ -31,7 +31,7 @@ export default {
 				},
 			},
 			fontFamily: {
-				sans: ["InterVar", ...defaultTheme.fontFamily.sans],
+				sans: ["Inter var", ...defaultTheme.fontFamily.sans],
 				mono: ["Berkeley Mono", ...defaultTheme.fontFamily.mono],
 			},
 		},
