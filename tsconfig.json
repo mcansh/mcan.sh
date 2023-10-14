@@ -23,7 +23,6 @@
 		"jsx": "react-jsx",
 		"baseUrl": ".",
 		"paths": { "~/*": ["./app/*"] },
-		"types": ["bun-types"],
 
 		/* strictness */
 		"strict": true,

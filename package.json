@@ -15,12 +15,13 @@
 		"format": "prettier --ignore-path .gitignore --ignore-unknown --write .",
 		"validate": "run-p lint format type-check",
 		"prepare": "is-ci || husky install",
-		"start": "cross-env NODE_ENV=production bun run ./server.ts"
+		"start": "remix-serve ./build/index.js"
 	},
 	"dependencies": {
 		"@mcansh/http-helmet": "^0.8.1",
 		"@remix-run/node": "0.0.0-nightly-09ed1c0-20231014",
 		"@remix-run/react": "0.0.0-nightly-09ed1c0-20231014",
+		"@remix-run/serve": "nightly",
 		"@remix-run/server-runtime": "0.0.0-nightly-09ed1c0-20231014",
 		"cloudinary-build-url": "^0.2.4",
 		"clsx": "^2.0.0",
@@ -42,7 +43,6 @@
 		"@types/react-dom": "^18.2.12",
 		"@typescript/lib-dom": "npm:@types/web@^0.0.116",
 		"autoprefixer": "^10.4.16",
-		"bun-types": "latest",
 		"del": "^7.1.0",
 		"eslint": "^8.51.0",
 		"eslint-plugin-prefer-let": "^3.0.1",
