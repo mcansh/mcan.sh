@@ -21,7 +21,7 @@
 		"@mcansh/http-helmet": "^0.8.1",
 		"@remix-run/node": "0.0.0-nightly-09ed1c0-20231014",
 		"@remix-run/react": "0.0.0-nightly-09ed1c0-20231014",
-		"@remix-run/serve": "nightly",
+		"@remix-run/serve": "0.0.0-nightly-09ed1c0-20231014",
 		"@remix-run/server-runtime": "0.0.0-nightly-09ed1c0-20231014",
 		"cloudinary-build-url": "^0.2.4",
 		"clsx": "^2.0.0",
