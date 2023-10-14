@@ -6,12 +6,12 @@ import {
 import { useLoaderData } from "@remix-run/react";
 import { cacheHeader } from "pretty-cache-header";
 
-import { getCloudinaryURL, MUGSHOT } from "~/cloudinary.server";
+import { getCloudinaryURL, MUGSHOT } from "~/cloudinary";
 import {
 	FunHoverLink,
 	styles as funHoverLinkStyles,
 } from "~/components/fun-hover-link";
-import berkeleyMonoStylesHref from "~/fonts/berkeley-mono/berkeley-mono.css";
+import berkeleyMonoStylesHref from "~/fonts/berkeley-mono/berkeley-mono.css?url";
 import berkeleyMonoFontHref from "~/fonts/berkeley-mono/BerkeleyMonoVariable-Regular.woff2";
 
 export function loader() {

@@ -5,7 +5,7 @@ import { useLoaderData } from "@remix-run/react";
 import { cacheHeader } from "pretty-cache-header";
 import { renderToStaticMarkup } from "react-dom/server";
 
-import { getCloudinaryURL, MUGSHOT } from "~/cloudinary.server";
+import { getCloudinaryURL, MUGSHOT } from "~/cloudinary";
 import { Svg } from "~/components/sprite";
 
 export function loader() {

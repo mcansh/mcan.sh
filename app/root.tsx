@@ -16,11 +16,11 @@ import {
 } from "@remix-run/react";
 import clsx from "clsx";
 import * as Fathom from "fathom-client";
-import appStylesHref from "tailwindcss/tailwind.css";
+import appStylesHref from "tailwindcss/tailwind.css?url";
 
 import type { Match } from "~/types/handle";
 import interFontHref from "~/fonts/inter/Inter.var.woff2";
-import interStylesHref from "~/fonts/inter/inter.css";
+import interStylesHref from "~/fonts/inter/inter.css?url";
 import { NonceContext } from "~/components/nonce";
 
 export const meta: MetaFunction = () => {
