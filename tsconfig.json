@@ -2,8 +2,7 @@
 	"exclude": ["./build", "./public/build"],
 	"include": [
 		"remix.config.js",
-		"remix.env.d.ts",
-		"vite.env.d.ts",
+		"env.d.ts",
 		"vite.config.js",
 		"**/*.ts",
 		"**/*.tsx"

@@ -1,8 +1,5 @@
-import {
-	json,
-	type HeadersFunction,
-	type LinksFunction,
-} from "@remix-run/server-runtime";
+import { json } from "@remix-run/node";
+import type { HeadersFunction, LinksFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { cacheHeader } from "pretty-cache-header";
 
@@ -11,8 +8,8 @@ import {
 	FunHoverLink,
 	styles as funHoverLinkStyles,
 } from "~/components/fun-hover-link";
-import berkeleyMonoStylesHref from "~/fonts/berkeley-mono/berkeley-mono.css?url";
-import berkeleyMonoFontHref from "~/fonts/berkeley-mono/BerkeleyMonoVariable-Regular.woff2";
+import berkeleyMonoStylesHref from "~/assets/berkeley-mono.css?url";
+import berkeleyMonoFontHref from "~/assets/fonts/berkeley-mono/BerkeleyMonoVariable-Regular.woff2";
 
 export function loader() {
 	let me = getCloudinaryURL(MUGSHOT, {

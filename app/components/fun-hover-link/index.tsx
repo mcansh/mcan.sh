@@ -2,7 +2,7 @@ import * as React from "react";
 import type { LinkProps } from "@remix-run/react";
 import { Link } from "@remix-run/react";
 
-export { default as styles } from "~/styles/fun-hover-link.css?url";
+export { default as styles } from "./fun-hover-link.css?url";
 
 export function FunHoverLink({ children, to, ...props }: LinkProps) {
 	return (

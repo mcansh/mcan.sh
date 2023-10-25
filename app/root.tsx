@@ -1,8 +1,5 @@
 import * as React from "react";
-import type {
-	LinksFunction,
-	ServerRuntimeMetaFunction as MetaFunction,
-} from "@remix-run/server-runtime";
+import type { LinksFunction, MetaFunction } from "@remix-run/node";
 import {
 	isRouteErrorResponse,
 	Links,
@@ -16,12 +13,12 @@ import {
 } from "@remix-run/react";
 import clsx from "clsx";
 import * as Fathom from "fathom-client";
-import appStylesHref from "tailwindcss/tailwind.css?url";
 
 import type { Match } from "~/types/handle";
-import interFontHref from "~/fonts/inter/Inter.var.woff2";
-import interStylesHref from "~/fonts/inter/inter.css?url";
 import { NonceContext } from "~/components/nonce";
+import interFontHref from "~/assets/fonts/inter/Inter.var.woff2";
+import appStylesHref from "~/assets/app.css?url";
+import interStylesHref from "~/assets/inter.css?url";
 
 export const meta: MetaFunction = () => {
 	return [
@@ -92,8 +89,8 @@ export default function App() {
 			<body className={clsx("h-full", handleBodyClassName)}>
 				<Outlet />
 				<ScrollRestoration nonce={nonce} />
-				<Scripts nonce={nonce} />
 				<LiveReload nonce={nonce} />
+				<Scripts nonce={nonce} />
 			</body>
 		</html>
 	);
@@ -161,8 +158,8 @@ export function ErrorBoundary() {
 					</>
 				)}
 				<ScrollRestoration nonce={nonce} />
-				<Scripts nonce={nonce} />
 				<LiveReload nonce={nonce} />
+				<Scripts nonce={nonce} />
 			</body>
 		</html>
 	);

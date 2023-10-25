@@ -179,15 +179,15 @@ function applySecurityHeaders(responseHeaders: Headers) {
 		"Cross-Origin-Opener-Policy": "same-origin",
 	});
 
-	for (let header of securityHeaders) {
-		responseHeaders.set(...header);
-	}
+	// for (let header of securityHeaders) {
+	// 	responseHeaders.set(...header);
+	// }
 
-	let permissionsPolicy = securityHeaders.get("Permissions-Policy");
+	// let permissionsPolicy = securityHeaders.get("Permissions-Policy");
 
-	if (permissionsPolicy) {
-		responseHeaders.set("Feature-Policy", permissionsPolicy);
-	}
+	// if (permissionsPolicy) {
+	// 	responseHeaders.set("Feature-Policy", permissionsPolicy);
+	// }
 
 	responseHeaders.set(`Expect-CT`, `report-uri="${env.SENTRY_REPORT_URL}"`);
 

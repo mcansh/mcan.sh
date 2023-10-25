@@ -1,0 +1,11 @@
+@font-face {
+	font-family: "Berkeley Mono";
+	font-weight: 100 900;
+	font-display: swap;
+	font-style: normal;
+	src:
+		url("./fonts/BerkeleyMonoVariable-Regular.woff2") format("woff2-variations"),
+		url("./fonts/BerkeleyMonoVariable-Regular.woff2") format("woff2");
+	src: url("./fonts/BerkeleyMonoVariable-Regular.woff2") format("woff2")
+		tech("variations");
+}
