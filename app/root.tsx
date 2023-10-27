@@ -17,8 +17,8 @@ import * as Fathom from "fathom-client";
 import type { Match } from "~/types/handle";
 import { NonceContext } from "~/components/nonce";
 import interFontHref from "~/assets/fonts/inter/Inter.var.woff2";
-import appStylesHref from "~/assets/app.css?url";
 import interStylesHref from "~/assets/inter.css?url";
+import "tailwindcss/tailwind.css";
 
 export const meta: MetaFunction = () => {
 	return [
@@ -31,9 +31,7 @@ export const links: LinksFunction = () => {
 	let iconSizes: Array<number> = [32, 57, 72, 96, 120, 128, 144, 152, 195, 228];
 
 	return [
-		{ rel: "preload", href: appStylesHref, as: "style" },
 		{ rel: "preload", href: interStylesHref, as: "style" },
-		{ rel: "stylesheet", href: appStylesHref },
 		{ rel: "stylesheet", href: interStylesHref },
 		{
 			rel: "preload",
