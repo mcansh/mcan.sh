@@ -4,8 +4,10 @@
 	font-display: swap;
 	font-style: normal;
 	src:
-		url("./fonts/BerkeleyMonoVariable-Regular.woff2") format("woff2-variations"),
-		url("./fonts/BerkeleyMonoVariable-Regular.woff2") format("woff2");
-	src: url("./fonts/BerkeleyMonoVariable-Regular.woff2") format("woff2")
-		tech("variations");
+		url("/fonts/berkeley-mono/BerkeleyMonoVariable-Regular.woff2")
+			format("woff2-variations"),
+		url("/fonts/berkeley-mono/BerkeleyMonoVariable-Regular.woff2")
+			format("woff2");
+	src: url("/fonts/berkeley-mono/BerkeleyMonoVariable-Regular.woff2")
+		format("woff2") tech("variations");
 }

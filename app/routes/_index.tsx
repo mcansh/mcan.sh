@@ -8,8 +8,8 @@ import {
 	FunHoverLink,
 	styles as funHoverLinkStyles,
 } from "~/components/fun-hover-link";
-import berkeleyMonoStylesHref from "~/assets/berkeley-mono.css?url";
-import berkeleyMonoFontHref from "~/assets/fonts/berkeley-mono/BerkeleyMonoVariable-Regular.woff2";
+
+import "~/assets/berkeley-mono.css";
 
 export function loader() {
 	let me = getCloudinaryURL(MUGSHOT, {
@@ -35,14 +35,6 @@ export const links: LinksFunction = () => {
 	return [
 		{ rel: "preload", href: funHoverLinkStyles, as: "style" },
 		{ rel: "stylesheet", href: funHoverLinkStyles },
-		{ rel: "preload", href: berkeleyMonoStylesHref, as: "style" },
-		{
-			rel: "preload",
-			href: berkeleyMonoFontHref,
-			as: "font",
-			crossOrigin: "anonymous",
-		},
-		{ rel: "stylesheet", href: berkeleyMonoStylesHref },
 	];
 };
 

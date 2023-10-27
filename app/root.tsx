@@ -16,8 +16,7 @@ import * as Fathom from "fathom-client";
 
 import type { Match } from "~/types/handle";
 import { NonceContext } from "~/components/nonce";
-import interFontHref from "~/assets/fonts/inter/Inter.var.woff2";
-import interStylesHref from "~/assets/inter.css?url";
+import "~/assets/inter.css";
 import "tailwindcss/tailwind.css";
 
 export const meta: MetaFunction = () => {
@@ -28,28 +27,19 @@ export const meta: MetaFunction = () => {
 };
 
 export const links: LinksFunction = () => {
-	let iconSizes: Array<number> = [32, 57, 72, 96, 120, 128, 144, 152, 195, 228];
+	let icons = [32, 57, 72, 96, 120, 128, 144, 152, 195, 228].map((icon) => {
+		return {
+			href: `/logo-${icon}.png`,
+			sizes: `${icon}x${icon}`,
+			rel: "apple-touch-icon",
+		};
+	});
 
 	return [
-		{ rel: "preload", href: interStylesHref, as: "style" },
-		{ rel: "stylesheet", href: interStylesHref },
-		{
-			rel: "preload",
-			href: interFontHref,
-			type: "font/woff2",
-			as: "font",
-			crossOrigin: "anonymous",
-		},
 		{ rel: "manifest", href: "/manifest.webmanifest" },
 		{ rel: "icon", href: "/favicon.png", type: "image/png" },
 		{ rel: "icon", href: "/favicon.ico" },
-		...iconSizes.map((icon) => {
-			return {
-				href: `/logo-${icon}.png`,
-				sizes: `${icon}x${icon}`,
-				rel: "apple-touch-icon",
-			};
-		}),
+		...icons,
 	];
 };
 
