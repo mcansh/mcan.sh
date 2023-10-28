@@ -119,6 +119,9 @@ function applySecurityHeaders(responseHeaders: Headers) {
 		"X-Frame-Options": "DENY",
 		"X-Content-Type-Options": "nosniff",
 		"X-DNS-Prefetch-Control": "on",
+		"Cross-Origin-Embedder-Policy": "require-corp",
+		"Cross-Origin-Resource-Policy": "same-origin",
+		"X-XSS-Protection": "1; mode=block",
 		"Strict-Transport-Security": {
 			maxAge: 31536000,
 			includeSubDomains: true,
