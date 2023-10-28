@@ -4,8 +4,8 @@
 	font-display: swap;
 	font-style: normal;
 	src:
-		url("./BerkeleyMonoVariable-Regular.woff2") format("woff2-variations"),
-		url("./BerkeleyMonoVariable-Regular.woff2") format("woff2");
-	src: url("./BerkeleyMonoVariable-Regular.woff2") format("woff2")
+		url("./berkeley-mono-variable-regular.woff2") format("woff2-variations"),
+		url("./berkeley-mono-variable-regular.woff2") format("woff2");
+	src: url("./berkeley-mono-variable-regular.woff2") format("woff2")
 		tech("variations");
 }
