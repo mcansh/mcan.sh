@@ -12,7 +12,7 @@ import {
 	styles as funHoverLinkStyles,
 } from "~/components/fun-hover-link";
 import berkeleyMonoStylesHref from "~/fonts/berkeley-mono/berkeley-mono.css";
-import berkeleyMonoFontHref from "~/fonts/berkeley-mono/BerkeleyMonoVariable-Regular.woff2";
+import berkeleyMonoFontHref from "~/fonts/berkeley-mono/berkeley-mono-variable-regular.woff2";
 
 export function loader() {
 	let me = getCloudinaryURL(MUGSHOT, {
