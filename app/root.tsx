@@ -19,7 +19,7 @@ import * as Fathom from "fathom-client";
 import appStylesHref from "tailwindcss/tailwind.css";
 
 import type { Match } from "~/types/handle";
-import interFontHref from "~/fonts/inter/Inter.var.woff2";
+import interFontHref from "~/fonts/inter/inter.var.woff2";
 import interStylesHref from "~/fonts/inter/inter.css";
 import { NonceContext } from "~/components/nonce";
 
