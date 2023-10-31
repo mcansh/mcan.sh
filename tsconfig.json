@@ -1,12 +1,6 @@
 {
 	"exclude": ["./build", "./public/build"],
-	"include": [
-		"remix.config.js",
-		"env.d.ts",
-		"vite.config.js",
-		"**/*.ts",
-		"**/*.tsx"
-	],
+	"include": ["remix.config.js", "env.d.ts", "**/*.ts", "**/*.tsx"],
 	"compilerOptions": {
 		/* base options */
 		"esModuleInterop": true,

@@ -1,10 +1,14 @@
+import url from "node:url";
+import path from "node:path";
 import {
 	unstable_createViteServer,
 	unstable_loadViteServerBuild,
 } from "@remix-run/dev";
-import { createRequestHandler } from "@remix-run/express";
+import { createRequestHandler } from "@mcansh/remix-fastify";
 import { installGlobals } from "@remix-run/node";
-import express from "express";
+import fastify from "fastify";
+import { fastifyStatic } from "@fastify/static";
+import middie from "@fastify/middie";
 
 installGlobals();
 
@@ -13,18 +17,49 @@ let vite =
 		? undefined
 		: await unstable_createViteServer();
 
-const app = express();
+let app = fastify();
+
+await app.register(middie);
+
+let noopContentParser = (_request, payload, done) => {
+	done(null, payload);
+};
+
+app.addContentTypeParser("application/json", noopContentParser);
+app.addContentTypeParser("*", noopContentParser);
+
+let __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 
 // handle asset requests
 if (vite) {
-	app.use(vite.middlewares);
+	await app.use(vite.middlewares);
 } else {
-	app.use(
-		"/build",
-		express.static("public/build", { immutable: true, maxAge: "1y" }),
-	);
+	await app.register(fastifyStatic, {
+		root: path.join(__dirname, "public", "build"),
+		prefix: "/build",
+		wildcard: true,
+		decorateReply: false,
+		cacheControl: true,
+		dotfiles: "allow",
+		etag: true,
+		maxAge: "1y",
+		immutable: true,
+		serveDotFiles: true,
+		lastModified: true,
+	});
 }
-app.use(express.static("public", { maxAge: "1h" }));
+
+await app.register(fastifyStatic, {
+	root: path.join(__dirname, "public"),
+	prefix: "/",
+	wildcard: false,
+	cacheControl: true,
+	dotfiles: "allow",
+	etag: true,
+	maxAge: "1h",
+	serveDotFiles: true,
+	lastModified: true,
+});
 
 // handle SSR requests
 app.all(
@@ -36,5 +71,7 @@ app.all(
 	}),
 );
 
-const port = 3000;
-app.listen(port, () => console.log(`✅ app ready: http://localhost:${port}`));
+let port = Number(process.env.PORT) || 3000;
+
+let address = await app.listen({ port, host: "0.0.0.0" });
+console.log(`✅ app ready: ${address}`);
