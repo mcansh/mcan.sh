@@ -1,13 +1,10 @@
 import { json } from "@remix-run/node";
-import type { HeadersFunction, LinksFunction } from "@remix-run/node";
+import type { HeadersFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { cacheHeader } from "pretty-cache-header";
 
 import { getCloudinaryURL, MUGSHOT } from "~/cloudinary";
-import {
-	FunHoverLink,
-	styles as funHoverLinkStyles,
-} from "~/components/fun-hover-link";
+import { FunHoverLink } from "~/components/fun-hover-link";
 
 import "~/assets/berkeley-mono.css";
 
@@ -29,13 +26,6 @@ export const headers: HeadersFunction = () => {
 		}),
 		Link: "<https://res.cloudinary.com>; rel=preconnect",
 	};
-};
-
-export const links: LinksFunction = () => {
-	return [
-		{ rel: "preload", href: funHoverLinkStyles, as: "style" },
-		{ rel: "stylesheet", href: funHoverLinkStyles },
-	];
 };
 
 export default function IndexPage() {

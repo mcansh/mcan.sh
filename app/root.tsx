@@ -13,11 +13,11 @@ import {
 } from "@remix-run/react";
 import clsx from "clsx";
 import * as Fathom from "fathom-client";
-import tailwindStyleHref from "tailwindcss/tailwind.css?url";
 
+import "~/assets/app.css";
+import "~/assets/inter.css";
 import type { Match } from "~/types/handle";
 import { NonceContext } from "~/components/nonce";
-import "~/assets/inter.css";
 
 export const meta: MetaFunction = () => {
 	return [
@@ -39,7 +39,6 @@ export const links: LinksFunction = () => {
 		{ rel: "manifest", href: "/manifest.webmanifest" },
 		{ rel: "icon", href: "/favicon.png", type: "image/png" },
 		{ rel: "icon", href: "/favicon.ico" },
-		{ rel: "stylesheet", href: tailwindStyleHref },
 		...icons,
 	];
 };
