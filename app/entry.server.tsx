@@ -137,6 +137,7 @@ function applySecurityHeaders(responseHeaders: Headers) {
 		"X-Frame-Options": "DENY",
 		"X-Content-Type-Options": "nosniff",
 		"X-DNS-Prefetch-Control": "on",
+		"X-XSS-Protection": "1; mode=block",
 		"Strict-Transport-Security": {
 			maxAge: 31536000,
 			includeSubDomains: true,
@@ -179,15 +180,15 @@ function applySecurityHeaders(responseHeaders: Headers) {
 		"Cross-Origin-Opener-Policy": "same-origin",
 	});
 
-	// for (let header of securityHeaders) {
-	// 	responseHeaders.set(...header);
-	// }
+	for (let header of securityHeaders) {
+		responseHeaders.set(...header);
+	}
 
-	// let permissionsPolicy = securityHeaders.get("Permissions-Policy");
+	let permissionsPolicy = securityHeaders.get("Permissions-Policy");
 
-	// if (permissionsPolicy) {
-	// 	responseHeaders.set("Feature-Policy", permissionsPolicy);
-	// }
+	if (permissionsPolicy) {
+		responseHeaders.set("Feature-Policy", permissionsPolicy);
+	}
 
 	responseHeaders.set(`Expect-CT`, `report-uri="${env.SENTRY_REPORT_URL}"`);
 
