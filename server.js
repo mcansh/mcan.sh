@@ -1,9 +1,9 @@
-import { createRequestHandler } from "@remix-run/express";
-import { installGlobals } from "@remix-run/node";
 import {
 	unstable_createViteServer,
 	unstable_loadViteServerBuild,
 } from "@remix-run/dev";
+import { createRequestHandler } from "@remix-run/express";
+import { installGlobals } from "@remix-run/node";
 import express from "express";
 
 installGlobals();
@@ -37,4 +37,4 @@ app.all(
 );
 
 const port = 3000;
-app.listen(port, () => console.log("http://localhost:" + port));
+app.listen(port, () => console.log(`✅ app ready: http://localhost:${port}`));
