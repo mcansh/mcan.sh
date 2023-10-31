@@ -1,6 +1,6 @@
 {
 	"exclude": ["./build", "./public/build"],
-	"include": ["remix.env.d.ts", "**/*.ts", "**/*.tsx"],
+	"include": ["remix.config.js", "env.d.ts", "**/*.ts", "**/*.tsx"],
 	"compilerOptions": {
 		/* base options */
 		"esModuleInterop": true,
@@ -16,7 +16,6 @@
 		"jsx": "react-jsx",
 		"baseUrl": ".",
 		"paths": { "~/*": ["./app/*"] },
-		"types": ["bun-types"],
 
 		/* strictness */
 		"strict": true,

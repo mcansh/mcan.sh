@@ -1,18 +1,12 @@
-import {
-	json,
-	type HeadersFunction,
-	type LinksFunction,
-} from "@remix-run/server-runtime";
+import { json } from "@remix-run/node";
+import type { HeadersFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { cacheHeader } from "pretty-cache-header";
 
-import { getCloudinaryURL, MUGSHOT } from "~/cloudinary.server";
-import {
-	FunHoverLink,
-	styles as funHoverLinkStyles,
-} from "~/components/fun-hover-link";
-import berkeleyMonoStylesHref from "~/fonts/berkeley-mono/berkeley-mono.css";
-import berkeleyMonoFontHref from "~/fonts/berkeley-mono/berkeley-mono-variable-regular.woff2";
+import { getCloudinaryURL, MUGSHOT } from "~/cloudinary";
+import { FunHoverLink } from "~/components/fun-hover-link";
+
+import "~/assets/berkeley-mono.css";
 
 export function loader() {
 	let me = getCloudinaryURL(MUGSHOT, {
@@ -32,21 +26,6 @@ export const headers: HeadersFunction = () => {
 		}),
 		Link: "<https://res.cloudinary.com>; rel=preconnect",
 	};
-};
-
-export const links: LinksFunction = () => {
-	return [
-		{ rel: "preload", href: funHoverLinkStyles, as: "style" },
-		{ rel: "stylesheet", href: funHoverLinkStyles },
-		{ rel: "preload", href: berkeleyMonoStylesHref, as: "style" },
-		{
-			rel: "preload",
-			href: berkeleyMonoFontHref,
-			as: "font",
-			crossOrigin: "anonymous",
-		},
-		{ rel: "stylesheet", href: berkeleyMonoStylesHref },
-	];
 };
 
 export default function IndexPage() {

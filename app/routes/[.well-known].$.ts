@@ -1,6 +1,6 @@
-import type { DataFunctionArgs } from "@remix-run/server-runtime";
+import type { DataFunctionArgs } from "@remix-run/node";
 
-import { getCloudinaryURL, MUGSHOT } from "~/cloudinary.server";
+import { getCloudinaryURL, MUGSHOT } from "~/cloudinary";
 
 let badRequest = new Response("ope", {
 	status: 404,

@@ -1,64 +1,82 @@
-/**
- * By default, Remix will handle generating the HTTP Response for you.
- * You are free to delete this file if you'd like to, but if you ever want it revealed again, you can run `npx remix reveal` ✨
- * For more information, see https://remix.run/file-conventions/entry.server
- */
-
 import crypto from "node:crypto";
+import { PassThrough } from "node:stream";
 import type {
 	AppLoadContext,
 	EntryContext,
 	HandleDataRequestFunction,
 } from "@remix-run/node";
+import { createReadableStreamFromReadable } from "@remix-run/node";
 import { RemixServer } from "@remix-run/react";
-import { createSecureHeaders } from "@mcansh/http-helmet";
 import isbot from "isbot";
-import { renderToReadableStream } from "react-dom/server";
+import { renderToPipeableStream } from "react-dom/server";
+import { createSecureHeaders } from "@mcansh/http-helmet";
 import { isPrefetch } from "remix-utils/is-prefetch";
 import { preloadRouteAssets } from "remix-utils/preload-route-assets";
 
+import { env } from "./env";
 import { NonceContext } from "./components/nonce";
-import { env } from "./env.server";
 
 const ABORT_DELAY = 5_000;
 
-export default async function handleRequest(
+export default function handleRequest(
 	request: Request,
 	responseStatusCode: number,
 	responseHeaders: Headers,
 	remixContext: EntryContext,
-	loadContext: AppLoadContext,
+	_loadContext: AppLoadContext,
 ) {
+	let callback = isbot(request.headers.get("user-agent"))
+		? "onAllReady"
+		: "onShellReady";
+
 	preloadRouteAssets(remixContext, responseHeaders);
 
 	let nonce = applySecurityHeaders(responseHeaders);
 
-	let stream = await renderToReadableStream(
-		<NonceContext.Provider value={nonce}>
-			<RemixServer
-				context={remixContext}
-				url={request.url}
-				abortDelay={ABORT_DELAY}
-			/>
-		</NonceContext.Provider>,
-		{
-			nonce,
-			onError(error, errorInfo) {
-				// log streaming render errors from inside the shell
-				console.error(error, errorInfo);
-				responseStatusCode = 500;
+	return new Promise((resolve, reject) => {
+		let shellRendered = false;
+		let { pipe, abort } = renderToPipeableStream(
+			<NonceContext.Provider value={nonce}>
+				<RemixServer
+					context={remixContext}
+					url={request.url}
+					abortDelay={ABORT_DELAY}
+				/>
+			</NonceContext.Provider>,
+			{
+				nonce,
+				[callback]() {
+					shellRendered = true;
+					let body = new PassThrough();
+					let stream = createReadableStreamFromReadable(body);
+
+					responseHeaders.set("Content-Type", "text/html");
+
+					resolve(
+						new Response(stream, {
+							headers: responseHeaders,
+							status: responseStatusCode,
+						}),
+					);
+
+					pipe(body);
+				},
+				onShellError(error: unknown) {
+					reject(error);
+				},
+				onError(error: unknown) {
+					responseStatusCode = 500;
+					// Log streaming rendering errors from inside the shell.  Don't log
+					// errors encountered during initial shell rendering since they'll
+					// reject and get logged in handleDocumentRequest.
+					if (shellRendered) {
+						console.error(error);
+					}
+				},
 			},
-		},
-	);
+		);
 
-	if (isbot(request.headers.get("user-agent"))) {
-		await stream.allReady;
-	}
-
-	responseHeaders.set("Content-Type", "text/html");
-	return new Response(stream, {
-		status: responseStatusCode,
-		headers: responseHeaders,
+		setTimeout(abort, ABORT_DELAY);
 	});
 }
 
