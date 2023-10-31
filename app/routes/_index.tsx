@@ -3,7 +3,7 @@ import type { HeadersFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { cacheHeader } from "pretty-cache-header";
 
-import { getCloudinaryURL, MUGSHOT } from "~/cloudinary";
+import { getCloudinaryURL, MUGSHOT } from "~/cloudinary.server";
 import { FunHoverLink } from "~/components/fun-hover-link";
 
 import "~/assets/berkeley-mono.css";

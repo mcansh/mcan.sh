@@ -13,7 +13,7 @@ import { createSecureHeaders } from "@mcansh/http-helmet";
 import { isPrefetch } from "remix-utils/is-prefetch";
 import { preloadRouteAssets } from "remix-utils/preload-route-assets";
 
-import { env } from "./env";
+import { env } from "./env.server";
 import { NonceContext } from "./components/nonce";
 
 const ABORT_DELAY = 5_000;
