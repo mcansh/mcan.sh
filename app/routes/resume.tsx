@@ -1,11 +1,11 @@
-import type { HeadersFunction } from "@remix-run/server-runtime";
-import { json } from "@remix-run/server-runtime";
+import type { HeadersFunction } from "@remix-run/node";
+import { json } from "@remix-run/node";
 import type { MetaFunction } from "@remix-run/react";
 import { useLoaderData } from "@remix-run/react";
 import { cacheHeader } from "pretty-cache-header";
 import { renderToStaticMarkup } from "react-dom/server";
 
-import { getCloudinaryURL, MUGSHOT } from "~/cloudinary.server";
+import { getCloudinaryURL, MUGSHOT } from "~/cloudinary";
 import { Svg } from "~/components/sprite";
 
 export function loader() {
