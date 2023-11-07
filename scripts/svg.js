@@ -1,8 +1,9 @@
 import path from "node:path";
+
 import fse from "fs-extra";
-import svgstore from "svgstore";
 import { globSync } from "glob";
-import prettier from "prettier";
+import { format } from "prettier";
+import svgstore from "svgstore";
 
 let ASSETS_PATH = path.join(process.cwd(), "assets");
 
@@ -55,11 +56,11 @@ async function createSprite() {
 	await Promise.all([
 		fse.writeFile(
 			OUT_FILE,
-			await prettier.format(sprites.toString(), { parser: "html" }),
+			await format(sprites.toString(), { parser: "html" }),
 		),
 		fse.writeFile(
 			COMPONENT_FILE,
-			await prettier.format(component, { parser: "typescript" }),
+			await format(component, { parser: "typescript" }),
 		),
 	]);
 }

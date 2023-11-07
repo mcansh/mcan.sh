@@ -3,6 +3,6 @@ import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
-	// @ts-expect-error hm
+	// @ts-expect-error - tsconfigPaths is having a type issue
 	plugins: [remix(), tsconfigPaths()],
 });
