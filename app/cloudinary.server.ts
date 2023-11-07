@@ -17,4 +17,4 @@ export function getCloudinaryURL(
 	});
 }
 
-export let MUGSHOT = "website/c12fskgl4pkrs30aj40g5xl8" as const;
+export let MUGSHOT = "website/zzn9unr9na0n0qjrwlxj" as const;
