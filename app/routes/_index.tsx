@@ -34,7 +34,7 @@ export default function IndexPage() {
 			<div className="flex flex-1 flex-col items-center justify-center">
 				<img
 					src={data.me}
-					alt="Me sitting on a oversized wooden chair at Comerica Park"
+					alt=""
 					height={240}
 					width={240}
 					placeholder="transparent"

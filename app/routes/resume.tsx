@@ -230,8 +230,8 @@ export default function ResumePage() {
 					<div className="relative h-32 w-32 overflow-hidden rounded-full sm:h-40 sm:w-40">
 						<div className="h-full w-full scale-125 bg-cover" />
 						<img
-							alt="Me standing on a rock in front of an American flag with a beer in hand"
 							src={data.me}
+							alt=""
 							height={160}
 							width={160}
 							className="absolute left-0 top-0 h-full w-full"
