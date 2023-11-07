@@ -6,8 +6,6 @@ import { cacheHeader } from "pretty-cache-header";
 import { getCloudinaryURL, MUGSHOT } from "~/cloudinary.server";
 import { FunHoverLink } from "~/components/fun-hover-link";
 
-import "~/assets/berkeley-mono.css";
-
 export function loader() {
 	let me = getCloudinaryURL(MUGSHOT, {
 		resize: { height: 480, width: 480, type: "fill" },

@@ -15,7 +15,7 @@ import * as Fathom from "fathom-client";
 import * as React from "react";
 
 import "~/assets/app.css";
-import "~/assets/inter.css";
+import "~/assets/berkeley-mono.css";
 import { NonceContext } from "~/components/nonce";
 import type { Match } from "~/types/handle";
 
@@ -68,7 +68,10 @@ export default function App() {
 	useFathom();
 
 	return (
-		<html lang="en" className="h-full dark:bg-slate-900 dark:text-white">
+		<html
+			lang="en"
+			className="h-full font-thin dark:bg-slate-900 dark:text-white"
+		>
 			<head>
 				<DefaultMeta />
 				<Meta />
@@ -105,7 +108,7 @@ export function ErrorBoundary() {
 			</head>
 			<body
 				className={clsx(
-					"mx-auto flex min-h-screen w-[90%] max-w-5xl flex-col justify-center space-y-4 bg-[#0827f5] pt-20 text-center font-mono text-white",
+					"mx-auto flex min-h-screen w-[90%] max-w-5xl flex-col justify-center space-y-4 bg-[#0827f5] pt-20 text-center text-white",
 					handleBodyClassName,
 				)}
 			>

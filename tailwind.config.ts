@@ -32,8 +32,7 @@ export default {
 				},
 			},
 			fontFamily: {
-				sans: ["Inter var experimental", ...defaultTheme.fontFamily.sans],
-				mono: ["Berkeley Mono", ...defaultTheme.fontFamily.mono],
+				sans: ["Berkeley Mono", ...defaultTheme.fontFamily.sans],
 			},
 		},
 	},
