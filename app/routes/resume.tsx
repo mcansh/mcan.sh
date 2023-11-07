@@ -340,7 +340,7 @@ export default function ResumePage() {
 						</ul>
 					</div>
 
-					<div className="flex print:hidden items-center justify-center space-x-4">
+					<div className="flex items-center justify-center space-x-4 print:hidden">
 						{data.links.map((link) => {
 							return (
 								<a
