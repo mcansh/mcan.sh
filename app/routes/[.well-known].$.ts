@@ -8,7 +8,7 @@ let badRequest = new Response("ope", {
 	headers: { "Content-Type": "text/plain" },
 });
 
-export async function loader({ params, request }: DataFunctionArgs) {
+export async function loader({ params }: DataFunctionArgs) {
 	let splat = params["*"];
 
 	if (!splat) {

@@ -1,4 +1,3 @@
-import * as React from "react";
 import type { LinksFunction, MetaFunction } from "@remix-run/node";
 import {
 	isRouteErrorResponse,
@@ -11,13 +10,14 @@ import {
 	useMatches,
 	useRouteError,
 } from "@remix-run/react";
-import clsx from "clsx";
+import { clsx } from "clsx";
 import * as Fathom from "fathom-client";
+import * as React from "react";
 
 import "~/assets/app.css";
 import "~/assets/inter.css";
-import type { Match } from "~/types/handle";
 import { NonceContext } from "~/components/nonce";
+import type { Match } from "~/types/handle";
 
 export const meta: MetaFunction = () => {
 	return [

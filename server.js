@@ -1,14 +1,15 @@
-import url from "node:url";
 import path from "node:path";
+import url from "node:url";
+
+import middie from "@fastify/middie";
+import { fastifyStatic } from "@fastify/static";
+import { createRequestHandler } from "@mcansh/remix-fastify";
 import {
 	unstable_createViteServer,
 	unstable_loadViteServerBuild,
 } from "@remix-run/dev";
-import { createRequestHandler } from "@mcansh/remix-fastify";
 import { installGlobals } from "@remix-run/node";
-import fastify from "fastify";
-import { fastifyStatic } from "@fastify/static";
-import middie from "@fastify/middie";
+import { fastify } from "fastify";
 
 installGlobals();
 

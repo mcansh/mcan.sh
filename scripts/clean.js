@@ -1,14 +1,15 @@
 #!/usr/bin/env node
 
 import path from "node:path";
+
+import { readConfig } from "@remix-run/dev/dist/config";
 import { deleteAsync } from "del";
-import kleur from "kleur";
 import Gitignore from "gitignore-fs";
 import { globSync } from "glob";
-
-import remixConfig from "../remix.config.js";
+import kleur from "kleur";
 
 async function clean() {
+	let remixConfig = await readConfig();
 	let cwd = process.cwd();
 	let gitignore = new Gitignore();
 
