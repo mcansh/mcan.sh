@@ -14,9 +14,9 @@ import { fastify } from "fastify";
 installGlobals();
 
 let vite =
-	process.env.NODE_ENV === "production"
-		? undefined
-		: await unstable_createViteServer();
+	process.env.NODE_ENV === "production" ?
+		undefined
+	:	await unstable_createViteServer();
 
 let app = fastify();
 
@@ -66,9 +66,10 @@ await app.register(fastifyStatic, {
 app.all(
 	"*",
 	createRequestHandler({
-		build: vite
-			? () => unstable_loadViteServerBuild(vite)
-			: await import("./build/index.js"),
+		build:
+			vite ?
+				() => unstable_loadViteServerBuild(vite)
+			:	await import("./build/index.js"),
 	}),
 );
 
