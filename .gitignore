@@ -9,6 +9,8 @@
 /build
 /public/build
 .eslintcache
+.prettiercache
 tsconfig.tsbuildinfo
 .env
 app/components/sprite
+
