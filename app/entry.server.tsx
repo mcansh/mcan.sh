@@ -26,9 +26,8 @@ export default function handleRequest(
 	remixContext: EntryContext,
 	_loadContext: AppLoadContext,
 ) {
-	let callback = isbot(request.headers.get("user-agent"))
-		? "onAllReady"
-		: "onShellReady";
+	let callback =
+		isbot(request.headers.get("user-agent")) ? "onAllReady" : "onShellReady";
 
 	preloadRouteAssets(remixContext, responseHeaders);
 
@@ -127,9 +126,9 @@ function applySecurityHeaders(responseHeaders: Headers) {
 			manifestSrc: ["'self'"],
 			prefetchSrc: ["'self'"],
 			connectSrc: [
-				...(process.env.NODE_ENV === "production"
-					? ["'self'"]
-					: ["'self'", "ws:"]),
+				...(process.env.NODE_ENV === "production" ?
+					["'self'"]
+				:	["'self'", "ws:"]),
 			],
 			workerSrc: ["blob:"],
 			reportUri: [env.SENTRY_REPORT_URL],
