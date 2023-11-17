@@ -283,7 +283,7 @@ export default function ResumePage() {
 									key={`${experience.company}-${experience.start}`}
 								>
 									<div>
-										<h3 className="flex flex-col py-2 sm:flex-row sm:items-baseline sm:space-x-2 sm:space-y-0">
+										<h3 className="flex flex-col py-2">
 											<span className="text-xl font-medium">
 												{experience.company}
 											</span>
