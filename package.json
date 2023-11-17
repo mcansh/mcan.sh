@@ -75,7 +75,7 @@
 			"eslint --cache --fix"
 		],
 		"*": [
-			"prettier --ignore-path .gitignore --cache --cache-location .prettiercache --ignore-unknown --experimental-ternaries --write"
+			"prettier --ignore-path .gitignore --cache --cache-location .prettiercache --ignore-unknown --write"
 		]
 	},
 	"engines": {
