@@ -122,7 +122,7 @@ function applySecurityHeaders(responseHeaders: Headers) {
 				"https://thirtyseven-active.b-cdn.net/script.js",
 				`'nonce-${nonce}'`,
 			],
-			styleSrc: ["'self'"],
+			styleSrc: ["'self'", `'nonce-${nonce}'`],
 			manifestSrc: ["'self'"],
 			prefetchSrc: ["'self'"],
 			connectSrc: [
