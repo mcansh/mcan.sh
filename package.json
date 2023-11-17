@@ -11,7 +11,7 @@
 		"clean": "./scripts/clean.js",
 		"type-check": "tsc",
 		"lint": "eslint --ignore-path .gitignore --cache --fix .",
-		"format": "prettier --ignore-path .gitignore --cache --cache-location .prettiercache --ignore-unknown --experimental-ternaries --write .",
+		"format": "prettier --ignore-path .gitignore --cache --cache-location .prettiercache --ignore-unknown --write .",
 		"validate": "run-p lint format type-check",
 		"prepare": "is-ci || husky install",
 		"dev": "node ./server.js",
