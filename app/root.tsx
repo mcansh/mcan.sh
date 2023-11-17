@@ -75,7 +75,7 @@ export default function App() {
 			<head>
 				<DefaultMeta />
 				<Meta />
-				<Links />
+				<Links nonce={nonce} />
 			</head>
 			<body className={clsx("h-full", handleBodyClassName)}>
 				<Outlet />
