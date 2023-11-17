@@ -112,13 +112,13 @@ export function ErrorBoundary() {
 					handleBodyClassName,
 				)}
 			>
-				{isRouteErrorResponse(error) ?
+				{isRouteErrorResponse(error) ? (
 					<>
 						<h1 className={headingClassName}>
 							{error.status} {error.statusText}
 						</h1>
 					</>
-				: error instanceof Error ?
+				) : error instanceof Error ? (
 					<>
 						<h1 className={headingClassName}>Uncaught Exception!</h1>
 						<p>
@@ -127,17 +127,19 @@ export function ErrorBoundary() {
 						</p>
 						<pre className={boxClassName}>{error.message}</pre>
 
-						{process.env.NODE_ENV === "production" ?
+						{process.env.NODE_ENV === "production" ? (
 							<p>
 								There was an uncaught exception in your application. Check the
 								browser console and/or the server console to inspect the error.
 							</p>
-						:	<pre className={clsx(boxClassName, "text-left")}>
+						) : (
+							<pre className={clsx(boxClassName, "text-left")}>
 								{error.stack}
 							</pre>
-						}
+						)}
 					</>
-				:	<>
+				) : (
+					<>
 						<h1 className={headingClassName}>Unknown Error!</h1>
 						<p>
 							If you are not the developer, please click back in your browser
@@ -145,7 +147,7 @@ export function ErrorBoundary() {
 						</p>
 						<pre className={boxClassName}>{String(error)}</pre>
 					</>
-				}
+				)}
 				<ScrollRestoration nonce={nonce} />
 				<LiveReload nonce={nonce} />
 				<Scripts nonce={nonce} />

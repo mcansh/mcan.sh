@@ -293,15 +293,16 @@ export default function ResumePage() {
 													{experience.start}
 												</time>
 												{" - "}
-												{"current" in experience ?
+												{"current" in experience ? (
 													<span>Present</span>
-												:	<time dateTime={experience.endISO}>
+												) : (
+													<time dateTime={experience.endISO}>
 														{experience.end}
 													</time>
-												}
+												)}
 											</span>
 										</h3>
-										{experience.duties.length > 0 ?
+										{experience.duties.length > 0 ? (
 											<ul className="list-disc space-y-1 pl-6">
 												{experience.duties.map((duty) => (
 													<li
@@ -312,7 +313,7 @@ export default function ResumePage() {
 													></li>
 												))}
 											</ul>
-										:	null}
+										) : null}
 									</div>
 								</li>
 							))}
@@ -330,9 +331,9 @@ export default function ResumePage() {
 										{certificate.label}
 									</a>{" "}
 									(
-									{Array.isArray(certificate.year) ?
-										certificate.year.join(", ")
-									:	certificate.year}
+									{Array.isArray(certificate.year)
+										? certificate.year.join(", ")
+										: certificate.year}
 									)
 								</li>
 							))}

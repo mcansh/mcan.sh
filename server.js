@@ -14,9 +14,9 @@ import { fastify } from "fastify";
 installGlobals();
 
 let vite =
-	process.env.NODE_ENV === "production" ?
-		undefined
-	:	await unstable_createViteServer();
+	process.env.NODE_ENV === "production"
+		? undefined
+		: await unstable_createViteServer();
 
 let app = fastify();
 
@@ -65,10 +65,9 @@ await app.register(fastifyStatic, {
 // handle SSR requests
 app.all("*", async (request, reply) => {
 	try {
-		let build =
-			vite ?
-				() => unstable_loadViteServerBuild(vite)
-			:	await import("./build/index.js");
+		let build = vite
+			? () => unstable_loadViteServerBuild(vite)
+			: await import("./build/index.js");
 		let criticalCss;
 
 		if (vite) {
