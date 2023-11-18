@@ -4,7 +4,6 @@ import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
 	plugins: [
-		// @ts-expect-error - type issue
 		remix({ future: { v3_fetcherPersist: true } }),
 		// @ts-expect-error - type issue
 		tsconfigPaths(),
