@@ -9,4 +9,4 @@ if (!isCi) {
 }
 
 console.log(`patching packages`);
-execSync("bunx patch-package");
+execSync("bunx patch-package", { stdio: "inherit" });
