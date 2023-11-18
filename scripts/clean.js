@@ -2,7 +2,7 @@
 
 import path from "node:path";
 
-import { readConfig } from "@remix-run/dev/dist/config";
+import { readConfig } from "@remix-run/dev/dist/config.js";
 import { deleteAsync } from "del";
 import Gitignore from "gitignore-fs";
 import { globSync } from "glob";
