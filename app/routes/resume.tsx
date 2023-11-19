@@ -5,7 +5,7 @@ import { useLoaderData } from "@remix-run/react";
 import { cacheHeader } from "pretty-cache-header";
 import { renderToStaticMarkup } from "react-dom/server";
 
-import { getCloudinaryURL, MUGSHOT } from "~/cloudinary.server";
+import { getMugshotURL } from "~/cloudinary.server";
 import { Svg } from "~/components/sprite";
 
 export function loader() {
@@ -161,12 +161,12 @@ export function loader() {
 		{
 			link: "https://www.ciwcertified.com/ciw-certifications/web-foundations-series/internet-business-associate",
 			label: "CIW Internet Business Associate",
-			year: 2014,
+			year: [2014],
 		},
 		{
 			link: "https://www.ciwcertified.com/ciw-certifications/web-foundations-series/site-development-associate",
 			label: "CIW Web Site Development Associate",
-			year: 2015,
+			year: [2015],
 		},
 		{
 			link: "https://testingjavascript.com",
@@ -181,9 +181,7 @@ export function loader() {
 			skills,
 			links,
 			experiences,
-			me: getCloudinaryURL(MUGSHOT, {
-				resize: { height: 480, width: 480, type: "fill" },
-			}),
+			me: getMugshotURL({ resize: { height: 480, width: 480, type: "fill" } }),
 		},
 		{
 			headers: {
@@ -193,6 +191,8 @@ export function loader() {
 					staleWhileRevalidate: "2 hours",
 					sMaxage: "1 hour",
 				}),
+				Link: "<https://res.cloudinary.com>; rel=preconnect",
+				"x-hello-recruiters": "1",
 			},
 		},
 	);
@@ -208,13 +208,18 @@ export const meta: MetaFunction<typeof loader> = () => {
 export const headers: HeadersFunction = ({ loaderHeaders }) => {
 	let routeHeaders = new Headers();
 
-	routeHeaders.set("x-hello-recruiters", "1");
-	routeHeaders.set("Link", "<https://res.cloudinary.com>; rel=preconnect");
+	let cacheControlHeader = loaderHeaders.get("Cache-Control");
+	let httpLinkHeader = loaderHeaders.get("Link");
+	let xHelloRecruiters = loaderHeaders.get("x-hello-recruiters");
 
-	let cacheControl = loaderHeaders.get("Cache-Control");
-
-	if (cacheControl) {
-		routeHeaders.set("Cache-Control", cacheControl);
+	if (cacheControlHeader) {
+		routeHeaders.set("Cache-Control", cacheControlHeader);
+	}
+	if (httpLinkHeader) {
+		routeHeaders.set("Link", httpLinkHeader);
+	}
+	if (xHelloRecruiters) {
+		routeHeaders.set("x-hello-recruiters", xHelloRecruiters);
 	}
 
 	return routeHeaders;
@@ -277,66 +282,66 @@ export default function ResumePage() {
 					<div>
 						<h2 className="text-2xl font-semibold">Experience</h2>
 						<ul>
-							{data.experiences.map((experience) => (
-								<li
-									className="space-y-2"
-									key={`${experience.company}-${experience.start}`}
-								>
-									<div>
-										<h3 className="flex flex-col py-2">
-											<span className="text-xl font-medium">
-												{experience.company}
-											</span>
-											<span className="text-lg">{experience.title}</span>
-											<span>
-												<time dateTime={experience.startISO}>
-													{experience.start}
-												</time>
-												{" - "}
-												{"current" in experience ? (
-													<span>Present</span>
-												) : (
-													<time dateTime={experience.endISO}>
-														{experience.end}
+							{data.experiences.map((experience) => {
+								return (
+									<li
+										className="space-y-2"
+										key={`${experience.company}-${experience.start}`}
+									>
+										<div>
+											<h3 className="flex flex-col py-2">
+												<span className="text-xl font-medium">
+													{experience.company}
+												</span>
+												<span className="text-lg">{experience.title}</span>
+												<span>
+													<time dateTime={experience.startISO}>
+														{experience.start}
 													</time>
-												)}
-											</span>
-										</h3>
-										{experience.duties.length > 0 ? (
-											<ul className="list-disc space-y-1 pl-6">
-												{experience.duties.map((duty) => (
-													<li
-														key={duty}
-														dangerouslySetInnerHTML={{
-															__html: duty,
-														}}
-													></li>
-												))}
-											</ul>
-										) : null}
-									</div>
-								</li>
-							))}
+													{" - "}
+													{"current" in experience ? (
+														<span>Present</span>
+													) : (
+														<time dateTime={experience.endISO}>
+															{experience.end}
+														</time>
+													)}
+												</span>
+											</h3>
+											{experience.duties.length > 0 ? (
+												<ul className="list-disc space-y-1 pl-6">
+													{experience.duties.map((duty) => {
+														return (
+															<li
+																key={duty}
+																dangerouslySetInnerHTML={{ __html: duty }}
+															/>
+														);
+													})}
+												</ul>
+											) : null}
+										</div>
+									</li>
+								);
+							})}
 						</ul>
 					</div>
 					<div>
 						<h2 className="text-2xl font-semibold">Certificates</h2>
 						<ul className="list-disc pl-6">
-							{data.certifications.map((certificate) => (
-								<li key={certificate.label}>
-									<a
-										className="text-indigo-600 hover:underline dark:text-indigo-300"
-										href={certificate.link}
-									>
-										{certificate.label}
-									</a>{" "}
-									(
-									{Array.isArray(certificate.year)
-										? certificate.year.join(", ")
-										: certificate.year}
-									)
-								</li>
-							))}
+							{data.certifications.map((certificate) => {
+								return (
+									<li key={certificate.label}>
+										<a
+											className="text-indigo-600 hover:underline dark:text-indigo-300"
+											href={certificate.link}
+										>
+											{certificate.label}
+										</a>{" "}
+										({certificate.year.join(", ")})
+									</li>
+								);
+							})}
 						</ul>
 					</div>
 
