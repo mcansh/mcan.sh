@@ -12,7 +12,7 @@ index fd88339..61989f0 100644
   * This component renders all the `<link rel="prefetch">` and
   * `<link rel="modulepreload"/>` tags for all the assets (data, modules, css) of
 diff --git a/node_modules/@remix-run/react/dist/components.js b/node_modules/@remix-run/react/dist/components.js
-index d0ba14b..8ebe7bd 100644
+index 3cce299..ce4fb52 100644
 --- a/node_modules/@remix-run/react/dist/components.js
 +++ b/node_modules/@remix-run/react/dist/components.js
 @@ -191,7 +191,7 @@ function composeEventHandlers(theirHandler, ourHandler) {
@@ -33,7 +33,7 @@ index d0ba14b..8ebe7bd 100644
        __html: criticalCss
      }
 diff --git a/node_modules/@remix-run/react/dist/esm/components.js b/node_modules/@remix-run/react/dist/esm/components.js
-index e71a019..693f658 100644
+index 2f5059c..e033016 100644
 --- a/node_modules/@remix-run/react/dist/esm/components.js
 +++ b/node_modules/@remix-run/react/dist/esm/components.js
 @@ -167,7 +167,7 @@ function composeEventHandlers(theirHandler, ourHandler) {
