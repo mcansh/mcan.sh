@@ -56,3 +56,4 @@ jobs:
           commit-message: "chore(deps): bump remix to ${{ steps.bump.outputs.version }}"
           update-pull-request-title-and-body: true
           branch: actions/remix-nightly
+          author: "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
