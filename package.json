@@ -1,85 +1,85 @@
 {
-	"private": true,
-	"repository": "https://github.com/mcansh/mcan.sh",
-	"homepage": "https://mcan.sh",
-	"author": "Logan McAnsh <logan@mcan.sh> (https://mcan.sh)",
-	"license": "MIT",
-	"sideEffects": false,
-	"type": "module",
-	"scripts": {
-		"build": "node ./scripts/svg.js && npm run type-check && vite build && vite build --ssr",
-		"clean": "./scripts/clean.js",
-		"type-check": "tsc",
-		"lint": "eslint --ignore-path .gitignore --cache --fix .",
-		"format": "prettier --ignore-path .gitignore --cache --cache-location .prettiercache --ignore-unknown --write .",
-		"validate": "run-p lint format type-check",
-		"prepare": "node ./scripts/prepare.js",
-		"dev": "node --watch-path ./server.js ./server.js",
-		"start": "NODE_ENV=production node ./server.js"
-	},
-	"dependencies": {
-		"@fastify/middie": "^8.3.0",
-		"@fastify/static": "^6.12.0",
-		"@mcansh/http-helmet": "^0.9.0",
-		"@mcansh/remix-fastify": "3.2.0-pre.0",
-		"@remix-run/node": "0.0.0-nightly-b6d7ee0-20231120",
-		"@remix-run/react": "0.0.0-nightly-b6d7ee0-20231120",
-		"@remix-run/serve": "0.0.0-nightly-b6d7ee0-20231120",
-		"cloudinary-build-url": "^0.2.4",
-		"clsx": "^2.0.0",
-		"cross-env": "^7.0.3",
-		"fastify": "^4.24.3",
-		"fathom-client": "^3.6.0",
-		"is-ci": "^3.0.1",
-		"isbot": "^3.7.1",
-		"pretty-cache-header": "^1.0.0",
-		"react": "^18.2.0",
-		"react-dom": "^18.2.0",
-		"remix-utils": "7.1.0",
-		"zod": "^3.22.4"
-	},
-	"devDependencies": {
-		"@cld-apis/types": "^0.1.6",
-		"@remix-run/dev": "0.0.0-nightly-b6d7ee0-20231120",
-		"@types/react": "^18.2.37",
-		"@types/react-dom": "^18.2.15",
-		"@typescript-eslint/eslint-plugin": "^6.11.0",
-		"@typescript-eslint/parser": "^6.11.0",
-		"@typescript/lib-dom": "npm:@types/web@^0.0.119",
-		"autoprefixer": "^10.4.16",
-		"del": "^7.1.0",
-		"eslint": "^8.53.0",
-		"eslint-import-resolver-typescript": "^3.6.1",
-		"eslint-plugin-import": "^2.29.0",
-		"eslint-plugin-prefer-let": "^3.0.1",
-		"fs-extra": "^11.1.1",
-		"gitignore-fs": "^2.2.2",
-		"glob": "^10.3.10",
-		"husky": "^8.0.3",
-		"kleur": "^4.1.5",
-		"lint-staged": "^15.1.0",
-		"npm-run-all": "^4.1.5",
-		"patch-package": "^8.0.0",
-		"postcss": "^8.4.31",
-		"postcss-100vh-fix": "^1.0.2",
-		"prettier": "^3.1.0",
-		"prettier-plugin-tailwindcss": "^0.5.7",
-		"svgstore": "^3.0.1",
-		"tailwindcss": "^3.3.5",
-		"tailwindcss-padding-safe": "^1.0.6",
-		"typescript": "5.2.2",
-		"vite": "^5.0.0",
-		"vite-tsconfig-paths": "^4.2.1"
-	},
-	"lint-staged": {
-		"*.+(js|jsx|ts|tsx|cts|mts)": [
-			"eslint --cache --fix"
-		],
-		"*": [
-			"prettier --ignore-path .gitignore --cache --cache-location .prettiercache --ignore-unknown --write"
-		]
-	},
-	"engines": {
-		"node": ">=18 && <21"
-	}
+  "private": true,
+  "repository": "https://github.com/mcansh/mcan.sh",
+  "homepage": "https://mcan.sh",
+  "author": "Logan McAnsh <logan@mcan.sh> (https://mcan.sh)",
+  "license": "MIT",
+  "sideEffects": false,
+  "type": "module",
+  "scripts": {
+    "build": "node ./scripts/svg.js && npm run type-check && vite build && vite build --ssr",
+    "clean": "./scripts/clean.js",
+    "type-check": "tsc",
+    "lint": "eslint --ignore-path .gitignore --cache --fix .",
+    "format": "prettier --ignore-path .gitignore --cache --cache-location .prettiercache --ignore-unknown --write .",
+    "validate": "run-p lint format type-check",
+    "prepare": "node ./scripts/prepare.js",
+    "dev": "node --watch-path ./server.js ./server.js",
+    "start": "NODE_ENV=production node ./server.js"
+  },
+  "dependencies": {
+    "@fastify/middie": "^8.3.0",
+    "@fastify/static": "^6.12.0",
+    "@mcansh/http-helmet": "^0.9.0",
+    "@mcansh/remix-fastify": "3.2.0-pre.0",
+    "@remix-run/node": "0.0.0-nightly-fd8d3a2-20231121",
+    "@remix-run/react": "0.0.0-nightly-fd8d3a2-20231121",
+    "@remix-run/serve": "0.0.0-nightly-fd8d3a2-20231121",
+    "cloudinary-build-url": "^0.2.4",
+    "clsx": "^2.0.0",
+    "cross-env": "^7.0.3",
+    "fastify": "^4.24.3",
+    "fathom-client": "^3.6.0",
+    "is-ci": "^3.0.1",
+    "isbot": "^3.7.1",
+    "pretty-cache-header": "^1.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "remix-utils": "7.1.0",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@cld-apis/types": "^0.1.6",
+    "@remix-run/dev": "0.0.0-nightly-fd8d3a2-20231121",
+    "@types/react": "^18.2.37",
+    "@types/react-dom": "^18.2.15",
+    "@typescript-eslint/eslint-plugin": "^6.11.0",
+    "@typescript-eslint/parser": "^6.11.0",
+    "@typescript/lib-dom": "npm:@types/web@^0.0.119",
+    "autoprefixer": "^10.4.16",
+    "del": "^7.1.0",
+    "eslint": "^8.53.0",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-prefer-let": "^3.0.1",
+    "fs-extra": "^11.1.1",
+    "gitignore-fs": "^2.2.2",
+    "glob": "^10.3.10",
+    "husky": "^8.0.3",
+    "kleur": "^4.1.5",
+    "lint-staged": "^15.1.0",
+    "npm-run-all": "^4.1.5",
+    "patch-package": "^8.0.0",
+    "postcss": "^8.4.31",
+    "postcss-100vh-fix": "^1.0.2",
+    "prettier": "^3.1.0",
+    "prettier-plugin-tailwindcss": "^0.5.7",
+    "svgstore": "^3.0.1",
+    "tailwindcss": "^3.3.5",
+    "tailwindcss-padding-safe": "^1.0.6",
+    "typescript": "5.2.2",
+    "vite": "^5.0.0",
+    "vite-tsconfig-paths": "^4.2.1"
+  },
+  "lint-staged": {
+    "*.+(js|jsx|ts|tsx|cts|mts)": [
+      "eslint --cache --fix"
+    ],
+    "*": [
+      "prettier --ignore-path .gitignore --cache --cache-location .prettiercache --ignore-unknown --write"
+    ]
+  },
+  "engines": {
+    "node": ">=18 && <21"
+  }
 }
