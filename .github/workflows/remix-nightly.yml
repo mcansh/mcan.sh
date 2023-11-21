@@ -1,0 +1,52 @@
+name: 🌒 Remix Nightly Release
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 8 * * *"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+  pull-requests: write
+
+env:
+  CI: true
+
+jobs:
+  bump:
+    name: 📦 Bump Remix to latest nightly
+    if: github.repository == 'mcansh/mcan.sh'
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v4
+
+      - name: 🧅 setup bun
+        uses: oven-sh/setup-bun@v1
+
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 📥 Install dependencies
+        run: bun install
+
+      - name: 📦 Bump Remix to latest nightly
+        id: bump
+        run: |
+          VERSION=$(npm info @remix-run/react --json | jq '."dist-tags".nightly')
+          echo "::set-output name=version::$VERSION"
+          npx --yes upgrade-remix@latest $VERSION
+
+      - name: 📤 Push changes
+        uses: gr2m/create-or-update-pull-request-action@v1
+        with:
+          title: "chore(deps): bump remix to ${{ steps.bump.outputs.version }}"
+          commit-message: "chore(deps): bump remix to ${{ steps.bump.outputs.version }}"
+          update-pull-request-title-and-body: true
+          branch: actions/remix-nightly
