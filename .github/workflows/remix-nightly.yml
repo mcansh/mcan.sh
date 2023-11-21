@@ -41,7 +41,7 @@ jobs:
         run: |
           VERSION=$(npm info @remix-run/react --json | jq '."dist-tags".nightly')
           npx --yes upgrade-remix@latest $VERSION
-          if [[ -z $(git status -s) ]]; then
+          if [ "$(git status --porcelain)" ]; then
             echo "version=$VERSION" >> $GITHUB_OUTPUT
           fi
 
