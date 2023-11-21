@@ -14,7 +14,7 @@
 		"format": "prettier --ignore-path .gitignore --cache --cache-location .prettiercache --ignore-unknown --write .",
 		"validate": "run-p lint format type-check",
 		"prepare": "node ./scripts/prepare.js",
-		"dev": "node --watch-path ./server.js ./server.js",
+		"dev": "NODE_ENV=development node --watch-path ./server.js ./server.js",
 		"start": "NODE_ENV=production node ./server.js"
 	},
 	"dependencies": {
