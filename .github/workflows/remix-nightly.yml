@@ -39,7 +39,7 @@ jobs:
       - name: 📦 Bump Remix to latest nightly
         id: bump
         run: |
-          VERSION=$(npm info @remix-run/react --json | jq -r '."dist-tags".nightly')
+          VERSION=$(npm info @remix-run/react dist-tags.nightly)
           npx --yes upgrade-remix@latest $VERSION
           npm run format
           if [ "$(git status --porcelain)" ]; then
