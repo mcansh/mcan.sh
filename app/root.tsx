@@ -13,8 +13,8 @@ import {
 import { clsx } from "clsx";
 import * as Fathom from "fathom-client";
 import * as React from "react";
+import "tailwindcss/tailwind.css";
 
-import "~/assets/app.css";
 import "~/assets/berkeley-mono.css";
 import { NonceContext } from "~/components/nonce";
 import type { Match } from "~/types/handle";
@@ -44,7 +44,10 @@ export const links: LinksFunction = () => {
 };
 
 function useFathom() {
+	let initialized = React.useRef(false);
 	React.useEffect(() => {
+		if (initialized.current) return;
+		initialized.current = true;
 		Fathom.load("EPVCGNZL", {
 			excludedDomains: ["localhost"],
 			url: "https://thirtyseven-active.b-cdn.net/script.js",
@@ -55,11 +58,13 @@ function useFathom() {
 
 function useHandleBodyClassName() {
 	let matches = useMatches() as unknown as Array<Match>;
-	let handleBodyClassName = matches
-		.filter((match) => match.handle?.bodyClassName)
-		.map((match) => match.handle?.bodyClassName);
 
-	return handleBodyClassName;
+	return matches.reduce<Array<string>>((acc, match) => {
+		if (!match.handle) return acc;
+		if (!match.handle.bodyClassName) return acc;
+		if (typeof match.handle.bodyClassName !== "string") return acc;
+		return [...acc, ...match.handle.bodyClassName];
+	}, []);
 }
 
 export default function App() {
@@ -75,13 +80,13 @@ export default function App() {
 			<head>
 				<DefaultMeta />
 				<Meta />
-				<Links nonce={nonce} />
+				<Links />
 			</head>
 			<body className={clsx("h-full", handleBodyClassName)}>
 				<Outlet />
 				<ScrollRestoration nonce={nonce} />
-				<LiveReload nonce={nonce} />
 				<Scripts nonce={nonce} />
+				<LiveReload nonce={nonce} />
 			</body>
 		</html>
 	);
@@ -91,7 +96,6 @@ export function ErrorBoundary() {
 	let error = useRouteError();
 	let nonce = React.useContext(NonceContext);
 	console.error(error);
-
 	useFathom();
 
 	let handleBodyClassName = useHandleBodyClassName();
