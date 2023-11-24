@@ -29,7 +29,7 @@ async function clean() {
 		filesToDelete.push(`${rel}/**/*`);
 	}
 
-	let deleted = await deleteAsync(filesToDelete);
+	let deleted = await deleteAsync([...filesToDelete, "node_modules/.vite/**"]);
 
 	if (deleted.length > 0) {
 		let deletedPaths = deleted.map((file) => path.relative(cwd, file));
