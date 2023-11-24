@@ -23,7 +23,7 @@
 		"@fastify/middie": "^8.3.0",
 		"@fastify/static": "^6.12.0",
 		"@mcansh/http-helmet": "^0.9.0",
-		"@mcansh/remix-fastify": "3.2.0-pre.0",
+		"@mcansh/remix-fastify": "3.2.1-pre.0",
 		"@remix-run/node": "0.0.0-nightly-6953c3f-20231123",
 		"@remix-run/react": "0.0.0-nightly-6953c3f-20231123",
 		"@remix-run/serve": "0.0.0-nightly-6953c3f-20231123",
