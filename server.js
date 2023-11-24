@@ -20,8 +20,6 @@ let vite =
 
 let app = fastify();
 
-await app.register(middie);
-
 let noopContentParser = (_request, payload, done) => {
 	done(null, payload);
 };
@@ -33,6 +31,7 @@ let __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 
 // handle asset requests
 if (vite) {
+	await app.register(middie);
 	await app.use(vite.middlewares);
 } else {
 	await app.register(fastifyStatic, {
@@ -65,33 +64,15 @@ await app.register(fastifyStatic, {
 // handle SSR requests
 app.all("*", async (request, reply) => {
 	try {
-		let build = vite
-			? () => unstable_loadViteServerBuild(vite)
-			: await import("./build/server/index.js");
-		let criticalCss;
-
-		if (vite) {
-			let [{ getStylesForUrl }, { readConfig }] = await Promise.all([
-				import("@remix-run/dev/dist/vite/styles.js"),
-				import("@remix-run/dev/dist/config.js"),
-			]);
-
-			let remixConfig = await readConfig();
-			let resolvedBuild = vite ? await build() : build;
-			criticalCss = await getStylesForUrl(
-				vite,
-				remixConfig,
-				{},
-				resolvedBuild,
-				request.url,
-			);
-		}
-
-		let handler = createRequestHandler({ build, criticalCss });
+		let handler = createRequestHandler({
+			build: vite
+				? () => unstable_loadViteServerBuild(vite)
+				: await import("./build/server/index.js"),
+		});
 		return handler(request, reply);
 	} catch (error) {
 		console.error(error);
-		return reply.status(500).send(error.message);
+		return reply.status(500).send(error);
 	}
 });
 
