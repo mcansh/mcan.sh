@@ -106,7 +106,7 @@ function applySecurityHeaders(responseHeaders: Headers) {
 		responseHeaders.set("Cache-Control", "no-cache");
 	}
 
-	let nonce = crypto.randomBytes(16).toString("base64");
+	let nonce = Buffer.from(crypto.randomUUID()).toString("base64");
 	let securityHeaders = createSecureHeaders({
 		"Content-Security-Policy": {
 			upgradeInsecureRequests: process.env.NODE_ENV === "production",
