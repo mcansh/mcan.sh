@@ -144,7 +144,7 @@ export default function ResumePage() {
 							<li>Shelby Township, MI</li>
 							<li>
 								<a
-									className="flex items-center space-x-2 text-blue-600 underline md:justify-end"
+									className="flex items-center space-x-2 text-blue-800 underline md:justify-end"
 									href="https://github.com/mcansh"
 								>
 									<span>GitHub</span>
@@ -153,7 +153,7 @@ export default function ResumePage() {
 							</li>
 							<li>
 								<a
-									className="flex items-center space-x-2 text-blue-600 underline md:justify-end"
+									className="flex items-center space-x-2 text-blue-800 underline md:justify-end"
 									href="https://github.com/loganmcansh"
 								>
 									<span>Twitter</span>
@@ -162,7 +162,7 @@ export default function ResumePage() {
 							</li>
 							<li>
 								<a
-									className="flex items-center space-x-2 text-blue-600 underline md:justify-end"
+									className="flex items-center space-x-2 text-blue-800 underline md:justify-end"
 									href="https://linkedin.com/in/loganmcansh"
 								>
 									<span>LinkedIn</span>
