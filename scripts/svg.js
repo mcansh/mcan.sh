@@ -36,7 +36,7 @@ async function createSprite() {
 	}
 
 	let component = js`
-    import iconsHref from "./index.svg";
+    import iconsHref from "./index.svg?url";
 
     export type SpriteName = ${[...union]
 			.map((icon) => `"${icon}"`)
