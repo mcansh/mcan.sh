@@ -11,8 +11,10 @@ import {
 	useRouteError,
 } from "@remix-run/react";
 import { clsx } from "clsx";
+import type { ClassValue } from "clsx";
 import * as Fathom from "fathom-client";
 import * as React from "react";
+import { twMerge } from "tailwind-merge";
 import "tailwindcss/tailwind.css";
 
 import "~/assets/berkeley-mono.css";
@@ -80,7 +82,7 @@ export default function App() {
 				<Links />
 			</head>
 			<body
-				className={clsx(
+				className={cn(
 					"h-full font-thin dark:bg-slate-900 dark:text-white",
 					handleBodyClassName,
 				)}
@@ -113,7 +115,7 @@ export function ErrorBoundary() {
 				<Links />
 			</head>
 			<body
-				className={clsx(
+				className={cn(
 					"mx-auto flex min-h-screen w-[90%] max-w-5xl flex-col justify-center space-y-4 bg-[#0827f5] pt-20 text-center text-white",
 					handleBodyClassName,
 				)}
@@ -139,9 +141,7 @@ export function ErrorBoundary() {
 								browser console and/or the server console to inspect the error.
 							</p>
 						) : (
-							<pre className={clsx(boxClassName, "text-left")}>
-								{error.stack}
-							</pre>
+							<pre className={cn(boxClassName, "text-left")}>{error.stack}</pre>
 						)}
 					</>
 				) : (
@@ -187,4 +187,8 @@ function DefaultMeta() {
 			/>
 		</>
 	);
+}
+
+function cn(...inputs: Array<ClassValue>) {
+	return twMerge(clsx(...inputs));
 }

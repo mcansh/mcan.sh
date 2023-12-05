@@ -59,6 +59,9 @@ dependencies:
   remix-utils:
     specifier: 7.3.0
     version: 7.3.0(@remix-run/node@0.0.0-nightly-999b565-20231205)(@remix-run/react@0.0.0-nightly-999b565-20231205)(react@18.2.0)(zod@3.22.4)
+  tailwind-merge:
+    specifier: ^2.1.0
+    version: 2.1.0
   zod:
     specifier: ^3.22.4
     version: 3.22.4
@@ -574,7 +577,6 @@ packages:
     engines: { node: ">=6.9.0" }
     dependencies:
       regenerator-runtime: 0.14.0
-    dev: true
 
   /@babel/template@7.22.15:
     resolution:
@@ -8939,7 +8941,6 @@ packages:
       {
         integrity: sha512-srw17NI0TUWHuGa5CFGGmhfNIeja30WMBfbslPNhf6JrqQlLN5gcrvig1oqPxiVaXb0oW0XRKtH6Nngs5lKCIA==,
       }
-    dev: true
 
   /regexp.prototype.flags@1.5.1:
     resolution:
@@ -9931,6 +9932,15 @@ packages:
     dependencies:
       cheerio: 1.0.0-rc.10
     dev: true
+
+  /tailwind-merge@2.1.0:
+    resolution:
+      {
+        integrity: sha512-l11VvI4nSwW7MtLSLYT4ldidDEUwQAMWuSHk7l4zcXZDgnCRa0V3OdCwFfM7DCzakVXMNRwAeje9maFFXT71dQ==,
+      }
+    dependencies:
+      "@babel/runtime": 7.23.5
+    dev: false
 
   /tailwindcss-padding-safe@1.0.6:
     resolution:
