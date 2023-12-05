@@ -63,7 +63,7 @@ function useHandleBodyClassName() {
 		if (!match.handle) return acc;
 		if (!match.handle.bodyClassName) return acc;
 		if (typeof match.handle.bodyClassName !== "string") return acc;
-		return [...acc, ...match.handle.bodyClassName];
+		return [...acc, match.handle.bodyClassName];
 	}, []);
 }
 
@@ -73,16 +73,18 @@ export default function App() {
 	useFathom();
 
 	return (
-		<html
-			lang="en"
-			className="h-full font-thin dark:bg-slate-900 dark:text-white"
-		>
+		<html lang="en" className="h-full">
 			<head>
 				<DefaultMeta />
 				<Meta />
 				<Links />
 			</head>
-			<body className={clsx("h-full", handleBodyClassName)}>
+			<body
+				className={clsx(
+					"h-full font-thin dark:bg-slate-900 dark:text-white",
+					handleBodyClassName,
+				)}
+			>
 				<Outlet />
 				<ScrollRestoration nonce={nonce} />
 				<Scripts nonce={nonce} />

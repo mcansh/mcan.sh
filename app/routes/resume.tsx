@@ -5,6 +5,7 @@ import { useLoaderData } from "@remix-run/react";
 import { cacheHeader } from "pretty-cache-header";
 
 import { Svg } from "~/components/sprite";
+import type { RouteHandle } from "~/types/handle";
 
 export function loader() {
 	return json(
@@ -116,6 +117,10 @@ export const headers: HeadersFunction = ({ loaderHeaders }) => {
 	}
 
 	return routeHeaders;
+};
+
+export let handle: RouteHandle = {
+	bodyClassName: "dark:bg-white dark:text-black",
 };
 
 export default function ResumePage() {
