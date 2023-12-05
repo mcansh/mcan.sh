@@ -13,9 +13,7 @@ installGlobals();
 let vite =
 	process.env.NODE_ENV === "production"
 		? undefined
-		: await import("vite").then((v) =>
-				v.createServer({ server: { middlewareMode: true } }),
-		  );
+		: await import("vite").then(({ createServer }) => createServer());
 
 let app = fastify();
 
