@@ -5,6 +5,7 @@ import { useLoaderData } from "@remix-run/react";
 import { cacheHeader } from "pretty-cache-header";
 
 import { Svg } from "~/components/sprite";
+import type { RouteHandle } from "~/types/handle";
 
 export function loader() {
 	return json(
@@ -118,6 +119,10 @@ export const headers: HeadersFunction = ({ loaderHeaders }) => {
 	return routeHeaders;
 };
 
+export let handle: RouteHandle = {
+	bodyClassName: "dark:bg-white dark:text-black",
+};
+
 export default function ResumePage() {
 	let data = useLoaderData<typeof loader>();
 
@@ -139,7 +144,7 @@ export default function ResumePage() {
 							<li>Shelby Township, MI</li>
 							<li>
 								<a
-									className="flex items-center space-x-2 text-blue-600 underline md:justify-end"
+									className="flex items-center space-x-2 text-blue-800 underline md:justify-end"
 									href="https://github.com/mcansh"
 								>
 									<span>GitHub</span>
@@ -148,7 +153,7 @@ export default function ResumePage() {
 							</li>
 							<li>
 								<a
-									className="flex items-center space-x-2 text-blue-600 underline md:justify-end"
+									className="flex items-center space-x-2 text-blue-800 underline md:justify-end"
 									href="https://github.com/loganmcansh"
 								>
 									<span>Twitter</span>
@@ -157,7 +162,7 @@ export default function ResumePage() {
 							</li>
 							<li>
 								<a
-									className="flex items-center space-x-2 text-blue-600 underline md:justify-end"
+									className="flex items-center space-x-2 text-blue-800 underline md:justify-end"
 									href="https://linkedin.com/in/loganmcansh"
 								>
 									<span>LinkedIn</span>
