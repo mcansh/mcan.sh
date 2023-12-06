@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+    paths: ./app/**/*
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -18,14 +19,7 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v4
 
-      - name: 📝 Get changed files
-        id: changed-files
-        uses: tj-actions/changed-files@v40.2.1
-        with:
-          path: "./app"
-
       - name: ♻️ Purge Cloudflare cache
-        if: ${{ github.ref == 'refs/heads/main' }} && steps.changed-files.outputs.any_changed == 'true'
         uses: jakejarvis/cloudflare-purge-action@v0.3.0
         env:
           CLOUDFLARE_ZONE: ${{ secrets.CLOUDFLARE_ZONE }}
