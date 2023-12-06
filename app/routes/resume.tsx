@@ -35,7 +35,7 @@ export function loader() {
 						"Implemented cutting-edge documentation infrastructure ideas from Ryan Florence and Kurt Mackey, utilizing a SQLite DB to store generated HTML from markdown and keeping it synchronized with GitHub updates.",
 						"Successfully migrated integration tests from Puppeteer to Playwright.",
 						"Developed robust deployment target testing infrastructure for first-party targets.",
-						"Created adaptable adapters to convert between proprietary request/response objects and native Request/Response objects.",
+						"Created adapters to convert between proprietary request/response objects and native Request/Response objects.",
 					],
 				},
 				{
