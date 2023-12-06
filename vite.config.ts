@@ -4,7 +4,15 @@ import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
 	server: { middlewareMode: true },
-	plugins: [remix({ future: { v3_fetcherPersist: true } }), tsconfigPaths()],
+	plugins: [
+		remix({
+			future: {
+				v3_fetcherPersist: true,
+				v3_relativeSplatPath: true,
+			},
+		}),
+		tsconfigPaths(),
+	],
 	build: {
 		assetsInlineLimit: 0, // keep SVG as asset URL
 	},
