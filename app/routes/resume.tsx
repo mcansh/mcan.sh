@@ -133,7 +133,7 @@ export default function ResumePage() {
 			</header>
 
 			<div className="grid h-full flex-1 gap-8 md:grid-cols-[300px,1fr] print:grid-cols-[175px,1fr] print:gap-4">
-				<aside className="space-y-8 bg-stone-300 p-8 md:text-right print:space-y-4 print:p-4">
+				<aside className="space-y-8 bg-stone-300 p-8 md:text-right print:space-y-4 print:p-4 print:py-2">
 					<div className="print:text-[9pt]">
 						<h2 className="text-lg font-medium print:text-[11pt]">Contact</h2>
 						<ul className="space-y-1 print:space-y-0.5">
@@ -192,7 +192,7 @@ export default function ResumePage() {
 					</div>
 				</aside>
 
-				<main className="p-8 pl-0 md:py-8 md:pr-8 print:py-0 print:pl-0 print:text-[9pt]">
+				<main className="p-8 pl-0 md:py-8 md:pr-8 print:px-0 print:py-2 print:text-[9pt]">
 					<h2 className="text-lg font-medium print:text-[11pt]">
 						Work Experience
 					</h2>
