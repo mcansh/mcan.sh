@@ -126,17 +126,17 @@ export default function ResumePage() {
 	let data = useLoaderData<typeof loader>();
 
 	return (
-		<div>
-			<header className="flex flex-col items-center justify-center space-y-2 bg-stone-800 py-6 text-center text-white">
-				<h1 className="text-3xl">Logan McAnsh</h1>
-				<p className="text-lg">Senior Software Engineer</p>
+		<div className="flex h-full flex-col">
+			<header className="flex flex-col items-center justify-center space-y-2 bg-stone-800 py-6 text-center text-white print:py-3">
+				<h1 className="text-3xl print:text-xl">Logan McAnsh</h1>
+				<p className="text-lg print:text-base">Senior Software Engineer</p>
 			</header>
 
-			<div className="grid gap-8 md:grid-cols-[300px,1fr]">
-				<aside className="space-y-8 bg-stone-300 p-8 md:text-right">
-					<div>
-						<h2 className="text-lg font-medium">Contact</h2>
-						<ul className="space-y-1">
+			<div className="grid h-full flex-1 gap-8 md:grid-cols-[300px,1fr] print:grid-cols-[175px,1fr] print:gap-4">
+				<aside className="space-y-8 bg-stone-300 p-8 md:text-right print:space-y-4 print:p-4 print:py-2">
+					<div className="print:text-[9pt]">
+						<h2 className="text-lg font-medium print:text-[11pt]">Contact</h2>
+						<ul className="space-y-1 print:space-y-0.5">
 							<li>
 								<a href="mailto:logan+resume@mcan.sh">logan+resume@mcan.sh</a>
 							</li>
@@ -171,18 +171,20 @@ export default function ResumePage() {
 						</ul>
 					</div>
 
-					<div>
-						<h2 className="text-lg font-medium">Skills</h2>
-						<ul className="space-y-1">
+					<div className="print:text-[9pt]">
+						<h2 className="text-lg font-medium print:text-[11pt]">Skills</h2>
+						<ul className="space-y-1 print:space-y-0.5">
 							{data.skills.map((skill) => {
 								return <li key={skill}>{skill}</li>;
 							})}
 						</ul>
 					</div>
 
-					<div>
-						<h2 className="text-lg font-medium">Certifications</h2>
-						<ul className="space-y-1">
+					<div className="print:text-[9pt]">
+						<h2 className="text-lg font-medium print:text-[11pt]">
+							Certifications
+						</h2>
+						<ul className="space-y-1 print:space-y-0.5">
 							{data.certifications.map((skill) => {
 								return <li key={skill}>{skill}</li>;
 							})}
@@ -190,19 +192,23 @@ export default function ResumePage() {
 					</div>
 				</aside>
 
-				<main className="p-8 md:py-8 md:pr-8">
-					<h2 className="text-lg font-medium">Work Experience</h2>
-					<ul className="space-y-8">
+				<main className="p-8 pl-0 md:py-8 md:pr-8 print:px-0 print:py-2 print:text-[9pt]">
+					<h2 className="text-lg font-medium print:text-[11pt]">
+						Work Experience
+					</h2>
+					<ul className="space-y-8 print:space-y-4">
 						{data.experience.map((job) => {
 							return (
 								<li key={job.company}>
-									<h3 className="text-xl">{job.company}</h3>
-									<p className="">{job.position}</p>
-									<p className="">
+									<h3 className="text-xl print:text-[10pt] print:font-medium">
+										{job.company}
+									</h3>
+									<p>{job.position}</p>
+									<p>
 										{job.startDate} - {job.endDate}
 									</p>
 
-									<ul className="list-inside list-disc space-y-1 pt-2">
+									<ul className="list-inside list-disc space-y-1 pt-2 print:space-y-0.5">
 										{job.tasks.map((task) => {
 											return <li key={task}>{task}</li>;
 										})}
