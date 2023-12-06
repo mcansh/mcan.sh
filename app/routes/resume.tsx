@@ -85,7 +85,6 @@ export function loader() {
 					staleWhileRevalidate: "2 hours",
 					sMaxage: "1 hour",
 				}),
-				Link: "<https://res.cloudinary.com>; rel=preconnect",
 				"x-hello-recruiters": "1",
 			},
 		},
