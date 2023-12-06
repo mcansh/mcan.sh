@@ -1,4 +1,4 @@
-import type { DataFunctionArgs } from "@remix-run/node";
+import type { LoaderFunctionArgs } from "@remix-run/node";
 
 import { getCloudinaryURL, MUGSHOT } from "~/cloudinary.server";
 
@@ -8,7 +8,7 @@ let badRequest = new Response("ope", {
 	headers: { "Content-Type": "text/plain" },
 });
 
-export async function loader({ params }: DataFunctionArgs) {
+export async function loader({ params }: LoaderFunctionArgs) {
 	let splat = params["*"];
 
 	if (!splat) {
@@ -44,7 +44,7 @@ export async function loader({ params }: DataFunctionArgs) {
 	}
 
 	// merge our segments with the url segments with a comma
-	transformSegment = transformSegment + "," + segments.join(",");
+	transformSegment = [...transformSegment.split(","), ...segments].join(",");
 
 	// replace the old transform segment with our new one
 	pathSegments[urlSegmentIndex] = transformSegment;
