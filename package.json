@@ -8,7 +8,7 @@
 	"type": "module",
 	"scripts": {
 		"build:icons": "node ./scripts/svg.js",
-		"build": "npm run build:icons && npm run type-check && vite build && vite build --ssr",
+		"build": "npm run build:icons && npm run type-check && remix vite:build",
 		"clean": "./scripts/clean.js",
 		"type-check": "tsc",
 		"lint": "eslint --ignore-path .gitignore --cache --fix .",
