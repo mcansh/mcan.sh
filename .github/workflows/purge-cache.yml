@@ -48,8 +48,7 @@ jobs:
       - name: 📝 Generate diff
         id: diff
         run: |
-          DIFF=$(diff -qr ./current ./previous)
-          if [ -z "$DIFF" ]; then
+          if [ -z "$(diff -qr ./current ./previous)" ]; then
             echo "has_diff=false" >> $GITHUB_OUTPUT
           else
             echo "has_diff=true" >> $GITHUB_OUTPUT
