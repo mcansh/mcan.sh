@@ -29,7 +29,6 @@ export function loader() {
 					position: "Senior Software Engineer",
 					startDate: "August 2021",
 					endDate: "August 2022",
-					note: "(Note: Acquired by Shopify in August 2022)",
 					tasks: [
 						"Played a significant role in the Remix Core Team",
 						"Established the nightly release pipeline, enabling the shipment of Remix nightly builds to npm.",
@@ -44,7 +43,6 @@ export function loader() {
 					position: "Frontend Web Developer",
 					startDate: "May 2016",
 					endDate: "July 2021",
-					note: "(Note: First member of the web team)",
 					tasks: [
 						"Spearheaded the development of a suite of modern white-label web applications using Next.js, significantly enhancing the mobile app offerings for more than 7 clients.",
 						"Maintained and supported the suite, which quickly became the most utilized aspect of the app.",
@@ -206,7 +204,12 @@ export default function ResumePage() {
 									</h3>
 									<p>{job.position}</p>
 									<p>
-										{job.startDate} - {job.endDate}
+										{job.startDate} - {job.endDate}{" "}
+										{"note" in job ? (
+											<span className="block text-sm italic text-gray-600 md:inline">
+												{job.note}
+											</span>
+										) : null}
 									</p>
 
 									<ul className="list-inside list-disc space-y-1 pt-2 print:space-y-0.5">
