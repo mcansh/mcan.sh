@@ -192,7 +192,7 @@ export default function ResumePage() {
 					</div>
 				</aside>
 
-				<main className="p-8 pl-0 md:py-8 md:pr-8 print:px-0 print:py-2 print:text-[9pt]">
+				<main className="p-8 md:py-8 md:pl-0 md:pr-8 print:px-0 print:py-2 print:text-[9pt]">
 					<h2 className="text-lg font-medium print:text-[11pt]">
 						Work Experience
 					</h2>
