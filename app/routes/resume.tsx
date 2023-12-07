@@ -75,6 +75,23 @@ export function loader() {
 				"Continuous Integration",
 				"Continuous Delivery",
 			],
+			links: [
+				{
+					href: "https://github.com/mcansh",
+					text: "GitHub",
+					icon: "github-mark",
+				},
+				{
+					href: "https://x.com/loganmcansh",
+					text: "X",
+					icon: "x",
+				},
+				{
+					href: "https://linkedin.com/in/loganmcansh",
+					text: "LinkedIn",
+					icon: "linkedin",
+				},
+			] as const,
 		},
 		{
 			headers: {
@@ -140,33 +157,22 @@ export default function ResumePage() {
 								<a href="mailto:logan+resume@mcan.sh">logan+resume@mcan.sh</a>
 							</li>
 							<li>Shelby Township, MI</li>
-							<li>
-								<a
-									className="flex items-center space-x-2 text-blue-800 underline md:justify-end"
-									href="https://github.com/mcansh"
-								>
-									<span>GitHub</span>
-									<Svg className="h-4 w-4 text-black" name="github-mark" />
-								</a>
-							</li>
-							<li>
-								<a
-									className="flex items-center space-x-2 text-blue-800 underline md:justify-end"
-									href="https://github.com/loganmcansh"
-								>
-									<span>Twitter</span>
-									<Svg className="h-4 w-4 text-black" name="x" />
-								</a>
-							</li>
-							<li>
-								<a
-									className="flex items-center space-x-2 text-blue-800 underline md:justify-end"
-									href="https://linkedin.com/in/loganmcansh"
-								>
-									<span>LinkedIn</span>
-									<Svg className="h-4 w-4 text-black" name="linkedin" />
-								</a>
-							</li>
+
+							{data.links.map((link) => {
+								let { pathname } = new URL(link.href);
+								return (
+									<li>
+										<a
+											className="flex items-center space-x-2 text-blue-800 underline md:justify-end"
+											href={link.href}
+										>
+											<span className="print:hidden">{link.text}</span>
+											<span className="hidden print:inline">{pathname}</span>
+											<Svg className="h-4 w-4 text-black" name={link.icon} />
+										</a>
+									</li>
+								);
+							})}
 						</ul>
 					</div>
 
