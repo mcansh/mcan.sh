@@ -49,7 +49,6 @@ export default function IndexPage() {
 					alt=""
 					height={240}
 					width={240}
-					placeholder="transparent"
 					className="mx-auto rounded-full"
 				/>
 				<h1 className="mt-4 text-4xl">Logan McAnsh</h1>
