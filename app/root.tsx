@@ -18,7 +18,7 @@ import { twMerge } from "tailwind-merge";
 import "tailwindcss/tailwind.css";
 
 import "~/assets/berkeley-mono.css";
-import { NonceContext } from "~/components/nonce";
+import { useNonce } from "~/components/nonce";
 import type { Match } from "~/types/handle";
 
 export const meta: MetaFunction = () => {
@@ -71,7 +71,7 @@ function useHandleBodyClassName() {
 
 export default function App() {
 	let handleBodyClassName = useHandleBodyClassName();
-	let nonce = React.useContext(NonceContext);
+	let nonce = useNonce();
 	useFathom();
 
 	return (
@@ -98,7 +98,7 @@ export default function App() {
 
 export function ErrorBoundary() {
 	let error = useRouteError();
-	let nonce = React.useContext(NonceContext);
+	let nonce = useNonce();
 	console.error(error);
 	useFathom();
 
