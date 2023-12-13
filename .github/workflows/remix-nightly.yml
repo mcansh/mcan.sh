@@ -41,10 +41,22 @@ jobs:
       - name: 📦 Bump Remix to latest nightly
         id: bump
         run: |
+          # reset the branch back to main
+          git reset --hard origin/main
+
+          # get the installed version of @remix-run/react
           PREV_VERSION=$(npm ls --depth=0 @remix-run/react --json | jq -r '.dependencies["@remix-run/react"].version')
+
+          # get the latest nightly version of @remix-run/react
           VERSION=$(npm info @remix-run/react dist-tags.nightly)
+
+          # upgrade @remix-run/* to the latest nightly
           npx --yes upgrade-remix@latest $VERSION
+
+          # format the lockfile
           npm run format
+
+          # check if there are any changes
           if [ "$(git status --porcelain)" ]; then
             echo "version=$VERSION" >> $GITHUB_OUTPUT
             echo "prev_version=$PREV_VERSION" >> $GITHUB_OUTPUT
