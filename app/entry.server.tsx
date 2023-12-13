@@ -14,7 +14,7 @@ import { renderToPipeableStream } from "react-dom/server";
 import { isPrefetch } from "remix-utils/is-prefetch";
 import { preloadRouteAssets } from "remix-utils/preload-route-assets";
 
-import { NonceContext } from "./components/nonce";
+import { NonceProvider } from "./components/nonce";
 import { env } from "./env.server";
 
 const ABORT_DELAY = 5_000;
@@ -37,14 +37,14 @@ export default function handleRequest(
 	return new Promise((resolve, reject) => {
 		let shellRendered = false;
 		let { pipe, abort } = renderToPipeableStream(
-			<NonceContext.Provider value={nonce}>
+			<NonceProvider nonce={nonce}>
 				<RemixServer
 					// @ts-expect-error remixContext type is wrong
 					context={remixContext}
 					url={request.url}
 					abortDelay={ABORT_DELAY}
 				/>
-			</NonceContext.Provider>,
+			</NonceProvider>,
 			{
 				nonce,
 				[callback]() {
