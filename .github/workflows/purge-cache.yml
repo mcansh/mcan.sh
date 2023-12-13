@@ -37,6 +37,7 @@ jobs:
         run: |
           pnpm run build
           mv ./build ./current
+          mv ./scripts/get-urls-to-purge.js ./get-urls-to-purge.js
 
       - name: 📦 Build previous commit
         run: |
@@ -48,7 +49,7 @@ jobs:
       - name: ♻️ Get URLs to Purge
         id: urls
         run: |
-          URLS=$(node ./scripts/get-urls-to-purge.js)
+          URLS=$(node ./get-urls-to-purge.js)
           echo "urls=$URLS" >> $GITHUB_ENV
 
       - name: ♻️ Purge Cloudflare cache
