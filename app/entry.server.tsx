@@ -1,7 +1,7 @@
 import crypto from "node:crypto";
 import { PassThrough } from "node:stream";
 
-import { createSecureHeaders } from "@mcansh/http-helmet";
+import { createSecureHeaders, mergeHeaders } from "@mcansh/http-helmet";
 import type {
 	AppLoadContext,
 	EntryContext,
@@ -32,7 +32,7 @@ export default function handleRequest(
 
 	preloadRouteAssets(remixContext, responseHeaders);
 
-	let nonce = applySecurityHeaders(responseHeaders);
+	let { nonce, headers } = applySecurityHeaders(responseHeaders);
 
 	return new Promise((resolve, reject) => {
 		let shellRendered = false;
@@ -52,13 +52,10 @@ export default function handleRequest(
 					let body = new PassThrough();
 					let stream = createReadableStreamFromReadable(body);
 
-					responseHeaders.set("Content-Type", "text/html");
+					headers.set("Content-Type", "text/html");
 
 					resolve(
-						new Response(stream, {
-							headers: responseHeaders,
-							status: responseStatusCode,
-						}),
+						new Response(stream, { headers, status: responseStatusCode }),
 					);
 
 					pipe(body);
@@ -185,17 +182,15 @@ function applySecurityHeaders(responseHeaders: Headers) {
 		"Cross-Origin-Opener-Policy": "same-origin",
 	});
 
-	for (let header of securityHeaders) {
-		responseHeaders.set(...header);
-	}
+	let merged = mergeHeaders(responseHeaders, securityHeaders);
 
 	let permissionsPolicy = securityHeaders.get("Permissions-Policy");
 
 	if (permissionsPolicy) {
-		responseHeaders.set("Feature-Policy", permissionsPolicy);
+		merged.set("Feature-Policy", permissionsPolicy);
 	}
 
-	responseHeaders.set(`Expect-CT`, `report-uri="${env.SENTRY_REPORT_URL}"`);
+	merged.set(`Expect-CT`, `report-uri="${env.SENTRY_REPORT_URL}"`);
 
-	return nonce;
+	return { nonce, headers: merged };
 }

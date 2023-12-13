@@ -1,7 +1,6 @@
 import path from "node:path";
 import url from "node:url";
 
-import middie from "@fastify/middie";
 import { fastifyStatic } from "@fastify/static";
 import { createRequestHandler } from "@mcansh/remix-fastify";
 import { installGlobals } from "@remix-run/node";
@@ -27,6 +26,7 @@ let __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 
 // handle asset requests
 if (vite) {
+	let middie = await import("@fastify/middie").then((m) => m.default);
 	await app.register(middie);
 	await app.use(vite.middlewares);
 } else {
@@ -63,7 +63,7 @@ app.all("*", async (request, reply) => {
 		let handler = createRequestHandler({
 			build: vite
 				? () => vite?.ssrLoadModule("virtual:remix/server-build")
-				: await import("./build/server/index.js")
+				: await import("./build/server/index.js"),
 		});
 		return handler(request, reply);
 	} catch (error) {

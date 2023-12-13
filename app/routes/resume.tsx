@@ -161,7 +161,7 @@ export default function ResumePage() {
 							{data.links.map((link) => {
 								let { pathname } = new URL(link.href);
 								return (
-									<li>
+									<li key={link.text}>
 										<a
 											className="flex items-center space-x-2 text-blue-800 underline md:justify-end"
 											href={link.href}
@@ -190,8 +190,8 @@ export default function ResumePage() {
 							Certifications
 						</h2>
 						<ul className="space-y-1 print:space-y-0.5">
-							{data.certifications.map((skill) => {
-								return <li key={skill}>{skill}</li>;
+							{data.certifications.map((certification) => {
+								return <li key={certification}>{certification}</li>;
 							})}
 						</ul>
 					</div>

@@ -2,10 +2,6 @@
 *.log
 .DS_Store
 /.cache
-/.output
-/api/index.js
-/api/index.js.map
-/api/_assets
 /build
 /public/build
 .eslintcache
@@ -14,3 +10,6 @@ tsconfig.tsbuildinfo
 .env
 app/components/sprite
 
+
+current/**/*
+previous/**/*
