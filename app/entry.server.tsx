@@ -39,7 +39,6 @@ export default function handleRequest(
 		let { pipe, abort } = renderToPipeableStream(
 			<NonceProvider nonce={nonce}>
 				<RemixServer
-					// @ts-expect-error remixContext type is wrong
 					context={remixContext}
 					url={request.url}
 					abortDelay={ABORT_DELAY}
