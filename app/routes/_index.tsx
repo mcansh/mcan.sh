@@ -1,6 +1,7 @@
 import { json } from "@remix-run/node";
 import type { HeadersFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
+import { Image } from "@unpic/react";
 import { cacheHeader } from "pretty-cache-header";
 
 import { getMugshotURL } from "~/cloudinary.server";
@@ -44,12 +45,15 @@ export default function IndexPage() {
 	return (
 		<div className="mx-auto flex h-screen max-w-screen-md flex-col items-center justify-between px-4 text-center">
 			<div className="flex flex-1 flex-col items-center justify-center">
-				<img
+				<Image
 					src={data.me}
-					alt=""
-					height={240}
+					layout="fixed"
+					cdn="cloudinary"
 					width={240}
+					height={240}
+					alt=""
 					className="mx-auto rounded-full"
+					priority
 				/>
 				<h1 className="mt-4 text-4xl">Logan McAnsh</h1>
 				<p className="mt-2 max-w-xs text-center text-lg sm:text-xl md:max-w-sm">
