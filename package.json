@@ -22,10 +22,11 @@
 	"dependencies": {
 		"@fastify/middie": "^8.3.0",
 		"@fastify/static": "^6.12.0",
-		"@mcansh/http-helmet": "0.10.0",
-		"@mcansh/remix-fastify": "3.2.1",
+		"@mcansh/http-helmet": "^0.10.0",
+		"@mcansh/remix-fastify": "^3.2.1",
 		"@remix-run/node": "2.4.1-pre.3",
 		"@remix-run/react": "2.4.1-pre.3",
+		"@unpic/react": "^0.1.5",
 		"cloudinary-build-url": "^0.2.4",
 		"clsx": "^2.0.0",
 		"cross-env": "^7.0.3",
@@ -69,7 +70,7 @@
 		"svgstore": "^3.0.1",
 		"tailwindcss": "^3.4.0",
 		"tailwindcss-padding-safe": "^1.0.6",
-		"typescript": "5.3.3",
+		"typescript": "^5.3.3",
 		"vite": "^5.0.10",
 		"vite-tsconfig-paths": "^4.2.2"
 	},

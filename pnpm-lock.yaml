@@ -12,10 +12,10 @@ dependencies:
     specifier: ^6.12.0
     version: 6.12.0
   "@mcansh/http-helmet":
-    specifier: 0.10.0
+    specifier: ^0.10.0
     version: 0.10.0
   "@mcansh/remix-fastify":
-    specifier: 3.2.1
+    specifier: ^3.2.1
     version: 3.2.1(@remix-run/node@2.4.1-pre.3)(fastify@4.25.1)
   "@remix-run/node":
     specifier: 2.4.1-pre.3
@@ -23,6 +23,9 @@ dependencies:
   "@remix-run/react":
     specifier: 2.4.1-pre.3
     version: 2.4.1-pre.3(react-dom@18.2.0)(react@18.2.0)(typescript@5.3.3)
+  "@unpic/react":
+    specifier: ^0.1.5
+    version: 0.1.5(react-dom@18.2.0)(react@18.2.0)
   cloudinary-build-url:
     specifier: ^0.2.4
     version: 0.2.4
@@ -149,7 +152,7 @@ devDependencies:
     specifier: ^1.0.6
     version: 1.0.6
   typescript:
-    specifier: 5.3.3
+    specifier: ^5.3.3
     version: 5.3.3
   vite:
     specifier: ^5.0.10
@@ -2513,6 +2516,33 @@ packages:
         integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==,
       }
     dev: true
+
+  /@unpic/core@0.0.42:
+    resolution:
+      {
+        integrity: sha512-K5Di+P8Bijl7doGDBGU+5VqX44e2iXMEm7G/AVla+9Hgxb5rOm/OXZoOjCUNjx5BOnjsVyegP6vlgsTfBtymkQ==,
+      }
+    dependencies:
+      unpic: 3.16.0
+    dev: false
+
+  /@unpic/react@0.1.5(react-dom@18.2.0)(react@18.2.0):
+    resolution:
+      {
+        integrity: sha512-SnpJlqdNpqBKeCHbK2IFqp95/v3c7WqrDouyZRlCoIzF3KtYplw8I9nIoHUn+WmpyiSq2UiYAJ4lk0nwwf7MBQ==,
+      }
+    peerDependencies:
+      next: ">=14"
+      react: ">=17"
+      react-dom: ">=17"
+    peerDependenciesMeta:
+      next:
+        optional: true
+    dependencies:
+      "@unpic/core": 0.0.42
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
 
   /@vanilla-extract/babel-plugin-debug-ids@1.0.3:
     resolution:
@@ -10416,6 +10446,13 @@ packages:
       }
     engines: { node: ">= 10.0.0" }
     dev: true
+
+  /unpic@3.16.0:
+    resolution:
+      {
+        integrity: sha512-XXvQGL+fvzwEX3aPXggTCrzySFPqvpC8r1LKy5ft9573AoX8CrszmA0uOzi6xgylCvvqFg46IDOudJKzM2lQ5A==,
+      }
+    dev: false
 
   /unpipe@1.0.0:
     resolution:
