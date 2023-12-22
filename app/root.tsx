@@ -17,9 +17,9 @@ import * as React from "react";
 import { twMerge } from "tailwind-merge";
 import "tailwindcss/tailwind.css";
 
-import "~/assets/berkeley-mono.css";
 import { useNonce } from "~/components/nonce";
 import type { Match } from "~/types/handle";
+import "~/assets/berkeley-mono.css";
 
 export const meta: MetaFunction = () => {
 	return [
