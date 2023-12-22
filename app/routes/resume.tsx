@@ -1,10 +1,11 @@
-import type { HeadersFunction } from "@remix-run/node";
+import type { HeadersFunction, LinksFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import type { MetaFunction } from "@remix-run/react";
 import { useLoaderData } from "@remix-run/react";
 import { cacheHeader } from "pretty-cache-header";
 
 import { Svg } from "~/components/sprite";
+import spriteHref from "~/components/sprite/index.svg";
 import type { RouteHandle } from "~/types/handle";
 
 export function loader() {
@@ -102,6 +103,8 @@ export function loader() {
 					sMaxage: "1 hour",
 				}),
 				"x-hello-recruiters": "1",
+				// preload the sprite
+				Link: `<${spriteHref}>; rel=preload; as=image; type=image/svg+xml`,
 			},
 		},
 	);
@@ -111,6 +114,17 @@ export const meta: MetaFunction<typeof loader> = () => {
 	return [
 		{ title: "Resume | Logan McAnsh" },
 		{ name: "description", content: "Logan McAnsh's Resume" },
+	];
+};
+
+export const links: LinksFunction = () => {
+	return [
+		{
+			rel: "preload",
+			href: spriteHref,
+			as: "image",
+			type: "image/svg+xml",
+		},
 	];
 };
 
