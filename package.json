@@ -12,7 +12,7 @@
 		"clean": "./scripts/clean.js",
 		"type-check": "tsc",
 		"lint": "eslint --ignore-path .gitignore --cache --fix .",
-		"format": "prettier --ignore-path .gitignore --cache --cache-location .prettiercache --ignore-unknown --write .",
+		"format": "prettier --ignore-path .gitignore --ignore-path .prettierignore --cache --cache-location .prettiercache --ignore-unknown --write .",
 		"validate": "run-p lint format type-check",
 		"prepare": "node ./scripts/prepare.js",
 		"predev": "npm run build:icons",
