@@ -50,10 +50,13 @@ jobs:
           # if prev_version is not a nightly or experimental release, we'll need to scope it to the `remix@` tag prefix
           if [[ $PREV_VERSION != *"nightly"* && $PREV_VERSION != *"experimental"* ]]; then
             PREV_VERSION="remix@$PREV_VERSION"
+          else
+            # otherwise, we'll need to prefix it with `v`
+            PREV_VERSION="v$PREV_VERSION"
           fi
 
           # get the latest nightly version of @remix-run/react
-          VERSION=$(npm info @remix-run/react dist-tags.nightly)
+          VERSION=v$(npm info @remix-run/react dist-tags.nightly)
 
           # upgrade @remix-run/* to the latest nightly
           npx --yes upgrade-remix@latest $VERSION
@@ -81,4 +84,4 @@ jobs:
           body: |
             This PR bumps \`@remix-run/*\` to the latest nightly release. For a list of changes, see the list of [changes][changes].
 
-            [changes]: https://github.com/remix-run/remix/compare/v${{ steps.bump.outputs.prev_version }}...v${{ steps.bump.outputs.version }}
+            [changes]: https://github.com/remix-run/remix/compare/${{ steps.bump.outputs.prev_version }}...${{ steps.bump.outputs.version }}
