@@ -13,5 +13,6 @@ export default defineConfig({
 	],
 	build: {
 		assetsInlineLimit: 0, // keep SVG as asset URL
+		cssMinify: "lightningcss",
 	},
 });
