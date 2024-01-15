@@ -1,11 +1,18 @@
 import { json } from "@remix-run/node";
-import type { HeadersFunction } from "@remix-run/node";
+import type { HeadersFunction, LinksFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { Image } from "@unpic/react";
 import { cacheHeader } from "pretty-cache-header";
 
 import { getMugshotURL } from "~/cloudinary.server";
-import { FunHoverLink } from "~/components/fun-hover-link";
+import { FunHoverLink, funHoverHref } from "~/components/fun-hover-link";
+
+export let links: LinksFunction = () => {
+	return [
+		{ rel: "stylesheet", href: funHoverHref },
+		{ rel: "preload", href: funHoverHref, as: "style" },
+	];
+};
 
 export function loader() {
 	return json(

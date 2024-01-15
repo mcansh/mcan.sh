@@ -120,10 +120,7 @@ function applySecurityHeaders(responseHeaders: Headers) {
 				"https://thirtyseven-active.b-cdn.net/script.js",
 				`'nonce-${nonce}'`,
 			],
-			styleSrc: [
-				"'self'",
-				...(process.env.NODE_ENV === "development" ? ["'unsafe-inline'"] : []),
-			],
+			styleSrc: ["'self'"],
 			manifestSrc: ["'self'"],
 			prefetchSrc: ["'self'"],
 			connectSrc: [
