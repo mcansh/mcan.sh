@@ -15,11 +15,11 @@ import type { ClassValue } from "clsx";
 import * as Fathom from "fathom-client";
 import * as React from "react";
 import { twMerge } from "tailwind-merge";
-import "tailwindcss/tailwind.css";
+import tailwindStyleHref from "tailwindcss/tailwind.css?url";
 
+import fontStyleHref from "~/assets/berkeley-mono.css?url";
 import { useNonce } from "~/components/nonce";
 import type { Match } from "~/types/handle";
-import "~/assets/berkeley-mono.css";
 
 export const meta: MetaFunction = () => {
 	return [
@@ -41,6 +41,10 @@ export const links: LinksFunction = () => {
 		{ rel: "manifest", href: "/manifest.webmanifest" },
 		{ rel: "icon", href: "/favicon.png", type: "image/png" },
 		{ rel: "icon", href: "/favicon.ico" },
+		{ rel: "stylesheet", href: tailwindStyleHref },
+		{ rel: "stylesheet", href: fontStyleHref },
+		{ rel: "preload", href: tailwindStyleHref, as: "style" },
+		{ rel: "preload", href: fontStyleHref, as: "style" },
 		...icons,
 	];
 };
