@@ -15,11 +15,11 @@ import type { ClassValue } from "clsx";
 import * as Fathom from "fathom-client";
 import * as React from "react";
 import { twMerge } from "tailwind-merge";
-import "tailwindcss/tailwind.css";
+import tailwindStyleHref from "tailwindcss/tailwind.css?url";
 
+import fontStyleHref from "~/assets/berkeley-mono.css?url";
 import { useNonce } from "~/components/nonce";
 import type { Match } from "~/types/handle";
-import "~/assets/berkeley-mono.css";
 
 export const meta: MetaFunction = () => {
 	return [
@@ -41,6 +41,10 @@ export const links: LinksFunction = () => {
 		{ rel: "manifest", href: "/manifest.webmanifest" },
 		{ rel: "icon", href: "/favicon.png", type: "image/png" },
 		{ rel: "icon", href: "/favicon.ico" },
+		{ rel: "stylesheet", href: tailwindStyleHref },
+		{ rel: "stylesheet", href: fontStyleHref },
+		{ rel: "preload", href: tailwindStyleHref, as: "style" },
+		{ rel: "preload", href: fontStyleHref, as: "style" },
 		...icons,
 	];
 };
@@ -103,7 +107,7 @@ export function ErrorBoundary() {
 	useFathom();
 
 	let handleBodyClassName = useHandleBodyClassName();
-	let headingClassName = `w-fit mx-auto inline-block text-3xl font-bold bg-white text-[#0827f5]`;
+	let headingClassName = `w-fit mx-auto inline-block text-3xl font-bold bg-white text-blue-screen`;
 	let boxClassName = `w-full px-4 py-2 overflow-auto border-4 border-white`;
 
 	return (
@@ -116,7 +120,7 @@ export function ErrorBoundary() {
 			</head>
 			<body
 				className={cn(
-					"mx-auto flex min-h-screen w-[90%] max-w-5xl flex-col justify-center space-y-4 bg-[#0827f5] pt-20 text-center text-white",
+					"mx-auto flex min-h-screen w-[90%] max-w-5xl flex-col justify-center space-y-4 bg-blue-screen pt-20 text-center text-white",
 					handleBodyClassName,
 				)}
 			>
