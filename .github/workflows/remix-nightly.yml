@@ -4,6 +4,12 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "0 8 * * *"
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+    paths:
+      - "package.json"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
