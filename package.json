@@ -36,8 +36,8 @@
 		"isbot": "^4.4.0",
 		"million": "^2.6.4",
 		"pretty-cache-header": "^1.0.0",
-		"react": "^18.2.0",
-		"react-dom": "^18.2.0",
+		"react": "18.3.0-canary-5c607369c-20240116",
+		"react-dom": "18.3.0-canary-5c607369c-20240116",
 		"remix-utils": "7.5.0",
 		"tailwind-merge": "^2.2.0",
 		"zod": "^3.22.4"
