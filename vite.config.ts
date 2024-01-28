@@ -7,12 +7,12 @@ import tsconfigPaths from "vite-tsconfig-paths";
 export default defineConfig({
 	server: { middlewareMode: true },
 	plugins: [
-		remix({ 
+		remix({
 			future: {
 				v3_fetcherPersist: true,
 				v3_relativeSplatPath: true,
 				v3_throwAbortReason: true,
-			}
+			},
 		}),
 		tsconfigPaths(),
 		splitVendorChunkPlugin(),
