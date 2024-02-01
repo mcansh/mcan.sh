@@ -7,6 +7,11 @@ import tsconfigPaths from "vite-tsconfig-paths";
 export default defineConfig({
 	server: { middlewareMode: true },
 	plugins: [
+		tsconfigPaths(),
+		splitVendorChunkPlugin(),
+		million({ auto: true, server: true }),
+		// @ts-expect-error - 👀
+		visualizer({ emitFile: true }),
 		remix({
 			future: {
 				v3_fetcherPersist: true,
@@ -14,11 +19,6 @@ export default defineConfig({
 				v3_throwAbortReason: true,
 			},
 		}),
-		tsconfigPaths(),
-		splitVendorChunkPlugin(),
-		million({ auto: true, server: true }),
-		// @ts-expect-error - 👀
-		visualizer({ emitFile: true }),
 	],
 	build: {
 		assetsInlineLimit: 0, // keep SVG as asset URL
