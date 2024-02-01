@@ -13,6 +13,7 @@ module.exports = {
 		"prefer-const": "off",
 		"prefer-let/prefer-let": "error",
 		"@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
+		"import/consistent-type-specifier-style": ["error", "prefer-top-level"],
 		"import/order": [
 			"error",
 			{

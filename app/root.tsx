@@ -2,7 +2,6 @@ import type { LinksFunction, MetaFunction } from "@remix-run/node";
 import {
 	isRouteErrorResponse,
 	Links,
-	LiveReload,
 	Meta,
 	Outlet,
 	Scripts,
@@ -94,7 +93,6 @@ export default function App() {
 				<Outlet />
 				<ScrollRestoration nonce={nonce} />
 				<Scripts nonce={nonce} />
-				<LiveReload nonce={nonce} />
 			</body>
 		</html>
 	);
@@ -159,7 +157,6 @@ export function ErrorBoundary() {
 					</>
 				)}
 				<ScrollRestoration nonce={nonce} />
-				<LiveReload nonce={nonce} />
 				<Scripts nonce={nonce} />
 			</body>
 		</html>
