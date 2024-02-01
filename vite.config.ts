@@ -1,7 +1,8 @@
 import { unstable_vitePlugin as remix } from "@remix-run/dev";
 import { vite as million } from "million/compiler";
 import { visualizer } from "rollup-plugin-visualizer";
-import { defineConfig, splitVendorChunkPlugin, type Plugin } from "vite";
+import { defineConfig, splitVendorChunkPlugin } from "vite";
+import type { Plugin } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 
 let EMIT_FILE = process.env.EMIT_FILE === "true";
