@@ -22,7 +22,7 @@
 	"dependencies": {
 		"@fastify/middie": "^8.3.0",
 		"@fastify/static": "^6.12.0",
-		"@mcansh/http-helmet": "^0.10.1",
+		"@mcansh/http-helmet": "0.0.0-experimental-f26e920",
 		"@mcansh/remix-fastify": "^3.2.1",
 		"@remix-run/node": "2.6.0",
 		"@remix-run/react": "2.6.0",

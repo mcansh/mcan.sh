@@ -1,3 +1,4 @@
+import { useNonce } from "@mcansh/http-helmet/remix";
 import type { LinksFunction, MetaFunction } from "@remix-run/node";
 import {
 	isRouteErrorResponse,
@@ -17,7 +18,6 @@ import { twMerge } from "tailwind-merge";
 import tailwindStyleHref from "tailwindcss/tailwind.css?url";
 
 import fontStyleHref from "~/assets/berkeley-mono.css?url";
-import { useNonce } from "~/components/nonce";
 import type { Match } from "~/types/handle";
 
 export const meta: MetaFunction = () => {

@@ -2,6 +2,7 @@ import crypto from "node:crypto";
 import { PassThrough } from "node:stream";
 
 import { createSecureHeaders, mergeHeaders } from "@mcansh/http-helmet";
+import { NonceProvider } from "@mcansh/http-helmet/remix";
 import type {
 	AppLoadContext,
 	EntryContext,
@@ -14,7 +15,6 @@ import { renderToPipeableStream } from "react-dom/server";
 import { isPrefetch } from "remix-utils/is-prefetch";
 import { preloadRouteAssets } from "remix-utils/preload-route-assets";
 
-import { NonceProvider } from "./components/nonce";
 import { env } from "./env.server";
 
 const ABORT_DELAY = 5_000;
