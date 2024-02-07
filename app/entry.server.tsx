@@ -1,8 +1,7 @@
-import crypto from "node:crypto";
 import { PassThrough } from "node:stream";
 
 import { createSecureHeaders, mergeHeaders } from "@mcansh/http-helmet";
-import { NonceProvider } from "@mcansh/http-helmet/remix";
+import { NonceProvider, createNonce } from "@mcansh/http-helmet/remix";
 import type {
 	AppLoadContext,
 	EntryContext,
@@ -103,7 +102,7 @@ function applySecurityHeaders(responseHeaders: Headers) {
 		responseHeaders.set("Cache-Control", "no-cache");
 	}
 
-	let nonce = Buffer.from(crypto.randomUUID()).toString("base64");
+	let nonce = createNonce();
 	let securityHeaders = createSecureHeaders({
 		"Content-Security-Policy": {
 			upgradeInsecureRequests: process.env.NODE_ENV === "production",
