@@ -1,4 +1,4 @@
-import { useNonce } from "@mcansh/http-helmet/remix";
+import { useNonce } from "@mcansh/http-helmet/react";
 import type { LinksFunction, MetaFunction } from "@remix-run/node";
 import {
 	isRouteErrorResponse,

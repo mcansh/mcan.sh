@@ -12,8 +12,8 @@ dependencies:
     specifier: ^6.12.0
     version: 6.12.0
   "@mcansh/http-helmet":
-    specifier: 0.0.0-experimental-f26e920
-    version: 0.0.0-experimental-f26e920(react-dom@18.3.0-canary-5c607369c-20240116)(react@18.3.0-canary-5c607369c-20240116)
+    specifier: 0.0.0-experimental-854d264
+    version: 0.0.0-experimental-854d264(react-dom@18.3.0-canary-5c607369c-20240116)(react@18.3.0-canary-5c607369c-20240116)
   "@mcansh/remix-fastify":
     specifier: ^3.2.1
     version: 3.2.1(@remix-run/node@2.6.0)(fastify@4.25.2)
@@ -1658,10 +1658,10 @@ packages:
     engines: { node: ">=8" }
     dev: false
 
-  /@mcansh/http-helmet@0.0.0-experimental-f26e920(react-dom@18.3.0-canary-5c607369c-20240116)(react@18.3.0-canary-5c607369c-20240116):
+  /@mcansh/http-helmet@0.0.0-experimental-854d264(react-dom@18.3.0-canary-5c607369c-20240116)(react@18.3.0-canary-5c607369c-20240116):
     resolution:
       {
-        integrity: sha512-IZxAuN8rTx4s63PwUHRBKoFLCOGpYdA6+rt8eW/pwpa3TD/CW05v2CAyzvnt9clpQjdTPPuew25Qt4fVoW1vcQ==,
+        integrity: sha512-xjHlKNNSg3WsoRzRj2UFehxl8XdYLTwhxukTtTvQq7QZlIs6NiPjKgOwtov2ClLP5hfAYKidcjMtEc5kc65GCw==,
       }
     peerDependencies:
       react: ^18.2.0
