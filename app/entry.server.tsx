@@ -1,7 +1,7 @@
 import { PassThrough } from "node:stream";
 
 import { createSecureHeaders, mergeHeaders } from "@mcansh/http-helmet";
-import { NonceProvider, createNonce } from "@mcansh/http-helmet/remix";
+import { NonceProvider, createNonce } from "@mcansh/http-helmet/react";
 import type {
 	AppLoadContext,
 	EntryContext,
