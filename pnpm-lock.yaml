@@ -16,13 +16,13 @@ dependencies:
     version: 0.0.0-experimental-854d264(react-dom@18.3.0-canary-5c607369c-20240116)(react@18.3.0-canary-5c607369c-20240116)
   '@mcansh/remix-fastify':
     specifier: ^3.2.1
-    version: 3.2.1(@remix-run/node@0.0.0-nightly-c847d3a-20240214)(fastify@4.25.2)
+    version: 3.2.1(@remix-run/node@0.0.0-nightly-3da950a-20240215)(fastify@4.25.2)
   '@remix-run/node':
-    specifier: 0.0.0-nightly-c847d3a-20240214
-    version: 0.0.0-nightly-c847d3a-20240214(typescript@5.3.3)
+    specifier: 0.0.0-nightly-3da950a-20240215
+    version: 0.0.0-nightly-3da950a-20240215(typescript@5.3.3)
   '@remix-run/react':
-    specifier: 0.0.0-nightly-c847d3a-20240214
-    version: 0.0.0-nightly-c847d3a-20240214(react-dom@18.3.0-canary-5c607369c-20240116)(react@18.3.0-canary-5c607369c-20240116)(typescript@5.3.3)
+    specifier: 0.0.0-nightly-3da950a-20240215
+    version: 0.0.0-nightly-3da950a-20240215(react-dom@18.3.0-canary-5c607369c-20240116)(react@18.3.0-canary-5c607369c-20240116)(typescript@5.3.3)
   '@unpic/react':
     specifier: ^0.1.5
     version: 0.1.5(react-dom@18.3.0-canary-5c607369c-20240116)(react@18.3.0-canary-5c607369c-20240116)
@@ -61,7 +61,7 @@ dependencies:
     version: 18.3.0-canary-5c607369c-20240116(react@18.3.0-canary-5c607369c-20240116)
   remix-utils:
     specifier: 7.5.0
-    version: 7.5.0(@remix-run/node@0.0.0-nightly-c847d3a-20240214)(@remix-run/react@0.0.0-nightly-c847d3a-20240214)(react@18.3.0-canary-5c607369c-20240116)(zod@3.22.4)
+    version: 7.5.0(@remix-run/node@0.0.0-nightly-3da950a-20240215)(@remix-run/react@0.0.0-nightly-3da950a-20240215)(react@18.3.0-canary-5c607369c-20240116)(zod@3.22.4)
   tailwind-merge:
     specifier: ^2.2.0
     version: 2.2.0
@@ -74,8 +74,8 @@ devDependencies:
     specifier: ^0.1.6
     version: 0.1.6
   '@remix-run/dev':
-    specifier: 0.0.0-nightly-c847d3a-20240214
-    version: 0.0.0-nightly-c847d3a-20240214(lightningcss@1.23.0)(typescript@5.3.3)(vite@5.1.0-beta.0)
+    specifier: 0.0.0-nightly-3da950a-20240215
+    version: 0.0.0-nightly-3da950a-20240215(lightningcss@1.23.0)(typescript@5.3.3)(vite@5.1.0-beta.0)
   '@types/react':
     specifier: ^18.2.48
     version: 18.2.48
@@ -1284,7 +1284,7 @@ packages:
       type-fest: 4.10.2
     dev: false
 
-  /@mcansh/remix-fastify@3.2.1(@remix-run/node@0.0.0-nightly-c847d3a-20240214)(fastify@4.25.2):
+  /@mcansh/remix-fastify@3.2.1(@remix-run/node@0.0.0-nightly-3da950a-20240215)(fastify@4.25.2):
     resolution: {integrity: sha512-K42Mt0lMayBzKjo1/QFwvjfNONqCRrHqLJvP5grvMQ76Qc58aDvOp0x+6wFzby73RsqwhLSckGrV8Bh/9dhF3w==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
@@ -1295,7 +1295,7 @@ packages:
       '@fastify/early-hints':
         optional: true
     dependencies:
-      '@remix-run/node': 0.0.0-nightly-c847d3a-20240214(typescript@5.3.3)
+      '@remix-run/node': 0.0.0-nightly-3da950a-20240215(typescript@5.3.3)
       '@remix-run/router': 1.14.1
       fastify: 4.25.2
     dev: false
@@ -1397,12 +1397,12 @@ packages:
     dev: true
     optional: true
 
-  /@remix-run/dev@0.0.0-nightly-c847d3a-20240214(lightningcss@1.23.0)(typescript@5.3.3)(vite@5.1.0-beta.0):
-    resolution: {integrity: sha512-YZghNw+zZR/sAa8v2nGjF+S1a1yWhxn5kmzICuFIrTVJ3hizVYICmfZdz7qeNguhtTk5zcUAI2qDHhT8TDdKbg==}
+  /@remix-run/dev@0.0.0-nightly-3da950a-20240215(lightningcss@1.23.0)(typescript@5.3.3)(vite@5.1.0-beta.0):
+    resolution: {integrity: sha512-gj/SZ0OvUb9c5MO8KCpToNUyfxD1aCU4pbF8Y0XnjO9zveaCAO1DfECpHP3um6M1sTB0Fq/sxkPqQdIkWVQ4Rw==}
     engines: {node: '>=18.0.0'}
     hasBin: true
     peerDependencies:
-      '@remix-run/serve': ^0.0.0-nightly-c847d3a-20240214
+      '@remix-run/serve': ^0.0.0-nightly-3da950a-20240215
       typescript: ^5.1.0
       vite: ^5.1.0
     peerDependenciesMeta:
@@ -1423,9 +1423,9 @@ packages:
       '@babel/types': 7.23.6
       '@mdx-js/mdx': 2.3.0
       '@npmcli/package-json': 4.0.1
-      '@remix-run/node': 0.0.0-nightly-c847d3a-20240214(typescript@5.3.3)
+      '@remix-run/node': 0.0.0-nightly-3da950a-20240215(typescript@5.3.3)
       '@remix-run/router': 1.15.0
-      '@remix-run/server-runtime': 0.0.0-nightly-c847d3a-20240214(typescript@5.3.3)
+      '@remix-run/server-runtime': 0.0.0-nightly-3da950a-20240215(typescript@5.3.3)
       '@types/mdx': 2.0.10
       '@vanilla-extract/integration': 6.2.4(lightningcss@1.23.0)
       arg: 5.0.2
@@ -1483,8 +1483,8 @@ packages:
       - utf-8-validate
     dev: true
 
-  /@remix-run/node@0.0.0-nightly-c847d3a-20240214(typescript@5.3.3):
-    resolution: {integrity: sha512-tf4NtD/prFPYpgX7XpwyDdg1eVxZJLvB2RkE/7/wnpb7jD2EeyH8mY6zJtqWUzFwa3uh+BYRFD+2sziREk1CeA==}
+  /@remix-run/node@0.0.0-nightly-3da950a-20240215(typescript@5.3.3):
+    resolution: {integrity: sha512-w6N/GZDr0+LCqvqeEwjeXxGIOmIXq0u5KSKjqhs3utACvQOLY0xqUD+HUYYm0u2CtYjuAv1wKE1EiFTVjgEXww==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       typescript: ^5.1.0
@@ -1492,7 +1492,7 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@remix-run/server-runtime': 0.0.0-nightly-c847d3a-20240214(typescript@5.3.3)
+      '@remix-run/server-runtime': 0.0.0-nightly-3da950a-20240215(typescript@5.3.3)
       '@remix-run/web-fetch': 4.4.2
       '@remix-run/web-file': 3.1.0
       '@remix-run/web-stream': 1.1.0
@@ -1502,8 +1502,8 @@ packages:
       stream-slice: 0.1.2
       typescript: 5.3.3
 
-  /@remix-run/react@0.0.0-nightly-c847d3a-20240214(react-dom@18.3.0-canary-5c607369c-20240116)(react@18.3.0-canary-5c607369c-20240116)(typescript@5.3.3):
-    resolution: {integrity: sha512-RAwBVsF3PsSTWF8qjGRUnVJHebWtkr6Z6i12PH67FAiMewPQE8pxvFd2Glua5thUkj5v5RYrn+uZie+bhjxBKw==}
+  /@remix-run/react@0.0.0-nightly-3da950a-20240215(react-dom@18.3.0-canary-5c607369c-20240116)(react@18.3.0-canary-5c607369c-20240116)(typescript@5.3.3):
+    resolution: {integrity: sha512-/cnxyz6oUYXa1XU8wo53pwngJ/IPJrbiAKUXX6LRnt0Yva68ZDvpuJUqDoW60hcO1Gi3rjSwVPcncqQXtriOHA==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       react: ^18.0.0
@@ -1514,7 +1514,7 @@ packages:
         optional: true
     dependencies:
       '@remix-run/router': 1.15.0
-      '@remix-run/server-runtime': 0.0.0-nightly-c847d3a-20240214(typescript@5.3.3)
+      '@remix-run/server-runtime': 0.0.0-nightly-3da950a-20240215(typescript@5.3.3)
       react: 18.3.0-canary-5c607369c-20240116
       react-dom: 18.3.0-canary-5c607369c-20240116(react@18.3.0-canary-5c607369c-20240116)
       react-router: 6.22.0-pre.0(react@18.3.0-canary-5c607369c-20240116)
@@ -1531,8 +1531,8 @@ packages:
     resolution: {integrity: sha512-HOil5aFtme37dVQTB6M34G95kPM3MMuqSmIRVCC52eKV+Y/tGSqw9P3rWhlAx6A+mz+MoX+XxsGsNJbaI5qCgQ==}
     engines: {node: '>=14.0.0'}
 
-  /@remix-run/server-runtime@0.0.0-nightly-c847d3a-20240214(typescript@5.3.3):
-    resolution: {integrity: sha512-jYb09DwvL0kMNOFKU21y+NABOIelGF75m/aSR6wIQNQN5cNoBok4JSZNn/KKezo1FokOe0Z3d8HwIoYlhTBORw==}
+  /@remix-run/server-runtime@0.0.0-nightly-3da950a-20240215(typescript@5.3.3):
+    resolution: {integrity: sha512-UKn6uaIPeVHaSymENh5LAV33cUfvC3ItybHbF/zitKL3tlGXXTduheyd+3dzr/4tohWN4yFaq4eiuVtLt007Pg==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       typescript: ^5.1.0
@@ -6599,7 +6599,7 @@ packages:
       unified: 10.1.2
     dev: true
 
-  /remix-utils@7.5.0(@remix-run/node@0.0.0-nightly-c847d3a-20240214)(@remix-run/react@0.0.0-nightly-c847d3a-20240214)(react@18.3.0-canary-5c607369c-20240116)(zod@3.22.4):
+  /remix-utils@7.5.0(@remix-run/node@0.0.0-nightly-3da950a-20240215)(@remix-run/react@0.0.0-nightly-3da950a-20240215)(react@18.3.0-canary-5c607369c-20240116)(zod@3.22.4):
     resolution: {integrity: sha512-vzjDhbdwK+3XxqL2LM7ZPzq0zyjb+77eAWbKhDqhnh0nlA11n3CmTtYzrZYpVf6h24+6m5mD6KnRfcdD3Zrl7w==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
@@ -6635,8 +6635,8 @@ packages:
       zod:
         optional: true
     dependencies:
-      '@remix-run/node': 0.0.0-nightly-c847d3a-20240214(typescript@5.3.3)
-      '@remix-run/react': 0.0.0-nightly-c847d3a-20240214(react-dom@18.3.0-canary-5c607369c-20240116)(react@18.3.0-canary-5c607369c-20240116)(typescript@5.3.3)
+      '@remix-run/node': 0.0.0-nightly-3da950a-20240215(typescript@5.3.3)
+      '@remix-run/react': 0.0.0-nightly-3da950a-20240215(react-dom@18.3.0-canary-5c607369c-20240116)(react@18.3.0-canary-5c607369c-20240116)(typescript@5.3.3)
       react: 18.3.0-canary-5c607369c-20240116
       type-fest: 4.8.3
       zod: 3.22.4
