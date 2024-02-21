@@ -29,6 +29,6 @@
 		"isolatedModules": true,
 
 		/* where our code runs */
-		"lib": ["DOM", "DOM.Iterable", "ES2022"],
-	},
+		"lib": ["DOM", "DOM.Iterable", "ES2022"]
+	}
 }
