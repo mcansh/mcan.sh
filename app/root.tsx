@@ -73,7 +73,10 @@ function useHandleBodyClassName() {
 }
 
 export function Layout({ children }: { children: React.ReactNode }) {
+	let error = useRouteError();
+	let handleBodyClassName = useHandleBodyClassName();
 	let nonce = useNonce();
+	useFathom();
 
 	return (
 		<html lang="en" className="h-full">
@@ -82,7 +85,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
 				<Meta />
 				<Links />
 			</head>
-			<body>
+			<body
+				className={cn(
+					error
+						? "mx-auto flex min-h-screen w-[90%] max-w-5xl flex-col justify-center space-y-4 bg-blue-screen pt-20 text-center text-white"
+						: "h-full font-thin dark:bg-slate-900 dark:text-white",
+					handleBodyClassName,
+				)}
+			>
 				{children}
 				<ScrollRestoration nonce={nonce} />
 				<Scripts nonce={nonce} />
@@ -92,75 +102,59 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-	let handleBodyClassName = useHandleBodyClassName();
-	useFathom();
-
-	return (
-		<div
-			className={cn(
-				"h-full font-thin dark:bg-slate-900 dark:text-white",
-				handleBodyClassName,
-			)}
-		>
-			<Outlet />
-		</div>
-	);
+	return <Outlet />;
 }
+
+const canUseDOM = !!(
+	typeof window !== "undefined" &&
+	window.document &&
+	window.document.createElement
+);
 
 export function ErrorBoundary() {
 	let error = useRouteError();
-	let nonce = useNonce();
-	console.error(error);
-	useFathom();
+	if (!canUseDOM) console.error(error);
 
-	let handleBodyClassName = useHandleBodyClassName();
 	let headingClassName = `w-fit mx-auto inline-block text-3xl font-bold bg-white text-blue-screen`;
 	let boxClassName = `w-full px-4 py-2 overflow-auto border-4 border-white`;
 
-	return (
-		<div
-			className={cn(
-				"mx-auto flex min-h-screen w-[90%] max-w-5xl flex-col justify-center space-y-4 bg-blue-screen pt-20 text-center text-white",
-				handleBodyClassName,
-			)}
-		>
-			{isRouteErrorResponse(error) ? (
-				<>
-					<h1 className={headingClassName}>
-						{error.status} {error.statusText}
-					</h1>
-				</>
-			) : error instanceof Error ? (
-				<>
-					<h1 className={headingClassName}>Uncaught Exception!</h1>
-					<p>
-						If you are not the developer, please click back in your browser and
-						try again.
-					</p>
-					<pre className={boxClassName}>{error.message}</pre>
-
-					{process.env.NODE_ENV === "production" ? (
-						<p>
-							There was an uncaught exception in your application. Check the
-							browser console and/or the server console to inspect the error.
-						</p>
-					) : (
-						<pre className={cn(boxClassName, "text-left")}>{error.stack}</pre>
-					)}
-				</>
-			) : (
-				<>
-					<h1 className={headingClassName}>Unknown Error!</h1>
-					<p>
-						If you are not the developer, please click back in your browser and
-						try again.
-					</p>
-					<pre className={boxClassName}>{String(error)}</pre>
-				</>
-			)}
-			<ScrollRestoration nonce={nonce} />
-			<Scripts nonce={nonce} />
+	return isRouteErrorResponse(error) ? (
+		<div className="space-y-4">
+			<h1 className={headingClassName}>
+				{error.status} {error.statusText}
+			</h1>
 		</div>
+	) : error instanceof Error ? (
+		<div className="space-y-4">
+			<h1 className={headingClassName}>Uncaught Exception!</h1>
+			<p>
+				If you are not the developer, please click back in your browser and try
+				again.
+			</p>
+
+			<details className="space-y-4">
+				<summary className="cursor-pointer">Error message</summary>
+				<pre className={boxClassName}>{error.message}</pre>
+
+				{process.env.NODE_ENV === "production" ? (
+					<p>
+						There was an uncaught exception in your application. Check the
+						browser console and/or the server console to inspect the error.
+					</p>
+				) : (
+					<pre className={cn(boxClassName, "text-left")}>{error.stack}</pre>
+				)}
+			</details>
+		</div>
+	) : (
+		<>
+			<h1 className={headingClassName}>Unknown Error!</h1>
+			<p>
+				If you are not the developer, please click back in your browser and try
+				again.
+			</p>
+			<pre className={boxClassName}>{String(error)}</pre>
+		</>
 	);
 }
 
