@@ -106,9 +106,7 @@ function applySecurityHeaders(responseHeaders: Headers) {
 	let securityHeaders = createSecureHeaders({
 		"Content-Security-Policy": {
 			upgradeInsecureRequests: process.env.NODE_ENV === "production",
-			baseUri: ["'self'"],
-			defaultSrc: ["'none'"],
-			fontSrc: ["'self'"],
+			defaultSrc: ["'self'"],
 			imgSrc: [
 				"'self'",
 				"https://res.cloudinary.com/dof0zryca/image/upload/",
@@ -119,9 +117,6 @@ function applySecurityHeaders(responseHeaders: Headers) {
 				"https://thirtyseven-active.b-cdn.net/script.js",
 				`'nonce-${nonce}'`,
 			],
-			styleSrc: ["'self'"],
-			manifestSrc: ["'self'"],
-			prefetchSrc: ["'self'"],
 			connectSrc: [
 				...(process.env.NODE_ENV === "production"
 					? ["'self'"]
