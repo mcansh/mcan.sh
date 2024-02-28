@@ -50,6 +50,12 @@ await app.register(fastifyStatic, {
 	lastModified: true,
 });
 
+let remixHandler = createRequestHandler({
+	build: vite
+		? () => vite.ssrLoadModule("virtual:remix/server-build")
+		: () => import("./build/server/index.js"),
+});
+
 app.register(async function (childServer) {
 	childServer.removeAllContentTypeParsers();
 	// allow all content types
@@ -58,19 +64,7 @@ app.register(async function (childServer) {
 	});
 
 	// handle SSR requests
-	childServer.all("*", async (request, reply) => {
-		try {
-			let handler = createRequestHandler({
-				build: vite
-					? () => vite?.ssrLoadModule("virtual:remix/server-build")
-					: await import("./build/server/index.js"),
-			});
-			return handler(request, reply);
-		} catch (error) {
-			console.error(error);
-			return reply.status(500).send(error);
-		}
-	});
+	childServer.all("*", remixHandler);
 });
 
 let port = Number(process.env.PORT) || 3000;
