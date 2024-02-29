@@ -16,7 +16,7 @@ import { preloadRouteAssets } from "remix-utils/preload-route-assets";
 
 import { env } from "./env.server";
 
-const ABORT_DELAY = 5_000;
+let ABORT_DELAY = 5_000;
 
 export default function handleRequest(
 	request: Request,
@@ -180,7 +180,7 @@ function applySecurityHeaders(responseHeaders: Headers) {
 		merged.set("Feature-Policy", permissionsPolicy);
 	}
 
-	merged.set(`Expect-CT`, `report-uri="${env.SENTRY_REPORT_URL}"`);
+	merged.set("Expect-CT", `report-uri="${env.SENTRY_REPORT_URL}"`);
 
 	return { nonce, headers: merged };
 }

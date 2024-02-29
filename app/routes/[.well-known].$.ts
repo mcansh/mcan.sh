@@ -1,6 +1,6 @@
 import type { LoaderFunctionArgs } from "@remix-run/node";
 
-import { getCloudinaryURL, MUGSHOT } from "~/cloudinary.server";
+import { MUGSHOT, getCloudinaryURL } from "~/cloudinary.server";
 
 let badRequest = new Response("ope", {
 	status: 404,

@@ -33,9 +33,9 @@ async function clean() {
 
 	if (deleted.length > 0) {
 		let deletedPaths = deleted.map((file) => path.relative(cwd, file));
-		console.log(`✨ Deleted the following files and directories`);
+		console.log("✨ Deleted the following files and directories");
 		console.log(
-			kleur.red(deletedPaths.map((file) => "👉 " + file).join("\n") + "\n"),
+			kleur.red(deletedPaths.map((file) => `👉 ${file}`).join("\n\n")),
 		);
 	}
 }

@@ -8,7 +8,9 @@ import { getMugshotURL } from "~/cloudinary.server";
 import { FunHoverLink } from "~/components/fun-link-hover";
 
 export function loader() {
-	let me = getMugshotURL({ resize: { height: 480, width: 480, type: "fill" } });
+	let me = getMugshotURL({
+		resize: { height: 480, width: 480, type: "fill" },
+	});
 	let me_url = new URL(me);
 	return json(
 		{ me },

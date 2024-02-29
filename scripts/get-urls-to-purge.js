@@ -47,7 +47,7 @@ for (let route of Object.values(remixConfig.routes)) {
 let allChangedFiles = [...new Set(changedFiles.concat(changedRoutes))];
 
 let urlsToPurge = allChangedFiles.filter(Boolean).map((file) => {
-	return new URL(file, `https://www.mcan.sh`).href;
+	return new URL(file, "https://www.mcan.sh").href;
 });
 
 // console.log({ changedRoutes, changedFiles, urlsToPurge });

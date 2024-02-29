@@ -1,12 +1,12 @@
 import { useNonce } from "@mcansh/http-helmet/react";
 import type { LinksFunction, MetaFunction } from "@remix-run/node";
 import {
-	isRouteErrorResponse,
 	Links,
 	Meta,
 	Outlet,
 	Scripts,
 	ScrollRestoration,
+	isRouteErrorResponse,
 	useMatches,
 	useRouteError,
 } from "@remix-run/react";
@@ -68,7 +68,8 @@ function useHandleBodyClassName() {
 		if (!match.handle) return acc;
 		if (!match.handle.bodyClassName) return acc;
 		if (typeof match.handle.bodyClassName !== "string") return acc;
-		return [...acc, match.handle.bodyClassName];
+		acc.push(match.handle.bodyClassName);
+		return acc;
 	}, []);
 }
 
@@ -115,8 +116,9 @@ export function ErrorBoundary() {
 	let error = useRouteError();
 	if (!canUseDOM) console.error(error);
 
-	let headingClassName = `w-fit mx-auto inline-block text-3xl font-bold bg-white text-blue-screen`;
-	let boxClassName = `w-full px-4 py-2 overflow-auto border-4 border-white`;
+	let headingClassName =
+		"w-fit mx-auto inline-block text-3xl font-bold bg-white text-blue-screen";
+	let boxClassName = "w-full px-4 py-2 overflow-auto border-4 border-white";
 
 	return isRouteErrorResponse(error) ? (
 		<div className="space-y-4">

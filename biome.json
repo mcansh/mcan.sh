@@ -1,0 +1,22 @@
+{
+	"$schema": "https://biomejs.dev/schemas/1.5.3/schema.json",
+	"organizeImports": {
+		"enabled": true
+	},
+	"formatter": {
+		"enabled": true,
+		"indentStyle": "tab",
+		"ignore": ["./build", "./node_modules", "./app/components/sprite"]
+	},
+	"linter": {
+		"enabled": true,
+		"ignore": ["./build", "./node_modules", "./app/components/sprite"],
+		"rules": {
+			"recommended": true,
+			"style": {
+				"noParameterAssign": "off",
+				"useConst": "off"
+			}
+		}
+	}
+}

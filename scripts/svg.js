@@ -14,7 +14,7 @@ let COMPONENT_FILE = path.join(OUT_DIR, "index.tsx");
 let js = String.raw;
 
 async function createSprite() {
-	let icons = globSync(`./**/*.svg`, {
+	let icons = globSync("./**/*.svg", {
 		cwd: ASSETS_PATH,
 		absolute: true,
 		nodir: true,

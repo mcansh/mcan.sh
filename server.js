@@ -56,7 +56,7 @@ let remixHandler = createRequestHandler({
 		: () => import("./build/server/index.js"),
 });
 
-app.register(async function (childServer) {
+app.register(async (childServer) => {
 	childServer.removeAllContentTypeParsers();
 	// allow all content types
 	childServer.addContentTypeParser("*", (_request, payload, done) => {
