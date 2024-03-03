@@ -22,7 +22,7 @@
 		"jsx": "react-jsx",
 		"baseUrl": ".",
 		"paths": { "~/*": ["./app/*"] },
-		"types": ["@remix-run/cloudflare", "vite/client"],
+		"types": ["@remix-run/node", "vite/client"],
 
 		/* strictness */
 		"strict": true,
