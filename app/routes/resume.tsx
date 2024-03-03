@@ -75,6 +75,8 @@ export function loader() {
 				"GitHub Actions",
 				"Continuous Integration",
 				"Continuous Delivery",
+				"Debugging",
+				"Troubleshooting",
 			],
 			links: [
 				{
