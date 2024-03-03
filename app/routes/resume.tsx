@@ -33,8 +33,8 @@ export function loader() {
 					tasks: [
 						"Played a significant role in the Remix Core Team",
 						"Established the nightly release pipeline, enabling the shipment of Remix nightly builds to npm.",
-						"Implemented cutting-edge documentation infrastructure ideas from Ryan Florence and Kurt Mackey, utilizing a SQLite DB to store generated HTML from markdown and keeping it synchronized with GitHub updates.",
-						"Successfully migrated integration tests from Puppeteer to Playwright.",
+						"Implemented documentation infrastructure ideas from Ryan Florence and Kurt Mackey, utilizing a SQLite DB to store generated HTML from markdown and keeping it synchronized with GitHub updates.",
+						"Successfully migrated integration tests from Puppeteer to Playwright which both increased reliability and speed.",
 						"Developed robust deployment target testing infrastructure for first-party targets.",
 						"Created adapters to convert between proprietary request/response objects and native Request/Response objects.",
 					],
