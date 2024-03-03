@@ -60,7 +60,7 @@ export function loader() {
 			skills: [
 				"Node.js",
 				"Git",
-				"React",
+				"React.js",
 				"Remix",
 				"React Router",
 				"TypeScript",
