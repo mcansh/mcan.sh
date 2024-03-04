@@ -13,7 +13,12 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
 	let pdf = await page.pdf({
 		tagged: true,
-		margin: "0",
+		margin: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
 		printBackground: true,
 	});
 	await browser.close();
