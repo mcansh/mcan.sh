@@ -23,8 +23,9 @@ if (vite) {
 	await app.register(middie);
 	await app.use(vite.middlewares);
 } else {
+	let client = path.join(__dirname, "build", "client");
 	await app.register(fastifyStatic, {
-		root: path.join(__dirname, "build", "client", "assets"),
+		root: path.join(client, "assets"),
 		prefix: "/assets",
 		wildcard: true,
 		decorateReply: false,
@@ -36,19 +37,19 @@ if (vite) {
 		serveDotFiles: true,
 		lastModified: true,
 	});
-}
 
-await app.register(fastifyStatic, {
-	root: path.join(__dirname, "build", "client"),
-	prefix: "/",
-	wildcard: false,
-	cacheControl: true,
-	dotfiles: "allow",
-	etag: true,
-	maxAge: "1h",
-	serveDotFiles: true,
-	lastModified: true,
-});
+	await app.register(fastifyStatic, {
+		root: client,
+		prefix: "/",
+		wildcard: false,
+		cacheControl: true,
+		dotfiles: "allow",
+		etag: true,
+		maxAge: "1h",
+		serveDotFiles: true,
+		lastModified: true,
+	});
+}
 
 let remixHandler = createRequestHandler({
 	build: vite
