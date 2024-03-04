@@ -8,16 +8,27 @@ const result = parseArgs({
 
 let [command, ...rest] = result.positionals;
 
-let options = { stdio: "inherit" };
+/**
+ * @param {string} command
+ * @param {string} args=[]
+ * @returns {void}
+ */
+function runScript(command, args = []) {
+	console.log(`> ${command} ${args.join(" ")}`);
+	cp.spawnSync(command, args, { stdio: "inherit" });
+}
 
 switch (command) {
 	case "typecheck": {
-		cp.execSync("tsc", options);
+		runScript("tsc");
 		break;
 	}
 
 	case "lint": {
-		if (!rest.length) rest = ["."];
+		if (!rest.length) {
+			console.log("no files specified, linting all files.");
+			rest = ["."];
+		}
 		let args = [
 			"--ignore-path",
 			".gitignore",
@@ -28,12 +39,15 @@ switch (command) {
 			"./node_modules/.cache/eslint",
 			...rest,
 		];
-		cp.execSync(`eslint ${args.join(" ")}`, options);
+		runScript("eslint", args);
 		break;
 	}
 
 	case "format": {
-		if (!rest.length) rest = ["."];
+		if (!rest.length) {
+			console.log("no files specified, formatting all files.");
+			rest = ["."];
+		}
 		let args = [
 			"--ignore-path",
 			".gitignore",
@@ -44,7 +58,7 @@ switch (command) {
 			"--write",
 			...rest,
 		];
-		cp.execSync(`prettier ${args.join(" ")}`, options);
+		runScript("prettier", args);
 		break;
 	}
 
