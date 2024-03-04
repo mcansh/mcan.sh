@@ -11,7 +11,10 @@ export async function loader({ request }: LoaderFunctionArgs) {
 	let page = await browser.newPage();
 	await page.goto(resume_url.toString());
 
-	let pdf = await page.pdf();
+	let pdf = await page.pdf({ 
+		margin: "0",
+		printBackground: true
+	});
 	await browser.close();
 
 	return new Response(pdf, {
