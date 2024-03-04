@@ -23,8 +23,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
 			"Content-Type": "application/pdf",
 			"Content-Disposition": "inline; filename=resume.pdf",
 			"Cache-Control": cacheHeader({
-				sMaxage: "1h",
-				staleWhileRevalidate: "1w",
+				private: true
 			}),
 		},
 	});
