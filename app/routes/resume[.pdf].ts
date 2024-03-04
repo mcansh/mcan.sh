@@ -14,7 +14,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
 	let pdf = await page.pdf({
 		tagged: true,
 		margin: "0",
-		printBackground: true
+		printBackground: true,
 	});
 	await browser.close();
 
@@ -23,7 +23,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
 			"Content-Type": "application/pdf",
 			"Content-Disposition": "inline; filename=resume.pdf",
 			"Cache-Control": cacheHeader({
-				private: true
+				private: true,
 			}),
 		},
 	});
