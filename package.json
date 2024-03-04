@@ -36,8 +36,8 @@
 		"fathom-client": "^3.6.0",
 		"isbot": "^5.1.1",
 		"pretty-cache-header": "^1.0.0",
-		"react": "18.3.0-canary-5c607369c-20240116",
-		"react-dom": "18.3.0-canary-5c607369c-20240116",
+		"react": "18.3.0-canary-034130c02-20240303",
+		"react-dom": "18.3.0-canary-034130c02-20240303",
 		"remix-utils": "7.5.0",
 		"tailwind-merge": "^2.2.1",
 		"zod": "^3.22.4"
@@ -45,10 +45,10 @@
 	"devDependencies": {
 		"@cld-apis/types": "^0.1.6",
 		"@remix-run/dev": "2.8.0",
-		"@types/react": "^18.2.61",
+		"@types/react": "^18.2.62",
 		"@types/react-dom": "^18.2.19",
-		"@typescript-eslint/eslint-plugin": "^7.1.0",
-		"@typescript-eslint/parser": "^7.1.0",
+		"@typescript-eslint/eslint-plugin": "^7.1.1",
+		"@typescript-eslint/parser": "^7.1.1",
 		"@typescript/lib-dom": "npm:@types/web@^0.0.140",
 		"autoprefixer": "^10.4.18",
 		"del": "^7.1.0",
@@ -76,7 +76,7 @@
 		"tailwindcss": "^3.4.1",
 		"tailwindcss-padding-safe": "^1.0.6",
 		"typescript": "^5.3.3",
-		"vite": "5.1.4",
+		"vite": "5.1.5",
 		"vite-tsconfig-paths": "^4.3.1"
 	},
 	"engines": {
