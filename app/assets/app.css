@@ -1,10 +1,17 @@
-import type { Config } from "tailwindcss";
+@import "tailwindcss";
+
+@theme {
+	--default-font-family: Berkeley Mono;
+	--color-blue-screen: #1000f2;
+	--color-link: #ea567c;
+}
+
+/* import type { Config } from "tailwindcss";
 import defaultTheme from "tailwindcss/defaultTheme";
 
 import tailwindcssPaddingSafe from "tailwindcss-padding-safe";
 
 export default {
-	content: ["app/**/*.{ts,tsx,js,jsx}"],
 	darkMode: "media",
 	theme: {
 		extend: {
@@ -41,4 +48,4 @@ export default {
 		extend: {},
 	},
 	plugins: [tailwindcssPaddingSafe],
-} satisfies Config;
+} satisfies Config; */

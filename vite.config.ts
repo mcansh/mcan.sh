@@ -1,4 +1,5 @@
 import { vitePlugin as remix } from "@remix-run/dev";
+import tailwindcss from "@tailwindcss/vite";
 import { visualizer } from "rollup-plugin-visualizer";
 import { defineConfig, splitVendorChunkPlugin } from "vite";
 import type { Plugin } from "vite";
@@ -9,6 +10,7 @@ let EMIT_REPORT = process.env.EMIT_REPORT === "true";
 export default defineConfig({
 	server: { middlewareMode: true },
 	plugins: [
+		tailwindcss(),
 		tsconfigPaths(),
 		splitVendorChunkPlugin(),
 		EMIT_REPORT ? visualizer({ emitFile: true }) : null,

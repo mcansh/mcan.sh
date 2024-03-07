@@ -42,7 +42,7 @@ export default function IndexPage() {
 	let data = useLoaderData<typeof loader>();
 
 	return (
-		<div className="mx-auto flex h-screen max-w-screen-md flex-col items-center justify-between px-4 text-center">
+		<div className="max-w-screen-md mx-auto flex h-screen flex-col items-center justify-between px-4 text-center">
 			<div className="flex flex-1 flex-col items-center justify-center">
 				<Image
 					src={data.me}
@@ -60,7 +60,7 @@ export default function IndexPage() {
 				</p>
 				<pre className="mt-2 font-thin">Past: Shopify x Remix</pre>
 			</div>
-			<div className="pb-8 media-standalone:pb-0">
+			<div className="media-standalone:pb-0 pb-8">
 				<FunHoverLink to="/resume" prefetch="intent">
 					Resume
 				</FunHoverLink>
