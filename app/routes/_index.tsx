@@ -60,7 +60,7 @@ export default function IndexPage() {
 				</p>
 				<pre className="mt-2 font-thin">Past: Shopify x Remix</pre>
 			</div>
-			<div className="media-standalone:pb-0 pb-8">
+			<div className="pb-8 [@media(display-mode:standalone)]:pb-0">
 				<FunHoverLink to="/resume" prefetch="intent">
 					Resume
 				</FunHoverLink>
