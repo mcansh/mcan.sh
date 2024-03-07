@@ -1,5 +1,6 @@
 import { createSvgSpritePlugin } from "@mcansh/vite-svg-sprite-plugin";
 import { vitePlugin as remix } from "@remix-run/dev";
+import tailwindcss from "@tailwindcss/vite";
 import { visualizer } from "rollup-plugin-visualizer";
 import { defineConfig } from "vite";
 import type { Plugin } from "vite";
@@ -11,6 +12,7 @@ let SVG_SPRITE_LOGGING = process.env.RAILWAY === "true";
 export default defineConfig({
 	plugins: [
 		createSvgSpritePlugin({ logging: SVG_SPRITE_LOGGING }),
+		tailwindcss(),
 		tsconfigPaths(),
 		EMIT_REPORT ? visualizer({ emitFile: true }) : null,
 		remix({

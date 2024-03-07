@@ -63,7 +63,7 @@ export default function IndexPage() {
 				<h2 className="mt-2">Current: United Wholesale Mortgage</h2>
 				<pre className="mt-2 font-thin">Past: Shopify x Remix</pre>
 			</div>
-			<div className="flex space-x-4 pb-8 media-standalone:pb-0">
+			<div className="media-standalone:pb-0 flex space-x-4 pb-8">
 				<FunHoverLink to="https://github.com/mcansh">GitHub</FunHoverLink>
 				<FunHoverLink to="/resume" prefetch="intent">
 					Resume
