@@ -150,9 +150,6 @@ importers:
       postcss:
         specifier: ^8.4.41
         version: 8.4.47
-      postcss-100vh-fix:
-        specifier: ^1.0.2
-        version: 1.0.2(postcss@8.4.47)
       precinct:
         specifier: ^12.1.2
         version: 12.1.2
@@ -3681,12 +3678,6 @@ packages:
 
   please-upgrade-node@3.2.0:
     resolution: {integrity: sha512-gQR3WpIgNIKwBMVLkpMUeR3e1/E1y42bqDQZfql+kDeXd8COYfM8PQA4X6y7a8u9Ua9FHmsrrmirW2vHs45hWg==}
-
-  postcss-100vh-fix@1.0.2:
-    resolution: {integrity: sha512-t7vqk9AfjI4fXmWlQCEiMZFFhi1hro4WlECINI1TV6Qh1XapUJE++gCmNr95F5Hen/+bz1OmO+SiSB9TZmFmSg==}
-    engines: {node: '>=10.0'}
-    peerDependencies:
-      postcss: ^8.1.0
 
   postcss-discard-duplicates@5.1.0:
     resolution: {integrity: sha512-zmX3IoSI2aoenxHV6C7plngHWWhUOV3sP1T8y2ifzxzbtnuhk1EdPwm0S1bIUNaJ2eNbWeGLEwzw8huPD67aQw==}
@@ -8761,10 +8752,6 @@ snapshots:
   please-upgrade-node@3.2.0:
     dependencies:
       semver-compare: 1.0.0
-
-  postcss-100vh-fix@1.0.2(postcss@8.4.47):
-    dependencies:
-      postcss: 8.4.47
 
   postcss-discard-duplicates@5.1.0(postcss@8.4.47):
     dependencies:
