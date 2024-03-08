@@ -27,7 +27,8 @@ export async function loader({ request }: LoaderFunctionArgs) {
 			"Content-Type": "application/pdf",
 			"Content-Disposition": "inline; filename=Logan McAnsh.pdf",
 			"Cache-Control": cacheHeader({
-				staleWhileRevalidate: "1d",
+				maxAge: "1 day",
+				staleWhileRevalidate: "1 month",
 				public: true,
 			}),
 		},
