@@ -3,6 +3,7 @@ import { chromium } from "playwright";
 import { cacheHeader } from "pretty-cache-header";
 
 export async function loader({ request }: LoaderFunctionArgs) {
+	console.info(`regenerating resume.pdf`);
 	let url = new URL(request.url);
 	let resume_url = new URL("resume", url.origin);
 
@@ -26,7 +27,8 @@ export async function loader({ request }: LoaderFunctionArgs) {
 			"Content-Type": "application/pdf",
 			"Content-Disposition": "inline; filename=Logan McAnsh.pdf",
 			"Cache-Control": cacheHeader({
-				private: true,
+				staleWhileRevalidate: "1d",
+				public: true,
 			}),
 		},
 	});
