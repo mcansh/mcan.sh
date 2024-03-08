@@ -16,4 +16,12 @@
 			height: -webkit-fill-available;
 		}
 	}
+
+	.fun-link-hover-gradient {
+		background-size: 100px 2px;
+	}
+
+	.fun-link-hover-gradient:hover {
+		background-size: 100px 100%;
+	}
 }
