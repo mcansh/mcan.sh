@@ -1,4 +1,5 @@
 import type { LoaderFunctionArgs } from "@remix-run/node";
+import etag from "etag";
 import { chromium } from "playwright";
 import { cacheHeader } from "pretty-cache-header";
 
@@ -20,7 +21,13 @@ export async function loader({ request }: LoaderFunctionArgs) {
 		},
 		printBackground: true,
 	});
+
+	let etagValue = etag(pdf);
 	await browser.close();
+
+	if (request.headers.get("If-None-Match") === etagValue) {
+		return new Response(null, { status: 304 });
+	}
 
 	return new Response(pdf, {
 		headers: {
@@ -32,6 +39,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
 			"Content-Disposition": "inline; filename=Logan McAnsh.pdf",
 			"Content-Length": pdf.byteLength.toString(),
 			"Content-Type": "application/pdf",
+			ETag: etagValue,
 		},
 	});
 }
