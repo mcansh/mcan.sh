@@ -1,8 +1,8 @@
 import type { LoaderFunctionArgs } from "@remix-run/node";
 
-import { getCloudinaryURL, MUGSHOT } from "~/cloudinary.server";
+import { getMugshotURL } from "~/cloudinary.server";
 
-let badRequest = new Response("ope", {
+let notFound = new Response("ope", {
 	status: 404,
 	statusText: "Not Found",
 	headers: { "Content-Type": "text/plain" },
@@ -11,37 +11,31 @@ let badRequest = new Response("ope", {
 export async function loader({ params }: LoaderFunctionArgs) {
 	let splat = params["*"];
 
-	if (!splat) {
-		return badRequest;
-	}
+	if (!splat) throw notFound;
 
 	let segments = splat.split("/");
-	if (segments.at(-1) !== "avatar") {
-		return badRequest;
-	}
+	if (segments.at(-1) !== "avatar") throw notFound;
 
 	// remove the last segment (avatar)
+	// the remaining segments are the transformations that we can forward to cloudinary
 	segments = segments.slice(0, -1);
 
-	let image = getCloudinaryURL(MUGSHOT);
+	// get the original image using our default transformations
+	let image = getMugshotURL();
 
-	let url = new URL(image);
+	// split the pathname into segments
+	let pathSegments = image.pathname.split("/").filter(Boolean);
 
-	let pathSegments = url.pathname.split("/").filter(Boolean);
-
+	// find the segment that contains the transformations
 	let urlSegmentIndex = pathSegments.findIndex((segment) => {
 		return segment.includes(",");
 	});
 
-	if (urlSegmentIndex === -1) {
-		return badRequest;
-	}
+	if (urlSegmentIndex === -1) throw notFound;
 
-	let transformSegment = pathSegments[urlSegmentIndex];
+	let transformSegment = pathSegments.at(urlSegmentIndex);
 
-	if (!transformSegment) {
-		return badRequest;
-	}
+	if (!transformSegment) throw notFound;
 
 	// merge our segments with the url segments with a comma
 	transformSegment = [...transformSegment.split(","), ...segments].join(",");
@@ -50,9 +44,7 @@ export async function loader({ params }: LoaderFunctionArgs) {
 	pathSegments[urlSegmentIndex] = transformSegment;
 
 	// replace the pathname with our new segments
-	url.pathname = pathSegments.join("/");
-
-	image = url.toString();
+	image.pathname = pathSegments.join("/");
 
 	return fetch(image);
 }

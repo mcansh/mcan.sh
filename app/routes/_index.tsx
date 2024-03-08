@@ -9,9 +9,8 @@ import { FunHoverLink } from "~/components/fun-link-hover";
 
 export function loader() {
 	let me = getMugshotURL({ resize: { height: 480, width: 480, type: "fill" } });
-	let me_url = new URL(me);
 	return json(
-		{ me },
+		{ me: me.toString() },
 		{
 			headers: {
 				"Cache-Control": cacheHeader({
@@ -20,7 +19,7 @@ export function loader() {
 					staleWhileRevalidate: "2 hours",
 					sMaxage: "1 hour",
 				}),
-				Link: `<${me_url.origin}>; rel=preconnect`,
+				Link: `<${me.origin}>; rel=preconnect`,
 			},
 		},
 	);
