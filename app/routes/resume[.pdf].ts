@@ -24,13 +24,14 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
 	return new Response(pdf, {
 		headers: {
-			"Content-Type": "application/pdf",
-			"Content-Disposition": "inline; filename=Logan McAnsh.pdf",
 			"Cache-Control": cacheHeader({
 				sMaxage: "1 day",
 				staleWhileRevalidate: "1 month",
 				public: true,
 			}),
+			"Content-Disposition": "inline; filename=Logan McAnsh.pdf",
+			"Content-Length": pdf.byteLength.toString(),
+			"Content-Type": "application/pdf",
 		},
 	});
 }
