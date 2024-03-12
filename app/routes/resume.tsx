@@ -221,12 +221,12 @@ export default function ResumePage() {
 					</div>
 				</aside>
 
-				<main className="space-y-8 p-8 md:py-8 md:pl-0 md:pr-8 print:px-0 print:py-2 print:text-[9pt]">
+				<main className="space-y-8 p-8 md:py-8 md:pl-0 md:pr-8 print:space-y-4 print:px-0 print:py-2 print:text-[9pt]">
 					<div>
 						<h2 className="text-lg font-medium print:text-[11pt]">
 							Work Experience
 						</h2>
-						<ul className="mt-4 space-y-8 print:space-y-4">
+						<ul className="mt-4 space-y-8 print:mt-2 print:space-y-4">
 							{data.experience.map((job) => {
 								return (
 									<li key={job.company}>
@@ -258,7 +258,7 @@ export default function ResumePage() {
 						<h2 className="text-lg font-medium print:text-[11pt]">
 							References
 						</h2>
-						<ul className="mt-4 space-y-8 print:space-y-4">
+						<ul className="mt-4 space-y-8 print:mt-2 print:space-y-4">
 							{data.references.map((reference) => {
 								return (
 									<li key={reference.name}>
