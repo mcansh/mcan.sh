@@ -51,12 +51,12 @@ export function loader() {
 						"Collaborated closely with the design team to enhance their workflow and reduce time spent on repetitive tasks, such as creating new artboards, by creating Sketch plugins for utility support.",
 					],
 				},
-			],
+			] as const,
 			certifications: [
 				"CIW Internet Business Associate",
 				"CIW Web Site Development Associate",
 				"Testing JavaScript",
-			],
+			] as const,
 			skills: [
 				"Node.js",
 				"Git",
@@ -75,7 +75,7 @@ export function loader() {
 				"GitHub Actions",
 				"Continuous Integration",
 				"Continuous Delivery",
-			],
+			] as const,
 			links: [
 				{
 					href: "https://github.com/mcansh",
@@ -91,6 +91,16 @@ export function loader() {
 					href: "https://linkedin.com/in/loganmcansh",
 					text: "LinkedIn",
 					icon: "linkedin",
+				},
+			] as const,
+			references: [
+				{
+					name: "Ryan Florence",
+					contact: "https://twitter.com/ryanflorence",
+				},
+				{
+					name: "Michael Jackson",
+					contact: "https://twitter.com/mjackson",
 				},
 			] as const,
 		},
@@ -211,36 +221,56 @@ export default function ResumePage() {
 					</div>
 				</aside>
 
-				<main className="p-8 md:py-8 md:pl-0 md:pr-8 print:px-0 print:py-2 print:text-[9pt]">
-					<h2 className="text-lg font-medium print:text-[11pt]">
-						Work Experience
-					</h2>
-					<ul className="space-y-8 print:space-y-4">
-						{data.experience.map((job) => {
-							return (
-								<li key={job.company}>
-									<h3 className="text-xl print:text-[10pt] print:font-medium">
-										{job.company}
-									</h3>
-									<p>{job.position}</p>
-									<p>
-										{job.startDate} - {job.endDate}{" "}
-										{"note" in job ? (
-											<span className="block text-sm italic text-gray-600 md:inline">
-												{job.note}
-											</span>
-										) : null}
-									</p>
+				<main className="space-y-8 p-8 md:py-8 md:pl-0 md:pr-8 print:px-0 print:py-2 print:text-[9pt]">
+					<div>
+						<h2 className="text-lg font-medium print:text-[11pt]">
+							Work Experience
+						</h2>
+						<ul className="mt-4 space-y-8 print:space-y-4">
+							{data.experience.map((job) => {
+								return (
+									<li key={job.company}>
+										<h3 className="text-xl print:text-[10pt] print:font-medium">
+											{job.company}
+										</h3>
+										<p>{job.position}</p>
+										<p>
+											{job.startDate} - {job.endDate}{" "}
+											{"note" in job ? (
+												<span className="block text-sm italic text-gray-600 md:inline">
+													{job.note}
+												</span>
+											) : null}
+										</p>
 
-									<ul className="list-inside list-disc space-y-1 pt-2 print:space-y-0.5">
-										{job.tasks.map((task) => {
-											return <li key={task}>{task}</li>;
-										})}
-									</ul>
-								</li>
-							);
-						})}
-					</ul>
+										<ul className="list-inside list-disc space-y-1 pt-2 print:space-y-0.5">
+											{job.tasks.map((task) => {
+												return <li key={task}>{task}</li>;
+											})}
+										</ul>
+									</li>
+								);
+							})}
+						</ul>
+					</div>
+
+					<div>
+						<h2 className="text-lg font-medium print:text-[11pt]">
+							References
+						</h2>
+						<ul className="mt-4 space-y-8 print:space-y-4">
+							{data.references.map((reference) => {
+								return (
+									<li key={reference.name}>
+										<h3 className="text-xl print:text-[10pt] print:font-medium">
+											{reference.name}
+										</h3>
+										<a href={reference.contact}>{reference.contact}</a>
+									</li>
+								);
+							})}
+						</ul>
+					</div>
 				</main>
 			</div>
 		</div>
