@@ -75,7 +75,7 @@ devDependencies:
     version: 0.1.6
   '@remix-run/dev':
     specifier: 0.0.0-nightly-c782da4-20240305
-    version: 0.0.0-nightly-c782da4-20240305(@types/node@20.10.4)(lightningcss@1.24.0)(typescript@5.4.2)(vite@5.1.5)
+    version: 0.0.0-nightly-c782da4-20240305(@types/node@20.11.28)(lightningcss@1.24.0)(typescript@5.4.2)(vite@5.1.6)
   '@types/etag':
     specifier: ^1.8.3
     version: 1.8.3
@@ -1461,7 +1461,7 @@ packages:
     dev: true
     optional: true
 
-  /@remix-run/dev@0.0.0-nightly-c782da4-20240305(@types/node@20.10.4)(lightningcss@1.24.0)(typescript@5.4.2)(vite@5.1.5):
+  /@remix-run/dev@0.0.0-nightly-c782da4-20240305(@types/node@20.11.28)(lightningcss@1.24.0)(typescript@5.4.2)(vite@5.1.6):
     resolution: {integrity: sha512-1R5BLygW9g/slMWVe4Ma09XWoXBD9PDG5gg3bEIwtVcYfeFBITXt0FcBFAvpcJtrGNFBQBtu30jLGQPZg5nmEA==}
     engines: {node: '>=18.0.0'}
     hasBin: true
@@ -3549,7 +3549,7 @@ packages:
     resolution: {integrity: sha512-EzV94NYKoO09GLXGjXj9JIlXijVck4ONSr5wiCWDvhsvj5jxSrzTmRU/9C1DyB6uToszLs8aifA6NQ7lEQdvFw==}
     engines: {node: '>= 0.8'}
     dependencies:
-      '@types/node': 20.10.4
+      '@types/node': 20.11.28
       require-like: 0.1.2
     dev: true
 
