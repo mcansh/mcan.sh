@@ -24,7 +24,7 @@
 	"dependencies": {
 		"@fastify/middie": "^8.3.0",
 		"@fastify/static": "^7.0.1",
-		"@mcansh/http-helmet": "0.10.2",
+		"@mcansh/http-helmet": "0.10.3",
 		"@mcansh/remix-fastify": "^3.2.2",
 		"@remix-run/node": "2.8.1",
 		"@remix-run/react": "2.8.1",
@@ -38,8 +38,8 @@
 		"isbot": "^5.1.1",
 		"playwright": "^1.42.1",
 		"pretty-cache-header": "^1.0.0",
-		"react": "18.3.0-canary-338dddc08-20240307",
-		"react-dom": "18.3.0-canary-338dddc08-20240307",
+		"react": "18.3.0-canary-a870b2d54-20240314",
+		"react-dom": "18.3.0-canary-a870b2d54-20240314",
 		"remix-utils": "7.5.0",
 		"tailwind-merge": "^2.2.1",
 		"zod": "^3.22.4"
