@@ -10,8 +10,8 @@ let js_glob = js_ext.map((ext) => `**/*.${ext}`);
 export default (allStagedFiles) => {
 	let tsFiles = micromatch(allStagedFiles, ts_glob);
 	let jsFiles = micromatch(allStagedFiles, js_glob);
-	let commands = ["npm run format --"];
-	if (tsFiles.length) commands.push("npm run typecheck --");
-	if (jsFiles.length) commands.push("npm run lint --");
-	return commands;
+	let commands = ["format"];
+	if (tsFiles.length) commands.push("typecheck");
+	if (jsFiles.length) commands.push("lint");
+	return commands.map((command) => `npm run ${command} --`);
 };
