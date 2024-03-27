@@ -1,4 +1,5 @@
 {
+	"name": "personal-website",
 	"private": true,
 	"repository": "https://github.com/mcansh/mcan.sh",
 	"homepage": "https://mcan.sh",
@@ -8,46 +9,49 @@
 	"type": "module",
 	"scripts": {
 		"build:icons": "node ./scripts/svg.js",
-		"build": "npm run build:icons && npm run type-check && remix vite:build",
+		"build": "npm run build:icons && npm run typecheck && remix vite:build",
 		"clean": "./scripts/clean.js",
-		"type-check": "tsc",
-		"lint": "eslint --ignore-path .gitignore --cache --fix .",
-		"format": "prettier --ignore-path .gitignore --ignore-path .prettierignore --cache --cache-location .prettiercache --ignore-unknown --write .",
-		"validate": "run-p lint format type-check",
+		"typecheck": "node ./scripts/cli.js typecheck",
+		"lint": "node ./scripts/cli.js lint",
+		"format": "node ./scripts/cli.js format",
+		"validate": "run-p lint format typecheck",
 		"prepare": "node ./scripts/prepare.js",
 		"predev": "npm run build:icons",
-		"dev": "NODE_ENV=development node --watch-path ./server.js ./server.js",
-		"start": "NODE_ENV=production node ./server.js"
+		"dev": "cross-env NODE_ENV=development node --watch-path ./server.js ./server.js",
+		"start": "cross-env NODE_ENV=production node ./server.js",
+		"knip": "knip"
 	},
 	"dependencies": {
 		"@fastify/middie": "^8.3.0",
 		"@fastify/static": "^7.0.1",
-		"@mcansh/http-helmet": "0.10.2",
+		"@mcansh/http-helmet": "0.10.3",
 		"@mcansh/remix-fastify": "^3.2.2",
-		"@remix-run/node": "2.8.0",
-		"@remix-run/react": "2.8.0",
+		"@remix-run/node": "2.8.1",
+		"@remix-run/react": "2.8.1",
 		"@unpic/react": "^0.1.11",
 		"cloudinary-build-url": "^0.2.4",
 		"clsx": "^2.1.0",
 		"cross-env": "^7.0.3",
+		"etag": "^1.8.1",
 		"fastify": "^4.26.2",
 		"fathom-client": "^3.6.0",
-		"is-ci": "^3.0.1",
 		"isbot": "^5.1.1",
+		"playwright": "^1.42.1",
 		"pretty-cache-header": "^1.0.0",
-		"react": "18.3.0-canary-5c607369c-20240116",
-		"react-dom": "18.3.0-canary-5c607369c-20240116",
+		"react": "18.3.0-canary-a870b2d54-20240314",
+		"react-dom": "18.3.0-canary-a870b2d54-20240314",
 		"remix-utils": "7.5.0",
 		"tailwind-merge": "^2.2.1",
 		"zod": "^3.22.4"
 	},
 	"devDependencies": {
 		"@cld-apis/types": "^0.1.6",
-		"@remix-run/dev": "2.8.0",
-		"@types/react": "^18.2.61",
-		"@types/react-dom": "^18.2.19",
-		"@typescript-eslint/eslint-plugin": "^7.1.0",
-		"@typescript-eslint/parser": "^7.1.0",
+		"@remix-run/dev": "2.8.1",
+		"@types/etag": "^1.8.3",
+		"@types/react": "^18.2.64",
+		"@types/react-dom": "^18.2.21",
+		"@typescript-eslint/eslint-plugin": "^7.1.1",
+		"@typescript-eslint/parser": "^7.1.1",
 		"@typescript/lib-dom": "npm:@types/web@^0.0.140",
 		"autoprefixer": "^10.4.18",
 		"del": "^7.1.0",
@@ -60,31 +64,26 @@
 		"glob": "^10.3.10",
 		"husky": "^9.0.11",
 		"kleur": "^4.1.5",
+		"knip": "^5.0.3",
 		"lightningcss": "^1.24.0",
 		"lint-staged": "^15.2.2",
+		"micromatch": "^4.0.5",
 		"npm-run-all": "^4.1.5",
 		"patch-package": "^8.0.0",
 		"postcss": "^8.4.35",
 		"postcss-100vh-fix": "^1.0.2",
 		"prettier": "^3.2.5",
-		"prettier-plugin-tailwindcss": "^0.5.11",
+		"prettier-plugin-tailwindcss": "^0.5.12",
 		"rollup-plugin-visualizer": "^5.12.0",
 		"svgstore": "^3.0.1",
 		"tailwindcss": "^3.4.1",
 		"tailwindcss-padding-safe": "^1.0.6",
-		"typescript": "^5.3.3",
-		"vite": "5.1.4",
+		"typescript": "^5.4.2",
+		"vite": "5.1.6",
 		"vite-tsconfig-paths": "^4.3.1"
-	},
-	"lint-staged": {
-		"*.+(js|jsx|ts|tsx|cts|mts)": [
-			"eslint --cache --fix"
-		],
-		"*": [
-			"prettier --ignore-path .gitignore --cache --cache-location .prettiercache --ignore-unknown --write"
-		]
 	},
 	"engines": {
 		"node": ">=18"
-	}
+	},
+	"packageManager": "pnpm@8.15.4+sha256.cea6d0bdf2de3a0549582da3983c70c92ffc577ff4410cbf190817ddc35137c2"
 }

@@ -22,7 +22,12 @@
 		"jsx": "react-jsx",
 		"baseUrl": ".",
 		"paths": { "~/*": ["./app/*"] },
-		"types": ["@remix-run/node", "vite/client"],
+		"types": [
+			"@remix-run/node",
+			"vite/client",
+			"react/canary",
+			"react-dom/canary"
+		],
 
 		/* strictness */
 		"strict": true,

@@ -106,24 +106,26 @@ function applySecurityHeaders(responseHeaders: Headers) {
 	let securityHeaders = createSecureHeaders({
 		"Content-Security-Policy": {
 			upgradeInsecureRequests: process.env.NODE_ENV === "production",
-			defaultSrc: ["'self'"],
-			imgSrc: [
+			"default-src": ["'self'"],
+			"img-src": [
 				"'self'",
 				"https://res.cloudinary.com/dof0zryca/image/upload/",
 				"https://thirtyseven-active.b-cdn.net",
 			],
-			scriptSrc: [
+			"script-src": [
+				"'strict-dynamic'",
 				"'self'",
 				"https://thirtyseven-active.b-cdn.net/script.js",
 				`'nonce-${nonce}'`,
 			],
-			connectSrc: [
+			"script-src-attr": [`'nonce-${nonce}'`],
+			"connect-src": [
 				...(process.env.NODE_ENV === "production"
 					? ["'self'"]
 					: ["'self'", "ws:"]),
 			],
-			workerSrc: ["blob:"],
-			reportUri: [env.SENTRY_REPORT_URL],
+			"worker-src": ["blob:"],
+			"report-uri": [env.SENTRY_REPORT_URL],
 		},
 		"Referrer-Policy": "origin-when-cross-origin",
 		"X-Frame-Options": "DENY",
