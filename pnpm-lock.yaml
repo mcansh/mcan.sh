@@ -16,13 +16,13 @@ dependencies:
     version: 0.10.2(react-dom@18.3.0-canary-5c607369c-20240116)(react@18.3.0-canary-5c607369c-20240116)
   '@mcansh/remix-fastify':
     specifier: ^3.2.2
-    version: 3.2.2(@remix-run/node@0.0.0-nightly-1fa128c3f-20240327)(fastify@4.26.2)
+    version: 3.2.2(@remix-run/node@0.0.0-nightly-8838b45e4-20240328)(fastify@4.26.2)
   '@remix-run/node':
-    specifier: 0.0.0-nightly-1fa128c3f-20240327
-    version: 0.0.0-nightly-1fa128c3f-20240327(typescript@5.4.2)
+    specifier: 0.0.0-nightly-8838b45e4-20240328
+    version: 0.0.0-nightly-8838b45e4-20240328(typescript@5.4.2)
   '@remix-run/react':
-    specifier: 0.0.0-nightly-1fa128c3f-20240327
-    version: 0.0.0-nightly-1fa128c3f-20240327(react-dom@18.3.0-canary-a870b2d54-20240314)(react@18.3.0-canary-a870b2d54-20240314)(typescript@5.4.2)
+    specifier: 0.0.0-nightly-8838b45e4-20240328
+    version: 0.0.0-nightly-8838b45e4-20240328(react-dom@18.3.0-canary-a870b2d54-20240314)(react@18.3.0-canary-a870b2d54-20240314)(typescript@5.4.2)
   '@unpic/react':
     specifier: ^0.1.11
     version: 0.1.11(react-dom@18.3.0-canary-5c607369c-20240116)(react@18.3.0-canary-5c607369c-20240116)
@@ -61,7 +61,7 @@ dependencies:
     version: 18.3.0-canary-5c607369c-20240116(react@18.3.0-canary-5c607369c-20240116)
   remix-utils:
     specifier: 7.5.0
-    version: 7.5.0(@remix-run/node@0.0.0-nightly-1fa128c3f-20240327)(@remix-run/react@0.0.0-nightly-1fa128c3f-20240327)(react@18.3.0-canary-a870b2d54-20240314)(zod@3.22.4)
+    version: 7.5.0(@remix-run/node@0.0.0-nightly-8838b45e4-20240328)(@remix-run/react@0.0.0-nightly-8838b45e4-20240328)(react@18.3.0-canary-a870b2d54-20240314)(zod@3.22.4)
   tailwind-merge:
     specifier: ^2.2.0
     version: 2.2.0
@@ -74,8 +74,8 @@ devDependencies:
     specifier: ^0.1.6
     version: 0.1.6
   '@remix-run/dev':
-    specifier: 0.0.0-nightly-1fa128c3f-20240327
-    version: 0.0.0-nightly-1fa128c3f-20240327(@remix-run/react@0.0.0-nightly-1fa128c3f-20240327)(@types/node@20.11.28)(lightningcss@1.24.0)(typescript@5.4.2)(vite@5.1.6)
+    specifier: 0.0.0-nightly-8838b45e4-20240328
+    version: 0.0.0-nightly-8838b45e4-20240328(@remix-run/react@0.0.0-nightly-8838b45e4-20240328)(@types/node@20.11.28)(lightningcss@1.24.0)(typescript@5.4.2)(vite@5.1.6)
   '@types/etag':
     specifier: ^1.8.3
     version: 1.8.3
@@ -1317,7 +1317,7 @@ packages:
       type-fest: 4.10.2
     dev: false
 
-  /@mcansh/remix-fastify@3.2.2(@remix-run/node@0.0.0-nightly-1fa128c3f-20240327)(fastify@4.26.2):
+  /@mcansh/remix-fastify@3.2.2(@remix-run/node@0.0.0-nightly-8838b45e4-20240328)(fastify@4.26.2):
     resolution: {integrity: sha512-8AB2N1IKVIiaUftl9VMVkSD+rJJKXdA+Acw0tEA16Kif9JNkBLf/UeliZMOIfZhXOWblnzrqH/S4OvNmMhWzcg==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
@@ -1328,7 +1328,7 @@ packages:
       '@fastify/early-hints':
         optional: true
     dependencies:
-      '@remix-run/node': 0.0.0-nightly-1fa128c3f-20240327(typescript@5.4.2)
+      '@remix-run/node': 0.0.0-nightly-8838b45e4-20240328(typescript@5.4.2)
       '@remix-run/router': 1.15.0
       fastify: 4.26.2
     dev: false
@@ -1461,13 +1461,13 @@ packages:
     dev: true
     optional: true
 
-  /@remix-run/dev@0.0.0-nightly-1fa128c3f-20240327(@remix-run/react@0.0.0-nightly-1fa128c3f-20240327)(@types/node@20.11.28)(lightningcss@1.24.0)(typescript@5.4.2)(vite@5.1.6):
-    resolution: {integrity: sha512-EVJm85cHk732nB8A6DlqHCHhUqYpPBOo6gRkqckw6YAz+Pz03VFw0NYiWypxBbfs4lZdDmztYUj+M/VtIiXQ3A==}
+  /@remix-run/dev@0.0.0-nightly-8838b45e4-20240328(@remix-run/react@0.0.0-nightly-8838b45e4-20240328)(@types/node@20.11.28)(lightningcss@1.24.0)(typescript@5.4.2)(vite@5.1.6):
+    resolution: {integrity: sha512-mioDIqMnscvTWxyy2exvjjmhTEdcBEN7JbQBaps39FmJSQKJ1064tQLbVXn5WiMazGj9KJudED9Lz/oEDM/SOw==}
     engines: {node: '>=18.0.0'}
     hasBin: true
     peerDependencies:
-      '@remix-run/react': ^0.0.0-nightly-1fa128c3f-20240327
-      '@remix-run/serve': ^0.0.0-nightly-1fa128c3f-20240327
+      '@remix-run/react': ^0.0.0-nightly-8838b45e4-20240328
+      '@remix-run/serve': ^0.0.0-nightly-8838b45e4-20240328
       typescript: ^5.1.0
       vite: ^5.1.0
       wrangler: ^3.28.2
@@ -1491,10 +1491,10 @@ packages:
       '@babel/types': 7.23.6
       '@mdx-js/mdx': 2.3.0
       '@npmcli/package-json': 4.0.1
-      '@remix-run/node': 0.0.0-nightly-1fa128c3f-20240327(typescript@5.4.2)
-      '@remix-run/react': 0.0.0-nightly-1fa128c3f-20240327(react-dom@18.3.0-canary-a870b2d54-20240314)(react@18.3.0-canary-a870b2d54-20240314)(typescript@5.4.2)
-      '@remix-run/router': 0.0.0-experimental-c7dd3d3a
-      '@remix-run/server-runtime': 0.0.0-nightly-1fa128c3f-20240327(typescript@5.4.2)
+      '@remix-run/node': 0.0.0-nightly-8838b45e4-20240328(typescript@5.4.2)
+      '@remix-run/react': 0.0.0-nightly-8838b45e4-20240328(react-dom@18.3.0-canary-a870b2d54-20240314)(react@18.3.0-canary-a870b2d54-20240314)(typescript@5.4.2)
+      '@remix-run/router': 1.16.0-pre.0
+      '@remix-run/server-runtime': 0.0.0-nightly-8838b45e4-20240328(typescript@5.4.2)
       '@types/mdx': 2.0.10
       '@vanilla-extract/integration': 6.2.4(lightningcss@1.24.0)
       arg: 5.0.2
@@ -1552,8 +1552,8 @@ packages:
       - utf-8-validate
     dev: true
 
-  /@remix-run/node@0.0.0-nightly-1fa128c3f-20240327(typescript@5.4.2):
-    resolution: {integrity: sha512-nidpkMye9g0Hb31+048G39m56Y9R17ipauIp0iKNeMxPV87QN/SrCzACGDaqRc6RyG5W6R6YzwTsfgFId03Z1Q==}
+  /@remix-run/node@0.0.0-nightly-8838b45e4-20240328(typescript@5.4.2):
+    resolution: {integrity: sha512-dPKW2nuELYMpwiPDvcN147t93wZMVdRUIbfhdmsZP/erZv0LItHk8f7a7b9JcPNX0HufiZMy8/RIiTzPG1N4FA==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       typescript: ^5.1.0
@@ -1561,16 +1561,16 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@remix-run/server-runtime': 0.0.0-nightly-1fa128c3f-20240327(typescript@5.4.2)
+      '@remix-run/server-runtime': 0.0.0-nightly-8838b45e4-20240328(typescript@5.4.2)
       '@web3-storage/multipart-parser': 1.0.0
       cookie-signature: 1.2.1
       source-map-support: 0.5.21
       stream-slice: 0.1.2
       typescript: 5.4.2
-      undici: 6.10.1
+      undici: 6.10.2
 
-  /@remix-run/react@0.0.0-nightly-1fa128c3f-20240327(react-dom@18.3.0-canary-a870b2d54-20240314)(react@18.3.0-canary-a870b2d54-20240314)(typescript@5.4.2):
-    resolution: {integrity: sha512-snt3jvS6+XibIInl5zS2gjVcgHNsyKQvP07cKNCgPE7CnB+ft/1jbEe513W23oMWwHbPm96eKiVd5dB/vYWeMQ==}
+  /@remix-run/react@0.0.0-nightly-8838b45e4-20240328(react-dom@18.3.0-canary-a870b2d54-20240314)(react@18.3.0-canary-a870b2d54-20240314)(typescript@5.4.2):
+    resolution: {integrity: sha512-QT5gdvLJhunAeMOR8mkmCtx0EcW0jP+jj3uILZhNuk8NPvkDSnFDpg+erX2ltVKCyir4JTwryRXrmjhHQEX3PQ==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       react: ^18.0.0
@@ -1580,26 +1580,26 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@remix-run/router': 0.0.0-experimental-c7dd3d3a
-      '@remix-run/server-runtime': 0.0.0-nightly-1fa128c3f-20240327(typescript@5.4.2)
+      '@remix-run/router': 1.16.0-pre.0
+      '@remix-run/server-runtime': 0.0.0-nightly-8838b45e4-20240328(typescript@5.4.2)
       react: 18.3.0-canary-a870b2d54-20240314
       react-dom: 18.3.0-canary-a870b2d54-20240314(react@18.3.0-canary-a870b2d54-20240314)
-      react-router: 0.0.0-experimental-c7dd3d3a(react@18.3.0-canary-a870b2d54-20240314)
-      react-router-dom: 0.0.0-experimental-c7dd3d3a(react-dom@18.3.0-canary-a870b2d54-20240314)(react@18.3.0-canary-a870b2d54-20240314)
+      react-router: 6.23.0-pre.0(react@18.3.0-canary-a870b2d54-20240314)
+      react-router-dom: 6.23.0-pre.0(react-dom@18.3.0-canary-a870b2d54-20240314)(react@18.3.0-canary-a870b2d54-20240314)
       turbo-stream: 2.0.0
       typescript: 5.4.2
-
-  /@remix-run/router@0.0.0-experimental-c7dd3d3a:
-    resolution: {integrity: sha512-reXnySaRGlEl6cOgF7fSQvIRzyRFUjGsez0kHQk0ok6Z3Y7n1PVTCKNhooSfOI1hBOi0c9cIMurhoTgjYXyxHw==}
-    engines: {node: '>=14.0.0'}
 
   /@remix-run/router@1.15.0:
     resolution: {integrity: sha512-HOil5aFtme37dVQTB6M34G95kPM3MMuqSmIRVCC52eKV+Y/tGSqw9P3rWhlAx6A+mz+MoX+XxsGsNJbaI5qCgQ==}
     engines: {node: '>=14.0.0'}
     dev: false
 
-  /@remix-run/server-runtime@0.0.0-nightly-1fa128c3f-20240327(typescript@5.4.2):
-    resolution: {integrity: sha512-0NNHIlvXssgfiTbnsKGh0TMVAxXXp7B5kiZHFM4qg/9k4ZuLTbnfTOrR7uM0y2aAgomhpgiP0yXc9C6rV4fgNg==}
+  /@remix-run/router@1.16.0-pre.0:
+    resolution: {integrity: sha512-4KYbcmBcjX1HO/sLPZIcY87YWTF3e5qs9KTTieXE0HNukV2m199yTkMIjcmzTNL6w0wDj5YYc2YiXxm4W9qsTw==}
+    engines: {node: '>=14.0.0'}
+
+  /@remix-run/server-runtime@0.0.0-nightly-8838b45e4-20240328(typescript@5.4.2):
+    resolution: {integrity: sha512-lIVM7HpJDf4qbShnKQlrfIVYE8+PBGE6ERUwp7GEcdvfbFKIjGUHRZ+fL9TCgiSWtK/KrxR0IKCHecvL81uefg==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       typescript: ^5.1.0
@@ -1607,7 +1607,7 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@remix-run/router': 0.0.0-experimental-c7dd3d3a
+      '@remix-run/router': 1.16.0-pre.0
       '@types/cookie': 0.6.0
       '@web3-storage/multipart-parser': 1.0.0
       cookie: 0.6.0
@@ -6533,25 +6533,25 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /react-router-dom@0.0.0-experimental-c7dd3d3a(react-dom@18.3.0-canary-a870b2d54-20240314)(react@18.3.0-canary-a870b2d54-20240314):
-    resolution: {integrity: sha512-pp1l8sk4Rc9vLucHgHU4B2LUL/4e6iwD7ipDGgfc9a08eNVowxaDJXkbtyYE10lpjaZZkXF1DFkdHfGrKeXWQw==}
+  /react-router-dom@6.23.0-pre.0(react-dom@18.3.0-canary-a870b2d54-20240314)(react@18.3.0-canary-a870b2d54-20240314):
+    resolution: {integrity: sha512-TDEljjV6XwOEb9gp6FFNquAB0yY490lhSZRo4YNDPI8+QEA0n3yJ2VfIZLmxR70ljnFBwYOnWmNl94EHom/JjQ==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       react: '>=16.8'
       react-dom: '>=16.8'
     dependencies:
-      '@remix-run/router': 0.0.0-experimental-c7dd3d3a
+      '@remix-run/router': 1.16.0-pre.0
       react: 18.3.0-canary-a870b2d54-20240314
       react-dom: 18.3.0-canary-a870b2d54-20240314(react@18.3.0-canary-a870b2d54-20240314)
-      react-router: 0.0.0-experimental-c7dd3d3a(react@18.3.0-canary-a870b2d54-20240314)
+      react-router: 6.23.0-pre.0(react@18.3.0-canary-a870b2d54-20240314)
 
-  /react-router@0.0.0-experimental-c7dd3d3a(react@18.3.0-canary-a870b2d54-20240314):
-    resolution: {integrity: sha512-biSo7Pmedzrm9DXjC3ScIwCWVt3qVAutf51hJ/POxfcRYvhgi9ENNGHLjpqabBH4oI5IwI53Vh0w7pKOdadC9A==}
+  /react-router@6.23.0-pre.0(react@18.3.0-canary-a870b2d54-20240314):
+    resolution: {integrity: sha512-GawzByLrAoOr4Sc0ybAuYBTJmtysK8I7p3VuBQCzDCqXzu10uAP7tu0Iy+mv0SGkmzKpPXg4PUO26UQ9bBH7bg==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       react: '>=16.8'
     dependencies:
-      '@remix-run/router': 0.0.0-experimental-c7dd3d3a
+      '@remix-run/router': 1.16.0-pre.0
       react: 18.3.0-canary-a870b2d54-20240314
 
   /react@18.3.0-canary-5c607369c-20240116:
@@ -6694,7 +6694,7 @@ packages:
       unified: 10.1.2
     dev: true
 
-  /remix-utils@7.5.0(@remix-run/node@0.0.0-nightly-1fa128c3f-20240327)(@remix-run/react@0.0.0-nightly-1fa128c3f-20240327)(react@18.3.0-canary-a870b2d54-20240314)(zod@3.22.4):
+  /remix-utils@7.5.0(@remix-run/node@0.0.0-nightly-8838b45e4-20240328)(@remix-run/react@0.0.0-nightly-8838b45e4-20240328)(react@18.3.0-canary-a870b2d54-20240314)(zod@3.22.4):
     resolution: {integrity: sha512-vzjDhbdwK+3XxqL2LM7ZPzq0zyjb+77eAWbKhDqhnh0nlA11n3CmTtYzrZYpVf6h24+6m5mD6KnRfcdD3Zrl7w==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
@@ -6730,8 +6730,8 @@ packages:
       zod:
         optional: true
     dependencies:
-      '@remix-run/node': 0.0.0-nightly-1fa128c3f-20240327(typescript@5.4.2)
-      '@remix-run/react': 0.0.0-nightly-1fa128c3f-20240327(react-dom@18.3.0-canary-a870b2d54-20240314)(react@18.3.0-canary-a870b2d54-20240314)(typescript@5.4.2)
+      '@remix-run/node': 0.0.0-nightly-8838b45e4-20240328(typescript@5.4.2)
+      '@remix-run/react': 0.0.0-nightly-8838b45e4-20240328(react-dom@18.3.0-canary-a870b2d54-20240314)(react@18.3.0-canary-a870b2d54-20240314)(typescript@5.4.2)
       react: 18.3.0-canary-a870b2d54-20240314
       type-fest: 4.8.3
       zod: 3.22.4
@@ -7647,8 +7647,8 @@ packages:
     resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
     dev: true
 
-  /undici@6.10.1:
-    resolution: {integrity: sha512-kSzmWrOx3XBKTgPm4Tal8Hyl3yf+hzlA00SAf4goxv8LZYafKmS6gJD/7Fe5HH/DMNiFTRXvkwhLo7mUn5fuQQ==}
+  /undici@6.10.2:
+    resolution: {integrity: sha512-HcVuBy7ACaDejIMdwCzAvO22OsiE6ir6ziTIr9kAE0vB+PheVe29ZvRN8p7FXCO2uZHTjEoUs5bPiFpuc/hwwQ==}
     engines: {node: '>=18.0'}
 
   /unescape-js@1.1.4:
