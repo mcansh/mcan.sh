@@ -1,16 +1,31 @@
-import type { HeadersFunction, LinksFunction } from "@remix-run/node";
+import type { HeadersFunction, LoaderFunctionArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import type { MetaFunction } from "@remix-run/react";
 import { useLoaderData } from "@remix-run/react";
 import { cacheHeader } from "pretty-cache-header";
 
-import { Svg } from "~/components/sprite";
-import spriteHref from "~/components/sprite/index.svg";
 import type { RouteHandle } from "~/types/handle";
 
-export function loader() {
+import githubMarkIconHref from "../../assets/github-mark.svg";
+import linkedinIconHref from "../../assets/linkedin.svg";
+import xIconHref from "../../assets/x.svg";
+
+export function loader({ request }: LoaderFunctionArgs) {
+	let url = new URL(request.url);
+	let spriteHref = new URL(xIconHref, url).pathname;
+
 	return json(
 		{
+			meta: [
+				{ title: "Resume | Logan McAnsh" },
+				{ name: "description", content: "Logan McAnsh's Resume" },
+				{
+					rel: "preload",
+					href: spriteHref,
+					as: "image",
+					type: "image/svg+xml",
+				},
+			],
 			experience: [
 				{
 					company: "Shopify",
@@ -80,17 +95,17 @@ export function loader() {
 				{
 					href: "https://github.com/mcansh",
 					text: "GitHub",
-					icon: "github-mark",
+					icon: githubMarkIconHref,
 				},
 				{
 					href: "https://x.com/loganmcansh",
 					text: "X",
-					icon: "x",
+					icon: xIconHref,
 				},
 				{
 					href: "https://linkedin.com/in/loganmcansh",
 					text: "LinkedIn",
-					icon: "linkedin",
+					icon: linkedinIconHref,
 				},
 			] as const,
 			references: [
@@ -120,22 +135,8 @@ export function loader() {
 	);
 }
 
-export const meta: MetaFunction<typeof loader> = () => {
-	return [
-		{ title: "Resume | Logan McAnsh" },
-		{ name: "description", content: "Logan McAnsh's Resume" },
-	];
-};
-
-export const links: LinksFunction = () => {
-	return [
-		{
-			rel: "preload",
-			href: spriteHref,
-			as: "image",
-			type: "image/svg+xml",
-		},
-	];
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
+	return data?.meta ?? [];
 };
 
 export const headers: HeadersFunction = ({ loaderHeaders }) => {
@@ -192,7 +193,9 @@ export default function ResumePage() {
 										>
 											<span className="print:hidden">{link.text}</span>
 											<span className="hidden print:inline">{pathname}</span>
-											<Svg className="h-4 w-4 text-black" name={link.icon} />
+											<svg className="h-4 w-4 text-black" aria-hidden>
+												<use href={link.icon}></use>
+											</svg>
 										</a>
 									</li>
 								);
