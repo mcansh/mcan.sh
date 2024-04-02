@@ -1,3 +1,4 @@
+import { createSvgSpritePlugin } from "@mcansh/vite-svg-sprite-plugin";
 import { vitePlugin as remix } from "@remix-run/dev";
 import { visualizer } from "rollup-plugin-visualizer";
 import { defineConfig, splitVendorChunkPlugin } from "vite";
@@ -9,6 +10,7 @@ let EMIT_REPORT = process.env.EMIT_REPORT === "true";
 export default defineConfig({
 	server: { middlewareMode: true },
 	plugins: [
+		createSvgSpritePlugin(),
 		tsconfigPaths(),
 		splitVendorChunkPlugin(),
 		EMIT_REPORT ? visualizer({ emitFile: true }) : null,
@@ -21,7 +23,7 @@ export default defineConfig({
 		}),
 	].filter((p: unknown): p is Plugin => !!p),
 	build: {
-		assetsInlineLimit: 0, // keep SVG as asset URL
+		assetsInlineLimit: 0,
 		cssMinify: "lightningcss",
 	},
 });
