@@ -12,3 +12,6 @@ app/components/sprite
 
 current/**/*
 previous/**/*
+
+yalc.lock
+.yalc

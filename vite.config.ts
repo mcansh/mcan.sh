@@ -1,7 +1,7 @@
 import { createSvgSpritePlugin } from "@mcansh/vite-svg-sprite-plugin";
 import { vitePlugin as remix } from "@remix-run/dev";
 import { visualizer } from "rollup-plugin-visualizer";
-import { defineConfig, splitVendorChunkPlugin } from "vite";
+import { defineConfig } from "vite";
 import type { Plugin } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 
@@ -12,7 +12,6 @@ export default defineConfig({
 	plugins: [
 		createSvgSpritePlugin(),
 		tsconfigPaths(),
-		splitVendorChunkPlugin(),
 		EMIT_REPORT ? visualizer({ emitFile: true }) : null,
 		remix({
 			future: {
@@ -23,7 +22,6 @@ export default defineConfig({
 		}),
 	].filter((p: unknown): p is Plugin => !!p),
 	build: {
-		assetsInlineLimit: 0,
 		cssMinify: "lightningcss",
 	},
 });
