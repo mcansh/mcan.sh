@@ -74,8 +74,8 @@ devDependencies:
     specifier: ^0.1.6
     version: 0.1.6
   '@mcansh/vite-svg-sprite-plugin':
-    specifier: ^0.1.5
-    version: 0.1.5(vite@5.2.7)
+    specifier: ^0.1.6
+    version: 0.1.6(vite@5.2.7)
   '@remix-run/dev':
     specifier: 2.8.1
     version: 2.8.1(@types/node@20.11.28)(lightningcss@1.24.1)(typescript@5.4.3)(vite@5.2.7)
@@ -1377,8 +1377,8 @@ packages:
       fastify: 4.26.2
     dev: false
 
-  /@mcansh/vite-svg-sprite-plugin@0.1.5(vite@5.2.7):
-    resolution: {integrity: sha512-d8nHPwmf8QecvSeGy69sjaPSvkTdBRhH/YlznIptjxNvvt1+N1d6/DmMWFpMBWKappVYSZFAfnomYRF3KVRQNg==}
+  /@mcansh/vite-svg-sprite-plugin@0.1.6(vite@5.2.7):
+    resolution: {integrity: sha512-I0XkmTmUhvSvV96RoVprN9gIJLPLVjUbaUE98GYJ2yJOihga4DHVs6bWXrj9tpFqRE+rFrZ/N7AGTKFXWezXWQ==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       vite: ^5.2.7
