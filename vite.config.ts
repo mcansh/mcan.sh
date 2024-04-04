@@ -21,7 +21,5 @@ export default defineConfig({
 			},
 		}),
 	].filter((p: unknown): p is Plugin => !!p),
-	build: {
-		cssMinify: "lightningcss",
-	},
+	build: { cssMinify: "lightningcss" },
 });
