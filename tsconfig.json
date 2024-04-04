@@ -26,7 +26,8 @@
 			"@remix-run/node",
 			"vite/client",
 			"react/canary",
-			"react-dom/canary"
+			"react-dom/canary",
+			"@mcansh/vite-svg-sprite-plugin/client.d.ts"
 		],
 
 		/* strictness */
