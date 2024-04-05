@@ -44,7 +44,7 @@
 	},
 	"devDependencies": {
 		"@cld-apis/types": "^0.1.6",
-		"@mcansh/vite-svg-sprite-plugin": "^0.1.6",
+		"@mcansh/vite-svg-sprite-plugin": "0.3.0",
 		"@remix-run/dev": "0.0.0-nightly-0c0e4955f-20240404",
 		"@types/etag": "^1.8.3",
 		"@types/react": "^18.2.64",
