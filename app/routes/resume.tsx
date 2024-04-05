@@ -3,6 +3,7 @@ import { json } from "@remix-run/node";
 import type { MetaFunction } from "@remix-run/react";
 import { useLoaderData } from "@remix-run/react";
 import { cacheHeader } from "pretty-cache-header";
+import spriteHref from "virtual:vite-svg-sprite-plugin";
 
 import type { RouteHandle } from "~/types/handle";
 
@@ -12,7 +13,6 @@ import xIconHref from "../../assets/x.svg";
 
 export function loader({ request }: LoaderFunctionArgs) {
 	let url = new URL(request.url);
-	let spriteHref = new URL(xIconHref, url).pathname;
 
 	return json(
 		{
