@@ -60,7 +60,7 @@ export function loader({ request }: LoaderFunctionArgs) {
 					startDate: "May 2016",
 					endDate: "July 2021",
 					tasks: [
-						"Led the development of a suite of modern white-label web applications using Next.js, significantly enhancing the mobile app offerings for more than 7 clients.",
+						"lead the development of a suite of modern white-label web applications using Next.js, significantly enhancing the mobile app offerings for more than 7 clients.",
 						"Maintained and supported the suite, which quickly became the most utilized aspect of the app.",
 						"Implemented a range of utility functions that improved the efficiency and consistency of web experiences.",
 						"Collaborated closely with the design team to enhance their workflow and reduce time spent on repetitive tasks, such as creating new artboards, by creating Sketch plugins for utility support.",
