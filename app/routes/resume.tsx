@@ -1,30 +1,27 @@
-import type { HeadersFunction, LoaderFunctionArgs } from "@remix-run/node";
+import type { HeadersFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import type { MetaFunction } from "@remix-run/react";
 import { useLoaderData } from "@remix-run/react";
 import { cacheHeader } from "pretty-cache-header";
-import spriteHref from "virtual:vite-svg-sprite-plugin";
+// import spriteHref from "virtual:vite-svg-sprite-plugin";
 
+import githubMarkIconHref from "~/assets/github-mark.svg";
+import linkedinIconHref from "~/assets/linkedin.svg";
+import xIconHref from "~/assets/x.svg";
 import type { RouteHandle } from "~/types/handle";
 
-import githubMarkIconHref from "../../assets/github-mark.svg";
-import linkedinIconHref from "../../assets/linkedin.svg";
-import xIconHref from "../../assets/x.svg";
-
-export function loader({ request }: LoaderFunctionArgs) {
-	let url = new URL(request.url);
-
+export function loader() {
 	return json(
 		{
 			meta: [
 				{ title: "Resume | Logan McAnsh" },
 				{ name: "description", content: "Logan McAnsh's Resume" },
-				{
-					rel: "preload",
-					href: spriteHref,
-					as: "image",
-					type: "image/svg+xml",
-				},
+				// {
+				// 	rel: "preload",
+				// 	href: spriteHref,
+				// 	as: "image",
+				// 	type: "image/svg+xml",
+				// },
 			],
 			experience: [
 				{
@@ -106,7 +103,7 @@ export function loader({ request }: LoaderFunctionArgs) {
 				}),
 				"x-hello-recruiters": "1",
 				// preload the sprite
-				Link: `<${spriteHref}>; rel=preload; as=image; type=image/svg+xml`,
+				// Link: `<${spriteHref}>; rel=preload; as=image; type=image/svg+xml`,
 			},
 		},
 	);

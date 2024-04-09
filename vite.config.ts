@@ -10,7 +10,7 @@ let EMIT_REPORT = process.env.EMIT_REPORT === "true";
 export default defineConfig({
 	server: { middlewareMode: true },
 	plugins: [
-		createSvgSpritePlugin({ logging: true }),
+		createSvgSpritePlugin(),
 		tsconfigPaths(),
 		EMIT_REPORT ? visualizer({ emitFile: true }) : null,
 		remix({

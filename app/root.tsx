@@ -16,7 +16,6 @@ import * as Fathom from "fathom-client";
 import * as React from "react";
 import { twMerge } from "tailwind-merge";
 import tailwindStyleHref from "tailwindcss/tailwind.css?url";
-import spriteUrl from "virtual:vite-svg-sprite-plugin";
 
 import fontStyleHref from "~/assets/berkeley-mono.css?url";
 import type { Match } from "~/types/handle";
@@ -38,7 +37,6 @@ export const links: LinksFunction = () => {
 	});
 
 	return [
-		{ rel: "preload", href: spriteUrl, as: "image", type: "image/svg+xml" },
 		{ rel: "manifest", href: "/manifest.webmanifest" },
 		{ rel: "icon", href: "/favicon.png", type: "image/png" },
 		{ rel: "icon", href: "/favicon.ico" },
