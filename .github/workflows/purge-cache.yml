@@ -33,13 +33,13 @@ jobs:
             - recursive: true
               args: [--frozen-lockfile, --strict-peer-dependencies]
 
-      - name: 📦 Build current commit
+      - name: 📦 Build
         run: pnpm run build
 
       - name: ♻️ Get URLs to Purge
         id: urls
         run: |
-          URLS=$(node ./get-urls-to-purge.js | grep "URLS TO PURGE")
+          URLS=$(node ./scripts/get-urls-to-purge.js | grep "URLS TO PURGE")
           echo "urls=$URLS" >> $GITHUB_ENV
 
       - name: ♻️ Purge Cloudflare cache
