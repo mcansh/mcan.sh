@@ -78,18 +78,6 @@ export function loader() {
 				"Continuous Integration",
 				"Continuous Delivery",
 			] as const,
-			links: [
-				{
-					href: "https://github.com/mcansh",
-					text: "GitHub",
-					icon: githubMarkIconHref,
-				},
-				{
-					href: "https://linkedin.com/in/loganmcansh",
-					text: "LinkedIn",
-					icon: linkedinIconHref,
-				},
-			] as const,
 			references: [
 				{
 					name: "Ryan Florence",
@@ -157,6 +145,19 @@ export let handle: RouteHandle = {
 export default function ResumePage() {
 	let data = useLoaderData<typeof loader>();
 
+	let links = [
+		{
+			href: "https://github.com/mcansh",
+			text: "GitHub",
+			icon: githubMarkIconHref,
+		},
+		{
+			href: "https://linkedin.com/in/loganmcansh",
+			text: "LinkedIn",
+			icon: linkedinIconHref,
+		},
+	] as const;
+
 	return (
 		<div className="flex h-full flex-col">
 			<header className="flex flex-col items-center justify-center space-y-2 bg-stone-800 py-6 text-center text-white print:py-3">
@@ -174,7 +175,7 @@ export default function ResumePage() {
 							</li>
 							<li>Shelby Township, MI</li>
 
-							{data.links.map((link) => {
+							{links.map((link) => {
 								let { pathname } = new URL(link.href);
 								return (
 									<li key={link.text}>
