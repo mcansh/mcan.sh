@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
 import path from "node:path";
+import { styleText } from "node:util";
 
 import { readConfig } from "@remix-run/dev/dist/config.js";
 import { deleteAsync } from "del";
 import Gitignore from "gitignore-fs";
 import { globSync } from "glob";
-import kleur from "kleur";
 
 async function clean() {
 	let remixConfig = await readConfig();
@@ -35,7 +35,10 @@ async function clean() {
 		let deletedPaths = deleted.map((file) => path.relative(cwd, file));
 		console.log(`✨ Deleted the following files and directories`);
 		console.log(
-			kleur.red(deletedPaths.map((file) => "👉 " + file).join("\n") + "\n"),
+			styleText(
+				"red",
+				deletedPaths.map((file) => "👉 " + file).join("\n") + "\n",
+			),
 		);
 	}
 }
