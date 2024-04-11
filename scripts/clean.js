@@ -3,13 +3,11 @@
 import path from "node:path";
 import { styleText } from "node:util";
 
-import { readConfig } from "@remix-run/dev/dist/config.js";
 import { deleteAsync } from "del";
 import Gitignore from "gitignore-fs";
 import { globSync } from "glob";
 
 async function clean() {
-	let remixConfig = await readConfig();
 	let cwd = process.cwd();
 	let gitignore = new Gitignore();
 
@@ -23,11 +21,6 @@ async function clean() {
 	let filesToDelete = files.filter((file) => {
 		return gitignore.ignoresSync(file);
 	});
-
-	if (process.env.NO_CACHE) {
-		let rel = path.relative(cwd, remixConfig.cacheDirectory);
-		filesToDelete.push(`${rel}/**/*`);
-	}
 
 	let deleted = await deleteAsync([...filesToDelete, "node_modules/.vite/**"]);
 
