@@ -91,8 +91,14 @@ export function loader() {
 				},
 			] as const,
 			references: [
-				{ name: "Ryan Florence", contact: "https://twitter.com/ryanflorence" },
-				{ name: "Michael Jackson", contact: "https://twitter.com/mjackson" },
+				{
+					name: "Ryan Florence",
+					twitter: "https://twitter.com/ryanflorence",
+				},
+				{
+					name: "Michael Jackson",
+					twitter: "https://twitter.com/mjackson",
+				},
 			] as const,
 		},
 		{
@@ -207,6 +213,31 @@ export default function ResumePage() {
 							})}
 						</ul>
 					</div>
+
+					<div className="print:text-[9pt]">
+						<h2 className="text-lg font-medium print:text-[11pt]">
+							References
+						</h2>
+						<ul className="space-y-1 print:space-y-0.5">
+							{data.references.map((reference) => {
+								return (
+									<li key={reference.name}>
+										<h3>
+											<a
+												className="text-blue-800 underline"
+												href={reference.twitter}
+											>
+												{reference.name}
+											</a>
+											<span className="hidden print:block print:text-[5pt]">
+												{reference.twitter}
+											</span>
+										</h3>
+									</li>
+								);
+							})}
+						</ul>
+					</div>
 				</aside>
 
 				<main className="space-y-8 p-8 md:py-8 md:pl-0 md:pr-8 print:space-y-4 print:px-0 print:py-2 print:text-[9pt]">
@@ -236,24 +267,6 @@ export default function ResumePage() {
 												return <li key={task}>{task}</li>;
 											})}
 										</ul>
-									</li>
-								);
-							})}
-						</ul>
-					</div>
-
-					<div>
-						<h2 className="text-lg font-medium print:text-[11pt]">
-							References
-						</h2>
-						<ul className="mt-4 space-y-8 print:mt-2 print:space-y-4">
-							{data.references.map((reference) => {
-								return (
-									<li key={reference.name}>
-										<h3 className="text-xl print:text-[10pt] print:font-medium">
-											{reference.name}
-										</h3>
-										<a href={reference.contact}>{reference.contact}</a>
 									</li>
 								);
 							})}
