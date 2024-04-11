@@ -78,8 +78,8 @@ devDependencies:
     specifier: ^0.1.6
     version: 0.1.6
   '@mcansh/vite-svg-sprite-plugin':
-    specifier: 0.4.1
-    version: 0.4.1(vite@5.2.8)
+    specifier: 0.4.2
+    version: 0.4.2(vite@5.2.8)
   '@remix-run/dev':
     specifier: 2.8.1
     version: 2.8.1(@types/node@20.12.7)(lightningcss@1.24.1)(typescript@5.4.5)(vite@5.2.8)
@@ -87,11 +87,11 @@ devDependencies:
     specifier: ^1.8.3
     version: 1.8.3
   '@types/react':
-    specifier: ^18.2.75
-    version: 18.2.75
+    specifier: ^18.2.76
+    version: 18.2.76
   '@types/react-dom':
-    specifier: ^18.2.24
-    version: 18.2.24
+    specifier: ^18.2.25
+    version: 18.2.25
   '@typescript-eslint/eslint-plugin':
     specifier: ^7.6.0
     version: 7.6.0(@typescript-eslint/parser@7.6.0)(eslint@8.57.0)(typescript@5.4.5)
@@ -129,8 +129,8 @@ devDependencies:
     specifier: ^9.0.11
     version: 9.0.11
   knip:
-    specifier: ^5.9.3
-    version: 5.9.3(@types/node@20.12.7)(typescript@5.4.5)
+    specifier: ^5.9.4
+    version: 5.9.4(@types/node@20.12.7)(typescript@5.4.5)
   lightningcss:
     specifier: ^1.24.1
     version: 1.24.1
@@ -161,9 +161,6 @@ devDependencies:
   rollup-plugin-visualizer:
     specifier: ^5.12.0
     version: 5.12.0
-  svgo:
-    specifier: ^3.2.0
-    version: 3.2.0
   tailwindcss:
     specifier: ^3.4.3
     version: 3.4.3
@@ -1179,8 +1176,8 @@ packages:
       fastify: 4.26.2
     dev: false
 
-  /@mcansh/vite-svg-sprite-plugin@0.4.1(vite@5.2.8):
-    resolution: {integrity: sha512-wbWo+bzI1vnd8ngEGo/1loVaucsLMpzoI9orM4mtW2fc+UtjnWpj0D8rMDW6R2VR6YrrcWcJp/kaN9xzjhCJBg==}
+  /@mcansh/vite-svg-sprite-plugin@0.4.2(vite@5.2.8):
+    resolution: {integrity: sha512-GSKyyovhend0uGyii0sLfvozxryQRP1TJGyXtvZP0ZzZJelfN01U9k4000wUvH3CPv3W6sLLuMhMtjUgjX3uHg==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       vite: ^5.2.7
@@ -1894,14 +1891,14 @@ packages:
     resolution: {integrity: sha512-5zvhXYtRNRluoE/jAp4GVsSduVUzNWKkOZrCDBWYtE7biZywwdC2AcEzg+cSMLFRfVgeAFqpfNabiPjxFddV1Q==}
     dev: true
 
-  /@types/react-dom@18.2.24:
-    resolution: {integrity: sha512-cN6upcKd8zkGy4HU9F1+/s98Hrp6D4MOcippK4PoE8OZRngohHZpbJn1GsaDLz87MqvHNoT13nHvNqM9ocRHZg==}
+  /@types/react-dom@18.2.25:
+    resolution: {integrity: sha512-o/V48vf4MQh7juIKZU2QGDfli6p1+OOi5oXx36Hffpc9adsHeXjVp8rHuPkjd8VT8sOJ2Zp05HR7CdpGTIUFUA==}
     dependencies:
-      '@types/react': 18.2.75
+      '@types/react': 18.2.76
     dev: true
 
-  /@types/react@18.2.75:
-    resolution: {integrity: sha512-+DNnF7yc5y0bHkBTiLKqXFe+L4B3nvOphiMY3tuA5X10esmjqk7smyBZzbGTy2vsiy/Bnzj8yFIBL8xhRacoOg==}
+  /@types/react@18.2.76:
+    resolution: {integrity: sha512-T6z/v7YxpswDM61Vq5KoSPTJqCkroJfsDIsvXCr4+qOY6gik5Ju4w0jf67cpC5z7ydOnp/E0V0W08pDRy8u9Xw==}
     dependencies:
       '@types/prop-types': 15.7.12
       csstype: 3.1.3
@@ -5058,8 +5055,8 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  /knip@5.9.3(@types/node@20.12.7)(typescript@5.4.5):
-    resolution: {integrity: sha512-z7Qxb4O1RJ6q+MygvBKCgpnQjQScgGobtPyh624bYHKJfrWqLS48TmfADfkHsep0ITicudv4fijQVgXunugGvQ==}
+  /knip@5.9.4(@types/node@20.12.7)(typescript@5.4.5):
+    resolution: {integrity: sha512-33TM8bSHxMMoj+wP9lzjUkIIEfpXaZsLWMYRCoHdbmYnl2HKPMNijcYTxwi1omRROobXrR/VJyH2ZsYOKM1jtg==}
     engines: {node: '>=18.6.0'}
     hasBin: true
     peerDependencies:
