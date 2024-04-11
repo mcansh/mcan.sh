@@ -7,11 +7,6 @@
 .eslintcache
 tsconfig.tsbuildinfo
 .env
-app/components/sprite
-
-
-current/**/*
-previous/**/*
 
 yalc.lock
 .yalc

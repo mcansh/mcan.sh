@@ -1,54 +1,51 @@
-import { readConfig } from "@remix-run/dev/dist/config.js";
-import { globSync } from "glob";
+import fsp from "node:fs/promises";
+import path from "node:path";
 
-let remixConfig = await readConfig(process.cwd());
+import { flatRoutesUniversal } from "@remix-run/dev/dist/config/flat-routes.js";
+import { glob } from "glob";
+import precinct from "precinct";
+import { simpleGit } from "simple-git";
 
-let currentBuild = globSync("./**/*", { cwd: "./current/client" });
-let previousBuild = globSync("./**/*", { cwd: "./previous/client" });
+let diff = await simpleGit().diffSummary();
+let changedFiles = diff.files
+	.filter((file) => file.file.startsWith("app"))
+	.map((file) => file.file.replace(path.extname(file.file), ""));
 
-let changedFiles = [];
+let files = await glob("app/**/*", { nodir: true });
+let routeFiles = await glob("app/routes/**/*", { nodir: true });
 
-// check if any files were added or removed from the build
-// between the current and previous builds
-for (let index = 0; index < currentBuild.length; index++) {
-	let currentFile = currentBuild[index];
-	let previousFile = previousBuild[index];
-	if (currentFile !== previousFile) {
-		changedFiles.push(currentFile);
+let routeManifest = Object.values(flatRoutesUniversal("app", routeFiles));
+
+let urls = new Set();
+
+for (let file of files) {
+	let content = await fsp.readFile(file, "utf8");
+	let type = file.endsWith(".tsx") ? "tsx" : file.endsWith(".ts") ? "ts" : "js";
+	let dependencies = precinct(content, { type })
+		.filter((dependency) => {
+			return (
+				dependency.startsWith("./") ||
+				dependency.startsWith("../") ||
+				dependency.startsWith("~/")
+			);
+		})
+		.map((dependency) => {
+			// if the dependency starts with ~, replace with absolute path
+			if (dependency.startsWith("~/")) {
+				return dependency.replace("~/", "app");
+			}
+			return dependency;
+		});
+
+	if (dependencies.some((dependency) => changedFiles.includes(dependency))) {
+		let fileWithoutApp = file.replace("app/", "");
+		let route = routeManifest.find((route) => route.file === fileWithoutApp);
+		if (route) urls.add(route.path ?? "/");
 	}
 }
 
-let changedRoutes = [];
-
-function getFileRegex(file) {
-	return new RegExp(`assets/${file}-([a-z0-9]+).js`);
-}
-
-let manifestRegex = getFileRegex("manifest");
-
-// check if manifest has changed
-if (changedFiles.some((file) => manifestRegex.test(file))) {
-	changedRoutes.push(
-		...Object.values(remixConfig.routes).map((route) => {
-			return route.path ?? "/";
-		}),
-	);
-}
-
-for (let route of Object.values(remixConfig.routes)) {
-	// root route is handled by manifest
-	if (route.path === "") continue;
-	let routeRegex = getFileRegex(route.path ?? "_index");
-	if (changedFiles.some((file) => routeRegex.test(file))) {
-		changedRoutes.push(route.path ?? "/");
-	}
-}
-
-let allChangedFiles = [...new Set(changedFiles.concat(changedRoutes))];
-
-let urlsToPurge = allChangedFiles.filter(Boolean).map((file) => {
-	return new URL(file, `https://www.mcan.sh`).href;
+let urlsToPurge = Array.from(urls).map((url) => {
+	return new URL(url, "https://www.mcan.sh").toString();
 });
 
-// console.log({ changedRoutes, changedFiles, urlsToPurge });
-console.log(urlsToPurge.join(", "));
+console.log("URLS TO PURGE", urlsToPurge.join(", "));

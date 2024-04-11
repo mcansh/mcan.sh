@@ -34,22 +34,12 @@ jobs:
               args: [--frozen-lockfile, --strict-peer-dependencies]
 
       - name: 📦 Build current commit
-        run: |
-          pnpm run build
-          mv ./build ./current
-          mv ./scripts/get-urls-to-purge.js ./get-urls-to-purge.js
-
-      - name: 📦 Build previous commit
-        run: |
-          git checkout HEAD^
-          pnpm install --frozen-lockfile --strict-peer-dependencies
-          pnpm run build
-          mv ./build ./previous
+        run: pnpm run build
 
       - name: ♻️ Get URLs to Purge
         id: urls
         run: |
-          URLS=$(node ./get-urls-to-purge.js)
+          URLS=$(node ./get-urls-to-purge.js | grep "URLS TO PURGE")
           echo "urls=$URLS" >> $GITHUB_ENV
 
       - name: ♻️ Purge Cloudflare cache
