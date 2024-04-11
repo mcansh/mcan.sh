@@ -21,8 +21,8 @@ module.exports = {
 				groups: ["builtin", "external", "internal", "parent", "sibling"],
 				"newlines-between": "always",
 			},
-			'import/no-unresolved': ['error', { ignore: ['^virtual:'] }],
 		],
+		"import/no-unresolved": ["error", { ignore: ["^virtual:"] }],
 	},
 
 	env: {
