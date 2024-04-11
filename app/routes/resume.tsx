@@ -1,9 +1,9 @@
-import type { HeadersFunction } from "@remix-run/node";
+import type { HeadersFunction, LinksFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import type { MetaFunction } from "@remix-run/react";
 import { useLoaderData } from "@remix-run/react";
 import { cacheHeader } from "pretty-cache-header";
-// import spriteHref from "virtual:vite-svg-sprite-plugin";
+import spriteHref from "virtual:@mcansh/vite-svg-sprite-plugin";
 
 import githubMarkIconHref from "~/assets/github-mark.svg";
 import linkedinIconHref from "~/assets/linkedin.svg";
@@ -13,16 +13,6 @@ import type { RouteHandle } from "~/types/handle";
 export function loader() {
 	return json(
 		{
-			meta: [
-				{ title: "Resume | Logan McAnsh" },
-				{ name: "description", content: "Logan McAnsh's Resume" },
-				// {
-				// 	rel: "preload",
-				// 	href: spriteHref,
-				// 	as: "image",
-				// 	type: "image/svg+xml",
-				// },
-			],
 			experience: [
 				{
 					company: "Shopify",
@@ -103,14 +93,23 @@ export function loader() {
 				}),
 				"x-hello-recruiters": "1",
 				// preload the sprite
-				// Link: `<${spriteHref}>; rel=preload; as=image; type=image/svg+xml`,
+				Link: `<${spriteHref}>; rel=preload; as=image; type=image/svg+xml`,
 			},
 		},
 	);
 }
 
-export const meta: MetaFunction<typeof loader> = ({ data }) => {
-	return data?.meta ?? [];
+export const meta: MetaFunction = () => {
+	return [
+		{ title: "Resume | Logan McAnsh" },
+		{ name: "description", content: "Logan McAnsh's Resume" },
+	];
+};
+
+export const links: LinksFunction = () => {
+	return [
+		{ rel: "preload", href: spriteHref, as: "image", type: "image/svg+xml" },
+	];
 };
 
 export const headers: HeadersFunction = ({ loaderHeaders }) => {
