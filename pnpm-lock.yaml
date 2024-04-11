@@ -128,9 +128,6 @@ devDependencies:
   husky:
     specifier: ^9.0.11
     version: 9.0.11
-  kleur:
-    specifier: ^4.1.5
-    version: 4.1.5
   knip:
     specifier: ^5.9.3
     version: 5.9.3(@types/node@20.12.7)(typescript@5.4.5)
