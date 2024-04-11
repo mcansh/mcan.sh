@@ -38,19 +38,25 @@
 		"pretty-cache-header": "^1.0.0",
 		"react": "18.3.0-canary-a870b2d54-20240314",
 		"react-dom": "18.3.0-canary-a870b2d54-20240314",
-		"remix-utils": "7.5.0",
+		"remix-utils": "7.6.0",
 		"tailwind-merge": "^2.2.2",
 		"zod": "^3.22.4"
 	},
+	"pnpm": {
+		"overrides": {
+			"react": "18.3.0-canary-a870b2d54-20240314",
+			"react-dom": "18.3.0-canary-a870b2d54-20240314"
+		}
+	},
 	"devDependencies": {
 		"@cld-apis/types": "^0.1.6",
-		"@mcansh/vite-svg-sprite-plugin": "0.0.0-experimental-3e6bb2f",
+		"@mcansh/vite-svg-sprite-plugin": "0.4.0",
 		"@remix-run/dev": "2.8.1",
 		"@types/etag": "^1.8.3",
-		"@types/react": "^18.2.74",
+		"@types/react": "^18.2.75",
 		"@types/react-dom": "^18.2.24",
-		"@typescript-eslint/eslint-plugin": "^7.5.0",
-		"@typescript-eslint/parser": "^7.5.0",
+		"@typescript-eslint/eslint-plugin": "^7.6.0",
+		"@typescript-eslint/parser": "^7.6.0",
 		"@typescript/lib-dom": "npm:@types/web@^0.0.142",
 		"autoprefixer": "^10.4.19",
 		"del": "^7.1.0",
@@ -62,7 +68,7 @@
 		"glob": "^10.3.12",
 		"husky": "^9.0.11",
 		"kleur": "^4.1.5",
-		"knip": "^5.7.3",
+		"knip": "^5.9.3",
 		"lightningcss": "^1.24.1",
 		"lint-staged": "^15.2.2",
 		"micromatch": "^4.0.5",
@@ -76,7 +82,7 @@
 		"svgo": "^3.2.0",
 		"tailwindcss": "^3.4.3",
 		"tailwindcss-padding-safe": "^1.0.6",
-		"typescript": "^5.4.4",
+		"typescript": "^5.4.5",
 		"vite": "5.2.8",
 		"vite-tsconfig-paths": "^4.3.2"
 	},
