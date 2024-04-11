@@ -5,8 +5,8 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  react: 18.3.0-canary-a870b2d54-20240314
-  react-dom: 18.3.0-canary-a870b2d54-20240314
+  react: 19.0.0-canary-4c12339ce-20240408
+  react-dom: 19.0.0-canary-4c12339ce-20240408
 
 dependencies:
   '@fastify/middie':
@@ -17,7 +17,7 @@ dependencies:
     version: 7.0.3
   '@mcansh/http-helmet':
     specifier: 0.10.3
-    version: 0.10.3(react-dom@18.3.0-canary-a870b2d54-20240314)(react@18.3.0-canary-a870b2d54-20240314)
+    version: 0.10.3(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
   '@mcansh/remix-fastify':
     specifier: ^3.2.2
     version: 3.2.2(@remix-run/node@2.8.1)(fastify@4.26.2)
@@ -26,10 +26,10 @@ dependencies:
     version: 2.8.1(typescript@5.4.5)
   '@remix-run/react':
     specifier: 2.8.1
-    version: 2.8.1(react-dom@18.3.0-canary-a870b2d54-20240314)(react@18.3.0-canary-a870b2d54-20240314)(typescript@5.4.5)
+    version: 2.8.1(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)(typescript@5.4.5)
   '@unpic/react':
     specifier: ^0.1.11
-    version: 0.1.11(react-dom@18.3.0-canary-a870b2d54-20240314)(react@18.3.0-canary-a870b2d54-20240314)
+    version: 0.1.11(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
   cloudinary-build-url:
     specifier: ^0.2.4
     version: 0.2.4
@@ -58,14 +58,14 @@ dependencies:
     specifier: ^1.0.0
     version: 1.0.0
   react:
-    specifier: 18.3.0-canary-a870b2d54-20240314
-    version: 18.3.0-canary-a870b2d54-20240314
+    specifier: 19.0.0-canary-4c12339ce-20240408
+    version: 19.0.0-canary-4c12339ce-20240408
   react-dom:
-    specifier: 18.3.0-canary-a870b2d54-20240314
-    version: 18.3.0-canary-a870b2d54-20240314(react@18.3.0-canary-a870b2d54-20240314)
+    specifier: 19.0.0-canary-4c12339ce-20240408
+    version: 19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408)
   remix-utils:
     specifier: 7.6.0
-    version: 7.6.0(@remix-run/node@2.8.1)(@remix-run/react@2.8.1)(react@18.3.0-canary-a870b2d54-20240314)(zod@3.22.4)
+    version: 7.6.0(@remix-run/node@2.8.1)(@remix-run/react@2.8.1)(react@19.0.0-canary-4c12339ce-20240408)(zod@3.22.4)
   tailwind-merge:
     specifier: ^2.2.2
     version: 2.2.2
@@ -1147,19 +1147,19 @@ packages:
     engines: {node: '>=8'}
     dev: false
 
-  /@mcansh/http-helmet@0.10.3(react-dom@18.3.0-canary-a870b2d54-20240314)(react@18.3.0-canary-a870b2d54-20240314):
+  /@mcansh/http-helmet@0.10.3(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408):
     resolution: {integrity: sha512-NblH7B0j9W5CPIm2BIkkMnl63gHkXdWQtn72bumLTfO/WtEMgmNeWkr7gf7+SDV+HR+ZqUEgZKwIueAMKOd2Xg==}
     peerDependencies:
-      react: 18.3.0-canary-a870b2d54-20240314
-      react-dom: 18.3.0-canary-a870b2d54-20240314
+      react: 19.0.0-canary-4c12339ce-20240408
+      react-dom: 19.0.0-canary-4c12339ce-20240408
     peerDependenciesMeta:
       react:
         optional: true
       react-dom:
         optional: true
     dependencies:
-      react: 18.3.0-canary-a870b2d54-20240314
-      react-dom: 18.3.0-canary-a870b2d54-20240314(react@18.3.0-canary-a870b2d54-20240314)
+      react: 19.0.0-canary-4c12339ce-20240408
+      react-dom: 19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408)
       type-fest: 4.15.0
     dev: false
 
@@ -1594,12 +1594,12 @@ packages:
       stream-slice: 0.1.2
       typescript: 5.4.5
 
-  /@remix-run/react@2.8.1(react-dom@18.3.0-canary-a870b2d54-20240314)(react@18.3.0-canary-a870b2d54-20240314)(typescript@5.4.5):
+  /@remix-run/react@2.8.1(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)(typescript@5.4.5):
     resolution: {integrity: sha512-HTPm1U8+xz2jPaVjZnssrckfmFMA8sUZUdaWnoF5lmLWdReqcQv+XlBhIrQQ3jO9L8iYYdnzaSZZcRFYSdpTYg==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
-      react: 18.3.0-canary-a870b2d54-20240314
-      react-dom: 18.3.0-canary-a870b2d54-20240314
+      react: 19.0.0-canary-4c12339ce-20240408
+      react-dom: 19.0.0-canary-4c12339ce-20240408
       typescript: ^5.1.0
     peerDependenciesMeta:
       typescript:
@@ -1607,10 +1607,10 @@ packages:
     dependencies:
       '@remix-run/router': 1.15.3
       '@remix-run/server-runtime': 2.8.1(typescript@5.4.5)
-      react: 18.3.0-canary-a870b2d54-20240314
-      react-dom: 18.3.0-canary-a870b2d54-20240314(react@18.3.0-canary-a870b2d54-20240314)
-      react-router: 6.22.3(react@18.3.0-canary-a870b2d54-20240314)
-      react-router-dom: 6.22.3(react-dom@18.3.0-canary-a870b2d54-20240314)(react@18.3.0-canary-a870b2d54-20240314)
+      react: 19.0.0-canary-4c12339ce-20240408
+      react-dom: 19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408)
+      react-router: 6.22.3(react@19.0.0-canary-4c12339ce-20240408)
+      react-router-dom: 6.22.3(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)
       typescript: 5.4.5
     dev: false
 
@@ -2061,19 +2061,19 @@ packages:
       unpic: 3.18.0
     dev: false
 
-  /@unpic/react@0.1.11(react-dom@18.3.0-canary-a870b2d54-20240314)(react@18.3.0-canary-a870b2d54-20240314):
+  /@unpic/react@0.1.11(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408):
     resolution: {integrity: sha512-8ru3Pc+DaADnTkuEqe2v+PzqUT6fhqs89bvJ9ESAg/OI2Nq7FCPu+zc77tnBYMY+VJtcfGjB9tNF3KIfxOB7Jg==}
     peerDependencies:
       next: '>=14'
-      react: 18.3.0-canary-a870b2d54-20240314
-      react-dom: 18.3.0-canary-a870b2d54-20240314
+      react: 19.0.0-canary-4c12339ce-20240408
+      react-dom: 19.0.0-canary-4c12339ce-20240408
     peerDependenciesMeta:
       next:
         optional: true
     dependencies:
       '@unpic/core': 0.0.47
-      react: 18.3.0-canary-a870b2d54-20240314
-      react-dom: 18.3.0-canary-a870b2d54-20240314(react@18.3.0-canary-a870b2d54-20240314)
+      react: 19.0.0-canary-4c12339ce-20240408
+      react-dom: 19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408)
     dev: false
 
   /@vanilla-extract/babel-plugin-debug-ids@1.0.5:
@@ -7043,13 +7043,13 @@ packages:
       unpipe: 1.0.0
     dev: true
 
-  /react-dom@18.3.0-canary-a870b2d54-20240314(react@18.3.0-canary-a870b2d54-20240314):
-    resolution: {integrity: sha512-m56pjWn6kmg0M4GLxtC8A+Uh1AVIc+IESfi1mV810nCoHdMcO/tmhC6pIaWtxHBb3szP0x0p+BXF42nf8lKkVA==}
+  /react-dom@19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408):
+    resolution: {integrity: sha512-dMttAQ6IA63sUCCw+ZBE4QBO87PGjEcgNhNTYGHmw15ONqeUKQ8XmGEUKBOTmux7CIV9gdmKr3BGUFdGeT5ERA==}
     peerDependencies:
-      react: 18.3.0-canary-a870b2d54-20240314
+      react: 19.0.0-canary-4c12339ce-20240408
     dependencies:
-      react: 18.3.0-canary-a870b2d54-20240314
-      scheduler: 0.24.0-canary-a870b2d54-20240314
+      react: 19.0.0-canary-4c12339ce-20240408
+      scheduler: 0.25.0-canary-4c12339ce-20240408
     dev: false
 
   /react-refresh@0.14.0:
@@ -7057,31 +7057,31 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /react-router-dom@6.22.3(react-dom@18.3.0-canary-a870b2d54-20240314)(react@18.3.0-canary-a870b2d54-20240314):
+  /react-router-dom@6.22.3(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408):
     resolution: {integrity: sha512-7ZILI7HjcE+p31oQvwbokjk6OA/bnFxrhJ19n82Ex9Ph8fNAq+Hm/7KchpMGlTgWhUxRHMMCut+vEtNpWpowKw==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
-      react: 18.3.0-canary-a870b2d54-20240314
-      react-dom: 18.3.0-canary-a870b2d54-20240314
+      react: 19.0.0-canary-4c12339ce-20240408
+      react-dom: 19.0.0-canary-4c12339ce-20240408
     dependencies:
       '@remix-run/router': 1.15.3
-      react: 18.3.0-canary-a870b2d54-20240314
-      react-dom: 18.3.0-canary-a870b2d54-20240314(react@18.3.0-canary-a870b2d54-20240314)
-      react-router: 6.22.3(react@18.3.0-canary-a870b2d54-20240314)
+      react: 19.0.0-canary-4c12339ce-20240408
+      react-dom: 19.0.0-canary-4c12339ce-20240408(react@19.0.0-canary-4c12339ce-20240408)
+      react-router: 6.22.3(react@19.0.0-canary-4c12339ce-20240408)
     dev: false
 
-  /react-router@6.22.3(react@18.3.0-canary-a870b2d54-20240314):
+  /react-router@6.22.3(react@19.0.0-canary-4c12339ce-20240408):
     resolution: {integrity: sha512-dr2eb3Mj5zK2YISHK++foM9w4eBnO23eKnZEDs7c880P6oKbrjz/Svg9+nxqtHQK+oMW4OtjZca0RqPglXxguQ==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
-      react: 18.3.0-canary-a870b2d54-20240314
+      react: 19.0.0-canary-4c12339ce-20240408
     dependencies:
       '@remix-run/router': 1.15.3
-      react: 18.3.0-canary-a870b2d54-20240314
+      react: 19.0.0-canary-4c12339ce-20240408
     dev: false
 
-  /react@18.3.0-canary-a870b2d54-20240314:
-    resolution: {integrity: sha512-/sjBAVN6TJ1G+Ia3hGMaLGZE3w/OKtO6FEzz/wBUKdmK3obyJvxK0FmHGVPpM9nDzrw5f1WJDoPE8nGgkvpKog==}
+  /react@19.0.0-canary-4c12339ce-20240408:
+    resolution: {integrity: sha512-QdQl76CTAmYrwjxq6fZRDWw2/MHPNxkYQ1xZVir2MbK/wxK62vFAPGr2j/AXs36ADVUq+tUGx4XNmdgnfL4f1Q==}
     engines: {node: '>=0.10.0'}
     dev: false
 
@@ -7231,7 +7231,7 @@ packages:
       unified: 10.1.2
     dev: true
 
-  /remix-utils@7.6.0(@remix-run/node@2.8.1)(@remix-run/react@2.8.1)(react@18.3.0-canary-a870b2d54-20240314)(zod@3.22.4):
+  /remix-utils@7.6.0(@remix-run/node@2.8.1)(@remix-run/react@2.8.1)(react@19.0.0-canary-4c12339ce-20240408)(zod@3.22.4):
     resolution: {integrity: sha512-BPhCUEy+nwrhDDDg2v3+LFSszV6tluMbeSkbffj2o4tqZxt5Kn69Y9sNpGxYLAj8gjqeYDuxjv55of+gYnnykA==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
@@ -7243,7 +7243,7 @@ packages:
       crypto-js: ^4.1.1
       intl-parse-accept-language: ^1.0.0
       is-ip: ^5.0.1
-      react: 18.3.0-canary-a870b2d54-20240314
+      react: 19.0.0-canary-4c12339ce-20240408
       zod: ^3.22.4
     peerDependenciesMeta:
       '@remix-run/cloudflare':
@@ -7268,8 +7268,8 @@ packages:
         optional: true
     dependencies:
       '@remix-run/node': 2.8.1(typescript@5.4.5)
-      '@remix-run/react': 2.8.1(react-dom@18.3.0-canary-a870b2d54-20240314)(react@18.3.0-canary-a870b2d54-20240314)(typescript@5.4.5)
-      react: 18.3.0-canary-a870b2d54-20240314
+      '@remix-run/react': 2.8.1(react-dom@19.0.0-canary-4c12339ce-20240408)(react@19.0.0-canary-4c12339ce-20240408)(typescript@5.4.5)
+      react: 19.0.0-canary-4c12339ce-20240408
       type-fest: 4.15.0
       zod: 3.22.4
     dev: false
@@ -7484,8 +7484,8 @@ packages:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
     dev: true
 
-  /scheduler@0.24.0-canary-a870b2d54-20240314:
-    resolution: {integrity: sha512-HS8crSVpnKgW1ZlzEA+tahjDjLYGre5D/7d4xmYcTjGw6Lcf8Bi1xbHO5QKz3aUqKNN8+Yhde8FcsuEO82+lug==}
+  /scheduler@0.25.0-canary-4c12339ce-20240408:
+    resolution: {integrity: sha512-XGG/Y5q5jeJy+rKp963+nlz81H/eDEMDmwem8QFHkuufjW/IEhM9ha6PO76m9qA6Qr59HVjlTGJ6D1bH1lemeQ==}
     dev: false
 
   /secure-json-parse@2.7.0:

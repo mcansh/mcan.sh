@@ -36,16 +36,16 @@
 		"isbot": "^5.1.4",
 		"playwright": "^1.43.0",
 		"pretty-cache-header": "^1.0.0",
-		"react": "18.3.0-canary-a870b2d54-20240314",
-		"react-dom": "18.3.0-canary-a870b2d54-20240314",
+		"react": "19.0.0-canary-4c12339ce-20240408",
+		"react-dom": "19.0.0-canary-4c12339ce-20240408",
 		"remix-utils": "7.6.0",
 		"tailwind-merge": "^2.2.2",
 		"zod": "^3.22.4"
 	},
 	"pnpm": {
 		"overrides": {
-			"react": "18.3.0-canary-a870b2d54-20240314",
-			"react-dom": "18.3.0-canary-a870b2d54-20240314"
+			"react": "19.0.0-canary-4c12339ce-20240408",
+			"react-dom": "19.0.0-canary-4c12339ce-20240408"
 		}
 	},
 	"devDependencies": {
