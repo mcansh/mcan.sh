@@ -31,7 +31,7 @@ export default function handleRequest(
 
 	preloadRouteAssets(remixContext, responseHeaders);
 
-	let { nonce, headers } = applySecurityHeaders(responseHeaders);
+	let { nonce, headers } = applySecurityHeaders(request, responseHeaders);
 
 	return new Promise((resolve, reject) => {
 		let shellRendered = false;
@@ -92,15 +92,17 @@ export let handleDataRequest: HandleDataRequestFunction = async (
 		response.headers.set("Cache-Control", "private, max-age=10");
 	}
 
-	applySecurityHeaders(response.headers);
+	applySecurityHeaders(request, response.headers);
 
 	return response;
 };
 
-function applySecurityHeaders(responseHeaders: Headers) {
+function applySecurityHeaders(request: Request, responseHeaders: Headers) {
 	if (process.env.NODE_ENV === "development") {
 		responseHeaders.set("Cache-Control", "no-cache");
 	}
+
+	let url = new URL(request.url);
 
 	let nonce = createNonce();
 	let securityHeaders = createSecureHeaders({
@@ -115,7 +117,10 @@ function applySecurityHeaders(responseHeaders: Headers) {
 			"script-src": [
 				"'self'",
 				"https://thirtyseven-active.b-cdn.net/script.js",
-				"cdn-cgi/scripts/*/cloudflare-static/email-decode.min.js",
+				new URL(
+					"cdn-cgi/scripts/*/cloudflare-static/email-decode.min.js",
+					url.origin,
+				).toString(),
 				`'nonce-${nonce}'`,
 				"'strict-dynamic'",
 			],
