@@ -115,7 +115,7 @@ function applySecurityHeaders(responseHeaders: Headers) {
 			"script-src": [
 				"'self'",
 				"https://thirtyseven-active.b-cdn.net/script.js",
-				"/cdn-cgi/scripts/*/cloudflare-static/email-decode.min.js",
+				"cdn-cgi/scripts/*/cloudflare-static/email-decode.min.js",
 				`'nonce-${nonce}'`,
 				"'strict-dynamic'",
 			],
