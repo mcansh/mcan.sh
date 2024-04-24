@@ -6,7 +6,7 @@ import { createRequestHandler } from "@mcansh/remix-fastify";
 import { installGlobals } from "@remix-run/node";
 import { fastify } from "fastify";
 
-installGlobals();
+installGlobals({ nativeFetch: true });
 
 let vite =
 	process.env.NODE_ENV === "production"

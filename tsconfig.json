@@ -5,7 +5,8 @@
 		"**/.server/**/*.ts",
 		"**/.server/**/*.tsx",
 		"**/.client/**/*.ts",
-		"**/.client/**/*.tsx"
+		"**/.client/**/*.tsx",
+		"node_modules/@remix-run/react/single-fetch.d.ts"
 	],
 	"compilerOptions": {
 		/* base options */
