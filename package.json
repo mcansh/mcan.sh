@@ -24,6 +24,7 @@
 		"@mcansh/remix-fastify": "^3.3.1",
 		"@remix-run/node": "2.9.1",
 		"@remix-run/react": "2.9.1",
+		"@remix-run/server-runtime": "2.9.1",
 		"@unpic/react": "^0.1.11",
 		"cloudinary-build-url": "^0.2.4",
 		"clsx": "^2.1.1",

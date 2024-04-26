@@ -27,7 +27,8 @@
 			"vite/client",
 			"react/canary",
 			"react-dom/canary",
-			"@mcansh/vite-svg-sprite-plugin/client"
+			"@mcansh/vite-svg-sprite-plugin/client",
+			"@remix-run/react/future/single-fetch.d.ts"
 		],
 
 		/* strictness */
