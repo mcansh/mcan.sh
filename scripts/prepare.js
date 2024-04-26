@@ -13,5 +13,3 @@ if (!isCi) {
 }
 
 execSync(`pnpm exec playwright install --with-deps chromium`, options);
-console.log(`patching packages`);
-execSync("pnpm dlx patch-package", options);
