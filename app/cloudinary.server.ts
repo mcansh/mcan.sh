@@ -3,7 +3,7 @@ import { buildUrl } from "cloudinary-build-url";
 
 import { env } from "./env.server";
 
-export function getCloudinaryURL(
+function getCloudinaryURL(
 	publicId: string,
 	transformations: TransformerOption = {},
 ): URL {
@@ -19,7 +19,7 @@ export function getCloudinaryURL(
 	return new URL(url);
 }
 
-export let MUGSHOT = "website/zitzbp5hl2p5mdw8pdec" as const;
+let MUGSHOT = "website/zitzbp5hl2p5mdw8pdec" as const;
 
 export function getMugshotURL(transformations: TransformerOption = {}): URL {
 	return getCloudinaryURL(MUGSHOT, transformations);
