@@ -16,6 +16,9 @@ import { preloadRouteAssets } from "remix-utils/preload-route-assets";
 
 import { env } from "./env.server";
 
+// Reject all pending promises from handler functions after timeout
+export const streamTimeout = 5_000;
+// Automatically timeout the react renderer after timeout
 const ABORT_DELAY = 5_000;
 
 export default function handleRequest(

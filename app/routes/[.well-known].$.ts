@@ -1,20 +1,24 @@
 import type { LoaderFunctionArgs } from "@remix-run/node";
+import type { ResponseStub } from "@remix-run/server-runtime/dist/routeModules";
 
 import { getMugshotURL } from "~/cloudinary.server";
 
-let notFound = new Response("ope", {
-	status: 404,
-	statusText: "Not Found",
-	headers: { "Content-Type": "text/plain" },
-});
+function throwResponse(response: ResponseStub | undefined, status: number) {
+	if (response) {
+		response.status = status;
+		throw response;
+	}
 
-export async function loader({ params }: LoaderFunctionArgs) {
+	throw new Response(null, { status });
+}
+
+export async function loader({ params, response }: LoaderFunctionArgs) {
 	let splat = params["*"];
 
-	if (!splat) throw notFound;
+	if (!splat) throw throwResponse(response, 404);
 
 	let segments = splat.split("/");
-	if (segments.at(-1) !== "avatar") throw notFound;
+	if (segments.at(-1) !== "avatar") throw throwResponse(response, 404);
 
 	// remove the last segment (avatar)
 	// the remaining segments are the transformations that we can forward to cloudinary
@@ -31,11 +35,11 @@ export async function loader({ params }: LoaderFunctionArgs) {
 		return segment.includes(",");
 	});
 
-	if (urlSegmentIndex === -1) throw notFound;
+	if (urlSegmentIndex === -1) throw throwResponse(response, 404);
 
 	let transformSegment = pathSegments.at(urlSegmentIndex);
 
-	if (!transformSegment) throw notFound;
+	if (!transformSegment) throw throwResponse(response, 404);
 
 	// merge our segments with the url segments with a comma
 	transformSegment = [...transformSegment.split(","), ...segments].join(",");

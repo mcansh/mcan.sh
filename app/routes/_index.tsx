@@ -1,5 +1,4 @@
-import { json } from "@remix-run/node";
-import type { HeadersFunction } from "@remix-run/node";
+import type { LoaderFunctionArgs } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { Image } from "@unpic/react";
 import { cacheHeader } from "pretty-cache-header";
@@ -7,36 +6,24 @@ import { cacheHeader } from "pretty-cache-header";
 import { getMugshotURL } from "~/cloudinary.server";
 import { FunHoverLink } from "~/components/fun-link-hover";
 
-export function loader() {
+export function loader({ response }: LoaderFunctionArgs) {
 	let me = getMugshotURL({ resize: { height: 480, width: 480, type: "fill" } });
-	return json(
-		{ me: me.toString() },
-		{
-			headers: {
-				"Cache-Control": cacheHeader({
-					public: true,
-					maxAge: "1 hour",
-					staleWhileRevalidate: "2 hours",
-					sMaxage: "1 hour",
-				}),
-				Link: `<${me.origin}>; rel=preconnect`,
-			},
-		},
-	);
-}
 
-export const headers: HeadersFunction = ({ loaderHeaders }) => {
-	let responseHeaders = new Headers();
-	let cacheControlHeader = loaderHeaders.get("Cache-Control");
-	let linkHeader = loaderHeaders.get("Link");
-	if (cacheControlHeader) {
-		responseHeaders.set("Cache-Control", cacheControlHeader);
+	if (response) {
+		response.headers.set(
+			"Cache-Control",
+			cacheHeader({
+				public: true,
+				maxAge: "1 hour",
+				staleWhileRevalidate: "2 hours",
+				sMaxage: "1 hour",
+			}),
+		);
+		response.headers.set("Link", `<${me.origin}>; rel=preconnect`);
 	}
-	if (linkHeader) {
-		responseHeaders.set("Link", linkHeader);
-	}
-	return responseHeaders;
-};
+
+	return { me: me.toString() };
+}
 
 export default function IndexPage() {
 	let data = useLoaderData<typeof loader>();
