@@ -6,7 +6,7 @@ installGlobals({ nativeFetch: true });
 
 let app = fastify();
 
-app.register(remixFastify);
+app.register(remixFastify, { mode: process.env.NODE_ENV });
 
 let port = Number(process.env.PORT) || 5173;
 
