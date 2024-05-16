@@ -1,5 +1,5 @@
 import type { LoaderFunctionArgs } from "@remix-run/node";
-import type { ResponseStub } from "@remix-run/server-runtime/dist/routeModules";
+import type { ResponseStub } from "@remix-run/server-runtime/dist/single-fetch";
 
 import { getMugshotURL } from "~/cloudinary.server";
 
