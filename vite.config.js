@@ -8,7 +8,6 @@ let EMIT_REPORT = process.env.EMIT_REPORT === "true";
 let SVG_SPRITE_LOGGING = process.env.RAILWAY === "true";
 
 export default defineConfig({
-	server: { middlewareMode: true },
 	plugins: [
 		createSvgSpritePlugin({ logging: SVG_SPRITE_LOGGING }),
 		tsconfigPaths(),
