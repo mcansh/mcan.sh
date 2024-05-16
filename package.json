@@ -31,21 +31,21 @@
 		"clsx": "^2.1.1",
 		"cross-env": "^7.0.3",
 		"etag": "^1.8.1",
-		"fastify": "^4.26.2",
+		"fastify": "^4.27.0",
 		"fathom-client": "^3.6.0",
-		"isbot": "^5.1.5",
-		"playwright": "^1.43.1",
+		"isbot": "^5.1.6",
+		"playwright": "^1.44.0",
 		"pretty-cache-header": "^1.0.0",
-		"react": "19.0.0-beta-94eed63c49-20240425",
-		"react-dom": "19.0.0-beta-94eed63c49-20240425",
+		"react": "19.0.0-beta-26f2496093-20240514",
+		"react-dom": "19.0.0-beta-26f2496093-20240514",
 		"remix-utils": "7.6.0",
 		"tailwind-merge": "^2.3.0",
-		"zod": "^3.23.4"
+		"zod": "^3.23.8"
 	},
 	"pnpm": {
 		"overrides": {
-			"react": "19.0.0-beta-94eed63c49-20240425",
-			"react-dom": "19.0.0-beta-94eed63c49-20240425"
+			"react": "19.0.0-beta-26f2496093-20240514",
+			"react-dom": "19.0.0-beta-26f2496093-20240514"
 		}
 	},
 	"devDependencies": {
@@ -53,11 +53,11 @@
 		"@mcansh/vite-svg-sprite-plugin": "0.4.2",
 		"@remix-run/dev": "0.0.0-nightly-6eb6acf3f-20240511",
 		"@types/etag": "^1.8.3",
-		"@types/react": "^18.3.1",
-		"@types/react-dom": "^18.3.0",
-		"@typescript-eslint/eslint-plugin": "^7.7.1",
-		"@typescript-eslint/parser": "^7.7.1",
-		"@typescript/lib-dom": "npm:@types/web@^0.0.143",
+		"@types/react": "npm:types-react@19.0.0-beta.1",
+		"@types/react-dom": "npm:types-react-dom@19.0.0-beta.1",
+		"@typescript-eslint/eslint-plugin": "^7.9.0",
+		"@typescript-eslint/parser": "^7.9.0",
+		"@typescript/lib-dom": "npm:@types/web@^0.0.145",
 		"autoprefixer": "^10.4.19",
 		"del": "^7.1.0",
 		"eslint": "^8.57.0",
@@ -65,9 +65,9 @@
 		"eslint-plugin-import": "^2.29.1",
 		"eslint-plugin-prefer-let": "^3.0.1",
 		"gitignore-fs": "^2.2.2",
-		"glob": "^10.3.12",
+		"glob": "^10.3.15",
 		"husky": "^9.0.11",
-		"knip": "^5.11.0",
+		"knip": "^5.16.0",
 		"lightningcss": "^1.24.1",
 		"lint-staged": "^15.2.2",
 		"micromatch": "^4.0.5",
@@ -82,7 +82,7 @@
 		"tailwindcss": "^3.4.3",
 		"tailwindcss-padding-safe": "^1.0.6",
 		"typescript": "^5.4.5",
-		"vite": "5.2.10",
+		"vite": "5.2.11",
 		"vite-tsconfig-paths": "^4.3.2"
 	},
 	"engines": {
