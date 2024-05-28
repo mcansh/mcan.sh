@@ -53,7 +53,7 @@ export function loader({ response }: LoaderFunctionArgs) {
 					"Established the nightly release pipeline, which allows for the automatic generation of nightly builds and the ability to test new features before they are released.",
 					"Implemented documentation infrastructure based on ideas from Ryan Florence and Kurt Mackey, utilizing a SQLite DB to store generated HTML from markdown and keeping it synchronized with GitHub updates.",
 					"Developed a new testing infrastructure using Playwright, which significantly improved the speed and reliability of the test suite.",
-					"Created a new deployment target testing infrastructure that allows for testing of Remix applications on different deployment targets, such as Vercel, Netlify, and AWS and Fly.io",
+					"Created a new deployment target testing infrastructure that allows for testing of Remix applications on different deployment targets, such as Vercel, Netlify, Amazon Web Services, and Fly.io",
 					"Developed and maintained both first and third party adapters that convert the deployment target's proprietary request and response objects into JavaScript Request/Response objects that Remix can use to render the application",
 				],
 			},
