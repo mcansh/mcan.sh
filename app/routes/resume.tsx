@@ -34,7 +34,7 @@ export function loader({ response }: LoaderFunctionArgs) {
 				position: "Senior Software Engineer",
 				startDate: "August 2022",
 				endDate: "May 2023",
-				note: "(Note: Acquired by Shopify in August 2022 as part of the Remix acquisition)",
+				note: "(Note: via Remix)",
 				tasks: [
 					"Contributed as a key member of the Remix Core Team at Shopify.",
 					"Moderated and triaged issues and pull requests for the React Router and Remix repositories.",
