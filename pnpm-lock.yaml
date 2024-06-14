@@ -18,8 +18,8 @@ importers:
         specifier: 0.10.3
         version: 0.10.3(react-dom@19.0.0-rc-dfd30974ab-20240613(react@19.0.0-rc-dfd30974ab-20240613))(react@19.0.0-rc-dfd30974ab-20240613)
       '@mcansh/remix-fastify':
-        specifier: ^3.3.1
-        version: 3.3.1(@remix-run/node@0.0.0-nightly-7a5339b1f-20240614(typescript@5.4.5))(fastify@4.28.0)(vite@5.3.1(@types/node@20.12.7)(lightningcss@1.25.1))
+        specifier: 3.3.2-pre.0
+        version: 3.3.2-pre.0(@remix-run/node@0.0.0-nightly-7a5339b1f-20240614(typescript@5.4.5))(fastify@4.28.0)(vite@5.3.1(@types/node@20.12.7)(lightningcss@1.25.1))
       '@remix-run/node':
         specifier: 0.0.0-nightly-7a5339b1f-20240614
         version: 0.0.0-nightly-7a5339b1f-20240614(typescript@5.4.5)
@@ -744,8 +744,8 @@ packages:
       react-dom:
         optional: true
 
-  '@mcansh/remix-fastify@3.3.1':
-    resolution: {integrity: sha512-pStGCBCImBFEraDD7r50ac4Gm+iIit9a1t1HJLLoD9J25mv1nJJomjsED5vpbt5UhxAjqqja+2yMXVVEUhjC6A==}
+  '@mcansh/remix-fastify@3.3.2-pre.0':
+    resolution: {integrity: sha512-yBiu7kR7JXfIb2nnruYLNKvnen/+tXzRzJZWICqpY9a2yQWuthncXXZRw7CrsX7VCyeQDSug8H4/y8zTlPKTWQ==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       '@remix-run/node': ^2.0.0
@@ -5202,7 +5202,7 @@ snapshots:
       react: 19.0.0-rc-dfd30974ab-20240613
       react-dom: 19.0.0-rc-dfd30974ab-20240613(react@19.0.0-rc-dfd30974ab-20240613)
 
-  '@mcansh/remix-fastify@3.3.1(@remix-run/node@0.0.0-nightly-7a5339b1f-20240614(typescript@5.4.5))(fastify@4.28.0)(vite@5.3.1(@types/node@20.12.7)(lightningcss@1.25.1))':
+  '@mcansh/remix-fastify@3.3.2-pre.0(@remix-run/node@0.0.0-nightly-7a5339b1f-20240614(typescript@5.4.5))(fastify@4.28.0)(vite@5.3.1(@types/node@20.12.7)(lightningcss@1.25.1))':
     dependencies:
       '@fastify/middie': 8.3.0
       '@fastify/static': 7.0.3
