@@ -21,7 +21,7 @@
 	},
 	"dependencies": {
 		"@mcansh/http-helmet": "0.10.3",
-		"@mcansh/remix-fastify": "^3.3.1",
+		"@mcansh/remix-fastify": "3.3.2-pre.0",
 		"@remix-run/node": "0.0.0-nightly-7a5339b1f-20240614",
 		"@remix-run/react": "0.0.0-nightly-7a5339b1f-20240614",
 		"@remix-run/server-runtime": "0.0.0-nightly-7a5339b1f-20240614",
