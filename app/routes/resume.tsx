@@ -30,6 +30,13 @@ export function loader({ response }: LoaderFunctionArgs) {
 	return {
 		experience: [
 			{
+				company: "United Wholesale Mortgage",
+				position: "Senior UI Developer",
+				startDate: "June 2024",
+				endDate: "Current",
+				tasks: [],
+			},
+			{
 				company: "Shopify",
 				position: "Senior Software Engineer",
 				startDate: "August 2022",
