@@ -54,7 +54,7 @@ export function loader({ response }: LoaderFunctionArgs) {
 				company: "Remix Software",
 				position: "Senior Software Engineer",
 				startDate: "August 2021",
-				endDate: "August 2022",
+				endDate: "May 2023",
 				tasks: [
 					"Played a significant role in the Remix Core Team.",
 					"Established the nightly release pipeline, which allows for the automatic generation of nightly builds and the ability to test new features before they are released.",
