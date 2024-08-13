@@ -14,6 +14,7 @@ export default defineConfig({
 		EMIT_REPORT ? visualizer({ emitFile: true }) : null,
 		remix({
 			future: {
+				unstable_lazyRouteDiscovery: true,
 				unstable_singleFetch: true,
 				v3_fetcherPersist: true,
 				v3_relativeSplatPath: true,
