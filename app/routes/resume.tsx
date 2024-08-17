@@ -1,4 +1,5 @@
-import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
+import { unstable_data, unstable_defineLoader } from "@remix-run/node";
+import type { LinksFunction } from "@remix-run/node";
 import type { MetaFunction } from "@remix-run/react";
 import { useLoaderData } from "@remix-run/react";
 import { cacheHeader } from "pretty-cache-header";
@@ -8,111 +9,108 @@ import githubMarkIconHref from "~/assets/github-mark.svg";
 import linkedinIconHref from "~/assets/linkedin.svg";
 import type { RouteHandle } from "~/types/handle";
 
-export function loader({ response }: LoaderFunctionArgs) {
-	if (response) {
-		response.headers.set(
-			"Cache-Control",
-			cacheHeader({
-				public: true,
-				maxAge: "1 hour",
-				staleWhileRevalidate: "2 hours",
-				sMaxage: "1 hour",
-			}),
-		);
-		response.headers.set("x-hello-recruiters", "1");
-		// preload the sprite
-		response.headers.set(
-			"Link",
-			`<${spriteHref}>; rel=preload; as=image; type=image/svg+xml`,
-		);
-	}
-
-	return {
-		experience: [
-			{
-				company: "United Wholesale Mortgage",
-				position: "Senior UI Developer",
-				startDate: "June 2024",
-				endDate: "Current",
-				tasks: [],
+export const loader = unstable_defineLoader(() => {
+	return unstable_data(
+		{
+			experience: [
+				{
+					company: "United Wholesale Mortgage",
+					position: "Senior UI Developer",
+					startDate: "June 2024",
+					endDate: "Current",
+					tasks: [],
+				},
+				{
+					company: "Shopify",
+					position: "Senior Software Engineer",
+					startDate: "August 2022",
+					endDate: "May 2023",
+					note: "(Note: via Remix)",
+					tasks: [
+						"Contributed as a key member of the Remix Core Team at Shopify.",
+						"Moderated and triaged issues and pull requests for the React Router and Remix repositories.",
+						"Developed and implemented a new `flat routes` routing convention based on teams ideas and community feedback.",
+						"Created the `@remix-run/testing` package to enable unit testing of components using Remix's Link, Form, Fetchers, etc.",
+						"Published a custom GitHub Action that automatically added comments to resolved issues and pull requests in nightly/pre/stable releases.",
+					],
+				},
+				{
+					company: "Remix Software",
+					position: "Senior Software Engineer",
+					startDate: "August 2021",
+					endDate: "May 2023",
+					tasks: [
+						"Played a significant role in the Remix Core Team.",
+						"Established the nightly release pipeline, which allows for the automatic generation of nightly builds and the ability to test new features before they are released.",
+						"Implemented documentation infrastructure based on ideas from Ryan Florence and Kurt Mackey, utilizing a SQLite DB to store generated HTML from markdown and keeping it synchronized with GitHub updates.",
+						"Developed a new testing infrastructure using Playwright, which significantly improved the speed and reliability of the test suite.",
+						"Created a new deployment target testing infrastructure that allows for testing of Remix applications on different deployment targets, such as Vercel, Netlify, Amazon Web Services, and Fly.io",
+						"Developed and maintained both first and third party adapters that convert the deployment target's proprietary request and response objects into JavaScript Request/Response objects that Remix can use to render the application",
+					],
+				},
+				{
+					company: "Powerley",
+					position: "Frontend Web Developer",
+					startDate: "May 2016",
+					endDate: "July 2021",
+					tasks: [
+						"Lead the development of a suite of modern white-label web applications using Next.js, significantly enhancing the mobile app offerings for more than 7 clients.",
+						"Maintained and supported the suite, which quickly became the most utilized areas of the app.",
+						"Created utility functions to reduce the time spent on repetitive tasks and improve the overall quality of the codebase.",
+						"Collaborated closely with the design team to enhance their workflow and reduce time spent on repetitive tasks, such as creating new artboards, by creating Sketch plugins for utility support.",
+					],
+				},
+			] as const,
+			certifications: [
+				"CIW Internet Business Associate",
+				"CIW Web Site Development Associate",
+				"Testing JavaScript",
+			] as const,
+			skills: [
+				"Node.js",
+				"Git",
+				"React.js",
+				"Remix",
+				"React Router",
+				"TypeScript",
+				"Next.js",
+				"TailwindCSS",
+				"Accessibility",
+				"Performance",
+				"Prisma",
+				"GraphQL",
+				"Rest APIs",
+				"Automated Testing",
+				"GitHub Actions",
+				"Continuous Integration",
+				"Continuous Delivery",
+			] as const,
+			references: [
+				{
+					name: "Ryan Florence",
+					twitter: "https://twitter.com/ryanflorence",
+				},
+				{
+					name: "Michael Jackson",
+					twitter: "https://twitter.com/mjackson",
+				},
+			] as const,
+		},
+		{
+			headers: {
+				"Cache-Control": cacheHeader({
+					public: true,
+					maxAge: "1 hour",
+					staleWhileRevalidate: "2 hours",
+					sMaxage: "1 hour",
+				}),
+				"x-hello-recruiters": "1",
+				// preload the sprite
+				Link: `<${spriteHref}>; rel=preload; as=image; type=image/svg+xml`,
 			},
-			{
-				company: "Shopify",
-				position: "Senior Software Engineer",
-				startDate: "August 2022",
-				endDate: "May 2023",
-				note: "(Note: via Remix)",
-				tasks: [
-					"Contributed as a key member of the Remix Core Team at Shopify.",
-					"Moderated and triaged issues and pull requests for the React Router and Remix repositories.",
-					"Developed and implemented a new `flat routes` routing convention based on teams ideas and community feedback.",
-					"Created the `@remix-run/testing` package to enable unit testing of components using Remix's Link, Form, Fetchers, etc.",
-					"Published a custom GitHub Action that automatically added comments to resolved issues and pull requests in nightly/pre/stable releases.",
-				],
-			},
-			{
-				company: "Remix Software",
-				position: "Senior Software Engineer",
-				startDate: "August 2021",
-				endDate: "May 2023",
-				tasks: [
-					"Played a significant role in the Remix Core Team.",
-					"Established the nightly release pipeline, which allows for the automatic generation of nightly builds and the ability to test new features before they are released.",
-					"Implemented documentation infrastructure based on ideas from Ryan Florence and Kurt Mackey, utilizing a SQLite DB to store generated HTML from markdown and keeping it synchronized with GitHub updates.",
-					"Developed a new testing infrastructure using Playwright, which significantly improved the speed and reliability of the test suite.",
-					"Created a new deployment target testing infrastructure that allows for testing of Remix applications on different deployment targets, such as Vercel, Netlify, Amazon Web Services, and Fly.io",
-					"Developed and maintained both first and third party adapters that convert the deployment target's proprietary request and response objects into JavaScript Request/Response objects that Remix can use to render the application",
-				],
-			},
-			{
-				company: "Powerley",
-				position: "Frontend Web Developer",
-				startDate: "May 2016",
-				endDate: "July 2021",
-				tasks: [
-					"Lead the development of a suite of modern white-label web applications using Next.js, significantly enhancing the mobile app offerings for more than 7 clients.",
-					"Maintained and supported the suite, which quickly became the most utilized areas of the app.",
-					"Created utility functions to reduce the time spent on repetitive tasks and improve the overall quality of the codebase.",
-					"Collaborated closely with the design team to enhance their workflow and reduce time spent on repetitive tasks, such as creating new artboards, by creating Sketch plugins for utility support.",
-				],
-			},
-		] as const,
-		certifications: [
-			"CIW Internet Business Associate",
-			"CIW Web Site Development Associate",
-			"Testing JavaScript",
-		] as const,
-		skills: [
-			"Node.js",
-			"Git",
-			"React.js",
-			"Remix",
-			"React Router",
-			"TypeScript",
-			"Next.js",
-			"TailwindCSS",
-			"Accessibility",
-			"Performance",
-			"Prisma",
-			"GraphQL",
-			"Rest APIs",
-			"Automated Testing",
-			"GitHub Actions",
-			"Continuous Integration",
-			"Continuous Delivery",
-		] as const,
-		references: [
-			{
-				name: "Ryan Florence",
-				twitter: "https://twitter.com/ryanflorence",
-			},
-			{
-				name: "Michael Jackson",
-				twitter: "https://twitter.com/mjackson",
-			},
-		] as const,
-	};
-}
+		},
+	);
+});
 
 export const meta: MetaFunction = () => {
 	return [

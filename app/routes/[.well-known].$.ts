@@ -1,24 +1,14 @@
-import type { LoaderFunctionArgs } from "@remix-run/node";
-import type { ResponseStub } from "@remix-run/server-runtime/dist/single-fetch";
+import { unstable_defineLoader } from "@remix-run/node";
 
 import { getMugshotURL } from "~/cloudinary.server";
 
-function throwResponse(response: ResponseStub | undefined, status: number) {
-	if (response) {
-		response.status = status;
-		throw response;
-	}
-
-	throw new Response(null, { status });
-}
-
-export async function loader({ params, response }: LoaderFunctionArgs) {
+export const loader = unstable_defineLoader(({ params }) => {
 	let splat = params["*"];
 
-	if (!splat) throw throwResponse(response, 404);
+	if (!splat) throw new Response(null, { status: 404 });
 
 	let segments = splat.split("/");
-	if (segments.at(-1) !== "avatar") throw throwResponse(response, 404);
+	if (segments.at(-1) !== "avatar") throw new Response(null, { status: 404 });
 
 	// remove the last segment (avatar)
 	// the remaining segments are the transformations that we can forward to cloudinary
@@ -35,11 +25,11 @@ export async function loader({ params, response }: LoaderFunctionArgs) {
 		return segment.includes(",");
 	});
 
-	if (urlSegmentIndex === -1) throw throwResponse(response, 404);
+	if (urlSegmentIndex === -1) throw new Response(null, { status: 404 });
 
 	let transformSegment = pathSegments.at(urlSegmentIndex);
 
-	if (!transformSegment) throw throwResponse(response, 404);
+	if (!transformSegment) throw new Response(null, { status: 404 });
 
 	// merge our segments with the url segments with a comma
 	transformSegment = [...transformSegment.split(","), ...segments].join(",");
@@ -51,4 +41,4 @@ export async function loader({ params, response }: LoaderFunctionArgs) {
 	image.pathname = pathSegments.join("/");
 
 	return fetch(image);
-}
+});
