@@ -45,6 +45,7 @@ export default function IndexPage() {
 				<p className="mt-2 max-w-xs text-center text-lg sm:text-xl md:max-w-sm">
 					Senior Software Engineer
 				</p>
+				<h2 className="mt-2">Current: United Wholesale Mortgage</h2>
 				<pre className="mt-2 font-thin">Past: Shopify x Remix</pre>
 			</div>
 			<div className="flex space-x-4 pb-8 media-standalone:pb-0">
