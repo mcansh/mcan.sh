@@ -89,7 +89,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 				className={cn(
 					error
 						? "mx-auto flex min-h-screen w-[90%] max-w-5xl flex-col justify-center space-y-4 bg-blue-screen pt-20 text-center text-white"
-						: "h-full font-thin dark:bg-slate-900 dark:text-white",
+						: undefined,
 					handleBodyClassName,
 				)}
 			>

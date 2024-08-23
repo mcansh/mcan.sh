@@ -5,6 +5,7 @@ import { cacheHeader } from "pretty-cache-header";
 
 import { getMugshotURL } from "~/cloudinary.server";
 import { FunHoverLink } from "~/components/fun-link-hover";
+import type { RouteHandle } from "~/types/handle";
 
 export const loader = unstable_defineLoader(() => {
 	let me = getMugshotURL({ resize: { height: 480, width: 480, type: "fill" } });
@@ -24,6 +25,10 @@ export const loader = unstable_defineLoader(() => {
 		},
 	);
 });
+
+export const handle: RouteHandle = {
+	bodyClassName: "h-full font-thin dark:bg-slate-900 dark:text-white",
+};
 
 export default function IndexPage() {
 	let data = useLoaderData<typeof loader>();

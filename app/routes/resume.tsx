@@ -125,10 +125,6 @@ export const links: LinksFunction = () => {
 	];
 };
 
-export let handle: RouteHandle = {
-	bodyClassName: "dark:bg-white dark:text-black",
-};
-
 export default function ResumePage() {
 	let data = useLoaderData<typeof loader>();
 
