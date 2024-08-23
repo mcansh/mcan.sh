@@ -1,6 +1,5 @@
 import { unstable_data, unstable_defineLoader } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import { Image } from "@unpic/react";
 import { cacheHeader } from "pretty-cache-header";
 
 import { getMugshotURL } from "~/cloudinary.server";
@@ -8,10 +7,22 @@ import { FunHoverLink } from "~/components/fun-link-hover";
 import type { RouteHandle } from "~/types/handle";
 
 export const loader = unstable_defineLoader(() => {
-	let me = getMugshotURL({ resize: { height: 480, width: 480, type: "fill" } });
+	let srcSet = [240, 480, 720].map((size) => {
+		let url = getMugshotURL({
+			resize: { type: "fill", width: size, height: size },
+		});
+
+		return { url, size };
+	});
+
+	let me = srcSet.at(1);
+	if (me === undefined) throw new Error("Failed to get mugshot");
 
 	return unstable_data(
-		{ me: me.toString() },
+		{
+			me: { url: me.url.href, size: me.size },
+			srcSet: srcSet.map((x) => `${x.url} ${x.size}w`).join(", "),
+		},
 		{
 			headers: {
 				"Cache-Control": cacheHeader({
@@ -20,7 +31,7 @@ export const loader = unstable_defineLoader(() => {
 					staleWhileRevalidate: "2 hours",
 					sMaxage: "1 hour",
 				}),
-				Link: `<${me.origin}>; rel=preconnect`,
+				Link: `<${me.url.origin}>; rel=preconnect`,
 			},
 		},
 	);
@@ -36,15 +47,14 @@ export default function IndexPage() {
 	return (
 		<div className="mx-auto flex h-screen max-w-screen-md flex-col items-center justify-between px-4 text-center">
 			<div className="flex flex-1 flex-col items-center justify-center">
-				<Image
-					src={data.me}
-					layout="fixed"
-					cdn="cloudinary"
-					width={240}
-					height={240}
+				<img
+					width={data.me.size}
+					height={data.me.size}
 					alt=""
-					className="mx-auto rounded-full"
-					priority
+					className="mx-auto size-60 rounded-full"
+					fetchPriority="high"
+					src={data.me.url}
+					srcSet={data.srcSet}
 				/>
 				<h1 className="mt-4 text-4xl">Logan McAnsh</h1>
 				<p className="mt-2 max-w-xs text-center text-lg sm:text-xl md:max-w-sm">
