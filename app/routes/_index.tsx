@@ -7,12 +7,12 @@ import { FunHoverLink } from "~/components/fun-link-hover";
 import type { RouteHandle } from "~/types/handle";
 
 export const loader = unstable_defineLoader(() => {
-	let srcSet = [240, 480, 720].map((size) => {
+	let srcSet = [240, 480, 720].map((size, index) => {
 		let url = getMugshotURL({
 			resize: { type: "fill", width: size, height: size },
 		});
 
-		return { url, size };
+		return { url, size, density: index + 1 };
 	});
 
 	let me = srcSet.at(1);
@@ -21,7 +21,7 @@ export const loader = unstable_defineLoader(() => {
 	return unstable_data(
 		{
 			me: { url: me.url.href, size: me.size },
-			srcSet: srcSet.map((x) => `${x.url} ${x.size}w`).join(", "),
+			srcSet: srcSet.map((x) => `${x.url} ${x.density}x`).join(", "),
 		},
 		{
 			headers: {
