@@ -24,6 +24,8 @@ export const meta: MetaFunction = () => {
 	return [
 		{ title: "Logan McAnsh" },
 		{ name: "description", content: "personal website for Logan McAnsh" },
+		{ name: "apple-mobile-web-app-capable", content: "yes" },
+		{ name: "mobile-web-app-capable", content: "yes" },
 	];
 };
 
