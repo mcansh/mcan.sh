@@ -21,9 +21,8 @@
 	},
 	"dependencies": {
 		"@mcansh/http-helmet": "0.11.1",
-		"@mcansh/remix-fastify": "3.4.0",
+		"@mcansh/remix-fastify": "https://pkg.pr.new/@mcansh/remix-fastify@428",
 		"@react-router/node": "0.0.0-nightly-d1bb8941a-20240920",
-		"react-router": "0.0.0-nightly-d1bb8941a-20240920",
 		"address": "^2.0.3",
 		"cloudinary-build-url": "^0.2.4",
 		"clsx": "^2.1.1",
@@ -36,6 +35,7 @@
 		"pretty-cache-header": "^1.0.0",
 		"react": "19.0.0-rc-dfd30974ab-20240613",
 		"react-dom": "19.0.0-rc-dfd30974ab-20240613",
+		"react-router": "0.0.0-nightly-d1bb8941a-20240920",
 		"remix-utils": "7.7.0",
 		"tailwind-merge": "^2.5.2",
 		"zod": "^3.23.8"
