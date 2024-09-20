@@ -8,7 +8,7 @@
 	"sideEffects": false,
 	"type": "module",
 	"scripts": {
-		"build": "npm run typecheck && remix vite:build",
+		"build": "npm run typecheck && react-router build",
 		"clean": "./scripts/clean.js",
 		"typecheck": "node ./scripts/cli.js typecheck",
 		"lint": "node ./scripts/cli.js lint",
