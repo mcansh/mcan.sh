@@ -123,7 +123,7 @@ export const links: LinksFunction = () => {
 };
 
 export default function ResumePage() {
-	let data = useLoaderData() as ReturnType<typeof loader>;
+	let data = useLoaderData() as ReturnType<typeof loader>["data"];
 
 	let links = [
 		{

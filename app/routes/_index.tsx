@@ -41,7 +41,7 @@ export const handle: RouteHandle = {
 };
 
 export default function IndexPage() {
-	let data = useLoaderData() as ReturnType<typeof loader>;
+	let data = useLoaderData() as ReturnType<typeof loader>["data"];
 
 	return (
 		<div className="mx-auto flex h-screen max-w-screen-md flex-col items-center justify-between px-4 text-center">
