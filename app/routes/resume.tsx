@@ -1,16 +1,13 @@
-import { unstable_data, unstable_defineLoader } from "@remix-run/node";
-import type { LinksFunction } from "@remix-run/node";
-import type { MetaFunction } from "@remix-run/react";
-import { useLoaderData } from "@remix-run/react";
 import { cacheHeader } from "pretty-cache-header";
+import type { LinksFunction, MetaFunction } from "react-router";
+import { data, useLoaderData } from "react-router";
 import spriteHref from "virtual:@mcansh/vite-svg-sprite-plugin";
 
 import githubMarkIconHref from "~/assets/github-mark.svg";
 import linkedinIconHref from "~/assets/linkedin.svg";
-import type { RouteHandle } from "~/types/handle";
 
-export const loader = unstable_defineLoader(() => {
-	return unstable_data(
+export function loader() {
+	return data(
 		{
 			experience: [
 				{
@@ -110,7 +107,7 @@ export const loader = unstable_defineLoader(() => {
 			},
 		},
 	);
-});
+}
 
 export const meta: MetaFunction = () => {
 	return [
@@ -126,7 +123,7 @@ export const links: LinksFunction = () => {
 };
 
 export default function ResumePage() {
-	let data = useLoaderData<typeof loader>();
+	let data = useLoaderData() as ReturnType<typeof loader>;
 
 	let links = [
 		{

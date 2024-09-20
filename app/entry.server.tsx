@@ -2,17 +2,17 @@ import { PassThrough } from "node:stream";
 
 import { createSecureHeaders, mergeHeaders } from "@mcansh/http-helmet";
 import { NonceProvider, createNonce } from "@mcansh/http-helmet/react";
+import { createReadableStreamFromReadable } from "@react-router/node";
+import { isbot } from "isbot";
+import { renderToPipeableStream } from "react-dom/server";
 import type {
 	AppLoadContext,
 	EntryContext,
 	HandleDataRequestFunction,
-} from "@remix-run/node";
-import { createReadableStreamFromReadable } from "@remix-run/node";
-import { RemixServer } from "@remix-run/react";
-import { isbot } from "isbot";
-import { renderToPipeableStream } from "react-dom/server";
+} from "react-router";
+import { ServerRouter } from "react-router";
 import { isPrefetch } from "remix-utils/is-prefetch";
-import { preloadRouteAssets } from "remix-utils/preload-route-assets";
+// import { preloadRouteAssets } from "remix-utils/preload-route-assets";
 
 import { env } from "./env.server";
 
@@ -32,7 +32,7 @@ export default function handleRequest(
 		? "onAllReady"
 		: "onShellReady";
 
-	preloadRouteAssets(remixContext, responseHeaders);
+	// preloadRouteAssets(remixContext, responseHeaders);
 
 	let { nonce, headers } = applySecurityHeaders(request, responseHeaders);
 
@@ -40,7 +40,7 @@ export default function handleRequest(
 		let shellRendered = false;
 		let { pipe, abort } = renderToPipeableStream(
 			<NonceProvider nonce={nonce}>
-				<RemixServer
+				<ServerRouter
 					context={remixContext}
 					url={request.url}
 					abortDelay={ABORT_DELAY}

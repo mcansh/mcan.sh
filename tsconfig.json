@@ -23,12 +23,11 @@
 		"baseUrl": ".",
 		"paths": { "~/*": ["./app/*"] },
 		"types": [
-			"@remix-run/node",
+			"@react-router/node",
 			"vite/client",
 			"react/canary",
 			"react-dom/canary",
-			"@mcansh/vite-svg-sprite-plugin/client",
-			"@remix-run/react/future/single-fetch.d.ts"
+			"@mcansh/vite-svg-sprite-plugin/client"
 		],
 
 		/* strictness */

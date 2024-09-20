@@ -1,12 +1,11 @@
-import { unstable_data, unstable_defineLoader } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
 import { cacheHeader } from "pretty-cache-header";
+import { data, useLoaderData } from "react-router";
 
 import { getMugshotURL } from "~/cloudinary.server";
 import { FunHoverLink } from "~/components/fun-link-hover";
 import type { RouteHandle } from "~/types/handle";
 
-export const loader = unstable_defineLoader(() => {
+export function loader() {
 	let srcSet = [240, 480, 720].map((size, index) => {
 		let url = getMugshotURL({
 			resize: { type: "fill", width: size, height: size },
@@ -18,7 +17,7 @@ export const loader = unstable_defineLoader(() => {
 	let me = srcSet.at(1);
 	if (me === undefined) throw new Error("Failed to get mugshot");
 
-	return unstable_data(
+	return data(
 		{
 			me: { url: me.url.href, size: me.size },
 			srcSet: srcSet.map((x) => `${x.url} ${x.density}x`).join(", "),
@@ -35,14 +34,14 @@ export const loader = unstable_defineLoader(() => {
 			},
 		},
 	);
-});
+}
 
 export const handle: RouteHandle = {
 	bodyClassName: "h-full font-thin dark:bg-slate-900 dark:text-white",
 };
 
 export default function IndexPage() {
-	let data = useLoaderData<typeof loader>();
+	let data = useLoaderData() as ReturnType<typeof loader>;
 
 	return (
 		<div className="mx-auto flex h-screen max-w-screen-md flex-col items-center justify-between px-4 text-center">

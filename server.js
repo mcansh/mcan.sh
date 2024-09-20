@@ -1,9 +1,6 @@
 import { remixFastify } from "@mcansh/remix-fastify";
-import { installGlobals } from "@remix-run/node";
 import { ip as ipAddress } from "address";
 import { fastify } from "fastify";
-
-installGlobals({ nativeFetch: true });
 
 let app = fastify();
 

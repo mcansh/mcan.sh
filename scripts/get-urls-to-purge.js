@@ -1,7 +1,6 @@
 import fsp from "node:fs/promises";
 import path from "node:path";
 
-import { flatRoutesUniversal } from "@remix-run/dev/dist/config/flat-routes.js";
 import { glob } from "glob";
 import precinct from "precinct";
 import { simpleGit } from "simple-git";
@@ -12,9 +11,9 @@ let changedFiles = diff.files
 	.map((file) => file.file.replace(path.extname(file.file), ""));
 
 let files = await glob("app/**/*", { nodir: true });
-let routeFiles = await glob("app/routes/**/*", { nodir: true });
+// let routeFiles = await glob("app/routes/**/*", { nodir: true });
 
-let routeManifest = Object.values(flatRoutesUniversal("app", routeFiles));
+let routeManifest = Object.values({});
 
 let urls = new Set();
 

@@ -1,9 +1,9 @@
-import { unstable_defineLoader } from "@remix-run/server-runtime";
 import etag from "etag";
 import { chromium } from "playwright";
 import { cacheHeader } from "pretty-cache-header";
+import type { LoaderFunctionArgs } from "react-router";
 
-export const loader = unstable_defineLoader(async ({ request }) => {
+export async function loader({ request }: LoaderFunctionArgs) {
 	console.info(`regenerating resume.pdf`);
 	let url = new URL(request.url);
 	let resume_url = new URL("resume", url.origin);
@@ -44,4 +44,4 @@ export const loader = unstable_defineLoader(async ({ request }) => {
 			ETag: etagValue,
 		},
 	});
-});
+}
