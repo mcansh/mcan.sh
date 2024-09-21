@@ -4,7 +4,10 @@ import { fastify } from "fastify";
 
 let app = fastify();
 
-app.register(remixFastify, { mode: process.env.NODE_ENV });
+app.register(remixFastify, {
+	mode: process.env.NODE_ENV,
+	virtualModule: "virtual:react-router/server-build",
+});
 
 let port = Number(process.env.PORT) || 5173;
 let host = process.env.HOST || "localhost";

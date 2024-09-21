@@ -98,7 +98,7 @@ function applySecurityHeaders(request: Request, responseHeaders: Headers) {
 	let nonce = createNonce();
 	let securityHeaders = createSecureHeaders({
 		"Content-Security-Policy": {
-			upgradeInsecureRequests: process.env.NODE_ENV === "production",
+			// "upgrade-insecure-requests": process.env.NODE_ENV === "production",
 			"base-uri": ["'self'"],
 			"default-src": ["'self'"],
 			"img-src": [

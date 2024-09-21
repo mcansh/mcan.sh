@@ -41,19 +41,19 @@ export const handle: RouteHandle = {
 };
 
 export default function IndexPage() {
-	let data = useLoaderData() as ReturnType<typeof loader>["data"];
+	let data = useLoaderData() as ReturnType<typeof loader>;
 
 	return (
 		<div className="mx-auto flex h-screen max-w-screen-md flex-col items-center justify-between px-4 text-center">
 			<div className="flex flex-1 flex-col items-center justify-center">
 				<img
-					width={data.me.size}
-					height={data.me.size}
+					width={data.data.me.size}
+					height={data.data.me.size}
 					alt=""
 					className="mx-auto size-60 rounded-full"
 					fetchPriority="high"
-					src={data.me.url}
-					srcSet={data.srcSet}
+					src={data.data.me.url}
+					srcSet={data.data.srcSet}
 				/>
 				<h1 className="mt-4 text-4xl">Logan McAnsh</h1>
 				<p className="mt-2 max-w-xs text-center text-lg sm:text-xl md:max-w-sm">

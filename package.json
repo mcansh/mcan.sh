@@ -21,28 +21,30 @@
 	},
 	"dependencies": {
 		"@mcansh/http-helmet": "0.11.1",
-		"@mcansh/remix-fastify": "^3.4.0",
-		"@react-router/node": "0.0.0-nightly-d1bb8941a-20240920",
+		"@mcansh/remix-fastify": "https://pkg.pr.new/@mcansh/remix-fastify@b5a1ad1",
+		"@react-router/node": "0.0.0-nightly-242035412-20240921",
 		"address": "^2.0.3",
+		"change-case": "^5.4.4",
 		"cloudinary-build-url": "^0.2.4",
 		"clsx": "^2.1.1",
 		"cross-env": "^7.0.3",
 		"etag": "^1.8.1",
-		"fastify": "^4.28.1",
+		"fastify": "^5.0.0",
 		"fathom-client": "^3.7.2",
 		"isbot": "^5.1.17",
-		"playwright": "^1.47.1",
+		"playwright": "^1.47.2",
 		"pretty-cache-header": "^1.0.0",
-		"react": "19.0.0-rc-dfd30974ab-20240613",
-		"react-dom": "19.0.0-rc-dfd30974ab-20240613",
-		"react-router": "0.0.0-nightly-d1bb8941a-20240920",
+		"react": "19.0.0-rc-e4953922-20240919",
+		"react-dom": "19.0.0-rc-e4953922-20240919",
+		"react-router": "0.0.0-nightly-242035412-20240921",
+		"react-router-dom": "0.0.0-nightly-242035412-20240921",
 		"tailwind-merge": "^2.5.2",
 		"zod": "^3.23.8"
 	},
 	"devDependencies": {
 		"@cld-apis/types": "^0.1.6",
 		"@mcansh/vite-svg-sprite-plugin": "0.4.2",
-		"@react-router/dev": "0.0.0-nightly-d1bb8941a-20240920",
+		"@react-router/dev": "0.0.0-nightly-242035412-20240921",
 		"@types/etag": "^1.8.3",
 		"@types/react": "npm:types-react@19.0.0-rc.1",
 		"@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
@@ -73,7 +75,7 @@
 		"tailwindcss": "^3.4.12",
 		"tailwindcss-padding-safe": "^1.0.6",
 		"typescript": "^5.6.2",
-		"vite": "5.4.6",
+		"vite": "5.4.7",
 		"vite-tsconfig-paths": "^5.0.1"
 	},
 	"pnpm": {
@@ -85,7 +87,7 @@
 			"react": "$react",
 			"react-dom": "$react-dom",
 			"react-router": "$react-router",
-			"react-router-dom": "$react-router"
+			"react-router-dom": "$react-router-dom"
 		}
 	},
 	"engines": {
