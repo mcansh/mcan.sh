@@ -5,10 +5,14 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  '@types/react': npm:types-react@19.0.0-alpha.3
-  '@types/react-dom': npm:types-react-dom@19.0.0-alpha.3
+  '@react-router/node': 0.0.0-nightly-d1bb8941a-20240920
+  '@react-router/dev': 0.0.0-nightly-d1bb8941a-20240920
+  '@types/react': npm:types-react@19.0.0-rc.1
+  '@types/react-dom': npm:types-react-dom@19.0.0-rc.1
   react: 19.0.0-rc-dfd30974ab-20240613
   react-dom: 19.0.0-rc-dfd30974ab-20240613
+  react-router: 0.0.0-nightly-d1bb8941a-20240920
+  react-router-dom: 0.0.0-nightly-d1bb8941a-20240920
 
 importers:
 
@@ -18,8 +22,8 @@ importers:
         specifier: 0.11.1
         version: 0.11.1(react-dom@19.0.0-rc-dfd30974ab-20240613(react@19.0.0-rc-dfd30974ab-20240613))(react@19.0.0-rc-dfd30974ab-20240613)
       '@mcansh/remix-fastify':
-        specifier: https://pkg.pr.new/@mcansh/remix-fastify@428
-        version: https://pkg.pr.new/@mcansh/remix-fastify@428(@remix-run/node@2.11.2(typescript@5.6.2))(fastify@5.0.0)(vite@5.4.6(@types/node@20.12.7)(lightningcss@1.27.0))
+        specifier: ^3.4.0
+        version: https://pkg.pr.new/@mcansh/remix-fastify@428(@remix-run/node@2.11.2(typescript@5.6.2))(fastify@4.28.1)(vite@5.4.6(@types/node@20.12.7)(lightningcss@1.27.0))
       '@react-router/node':
         specifier: 0.0.0-nightly-d1bb8941a-20240920
         version: 0.0.0-nightly-d1bb8941a-20240920(react-router@0.0.0-nightly-d1bb8941a-20240920(react-dom@19.0.0-rc-dfd30974ab-20240613(react@19.0.0-rc-dfd30974ab-20240613))(react@19.0.0-rc-dfd30974ab-20240613))(typescript@5.6.2)
@@ -39,8 +43,8 @@ importers:
         specifier: ^1.8.1
         version: 1.8.1
       fastify:
-        specifier: ^5.0.0
-        version: 5.0.0
+        specifier: ^4.28.1
+        version: 4.28.1
       fathom-client:
         specifier: ^3.7.2
         version: 3.7.2
@@ -62,9 +66,6 @@ importers:
       react-router:
         specifier: 0.0.0-nightly-d1bb8941a-20240920
         version: 0.0.0-nightly-d1bb8941a-20240920(react-dom@19.0.0-rc-dfd30974ab-20240613(react@19.0.0-rc-dfd30974ab-20240613))(react@19.0.0-rc-dfd30974ab-20240613)
-      remix-utils:
-        specifier: 7.7.0
-        version: 7.7.0(@remix-run/node@2.11.2(typescript@5.6.2))(@remix-run/react@2.11.2(react-dom@19.0.0-rc-dfd30974ab-20240613(react@19.0.0-rc-dfd30974ab-20240613))(react@19.0.0-rc-dfd30974ab-20240613)(typescript@5.6.2))(@remix-run/router@1.19.1)(react@19.0.0-rc-dfd30974ab-20240613)(zod@3.23.8)
       tailwind-merge:
         specifier: ^2.5.2
         version: 2.5.2
@@ -85,11 +86,11 @@ importers:
         specifier: ^1.8.3
         version: 1.8.3
       '@types/react':
-        specifier: npm:types-react@19.0.0-alpha.3
-        version: types-react@19.0.0-alpha.3
+        specifier: npm:types-react@19.0.0-rc.1
+        version: types-react@19.0.0-rc.1
       '@types/react-dom':
-        specifier: npm:types-react-dom@19.0.0-alpha.3
-        version: types-react-dom@19.0.0-alpha.3
+        specifier: npm:types-react-dom@19.0.0-rc.1
+        version: types-react-dom@19.0.0-rc.1
       '@typescript-eslint/eslint-plugin':
         specifier: ^8.6.0
         version: 8.6.0(@typescript-eslint/parser@8.6.0(eslint@8.57.0)(typescript@5.6.2))(eslint@8.57.0)(typescript@5.6.2)
@@ -537,14 +538,17 @@ packages:
   '@fastify/accept-negotiator@2.0.0':
     resolution: {integrity: sha512-/Sce/kBzuTxIq5tJh85nVNOq9wKD8s+viIgX0fFMDBdw95gnpf53qmF1oBgJym3cPFliWUuSloVg/1w/rH0FcQ==}
 
-  '@fastify/ajv-compiler@4.0.0':
-    resolution: {integrity: sha512-dt0jyLAlay14LpIn4Fg1SY7V5NJ9KH0YFDpYVQY5cgIVBvdI8908AMx5zQ0bBYPGT6Wh+bM3f2caMmOXLP3QsQ==}
+  '@fastify/ajv-compiler@3.6.0':
+    resolution: {integrity: sha512-LwdXQJjmMD+GwLOkP7TVC68qa+pSSogeWWmznRJ/coyTcfe9qA05AHFSe1eZFwK6q+xVRpChnvFUkf1iYaSZsQ==}
+
+  '@fastify/error@3.4.1':
+    resolution: {integrity: sha512-wWSvph+29GR783IhmvdwWnN4bUxTD01Vm5Xad4i7i1VuAOItLvbPAb69sb0IQ2N57yprvhNIwAP5B6xfKTmjmQ==}
 
   '@fastify/error@4.0.0':
     resolution: {integrity: sha512-OO/SA8As24JtT1usTUTKgGH7uLvhfwZPwlptRi2Dp5P4KKmJI3gvsZ8MIHnNwDs4sLf/aai5LzTyl66xr7qMxA==}
 
-  '@fastify/fast-json-stringify-compiler@5.0.0':
-    resolution: {integrity: sha512-tywfuZfXsyxLC5kEqrMubbFa9vpAxNtuPE7j9w5si1r+6p5b981pDfZ5Y8HBqmjDQl+PABT7cV5jZgXI2j+I5g==}
+  '@fastify/fast-json-stringify-compiler@4.3.0':
+    resolution: {integrity: sha512-aZAXGYo6m22Fk1zZzEUKBvut/CIIQe/BapEORnxiD5Qr0kPHqqI69NtEMCme74h+at72sPhbkb4ZrLd1W3KRLA==}
 
   '@fastify/merge-json-schemas@0.1.1':
     resolution: {integrity: sha512-fERDVz7topgNjtXsJTTW1JKLy0rhuLRcquYqNR9rF7OcVpCa2OVW49ZPDIhaRRCaUuvVxI+N416xUoF76HNSXA==}
@@ -670,7 +674,7 @@ packages:
     hasBin: true
     peerDependencies:
       '@react-router/serve': ^0.0.0-nightly-d1bb8941a-20240920
-      react-router: ^0.0.0-nightly-d1bb8941a-20240920
+      react-router: 0.0.0-nightly-d1bb8941a-20240920
       typescript: ^5.1.0
       vite: ^5.1.0
       wrangler: ^3.28.2
@@ -696,17 +700,6 @@ packages:
     resolution: {integrity: sha512-gRNFM61EOYWNmYgf+pvBt6MrirWlkDz1G6RQsJNowtRqbYoy05AdDe5HiHGF5w8ZMAZVeXnZiwbL0Nt7ykYBCA==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
-      typescript: ^5.1.0
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-
-  '@remix-run/react@2.11.2':
-    resolution: {integrity: sha512-SjjuK3aD/9wnIC5r0ZBNCpVSwEwt67YOQM7DCXhHiS8BtCvAxWEC4k4t8CvO9IwBG0gczqxzSqASH7U1RVtWqw==}
-    engines: {node: '>=18.0.0'}
-    peerDependencies:
-      react: 19.0.0-rc-dfd30974ab-20240613
-      react-dom: 19.0.0-rc-dfd30974ab-20240613
       typescript: ^5.1.0
     peerDependenciesMeta:
       typescript:
@@ -996,6 +989,14 @@ packages:
     resolution: {integrity: sha512-0poP0T7el6Vq3rstR8Mn4V/IQrpBLO6POkUSrN7RhyY+GF/InCFShQzsQ39T25gkHhLgSLByyAz+Kjb+c2L98w==}
     engines: {node: '>=12'}
 
+  ajv-formats@2.1.1:
+    resolution: {integrity: sha512-Wx0Kx52hxE7C18hkMEggYlEifqWZtYaRgouJor+WMdPnQyEK13vgEWyVNup7SoeeoLMsr4kf5h6dOW11I15MUA==}
+    peerDependencies:
+      ajv: ^8.0.0
+    peerDependenciesMeta:
+      ajv:
+        optional: true
+
   ajv-formats@3.0.1:
     resolution: {integrity: sha512-8iUql50EUR+uUcdRQ3HDqa6EVyo3docL8g5WJ3FNcWmu62IbkGUue/pEyLBW8VGKKucTPgqeks4fIU1DA4yowQ==}
     peerDependencies:
@@ -1094,8 +1095,8 @@ packages:
     resolution: {integrity: sha512-wvUjBtSGN7+7SjNpq/9M2Tg350UZD3q62IFZLbRAR1bSMlCo1ZaeW+BJ+D090e4hIIZLBcTDWe4Mh4jvUDajzQ==}
     engines: {node: '>= 0.4'}
 
-  avvio@9.0.0:
-    resolution: {integrity: sha512-UbYrOXgE/I+knFG+3kJr9AgC7uNo8DG+FGGODpH9Bj1O1kL/QDjBXnTem9leD3VdQKtaHjV3O85DQ7hHh4IIHw==}
+  avvio@8.4.0:
+    resolution: {integrity: sha512-CDSwaxINFy59iNwhYnkvALBwZiTydGkOecZyPkqBpABYR1KqGEsET0VOOYDwtleZSUIdeY36DC2bSZ24CO1igA==}
 
   axios@0.24.0:
     resolution: {integrity: sha512-Q6cWsys88HoPgAaFAVUb0WpPk0O8iTeisR9IMqy9G8AbO4NlpVknrnQS03zzF9PGAWgO3cgletO3VjV/P7VztA==}
@@ -1752,6 +1753,9 @@ packages:
     resolution: {integrity: sha512-eNTPlAD67BmP31LDINZ3U7HSF8l57TxOY2PmBJ1shpCvpnxBF93mWCE8YHBnXs8qiUZJc9WDcWIeC3a2HIAMfw==}
     engines: {node: '>=6'}
 
+  fast-content-type-parse@1.1.0:
+    resolution: {integrity: sha512-fBHHqSTFLVnR61C+gltJuE5GkVQMV0S2nqUO8TJ+5Z3qAKG8vAx4FKai1s5jq/inV1+sREynIWSuQ6HgoSXpDQ==}
+
   fast-decode-uri-component@1.0.1:
     resolution: {integrity: sha512-WKgKWg5eUxvRZGwW8FvfbaH7AXSh2cL+3j5fMGzUMCxWBJ3dV3a7Wz8y2f/uQ0e3B6WmodD3oS54jTQ9HVTIIg==}
 
@@ -1765,8 +1769,8 @@ packages:
   fast-json-stable-stringify@2.1.0:
     resolution: {integrity: sha512-lhd/wF+Lk98HZoTCtlVraHtfh5XYijIjalXck7saUtuanSDyLMxnHhSXEDJqHxD7msR8D0uCmqlkwjCV8xvwHw==}
 
-  fast-json-stringify@6.0.0:
-    resolution: {integrity: sha512-FGMKZwniMTgZh7zQp9b6XnBVxUmKVahQLQeRQHqwYmPDqDhcEKZ3BaQsxelFFI5PY7nN71OEeiL47/zUWcYe1A==}
+  fast-json-stringify@5.16.1:
+    resolution: {integrity: sha512-KAdnLvy1yu/XrRtP+LJnxbBGrhN+xXu+gt3EUvZhYGKCr3lFHq/7UFJHHFgmJKoqlh6B40bZLEv7w46B0mqn1g==}
 
   fast-levenshtein@2.0.6:
     resolution: {integrity: sha512-DCXu6Ifhqcks7TZKY3Hxp3y6qphY5SJZmrWMDrKcERSOXWQdMhU9Ig/PYrzyw/ul9jOIyh0N4M0tbC5hodg8dw==}
@@ -1781,14 +1785,11 @@ packages:
   fast-uri@2.3.0:
     resolution: {integrity: sha512-eel5UKGn369gGEWOqBShmFJWfq/xSJvsgDzgLYC845GneayWvXBf0lJCBn5qTABfewy1ZDPoaR5OZCP+kssfuw==}
 
-  fast-uri@3.0.1:
-    resolution: {integrity: sha512-MWipKbbYiYI0UC7cl8m/i/IWTqfC8YXsqjzybjddLsFjStroQzsHXkc73JutMvBiXmOvapk+axIl79ig5t55Bw==}
-
   fastify-plugin@5.0.0:
     resolution: {integrity: sha512-0725fmH/yYi8ugsjszLci+lLnGBK6cG+WSxM7edY2OXJEU7gr2JiGBoieL2h9mhTych1vFsEfXsAsGGDJ/Rd5w==}
 
-  fastify@5.0.0:
-    resolution: {integrity: sha512-Qe4dU+zGOzg7vXjw4EvcuyIbNnMwTmcuOhlOrOJsgwzvjEZmsM/IeHulgJk+r46STjdJS/ZJbxO8N70ODXDMEQ==}
+  fastify@4.28.1:
+    resolution: {integrity: sha512-kFWUtpNr4i7t5vY2EJPCN2KgMVpuqfU4NjnJNCgiNB900oiDeYqaNDRcAfeBbOF5hGixixxcKnOU4KN9z6QncQ==}
 
   fastq@1.17.1:
     resolution: {integrity: sha512-sRVD3lWVIXWg6By68ZN7vho9a1pQcN/WBFaAAsDDFzlJjvoGx0P8z7V1t72grFJfJhu3YPZBuu25f7Kaw2jN1w==}
@@ -1804,8 +1805,8 @@ packages:
     resolution: {integrity: sha512-YsGpe3WHLK8ZYi4tWDg2Jy3ebRz2rXowDxnld4bkQB00cc/1Zw9AWnC0i9ztDJitivtQvaI9KaLyKrc+hBW0yg==}
     engines: {node: '>=8'}
 
-  find-my-way@9.0.1:
-    resolution: {integrity: sha512-/5NN/R0pFWuff16TMajeKt2JyiW+/OE8nOO8vo1DwZTxLaIURb7lcBYPIgRPh61yCNh9l8voeKwcrkUzmB00vw==}
+  find-my-way@8.2.2:
+    resolution: {integrity: sha512-Dobi7gcTEq8yszimcfp/R7+owiT4WncAJ7VTTgFH1jYJ5GaG1FbhjwDG820hptN0QDFvzVY3RfCzdInvGPGzjA==}
     engines: {node: '>=14'}
 
   find-up@4.1.0:
@@ -2321,8 +2322,8 @@ packages:
     resolution: {integrity: sha512-+bT2uH4E5LGE7h/n3evcS/sQlJXCpIp6ym8OWJ5eV6+67Dsql/LaaT7qJBAt2rzfoa/5QBGBhxDix1dMt2kQKQ==}
     engines: {node: '>= 0.8.0'}
 
-  light-my-request@6.0.0:
-    resolution: {integrity: sha512-kFkFXrmKCL0EEeOmJybMH5amWFd+AFvlvMlvFTRxCUwbhfapZqDmeLMPoWihntnYY6JpoQDE9k+vOzObF1fDqg==}
+  light-my-request@5.13.0:
+    resolution: {integrity: sha512-9IjUN9ZyCS9pTG+KqTDEQo68Sui2lHsYBrfMyVUTTZ3XhH8PMZq7xO94Kr+eP9dhi/kcKsx4N41p2IXEBil1pQ==}
 
   lightningcss-darwin-arm64@1.27.0:
     resolution: {integrity: sha512-Gl/lqIXY+d+ySmMbgDf0pgaWSqrWYxVHoc88q+Vhf2YNzZ8DwoRzGt5NZDVqqIW5ScpSnmmjcgXP87Dn2ylSSQ==}
@@ -2967,9 +2968,6 @@ packages:
   process-warning@3.0.0:
     resolution: {integrity: sha512-mqn0kFRl0EoqhnL0GQ0veqFHyIN1yig9RHh/InzORTUiZHFRAur+aMtRkELNwGs9aNwKS6tg/An4NYBPGwvtzQ==}
 
-  process-warning@4.0.0:
-    resolution: {integrity: sha512-/MyYDxttz7DfGMMHiysAsFE4qF+pQYAA8ziO/3NcRVrQ5fSk+Mns4QZA/oRPFzvcqNoVJXQNWNAsdwBXLUkQKw==}
-
   process@0.11.10:
     resolution: {integrity: sha512-cdGef/drWFoydD1JsMzuFf8100nZl+GT+yacc2bEced5f9Rjk4z+WtFUTBu9PhOi9j/jfmBPu0mMEY4wIdAF8A==}
     engines: {node: '>= 0.6.0'}
@@ -3022,13 +3020,6 @@ packages:
     resolution: {integrity: sha512-wViHqhAd8OHeLS/IRMJjTSDHF3U9eWi62F/MledQGPdJGDhodXJ9PBLNGr6WWL7qlH12Mt3TyTpbS+hGXMjCzQ==}
     engines: {node: '>=0.10.0'}
 
-  react-router-dom@6.26.1:
-    resolution: {integrity: sha512-veut7m41S1fLql4pLhxeSW3jlqs+4MtjRLj0xvuCEXsxusJCbs6I8yn9BxzzDX2XDgafrccY6hwjmd/bL54tFw==}
-    engines: {node: '>=14.0.0'}
-    peerDependencies:
-      react: 19.0.0-rc-dfd30974ab-20240613
-      react-dom: 19.0.0-rc-dfd30974ab-20240613
-
   react-router@0.0.0-nightly-d1bb8941a-20240920:
     resolution: {integrity: sha512-5LQiwlXiKX7mKClIBRuD3Li+murkmwXBgtE1z3EiG9v/w9So45iQBds6ZtKFIqdoc+YzMtsN1LCdbV8+Vt8clQ==}
     engines: {node: '>=18.0.0'}
@@ -3038,12 +3029,6 @@ packages:
     peerDependenciesMeta:
       react-dom:
         optional: true
-
-  react-router@6.26.1:
-    resolution: {integrity: sha512-kIwJveZNwp7teQRI5QmwWo39A5bXRyqpH0COKKmPnyD2vBvDwgFXSqDUYtt1h+FEyfnE8eXr7oe0MxRzVwCcvQ==}
-    engines: {node: '>=14.0.0'}
-    peerDependencies:
-      react: 19.0.0-rc-dfd30974ab-20240613
 
   react@19.0.0-rc-dfd30974ab-20240613:
     resolution: {integrity: sha512-3Qj7oDBSsImcwuHwRHOqpp58P0JNn72/SxXqKj+HYnKj1PnoPXXsaeO9Xv9Rz4yT6B6IpteWra2guN6l5r8P4A==}
@@ -3086,39 +3071,6 @@ packages:
     resolution: {integrity: sha512-NcDiDkTLuPR+++OCKB0nWafEmhg/Da8aUPLPMQbK+bxKKCm1/S5he+AqYa4PlMCVBalb4/yxIRub6qkEx5yJbw==}
     engines: {node: '>= 0.4'}
 
-  remix-utils@7.7.0:
-    resolution: {integrity: sha512-J8NhP044nrNIam/xOT1L9a4RQ9FSaA2wyrUwmN8ZT+c/+CdAAf70yfaLnvMyKcV5U+8BcURQ/aVbth77sT6jGA==}
-    engines: {node: '>=18.0.0'}
-    peerDependencies:
-      '@remix-run/cloudflare': ^2.0.0
-      '@remix-run/node': ^2.0.0
-      '@remix-run/react': ^2.0.0
-      '@remix-run/router': ^1.7.2
-      crypto-js: ^4.1.1
-      intl-parse-accept-language: ^1.0.0
-      is-ip: ^5.0.1
-      react: 19.0.0-rc-dfd30974ab-20240613
-      zod: ^3.22.4
-    peerDependenciesMeta:
-      '@remix-run/cloudflare':
-        optional: true
-      '@remix-run/node':
-        optional: true
-      '@remix-run/react':
-        optional: true
-      '@remix-run/router':
-        optional: true
-      crypto-js:
-        optional: true
-      intl-parse-accept-language:
-        optional: true
-      is-ip:
-        optional: true
-      react:
-        optional: true
-      zod:
-        optional: true
-
   require-directory@2.1.1:
     resolution: {integrity: sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==}
     engines: {node: '>=0.10.0'}
@@ -3146,8 +3098,8 @@ packages:
     resolution: {integrity: sha512-oMA2dcrw6u0YfxJQXm342bFKX/E4sG9rbTzO9ptUcR/e8A33cHuvStiYOwH7fszkZlZ1z/ta9AAoPk2F4qIOHA==}
     engines: {node: '>=18'}
 
-  ret@0.5.0:
-    resolution: {integrity: sha512-I1XxrZSQ+oErkRR4jYbAyEEu2I0avBvvMM5JN+6EBprOGRCs63ENqZ3vjavq8fBw2+62G5LF5XelKwuJpcvcxw==}
+  ret@0.4.3:
+    resolution: {integrity: sha512-0f4Memo5QP7WQyUEAYUO3esD/XjOc3Zjjg5CPsAq1p8sIu0XPeMbHJemKA0BO7tV0X7+A0FoEpbmHXWxPyD3wQ==}
     engines: {node: '>=10'}
 
   retry@0.12.0:
@@ -3205,8 +3157,8 @@ packages:
     resolution: {integrity: sha512-CdASjNJPvRa7roO6Ra/gLYBTzYzzPyyBXxIMdGW3USQLyjWEls2RgW5UBTXaQVp+OrpeCK3bLem8smtmheoRuw==}
     engines: {node: '>= 0.4'}
 
-  safe-regex2@4.0.0:
-    resolution: {integrity: sha512-Hvjfv25jPDVr3U+4LDzBuZPPOymELG3PYcSk5hcevooo1yxxamQL/bHs/GrEPGmMoMEwRrHVGiCA1pXi97B8Ew==}
+  safe-regex2@3.1.0:
+    resolution: {integrity: sha512-RAAZAGbap2kBfbVhvmnTFv73NWLMvDGOITFYTZBAaY8eR+Ir4ef7Up/e7amo+y1+AH+3PtLkrt9mvcTsG9LXug==}
 
   safe-stable-stringify@2.4.3:
     resolution: {integrity: sha512-e2bDA2WJT0wxseVd4lsDP4+3ONX6HpMXQa1ZhFQ7SU+GjvORCmShbCMltrtIDfkYhVHrOcPtj+KhmDBdPdZD1g==}
@@ -3570,11 +3522,11 @@ packages:
     resolution: {integrity: sha512-/OxDN6OtAk5KBpGb28T+HZc2M+ADtvRxXrKKbUwtsLgdoxgX13hyy7ek6bFRl5+aBs2yZzB0c4CnQfAtVypW/g==}
     engines: {node: '>= 0.4'}
 
-  types-react-dom@19.0.0-alpha.3:
-    resolution: {integrity: sha512-foCg3VSAoTLKBpU6FKgtHjOzqZVo7UVXfG/JnKM8imXq/+TvSGebj+KJlAVG6H1n+hiQtqpjHc+hk5FmZOJCqw==}
+  types-react-dom@19.0.0-rc.1:
+    resolution: {integrity: sha512-VSLZJl8VXCD0fAWp7DUTFUDCcZ8DVXOQmjhJMD03odgeFmu14ZQJHCXeETm3BEAhJqfgJaFkLnGkQv88sRx0fQ==}
 
-  types-react@19.0.0-alpha.3:
-    resolution: {integrity: sha512-u7IEgvEgACYFDGtaqBgh5tqtYxkfPgtE7sl3RjfsT4QTpRM9FADXoWomFYZVi55Upii3LUcaZYrKFyHqUTHpew==}
+  types-react@19.0.0-rc.1:
+    resolution: {integrity: sha512-RshndUfqTW6K3STLPis8BtAYCGOkMbtvYsi90gmVNDZBXUyUc5juf2PE9LfS/JmOlUIRO8cWTS/1MTnmhjDqyQ==}
 
   typescript@5.6.2:
     resolution: {integrity: sha512-NW8ByodCSNCwZeghjN3o+JX5OFH0Ojg6sadjEKY4huZ52TqbJTJnDo5+Tw98lSy63NZvi4n+ez5m2u5d4PkZyw==}
@@ -4108,17 +4060,19 @@ snapshots:
 
   '@fastify/accept-negotiator@2.0.0': {}
 
-  '@fastify/ajv-compiler@4.0.0':
+  '@fastify/ajv-compiler@3.6.0':
     dependencies:
       ajv: 8.12.0
-      ajv-formats: 3.0.1(ajv@8.12.0)
-      fast-uri: 3.0.1
+      ajv-formats: 2.1.1(ajv@8.12.0)
+      fast-uri: 2.3.0
+
+  '@fastify/error@3.4.1': {}
 
   '@fastify/error@4.0.0': {}
 
-  '@fastify/fast-json-stringify-compiler@5.0.0':
+  '@fastify/fast-json-stringify-compiler@4.3.0':
     dependencies:
-      fast-json-stringify: 6.0.0
+      fast-json-stringify: 5.16.1
 
   '@fastify/merge-json-schemas@0.1.1':
     dependencies:
@@ -4203,12 +4157,12 @@ snapshots:
       react: 19.0.0-rc-dfd30974ab-20240613
       react-dom: 19.0.0-rc-dfd30974ab-20240613(react@19.0.0-rc-dfd30974ab-20240613)
 
-  '@mcansh/remix-fastify@https://pkg.pr.new/@mcansh/remix-fastify@428(@remix-run/node@2.11.2(typescript@5.6.2))(fastify@5.0.0)(vite@5.4.6(@types/node@20.12.7)(lightningcss@1.27.0))':
+  '@mcansh/remix-fastify@https://pkg.pr.new/@mcansh/remix-fastify@428(@remix-run/node@2.11.2(typescript@5.6.2))(fastify@4.28.1)(vite@5.4.6(@types/node@20.12.7)(lightningcss@1.27.0))':
     dependencies:
       '@fastify/middie': 9.0.1
       '@fastify/static': 8.0.0
       '@remix-run/node': 2.11.2(typescript@5.6.2)
-      fastify: 5.0.0
+      fastify: 4.28.1
       fastify-plugin: 5.0.0
       pretty-cache-header: 1.0.0
     optionalDependencies:
@@ -4336,19 +4290,6 @@ snapshots:
       undici: 6.19.8
     optionalDependencies:
       typescript: 5.6.2
-
-  '@remix-run/react@2.11.2(react-dom@19.0.0-rc-dfd30974ab-20240613(react@19.0.0-rc-dfd30974ab-20240613))(react@19.0.0-rc-dfd30974ab-20240613)(typescript@5.6.2)':
-    dependencies:
-      '@remix-run/router': 1.19.1
-      '@remix-run/server-runtime': 2.11.2(typescript@5.6.2)
-      react: 19.0.0-rc-dfd30974ab-20240613
-      react-dom: 19.0.0-rc-dfd30974ab-20240613(react@19.0.0-rc-dfd30974ab-20240613)
-      react-router: 6.26.1(react@19.0.0-rc-dfd30974ab-20240613)
-      react-router-dom: 6.26.1(react-dom@19.0.0-rc-dfd30974ab-20240613(react@19.0.0-rc-dfd30974ab-20240613))(react@19.0.0-rc-dfd30974ab-20240613)
-      turbo-stream: 2.3.0
-    optionalDependencies:
-      typescript: 5.6.2
-    optional: true
 
   '@remix-run/router@1.19.1': {}
 
@@ -4646,6 +4587,10 @@ snapshots:
       clean-stack: 4.2.0
       indent-string: 5.0.0
 
+  ajv-formats@2.1.1(ajv@8.12.0):
+    optionalDependencies:
+      ajv: 8.12.0
+
   ajv-formats@3.0.1(ajv@8.12.0):
     optionalDependencies:
       ajv: 8.12.0
@@ -4761,9 +4706,9 @@ snapshots:
     dependencies:
       possible-typed-array-names: 1.0.0
 
-  avvio@9.0.0:
+  avvio@8.4.0:
     dependencies:
-      '@fastify/error': 4.0.0
+      '@fastify/error': 3.4.1
       fastq: 1.17.1
 
   axios@0.24.0:
@@ -5559,6 +5504,8 @@ snapshots:
 
   exit-hook@2.2.1: {}
 
+  fast-content-type-parse@1.1.0: {}
+
   fast-decode-uri-component@1.0.1: {}
 
   fast-deep-equal@3.1.3: {}
@@ -5573,7 +5520,7 @@ snapshots:
 
   fast-json-stable-stringify@2.1.0: {}
 
-  fast-json-stringify@6.0.0:
+  fast-json-stringify@5.16.1:
     dependencies:
       '@fastify/merge-json-schemas': 0.1.1
       ajv: 8.12.0
@@ -5593,26 +5540,25 @@ snapshots:
 
   fast-uri@2.3.0: {}
 
-  fast-uri@3.0.1: {}
-
   fastify-plugin@5.0.0: {}
 
-  fastify@5.0.0:
+  fastify@4.28.1:
     dependencies:
-      '@fastify/ajv-compiler': 4.0.0
-      '@fastify/error': 4.0.0
-      '@fastify/fast-json-stringify-compiler': 5.0.0
+      '@fastify/ajv-compiler': 3.6.0
+      '@fastify/error': 3.4.1
+      '@fastify/fast-json-stringify-compiler': 4.3.0
       abstract-logging: 2.0.1
-      avvio: 9.0.0
-      fast-json-stringify: 6.0.0
-      find-my-way: 9.0.1
-      light-my-request: 6.0.0
+      avvio: 8.4.0
+      fast-content-type-parse: 1.1.0
+      fast-json-stringify: 5.16.1
+      find-my-way: 8.2.2
+      light-my-request: 5.13.0
       pino: 9.1.0
-      process-warning: 4.0.0
+      process-warning: 3.0.0
       proxy-addr: 2.0.7
       rfdc: 1.4.1
       secure-json-parse: 2.7.0
-      semver: 7.6.0
+      semver: 7.6.3
       toad-cache: 3.7.0
 
   fastq@1.17.1:
@@ -5629,11 +5575,11 @@ snapshots:
     dependencies:
       to-regex-range: 5.0.1
 
-  find-my-way@9.0.1:
+  find-my-way@8.2.2:
     dependencies:
       fast-deep-equal: 3.1.3
       fast-querystring: 1.1.2
-      safe-regex2: 4.0.0
+      safe-regex2: 3.1.0
 
   find-up@4.1.0:
     dependencies:
@@ -6138,10 +6084,10 @@ snapshots:
       prelude-ls: 1.2.1
       type-check: 0.4.0
 
-  light-my-request@6.0.0:
+  light-my-request@5.13.0:
     dependencies:
       cookie: 0.6.0
-      process-warning: 4.0.0
+      process-warning: 3.0.0
       set-cookie-parser: 2.6.0
 
   lightningcss-darwin-arm64@1.27.0:
@@ -6705,8 +6651,6 @@ snapshots:
 
   process-warning@3.0.0: {}
 
-  process-warning@4.0.0: {}
-
   process@0.11.10: {}
 
   promise-inflight@1.0.1: {}
@@ -6749,14 +6693,6 @@ snapshots:
 
   react-refresh@0.14.0: {}
 
-  react-router-dom@6.26.1(react-dom@19.0.0-rc-dfd30974ab-20240613(react@19.0.0-rc-dfd30974ab-20240613))(react@19.0.0-rc-dfd30974ab-20240613):
-    dependencies:
-      '@remix-run/router': 1.19.1
-      react: 19.0.0-rc-dfd30974ab-20240613
-      react-dom: 19.0.0-rc-dfd30974ab-20240613(react@19.0.0-rc-dfd30974ab-20240613)
-      react-router: 6.26.1(react@19.0.0-rc-dfd30974ab-20240613)
-    optional: true
-
   react-router@0.0.0-nightly-d1bb8941a-20240920(react-dom@19.0.0-rc-dfd30974ab-20240613(react@19.0.0-rc-dfd30974ab-20240613))(react@19.0.0-rc-dfd30974ab-20240613):
     dependencies:
       '@types/cookie': 0.6.0
@@ -6768,12 +6704,6 @@ snapshots:
       turbo-stream: 2.4.0
     optionalDependencies:
       react-dom: 19.0.0-rc-dfd30974ab-20240613(react@19.0.0-rc-dfd30974ab-20240613)
-
-  react-router@6.26.1(react@19.0.0-rc-dfd30974ab-20240613):
-    dependencies:
-      '@remix-run/router': 1.19.1
-      react: 19.0.0-rc-dfd30974ab-20240613
-    optional: true
 
   react@19.0.0-rc-dfd30974ab-20240613: {}
 
@@ -6833,16 +6763,6 @@ snapshots:
       es-errors: 1.3.0
       set-function-name: 2.0.2
 
-  remix-utils@7.7.0(@remix-run/node@2.11.2(typescript@5.6.2))(@remix-run/react@2.11.2(react-dom@19.0.0-rc-dfd30974ab-20240613(react@19.0.0-rc-dfd30974ab-20240613))(react@19.0.0-rc-dfd30974ab-20240613)(typescript@5.6.2))(@remix-run/router@1.19.1)(react@19.0.0-rc-dfd30974ab-20240613)(zod@3.23.8):
-    dependencies:
-      type-fest: 4.26.1
-    optionalDependencies:
-      '@remix-run/node': 2.11.2(typescript@5.6.2)
-      '@remix-run/react': 2.11.2(react-dom@19.0.0-rc-dfd30974ab-20240613(react@19.0.0-rc-dfd30974ab-20240613))(react@19.0.0-rc-dfd30974ab-20240613)(typescript@5.6.2)
-      '@remix-run/router': 1.19.1
-      react: 19.0.0-rc-dfd30974ab-20240613
-      zod: 3.23.8
-
   require-directory@2.1.1: {}
 
   require-from-string@2.0.2: {}
@@ -6864,7 +6784,7 @@ snapshots:
       onetime: 7.0.0
       signal-exit: 4.1.0
 
-  ret@0.5.0: {}
+  ret@0.4.3: {}
 
   retry@0.12.0: {}
 
@@ -6936,9 +6856,9 @@ snapshots:
       es-errors: 1.3.0
       is-regex: 1.1.4
 
-  safe-regex2@4.0.0:
+  safe-regex2@3.1.0:
     dependencies:
-      ret: 0.5.0
+      ret: 0.4.3
 
   safe-stable-stringify@2.4.3: {}
 
@@ -7312,11 +7232,11 @@ snapshots:
       is-typed-array: 1.1.13
       possible-typed-array-names: 1.0.0
 
-  types-react-dom@19.0.0-alpha.3:
+  types-react-dom@19.0.0-rc.1:
     dependencies:
-      '@types/react': types-react@19.0.0-alpha.3
+      '@types/react': types-react@19.0.0-rc.1
 
-  types-react@19.0.0-alpha.3:
+  types-react@19.0.0-rc.1:
     dependencies:
       csstype: 3.1.3
 

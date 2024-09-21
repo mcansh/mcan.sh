@@ -11,8 +11,6 @@ import type {
 	HandleDataRequestFunction,
 } from "react-router";
 import { ServerRouter } from "react-router";
-import { isPrefetch } from "remix-utils/is-prefetch";
-// import { preloadRouteAssets } from "remix-utils/preload-route-assets";
 
 import { env } from "./env.server";
 
@@ -85,17 +83,6 @@ export let handleDataRequest: HandleDataRequestFunction = async (
 	response,
 	{ request },
 ) => {
-	// if it's a GET request and it's a prefetch request
-	// and it doesn't already have a Cache-Control header
-	// we will cache for 10 seconds only on the browser
-	if (
-		request.method.toLowerCase() === "get" &&
-		isPrefetch(request) &&
-		!response.headers.has("Cache-Control")
-	) {
-		response.headers.set("Cache-Control", "private, max-age=10");
-	}
-
 	applySecurityHeaders(request, response.headers);
 
 	return response;

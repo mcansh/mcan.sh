@@ -21,14 +21,14 @@
 	},
 	"dependencies": {
 		"@mcansh/http-helmet": "0.11.1",
-		"@mcansh/remix-fastify": "https://pkg.pr.new/@mcansh/remix-fastify@428",
+		"@mcansh/remix-fastify": "^3.4.0",
 		"@react-router/node": "0.0.0-nightly-d1bb8941a-20240920",
 		"address": "^2.0.3",
 		"cloudinary-build-url": "^0.2.4",
 		"clsx": "^2.1.1",
 		"cross-env": "^7.0.3",
 		"etag": "^1.8.1",
-		"fastify": "^5.0.0",
+		"fastify": "^4.28.1",
 		"fathom-client": "^3.7.2",
 		"isbot": "^5.1.17",
 		"playwright": "^1.47.1",
@@ -36,25 +36,16 @@
 		"react": "19.0.0-rc-dfd30974ab-20240613",
 		"react-dom": "19.0.0-rc-dfd30974ab-20240613",
 		"react-router": "0.0.0-nightly-d1bb8941a-20240920",
-		"remix-utils": "7.7.0",
 		"tailwind-merge": "^2.5.2",
 		"zod": "^3.23.8"
-	},
-	"pnpm": {
-		"overrides": {
-			"@types/react": "$@types/react",
-			"@types/react-dom": "$@types/react-dom",
-			"react": "$react",
-			"react-dom": "$react-dom"
-		}
 	},
 	"devDependencies": {
 		"@cld-apis/types": "^0.1.6",
 		"@mcansh/vite-svg-sprite-plugin": "0.4.2",
 		"@react-router/dev": "0.0.0-nightly-d1bb8941a-20240920",
 		"@types/etag": "^1.8.3",
-		"@types/react": "npm:types-react@19.0.0-alpha.3",
-		"@types/react-dom": "npm:types-react-dom@19.0.0-alpha.3",
+		"@types/react": "npm:types-react@19.0.0-rc.1",
+		"@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
 		"@typescript-eslint/eslint-plugin": "^8.6.0",
 		"@typescript-eslint/parser": "^8.6.0",
 		"@typescript/lib-dom": "npm:@types/web@^0.0.163",
@@ -85,8 +76,20 @@
 		"vite": "5.4.6",
 		"vite-tsconfig-paths": "^5.0.1"
 	},
+	"pnpm": {
+		"overrides": {
+			"@react-router/node": "$@react-router/node",
+			"@react-router/dev": "$@react-router/dev",
+			"@types/react": "$@types/react",
+			"@types/react-dom": "$@types/react-dom",
+			"react": "$react",
+			"react-dom": "$react-dom",
+			"react-router": "$react-router",
+			"react-router-dom": "$react-router"
+		}
+	},
 	"engines": {
-		"node": ">=18"
+		"node": ">=20"
 	},
 	"packageManager": "pnpm@9.11.0"
 }
