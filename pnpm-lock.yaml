@@ -10661,6 +10661,13 @@ snapshots:
     optionalDependencies:
       postcss: 8.4.47
 
+  postcss-load-config@4.0.2(postcss@8.4.47):
+    dependencies:
+      lilconfig: 3.1.1
+      yaml: 2.4.5
+    optionalDependencies:
+      postcss: 8.4.47
+
   postcss-modules-extract-imports@3.1.0(postcss@8.4.47):
     dependencies:
       postcss: 8.4.47
@@ -11939,8 +11946,7 @@ snapshots:
   /turbo-stream@2.0.0:
     resolution: {integrity: sha512-h0dfgRJAoiEh2hdFCoEuOSApsUfnw87gmNuziVS/mYycuBSCTeqpdanypMlHci6CvZibF7b9kvSpbeC7/r2/KA==}
 
-  /turbo-stream@2.0.0:
-    resolution: {integrity: sha512-h0dfgRJAoiEh2hdFCoEuOSApsUfnw87gmNuziVS/mYycuBSCTeqpdanypMlHci6CvZibF7b9kvSpbeC7/r2/KA==}
+  turbo-stream@2.4.0: {}
 
   turbo-stream@2.4.0: {}
 
