@@ -99,7 +99,7 @@ jobs:
 
               git add .
               git commit -m "chore(deps): bump \`@remix-run/*\` to ${{ steps.bump.outputs.version }}"
-              git push origin HEAD:${env.BRANCH_NAME}
+              git push origin HEAD:${BRANCH_NAME}
 
               gh pr create --title "chore(deps): bump \`@remix-run/*\` to ${{ steps.bump.outputs.version }}" --body "This PR bumps \`@remix-run/*\` to the latest nightly release. For a list of changes, see the list of [changes](https://github.com/remix-run/remix/compare/${{ steps.bump.outputs.prev_version }}...${{ steps.bump.outputs.version }}).
           fi
