@@ -81,7 +81,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 	useFathom();
 
 	return (
-		<html lang="en" className="h-full">
+		<html lang="en" className="h-dvh">
 			<head>
 				<DefaultMeta />
 				<Meta />
@@ -90,7 +90,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 			<body
 				className={cn(
 					error
-						? "mx-auto flex min-h-screen w-[90%] max-w-5xl flex-col justify-center space-y-4 bg-blue-screen pt-20 text-center text-white"
+						? "mx-auto flex min-h-dvh w-[90%] max-w-5xl flex-col justify-center space-y-4 bg-blue-screen pt-20 text-center text-white"
 						: undefined,
 					handleBodyClassName,
 				)}
