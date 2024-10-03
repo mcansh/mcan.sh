@@ -16,8 +16,8 @@ import * as Fathom from "fathom-client";
 import * as React from "react";
 import { twMerge } from "tailwind-merge";
 
-import appStyleHref from "~/assets/app.css?url";
-import fontStyleHref from "~/assets/berkeley-mono.css?url";
+import "~/assets/app.css";
+import "~/assets/berkeley-mono.css";
 import type { Match } from "~/types/handle";
 
 export const meta: MetaFunction = () => {
@@ -38,18 +38,10 @@ export const links: LinksFunction = () => {
 		};
 	});
 
-	let stylesheets = [appStyleHref, fontStyleHref].flatMap((href) => {
-		return [
-			{ rel: "stylesheet", href },
-			{ rel: "preload", href, as: "style" },
-		];
-	});
-
 	return [
 		{ rel: "manifest", href: "/manifest.webmanifest" },
 		{ rel: "icon", href: "/favicon.png", type: "image/png" },
 		{ rel: "icon", href: "/favicon.ico" },
-		...stylesheets,
 		...icons,
 	];
 };
