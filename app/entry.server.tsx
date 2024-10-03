@@ -112,8 +112,8 @@ function applySecurityHeaders(request: Request, responseHeaders: Headers) {
 	let securityHeaders = createSecureHeaders({
 		"Content-Security-Policy": {
 			upgradeInsecureRequests: process.env.NODE_ENV === "production",
+			"default-src": ["'none'"],
 			"base-uri": ["'self'"],
-			"default-src": ["'self'"],
 			"img-src": [
 				"'self'",
 				"https://res.cloudinary.com/dof0zryca/image/upload/",
@@ -129,13 +129,18 @@ function applySecurityHeaders(request: Request, responseHeaders: Headers) {
 				`'nonce-${nonce}'`,
 				"'strict-dynamic'",
 			],
-			"script-src-attr": [`'nonce-${nonce}'`],
 			"connect-src": [
 				...(process.env.NODE_ENV === "production"
 					? ["'self'"]
 					: ["'self'", "ws:"]),
 			],
 			"worker-src": ["blob:"],
+			"manifest-src": ["'self'"],
+			"font-src": ["'self'"],
+			"style-src": [
+				"'self'",
+				...(process.env.NODE_ENV === "development" ? ["'unsafe-inline'"] : []),
+			],
 			"report-uri": [env.SENTRY_REPORT_URL],
 		},
 		"Referrer-Policy": "origin-when-cross-origin",
