@@ -178,7 +178,7 @@ export default function ResumePage() {
 					<div className="print:text-[9pt]">
 						<h2 className="text-lg font-medium print:text-[11pt]">Skills</h2>
 						<ul className="space-y-1 print:space-y-0.5">
-							{data.skills.map((skill) => {
+							{data.data.skills.map((skill) => {
 								return <li key={skill}>{skill}</li>;
 							})}
 						</ul>
@@ -189,7 +189,7 @@ export default function ResumePage() {
 							Certifications
 						</h2>
 						<ul className="space-y-1 print:space-y-0.5">
-							{data.certifications.map((certification) => {
+							{data.data.certifications.map((certification) => {
 								return <li key={certification}>{certification}</li>;
 							})}
 						</ul>
@@ -200,7 +200,7 @@ export default function ResumePage() {
 							References
 						</h2>
 						<ul className="space-y-1 print:space-y-0.5">
-							{data.references.map((reference) => {
+							{data.data.references.map((reference) => {
 								return (
 									<li key={reference.name}>
 										<h3>
@@ -227,7 +227,7 @@ export default function ResumePage() {
 							Work Experience
 						</h2>
 						<ul className="mt-4 space-y-8 print:mt-2 print:space-y-4">
-							{data.experience.map((job) => {
+							{data.data.experience.map((job) => {
 								return (
 									<li key={job.company}>
 										<h3 className="text-xl print:text-[10pt] print:font-medium">
