@@ -1,6 +1,6 @@
 import { cacheHeader } from "pretty-cache-header";
 import type { LinksFunction, MetaFunction } from "react-router";
-import { data, useLoaderData } from "react-router";
+import { data, Link, useLoaderData } from "react-router";
 import spriteHref from "virtual:@mcansh/vite-svg-sprite-plugin";
 
 import githubMarkIconHref from "~/assets/github-mark.svg";
@@ -141,7 +141,11 @@ export default function ResumePage() {
 	return (
 		<div className="flex h-full flex-col">
 			<header className="flex flex-col items-center justify-center space-y-2 bg-stone-800 py-6 text-center text-white print:py-3">
-				<h1 className="text-3xl print:text-xl">Logan McAnsh</h1>
+				<h1 className="text-3xl print:text-xl">
+					<Link to="/" className="hover:underline">
+						Logan McAnsh
+					</Link>
+				</h1>
 				<p className="text-lg print:text-base">Senior Software Engineer</p>
 			</header>
 
