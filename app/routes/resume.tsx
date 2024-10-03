@@ -148,7 +148,7 @@ export default function ResumePage() {
 				<p className="text-lg print:text-base">Senior Software Engineer</p>
 			</header>
 
-			<div className="grid h-full flex-1 gap-8 md:grid-cols-[300px,1fr] print:grid-cols-[175px,1fr] print:gap-4">
+			<div className="grid h-full flex-1 gap-8 md:grid-cols-[300px_1fr] print:grid-cols-[175px_1fr] print:gap-4">
 				<aside className="space-y-8 bg-stone-300 p-8 md:text-right print:space-y-4 print:p-4 print:py-2">
 					<div className="print:text-[9pt]">
 						<h2 className="text-lg font-medium print:text-[11pt]">Contact</h2>
@@ -224,7 +224,7 @@ export default function ResumePage() {
 					</div>
 				</aside>
 
-				<main className="space-y-8 p-8 md:py-8 md:pl-0 md:pr-8 print:space-y-4 print:px-0 print:py-2 print:text-[9pt]">
+				<main className="space-y-8 p-8 md:py-8 md:pr-8 md:pl-0 print:space-y-4 print:py-2 print:px-0 print:text-[9pt]">
 					<div>
 						<h2 className="text-lg font-medium print:text-[11pt]">
 							Work Experience

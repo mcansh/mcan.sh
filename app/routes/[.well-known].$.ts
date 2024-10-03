@@ -1,14 +1,20 @@
-import { unstable_defineLoader } from "@remix-run/node";
+import type { LoaderFunctionArgs } from "@remix-run/node";
 
 import { getMugshotURL } from "~/cloudinary.server";
 
-export const loader = unstable_defineLoader(({ params }) => {
+let notFound = new Response("ope not found", {
+	status: 404,
+	statusText: "Not Found",
+	headers: { "Content-Type": "text/plain" },
+});
+
+export async function loader({ params }: LoaderFunctionArgs) {
 	let splat = params["*"];
 
-	if (!splat) throw new Response(null, { status: 404 });
+	if (!splat) throw notFound;
 
 	let segments = splat.split("/");
-	if (segments.at(-1) !== "avatar") throw new Response(null, { status: 404 });
+	if (segments.at(-1) !== "avatar") throw notFound;
 
 	// remove the last segment (avatar)
 	// the remaining segments are the transformations that we can forward to cloudinary
@@ -25,11 +31,11 @@ export const loader = unstable_defineLoader(({ params }) => {
 		return segment.includes(",");
 	});
 
-	if (urlSegmentIndex === -1) throw new Response(null, { status: 404 });
+	if (urlSegmentIndex === -1) throw notFound;
 
 	let transformSegment = pathSegments.at(urlSegmentIndex);
 
-	if (!transformSegment) throw new Response(null, { status: 404 });
+	if (!transformSegment) throw notFound;
 
 	// merge our segments with the url segments with a comma
 	transformSegment = [...transformSegment.split(","), ...segments].join(",");
@@ -41,4 +47,4 @@ export const loader = unstable_defineLoader(({ params }) => {
 	image.pathname = pathSegments.join("/");
 
 	return fetch(image);
-});
+}

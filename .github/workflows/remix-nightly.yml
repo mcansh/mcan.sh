@@ -21,7 +21,7 @@ permissions:
 
 env:
   CI: true
-  BRANCH_NAME: 'actions/remix-nightly'
+  BRANCH_NAME: "actions/remix-nightly"
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
