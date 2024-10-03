@@ -34,10 +34,9 @@
 		"isbot": "^5.1.17",
 		"playwright": "^1.47.2",
 		"pretty-cache-header": "^1.0.0",
-		"react": "19.0.0-rc-e4953922-20240919",
-		"react-dom": "19.0.0-rc-e4953922-20240919",
-		"react-router": "0.0.0-nightly-242035412-20240921",
-		"react-router-dom": "0.0.0-nightly-242035412-20240921",
+		"react": "19.0.0-rc-0751fac7-20241002",
+		"react-dom": "19.0.0-rc-0751fac7-20241002",
+		"react-router": "0.0.0-nightly-8fc8239ff-20241003",
 		"tailwind-merge": "^2.5.2",
 		"zod": "^3.23.8"
 	},
@@ -48,19 +47,19 @@
 		"@types/etag": "^1.8.3",
 		"@types/react": "npm:types-react@19.0.0-rc.1",
 		"@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
-		"@typescript-eslint/eslint-plugin": "^8.6.0",
-		"@typescript-eslint/parser": "^8.6.0",
-		"@typescript/lib-dom": "npm:@types/web@^0.0.163",
+		"@typescript-eslint/eslint-plugin": "^8.8.0",
+		"@typescript-eslint/parser": "^8.8.0",
+		"@typescript/lib-dom": "npm:@types/web@^0.0.167",
 		"autoprefixer": "^10.4.20",
 		"del": "^7.1.0",
 		"eslint": "^8.57.0",
 		"eslint-import-resolver-typescript": "^3.6.3",
-		"eslint-plugin-import": "^2.30.0",
+		"eslint-plugin-import": "^2.31.0",
 		"eslint-plugin-prefer-let": "^4.0.0",
 		"gitignore-fs": "^2.2.2",
 		"glob": "^11.0.0",
 		"husky": "^9.1.6",
-		"knip": "^5.30.2",
+		"knip": "^5.31.0",
 		"lightningcss": "^1.27.0",
 		"lint-staged": "^15.2.10",
 		"micromatch": "^4.0.8",
@@ -69,13 +68,13 @@
 		"postcss-100vh-fix": "^1.0.2",
 		"precinct": "^12.1.2",
 		"prettier": "^3.3.3",
-		"prettier-plugin-tailwindcss": "^0.6.6",
+		"prettier-plugin-tailwindcss": "^0.6.8",
 		"rollup-plugin-visualizer": "^5.12.0",
 		"simple-git": "^3.27.0",
-		"tailwindcss": "^3.4.12",
+		"tailwindcss": "^3.4.13",
 		"tailwindcss-padding-safe": "^1.0.6",
 		"typescript": "^5.6.2",
-		"vite": "5.4.7",
+		"vite": "5.4.8",
 		"vite-tsconfig-paths": "^5.0.1"
 	},
 	"pnpm": {
@@ -87,11 +86,11 @@
 			"react": "$react",
 			"react-dom": "$react-dom",
 			"react-router": "$react-router",
-			"react-router-dom": "$react-router-dom"
+			"react-router-dom": "$react-router"
 		}
 	},
 	"engines": {
 		"node": ">=20"
 	},
-	"packageManager": "pnpm@9.11.0"
+	"packageManager": "pnpm@9.12.0+sha512.4abf725084d7bcbafbd728bfc7bee61f2f791f977fd87542b3579dcb23504d170d46337945e4c66485cd12d588a0c0e570ed9c477e7ccdd8507cf05f3f92eaca"
 }
