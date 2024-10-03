@@ -22,8 +22,8 @@ importers:
         specifier: 0.11.1
         version: 0.11.1(react-dom@19.0.0-rc-0751fac7-20241002(react@19.0.0-rc-0751fac7-20241002))(react@19.0.0-rc-0751fac7-20241002)
       '@mcansh/remix-fastify':
-        specifier: https://pkg.pr.new/@mcansh/remix-fastify@b5a1ad1
-        version: https://pkg.pr.new/@mcansh/remix-fastify@b5a1ad1(@remix-run/node@2.11.2(typescript@5.6.2))(fastify@5.0.0)(vite@5.4.8(@types/node@20.12.7)(lightningcss@1.27.0))
+        specifier: https://pkg.pr.new/@mcansh/remix-fastify@7356798
+        version: https://pkg.pr.new/@mcansh/remix-fastify@7356798(@remix-run/node@2.11.2(typescript@5.6.2))(fastify@5.0.0)(react-router@0.0.0-nightly-8fc8239ff-20241003(react-dom@19.0.0-rc-0751fac7-20241002(react@19.0.0-rc-0751fac7-20241002))(react@19.0.0-rc-0751fac7-20241002))(vite@5.4.8(@types/node@20.12.7)(lightningcss@1.27.0))
       '@react-router/node':
         specifier: 0.0.0-nightly-242035412-20240921
         version: 0.0.0-nightly-242035412-20240921(react-router@0.0.0-nightly-8fc8239ff-20241003(react-dom@19.0.0-rc-0751fac7-20241002(react@19.0.0-rc-0751fac7-20241002))(react@19.0.0-rc-0751fac7-20241002))(typescript@5.6.2)
@@ -67,6 +67,9 @@ importers:
         specifier: 19.0.0-rc-0751fac7-20241002
         version: 19.0.0-rc-0751fac7-20241002(react@19.0.0-rc-0751fac7-20241002)
       react-router:
+        specifier: 0.0.0-nightly-8fc8239ff-20241003
+        version: 0.0.0-nightly-8fc8239ff-20241003(react-dom@19.0.0-rc-0751fac7-20241002(react@19.0.0-rc-0751fac7-20241002))(react@19.0.0-rc-0751fac7-20241002)
+      react-router-dom:
         specifier: 0.0.0-nightly-8fc8239ff-20241003
         version: 0.0.0-nightly-8fc8239ff-20241003(react-dom@19.0.0-rc-0751fac7-20241002(react@19.0.0-rc-0751fac7-20241002))(react@19.0.0-rc-0751fac7-20241002)
       tailwind-merge:
@@ -618,15 +621,20 @@ packages:
       react-dom:
         optional: true
 
-  '@mcansh/remix-fastify@https://pkg.pr.new/@mcansh/remix-fastify@b5a1ad1':
-    resolution: {tarball: https://pkg.pr.new/@mcansh/remix-fastify@b5a1ad1}
+  '@mcansh/remix-fastify@https://pkg.pr.new/@mcansh/remix-fastify@7356798':
+    resolution: {tarball: https://pkg.pr.new/@mcansh/remix-fastify@7356798}
     version: 3.4.0
     engines: {node: '>=20.0.0'}
     peerDependencies:
       '@remix-run/node': ^2.0.0
       fastify: ^3.29.0 || ^4.0.0 || ^5.0.0
+      react-router: 0.0.0-nightly-8fc8239ff-20241003
       vite: ^5.0.0
     peerDependenciesMeta:
+      '@remix-run/node':
+        optional: true
+      react-router:
+        optional: true
       vite:
         optional: true
 
@@ -3019,6 +3027,13 @@ packages:
     resolution: {integrity: sha512-wViHqhAd8OHeLS/IRMJjTSDHF3U9eWi62F/MledQGPdJGDhodXJ9PBLNGr6WWL7qlH12Mt3TyTpbS+hGXMjCzQ==}
     engines: {node: '>=0.10.0'}
 
+  react-router-dom@0.0.0-nightly-8fc8239ff-20241003:
+    resolution: {integrity: sha512-PR2zQE9VmoBWqk7fmFb5mTpR7MdcENhSXsXtW3rSg5Vv+iNN3N+rAIGLEd2B/UK786gLJYRKHcozjNEhjla/kw==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      react: 19.0.0-rc-0751fac7-20241002
+      react-dom: 19.0.0-rc-0751fac7-20241002
+
   react-router@0.0.0-nightly-8fc8239ff-20241003:
     resolution: {integrity: sha512-QemJpXxUoqvmxbDGwU5EBylKNuFoCLFQBOcGLcUYcVT+/9GD7+suPL1WYK0xsfkCf6ORkGkktCn+vC/+YXN55A==}
     engines: {node: '>=18.0.0'}
@@ -4154,15 +4169,16 @@ snapshots:
       react: 19.0.0-rc-0751fac7-20241002
       react-dom: 19.0.0-rc-0751fac7-20241002(react@19.0.0-rc-0751fac7-20241002)
 
-  '@mcansh/remix-fastify@https://pkg.pr.new/@mcansh/remix-fastify@b5a1ad1(@remix-run/node@2.11.2(typescript@5.6.2))(fastify@5.0.0)(vite@5.4.8(@types/node@20.12.7)(lightningcss@1.27.0))':
+  '@mcansh/remix-fastify@https://pkg.pr.new/@mcansh/remix-fastify@7356798(@remix-run/node@2.11.2(typescript@5.6.2))(fastify@5.0.0)(react-router@0.0.0-nightly-8fc8239ff-20241003(react-dom@19.0.0-rc-0751fac7-20241002(react@19.0.0-rc-0751fac7-20241002))(react@19.0.0-rc-0751fac7-20241002))(vite@5.4.8(@types/node@20.12.7)(lightningcss@1.27.0))':
     dependencies:
       '@fastify/middie': 9.0.2
       '@fastify/static': 8.0.1
-      '@remix-run/node': 2.11.2(typescript@5.6.2)
       fastify: 5.0.0
       fastify-plugin: 5.0.1
       pretty-cache-header: 1.0.0
     optionalDependencies:
+      '@remix-run/node': 2.11.2(typescript@5.6.2)
+      react-router: 0.0.0-nightly-8fc8239ff-20241003(react-dom@19.0.0-rc-0751fac7-20241002(react@19.0.0-rc-0751fac7-20241002))(react@19.0.0-rc-0751fac7-20241002)
       vite: 5.4.8(@types/node@20.12.7)(lightningcss@1.27.0)
 
   '@mcansh/vite-svg-sprite-plugin@0.4.2(vite@5.4.8(@types/node@20.12.7)(lightningcss@1.27.0))':
@@ -4287,8 +4303,10 @@ snapshots:
       undici: 6.19.8
     optionalDependencies:
       typescript: 5.6.2
+    optional: true
 
-  '@remix-run/router@1.19.1': {}
+  '@remix-run/router@1.19.1':
+    optional: true
 
   '@remix-run/server-runtime@2.11.2(typescript@5.6.2)':
     dependencies:
@@ -4301,11 +4319,13 @@ snapshots:
       turbo-stream: 2.3.0
     optionalDependencies:
       typescript: 5.6.2
+    optional: true
 
   '@remix-run/web-blob@3.1.0':
     dependencies:
       '@remix-run/web-stream': 1.1.0
       web-encoding: 1.1.5
+    optional: true
 
   '@remix-run/web-fetch@4.4.2':
     dependencies:
@@ -4317,18 +4337,22 @@ snapshots:
       abort-controller: 3.0.0
       data-uri-to-buffer: 3.0.1
       mrmime: 1.0.1
+    optional: true
 
   '@remix-run/web-file@3.1.0':
     dependencies:
       '@remix-run/web-blob': 3.1.0
+    optional: true
 
   '@remix-run/web-form-data@3.1.0':
     dependencies:
       web-encoding: 1.1.5
+    optional: true
 
   '@remix-run/web-stream@1.1.0':
     dependencies:
       web-streams-polyfill: 3.3.3
+    optional: true
 
   '@rollup/rollup-android-arm-eabi@4.21.0':
     optional: true
@@ -4908,7 +4932,8 @@ snapshots:
 
   convert-source-map@2.0.0: {}
 
-  cookie-signature@1.2.1: {}
+  cookie-signature@1.2.1:
+    optional: true
 
   cookie@0.6.0: {}
 
@@ -4976,7 +5001,8 @@ snapshots:
 
   csstype@3.1.3: {}
 
-  data-uri-to-buffer@3.0.1: {}
+  data-uri-to-buffer@3.0.1:
+    optional: true
 
   data-view-buffer@1.0.1:
     dependencies:
@@ -5869,6 +5895,7 @@ snapshots:
     dependencies:
       call-bind: 1.0.7
       has-tostringtag: 1.0.2
+    optional: true
 
   is-array-buffer@3.0.4:
     dependencies:
@@ -5925,6 +5952,7 @@ snapshots:
   is-generator-function@1.0.10:
     dependencies:
       has-tostringtag: 1.0.2
+    optional: true
 
   is-glob@4.0.3:
     dependencies:
@@ -6249,7 +6277,8 @@ snapshots:
       ast-module-types: 6.0.0
       node-source-walk: 7.0.0
 
-  mrmime@1.0.1: {}
+  mrmime@1.0.1:
+    optional: true
 
   ms@2.1.2: {}
 
@@ -6687,6 +6716,12 @@ snapshots:
       scheduler: 0.25.0-rc-0751fac7-20241002
 
   react-refresh@0.14.0: {}
+
+  react-router-dom@0.0.0-nightly-8fc8239ff-20241003(react-dom@19.0.0-rc-0751fac7-20241002(react@19.0.0-rc-0751fac7-20241002))(react@19.0.0-rc-0751fac7-20241002):
+    dependencies:
+      react: 19.0.0-rc-0751fac7-20241002
+      react-dom: 19.0.0-rc-0751fac7-20241002(react@19.0.0-rc-0751fac7-20241002)
+      react-router: 0.0.0-nightly-8fc8239ff-20241003(react-dom@19.0.0-rc-0751fac7-20241002(react@19.0.0-rc-0751fac7-20241002))(react@19.0.0-rc-0751fac7-20241002)
 
   react-router@0.0.0-nightly-8fc8239ff-20241003(react-dom@19.0.0-rc-0751fac7-20241002(react@19.0.0-rc-0751fac7-20241002))(react@19.0.0-rc-0751fac7-20241002):
     dependencies:
@@ -7177,7 +7212,8 @@ snapshots:
 
   tslib@2.6.2: {}
 
-  turbo-stream@2.3.0: {}
+  turbo-stream@2.3.0:
+    optional: true
 
   turbo-stream@2.4.0: {}
 
@@ -7269,6 +7305,7 @@ snapshots:
       is-generator-function: 1.0.10
       is-typed-array: 1.1.13
       which-typed-array: 1.1.15
+    optional: true
 
   valibot@0.41.0(typescript@5.6.2):
     optionalDependencies:
@@ -7332,8 +7369,10 @@ snapshots:
       util: 0.12.5
     optionalDependencies:
       '@zxing/text-encoding': 0.9.0
+    optional: true
 
-  web-streams-polyfill@3.3.3: {}
+  web-streams-polyfill@3.3.3:
+    optional: true
 
   which-boxed-primitive@1.0.2:
     dependencies:

@@ -21,7 +21,7 @@
 	},
 	"dependencies": {
 		"@mcansh/http-helmet": "0.11.1",
-		"@mcansh/remix-fastify": "https://pkg.pr.new/@mcansh/remix-fastify@b5a1ad1",
+		"@mcansh/remix-fastify": "https://pkg.pr.new/@mcansh/remix-fastify@7356798",
 		"@react-router/node": "0.0.0-nightly-242035412-20240921",
 		"address": "^2.0.3",
 		"change-case": "^5.4.4",
@@ -37,6 +37,7 @@
 		"react": "19.0.0-rc-0751fac7-20241002",
 		"react-dom": "19.0.0-rc-0751fac7-20241002",
 		"react-router": "0.0.0-nightly-8fc8239ff-20241003",
+		"react-router-dom": "0.0.0-nightly-8fc8239ff-20241003",
 		"tailwind-merge": "^2.5.2",
 		"zod": "^3.23.8"
 	},
@@ -86,7 +87,7 @@
 			"react": "$react",
 			"react-dom": "$react-dom",
 			"react-router": "$react-router",
-			"react-router-dom": "$react-router"
+			"react-router-dom": "$react-router-dom"
 		}
 	},
 	"engines": {
