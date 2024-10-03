@@ -11,6 +11,8 @@ import type {
 	HandleDataRequestFunction,
 } from "react-router";
 import { ServerRouter } from "react-router";
+import { isPrefetch } from "remix-utils/is-prefetch";
+import { preloadRouteAssets } from "remix-utils/preload-route-assets";
 
 import { env } from "./env.server";
 
@@ -23,14 +25,15 @@ export default function handleRequest(
 	request: Request,
 	responseStatusCode: number,
 	responseHeaders: Headers,
-	remixContext: EntryContext,
+	reactRouterContext: EntryContext,
 	_loadContext: AppLoadContext,
 ) {
 	let callback = isbot(request.headers.get("user-agent"))
 		? "onAllReady"
 		: "onShellReady";
 
-	// preloadRouteAssets(remixContext, responseHeaders);
+	// @ts-expect-error - remix-utils needs to be updated to support react-router v7
+	preloadRouteAssets(reactRouterContext, responseHeaders);
 
 	let { nonce, headers } = applySecurityHeaders(request, responseHeaders);
 
@@ -39,7 +42,7 @@ export default function handleRequest(
 		let { pipe, abort } = renderToPipeableStream(
 			<NonceProvider nonce={nonce}>
 				<ServerRouter
-					context={remixContext}
+					context={reactRouterContext}
 					url={request.url}
 					abortDelay={ABORT_DELAY}
 					nonce={nonce}
@@ -83,6 +86,17 @@ export let handleDataRequest: HandleDataRequestFunction = async (
 	response,
 	{ request },
 ) => {
+	// if it's a GET request and it's a prefetch request
+	// and it doesn't already have a Cache-Control header
+	// we will cache for 10 seconds only on the browser
+	if (
+		request.method.toLowerCase() === "get" &&
+		isPrefetch(request) &&
+		!response.headers.has("Cache-Control")
+	) {
+		response.headers.set("Cache-Control", "private, max-age=10");
+	}
+
 	applySecurityHeaders(request, response.headers);
 
 	return response;
@@ -98,7 +112,6 @@ function applySecurityHeaders(request: Request, responseHeaders: Headers) {
 	let nonce = createNonce();
 	let securityHeaders = createSecureHeaders({
 		"Content-Security-Policy": {
-			// "upgrade-insecure-requests": process.env.NODE_ENV === "production",
 			"base-uri": ["'self'"],
 			"default-src": ["'self'"],
 			"img-src": [
@@ -173,6 +186,11 @@ function applySecurityHeaders(request: Request, responseHeaders: Headers) {
 	});
 
 	let merged = mergeHeaders(responseHeaders, securityHeaders);
+
+	// TODO: fix upstream in @mcansh/http-helmet
+	if (process.env.NODE_ENV === "production") {
+		merged.append("upgrade-insecure-requests", "1");
+	}
 
 	let permissionsPolicy = securityHeaders.get("Permissions-Policy");
 
