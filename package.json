@@ -22,9 +22,9 @@
 	"dependencies": {
 		"@mcansh/http-helmet": "0.10.3",
 		"@mcansh/remix-fastify": "3.4.0",
-		"@remix-run/node": "2.11.2",
-		"@remix-run/react": "2.11.2",
-		"@remix-run/server-runtime": "2.11.2",
+		"@remix-run/node": "0.0.0-nightly-6ee69c13d-20241003",
+		"@remix-run/react": "0.0.0-nightly-6ee69c13d-20241003",
+		"@remix-run/server-runtime": "0.0.0-nightly-6ee69c13d-20241003",
 		"address": "^2.0.3",
 		"cloudinary-build-url": "^0.2.4",
 		"clsx": "^2.1.1",
@@ -52,7 +52,7 @@
 	"devDependencies": {
 		"@cld-apis/types": "^0.1.6",
 		"@mcansh/vite-svg-sprite-plugin": "0.4.2",
-		"@remix-run/dev": "2.11.2",
+		"@remix-run/dev": "0.0.0-nightly-6ee69c13d-20241003",
 		"@types/etag": "^1.8.3",
 		"@types/react": "npm:types-react@19.0.0-alpha.3",
 		"@types/react-dom": "npm:types-react-dom@19.0.0-alpha.3",
