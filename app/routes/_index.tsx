@@ -1,4 +1,4 @@
-import { unstable_data, unstable_defineLoader } from "@remix-run/node";
+import { unstable_data } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { cacheHeader } from "pretty-cache-header";
 
@@ -6,7 +6,7 @@ import { getMugshotURL } from "#app/cloudinary.server.js";
 import { FunHoverLink } from "#app/components/fun-link-hover.js";
 import type { RouteHandle } from "#app/types/handle.js";
 
-export const loader = unstable_defineLoader(() => {
+export function loader() {
 	let srcSet = [240, 480, 720].map((size, index) => {
 		let url = getMugshotURL({
 			resize: { type: "fill", width: size, height: size },
@@ -35,7 +35,7 @@ export const loader = unstable_defineLoader(() => {
 			},
 		},
 	);
-});
+}
 
 export const handle: RouteHandle = {
 	bodyClassName: "h-full font-thin dark:bg-slate-900 dark:text-white",

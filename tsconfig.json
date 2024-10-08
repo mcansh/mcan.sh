@@ -1,4 +1,5 @@
 {
+	"extends": "@total-typescript/tsconfig/bundler/dom/app",
 	"include": [
 		"**/*.ts",
 		"**/*.tsx",
@@ -8,40 +9,16 @@
 		"**/.client/**/*.tsx"
 	],
 	"compilerOptions": {
-		/* base options */
-		"esModuleInterop": true,
-		"forceConsistentCasingInFileNames": true,
-		"incremental": true,
-		"skipLibCheck": true,
-		"target": "ES2022",
-		"verbatimModuleSyntax": true,
-		"allowJs": true,
-		"checkJs": true,
-		"resolveJsonModule": true,
-		"moduleDetection": "force",
-		"jsx": "react-jsx",
-		"baseUrl": ".",
 		"types": [
 			"@remix-run/node",
 			"vite/client",
 			"react/canary",
 			"react-dom/canary",
-			"@mcansh/vite-svg-sprite-plugin/client",
-			"@remix-run/react/future/single-fetch.d.ts"
+			"@mcansh/vite-svg-sprite-plugin/client"
 		],
-
-		/* strictness */
-		"strict": true,
-		"noUncheckedIndexedAccess": true,
+		"forceConsistentCasingInFileNames": true,
+		"checkJs": true,
 		"noFallthroughCasesInSwitch": true,
-
-		/* transpiling */
-		"moduleResolution": "Bundler",
-		"module": "ESNext",
-		"noEmit": true,
-		"isolatedModules": true,
-
-		/* where our code runs */
-		"lib": ["DOM", "DOM.Iterable", "ES2022"]
+		"jsx": "react-jsx"
 	}
 }

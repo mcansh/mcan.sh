@@ -1,4 +1,4 @@
-import { unstable_data, unstable_defineLoader } from "@remix-run/node";
+import { unstable_data } from "@remix-run/node";
 import type { LinksFunction } from "@remix-run/node";
 import type { MetaFunction } from "@remix-run/react";
 import { useLoaderData } from "@remix-run/react";
@@ -8,7 +8,7 @@ import spriteHref from "virtual:@mcansh/vite-svg-sprite-plugin";
 import githubMarkIconHref from "#app/assets/github-mark.svg";
 import linkedinIconHref from "#app/assets/linkedin.svg";
 
-export const loader = unstable_defineLoader(() => {
+export function loader() {
 	return unstable_data(
 		{
 			experience: [
@@ -109,7 +109,7 @@ export const loader = unstable_defineLoader(() => {
 			},
 		},
 	);
-});
+}
 
 export const meta: MetaFunction = () => {
 	return [
