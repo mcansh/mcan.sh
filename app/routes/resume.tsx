@@ -7,7 +7,6 @@ import spriteHref from "virtual:@mcansh/vite-svg-sprite-plugin";
 
 import githubMarkIconHref from "#/app/assets/github-mark.svg";
 import linkedinIconHref from "#/app/assets/linkedin.svg";
-import type { RouteHandle } from "#/app/types/handle";
 
 export const loader = unstable_defineLoader(() => {
 	return unstable_data(
