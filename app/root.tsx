@@ -17,8 +17,8 @@ import * as React from "react";
 import { twMerge } from "tailwind-merge";
 import tailwindStyleHref from "tailwindcss/tailwind.css?url";
 
-import fontStyleHref from "~/assets/berkeley-mono.css?url";
-import type { Match } from "~/types/handle";
+import fontStyleHref from "#/app/assets/berkeley-mono.css?url";
+import type { Match } from "#/app/types/handle";
 
 export const meta: MetaFunction = () => {
 	return [

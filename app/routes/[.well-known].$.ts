@@ -1,6 +1,6 @@
 import { unstable_defineLoader } from "@remix-run/node";
 
-import { getMugshotURL } from "~/cloudinary.server";
+import { getMugshotURL } from "#/app/cloudinary.server";
 
 export const loader = unstable_defineLoader(({ params }) => {
 	let splat = params["*"];
