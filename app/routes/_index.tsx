@@ -2,9 +2,9 @@ import { unstable_data, unstable_defineLoader } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { cacheHeader } from "pretty-cache-header";
 
-import { getMugshotURL } from "#/app/cloudinary.server";
-import { FunHoverLink } from "#/app/components/fun-link-hover";
-import type { RouteHandle } from "#/app/types/handle";
+import { getMugshotURL } from "#app/cloudinary.server.js";
+import { FunHoverLink } from "#app/components/fun-link-hover.js";
+import type { RouteHandle } from "#app/types/handle.js";
 
 export const loader = unstable_defineLoader(() => {
 	let srcSet = [240, 480, 720].map((size, index) => {

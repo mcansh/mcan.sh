@@ -5,8 +5,8 @@ import { useLoaderData } from "@remix-run/react";
 import { cacheHeader } from "pretty-cache-header";
 import spriteHref from "virtual:@mcansh/vite-svg-sprite-plugin";
 
-import githubMarkIconHref from "#/app/assets/github-mark.svg";
-import linkedinIconHref from "#/app/assets/linkedin.svg";
+import githubMarkIconHref from "#app/assets/github-mark.svg";
+import linkedinIconHref from "#app/assets/linkedin.svg";
 
 export const loader = unstable_defineLoader(() => {
 	return unstable_data(
