@@ -1,8 +1,8 @@
-import { unstable_defineLoader } from "@remix-run/node";
+import type { LoaderFunctionArgs } from "@remix-run/node";
 
-import { getMugshotURL } from "~/cloudinary.server";
+import { getMugshotURL } from "#app/cloudinary.server.js";
 
-export const loader = unstable_defineLoader(({ params }) => {
+export function loader({ params }: LoaderFunctionArgs) {
 	let splat = params["*"];
 
 	if (!splat) throw new Response(null, { status: 404 });
@@ -41,4 +41,4 @@ export const loader = unstable_defineLoader(({ params }) => {
 	image.pathname = pathSegments.join("/");
 
 	return fetch(image);
-});
+}
