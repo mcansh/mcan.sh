@@ -3,15 +3,19 @@ import { vitePlugin as remix } from "@remix-run/dev";
 import { visualizer } from "rollup-plugin-visualizer";
 import { defineConfig } from "vite";
 import type { Plugin } from "vite";
-import tsconfigPaths from "vite-tsconfig-paths";
 
 let EMIT_REPORT = process.env.EMIT_REPORT === "true";
 let SVG_SPRITE_LOGGING = process.env.RAILWAY === "true";
 
+declare module "@remix-run/node" {
+	interface Future {
+		unstable_singleFetch: true;
+	}
+}
+
 export default defineConfig({
 	plugins: [
 		createSvgSpritePlugin({ logging: SVG_SPRITE_LOGGING }),
-		tsconfigPaths(),
 		EMIT_REPORT ? visualizer({ emitFile: true }) : null,
 		remix({
 			future: {
