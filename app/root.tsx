@@ -17,8 +17,8 @@ import type { LinksFunction, MetaFunction } from "react-router";
 import { twMerge } from "tailwind-merge";
 import tailwindStyleHref from "tailwindcss/tailwind.css?url";
 
-import fontStyleHref from "~/assets/berkeley-mono.css?url";
-import type { Match } from "~/types/handle";
+import fontStyleHref from "./assets/berkeley-mono.css?url";
+import type { Match } from "./types/handle";
 
 export const meta: MetaFunction = () => {
 	return [
@@ -81,7 +81,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 	useFathom();
 
 	return (
-		<html lang="en" className="h-full">
+		<html lang="en" className="h-dvh">
 			<head>
 				<DefaultMeta />
 				<Meta />
@@ -90,7 +90,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 			<body
 				className={cn(
 					error
-						? "mx-auto flex min-h-screen w-[90%] max-w-5xl flex-col justify-center space-y-4 bg-blue-screen pt-20 text-center text-white"
+						? "mx-auto flex min-h-dvh w-[90%] max-w-5xl flex-col justify-center space-y-4 bg-blue-screen pt-20 text-center text-white"
 						: undefined,
 					handleBodyClassName,
 				)}

@@ -1,9 +1,11 @@
 import { cacheHeader } from "pretty-cache-header";
-import { data, useLoaderData } from "react-router";
+import { data } from "react-router";
 
-import { getMugshotURL } from "~/cloudinary.server";
-import { FunHoverLink } from "~/components/fun-link-hover";
-import type { RouteHandle } from "~/types/handle";
+import { getMugshotURL } from "#app/cloudinary.server.js";
+import { FunHoverLink } from "#app/components/fun-link-hover.js";
+import type { RouteHandle } from "#app/types/handle.js";
+
+import type * as Route from "./+types._index";
 
 export function loader() {
 	let srcSet = [240, 480, 720].map((size, index) => {
@@ -40,20 +42,20 @@ export const handle: RouteHandle = {
 	bodyClassName: "h-full font-thin dark:bg-slate-900 dark:text-white",
 };
 
-export default function IndexPage() {
-	let data = useLoaderData() as ReturnType<typeof loader>;
+export default function IndexPage({ loaderData }: Route.ComponentProps) {
+	console.log({ loaderData });
 
 	return (
 		<div className="mx-auto flex h-screen max-w-screen-md flex-col items-center justify-between px-4 text-center">
 			<div className="flex flex-1 flex-col items-center justify-center">
 				<img
-					width={data.data.me.size}
-					height={data.data.me.size}
+					width={loaderData.me.size}
+					height={loaderData.me.size}
 					alt=""
 					className="mx-auto size-60 rounded-full"
 					fetchPriority="high"
-					src={data.data.me.url}
-					srcSet={data.data.srcSet}
+					src={loaderData.me.url}
+					srcSet={loaderData.srcSet}
 				/>
 				<h1 className="mt-4 text-4xl">Logan McAnsh</h1>
 				<p className="mt-2 max-w-xs text-center text-lg sm:text-xl md:max-w-sm">

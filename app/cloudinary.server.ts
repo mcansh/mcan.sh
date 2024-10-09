@@ -19,7 +19,7 @@ function getCloudinaryURL(
 	return new URL(url);
 }
 
-let MUGSHOT = "website/zitzbp5hl2p5mdw8pdec" as const;
+let MUGSHOT = "website/x8sgp7p77r6dw37haus5924d" as const;
 
 export function getMugshotURL(transformations: TransformerOption = {}): URL {
 	return getCloudinaryURL(MUGSHOT, transformations);

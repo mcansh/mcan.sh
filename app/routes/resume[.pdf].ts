@@ -1,9 +1,10 @@
 import etag from "etag";
 import { chromium } from "playwright";
 import { cacheHeader } from "pretty-cache-header";
-import type { LoaderFunctionArgs } from "react-router";
 
-export async function loader({ request }: LoaderFunctionArgs) {
+import type * as Route from "./+types.resume[.pdf]";
+
+export async function loader({ request }: Route.LoaderArgs) {
 	console.info(`regenerating resume.pdf`);
 	let url = new URL(request.url);
 	let resume_url = new URL("resume", url.origin);

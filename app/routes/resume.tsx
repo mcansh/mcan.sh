@@ -1,13 +1,15 @@
 import { cacheHeader } from "pretty-cache-header";
-import type { LinksFunction, MetaFunction } from "react-router";
-import { data, Link, useLoaderData } from "react-router";
+import { json, Link } from "react-router";
+import type { MetaFunction, LinksFunction } from "react-router";
 import spriteHref from "virtual:@mcansh/vite-svg-sprite-plugin";
 
-import githubMarkIconHref from "~/assets/github-mark.svg";
-import linkedinIconHref from "~/assets/linkedin.svg";
+import githubMarkIconHref from "#app/assets/github-mark.svg";
+import linkedinIconHref from "#app/assets/linkedin.svg";
+
+import type * as Route from "./+types.resume";
 
 export function loader() {
-	return data(
+	return json(
 		{
 			experience: [
 				{
@@ -122,9 +124,7 @@ export const links: LinksFunction = () => {
 	];
 };
 
-export default function ResumePage() {
-	let data = useLoaderData() as Awaited<ReturnType<typeof loader>>;
-
+export default function ResumePage({ loaderData }: Route.ComponentProps) {
 	let links = [
 		{
 			href: "https://github.com/mcansh",
@@ -182,7 +182,7 @@ export default function ResumePage() {
 					<div className="print:text-[9pt]">
 						<h2 className="text-lg font-medium print:text-[11pt]">Skills</h2>
 						<ul className="space-y-1 print:space-y-0.5">
-							{data.data.skills.map((skill) => {
+							{loaderData.skills.map((skill) => {
 								return <li key={skill}>{skill}</li>;
 							})}
 						</ul>
@@ -193,7 +193,7 @@ export default function ResumePage() {
 							Certifications
 						</h2>
 						<ul className="space-y-1 print:space-y-0.5">
-							{data.data.certifications.map((certification) => {
+							{loaderData.data.certifications.map((certification) => {
 								return <li key={certification}>{certification}</li>;
 							})}
 						</ul>
@@ -204,7 +204,7 @@ export default function ResumePage() {
 							References
 						</h2>
 						<ul className="space-y-1 print:space-y-0.5">
-							{data.data.references.map((reference) => {
+							{loaderData.references.map((reference) => {
 								return (
 									<li key={reference.name}>
 										<h3>
@@ -231,7 +231,7 @@ export default function ResumePage() {
 							Work Experience
 						</h2>
 						<ul className="mt-4 space-y-8 print:mt-2 print:space-y-4">
-							{data.data.experience.map((job) => {
+							{loaderData.experience.map((job) => {
 								return (
 									<li key={job.company}>
 										<h3 className="text-xl print:text-[10pt] print:font-medium">
