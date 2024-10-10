@@ -1,5 +1,8 @@
 import { useNonce } from "@mcansh/http-helmet/react";
-import type { LinksFunction, MetaFunction } from "@remix-run/node";
+import { clsx } from "clsx";
+import type { ClassValue } from "clsx";
+import * as Fathom from "fathom-client";
+import * as React from "react";
 import {
 	isRouteErrorResponse,
 	Links,
@@ -10,11 +13,8 @@ import {
 	useLocation,
 	useMatches,
 	useRouteError,
-} from "@remix-run/react";
-import { clsx } from "clsx";
-import type { ClassValue } from "clsx";
-import * as Fathom from "fathom-client";
-import * as React from "react";
+} from "react-router";
+import type { LinksFunction, MetaFunction } from "react-router";
 import { twMerge } from "tailwind-merge";
 import tailwindStyleHref from "tailwindcss/tailwind.css?url";
 

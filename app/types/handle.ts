@@ -1,4 +1,4 @@
-import type { useMatches } from "@remix-run/react";
+import type { useMatches } from "react-router";
 
 export interface RouteHandle {
 	bodyClassName?: string;
