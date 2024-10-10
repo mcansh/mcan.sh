@@ -1,6 +1,5 @@
 import type { Config } from "tailwindcss";
 import defaultTheme from "tailwindcss/defaultTheme";
-
 import tailwindcssPaddingSafe from "tailwindcss-padding-safe";
 
 export default {
@@ -30,7 +29,7 @@ export default {
 				blue: {
 					screen: "#1000f2",
 				},
-				link: "#ea567c",
+				link: "#e53a40",
 			},
 			fontFamily: {
 				sans: ["Berkeley Mono", ...defaultTheme.fontFamily.sans],
