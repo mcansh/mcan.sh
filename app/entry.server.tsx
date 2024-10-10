@@ -108,6 +108,8 @@ function applySecurityHeaders(request: Request, responseHeaders: Headers) {
 
 	let url = new URL(request.url);
 
+	let fathomScriptDomain = "https://cdn.usefathom.com/script.js";
+
 	let nonce = createNonce();
 	let securityHeaders = createSecureHeaders({
 		"Content-Security-Policy": {
@@ -116,11 +118,11 @@ function applySecurityHeaders(request: Request, responseHeaders: Headers) {
 			"img-src": [
 				"'self'",
 				`https://res.cloudinary.com/${env.CLOUDINARY_CLOUD_NAME}/image/upload/`,
-				"https://thirtyseven-active.b-cdn.net",
+				fathomScriptDomain,
 			],
 			"script-src": [
 				"'self'",
-				"https://thirtyseven-active.b-cdn.net/script.js",
+				new URL("script.js", fathomScriptDomain).toString(),
 				new URL(
 					"cdn-cgi/scripts/*/cloudflare-static/email-decode.min.js",
 					url.origin,

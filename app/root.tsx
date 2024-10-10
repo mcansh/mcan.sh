@@ -7,6 +7,7 @@ import {
 	Outlet,
 	Scripts,
 	ScrollRestoration,
+	useLocation,
 	useMatches,
 	useRouteError,
 } from "@remix-run/react";
@@ -50,17 +51,24 @@ export const links: LinksFunction = () => {
 	];
 };
 
-function useFathom() {
-	let initialized = React.useRef(false);
+function TrackPageView() {
+	let location = useLocation();
+
 	React.useEffect(() => {
-		if (initialized.current) return;
-		initialized.current = true;
-		Fathom.load("EPVCGNZL", {
+		Fathom.load(import.meta.env.VITE_FATHOM_SITE_ID, {
 			excludedDomains: ["localhost"],
-			url: "https://thirtyseven-active.b-cdn.net/script.js",
-			spa: "auto",
+			auto: false,
 		});
 	}, []);
+
+	React.useEffect(() => {
+		Fathom.trackPageview({
+			url: location.pathname + location.search,
+			referrer: document.referrer,
+		});
+	}, [location.pathname, location.search]);
+
+	return null;
 }
 
 function useHandleBodyClassName() {
@@ -78,7 +86,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
 	let error = useRouteError();
 	let handleBodyClassName = useHandleBodyClassName();
 	let nonce = useNonce();
-	useFathom();
 
 	return (
 		<html lang="en" className="h-dvh">
@@ -95,6 +102,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 					handleBodyClassName,
 				)}
 			>
+				<TrackPageView />
 				{children}
 				<ScrollRestoration nonce={nonce} />
 				<Scripts nonce={nonce} />
