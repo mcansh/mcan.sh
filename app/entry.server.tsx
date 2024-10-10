@@ -115,7 +115,7 @@ function applySecurityHeaders(request: Request, responseHeaders: Headers) {
 			"default-src": ["'self'"],
 			"img-src": [
 				"'self'",
-				"https://res.cloudinary.com/dof0zryca/image/upload/",
+				`https://res.cloudinary.com/${env.CLOUDINARY_CLOUD_NAME}/image/upload/`,
 				"https://thirtyseven-active.b-cdn.net",
 			],
 			"script-src": [
