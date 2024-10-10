@@ -1,5 +1,5 @@
 import { useNonce } from "@mcansh/http-helmet/react";
-import type { LinksFunction, MetaFunction } from "@remix-run/node";
+import type { LinksFunction, MetaFunction } from "@remix-run/cloudflare";
 import {
 	isRouteErrorResponse,
 	Links,

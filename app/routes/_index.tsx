@@ -1,4 +1,4 @@
-import { unstable_data } from "@remix-run/node";
+import { unstable_data } from "@remix-run/cloudflare";
 import { useLoaderData } from "@remix-run/react";
 import { cacheHeader } from "pretty-cache-header";
 

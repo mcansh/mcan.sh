@@ -1,4 +1,4 @@
-import type { LoaderFunctionArgs } from "@remix-run/node";
+import type { LoaderFunctionArgs } from "@remix-run/cloudflare";
 import createEtag from "etag";
 
 let uniqueIconSizes = new Set([

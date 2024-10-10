@@ -1,83 +1,53 @@
-import { PassThrough } from "node:stream";
-
 import { createSecureHeaders, mergeHeaders } from "@mcansh/http-helmet";
 import { NonceProvider, createNonce } from "@mcansh/http-helmet/react";
 import type {
 	AppLoadContext,
 	EntryContext,
 	HandleDataRequestFunction,
-} from "@remix-run/node";
-import { createReadableStreamFromReadable } from "@remix-run/node";
+} from "@remix-run/cloudflare";
 import { RemixServer } from "@remix-run/react";
 import { isbot } from "isbot";
-import { renderToPipeableStream } from "react-dom/server";
+import { renderToReadableStream } from "react-dom/server";
 import { isPrefetch } from "remix-utils/is-prefetch";
 import { preloadRouteAssets } from "remix-utils/preload-route-assets";
 
 import { env } from "./env.server";
 
-// Reject all pending promises from handler functions after timeout
-export const streamTimeout = 5_000;
-// Automatically timeout the react renderer after timeout
-const ABORT_DELAY = 5_000;
-
-export default function handleRequest(
+export default async function handleRequest(
 	request: Request,
 	responseStatusCode: number,
 	responseHeaders: Headers,
 	remixContext: EntryContext,
 	_loadContext: AppLoadContext,
 ) {
-	let callback = isbot(request.headers.get("user-agent"))
-		? "onAllReady"
-		: "onShellReady";
-
 	preloadRouteAssets(remixContext, responseHeaders);
 
 	let { nonce, headers } = applySecurityHeaders(request, responseHeaders);
 
-	return new Promise((resolve, reject) => {
-		let shellRendered = false;
-		let { pipe, abort } = renderToPipeableStream(
-			<NonceProvider nonce={nonce}>
-				<RemixServer
-					context={remixContext}
-					url={request.url}
-					abortDelay={ABORT_DELAY}
-					nonce={nonce}
-				/>
-			</NonceProvider>,
-			{
-				nonce,
-				[callback]() {
-					shellRendered = true;
-					let body = new PassThrough();
-					let stream = createReadableStreamFromReadable(body);
-
-					headers.set("Content-Type", "text/html");
-
-					resolve(
-						new Response(stream, { headers, status: responseStatusCode }),
-					);
-
-					pipe(body);
-				},
-				onShellError(error: unknown) {
-					reject(error);
-				},
-				onError(error: unknown) {
-					responseStatusCode = 500;
-					// Log streaming rendering errors from inside the shell.  Don't log
-					// errors encountered during initial shell rendering since they'll
-					// reject and get logged in handleDocumentRequest.
-					if (shellRendered) {
-						console.error(error);
-					}
-				},
+	let body = await renderToReadableStream(
+		<NonceProvider nonce={nonce}>
+			<RemixServer context={remixContext} url={request.url} nonce={nonce} />
+		</NonceProvider>,
+		{
+			nonce,
+			signal: request.signal,
+			onError(error: unknown) {
+				// Log streaming rendering errors from inside the shell.
+				console.error(error);
+				responseStatusCode = 500;
 			},
-		);
+		},
+	);
 
-		setTimeout(abort, ABORT_DELAY);
+	if (isbot(request.headers.get("user-agent"))) {
+		await body.allReady;
+	}
+
+	headers.set("Content-Type", "text/html");
+
+	return new Response(body, {
+		headers,
+		status: responseStatusCode,
 	});
 }
 
