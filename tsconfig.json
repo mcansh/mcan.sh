@@ -8,6 +8,7 @@
 		"**/.client/**/*.ts",
 		"**/.client/**/*.tsx"
 	],
+	"exclude": ["build", "node_modules"],
 	"compilerOptions": {
 		"types": [
 			"@remix-run/node",
