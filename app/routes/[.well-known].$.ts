@@ -1,6 +1,6 @@
 import type { LoaderFunctionArgs } from "@remix-run/cloudflare";
 
-import { getMugshotURL } from "#app/cloudinary.server.js";
+import { getMugshotURL } from "#app/.server/cloudinary.js";
 
 export function loader({ params }: LoaderFunctionArgs) {
 	let splat = params["*"];

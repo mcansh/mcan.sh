@@ -11,7 +11,7 @@ import { renderToReadableStream } from "react-dom/server";
 import { isPrefetch } from "remix-utils/is-prefetch";
 import { preloadRouteAssets } from "remix-utils/preload-route-assets";
 
-import { env } from "./env.server";
+import { env } from "./.server/env";
 
 export default async function handleRequest(
 	request: Request,

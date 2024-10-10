@@ -2,7 +2,7 @@ import { unstable_data } from "@remix-run/cloudflare";
 import { useLoaderData } from "@remix-run/react";
 import { cacheHeader } from "pretty-cache-header";
 
-import { getMugshotURL } from "#app/cloudinary.server.js";
+import { getMugshotURL } from "#app/.server/cloudinary.js";
 import { FunHoverLink } from "#app/components/fun-link-hover.js";
 import type { RouteHandle } from "#app/types/handle.js";
 

@@ -17,6 +17,9 @@ importers:
       '@mcansh/http-helmet':
         specifier: ^0.11.1
         version: 0.11.1(react-dom@19.0.0-rc-ed966dac-20241007(react@19.0.0-rc-ed966dac-20241007))(react@19.0.0-rc-ed966dac-20241007)
+      '@oslojs/crypto':
+        specifier: ^1.0.1
+        version: 1.0.1
       '@remix-run/cloudflare':
         specifier: ^2.12.1
         version: 2.12.1(@cloudflare/workers-types@4.20241004.0)(typescript@5.6.3)
@@ -38,9 +41,6 @@ importers:
       cross-env:
         specifier: ^7.0.3
         version: 7.0.3
-      etag:
-        specifier: ^1.8.1
-        version: 1.8.1
       fathom-client:
         specifier: ^3.7.2
         version: 3.7.2
@@ -81,9 +81,6 @@ importers:
       '@total-typescript/tsconfig':
         specifier: ^1.0.4
         version: 1.0.4
-      '@types/etag':
-        specifier: ^1.8.3
-        version: 1.8.3
       '@types/react':
         specifier: npm:types-react@19.0.0-alpha.3
         version: types-react@19.0.0-alpha.3
@@ -949,6 +946,15 @@ packages:
     resolution: {integrity: sha512-gGq0NJkIGSwdbUt4yhdF8ZrmkGKVz9vAdVzpOfnom+V8PLSmSOVhZwbNvZZS1EYcJN5hzzKBxmmVVAInM6HQLg==}
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
 
+  '@oslojs/asn1@1.0.0':
+    resolution: {integrity: sha512-zw/wn0sj0j0QKbIXfIlnEcTviaCzYOY3V5rAyjR6YtOByFtJiT574+8p9Wlach0lZH9fddD4yb9laEAIl4vXQA==}
+
+  '@oslojs/binary@1.0.0':
+    resolution: {integrity: sha512-9RCU6OwXU6p67H4NODbuxv2S3eenuQ4/WFLrsq+K/k682xrznH5EVWA7N4VFk9VYVcbFtKqur5YQQZc0ySGhsQ==}
+
+  '@oslojs/crypto@1.0.1':
+    resolution: {integrity: sha512-7n08G8nWjAr/Yu3vu9zzrd0L9XnrJfpMioQcvCMxBIiF5orECHe5/3J0jmXRVvgfqMm/+4oxlQ+Sq39COYLcNQ==}
+
   '@pkgjs/parseargs@0.11.0':
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
     engines: {node: '>=14'}
@@ -1155,9 +1161,6 @@ packages:
 
   '@types/estree@1.0.5':
     resolution: {integrity: sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==}
-
-  '@types/etag@1.8.3':
-    resolution: {integrity: sha512-QYHv9Yeh1ZYSMPQOoxY4XC4F1r+xRUiAriB303F4G6uBsT3KKX60DjiogvVv+2VISVDuJhcIzMdbjT+Bm938QQ==}
 
   '@types/hast@2.3.10':
     resolution: {integrity: sha512-McWspRw8xx8J9HurkVBfYj0xKoE25tOFlHGdx4MJ5xORQrMGZNqJhVQWaIbm6Oyla5kYOXtDiopzKRJzEOkwJw==}
@@ -4507,9 +4510,6 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
-  ufo@1.5.3:
-    resolution: {integrity: sha512-Y7HYmWaFwPUmkoQCUIAYpKqkOf+SbVj/2fJJZ4RJMCfZp0rTGwRbzQD+HghfnhKOjL9E01okqz+ncJskGYfBNw==}
-
   ufo@1.5.4:
     resolution: {integrity: sha512-UsUk3byDzKd04EyoZ7U4DOlxQaD14JUKQl6/P7wiX4FNvUfm3XL246n9W5AmqwW5RSFJ27NAuM0iLscAOYUiGQ==}
 
@@ -5444,6 +5444,17 @@ snapshots:
     dependencies:
       which: 3.0.1
 
+  '@oslojs/asn1@1.0.0':
+    dependencies:
+      '@oslojs/binary': 1.0.0
+
+  '@oslojs/binary@1.0.0': {}
+
+  '@oslojs/crypto@1.0.1':
+    dependencies:
+      '@oslojs/asn1': 1.0.0
+      '@oslojs/binary': 1.0.0
+
   '@pkgjs/parseargs@0.11.0':
     optional: true
 
@@ -5682,10 +5693,6 @@ snapshots:
 
   '@types/estree@1.0.5': {}
 
-  '@types/etag@1.8.3':
-    dependencies:
-      '@types/node': 20.12.7
-
   '@types/hast@2.3.10':
     dependencies:
       '@types/unist': 2.0.10
@@ -5849,7 +5856,7 @@ snapshots:
       '@babel/plugin-syntax-typescript': 7.24.1(@babel/core@7.24.4)
       '@vanilla-extract/babel-plugin-debug-ids': 1.0.5
       '@vanilla-extract/css': 1.14.2
-      esbuild: 0.17.6
+      esbuild: 0.17.19
       eval: 0.1.8
       find-up: 5.0.0
       javascript-stringify: 2.1.0
@@ -8283,7 +8290,7 @@ snapshots:
       acorn: 8.12.1
       pathe: 1.1.2
       pkg-types: 1.0.3
-      ufo: 1.5.3
+      ufo: 1.5.4
 
   modern-ahocorasick@1.0.1: {}
 
@@ -9519,8 +9526,6 @@ snapshots:
       csstype: 3.1.3
 
   typescript@5.6.3: {}
-
-  ufo@1.5.3: {}
 
   ufo@1.5.4: {}
 

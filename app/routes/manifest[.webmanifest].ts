@@ -1,5 +1,6 @@
 import type { LoaderFunctionArgs } from "@remix-run/cloudflare";
-import createEtag from "etag";
+
+import { createEtag } from "#app/.server/etag.js";
 
 let uniqueIconSizes = new Set([
 	32, 57, 72, 96, 120, 128, 144, 152, 195, 228, 512,
@@ -12,7 +13,7 @@ export let iconSizes = [...uniqueIconSizes].map((size) => {
 	};
 });
 
-export function loader({ request }: LoaderFunctionArgs) {
+export async function loader({ request }: LoaderFunctionArgs) {
 	let content = {
 		name: "Logan McAnsh",
 		short_name: "LM",
@@ -26,7 +27,7 @@ export function loader({ request }: LoaderFunctionArgs) {
 
 	let manifest = JSON.stringify(content, null, 2);
 
-	let etag = createEtag(manifest);
+	let etag = await createEtag(manifest);
 
 	if (request.headers.get("If-None-Match") === etag) {
 		return new Response(null, {

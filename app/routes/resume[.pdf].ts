@@ -1,7 +1,8 @@
 import type { LoaderFunctionArgs } from "@remix-run/server-runtime";
-import createEtag from "etag";
 import { chromium } from "playwright";
 import { cacheHeader } from "pretty-cache-header";
+
+import { createEtag } from "#app/.server/etag.js";
 
 export async function loader({ request }: LoaderFunctionArgs) {
 	console.info(`regenerating resume.pdf`);
@@ -24,7 +25,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
 		printBackground: true,
 	});
 
-	let etag = createEtag(pdf);
+	let etag = await createEtag(pdf);
 	await browser.close();
 
 	if (request.headers.get("If-None-Match") === etag) {

@@ -26,6 +26,7 @@
 	},
 	"dependencies": {
 		"@mcansh/http-helmet": "^0.11.1",
+		"@oslojs/crypto": "^1.0.1",
 		"@remix-run/cloudflare": "^2.12.1",
 		"@remix-run/cloudflare-workers": "^2.12.1",
 		"@remix-run/react": "^2.12.1",
@@ -33,7 +34,6 @@
 		"cloudinary-build-url": "^0.2.4",
 		"clsx": "^2.1.1",
 		"cross-env": "^7.0.3",
-		"etag": "^1.8.1",
 		"fathom-client": "^3.7.2",
 		"isbot": "^5.1.17",
 		"playwright": "^1.48.0",
@@ -49,7 +49,6 @@
 		"@mcansh/vite-svg-sprite-plugin": "^0.4.2",
 		"@remix-run/dev": "^2.12.1",
 		"@total-typescript/tsconfig": "^1.0.4",
-		"@types/etag": "^1.8.3",
 		"@types/react": "npm:types-react@19.0.0-alpha.3",
 		"@types/react-dom": "npm:types-react-dom@19.0.0-alpha.3",
 		"@typescript-eslint/eslint-plugin": "^8.8.1",

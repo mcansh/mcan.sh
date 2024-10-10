@@ -11,7 +11,7 @@
 	"exclude": ["build", "node_modules"],
 	"compilerOptions": {
 		"types": [
-			"@remix-run/node",
+			"@remix-run/cloudflare",
 			"vite/client",
 			"react/canary",
 			"react-dom/canary",
