@@ -111,7 +111,6 @@ function applySecurityHeaders(request: Request, responseHeaders: Headers) {
 	let nonce = createNonce();
 	let securityHeaders = createSecureHeaders({
 		"Content-Security-Policy": {
-			upgradeInsecureRequests: process.env.NODE_ENV === "production",
 			"base-uri": ["'self'"],
 			"default-src": ["'self'"],
 			"img-src": [
@@ -185,15 +184,20 @@ function applySecurityHeaders(request: Request, responseHeaders: Headers) {
 		"Cross-Origin-Opener-Policy": "same-origin",
 	});
 
-	let merged = mergeHeaders(responseHeaders, securityHeaders);
+	responseHeaders = mergeHeaders(responseHeaders, securityHeaders);
 
 	let permissionsPolicy = securityHeaders.get("Permissions-Policy");
 
 	if (permissionsPolicy) {
-		merged.set("Feature-Policy", permissionsPolicy);
+		responseHeaders.set("Feature-Policy", permissionsPolicy);
 	}
 
-	merged.set(`Expect-CT`, `report-uri="${env.SENTRY_REPORT_URL}"`);
+	responseHeaders.set(`Expect-CT`, `report-uri="${env.SENTRY_REPORT_URL}"`);
 
-	return { nonce, headers: merged };
+	// TODO: fix upstream in @mcansh/http-helmet
+	if (process.env.NODE_ENV === "production") {
+		responseHeaders.append("Upgrade-Insecure-Requests", "1");
+	}
+
+	return { nonce, headers: responseHeaders };
 }
