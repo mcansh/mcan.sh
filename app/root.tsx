@@ -19,6 +19,7 @@ import { twMerge } from "tailwind-merge";
 import tailwindStyleHref from "tailwindcss/tailwind.css?url";
 
 import fontStyleHref from "./assets/berkeley-mono.css?url";
+import { iconSizes } from "./routes/manifest[.webmanifest]";
 import type { Match } from "./types/handle";
 
 export const meta: MetaFunction = () => {
@@ -31,12 +32,8 @@ export const meta: MetaFunction = () => {
 };
 
 export const links: LinksFunction = () => {
-	let icons = [32, 57, 72, 96, 120, 128, 144, 152, 195, 228].map((icon) => {
-		return {
-			href: `/logo-${icon}.png`,
-			sizes: `${icon}x${icon}`,
-			rel: "apple-touch-icon",
-		};
+	let icons = iconSizes.map((icon) => {
+		return { href: icon.src, sizes: icon.sizes, rel: "apple-touch-icon" };
 	});
 
 	return [
