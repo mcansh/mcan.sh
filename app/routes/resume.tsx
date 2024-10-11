@@ -1,5 +1,5 @@
-import { unstable_data } from "@remix-run/node";
-import type { LinksFunction } from "@remix-run/node";
+import { unstable_data } from "@remix-run/cloudflare";
+import type { LinksFunction } from "@remix-run/cloudflare";
 import type { MetaFunction } from "@remix-run/react";
 import { useLoaderData } from "@remix-run/react";
 import { cacheHeader } from "pretty-cache-header";

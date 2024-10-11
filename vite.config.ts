@@ -1,13 +1,15 @@
 import { createSvgSpritePlugin } from "@mcansh/vite-svg-sprite-plugin";
-import { vitePlugin as remix } from "@remix-run/dev";
+import {
+	cloudflareDevProxyVitePlugin,
+	vitePlugin as remix,
+} from "@remix-run/dev";
 import { visualizer } from "rollup-plugin-visualizer";
 import { defineConfig } from "vite";
 import type { Plugin } from "vite";
 
 let EMIT_REPORT = process.env.EMIT_REPORT === "true";
-let SVG_SPRITE_LOGGING = process.env.RAILWAY === "true";
 
-declare module "@remix-run/node" {
+declare module "@remix-run/cloudflare" {
 	interface Future {
 		unstable_singleFetch: true;
 	}
@@ -15,7 +17,8 @@ declare module "@remix-run/node" {
 
 export default defineConfig({
 	plugins: [
-		createSvgSpritePlugin({ logging: SVG_SPRITE_LOGGING }),
+		cloudflareDevProxyVitePlugin(),
+		createSvgSpritePlugin(),
 		EMIT_REPORT ? visualizer({ emitFile: true }) : null,
 		remix({
 			future: {
@@ -27,5 +30,13 @@ export default defineConfig({
 			},
 		}),
 	].filter((plugin: unknown): plugin is Plugin => plugin != null),
-	build: { cssMinify: "lightningcss" },
+	build: { cssMinify: "lightningcss", minify: true },
+	ssr: {
+		resolve: {
+			conditions: ["workerd", "worker", "browser"],
+		},
+	},
+	resolve: {
+		mainFields: ["browser", "module", "main"],
+	},
 });

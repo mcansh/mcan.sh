@@ -1,7 +1,8 @@
 import type { LoaderFunctionArgs } from "@remix-run/server-runtime";
-import etag from "etag";
 import { chromium } from "playwright";
 import { cacheHeader } from "pretty-cache-header";
+
+import { createEtag } from "#app/.server/etag.js";
 
 export async function loader({ request }: LoaderFunctionArgs) {
 	console.info(`regenerating resume.pdf`);
@@ -24,10 +25,10 @@ export async function loader({ request }: LoaderFunctionArgs) {
 		printBackground: true,
 	});
 
-	let etagValue = etag(pdf);
+	let etag = await createEtag(pdf);
 	await browser.close();
 
-	if (request.headers.get("If-None-Match") === etagValue) {
+	if (request.headers.get("If-None-Match") === etag) {
 		return new Response(null, { status: 304 });
 	}
 
@@ -41,7 +42,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
 			"Content-Disposition": "inline; filename=Logan McAnsh.pdf",
 			"Content-Length": pdf.byteLength.toString(),
 			"Content-Type": "application/pdf",
-			ETag: etagValue,
+			ETag: etag,
 		},
 	});
 }
