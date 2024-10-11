@@ -1,13 +1,13 @@
 import { remixFastify } from "@mcansh/remix-fastify";
-import { installGlobals } from "@remix-run/node";
 import { ip as ipAddress } from "address";
 import { fastify } from "fastify";
 
-installGlobals({ nativeFetch: true });
-
 let app = fastify();
 
-app.register(remixFastify, { mode: process.env.NODE_ENV });
+app.register(remixFastify, {
+	mode: process.env.NODE_ENV,
+	virtualModule: "virtual:react-router/server-build",
+});
 
 let port = Number(process.env.PORT) || 5173;
 let host = process.env.HOST || "localhost";

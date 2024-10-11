@@ -11,7 +11,7 @@
 		"#*": "./*"
 	},
 	"scripts": {
-		"build": "npm run typecheck && remix vite:build",
+		"build": "npm run typecheck && react-router build",
 		"clean": "./scripts/clean.js",
 		"typecheck": "node ./scripts/cli.js typecheck",
 		"lint": "node ./scripts/cli.js lint",
@@ -23,12 +23,11 @@
 		"knip": "knip-bun"
 	},
 	"dependencies": {
-		"@mcansh/http-helmet": "^0.11.1",
-		"@mcansh/remix-fastify": "https://pkg.pr.new/@mcansh/remix-fastify@428",
-		"@remix-run/node": "^2.12.1",
-		"@remix-run/react": "^2.12.1",
-		"@remix-run/server-runtime": "^2.12.1",
+		"@mcansh/http-helmet": "0.11.1",
+		"@mcansh/remix-fastify": "https://pkg.pr.new/@mcansh/remix-fastify@7356798",
+		"@react-router/node": "0.0.0-nightly-6c7c5147c-20241008",
 		"address": "^2.0.3",
+		"change-case": "^5.4.4",
 		"cloudinary-build-url": "^0.2.4",
 		"clsx": "^2.1.1",
 		"cross-env": "^7.0.3",
@@ -40,6 +39,7 @@
 		"pretty-cache-header": "^1.0.0",
 		"react": "19.0.0-rc-ed966dac-20241007",
 		"react-dom": "19.0.0-rc-ed966dac-20241007",
+		"react-router": "0.0.0-nightly-6c7c5147c-20241008",
 		"remix-utils": "^7.7.0",
 		"tailwind-merge": "^2.5.3",
 		"zod": "^3.23.8"
@@ -47,11 +47,12 @@
 	"devDependencies": {
 		"@cld-apis/types": "^0.1.6",
 		"@mcansh/vite-svg-sprite-plugin": "^0.4.2",
+		"@react-router/dev": "0.0.0-nightly-6c7c5147c-20241008",
 		"@remix-run/dev": "^2.12.1",
 		"@total-typescript/tsconfig": "^1.0.4",
 		"@types/etag": "^1.8.3",
-		"@types/react": "npm:types-react@19.0.0-alpha.3",
-		"@types/react-dom": "npm:types-react-dom@19.0.0-alpha.3",
+		"@types/react": "npm:types-react@19.0.0-rc.1",
+		"@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
 		"@typescript-eslint/eslint-plugin": "^8.8.1",
 		"@typescript-eslint/parser": "^8.8.1",
 		"@typescript/lib-dom": "npm:@types/web@^0.0.169",
@@ -71,7 +72,6 @@
 		"npm-run-all": "^4.1.5",
 		"postcss": "^8.4.47",
 		"postcss-100vh-fix": "^1.0.2",
-		"precinct": "^12.1.2",
 		"prettier": "^3.3.3",
 		"prettier-plugin-tailwindcss": "^0.6.8",
 		"rollup-plugin-visualizer": "^5.12.0",
