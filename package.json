@@ -46,7 +46,7 @@
 	},
 	"devDependencies": {
 		"@cld-apis/types": "^0.1.6",
-		"@mcansh/vite-svg-sprite-plugin": "^0.4.2",
+		"@mcansh/vite-plugin-svg-sprite": "0.0.0-experimental-3b96418",
 		"@remix-run/dev": "^2.12.1",
 		"@total-typescript/tsconfig": "^1.0.4",
 		"@types/etag": "^1.8.3",

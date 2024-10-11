@@ -1,4 +1,4 @@
-import { createSvgSpritePlugin } from "@mcansh/vite-svg-sprite-plugin";
+import { svgSprite } from "@mcansh/vite-plugin-svg-sprite";
 import { vitePlugin as remix } from "@remix-run/dev";
 import { visualizer } from "rollup-plugin-visualizer";
 import { defineConfig } from "vite";
@@ -6,6 +6,8 @@ import type { Plugin } from "vite";
 
 let EMIT_REPORT = process.env.EMIT_REPORT === "true";
 let SVG_SPRITE_LOGGING = process.env.RAILWAY === "true";
+
+console.log({ SVG_SPRITE_LOGGING });
 
 declare module "@remix-run/node" {
 	interface Future {
@@ -15,7 +17,7 @@ declare module "@remix-run/node" {
 
 export default defineConfig({
 	plugins: [
-		createSvgSpritePlugin({ logging: SVG_SPRITE_LOGGING }),
+		svgSprite({ logging: SVG_SPRITE_LOGGING }),
 		EMIT_REPORT ? visualizer({ emitFile: true }) : null,
 		remix({
 			future: {
