@@ -120,7 +120,7 @@ function applySecurityHeaders(request: Request, responseHeaders: Headers) {
 			],
 			"script-src": [
 				"'self'",
-				"https://cdn.usefathom.com/script.js"
+				"https://cdn.usefathom.com/script.js",
 				new URL(
 					"cdn-cgi/scripts/*/cloudflare-static/email-decode.min.js",
 					url.origin,
