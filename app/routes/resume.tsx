@@ -3,7 +3,7 @@ import type { LinksFunction } from "@remix-run/node";
 import type { MetaFunction } from "@remix-run/react";
 import { useLoaderData } from "@remix-run/react";
 import { cacheHeader } from "pretty-cache-header";
-import spriteHref from "virtual:@mcansh/vite-svg-sprite-plugin";
+import spriteHref from "virtual:@mcansh/vite-plugin-svg-sprite";
 
 import githubMarkIconHref from "#app/assets/github-mark.svg";
 import linkedinIconHref from "#app/assets/linkedin.svg";
