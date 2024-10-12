@@ -1,7 +1,7 @@
 import { unstable_data } from "@remix-run/node";
 import type { LinksFunction } from "@remix-run/node";
 import type { MetaFunction } from "@remix-run/react";
-import { useLoaderData } from "@remix-run/react";
+import { Link, useLoaderData } from "@remix-run/react";
 import { cacheHeader } from "pretty-cache-header";
 import spriteHref from "virtual:@mcansh/vite-plugin-svg-sprite";
 
@@ -143,7 +143,11 @@ export default function ResumePage() {
 	return (
 		<div className="flex h-full flex-col">
 			<header className="flex flex-col items-center justify-center space-y-2 bg-stone-800 py-6 text-center text-white print:py-3">
-				<h1 className="text-3xl print:text-xl">Logan McAnsh</h1>
+				<h1 className="text-3xl print:text-xl">
+					<Link to="/">
+						Logan McAnsh
+					</Link>
+				</h1>
 				<p className="text-lg print:text-base">Senior Software Engineer</p>
 			</header>
 
