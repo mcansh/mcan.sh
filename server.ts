@@ -4,6 +4,7 @@ import type { ServerBuild } from "@remix-run/cloudflare";
 // eslint-disable-next-line import/no-unresolved
 import __STATIC_CONTENT_MANIFEST from "__STATIC_CONTENT_MANIFEST";
 
+import { envSchema } from "./app/.server/env.js";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore - this file wont exist until after the build
 import * as build from "./build/server";
@@ -38,6 +39,7 @@ export default {
 		}
 
 		try {
+			let result = envSchema.parse(env);
 			let loadContext = {
 				cloudflare: {
 					// This object matches the return value from Wrangler's
@@ -47,8 +49,9 @@ export default {
 					cf: request.cf,
 					ctx: { waitUntil, passThroughOnException },
 					caches,
-					env,
+					env: env,
 				},
+				env: result,
 			};
 
 			// @ts-expect-error - hush

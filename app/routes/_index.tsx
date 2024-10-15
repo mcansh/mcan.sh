@@ -1,4 +1,5 @@
 import { unstable_data } from "@remix-run/cloudflare";
+import type { LoaderFunctionArgs } from "@remix-run/cloudflare";
 import { useLoaderData } from "@remix-run/react";
 import { cacheHeader } from "pretty-cache-header";
 
@@ -6,9 +7,9 @@ import { getMugshotURL } from "#app/.server/cloudinary.js";
 import { FunHoverLink } from "#app/components/fun-link-hover.js";
 import type { RouteHandle } from "#app/types/handle.js";
 
-export function loader() {
+export function loader({ context }: LoaderFunctionArgs) {
 	let srcSet = [240, 480, 720].map((size, index) => {
-		let url = getMugshotURL({
+		let url = getMugshotURL(context, {
 			resize: { type: "fill", width: size, height: size },
 		});
 

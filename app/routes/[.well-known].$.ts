@@ -2,7 +2,7 @@ import type { LoaderFunctionArgs } from "@remix-run/cloudflare";
 
 import { getMugshotURL } from "#app/.server/cloudinary.js";
 
-export function loader({ params }: LoaderFunctionArgs) {
+export function loader({ context, params }: LoaderFunctionArgs) {
 	let splat = params["*"];
 
 	if (!splat) throw new Response(null, { status: 404 });
@@ -15,7 +15,7 @@ export function loader({ params }: LoaderFunctionArgs) {
 	segments = segments.slice(0, -1);
 
 	// get the original image using our default transformations
-	let image = getMugshotURL();
+	let image = getMugshotURL(context);
 
 	// split the pathname into segments
 	let pathSegments = image.pathname.split("/").filter(Boolean);

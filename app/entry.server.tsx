@@ -11,18 +11,20 @@ import { renderToReadableStream } from "react-dom/server";
 import { isPrefetch } from "remix-utils/is-prefetch";
 import { preloadRouteAssets } from "remix-utils/preload-route-assets";
 
-import { env } from "./.server/env";
-
 export default async function handleRequest(
 	request: Request,
 	responseStatusCode: number,
 	responseHeaders: Headers,
 	remixContext: EntryContext,
-	_loadContext: AppLoadContext,
+	loadContext: AppLoadContext,
 ) {
 	preloadRouteAssets(remixContext, responseHeaders);
 
-	let { nonce, headers } = applySecurityHeaders(request, responseHeaders);
+	let { nonce, headers } = applySecurityHeaders(
+		loadContext,
+		request,
+		responseHeaders,
+	);
 
 	let body = await renderToReadableStream(
 		<NonceProvider nonce={nonce}>
@@ -53,7 +55,7 @@ export default async function handleRequest(
 
 export let handleDataRequest: HandleDataRequestFunction = async (
 	response,
-	{ request },
+	{ context, request },
 ) => {
 	// if it's a GET request and it's a prefetch request
 	// and it doesn't already have a Cache-Control header
@@ -66,12 +68,16 @@ export let handleDataRequest: HandleDataRequestFunction = async (
 		response.headers.set("Cache-Control", "private, max-age=10");
 	}
 
-	applySecurityHeaders(request, response.headers);
+	applySecurityHeaders(context, request, response.headers);
 
 	return response;
 };
 
-function applySecurityHeaders(request: Request, responseHeaders: Headers) {
+function applySecurityHeaders(
+	loadContext: AppLoadContext,
+	request: Request,
+	responseHeaders: Headers,
+) {
 	if (process.env.NODE_ENV === "development") {
 		responseHeaders.set("Cache-Control", "no-cache");
 	}
@@ -87,7 +93,7 @@ function applySecurityHeaders(request: Request, responseHeaders: Headers) {
 			"default-src": ["'self'"],
 			"img-src": [
 				"'self'",
-				`https://res.cloudinary.com/${env.CLOUDINARY_CLOUD_NAME}/image/upload/`,
+				`https://res.cloudinary.com/${loadContext.env.CLOUDINARY_CLOUD_NAME}/image/upload/`,
 				fathomScriptDomain,
 			],
 			"script-src": [
@@ -107,7 +113,7 @@ function applySecurityHeaders(request: Request, responseHeaders: Headers) {
 					: ["'self'", "ws:"]),
 			],
 			"worker-src": ["blob:"],
-			"report-uri": [env.SENTRY_REPORT_URL],
+			"report-uri": [loadContext.env.SENTRY_REPORT_URL],
 		},
 		"Referrer-Policy": "origin-when-cross-origin",
 		"X-Frame-Options": "DENY",
@@ -164,7 +170,10 @@ function applySecurityHeaders(request: Request, responseHeaders: Headers) {
 		responseHeaders.set("Feature-Policy", permissionsPolicy);
 	}
 
-	responseHeaders.set(`Expect-CT`, `report-uri="${env.SENTRY_REPORT_URL}"`);
+	responseHeaders.set(
+		`Expect-CT`,
+		`report-uri="${loadContext.env.SENTRY_REPORT_URL}"`,
+	);
 
 	// TODO: fix upstream in @mcansh/http-helmet
 	if (process.env.NODE_ENV === "production") {

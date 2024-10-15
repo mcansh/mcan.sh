@@ -3,10 +3,16 @@ name = "personal-website"
 main = "./server.ts"
 workers_dev = true
 # https://developers.cloudflare.com/workers/platform/compatibility-dates
-compatibility_date = "2023-04-20"
+compatibility_flags = ["nodejs_compat"]
+compatibility_date = "2024-09-23"
+
+[observability]
+enabled = true
 
 [site]
 bucket = "./build/client"
 
 [build]
-command = "npm run build"
+command = "pnpm run build"
+
+browser = { binding = "MYBROWSER" }
