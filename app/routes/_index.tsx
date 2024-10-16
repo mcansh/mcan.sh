@@ -61,7 +61,7 @@ export default function IndexPage() {
 					Senior Software Engineer
 				</p>
 				<h2 className="mt-2">Current: United Wholesale Mortgage</h2>
-				<pre className="mt-2 font-thin">Past: Shopify x Remix</pre>
+				<pre className="mt-2 font-thin">Past: Shopify, Remix, & Powerley</pre>
 			</div>
 			<div className="flex space-x-4 pb-8 media-standalone:pb-0">
 				<FunHoverLink to="https://github.com/mcansh">GitHub</FunHoverLink>
