@@ -6,4 +6,4 @@ export let envSchema = z.object({
 	VITE_FATHOM_SITE_ID: z.string().min(1),
 });
 
-export type Env = z.infer<typeof envSchema>;
+export type AppEnv = z.infer<typeof envSchema>;

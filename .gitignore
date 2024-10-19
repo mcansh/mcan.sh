@@ -12,3 +12,4 @@ yalc.lock
 .yalc
 
 .wrangler
+.dev.vars

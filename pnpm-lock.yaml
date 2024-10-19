@@ -69,9 +69,9 @@ importers:
       '@cld-apis/types':
         specifier: ^0.1.6
         version: 0.1.6
-      '@mcansh/vite-svg-sprite-plugin':
-        specifier: ^0.4.2
-        version: 0.4.2(vite@5.4.8(@types/node@20.12.7)(lightningcss@1.27.0))
+      '@mcansh/vite-plugin-svg-sprite':
+        specifier: 0.0.0-experimental-3b96418
+        version: 0.0.0-experimental-3b96418(vite@5.4.9(@types/node@20.12.7)(lightningcss@1.27.0))
       '@remix-run/dev':
         specifier: ^2.12.1
         version: 2.12.1(@remix-run/react@2.12.1(react-dom@19.0.0-rc-ed966dac-20241007(react@19.0.0-rc-ed966dac-20241007))(react@19.0.0-rc-ed966dac-20241007)(typescript@5.6.3))(@types/node@20.12.7)(lightningcss@1.27.0)(typescript@5.6.3)(vite@5.4.8(@types/node@20.12.7)(lightningcss@1.27.0))(wrangler@3.80.3(@cloudflare/workers-types@4.20241004.0))
@@ -902,8 +902,8 @@ packages:
       react-dom:
         optional: true
 
-  '@mcansh/vite-svg-sprite-plugin@0.4.2':
-    resolution: {integrity: sha512-GSKyyovhend0uGyii0sLfvozxryQRP1TJGyXtvZP0ZzZJelfN01U9k4000wUvH3CPv3W6sLLuMhMtjUgjX3uHg==}
+  '@mcansh/vite-plugin-svg-sprite@0.0.0-experimental-3b96418':
+    resolution: {integrity: sha512-56oh+g7S/gd7j3CTxqY7n+4AeqjNTf9zjp7d+U8zqzpRpaq8bJjhO36kYYzKs61IbfYFJV7fqHzMzIDosBO2Hg==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       vite: ^5.2.7
@@ -5349,13 +5349,13 @@ snapshots:
       react: 19.0.0-rc-ed966dac-20241007
       react-dom: 19.0.0-rc-ed966dac-20241007(react@19.0.0-rc-ed966dac-20241007)
 
-  '@mcansh/vite-svg-sprite-plugin@0.4.2(vite@5.4.8(@types/node@20.12.7)(lightningcss@1.27.0))':
+  '@mcansh/vite-plugin-svg-sprite@0.0.0-experimental-3b96418(vite@5.4.9(@types/node@20.12.7)(lightningcss@1.27.0))':
     dependencies:
       fs-extra: 11.2.0
       hasha: 6.0.0
       svgo: 3.2.0
       svgstore: 3.0.1
-      vite: 5.4.8(@types/node@20.12.7)(lightningcss@1.27.0)
+      vite: 5.4.9(@types/node@20.12.7)(lightningcss@1.27.0)
 
   '@mdx-js/mdx@2.3.0':
     dependencies:

@@ -1,4 +1,4 @@
-import { createSvgSpritePlugin } from "@mcansh/vite-svg-sprite-plugin";
+import { svgSprite } from "@mcansh/vite-plugin-svg-sprite";
 import {
 	cloudflareDevProxyVitePlugin,
 	vitePlugin as remix,
@@ -18,7 +18,7 @@ declare module "@remix-run/cloudflare" {
 export default defineConfig({
 	plugins: [
 		cloudflareDevProxyVitePlugin(),
-		createSvgSpritePlugin(),
+		svgSprite(),
 		EMIT_REPORT ? visualizer({ emitFile: true }) : null,
 		remix({
 			future: {
