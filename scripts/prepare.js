@@ -11,5 +11,3 @@ if (!isCi) {
 	// format pnpm-lock.yaml
 	execSync(`pnpm run format ./pnpm-lock.yaml`, options);
 }
-
-execSync(`pnpm exec playwright install --with-deps chromium`, options);
