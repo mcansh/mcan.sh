@@ -1,4 +1,4 @@
-import { unstable_data } from "@remix-run/node";
+import { data } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { cacheHeader } from "pretty-cache-header";
 
@@ -18,7 +18,7 @@ export function loader() {
 	let me = srcSet.at(1);
 	if (me === undefined) throw new Error("Failed to get mugshot");
 
-	return unstable_data(
+	return data(
 		{
 			me: { url: me.url.href, size: me.size },
 			srcSet: srcSet.map((x) => `${x.url} ${x.density}x`).join(", "),
