@@ -1,7 +1,7 @@
 import { cacheHeader } from "pretty-cache-header";
 import type { MetaFunction, LinksFunction } from "react-router";
 import { Link, data } from "react-router";
-import spriteHref from "virtual:@mcansh/vite-svg-sprite-plugin";
+import spriteHref from "virtual:@mcansh/vite-plugin-svg-sprite";
 
 import githubMarkIconHref from "#app/assets/github-mark.svg";
 import linkedinIconHref from "#app/assets/linkedin.svg";

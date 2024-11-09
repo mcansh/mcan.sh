@@ -12,10 +12,11 @@
 		"types": [
 			"@react-router/node",
 			"vite/client",
-			"@mcansh/vite-svg-sprite-plugin/client"
+			"@mcansh/vite-plugin-svg-sprite/client"
 		],
 		"forceConsistentCasingInFileNames": true,
 		"checkJs": true,
+		"allowJs": true,
 		"noFallthroughCasesInSwitch": true,
 		"jsx": "react-jsx",
 		"rootDirs": [".", "./.react-router/types"],
