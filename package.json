@@ -24,8 +24,8 @@
 	},
 	"dependencies": {
 		"@mcansh/http-helmet": "0.11.1",
-		"@mcansh/remix-fastify": "https://pkg.pr.new/@mcansh/remix-fastify@7356798",
-		"@react-router/node": "0.0.0-nightly-6c7c5147c-20241008",
+		"@mcansh/remix-fastify": "^4.0.1",
+		"@react-router/node": "7.0.0-pre.5",
 		"address": "^2.0.3",
 		"change-case": "^5.4.4",
 		"cloudinary-build-url": "^0.2.4",
@@ -39,7 +39,7 @@
 		"pretty-cache-header": "^1.0.0",
 		"react": "19.0.0-rc-ed966dac-20241007",
 		"react-dom": "19.0.0-rc-ed966dac-20241007",
-		"react-router": "0.0.0-nightly-6c7c5147c-20241008",
+		"react-router": "7.0.0-pre.5",
 		"remix-utils": "^7.7.0",
 		"tailwind-merge": "^2.5.3",
 		"zod": "^3.23.8"
@@ -47,7 +47,7 @@
 	"devDependencies": {
 		"@cld-apis/types": "^0.1.6",
 		"@mcansh/vite-svg-sprite-plugin": "^0.4.2",
-		"@react-router/dev": "0.0.0-nightly-6c7c5147c-20241008",
+		"@react-router/dev": "7.0.0-pre.5",
 		"@remix-run/dev": "^2.12.1",
 		"@total-typescript/tsconfig": "^1.0.4",
 		"@types/etag": "^1.8.3",
@@ -86,11 +86,12 @@
 			"@types/react": "$@types/react",
 			"@types/react-dom": "$@types/react-dom",
 			"react": "$react",
-			"react-dom": "$react-dom"
+			"react-dom": "$react-dom",
+			"react-router-dom": "$react-router"
 		}
 	},
 	"engines": {
 		"node": ">=18"
 	},
-	"packageManager": "pnpm@9.12.1+sha512.e5a7e52a4183a02d5931057f7a0dbff9d5e9ce3161e33fa68ae392125b79282a8a8a470a51dfc8a0ed86221442eb2fb57019b0990ed24fab519bf0e1bc5ccfc4"
+	"packageManager": "pnpm@9.12.3+sha512.cce0f9de9c5a7c95bef944169cc5dfe8741abfb145078c0d508b868056848a87c81e626246cb60967cbd7fd29a6c062ef73ff840d96b3c86c40ac92cf4a813ee"
 }

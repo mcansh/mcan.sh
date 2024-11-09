@@ -9,6 +9,7 @@ overrides:
   '@types/react-dom': npm:types-react-dom@19.0.0-rc.1
   react: 19.0.0-rc-ed966dac-20241007
   react-dom: 19.0.0-rc-ed966dac-20241007
+  react-router-dom: 7.0.0-pre.5
 
 importers:
 
@@ -18,11 +19,11 @@ importers:
         specifier: 0.11.1
         version: 0.11.1(react-dom@19.0.0-rc-ed966dac-20241007(react@19.0.0-rc-ed966dac-20241007))(react@19.0.0-rc-ed966dac-20241007)
       '@mcansh/remix-fastify':
-        specifier: https://pkg.pr.new/@mcansh/remix-fastify@7356798
-        version: https://pkg.pr.new/@mcansh/remix-fastify@7356798(@remix-run/node@2.12.1(typescript@5.6.3))(fastify@5.0.0)(react-router@0.0.0-nightly-6c7c5147c-20241008(react-dom@19.0.0-rc-ed966dac-20241007(react@19.0.0-rc-ed966dac-20241007))(react@19.0.0-rc-ed966dac-20241007))(vite@5.4.8(@types/node@20.12.7)(lightningcss@1.27.0))
+        specifier: ^4.0.1
+        version: 4.0.1(@remix-run/node@2.12.1(typescript@5.6.3))(fastify@5.0.0)(react-router@7.0.0-pre.5(react-dom@19.0.0-rc-ed966dac-20241007(react@19.0.0-rc-ed966dac-20241007))(react@19.0.0-rc-ed966dac-20241007))(vite@5.4.8(@types/node@20.12.7)(lightningcss@1.27.0))
       '@react-router/node':
-        specifier: 0.0.0-nightly-6c7c5147c-20241008
-        version: 0.0.0-nightly-6c7c5147c-20241008(react-router@0.0.0-nightly-6c7c5147c-20241008(react-dom@19.0.0-rc-ed966dac-20241007(react@19.0.0-rc-ed966dac-20241007))(react@19.0.0-rc-ed966dac-20241007))(typescript@5.6.3)
+        specifier: 7.0.0-pre.5
+        version: 7.0.0-pre.5(react-router@7.0.0-pre.5(react-dom@19.0.0-rc-ed966dac-20241007(react@19.0.0-rc-ed966dac-20241007))(react@19.0.0-rc-ed966dac-20241007))(typescript@5.6.3)
       address:
         specifier: ^2.0.3
         version: 2.0.3
@@ -63,8 +64,8 @@ importers:
         specifier: 19.0.0-rc-ed966dac-20241007
         version: 19.0.0-rc-ed966dac-20241007(react@19.0.0-rc-ed966dac-20241007)
       react-router:
-        specifier: 0.0.0-nightly-6c7c5147c-20241008
-        version: 0.0.0-nightly-6c7c5147c-20241008(react-dom@19.0.0-rc-ed966dac-20241007(react@19.0.0-rc-ed966dac-20241007))(react@19.0.0-rc-ed966dac-20241007)
+        specifier: 7.0.0-pre.5
+        version: 7.0.0-pre.5(react-dom@19.0.0-rc-ed966dac-20241007(react@19.0.0-rc-ed966dac-20241007))(react@19.0.0-rc-ed966dac-20241007)
       remix-utils:
         specifier: ^7.7.0
         version: 7.7.0(@remix-run/node@2.12.1(typescript@5.6.3))(@remix-run/react@2.12.1(react-dom@19.0.0-rc-ed966dac-20241007(react@19.0.0-rc-ed966dac-20241007))(react@19.0.0-rc-ed966dac-20241007)(typescript@5.6.3))(@remix-run/router@1.19.2)(react@19.0.0-rc-ed966dac-20241007)(zod@3.23.8)
@@ -82,8 +83,8 @@ importers:
         specifier: ^0.4.2
         version: 0.4.2(vite@5.4.8(@types/node@20.12.7)(lightningcss@1.27.0))
       '@react-router/dev':
-        specifier: 0.0.0-nightly-6c7c5147c-20241008
-        version: 0.0.0-nightly-6c7c5147c-20241008(@types/node@20.12.7)(lightningcss@1.27.0)(react-router@0.0.0-nightly-6c7c5147c-20241008(react-dom@19.0.0-rc-ed966dac-20241007(react@19.0.0-rc-ed966dac-20241007))(react@19.0.0-rc-ed966dac-20241007))(typescript@5.6.3)(vite@5.4.8(@types/node@20.12.7)(lightningcss@1.27.0))
+        specifier: 7.0.0-pre.5
+        version: 7.0.0-pre.5(@types/node@20.12.7)(lightningcss@1.27.0)(react-router@7.0.0-pre.5(react-dom@19.0.0-rc-ed966dac-20241007(react@19.0.0-rc-ed966dac-20241007))(react@19.0.0-rc-ed966dac-20241007))(typescript@5.6.3)(vite@5.4.8(@types/node@20.12.7)(lightningcss@1.27.0))
       '@remix-run/dev':
         specifier: ^2.12.1
         version: 2.12.1(@remix-run/react@2.12.1(react-dom@19.0.0-rc-ed966dac-20241007(react@19.0.0-rc-ed966dac-20241007))(react@19.0.0-rc-ed966dac-20241007)(typescript@5.6.3))(@types/node@20.12.7)(lightningcss@1.27.0)(typescript@5.6.3)(vite@5.4.8(@types/node@20.12.7)(lightningcss@1.27.0))
@@ -676,8 +677,8 @@ packages:
   '@fastify/send@3.1.1':
     resolution: {integrity: sha512-LdiV2mle/2tH8vh6GwGl0ubfUAgvY+9yF9oGI1iiwVyNUVOQamvw5n+OFu6iCNNoyuCY80FFURBn4TZCbTe8LA==}
 
-  '@fastify/static@8.0.1':
-    resolution: {integrity: sha512-7idyhbcgf14v4bjWzUeHEFvnVxvNJ1n5cyGPgFtwTZjnjUQ1wgC7a2FQai7OGKqCKywDEjzbPhAZRW+uEK1LMg==}
+  '@fastify/static@8.0.2':
+    resolution: {integrity: sha512-xJ+XaZVl4Y+lKztx8jGi+BE73aByhOmjMgaTx98E4XtVZxUpiaYQIMBlwACsJz+xohm0kvzV34BZoiZ+bsJtBQ==}
 
   '@humanwhocodes/config-array@0.11.14':
     resolution: {integrity: sha512-3T8LkOmg45BV5FICb15QQMsyUSWrQ8AygVfC7ZG32zOalnqrilm018ZVCw0eapXux8FtA33q8PSRSstjee3jSg==}
@@ -738,9 +739,8 @@ packages:
       react-dom:
         optional: true
 
-  '@mcansh/remix-fastify@https://pkg.pr.new/@mcansh/remix-fastify@7356798':
-    resolution: {tarball: https://pkg.pr.new/@mcansh/remix-fastify@7356798}
-    version: 3.4.0
+  '@mcansh/remix-fastify@4.0.1':
+    resolution: {integrity: sha512-522p72sRkblZWszVjT6HcSZh+rgEhBRXQIr7clzPWYK4qUK+P1+FHEw5wqs5MynsizRpS2JE0nZvnxe7xpJXlg==}
     engines: {node: '>=20.0.0'}
     peerDependencies:
       '@remix-run/node': ^2.0.0
@@ -800,13 +800,13 @@ packages:
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
     engines: {node: '>=14'}
 
-  '@react-router/dev@0.0.0-nightly-6c7c5147c-20241008':
-    resolution: {integrity: sha512-yb8Rw3/MieBSX897eMe4Qe0v/eGA65ALSIXzJElS+6h/HQX3SkYQPejfEa3hwwla61QMbGMIarkdpUMrqMXgew==}
-    engines: {node: '>=18.0.0'}
+  '@react-router/dev@7.0.0-pre.5':
+    resolution: {integrity: sha512-U7mYFLwd+Gt/QikANHLZ5hnnUq731iW+gh+sfOFDZiDSvq2RGIqtvS6/WT2bEcC/G/tvjmrx2kVP30eSKOdCzw==}
+    engines: {node: '>=20.0.0'}
     hasBin: true
     peerDependencies:
-      '@react-router/serve': ^0.0.0-nightly-6c7c5147c-20241008
-      react-router: ^0.0.0-nightly-6c7c5147c-20241008
+      '@react-router/serve': ^7.0.0-pre.5
+      react-router: ^7.0.0-pre.5
       typescript: ^5.1.0
       vite: ^5.1.0
       wrangler: ^3.28.2
@@ -818,11 +818,11 @@ packages:
       wrangler:
         optional: true
 
-  '@react-router/node@0.0.0-nightly-6c7c5147c-20241008':
-    resolution: {integrity: sha512-HsesaVFgNk96UeKa+/2ZTHE0iaw41WGOz+g7nPl7AYbao+EBhtwfzJxwuUiyzFmFgrNkLHwIuu1gqBzKBJ6KUQ==}
-    engines: {node: '>=18.0.0'}
+  '@react-router/node@7.0.0-pre.5':
+    resolution: {integrity: sha512-meYaoDNs2F31v6BRGFikPCtoJ0VZfi7MTdlooc1wgxD/uO+GcV2i3RPLrvt2hXyDE59guz62Q73h+SiUlFMfeA==}
+    engines: {node: '>=20.0.0'}
     peerDependencies:
-      react-router: 0.0.0-nightly-6c7c5147c-20241008
+      react-router: 7.0.0-pre.5
       typescript: ^5.1.0
     peerDependenciesMeta:
       typescript:
@@ -1516,6 +1516,10 @@ packages:
   cookie@0.7.2:
     resolution: {integrity: sha512-yki5XnKuf750l50uGTllt6kKILY4nQ1eNIQatoXEByZ5dWgnKqbnqmTrBE5B4N7lrMJKQ2ytWMiTO2o0v6Ew/w==}
     engines: {node: '>= 0.6'}
+
+  cookie@1.0.1:
+    resolution: {integrity: sha512-Xd8lFX4LM9QEEwxQpF9J9NTUh8pmdJO0cyRJhFiDoLTk2eH8FXlRv2IFGYVadZpqI3j8fhNrSdKCeYPxiAhLXw==}
+    engines: {node: '>=18'}
 
   core-util-is@1.0.3:
     resolution: {integrity: sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ==}
@@ -3343,6 +3347,9 @@ packages:
   picocolors@1.1.0:
     resolution: {integrity: sha512-TQ92mBOW0l3LeMeyLV6mzy/kWr8lkd/hp3mTg7wYK7zJhuBStmGMBG0BdeDZS/dZx1IukaX6Bk11zcln25o1Aw==}
 
+  picocolors@1.1.1:
+    resolution: {integrity: sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==}
+
   picomatch@2.3.1:
     resolution: {integrity: sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==}
     engines: {node: '>=8.6'}
@@ -3650,28 +3657,28 @@ packages:
     resolution: {integrity: sha512-wViHqhAd8OHeLS/IRMJjTSDHF3U9eWi62F/MledQGPdJGDhodXJ9PBLNGr6WWL7qlH12Mt3TyTpbS+hGXMjCzQ==}
     engines: {node: '>=0.10.0'}
 
-  react-router-dom@6.26.2:
-    resolution: {integrity: sha512-z7YkaEW0Dy35T3/QKPYB1LjMK2R1fxnHO8kWpUMTBdfVzZrWOiY9a7CtN8HqdWtDUWd5FY6Dl8HFsqVwH4uOtQ==}
-    engines: {node: '>=14.0.0'}
+  react-router-dom@7.0.0-pre.5:
+    resolution: {integrity: sha512-GhJ0NFtDqK5WM26WQ5PzPmD3dVamEE/CDGI3PVCzNlrk9xK/23zbMFxZHTX5PU+S5n46oEPwhUAanBd1grh42w==}
+    engines: {node: '>=20.0.0'}
     peerDependencies:
       react: 19.0.0-rc-ed966dac-20241007
       react-dom: 19.0.0-rc-ed966dac-20241007
-
-  react-router@0.0.0-nightly-6c7c5147c-20241008:
-    resolution: {integrity: sha512-qLbx7lt+Sf3l3FGHjPX5IJ8CsIG4Ac4lsCNhzW+0UUCRw+f5wAl6+rThJfR69pZyMSZ838GIQ2fYKLk1cjPGYg==}
-    engines: {node: '>=18.0.0'}
-    peerDependencies:
-      react: 19.0.0-rc-ed966dac-20241007
-      react-dom: 19.0.0-rc-ed966dac-20241007
-    peerDependenciesMeta:
-      react-dom:
-        optional: true
 
   react-router@6.26.2:
     resolution: {integrity: sha512-tvN1iuT03kHgOFnLPfLJ8V95eijteveqdOSk+srqfePtQvqCExB8eHOYnlilbOcyJyKnYkr1vJvf7YqotAJu1A==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       react: 19.0.0-rc-ed966dac-20241007
+
+  react-router@7.0.0-pre.5:
+    resolution: {integrity: sha512-UGrqwmlTubhrtUzIu1WYb1z9FVeCqGi9RdywwjFrSQqIDTPjn7g5PPuFAS6pbVuj81VRI7HVzaljpzKXPDnfEQ==}
+    engines: {node: '>=20.0.0'}
+    peerDependencies:
+      react: 19.0.0-rc-ed966dac-20241007
+      react-dom: 19.0.0-rc-ed966dac-20241007
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
 
   react@19.0.0-rc-ed966dac-20241007:
     resolution: {integrity: sha512-9lX9zCQHA4q9mXxYPIpo4OqZ7y5uzGwtGUKkm5EcPp9xkBsX6IToQZLonaRiYJA/tRJnVvVmB7p+M4Afv0RuEA==}
@@ -4980,7 +4987,7 @@ snapshots:
       http-errors: 2.0.0
       mime: 3.0.0
 
-  '@fastify/static@8.0.1':
+  '@fastify/static@8.0.2':
     dependencies:
       '@fastify/accept-negotiator': 2.0.0
       '@fastify/send': 3.1.1
@@ -5046,16 +5053,16 @@ snapshots:
       react: 19.0.0-rc-ed966dac-20241007
       react-dom: 19.0.0-rc-ed966dac-20241007(react@19.0.0-rc-ed966dac-20241007)
 
-  '@mcansh/remix-fastify@https://pkg.pr.new/@mcansh/remix-fastify@7356798(@remix-run/node@2.12.1(typescript@5.6.3))(fastify@5.0.0)(react-router@0.0.0-nightly-6c7c5147c-20241008(react-dom@19.0.0-rc-ed966dac-20241007(react@19.0.0-rc-ed966dac-20241007))(react@19.0.0-rc-ed966dac-20241007))(vite@5.4.8(@types/node@20.12.7)(lightningcss@1.27.0))':
+  '@mcansh/remix-fastify@4.0.1(@remix-run/node@2.12.1(typescript@5.6.3))(fastify@5.0.0)(react-router@7.0.0-pre.5(react-dom@19.0.0-rc-ed966dac-20241007(react@19.0.0-rc-ed966dac-20241007))(react@19.0.0-rc-ed966dac-20241007))(vite@5.4.8(@types/node@20.12.7)(lightningcss@1.27.0))':
     dependencies:
       '@fastify/middie': 9.0.2
-      '@fastify/static': 8.0.1
+      '@fastify/static': 8.0.2
       fastify: 5.0.0
       fastify-plugin: 5.0.1
       pretty-cache-header: 1.0.0
     optionalDependencies:
       '@remix-run/node': 2.12.1(typescript@5.6.3)
-      react-router: 0.0.0-nightly-6c7c5147c-20241008(react-dom@19.0.0-rc-ed966dac-20241007(react@19.0.0-rc-ed966dac-20241007))(react@19.0.0-rc-ed966dac-20241007)
+      react-router: 7.0.0-pre.5(react-dom@19.0.0-rc-ed966dac-20241007(react@19.0.0-rc-ed966dac-20241007))(react@19.0.0-rc-ed966dac-20241007)
       vite: 5.4.8(@types/node@20.12.7)(lightningcss@1.27.0)
 
   '@mcansh/vite-svg-sprite-plugin@0.4.2(vite@5.4.8(@types/node@20.12.7)(lightningcss@1.27.0))':
@@ -5138,7 +5145,7 @@ snapshots:
   '@pkgjs/parseargs@0.11.0':
     optional: true
 
-  '@react-router/dev@0.0.0-nightly-6c7c5147c-20241008(@types/node@20.12.7)(lightningcss@1.27.0)(react-router@0.0.0-nightly-6c7c5147c-20241008(react-dom@19.0.0-rc-ed966dac-20241007(react@19.0.0-rc-ed966dac-20241007))(react@19.0.0-rc-ed966dac-20241007))(typescript@5.6.3)(vite@5.4.8(@types/node@20.12.7)(lightningcss@1.27.0))':
+  '@react-router/dev@7.0.0-pre.5(@types/node@20.12.7)(lightningcss@1.27.0)(react-router@7.0.0-pre.5(react-dom@19.0.0-rc-ed966dac-20241007(react@19.0.0-rc-ed966dac-20241007))(react@19.0.0-rc-ed966dac-20241007))(typescript@5.6.3)(vite@5.4.8(@types/node@20.12.7)(lightningcss@1.27.0))':
     dependencies:
       '@babel/core': 7.24.4
       '@babel/generator': 7.24.4
@@ -5149,10 +5156,9 @@ snapshots:
       '@babel/traverse': 7.24.1
       '@babel/types': 7.25.2
       '@npmcli/package-json': 4.0.1
-      '@react-router/node': 0.0.0-nightly-6c7c5147c-20241008(react-router@0.0.0-nightly-6c7c5147c-20241008(react-dom@19.0.0-rc-ed966dac-20241007(react@19.0.0-rc-ed966dac-20241007))(react@19.0.0-rc-ed966dac-20241007))(typescript@5.6.3)
+      '@react-router/node': 7.0.0-pre.5(react-router@7.0.0-pre.5(react-dom@19.0.0-rc-ed966dac-20241007(react@19.0.0-rc-ed966dac-20241007))(react@19.0.0-rc-ed966dac-20241007))(typescript@5.6.3)
       arg: 5.0.2
       babel-dead-code-elimination: 1.0.6
-      chalk: 4.1.2
       chokidar: 4.0.1
       dedent: 1.5.3
       es-module-lexer: 1.5.0
@@ -5162,11 +5168,11 @@ snapshots:
       jsesc: 3.0.2
       lodash: 4.17.21
       pathe: 1.1.2
-      picocolors: 1.1.0
+      picocolors: 1.1.1
       picomatch: 2.3.1
       prettier: 2.8.8
       react-refresh: 0.14.0
-      react-router: 0.0.0-nightly-6c7c5147c-20241008(react-dom@19.0.0-rc-ed966dac-20241007(react@19.0.0-rc-ed966dac-20241007))(react@19.0.0-rc-ed966dac-20241007)
+      react-router: 7.0.0-pre.5(react-dom@19.0.0-rc-ed966dac-20241007(react@19.0.0-rc-ed966dac-20241007))(react@19.0.0-rc-ed966dac-20241007)
       semver: 7.6.3
       set-cookie-parser: 2.6.0
       valibot: 0.41.0(typescript@5.6.3)
@@ -5187,10 +5193,10 @@ snapshots:
       - supports-color
       - terser
 
-  '@react-router/node@0.0.0-nightly-6c7c5147c-20241008(react-router@0.0.0-nightly-6c7c5147c-20241008(react-dom@19.0.0-rc-ed966dac-20241007(react@19.0.0-rc-ed966dac-20241007))(react@19.0.0-rc-ed966dac-20241007))(typescript@5.6.3)':
+  '@react-router/node@7.0.0-pre.5(react-router@7.0.0-pre.5(react-dom@19.0.0-rc-ed966dac-20241007(react@19.0.0-rc-ed966dac-20241007))(react@19.0.0-rc-ed966dac-20241007))(typescript@5.6.3)':
     dependencies:
       '@web3-storage/multipart-parser': 1.0.0
-      react-router: 0.0.0-nightly-6c7c5147c-20241008(react-dom@19.0.0-rc-ed966dac-20241007(react@19.0.0-rc-ed966dac-20241007))(react@19.0.0-rc-ed966dac-20241007)
+      react-router: 7.0.0-pre.5(react-dom@19.0.0-rc-ed966dac-20241007(react@19.0.0-rc-ed966dac-20241007))(react@19.0.0-rc-ed966dac-20241007)
       source-map-support: 0.5.21
       stream-slice: 0.1.2
       undici: 6.20.0
@@ -5290,7 +5296,7 @@ snapshots:
       react: 19.0.0-rc-ed966dac-20241007
       react-dom: 19.0.0-rc-ed966dac-20241007(react@19.0.0-rc-ed966dac-20241007)
       react-router: 6.26.2(react@19.0.0-rc-ed966dac-20241007)
-      react-router-dom: 6.26.2(react-dom@19.0.0-rc-ed966dac-20241007(react@19.0.0-rc-ed966dac-20241007))(react@19.0.0-rc-ed966dac-20241007)
+      react-router-dom: 7.0.0-pre.5(react-dom@19.0.0-rc-ed966dac-20241007(react@19.0.0-rc-ed966dac-20241007))(react@19.0.0-rc-ed966dac-20241007)
       turbo-stream: 2.4.0
     optionalDependencies:
       typescript: 5.6.3
@@ -6014,6 +6020,8 @@ snapshots:
   cookie@0.6.0: {}
 
   cookie@0.7.2: {}
+
+  cookie@1.0.1: {}
 
   core-util-is@1.0.3: {}
 
@@ -8184,6 +8192,8 @@ snapshots:
 
   picocolors@1.1.0: {}
 
+  picocolors@1.1.1: {}
+
   picomatch@2.3.1: {}
 
   picomatch@4.0.2: {}
@@ -8411,29 +8421,28 @@ snapshots:
 
   react-refresh@0.14.0: {}
 
-  react-router-dom@6.26.2(react-dom@19.0.0-rc-ed966dac-20241007(react@19.0.0-rc-ed966dac-20241007))(react@19.0.0-rc-ed966dac-20241007):
+  react-router-dom@7.0.0-pre.5(react-dom@19.0.0-rc-ed966dac-20241007(react@19.0.0-rc-ed966dac-20241007))(react@19.0.0-rc-ed966dac-20241007):
+    dependencies:
+      react: 19.0.0-rc-ed966dac-20241007
+      react-dom: 19.0.0-rc-ed966dac-20241007(react@19.0.0-rc-ed966dac-20241007)
+      react-router: 7.0.0-pre.5(react-dom@19.0.0-rc-ed966dac-20241007(react@19.0.0-rc-ed966dac-20241007))(react@19.0.0-rc-ed966dac-20241007)
+
+  react-router@6.26.2(react@19.0.0-rc-ed966dac-20241007):
     dependencies:
       '@remix-run/router': 1.19.2
       react: 19.0.0-rc-ed966dac-20241007
-      react-dom: 19.0.0-rc-ed966dac-20241007(react@19.0.0-rc-ed966dac-20241007)
-      react-router: 6.26.2(react@19.0.0-rc-ed966dac-20241007)
 
-  react-router@0.0.0-nightly-6c7c5147c-20241008(react-dom@19.0.0-rc-ed966dac-20241007(react@19.0.0-rc-ed966dac-20241007))(react@19.0.0-rc-ed966dac-20241007):
+  react-router@7.0.0-pre.5(react-dom@19.0.0-rc-ed966dac-20241007(react@19.0.0-rc-ed966dac-20241007))(react@19.0.0-rc-ed966dac-20241007):
     dependencies:
       '@types/cookie': 0.6.0
       '@web3-storage/multipart-parser': 1.0.0
-      cookie: 0.6.0
+      cookie: 1.0.1
       react: 19.0.0-rc-ed966dac-20241007
       set-cookie-parser: 2.6.0
       source-map: 0.7.4
       turbo-stream: 2.4.0
     optionalDependencies:
       react-dom: 19.0.0-rc-ed966dac-20241007(react@19.0.0-rc-ed966dac-20241007)
-
-  react-router@6.26.2(react@19.0.0-rc-ed966dac-20241007):
-    dependencies:
-      '@remix-run/router': 1.19.2
-      react: 19.0.0-rc-ed966dac-20241007
 
   react@19.0.0-rc-ed966dac-20241007: {}
 
@@ -9272,7 +9281,7 @@ snapshots:
       cac: 6.7.14
       debug: 4.3.6
       pathe: 1.1.2
-      picocolors: 1.1.0
+      picocolors: 1.1.1
       vite: 5.4.8(@types/node@20.12.7)(lightningcss@1.27.0)
     transitivePeerDependencies:
       - '@types/node'

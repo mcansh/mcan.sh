@@ -1,15 +1,15 @@
 import { cacheHeader } from "pretty-cache-header";
-import { json, Link } from "react-router";
 import type { MetaFunction, LinksFunction } from "react-router";
+import { Link, data } from "react-router";
 import spriteHref from "virtual:@mcansh/vite-svg-sprite-plugin";
 
 import githubMarkIconHref from "#app/assets/github-mark.svg";
 import linkedinIconHref from "#app/assets/linkedin.svg";
 
-import type * as Route from "./+types.resume";
+import type { Route } from "./+types.resume";
 
 export function loader() {
-	return json(
+	return data(
 		{
 			experience: [
 				{
@@ -59,12 +59,12 @@ export function loader() {
 						"Collaborated closely with the design team to enhance their workflow and reduce time spent on repetitive tasks, such as creating new artboards, by creating Sketch plugins for utility support.",
 					],
 				},
-			] as const,
+			],
 			certifications: [
 				"CIW Internet Business Associate",
 				"CIW Web Site Development Associate",
 				"Testing JavaScript",
-			] as const,
+			],
 			skills: [
 				"Node.js",
 				"Git",
@@ -83,7 +83,7 @@ export function loader() {
 				"GitHub Actions",
 				"Continuous Integration",
 				"Continuous Delivery",
-			] as const,
+			],
 			references: [
 				{
 					name: "Ryan Florence",
@@ -93,7 +93,7 @@ export function loader() {
 					name: "Michael Jackson",
 					twitter: "https://twitter.com/mjackson",
 				},
-			] as const,
+			],
 		},
 		{
 			headers: {
@@ -193,7 +193,7 @@ export default function ResumePage({ loaderData }: Route.ComponentProps) {
 							Certifications
 						</h2>
 						<ul className="space-y-1 print:space-y-0.5">
-							{loaderData.data.certifications.map((certification) => {
+							{loaderData.certifications.map((certification) => {
 								return <li key={certification}>{certification}</li>;
 							})}
 						</ul>

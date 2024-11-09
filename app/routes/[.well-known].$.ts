@@ -1,9 +1,8 @@
 import { getMugshotURL } from "#app/cloudinary.server.js";
 
-import type * as Route from "./+types.[.well-known].$";
+import type { Route } from "./+types.[.well-known].$";
 
 export function loader({ params }: Route.LoaderArgs) {
-	// @ts-expect-error - splat is not defined in the types
 	let splat = params["*"];
 
 	if (!splat) throw new Response(null, { status: 404 });

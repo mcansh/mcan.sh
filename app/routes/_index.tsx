@@ -5,7 +5,7 @@ import { getMugshotURL } from "#app/cloudinary.server.js";
 import { FunHoverLink } from "#app/components/fun-link-hover.js";
 import type { RouteHandle } from "#app/types/handle.js";
 
-import type * as Route from "./+types._index";
+import type { Route } from "./+types._index";
 
 export function loader() {
 	let srcSet = [240, 480, 720].map((size, index) => {

@@ -1,6 +1,5 @@
 import type { Config } from "tailwindcss";
 import defaultTheme from "tailwindcss/defaultTheme";
-
 import tailwindcssPaddingSafe from "tailwindcss-padding-safe";
 
 export default {
