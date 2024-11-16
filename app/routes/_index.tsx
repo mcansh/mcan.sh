@@ -43,8 +43,6 @@ export const handle: RouteHandle = {
 };
 
 export default function IndexPage({ loaderData }: Route.ComponentProps) {
-	console.log({ loaderData });
-
 	return (
 		<div className="mx-auto flex h-screen max-w-screen-md flex-col items-center justify-between px-4 text-center">
 			<div className="flex flex-1 flex-col items-center justify-center">
