@@ -1,8 +1,8 @@
-import type { LoaderFunctionArgs } from "@remix-run/node";
-
 import { getMugshotURL } from "#app/cloudinary.server.js";
 
-export function loader({ params }: LoaderFunctionArgs) {
+import type { Route } from "./+types.[.well-known].$";
+
+export function loader({ params }: Route.LoaderArgs) {
 	let splat = params["*"];
 
 	if (!splat) throw new Response(null, { status: 404 });

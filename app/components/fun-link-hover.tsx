@@ -1,5 +1,5 @@
-import type { LinkProps } from "@remix-run/react";
-import { Link } from "@remix-run/react";
+import type { LinkProps } from "react-router";
+import { Link } from "react-router";
 
 export function FunHoverLink({ children, to, ...props }: LinkProps) {
 	return (
