@@ -2,15 +2,15 @@ import { PassThrough } from "node:stream";
 
 import { createSecureHeaders, mergeHeaders } from "@mcansh/http-helmet";
 import { NonceProvider, createNonce } from "@mcansh/http-helmet/react";
+import { createReadableStreamFromReadable } from "@react-router/node";
+import { isbot } from "isbot";
+import { renderToPipeableStream } from "react-dom/server";
 import type {
 	AppLoadContext,
 	EntryContext,
 	HandleDataRequestFunction,
-} from "@remix-run/node";
-import { createReadableStreamFromReadable } from "@remix-run/node";
-import { RemixServer } from "@remix-run/react";
-import { isbot } from "isbot";
-import { renderToPipeableStream } from "react-dom/server";
+} from "react-router";
+import { ServerRouter } from "react-router";
 import { isPrefetch } from "remix-utils/is-prefetch";
 import { preloadRouteAssets } from "remix-utils/preload-route-assets";
 
@@ -25,14 +25,15 @@ export default function handleRequest(
 	request: Request,
 	responseStatusCode: number,
 	responseHeaders: Headers,
-	remixContext: EntryContext,
+	reactRouterContext: EntryContext,
 	_loadContext: AppLoadContext,
 ) {
 	let callback = isbot(request.headers.get("user-agent"))
 		? "onAllReady"
 		: "onShellReady";
 
-	preloadRouteAssets(remixContext, responseHeaders);
+	// @ts-expect-error - remix-utils needs to be updated to support react-router v7
+	preloadRouteAssets(reactRouterContext, responseHeaders);
 
 	let { nonce, headers } = applySecurityHeaders(request, responseHeaders);
 
@@ -40,8 +41,8 @@ export default function handleRequest(
 		let shellRendered = false;
 		let { pipe, abort } = renderToPipeableStream(
 			<NonceProvider nonce={nonce}>
-				<RemixServer
-					context={remixContext}
+				<ServerRouter
+					context={reactRouterContext}
 					url={request.url}
 					abortDelay={ABORT_DELAY}
 					nonce={nonce}
@@ -185,6 +186,11 @@ function applySecurityHeaders(request: Request, responseHeaders: Headers) {
 	});
 
 	responseHeaders = mergeHeaders(responseHeaders, securityHeaders);
+
+	// TODO: fix upstream in @mcansh/http-helmet
+	if (process.env.NODE_ENV === "production") {
+		responseHeaders.append("upgrade-insecure-requests", "1");
+	}
 
 	let permissionsPolicy = securityHeaders.get("Permissions-Policy");
 

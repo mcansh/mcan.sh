@@ -10,15 +10,16 @@
 	],
 	"compilerOptions": {
 		"types": [
-			"@remix-run/node",
+			"@react-router/node",
 			"vite/client",
-			"react/canary",
-			"react-dom/canary",
 			"@mcansh/vite-plugin-svg-sprite/client"
 		],
 		"forceConsistentCasingInFileNames": true,
 		"checkJs": true,
+		"allowJs": true,
 		"noFallthroughCasesInSwitch": true,
-		"jsx": "react-jsx"
+		"jsx": "react-jsx",
+		"rootDirs": [".", "./.react-router/types"],
+		"plugins": [{ "name": "@react-router/dev" }]
 	}
 }
