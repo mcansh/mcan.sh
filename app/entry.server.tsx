@@ -189,7 +189,7 @@ function applySecurityHeaders(request: Request, responseHeaders: Headers) {
 
 	// TODO: fix upstream in @mcansh/http-helmet
 	if (process.env.NODE_ENV === "production") {
-		merged.append("upgrade-insecure-requests", "1");
+		responseHeaders.append("upgrade-insecure-requests", "1");
 	}
 
 	let permissionsPolicy = securityHeaders.get("Permissions-Policy");
