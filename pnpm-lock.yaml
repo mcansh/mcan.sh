@@ -19,8 +19,8 @@ importers:
         specifier: 0.11.1
         version: 0.11.1(react-dom@19.0.0-rc-ed966dac-20241007(react@19.0.0-rc-ed966dac-20241007))(react@19.0.0-rc-ed966dac-20241007)
       '@mcansh/remix-fastify':
-        specifier: ^4.0.1
-        version: 4.0.1(@remix-run/node@2.12.1(typescript@5.6.3))(fastify@5.1.0)(react-router@7.0.0-pre.5(react-dom@19.0.0-rc-ed966dac-20241007(react@19.0.0-rc-ed966dac-20241007))(react@19.0.0-rc-ed966dac-20241007))(vite@5.4.10(@types/node@20.12.7)(lightningcss@1.28.1))
+        specifier: https://pkg.pr.new/@mcansh/remix-fastify@459
+        version: https://pkg.pr.new/@mcansh/remix-fastify@459(@remix-run/node@2.12.1(typescript@5.6.3))(fastify@5.1.0)(react-router@7.0.0-pre.5(react-dom@19.0.0-rc-ed966dac-20241007(react@19.0.0-rc-ed966dac-20241007))(react@19.0.0-rc-ed966dac-20241007))(vite@5.4.10(@types/node@20.12.7)(lightningcss@1.28.1))
       '@react-router/node':
         specifier: 7.0.0-pre.5
         version: 7.0.0-pre.5(react-router@7.0.0-pre.5(react-dom@19.0.0-rc-ed966dac-20241007(react@19.0.0-rc-ed966dac-20241007))(react@19.0.0-rc-ed966dac-20241007))(typescript@5.6.3)
@@ -598,13 +598,14 @@ packages:
       react-dom:
         optional: true
 
-  '@mcansh/remix-fastify@4.0.1':
-    resolution: {integrity: sha512-522p72sRkblZWszVjT6HcSZh+rgEhBRXQIr7clzPWYK4qUK+P1+FHEw5wqs5MynsizRpS2JE0nZvnxe7xpJXlg==}
+  '@mcansh/remix-fastify@https://pkg.pr.new/@mcansh/remix-fastify@459':
+    resolution: {tarball: https://pkg.pr.new/@mcansh/remix-fastify@459}
+    version: 4.0.1
     engines: {node: '>=20.0.0'}
     peerDependencies:
       '@remix-run/node': ^2.0.0
       fastify: ^3.29.0 || ^4.0.0 || ^5.0.0
-      react-router: '*'
+      react-router: '>=7.0.0 || >=7.0.0.pre'
       vite: ^5.0.0
     peerDependenciesMeta:
       '@remix-run/node':
@@ -3995,7 +3996,7 @@ snapshots:
       react: 19.0.0-rc-ed966dac-20241007
       react-dom: 19.0.0-rc-ed966dac-20241007(react@19.0.0-rc-ed966dac-20241007)
 
-  '@mcansh/remix-fastify@4.0.1(@remix-run/node@2.12.1(typescript@5.6.3))(fastify@5.1.0)(react-router@7.0.0-pre.5(react-dom@19.0.0-rc-ed966dac-20241007(react@19.0.0-rc-ed966dac-20241007))(react@19.0.0-rc-ed966dac-20241007))(vite@5.4.10(@types/node@20.12.7)(lightningcss@1.28.1))':
+  '@mcansh/remix-fastify@https://pkg.pr.new/@mcansh/remix-fastify@459(@remix-run/node@2.12.1(typescript@5.6.3))(fastify@5.1.0)(react-router@7.0.0-pre.5(react-dom@19.0.0-rc-ed966dac-20241007(react@19.0.0-rc-ed966dac-20241007))(react@19.0.0-rc-ed966dac-20241007))(vite@5.4.10(@types/node@20.12.7)(lightningcss@1.28.1))':
     dependencies:
       '@fastify/middie': 9.0.2
       '@fastify/static': 8.0.2

@@ -24,7 +24,7 @@
 	},
 	"dependencies": {
 		"@mcansh/http-helmet": "0.11.1",
-		"@mcansh/remix-fastify": "^4.0.1",
+		"@mcansh/remix-fastify": "https://pkg.pr.new/@mcansh/remix-fastify@459",
 		"@react-router/node": "7.0.0-pre.5",
 		"address": "^2.0.3",
 		"change-case": "^5.4.4",
