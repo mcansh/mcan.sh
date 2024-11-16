@@ -23,7 +23,7 @@
 		"knip": "knip-bun"
 	},
 	"dependencies": {
-		"@mcansh/http-helmet": "0.11.1",
+		"@mcansh/http-helmet": "^0.11.1",
 		"@mcansh/remix-fastify": "https://pkg.pr.new/@mcansh/remix-fastify@459",
 		"@react-router/node": "7.0.0-pre.5",
 		"address": "^2.0.3",

@@ -1,4 +1,4 @@
-import etag from "etag";
+import createEtag from "etag";
 import { chromium } from "playwright";
 import { cacheHeader } from "pretty-cache-header";
 
@@ -25,10 +25,10 @@ export async function loader({ request }: Route.LoaderArgs) {
 		printBackground: true,
 	});
 
-	let etagValue = etag(pdf);
+	let etag = createEtag(pdf);
 	await browser.close();
 
-	if (request.headers.get("If-None-Match") === etagValue) {
+	if (request.headers.get("If-None-Match") === etag) {
 		return new Response(null, { status: 304 });
 	}
 
@@ -42,7 +42,7 @@ export async function loader({ request }: Route.LoaderArgs) {
 			"Content-Disposition": "inline; filename=Logan McAnsh.pdf",
 			"Content-Length": pdf.byteLength.toString(),
 			"Content-Type": "application/pdf",
-			ETag: etagValue,
+			ETag: etag,
 		},
 	});
 }

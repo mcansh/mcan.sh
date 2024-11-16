@@ -10,6 +10,7 @@ import {
 	Outlet,
 	Scripts,
 	ScrollRestoration,
+	useLocation,
 	useMatches,
 	useRouteError,
 } from "react-router";
@@ -18,6 +19,7 @@ import { twMerge } from "tailwind-merge";
 import tailwindStyleHref from "tailwindcss/tailwind.css?url";
 
 import fontStyleHref from "./assets/berkeley-mono.css?url";
+import { iconSizes } from "./routes/manifest[.webmanifest]";
 import type { Match } from "./types/handle";
 
 export const meta: MetaFunction = () => {
@@ -30,12 +32,8 @@ export const meta: MetaFunction = () => {
 };
 
 export const links: LinksFunction = () => {
-	let icons = [32, 57, 72, 96, 120, 128, 144, 152, 195, 228].map((icon) => {
-		return {
-			href: `/logo-${icon}.png`,
-			sizes: `${icon}x${icon}`,
-			rel: "apple-touch-icon",
-		};
+	let icons = iconSizes.map((icon) => {
+		return { href: icon.src, sizes: icon.sizes, rel: "apple-touch-icon" };
 	});
 
 	return [
@@ -50,17 +48,24 @@ export const links: LinksFunction = () => {
 	];
 };
 
-function useFathom() {
-	let initialized = React.useRef(false);
+function TrackPageView() {
+	let location = useLocation();
+
 	React.useEffect(() => {
-		if (initialized.current) return;
-		initialized.current = true;
-		Fathom.load("EPVCGNZL", {
+		Fathom.load(import.meta.env.VITE_FATHOM_SITE_ID, {
 			excludedDomains: ["localhost"],
-			url: "https://thirtyseven-active.b-cdn.net/script.js",
-			spa: "auto",
+			auto: false,
 		});
 	}, []);
+
+	React.useEffect(() => {
+		Fathom.trackPageview({
+			url: location.pathname + location.search,
+			referrer: document.referrer,
+		});
+	}, [location.pathname, location.search]);
+
+	return null;
 }
 
 function useHandleBodyClassName() {
@@ -78,7 +83,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
 	let error = useRouteError();
 	let handleBodyClassName = useHandleBodyClassName();
 	let nonce = useNonce();
-	useFathom();
 
 	return (
 		<html lang="en" className="h-dvh">
@@ -95,6 +99,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 					handleBodyClassName,
 				)}
 			>
+				<TrackPageView />
 				{children}
 				<ScrollRestoration nonce={nonce} />
 				<Scripts nonce={nonce} />

@@ -29,7 +29,7 @@ export default {
 				blue: {
 					screen: "#1000f2",
 				},
-				link: "#ea567c",
+				link: "#e53a40",
 			},
 			fontFamily: {
 				sans: ["Berkeley Mono", ...defaultTheme.fontFamily.sans],

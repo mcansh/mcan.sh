@@ -7,6 +7,12 @@ import type { Plugin } from "vite";
 let EMIT_REPORT = process.env.EMIT_REPORT === "true";
 let SVG_SPRITE_LOGGING = process.env.RAILWAY === "true";
 
+declare module "@remix-run/node" {
+	interface Future {
+		v3_singleFetch: true;
+	}
+}
+
 export default defineConfig({
 	plugins: [
 		svgSprite({ logging: SVG_SPRITE_LOGGING }),

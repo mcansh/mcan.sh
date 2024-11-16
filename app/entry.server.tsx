@@ -116,12 +116,12 @@ function applySecurityHeaders(request: Request, responseHeaders: Headers) {
 			"default-src": ["'self'"],
 			"img-src": [
 				"'self'",
-				"https://res.cloudinary.com/dof0zryca/image/upload/",
-				"https://thirtyseven-active.b-cdn.net",
+				`https://res.cloudinary.com/${env.CLOUDINARY_CLOUD_NAME}/image/upload/`,
+				"https://cdn.usefathom.com",
 			],
 			"script-src": [
 				"'self'",
-				"https://thirtyseven-active.b-cdn.net/script.js",
+				"https://cdn.usefathom.com/script.js",
 				new URL(
 					"cdn-cgi/scripts/*/cloudflare-static/email-decode.min.js",
 					url.origin,
@@ -185,7 +185,7 @@ function applySecurityHeaders(request: Request, responseHeaders: Headers) {
 		"Cross-Origin-Opener-Policy": "same-origin",
 	});
 
-	let merged = mergeHeaders(responseHeaders, securityHeaders);
+	responseHeaders = mergeHeaders(responseHeaders, securityHeaders);
 
 	// TODO: fix upstream in @mcansh/http-helmet
 	if (process.env.NODE_ENV === "production") {
@@ -195,10 +195,15 @@ function applySecurityHeaders(request: Request, responseHeaders: Headers) {
 	let permissionsPolicy = securityHeaders.get("Permissions-Policy");
 
 	if (permissionsPolicy) {
-		merged.set("Feature-Policy", permissionsPolicy);
+		responseHeaders.set("Feature-Policy", permissionsPolicy);
 	}
 
-	merged.set(`Expect-CT`, `report-uri="${env.SENTRY_REPORT_URL}"`);
+	responseHeaders.set(`Expect-CT`, `report-uri="${env.SENTRY_REPORT_URL}"`);
 
-	return { nonce, headers: merged };
+	// TODO: fix upstream in @mcansh/http-helmet
+	if (process.env.NODE_ENV === "production") {
+		responseHeaders.append("Upgrade-Insecure-Requests", "1");
+	}
+
+	return { nonce, headers: responseHeaders };
 }
