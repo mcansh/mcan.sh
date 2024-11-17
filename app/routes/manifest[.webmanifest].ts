@@ -12,14 +12,16 @@ export let iconSizes = [...uniqueIconSizes].map((size) => {
 	};
 });
 
+export let linkColor = "#e53a40";
+
 export function loader({ request }: LoaderFunctionArgs) {
 	let content = {
 		name: "Logan McAnsh",
 		short_name: "LM",
 		description: "personal website for logan mcansh",
 		start_url: "/?homescreen=1",
-		background_color: "#e53a40",
-		theme_color: "#e53a40",
+		background_color: linkColor,
+		theme_color: linkColor,
 		display: "standalone",
 		icons: iconSizes,
 	};
