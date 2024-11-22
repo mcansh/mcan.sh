@@ -60,7 +60,7 @@
 		"@typescript-eslint/parser": "^8.14.0",
 		"@typescript/lib-dom": "npm:@types/web@^0.0.179",
 		"autoprefixer": "^10.4.20",
-		"eslint": "^9.14.0",
+		"eslint": "^9.15.0",
 		"eslint-import-resolver-typescript": "^3.6.3",
 		"eslint-plugin-import": "^2.31.0",
 		"eslint-plugin-prefer-let": "^4.0.0",
