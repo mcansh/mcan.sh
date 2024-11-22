@@ -224,7 +224,7 @@ export default function ResumePage() {
 					</div>
 				</aside>
 
-				<main className="space-y-8 p-8 md:py-8 md:pr-8 md:pl-0 print:space-y-4 print:py-2 print:px-0 print:text-[9pt]">
+				<main className="space-y-8 p-8 md:py-8 md:pr-8 md:pl-0 print:space-y-4 print:px-0 print:py-2 print:text-[9pt]">
 					<div>
 						<h2 className="text-lg font-medium print:text-[11pt]">
 							Work Experience
@@ -240,7 +240,7 @@ export default function ResumePage() {
 										<p>
 											{job.startDate} - {job.endDate}{" "}
 											{"note" in job ? (
-												<span className="block text-sm italic text-gray-600 md:inline">
+												<span className="block text-sm text-gray-600 italic md:inline">
 													{job.note}
 												</span>
 											) : null}
