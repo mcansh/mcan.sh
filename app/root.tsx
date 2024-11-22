@@ -103,15 +103,9 @@ export default function App() {
 	return <Outlet />;
 }
 
-const canUseDOM = !!(
-	typeof window !== "undefined" &&
-	window.document &&
-	window.document.createElement
-);
-
 export function ErrorBoundary() {
 	let error = useRouteError();
-	if (!canUseDOM) console.error(error);
+	if (typeof document === "undefined") console.error(error);
 
 	let headingClassName = `w-fit mx-auto inline-block text-3xl font-bold bg-white text-blue-screen`;
 	let boxClassName = `w-full px-4 py-2 overflow-auto border-4 border-white`;
