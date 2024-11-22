@@ -8,8 +8,9 @@ module.exports = {
 		"plugin:import/typescript",
 	],
 	parser: "@typescript-eslint/parser",
-	plugins: ["@typescript-eslint", "prefer-let"],
+	plugins: ["@typescript-eslint", "prefer-let", "react-compiler"],
 	rules: {
+		"react-compiler/react-compiler": "error",
 		"prefer-const": "off",
 		"prefer-let/prefer-let": "error",
 		"@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],

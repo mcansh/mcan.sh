@@ -1,5 +1,5 @@
-import type { LoaderFunctionArgs } from "@remix-run/node";
 import createEtag from "etag";
+import type { LoaderFunctionArgs } from "react-router";
 
 let uniqueIconSizes = new Set([
 	32, 57, 72, 96, 120, 128, 144, 152, 195, 228, 512,

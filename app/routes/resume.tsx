@@ -6,7 +6,7 @@ import spriteHref from "virtual:@mcansh/vite-plugin-svg-sprite";
 import githubMarkIconHref from "#app/assets/github-mark.svg";
 import linkedinIconHref from "#app/assets/linkedin.svg";
 
-import type { Route } from "./+types.resume";
+import type { Route } from "./+types/resume";
 
 export function loader() {
 	return data(

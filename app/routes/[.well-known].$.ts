@@ -1,6 +1,6 @@
 import { getMugshotURL } from "#app/cloudinary.server.js";
 
-import type { Route } from "./+types.[.well-known].$";
+import type { Route } from "./+types/[.well-known].$";
 
 export function loader({ params }: Route.LoaderArgs) {
 	let splat = params["*"];
@@ -15,10 +15,10 @@ export function loader({ params }: Route.LoaderArgs) {
 	segments = segments.slice(0, -1);
 
 	// get the original image using our default transformations
-	let image = getMugshotURL();
+	let imageUrl = getMugshotURL();
 
 	// split the pathname into segments
-	let pathSegments = image.pathname.split("/").filter(Boolean);
+	let pathSegments = imageUrl.pathname.split("/").filter(Boolean);
 
 	// find the segment that contains the transformations
 	let urlSegmentIndex = pathSegments.findIndex((segment) => {
@@ -38,7 +38,7 @@ export function loader({ params }: Route.LoaderArgs) {
 	pathSegments[urlSegmentIndex] = transformSegment;
 
 	// replace the pathname with our new segments
-	image.pathname = pathSegments.join("/");
+	imageUrl.pathname = pathSegments.join("/");
 
-	return fetch(image);
+	return fetch(imageUrl);
 }
