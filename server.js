@@ -1,3 +1,6 @@
+import console from "node:console";
+import process from "node:process";
+
 import { reactRouterFastify } from "@mcansh/remix-fastify/react-router";
 import { ip as ipAddress } from "address";
 import { fastify } from "fastify";

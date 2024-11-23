@@ -1,4 +1,5 @@
 import { execSync } from "node:child_process";
+import process from "node:process";
 
 let isCi = process.env.CI !== undefined;
 

@@ -1,4 +1,6 @@
 import cp from "node:child_process";
+import console from "node:console";
+import process from "node:process";
 import { parseArgs } from "node:util";
 
 const result = parseArgs({
@@ -31,8 +33,6 @@ switch (command) {
 			rest = ["."];
 		}
 		let args = [
-			"--ignore-path",
-			".gitignore",
 			"--fix",
 			"--no-error-on-unmatched-pattern",
 			"--cache",
