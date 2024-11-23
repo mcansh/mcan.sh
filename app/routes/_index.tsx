@@ -1,12 +1,13 @@
-import { unstable_data, unstable_defineLoader } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
 import { cacheHeader } from "pretty-cache-header";
+import { data } from "react-router";
 
-import { getMugshotURL } from "~/cloudinary.server";
-import { FunHoverLink } from "~/components/fun-link-hover";
-import type { RouteHandle } from "~/types/handle";
+import { getMugshotURL } from "#app/cloudinary.server.js";
+import { FunHoverLink } from "#app/components/fun-link-hover.js";
+import type { RouteHandle } from "#app/types/handle.js";
 
-export const loader = unstable_defineLoader(() => {
+import type { Route } from "./+types._index";
+
+export function loader() {
 	let srcSet = [240, 480, 720].map((size, index) => {
 		let url = getMugshotURL({
 			resize: { type: "fill", width: size, height: size },
@@ -18,7 +19,7 @@ export const loader = unstable_defineLoader(() => {
 	let me = srcSet.at(1);
 	if (me === undefined) throw new Error("Failed to get mugshot");
 
-	return unstable_data(
+	return data(
 		{
 			me: { url: me.url.href, size: me.size },
 			srcSet: srcSet.map((x) => `${x.url} ${x.density}x`).join(", "),
@@ -35,26 +36,24 @@ export const loader = unstable_defineLoader(() => {
 			},
 		},
 	);
-});
+}
 
 export const handle: RouteHandle = {
 	bodyClassName: "h-full font-thin dark:bg-slate-900 dark:text-white",
 };
 
-export default function IndexPage() {
-	let data = useLoaderData<typeof loader>();
-
+export default function IndexPage({ loaderData }: Route.ComponentProps) {
 	return (
 		<div className="mx-auto flex h-screen max-w-screen-md flex-col items-center justify-between px-4 text-center">
 			<div className="flex flex-1 flex-col items-center justify-center">
 				<img
-					width={data.me.size}
-					height={data.me.size}
+					width={loaderData.me.size}
+					height={loaderData.me.size}
 					alt=""
 					className="mx-auto size-60 rounded-full"
 					fetchPriority="high"
-					src={data.me.url}
-					srcSet={data.srcSet}
+					src={loaderData.me.url}
+					srcSet={loaderData.srcSet}
 				/>
 				<h1 className="mt-4 text-4xl">Logan McAnsh</h1>
 				<p className="mt-2 max-w-xs text-center text-lg sm:text-xl md:max-w-sm">

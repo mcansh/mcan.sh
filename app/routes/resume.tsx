@@ -1,16 +1,15 @@
-import { unstable_data, unstable_defineLoader } from "@remix-run/node";
-import type { LinksFunction } from "@remix-run/node";
-import type { MetaFunction } from "@remix-run/react";
-import { useLoaderData } from "@remix-run/react";
 import { cacheHeader } from "pretty-cache-header";
-import spriteHref from "virtual:@mcansh/vite-svg-sprite-plugin";
+import type { MetaFunction, LinksFunction } from "react-router";
+import { Link, data } from "react-router";
+import spriteHref from "virtual:@mcansh/vite-plugin-svg-sprite";
 
-import githubMarkIconHref from "~/assets/github-mark.svg";
-import linkedinIconHref from "~/assets/linkedin.svg";
-import type { RouteHandle } from "~/types/handle";
+import githubMarkIconHref from "#app/assets/github-mark.svg";
+import linkedinIconHref from "#app/assets/linkedin.svg";
 
-export const loader = unstable_defineLoader(() => {
-	return unstable_data(
+import type { Route } from "./+types.resume";
+
+export function loader() {
+	return data(
 		{
 			experience: [
 				{
@@ -60,12 +59,12 @@ export const loader = unstable_defineLoader(() => {
 						"Collaborated closely with the design team to enhance their workflow and reduce time spent on repetitive tasks, such as creating new artboards, by creating Sketch plugins for utility support.",
 					],
 				},
-			] as const,
+			],
 			certifications: [
 				"CIW Internet Business Associate",
 				"CIW Web Site Development Associate",
 				"Testing JavaScript",
-			] as const,
+			],
 			skills: [
 				"Node.js",
 				"Git",
@@ -84,7 +83,7 @@ export const loader = unstable_defineLoader(() => {
 				"GitHub Actions",
 				"Continuous Integration",
 				"Continuous Delivery",
-			] as const,
+			],
 			references: [
 				{
 					name: "Ryan Florence",
@@ -94,7 +93,7 @@ export const loader = unstable_defineLoader(() => {
 					name: "Michael Jackson",
 					twitter: "https://twitter.com/mjackson",
 				},
-			] as const,
+			],
 		},
 		{
 			headers: {
@@ -110,7 +109,7 @@ export const loader = unstable_defineLoader(() => {
 			},
 		},
 	);
-});
+}
 
 export const meta: MetaFunction = () => {
 	return [
@@ -125,9 +124,7 @@ export const links: LinksFunction = () => {
 	];
 };
 
-export default function ResumePage() {
-	let data = useLoaderData<typeof loader>();
-
+export default function ResumePage({ loaderData }: Route.ComponentProps) {
 	let links = [
 		{
 			href: "https://github.com/mcansh",
@@ -144,7 +141,11 @@ export default function ResumePage() {
 	return (
 		<div className="flex h-full flex-col">
 			<header className="flex flex-col items-center justify-center space-y-2 bg-stone-800 py-6 text-center text-white print:py-3">
-				<h1 className="text-3xl print:text-xl">Logan McAnsh</h1>
+				<h1 className="text-3xl print:text-xl">
+					<Link to="/" className="hover:underline">
+						Logan McAnsh
+					</Link>
+				</h1>
 				<p className="text-lg print:text-base">Senior Software Engineer</p>
 			</header>
 
@@ -181,7 +182,7 @@ export default function ResumePage() {
 					<div className="print:text-[9pt]">
 						<h2 className="text-lg font-medium print:text-[11pt]">Skills</h2>
 						<ul className="space-y-1 print:space-y-0.5">
-							{data.skills.map((skill) => {
+							{loaderData.skills.map((skill) => {
 								return <li key={skill}>{skill}</li>;
 							})}
 						</ul>
@@ -192,7 +193,7 @@ export default function ResumePage() {
 							Certifications
 						</h2>
 						<ul className="space-y-1 print:space-y-0.5">
-							{data.certifications.map((certification) => {
+							{loaderData.certifications.map((certification) => {
 								return <li key={certification}>{certification}</li>;
 							})}
 						</ul>
@@ -203,7 +204,7 @@ export default function ResumePage() {
 							References
 						</h2>
 						<ul className="space-y-1 print:space-y-0.5">
-							{data.references.map((reference) => {
+							{loaderData.references.map((reference) => {
 								return (
 									<li key={reference.name}>
 										<h3>
@@ -230,7 +231,7 @@ export default function ResumePage() {
 							Work Experience
 						</h2>
 						<ul className="mt-4 space-y-8 print:mt-2 print:space-y-4">
-							{data.experience.map((job) => {
+							{loaderData.experience.map((job) => {
 								return (
 									<li key={job.company}>
 										<h3 className="text-xl print:text-[10pt] print:font-medium">

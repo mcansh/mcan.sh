@@ -10,3 +10,6 @@ tsconfig.tsbuildinfo
 
 yalc.lock
 .yalc
+
+.react-router
+.idea

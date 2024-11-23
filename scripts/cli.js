@@ -10,7 +10,7 @@ let [command, ...rest] = result.positionals;
 
 /**
  * @param {string} command
- * @param {string} args=[]
+ * @param {string} [args]
  * @returns {void}
  */
 function runScript(command, args = []) {
@@ -20,6 +20,7 @@ function runScript(command, args = []) {
 
 switch (command) {
 	case "typecheck": {
+		runScript("react-router typegen");
 		runScript("tsc");
 		break;
 	}

@@ -1,9 +1,10 @@
-import { unstable_defineLoader } from "@remix-run/server-runtime";
-import etag from "etag";
+import createEtag from "etag";
 import { chromium } from "playwright";
 import { cacheHeader } from "pretty-cache-header";
 
-export const loader = unstable_defineLoader(async ({ request }) => {
+import type { Route } from "./+types.resume[.pdf]";
+
+export async function loader({ request }: Route.LoaderArgs) {
 	console.info(`regenerating resume.pdf`);
 	let url = new URL(request.url);
 	let resume_url = new URL("resume", url.origin);
@@ -24,10 +25,10 @@ export const loader = unstable_defineLoader(async ({ request }) => {
 		printBackground: true,
 	});
 
-	let etagValue = etag(pdf);
+	let etag = createEtag(pdf);
 	await browser.close();
 
-	if (request.headers.get("If-None-Match") === etagValue) {
+	if (request.headers.get("If-None-Match") === etag) {
 		return new Response(null, { status: 304 });
 	}
 
@@ -41,7 +42,7 @@ export const loader = unstable_defineLoader(async ({ request }) => {
 			"Content-Disposition": "inline; filename=Logan McAnsh.pdf",
 			"Content-Length": pdf.byteLength.toString(),
 			"Content-Type": "application/pdf",
-			ETag: etagValue,
+			ETag: etag,
 		},
 	});
-});
+}

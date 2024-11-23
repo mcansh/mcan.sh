@@ -1,6 +1,6 @@
-import type { LoaderFunctionArgs } from "@remix-run/node";
+import { getMugshotURL } from "#app/cloudinary.server.js";
 
-import { getMugshotURL } from "~/cloudinary.server";
+import type { Route } from "./+types.[.well-known].$";
 
 let notFound = new Response("ope not found", {
 	status: 404,
@@ -8,7 +8,7 @@ let notFound = new Response("ope not found", {
 	headers: { "Content-Type": "text/plain" },
 });
 
-export async function loader({ params }: LoaderFunctionArgs) {
+export function loader({ params }: Route.LoaderArgs) {
 	let splat = params["*"];
 
 	if (!splat) throw notFound;

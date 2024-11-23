@@ -2,15 +2,15 @@ import { PassThrough } from "node:stream";
 
 import { createSecureHeaders, mergeHeaders } from "@mcansh/http-helmet";
 import { NonceProvider, createNonce } from "@mcansh/http-helmet/react";
+import { createReadableStreamFromReadable } from "@react-router/node";
+import { isbot } from "isbot";
+import { renderToPipeableStream } from "react-dom/server";
 import type {
 	AppLoadContext,
 	EntryContext,
 	HandleDataRequestFunction,
-} from "@remix-run/node";
-import { createReadableStreamFromReadable } from "@remix-run/node";
-import { RemixServer } from "@remix-run/react";
-import { isbot } from "isbot";
-import { renderToPipeableStream } from "react-dom/server";
+} from "react-router";
+import { ServerRouter } from "react-router";
 import { isPrefetch } from "remix-utils/is-prefetch";
 import { preloadRouteAssets } from "remix-utils/preload-route-assets";
 
@@ -25,14 +25,15 @@ export default function handleRequest(
 	request: Request,
 	responseStatusCode: number,
 	responseHeaders: Headers,
-	remixContext: EntryContext,
+	reactRouterContext: EntryContext,
 	_loadContext: AppLoadContext,
 ) {
 	let callback = isbot(request.headers.get("user-agent"))
 		? "onAllReady"
 		: "onShellReady";
 
-	preloadRouteAssets(remixContext, responseHeaders);
+	// @ts-expect-error - remix-utils needs to be updated to support react-router v7
+	preloadRouteAssets(reactRouterContext, responseHeaders);
 
 	let { nonce, headers } = applySecurityHeaders(request, responseHeaders);
 
@@ -40,8 +41,8 @@ export default function handleRequest(
 		let shellRendered = false;
 		let { pipe, abort } = renderToPipeableStream(
 			<NonceProvider nonce={nonce}>
-				<RemixServer
-					context={remixContext}
+				<ServerRouter
+					context={reactRouterContext}
 					url={request.url}
 					abortDelay={ABORT_DELAY}
 					nonce={nonce}
@@ -111,17 +112,16 @@ function applySecurityHeaders(request: Request, responseHeaders: Headers) {
 	let nonce = createNonce();
 	let securityHeaders = createSecureHeaders({
 		"Content-Security-Policy": {
-			upgradeInsecureRequests: process.env.NODE_ENV === "production",
 			"default-src": ["'none'"],
 			"base-uri": ["'self'"],
 			"img-src": [
 				"'self'",
-				"https://res.cloudinary.com/dof0zryca/image/upload/",
-				"https://thirtyseven-active.b-cdn.net",
+				`https://res.cloudinary.com/${env.CLOUDINARY_CLOUD_NAME}/image/upload/`,
+				"https://cdn.usefathom.com",
 			],
 			"script-src": [
 				"'self'",
-				"https://thirtyseven-active.b-cdn.net/script.js",
+				"https://cdn.usefathom.com/script.js",
 				new URL(
 					"cdn-cgi/scripts/*/cloudflare-static/email-decode.min.js",
 					url.origin,
@@ -190,15 +190,25 @@ function applySecurityHeaders(request: Request, responseHeaders: Headers) {
 		"Cross-Origin-Opener-Policy": "same-origin",
 	});
 
-	let merged = mergeHeaders(responseHeaders, securityHeaders);
+	let headers = mergeHeaders(responseHeaders, securityHeaders);
+
+	// TODO: fix upstream in @mcansh/http-helmet
+	if (process.env.NODE_ENV === "production") {
+		headers.append("upgrade-insecure-requests", "1");
+	}
 
 	let permissionsPolicy = securityHeaders.get("Permissions-Policy");
 
 	if (permissionsPolicy) {
-		merged.set("Feature-Policy", permissionsPolicy);
+		headers.set("Feature-Policy", permissionsPolicy);
 	}
 
-	merged.set(`Expect-CT`, `report-uri="${env.SENTRY_REPORT_URL}"`);
+	headers.set(`Expect-CT`, `report-uri="${env.SENTRY_REPORT_URL}"`);
 
-	return { nonce, headers: merged };
+	// TODO: fix upstream in @mcansh/http-helmet
+	if (process.env.NODE_ENV === "production") {
+		headers.append("Upgrade-Insecure-Requests", "1");
+	}
+
+	return { nonce, headers };
 }
