@@ -112,8 +112,8 @@ function applySecurityHeaders(request: Request, responseHeaders: Headers) {
 	let nonce = createNonce();
 	let securityHeaders = createSecureHeaders({
 		"Content-Security-Policy": {
+			"default-src": ["'none'"],
 			"base-uri": ["'self'"],
-			"default-src": ["'self'"],
 			"img-src": [
 				"'self'",
 				`https://res.cloudinary.com/${env.CLOUDINARY_CLOUD_NAME}/image/upload/`,
@@ -129,13 +129,18 @@ function applySecurityHeaders(request: Request, responseHeaders: Headers) {
 				`'nonce-${nonce}'`,
 				"'strict-dynamic'",
 			],
-			"script-src-attr": [`'nonce-${nonce}'`],
 			"connect-src": [
 				...(process.env.NODE_ENV === "production"
 					? ["'self'"]
 					: ["'self'", "ws:"]),
 			],
 			"worker-src": ["blob:"],
+			"manifest-src": ["'self'"],
+			"font-src": ["'self'"],
+			"style-src": [
+				"'self'",
+				...(process.env.NODE_ENV === "development" ? ["'unsafe-inline'"] : []),
+			],
 			"report-uri": [env.SENTRY_REPORT_URL],
 		},
 		"Referrer-Policy": "origin-when-cross-origin",
@@ -185,25 +190,25 @@ function applySecurityHeaders(request: Request, responseHeaders: Headers) {
 		"Cross-Origin-Opener-Policy": "same-origin",
 	});
 
-	responseHeaders = mergeHeaders(responseHeaders, securityHeaders);
+	let headers = mergeHeaders(responseHeaders, securityHeaders);
 
 	// TODO: fix upstream in @mcansh/http-helmet
 	if (process.env.NODE_ENV === "production") {
-		responseHeaders.append("upgrade-insecure-requests", "1");
+		headers.append("upgrade-insecure-requests", "1");
 	}
 
 	let permissionsPolicy = securityHeaders.get("Permissions-Policy");
 
 	if (permissionsPolicy) {
-		responseHeaders.set("Feature-Policy", permissionsPolicy);
+		headers.set("Feature-Policy", permissionsPolicy);
 	}
 
-	responseHeaders.set(`Expect-CT`, `report-uri="${env.SENTRY_REPORT_URL}"`);
+	headers.set(`Expect-CT`, `report-uri="${env.SENTRY_REPORT_URL}"`);
 
 	// TODO: fix upstream in @mcansh/http-helmet
 	if (process.env.NODE_ENV === "production") {
-		responseHeaders.append("Upgrade-Insecure-Requests", "1");
+		headers.append("Upgrade-Insecure-Requests", "1");
 	}
 
-	return { nonce, headers: responseHeaders };
+	return { nonce, headers };
 }

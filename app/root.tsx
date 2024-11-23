@@ -16,9 +16,9 @@ import {
 } from "react-router";
 import type { LinksFunction, MetaFunction } from "react-router";
 import { twMerge } from "tailwind-merge";
-import tailwindStyleHref from "tailwindcss/tailwind.css?url";
 
-import fontStyleHref from "./assets/berkeley-mono.css?url";
+import "./assets/app.css";
+import "./assets/berkeley-mono.css";
 import { iconSizes } from "./routes/manifest[.webmanifest]";
 import type { Match } from "./types/handle";
 
@@ -40,10 +40,6 @@ export const links: LinksFunction = () => {
 		{ rel: "manifest", href: "/manifest.webmanifest" },
 		{ rel: "icon", href: "/favicon.png", type: "image/png" },
 		{ rel: "icon", href: "/favicon.ico" },
-		{ rel: "stylesheet", href: tailwindStyleHref },
-		{ rel: "stylesheet", href: fontStyleHref },
-		{ rel: "preload", href: tailwindStyleHref, as: "style" },
-		{ rel: "preload", href: fontStyleHref, as: "style" },
 		...icons,
 	];
 };
@@ -94,7 +90,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 			<body
 				className={cn(
 					error
-						? "mx-auto flex min-h-dvh w-[90%] max-w-5xl flex-col justify-center space-y-4 bg-blue-screen pt-20 text-center text-white"
+						? "bg-blue-screen mx-auto flex min-h-dvh w-[90%] max-w-5xl flex-col justify-center space-y-4 pt-20 text-center text-white"
 						: undefined,
 					handleBodyClassName,
 				)}
@@ -112,15 +108,9 @@ export default function App() {
 	return <Outlet />;
 }
 
-const canUseDOM = !!(
-	typeof window !== "undefined" &&
-	window.document &&
-	window.document.createElement
-);
-
 export function ErrorBoundary() {
 	let error = useRouteError();
-	if (!canUseDOM) console.error(error);
+	if (typeof document === "undefined") console.error(error);
 
 	let headingClassName = `w-fit mx-auto inline-block text-3xl font-bold bg-white text-blue-screen`;
 	let boxClassName = `w-full px-4 py-2 overflow-auto border-4 border-white`;
