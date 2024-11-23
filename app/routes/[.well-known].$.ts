@@ -1,14 +1,20 @@
 import { getMugshotURL } from "#app/cloudinary.server.js";
 
-import type { Route } from "./+types.[.well-known].$";
+import type { Route } from "./+types/[.well-known].$";
+
+let notFound = new Response("ope not found", {
+	status: 404,
+	statusText: "Not Found",
+	headers: { "Content-Type": "text/plain" },
+});
 
 export function loader({ params }: Route.LoaderArgs) {
 	let splat = params["*"];
 
-	if (!splat) throw new Response(null, { status: 404 });
+	if (!splat) throw notFound;
 
 	let segments = splat.split("/");
-	if (segments.at(-1) !== "avatar") throw new Response(null, { status: 404 });
+	if (segments.at(-1) !== "avatar") throw notFound;
 
 	// remove the last segment (avatar)
 	// the remaining segments are the transformations that we can forward to cloudinary
@@ -25,11 +31,11 @@ export function loader({ params }: Route.LoaderArgs) {
 		return segment.includes(",");
 	});
 
-	if (urlSegmentIndex === -1) throw new Response(null, { status: 404 });
+	if (urlSegmentIndex === -1) throw notFound;
 
 	let transformSegment = pathSegments.at(urlSegmentIndex);
 
-	if (!transformSegment) throw new Response(null, { status: 404 });
+	if (!transformSegment) throw notFound;
 
 	// merge our segments with the url segments with a comma
 	transformSegment = [...transformSegment.split(","), ...segments].join(",");

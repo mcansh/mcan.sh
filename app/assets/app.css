@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+@theme {
+	--default-font-family: Berkeley Mono;
+	--color-blue-screen: #1000f2;
+	--color-link: #ea567c;
+}
+
+@layer base {
+	.h-screen {
+		height: 100vh;
+	}
+
+	@supports (-webkit-touch-callout: none) {
+		.h-screen {
+			height: -webkit-fill-available;
+		}
+	}
+
+	.fun-link-hover-gradient {
+		background-size: 100px 2px;
+	}
+
+	.fun-link-hover-gradient:hover {
+		background-size: 100px 100%;
+	}
+}

@@ -1,7 +1,7 @@
 import { index, route } from "@react-router/dev/routes";
 import type { RouteConfig } from "@react-router/dev/routes";
 
-export const routes = [
+export default [
 	index("./routes/_index.tsx"),
 	route("/.well-known/*", "./routes/[.well-known].$.ts"),
 	route("/resume", "./routes/resume.tsx"),

@@ -5,7 +5,7 @@ import { getMugshotURL } from "#app/cloudinary.server.js";
 import { FunHoverLink } from "#app/components/fun-link-hover.js";
 import type { RouteHandle } from "#app/types/handle.js";
 
-import type { Route } from "./+types._index";
+import type { Route } from "./+types/_index";
 
 export function loader() {
 	let srcSet = [240, 480, 720].map((size, index) => {
@@ -62,7 +62,7 @@ export default function IndexPage({ loaderData }: Route.ComponentProps) {
 				<h2 className="mt-2">Current: United Wholesale Mortgage</h2>
 				<pre className="mt-2 font-thin">Past: Shopify x Remix</pre>
 			</div>
-			<div className="flex space-x-4 pb-8 media-standalone:pb-0">
+			<div className="flex space-x-4 pt-5 pb-8 [@media(display-mode:standalone)]:pb-0">
 				<FunHoverLink to="https://github.com/mcansh">GitHub</FunHoverLink>
 				<FunHoverLink to="/resume" prefetch="intent">
 					Resume
