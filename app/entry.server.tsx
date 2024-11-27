@@ -112,6 +112,7 @@ function applySecurityHeaders(request: Request, responseHeaders: Headers) {
 	let nonce = createNonce();
 	let securityHeaders = createSecureHeaders({
 		"Content-Security-Policy": {
+			"upgrade-insecure-requests": true,
 			"default-src": ["'none'"],
 			"base-uri": ["'self'"],
 			"img-src": [
@@ -204,11 +205,6 @@ function applySecurityHeaders(request: Request, responseHeaders: Headers) {
 	}
 
 	headers.set(`Expect-CT`, `report-uri="${env.SENTRY_REPORT_URL}"`);
-
-	// TODO: fix upstream in @mcansh/http-helmet
-	if (process.env.NODE_ENV === "production") {
-		headers.append("Upgrade-Insecure-Requests", "1");
-	}
 
 	return { nonce, headers };
 }
