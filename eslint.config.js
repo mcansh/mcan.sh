@@ -41,6 +41,7 @@ export default tseslint.config(
 				},
 			],
 			"import/no-unresolved": ["error", { ignore: ["^virtual:"] }],
+			"import/no-named-as-default-member": "off",
 		},
 		settings: {
 			"import/resolver": {
