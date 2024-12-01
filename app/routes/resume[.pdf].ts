@@ -11,8 +11,7 @@ export async function loader({ request }: Route.LoaderArgs) {
 
 	let browser = await chromium.launch();
 	let page = await browser.newPage();
-	await page.goto(resume_url.toString());
-	await page.waitForLoadState("domcontentloaded");
+	await page.goto(resume_url.toString(), { waitUntil: "domcontentloaded" });
 
 	let pdf = await page.pdf({
 		tagged: true,
