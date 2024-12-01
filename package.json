@@ -23,7 +23,7 @@
 		"knip": "knip-bun"
 	},
 	"dependencies": {
-		"@mcansh/http-helmet": "^0.11.2",
+		"@mcansh/http-helmet": "^0.12.0",
 		"@mcansh/remix-fastify": "^4.0.3",
 		"@react-router/node": "7.0.1",
 		"address": "^2.0.3",
@@ -47,7 +47,7 @@
 	"devDependencies": {
 		"@cld-apis/types": "^0.1.6",
 		"@eslint/compat": "^1.2.3",
-		"@eslint/js": "^9.15.0",
+		"@eslint/js": "^9.16.0",
 		"@mcansh/vite-plugin-svg-sprite": "^0.5.0",
 		"@react-router/dev": "7.0.1",
 		"@tailwindcss/vite": "4.0.0-beta.2",
@@ -58,15 +58,15 @@
 		"@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
 		"@typescript-eslint/eslint-plugin": "^8.16.0",
 		"@typescript-eslint/parser": "^8.16.0",
-		"@typescript/lib-dom": "npm:@types/web@^0.0.183",
+		"@typescript/lib-dom": "npm:@types/web@^0.0.185",
 		"autoprefixer": "^10.4.20",
-		"eslint": "^9.15.0",
+		"eslint": "^9.16.0",
 		"eslint-import-resolver-typescript": "^3.6.3",
 		"eslint-plugin-import": "^2.31.0",
 		"eslint-plugin-prefer-let": "^4.0.0",
 		"globify-gitignore": "^1.0.3",
 		"husky": "^9.1.7",
-		"knip": "^5.38.1",
+		"knip": "^5.38.3",
 		"lightningcss": "^1.28.2",
 		"lint-staged": "^15.2.10",
 		"micromatch": "^4.0.8",
@@ -89,5 +89,5 @@
 	"engines": {
 		"node": ">=22"
 	},
-	"packageManager": "pnpm@9.14.2+sha512.6e2baf77d06b9362294152c851c4f278ede37ab1eba3a55fda317a4a17b209f4dbb973fb250a77abc463a341fcb1f17f17cfa24091c4eb319cda0d9b84278387"
+	"packageManager": "pnpm@9.14.4+sha512.c8180b3fbe4e4bca02c94234717896b5529740a6cbadf19fa78254270403ea2f27d4e1d46a08a0f56c89b63dc8ebfd3ee53326da720273794e6200fcf0d184ab"
 }
