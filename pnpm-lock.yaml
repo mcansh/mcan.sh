@@ -16,8 +16,8 @@ importers:
   .:
     dependencies:
       '@mcansh/http-helmet':
-        specifier: https://pkg.pr.new/@mcansh/http-helmet@173
-        version: https://pkg.pr.new/@mcansh/http-helmet@173(react-dom@19.0.0-rc.1(react@19.0.0-rc.1))(react@19.0.0-rc.1)
+        specifier: ^0.11.2
+        version: 0.11.2(react-dom@19.0.0-rc.1(react@19.0.0-rc.1))(react@19.0.0-rc.1)
       '@mcansh/remix-fastify':
         specifier: ^4.0.3
         version: 4.0.3(@remix-run/node@2.13.1(typescript@5.7.2))(fastify@5.1.0)(react-router@7.0.1(react-dom@19.0.0-rc.1(react@19.0.0-rc.1))(react@19.0.0-rc.1))(vite@6.0.1(@types/node@20.12.7)(jiti@2.4.0)(lightningcss@1.28.2)(yaml@2.5.0))
@@ -743,9 +743,8 @@ packages:
     resolution: {integrity: sha512-9I2Zn6+NJLfaGoz9jN3lpwDgAYvfGeNYdbAIjJOqzs4Tpc+VU3Jqq4IofSUBKajiDS8k9fZIg18/z13mpk1bsA==}
     engines: {node: '>=8'}
 
-  '@mcansh/http-helmet@https://pkg.pr.new/@mcansh/http-helmet@173':
-    resolution: {tarball: https://pkg.pr.new/@mcansh/http-helmet@173}
-    version: 0.11.1
+  '@mcansh/http-helmet@0.11.2':
+    resolution: {integrity: sha512-LwwY1v6QmZahLg5Ba3XDkM6qq2RVezB/0AEyLVkBCDRERMPXLGQ5cw///8oMfRdYcObUn6ObY5HithaQMhNQDw==}
     peerDependencies:
       react: 19.0.0-rc.1
       react-dom: 19.0.0-rc.1
@@ -4307,7 +4306,7 @@ snapshots:
 
   '@lukeed/ms@2.0.2': {}
 
-  '@mcansh/http-helmet@https://pkg.pr.new/@mcansh/http-helmet@173(react-dom@19.0.0-rc.1(react@19.0.0-rc.1))(react@19.0.0-rc.1)':
+  '@mcansh/http-helmet@0.11.2(react-dom@19.0.0-rc.1(react@19.0.0-rc.1))(react@19.0.0-rc.1)':
     dependencies:
       change-case: 5.4.4
       type-fest: 4.26.1
