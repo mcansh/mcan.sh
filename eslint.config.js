@@ -4,6 +4,7 @@ import { fixupPluginRules } from "@eslint/compat";
 import eslint from "@eslint/js";
 import importPlugin from "eslint-plugin-import";
 import preferLet from "eslint-plugin-prefer-let";
+import reactCompiler from "eslint-plugin-react-compiler";
 import { globifyGitIgnore } from "globify-gitignore";
 import tseslint from "typescript-eslint";
 
@@ -23,8 +24,10 @@ export default tseslint.config(
 		},
 		plugins: {
 			"prefer-let": fixupPluginRules(preferLet),
+			"react-compiler": reactCompiler,
 		},
 		rules: {
+			"react-compiler/react-compiler": "error",
 			"prefer-const": "off",
 			"prefer-let/prefer-let": "error",
 			"@typescript-eslint/no-unused-vars": [

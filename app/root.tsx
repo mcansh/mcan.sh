@@ -1,8 +1,9 @@
 import { useNonce } from "@mcansh/http-helmet/react";
-import { clsx } from "clsx";
 import type { ClassValue } from "clsx";
+import { clsx } from "clsx";
 import * as Fathom from "fathom-client";
 import * as React from "react";
+import type { LinksFunction, MetaFunction } from "react-router";
 import {
 	isRouteErrorResponse,
 	Links,
@@ -14,12 +15,11 @@ import {
 	useMatches,
 	useRouteError,
 } from "react-router";
-import type { LinksFunction, MetaFunction } from "react-router";
 import { twMerge } from "tailwind-merge";
 
 import "./assets/app.css";
 import "./assets/berkeley-mono.css";
-import { iconSizes } from "./routes/manifest[.webmanifest]";
+import { iconSizes } from "./routes/manifest.webmanifest";
 import type { Match } from "./types/handle";
 
 export const meta: MetaFunction = () => {

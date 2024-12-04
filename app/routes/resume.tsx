@@ -1,5 +1,5 @@
 import { cacheHeader } from "pretty-cache-header";
-import type { MetaFunction, LinksFunction } from "react-router";
+import type { LinksFunction, MetaFunction } from "react-router";
 import { Link, data } from "react-router";
 import spriteHref from "virtual:@mcansh/vite-plugin-svg-sprite";
 
