@@ -1,71 +1,97 @@
-import cp from "node:child_process";
 import console from "node:console";
 import process from "node:process";
 import { parseArgs } from "node:util";
+
+import spawn from "cross-spawn";
 
 const result = parseArgs({
 	args: process.argv.slice(2),
 	allowPositionals: true,
 });
 
-let [command, ...rest] = result.positionals;
-
 /**
  * @param {string} command
  * @param {string} [args]
  * @returns {void}
  */
-function runScript(command, args = []) {
+async function runScript(command, args = []) {
 	console.log(`> ${command} ${args.join(" ")}`);
-	cp.spawnSync(command, args, { stdio: "inherit" });
+	return spawn(command, args, { stdio: "inherit" });
 }
 
-switch (command) {
-	case "typecheck": {
-		runScript("react-router typegen");
-		runScript("tsc");
-		break;
-	}
+async function run() {
+	let [command, ...rest] = result.positionals;
 
-	case "lint": {
-		if (!rest.length) {
-			console.log("no files specified, linting all files.");
-			rest = ["."];
+	switch (command) {
+		case "typecheck": {
+			await runScript("react-router typegen");
+			await runScript("tsc");
+			break;
 		}
-		let args = [
-			"--fix",
-			"--no-error-on-unmatched-pattern",
-			"--cache",
-			"--cache-location",
-			"./node_modules/.cache/eslint",
-			...rest,
-		];
-		runScript("eslint", args);
-		break;
-	}
 
-	case "format": {
-		if (!rest.length) {
-			console.log("no files specified, formatting all files.");
-			rest = ["."];
+		case "lint": {
+			if (!rest.length) {
+				console.log("no files specified, linting all files.");
+				rest = ["."];
+			}
+
+			let args = [
+				"--fix",
+				"--no-error-on-unmatched-pattern",
+				"--cache",
+				"--cache-location",
+				"./node_modules/.cache/eslint",
+				...rest,
+			];
+
+			await runScript("eslint", args);
+			break;
 		}
-		let args = [
-			"--ignore-path",
-			".gitignore",
-			"--ignore-path",
-			".prettierignore",
-			"--cache",
-			"--ignore-unknown",
-			"--write",
-			...rest,
-		];
-		runScript("prettier", args);
-		break;
-	}
 
-	default: {
-		throw new Error(
-			`Unknown script ${command}, expected \`lint\`, \`format\`, or \`typecheck\``,
-		);
+		case "format": {
+			if (!rest.length) {
+				console.log("no files specified, formatting all files.");
+				rest = ["."];
+			}
+
+			let args = [
+				"--ignore-path",
+				".gitignore",
+				"--ignore-path",
+				".prettierignore",
+				"--cache",
+				"--ignore-unknown",
+				"--write",
+				...rest,
+			];
+
+			await runScript("prettier", args);
+			break;
+		}
+
+		case "validate": {
+			await Promise.all([
+				runScript("node", ["--run", "typecheck"]),
+				runScript("node", ["--run", "lint"]),
+				runScript("node", ["--run", "format"]),
+			]);
+			break;
+		}
+
+		default: {
+			throw new Error(
+				`Unknown script ${command}, expected \`lint\`, \`format\`, \`typecheck\`, or \`validate\`.`,
+			);
+		}
 	}
 }
+
+run().then(
+	() => {
+		process.exit(0);
+	},
+	(error) => {
+		if (error) console.error(error);
+		process.exit(1);
+	},
+);
