@@ -135,17 +135,13 @@ function applySecurityHeaders(request: Request, responseHeaders: Headers) {
 				"'strict-dynamic'",
 			],
 			"connect-src": [
-				...(process.env.NODE_ENV === "production"
-					? ["'self'"]
-					: ["'self'", "ws:"]),
+				"'self'",
+				...(process.env.NODE_ENV === "development" ? ["ws:"] : []),
 			],
 			"worker-src": ["blob:"],
 			"manifest-src": ["'self'"],
 			"font-src": ["'self'"],
-			"style-src": [
-				"'self'",
-				...(process.env.NODE_ENV === "development" ? ["'unsafe-inline'"] : []),
-			],
+			"style-src": ["'self'"],
 			"report-uri": [env.SENTRY_REPORT_URL],
 		},
 		"Referrer-Policy": "origin-when-cross-origin",
