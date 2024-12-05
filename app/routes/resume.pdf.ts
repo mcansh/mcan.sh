@@ -42,6 +42,7 @@ export async function loader({ request }: Route.LoaderArgs) {
 			"Content-Length": pdf.byteLength.toString(),
 			"Content-Type": "application/pdf",
 			ETag: etag,
+			"Last-Modified": new Date().toUTCString(),
 		},
 	});
 }
