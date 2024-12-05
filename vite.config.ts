@@ -4,9 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite";
 import babel from "vite-plugin-babel";
 
-const ReactCompilerConfig = {
-	target: "18", // '17' | '18' | '19'
-};
+let ReactCompilerConfig = {};
 
 export default defineConfig({
 	build: { cssMinify: "lightningcss" },
