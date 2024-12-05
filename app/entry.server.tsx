@@ -116,7 +116,7 @@ function applySecurityHeaders(request: Request, responseHeaders: Headers) {
 	let nonce = createNonce();
 	let securityHeaders = createSecureHeaders({
 		"Content-Security-Policy": {
-			"upgrade-insecure-requests": true,
+			"upgrade-insecure-requests": process.env.NODE_ENV === "production",
 			"default-src": ["'none'"],
 			"base-uri": ["'self'"],
 			"img-src": [
@@ -196,11 +196,6 @@ function applySecurityHeaders(request: Request, responseHeaders: Headers) {
 	});
 
 	let headers = mergeHeaders(responseHeaders, securityHeaders);
-
-	// TODO: fix upstream in @mcansh/http-helmet
-	if (process.env.NODE_ENV === "production") {
-		headers.append("upgrade-insecure-requests", "1");
-	}
 
 	let permissionsPolicy = securityHeaders.get("Permissions-Policy");
 
