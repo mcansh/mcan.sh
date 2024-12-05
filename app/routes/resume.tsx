@@ -1,5 +1,4 @@
 import { cacheHeader } from "pretty-cache-header";
-import type { LinksFunction, MetaFunction } from "react-router";
 import { Link, data } from "react-router";
 import spriteHref from "virtual:@mcansh/vite-plugin-svg-sprite";
 
@@ -111,18 +110,18 @@ export function loader() {
 	);
 }
 
-export const meta: MetaFunction = () => {
+export function meta(): Route.MetaDescriptors {
 	return [
 		{ title: "Resume | Logan McAnsh" },
 		{ name: "description", content: "Logan McAnsh's Resume" },
 	];
-};
+}
 
-export const links: LinksFunction = () => {
+export function links(): Route.LinkDescriptors {
 	return [
 		{ rel: "preload", href: spriteHref, as: "image", type: "image/svg+xml" },
 	];
-};
+}
 
 export default function ResumePage({ loaderData }: Route.ComponentProps) {
 	let links = [
