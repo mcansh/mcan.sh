@@ -16,6 +16,11 @@ export default defineConfig({
 		reactRouter(),
 		babel({
 			filter: /\.[jt]sx?$/,
+			loader(path) {
+				if (/.ts$/i.test(path)) return "tsx";
+				if (/.tsx$/i.test(path)) return "tsx";
+				return "js";
+			},
 			babelConfig: {
 				presets: ["@babel/preset-typescript"],
 				plugins: [["babel-plugin-react-compiler", ReactCompilerConfig]],
