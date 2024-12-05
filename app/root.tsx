@@ -73,6 +73,20 @@ export function Layout({ children }: { children: React.ReactNode }) {
 	let handleBodyClassName = useHandleBodyClassName();
 	let nonce = useNonce();
 
+	React.useEffect(() => {
+		async function init() {
+			if (!import.meta.env.DEV) return;
+			let { scan } = await import("react-scan");
+			scan({
+				enabled: true,
+				log: true,
+				report: true,
+			});
+		}
+
+		init();
+	}, []);
+
 	return (
 		<html lang="en" className="h-dvh">
 			<head>
