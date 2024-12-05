@@ -18,7 +18,7 @@ import { ServerRouter } from "react-router";
 import { isPrefetch } from "remix-utils/is-prefetch";
 import { preloadRouteAssets } from "remix-utils/preload-route-assets";
 
-import { env } from "./env.server";
+import { env } from "./.server/env";
 
 // Reject all pending promises from handler functions after timeout
 export const streamTimeout = 5_000;

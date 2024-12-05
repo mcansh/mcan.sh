@@ -1,4 +1,4 @@
-import { getMugshotURL } from "#app/cloudinary.server.js";
+import { getMugshotURL } from "#app/.server/cloudinary.js";
 
 import type { Route } from "./+types/well-known.$";
 
