@@ -6,5 +6,5 @@ export default [
 	route("/.well-known/*", "./routes/well-known.$.ts"),
 	route("/resume", "./routes/resume.tsx"),
 	route("/resume.pdf", "./routes/resume.pdf.ts"),
-	route("/manifest.webmanifest", "./routes/manifest.webmanifest.ts"),
+	route("/manifest.webmanifest", "./routes/manifest.webmanifest/index.ts"),
 ] satisfies RouteConfig;
