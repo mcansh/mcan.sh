@@ -3,7 +3,6 @@ import type { ClassValue } from "clsx";
 import { clsx } from "clsx";
 import * as Fathom from "fathom-client";
 import * as React from "react";
-import type { LinksFunction } from "react-router";
 import {
 	isRouteErrorResponse,
 	Links,
@@ -17,12 +16,13 @@ import {
 } from "react-router";
 import { twMerge } from "tailwind-merge";
 
+import type { Route } from "./+types/root";
 import appStyleHref from "./assets/app.css?url";
 import fontStyleHref from "./assets/berkeley-mono.css?url";
 import { iconSizes } from "./routes/manifest.webmanifest/utils";
 import type { Match } from "./types/handle";
 
-export const links: LinksFunction = () => {
+export function links(): Route.LinkDescriptors {
 	let icons = iconSizes.map((icon) => {
 		return { href: icon.src, sizes: icon.sizes, rel: "apple-touch-icon" };
 	});
@@ -35,7 +35,7 @@ export const links: LinksFunction = () => {
 		{ rel: "stylesheet", href: fontStyleHref },
 		{ rel: "stylesheet", href: appStyleHref },
 	];
-};
+}
 
 function TrackPageView() {
 	let location = useLocation();
