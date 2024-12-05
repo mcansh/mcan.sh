@@ -3,7 +3,7 @@ import type { ClassValue } from "clsx";
 import { clsx } from "clsx";
 import * as Fathom from "fathom-client";
 import * as React from "react";
-import type { LinksFunction, MetaFunction } from "react-router";
+import type { LinksFunction } from "react-router";
 import {
 	isRouteErrorResponse,
 	Links,
@@ -17,19 +17,10 @@ import {
 } from "react-router";
 import { twMerge } from "tailwind-merge";
 
-import "./assets/app.css";
-import "./assets/berkeley-mono.css";
-import { iconSizes } from "./routes/manifest.webmanifest";
+import appStyleHref from "./assets/app.css?url";
+import fontStyleHref from "./assets/berkeley-mono.css?url";
+import { iconSizes } from "./routes/manifest.webmanifest/utils";
 import type { Match } from "./types/handle";
-
-export const meta: MetaFunction = () => {
-	return [
-		{ title: "Logan McAnsh" },
-		{ name: "description", content: "personal website for Logan McAnsh" },
-		{ name: "apple-mobile-web-app-capable", content: "yes" },
-		{ name: "mobile-web-app-capable", content: "yes" },
-	];
-};
 
 export const links: LinksFunction = () => {
 	let icons = iconSizes.map((icon) => {
@@ -37,10 +28,12 @@ export const links: LinksFunction = () => {
 	});
 
 	return [
+		...icons,
 		{ rel: "manifest", href: "/manifest.webmanifest" },
 		{ rel: "icon", href: "/favicon.png", type: "image/png" },
 		{ rel: "icon", href: "/favicon.ico" },
-		...icons,
+		{ rel: "stylesheet", href: fontStyleHref },
+		{ rel: "stylesheet", href: appStyleHref },
 	];
 };
 
@@ -159,15 +152,20 @@ function DefaultMeta() {
 	return (
 		<>
 			<meta charSet="utf-8" />
-			<meta
-				name="viewport"
-				content="initial-scale=1.0, width=device-width, viewport-fit=cover"
-			/>
+			<title>Logan McAnsh</title>
+			<meta name="apple-mobile-web-app-capable" content="yes" />
+			<meta name="mobile-web-app-capable" content="yes" />
 			<meta
 				name="apple-mobile-web-app-status-bar-style"
 				content="black-translucent"
 			/>
-			<meta name="apple-mobile-web-app-capable" content="yes" />
+			<meta name="apple-mobile-web-app-title" content="Logan McAnsh" />
+			<meta name="application-name" content="Logan McAnsh" />
+			<meta name="description" content="personal website for Logan McAnsh" />"
+			<meta
+				name="viewport"
+				content="initial-scale=1.0, width=device-width, viewport-fit=cover"
+			/>
 			<meta
 				name="theme-color"
 				content="#ffffff"
