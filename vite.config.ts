@@ -13,11 +13,10 @@ export default defineConfig({
 		svgSprite(),
 		reactRouter(),
 		babel({
-			filter: /\.[jt]sx?$/,
+			filter: /\.[jt]sx$/,
 			loader(path) {
-				if (/.ts$/i.test(path)) return "tsx";
 				if (/.tsx$/i.test(path)) return "tsx";
-				return "js";
+				return "jsx";
 			},
 			babelConfig: {
 				presets: ["@babel/preset-typescript"],
