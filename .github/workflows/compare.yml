@@ -1,0 +1,107 @@
+name: artifacts Comparison
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+
+permissions: write-all
+
+jobs:
+  build_artifacts:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ github.token }}
+
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 📥 Install dependencies
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          run_install: |
+            - recursive: true
+              args: [--frozen-lockfile, --strict-peer-dependencies]
+
+      - name: Build artifacts
+        run: pnpm run build
+
+      - name: Generate artifacts summary
+        id: artifacts-summary
+        run: |
+          echo "artifacts_SUMMARY<<EOF" >> $GITHUB_OUTPUT
+          find build/ -type f -exec sha512sum {} \; | sed 's/  /,/' | cat <(echo 'sha512,file_name') - >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Add the artifacts summary as a git notes
+        run: |
+          git fetch origin refs/notes/*:refs/notes/*
+          git config user.name "github-actions"
+          git config user.email "bot@github.com"
+          git notes add -m "${{ steps.artifacts-summary.outputs.artifacts_SUMMARY }}"
+          git notes show
+          git push origin refs/notes/*
+
+  # In case of PR, add report of artifacts comparison
+  compare_artifacts:
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'pull_request' }}
+    needs: build_artifacts
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ github.token }}
+
+      - name: Pull artifacts summaries (i.e., git notes) from upstream
+        run: |
+          git fetch origin refs/notes/*:refs/notes/*
+
+      - name: Retrieve PR's head branch's artifacts summary
+        id: artifact-summary-head
+        run: |
+          echo "artifacts_SUMMARY<<EOF" >> $GITHUB_OUTPUT
+          git notes show >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Retrieve PR's target branch's artifacts summary
+        id: artifact-summary-base
+        run: |
+          git checkout ${{ github.base_ref }}
+          echo "artifacts_SUMMARY<<EOF" >> $GITHUB_OUTPUT
+          git notes show >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Install artifactscomparison package
+        run: pip install -U artifactscomparison
+
+      - name: Generate artifact comparison report
+        id: artifact-comparison-report
+        run: |
+          echo "${{ steps.artifact-summary-head.outputs.artifacts_SUMMARY }}" > head.csv
+          echo "${{ steps.artifact-summary-base.outputs.artifacts_SUMMARY }}" > base.csv
+          echo "artifacts_REPORT<<EOF" >> $GITHUB_OUTPUT
+          artifacts_comparison -b base.csv -h head.csv >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Comment PR with artifact comparison report
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          message: ${{ steps.artifact-comparison-report.outputs.artifacts_REPORT }}
+          comment_tag: artifact_comparison_report
+          mode: recreate
