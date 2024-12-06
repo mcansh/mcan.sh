@@ -86,10 +86,6 @@
 	},
 	"pnpm": {
 		"overrides": {
-			"@types/react": "$@types/react",
-			"@types/react-dom": "$@types/react-dom",
-			"react": "$react",
-			"react-dom": "$react-dom",
 			"react-router-dom": "$react-router"
 		}
 	},
