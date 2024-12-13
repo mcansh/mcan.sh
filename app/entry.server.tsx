@@ -111,12 +111,13 @@ function applySecurityHeaders(request: Request, responseHeaders: Headers) {
 
 	let url = new URL(request.url);
 
+	let upgradeInsecureRequests =
+		process.env.NODE_ENV === "production" && !url.host.includes("localhost");
+
 	let nonce = createNonce();
 	let securityHeaders = createSecureHeaders({
 		"Content-Security-Policy": {
-			"upgrade-insecure-requests":
-				process.env.NODE_ENV === "production" &&
-				!url.host.includes("localhost"),
+			"upgrade-insecure-requests": upgradeInsecureRequests,
 			"default-src": ["'none'"],
 			"base-uri": ["'self'"],
 			"img-src": [
