@@ -55,7 +55,7 @@ export default function IndexPage({ loaderData }: Route.ComponentProps) {
 					src={loaderData.me.url}
 					srcSet={loaderData.srcSet}
 				/>
-				<div className="border-7 p-4 mt-4 space-y-2">
+				<div className="mt-4 space-y-2">
 					<h1 className="text-4xl">Logan McAnsh</h1>
 					<p className="max-w-xs text-center text-lg sm:text-xl md:max-w-sm">
 						Senior Software Engineer
