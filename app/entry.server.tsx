@@ -145,7 +145,6 @@ function applySecurityHeaders(request: Request, responseHeaders: Headers) {
 			"style-src": ["'self'"],
 			"report-uri": [env.SENTRY_REPORT_URL],
 		},
-		"Referrer-Policy": "origin-when-cross-origin",
 		"X-Frame-Options": "DENY",
 		"X-Content-Type-Options": "nosniff",
 		"X-DNS-Prefetch-Control": "on",
