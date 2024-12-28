@@ -190,6 +190,7 @@ function applySecurityHeaders(request: Request, responseHeaders: Headers) {
 			"xr-spatial-tracking": [],
 		},
 		"Cross-Origin-Opener-Policy": "same-origin",
+		"Referrer-Policy": "same-origin",
 	});
 
 	let headers = mergeHeaders(responseHeaders, securityHeaders);
