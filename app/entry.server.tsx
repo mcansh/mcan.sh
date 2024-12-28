@@ -123,7 +123,7 @@ function applySecurityHeaders(request: Request, responseHeaders: Headers) {
 			"img-src": [
 				"'self'",
 				`https://res.cloudinary.com/${env.CLOUDINARY_CLOUD_NAME}/image/upload/`,
-				"https://cdn.usefathom.com",
+				"https://cdn.usefathom.com/",
 			],
 			"script-src": [
 				"'self'",
