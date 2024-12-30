@@ -13,7 +13,7 @@ export default defineConfig({
 		svgSprite(),
 		reactRouter(),
 		babel({
-			filter: /\.[jt]sx$/,
+			filter: /^app\/\.[jt]sx$/,
 			loader(path) {
 				if (/.tsx$/i.test(path)) return "tsx";
 				return "jsx";
