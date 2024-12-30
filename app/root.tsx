@@ -73,24 +73,34 @@ export function Layout({ children }: { children: React.ReactNode }) {
 	let handleBodyClassName = useHandleBodyClassName();
 	let nonce = useNonce();
 
-	React.useEffect(() => {
-		async function init() {
-			if (!import.meta.env.DEV) return;
-			let { scan } = await import("react-scan");
-			scan({
-				enabled: true,
-				log: true,
-				report: true,
-			});
-		}
-
-		init();
-	}, []);
-
 	return (
 		<html lang="en" className="h-dvh">
 			<head>
-				<DefaultMeta />
+				<meta charSet="utf-8" />
+				<title>Logan McAnsh</title>
+				<meta name="apple-mobile-web-app-capable" content="yes" />
+				<meta name="mobile-web-app-capable" content="yes" />
+				<meta
+					name="apple-mobile-web-app-status-bar-style"
+					content="black-translucent"
+				/>
+				<meta name="apple-mobile-web-app-title" content="Logan McAnsh" />
+				<meta name="application-name" content="Logan McAnsh" />
+				<meta name="description" content="personal website for Logan McAnsh" />
+				<meta
+					name="viewport"
+					content="initial-scale=1.0, width=device-width, viewport-fit=cover"
+				/>
+				<meta
+					name="theme-color"
+					content="#ffffff"
+					media="(prefers-color-scheme: light)"
+				/>
+				<meta
+					name="theme-color"
+					content="#0f172a"
+					media="(prefers-color-scheme: dark)"
+				/>
 				<Meta />
 				<Links />
 			</head>
@@ -158,38 +168,6 @@ export function ErrorBoundary() {
 				again.
 			</p>
 			<pre className={boxClassName}>{String(error)}</pre>
-		</>
-	);
-}
-
-function DefaultMeta() {
-	return (
-		<>
-			<meta charSet="utf-8" />
-			<title>Logan McAnsh</title>
-			<meta name="apple-mobile-web-app-capable" content="yes" />
-			<meta name="mobile-web-app-capable" content="yes" />
-			<meta
-				name="apple-mobile-web-app-status-bar-style"
-				content="black-translucent"
-			/>
-			<meta name="apple-mobile-web-app-title" content="Logan McAnsh" />
-			<meta name="application-name" content="Logan McAnsh" />
-			<meta name="description" content="personal website for Logan McAnsh" />"
-			<meta
-				name="viewport"
-				content="initial-scale=1.0, width=device-width, viewport-fit=cover"
-			/>
-			<meta
-				name="theme-color"
-				content="#ffffff"
-				media="(prefers-color-scheme: light)"
-			/>
-			<meta
-				name="theme-color"
-				content="#0f172a"
-				media="(prefers-color-scheme: dark)"
-			/>
 		</>
 	);
 }
