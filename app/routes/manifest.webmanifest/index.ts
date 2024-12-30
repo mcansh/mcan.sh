@@ -1,9 +1,9 @@
 import createEtag from "etag";
-import type { LoaderFunctionArgs } from "react-router";
 
+import type { Route } from "./+types/index";
 import { iconSizes, linkColor } from "./utils";
 
-export function loader({ request }: LoaderFunctionArgs) {
+export function loader({ request }: Route.LoaderArgs) {
 	let content = {
 		name: "Logan McAnsh",
 		short_name: "LM",
