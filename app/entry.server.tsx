@@ -43,12 +43,7 @@ export default function handleRequest(
 
 		let { pipe, abort } = renderToPipeableStream(
 			<NonceProvider nonce={nonce}>
-				<ServerRouter
-					context={routerContext}
-					url={request.url}
-					abortDelay={ABORT_DELAY}
-					nonce={nonce}
-				/>
+				<ServerRouter context={routerContext} url={request.url} nonce={nonce} />
 			</NonceProvider>,
 			{
 				nonce,
