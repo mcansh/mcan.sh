@@ -122,6 +122,7 @@ function applySecurityHeaders(
 				cloudflareEmailDecodePath,
 				`'nonce-${nonce}'`,
 				"'strict-dynamic'",
+				"'unsafe-eval'",
 			],
 			"connect-src": ["'self'", ...(import.meta.env.DEV ? ["ws:"] : [])],
 			"worker-src": ["blob:"],
