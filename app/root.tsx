@@ -113,7 +113,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
 					handleBodyClassName,
 				)}
 			>
-				<TrackPageView />
+				<Monitoring
+		    apiKey="lRQEFaVnvkO94n-oj69T08EygAKdozu9"
+		    url="https://monitoring.react-scan.com/api/v1/ingest"
+		    commit={process.env.COMMIT_HASH}
+			   branch={process.env.BRANCH}
+	   />
 				{children}
 				<ScrollRestoration nonce={nonce} />
 				<Scripts nonce={nonce} />
