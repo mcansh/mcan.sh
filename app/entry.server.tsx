@@ -129,6 +129,7 @@ function applySecurityHeaders(request: Request, responseHeaders: Headers) {
 				).toString(),
 				`'nonce-${nonce}'`,
 				"'strict-dynamic'",
+				"'unsafe-eval'",
 			],
 			"connect-src": [
 				"'self'",

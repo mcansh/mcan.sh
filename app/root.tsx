@@ -14,6 +14,7 @@ import {
 	useMatches,
 	useRouteError,
 } from "react-router";
+import { Monitoring } from "react-scan/monitoring/react-router";
 import { twMerge } from "tailwind-merge";
 
 import type { Route } from "./+types/root";
@@ -113,6 +114,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
 				)}
 			>
 				<TrackPageView />
+				<Monitoring
+					apiKey="lRQEFaVnvkO94n-oj69T08EygAKdozu9"
+					url="https://monitoring.react-scan.com/api/v1/ingest"
+					commit={import.meta.env.VITE_RAILWAY_GIT_COMMIT_SHA}
+					branch={import.meta.env.VITE_RAILWAY_GIT_BRANCH}
+				/>
 				{children}
 				<ScrollRestoration nonce={nonce} />
 				<Scripts nonce={nonce} />
