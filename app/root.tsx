@@ -118,8 +118,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
 				<Monitoring
 					apiKey="lRQEFaVnvkO94n-oj69T08EygAKdozu9"
 					url="https://monitoring.react-scan.com/api/v1/ingest"
-					commit={process.env.COMMIT_HASH}
-					branch={process.env.BRANCH}
+					commit={import.meta.env.VITE_RAILWAY_GIT_COMMIT_SHA}
+					branch={import.meta.env.VITE_RAILWAY_GIT_BRANCH}
 				/>
 				{children}
 				<ScrollRestoration nonce={nonce} />
