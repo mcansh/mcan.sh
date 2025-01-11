@@ -1,4 +1,5 @@
 import { useNonce } from "@mcansh/http-helmet/react";
+import * as Sentry from "@sentry/react";
 import type { ClassValue } from "clsx";
 import { clsx } from "clsx";
 import * as Fathom from "fathom-client";
@@ -131,6 +132,10 @@ export function ErrorBoundary() {
 
 	let headingClassName = `w-fit mx-auto inline-block text-3xl font-bold bg-white text-blue-screen`;
 	let boxClassName = `w-full px-4 py-2 overflow-auto border-4 border-white`;
+
+	React.useEffect(() => {
+		Sentry.captureException(error);
+	}, [error]);
 
 	return isRouteErrorResponse(error) ? (
 		<div className="space-y-4">

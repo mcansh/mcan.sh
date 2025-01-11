@@ -14,6 +14,7 @@ import type { EntryContext, HandleDataRequestFunction } from "react-router";
 import { ServerRouter } from "react-router";
 import { isPrefetch } from "remix-utils/is-prefetch";
 import { preloadRouteAssets } from "remix-utils/preload-route-assets";
+import "./instrument";
 
 import { env } from "#app/.server/env.js";
 
