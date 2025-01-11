@@ -1,5 +1,6 @@
 import { svgSprite } from "@mcansh/vite-plugin-svg-sprite";
 import { reactRouter } from "@react-router/dev/vite";
+import { sentryVitePlugin } from "@sentry/vite-plugin";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite";
 import babel from "vite-plugin-babel";
@@ -7,7 +8,10 @@ import babel from "vite-plugin-babel";
 let ReactCompilerConfig = {};
 
 export default defineConfig({
-	build: { cssMinify: "lightningcss" },
+	build: {
+		cssMinify: "lightningcss",
+		sourcemap: true,
+	},
 	plugins: [
 		tailwindcss(),
 		svgSprite(),
@@ -22,6 +26,10 @@ export default defineConfig({
 				presets: ["@babel/preset-typescript"],
 				plugins: [["babel-plugin-react-compiler", ReactCompilerConfig]],
 			},
+		}),
+		sentryVitePlugin({
+			org: "mcansh",
+			project: "personal-website",
 		}),
 	],
 });

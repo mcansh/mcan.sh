@@ -1,4 +1,5 @@
 import { useNonce } from "@mcansh/http-helmet/react";
+import * as Sentry from "@sentry/react";
 import type { ClassValue } from "clsx";
 import { clsx } from "clsx";
 import * as Fathom from "fathom-client";
@@ -15,10 +16,11 @@ import {
 	useRouteError,
 } from "react-router";
 import { twMerge } from "tailwind-merge";
-
 import type { Route } from "./+types/root";
 import appStyleHref from "./assets/app.css?url";
 import fontStyleHref from "./assets/berkeley-mono.css?url";
+import { client_env } from "./env/client";
+import { env } from "./env/index.server";
 import { iconSizes } from "./routes/manifest.webmanifest/utils";
 import type { Match } from "./types/handle";
 
@@ -37,11 +39,20 @@ export function links(): Route.LinkDescriptors {
 	];
 }
 
+export function loader() {
+	return {
+		env: {
+			RAILWAY_GIT_BRANCH: env.RAILWAY_GIT_BRANCH,
+			RAILWAY_DEPLOYMENT_ID: env.RAILWAY_DEPLOYMENT_ID,
+		},
+	};
+}
+
 function TrackPageView() {
 	let location = useLocation();
 
 	React.useEffect(() => {
-		Fathom.load(import.meta.env.VITE_FATHOM_SITE_ID, {
+		Fathom.load(client_env.VITE_FATHOM_SITE_ID, {
 			excludedDomains: ["localhost"],
 			auto: false,
 		});
@@ -74,7 +85,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 	let nonce = useNonce();
 
 	return (
-		<html lang="en" className="h-dvh">
+		<html lang="en" className="min-h-dvh">
 			<head>
 				<meta charSet="utf-8" />
 				<title>Logan McAnsh</title>
@@ -131,6 +142,10 @@ export function ErrorBoundary() {
 
 	let headingClassName = `w-fit mx-auto inline-block text-3xl font-bold bg-white text-blue-screen`;
 	let boxClassName = `w-full px-4 py-2 overflow-auto border-4 border-white`;
+
+	React.useEffect(() => {
+		Sentry.captureException(error);
+	}, [error]);
 
 	return isRouteErrorResponse(error) ? (
 		<div className="space-y-4">

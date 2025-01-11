@@ -8,6 +8,7 @@
 		"**/.client/**/*.ts",
 		"**/.client/**/*.tsx"
 	],
+	"exclude": ["node_modules", "build"],
 	"compilerOptions": {
 		"types": [
 			"@react-router/node",

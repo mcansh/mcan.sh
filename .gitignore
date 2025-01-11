@@ -13,3 +13,6 @@ yalc.lock
 
 .react-router
 .idea
+
+# Sentry Config File
+.env.sentry-build-plugin

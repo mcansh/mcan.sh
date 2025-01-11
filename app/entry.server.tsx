@@ -1,5 +1,3 @@
-import { PassThrough } from "node:stream";
-
 import {
 	createNonce,
 	createSecureHeaders,
@@ -8,14 +6,16 @@ import {
 import { NonceProvider } from "@mcansh/http-helmet/react";
 import { createReadableStreamFromReadable } from "@react-router/node";
 import { isbot } from "isbot";
+import { PassThrough } from "node:stream";
 import type { RenderToPipeableStreamOptions } from "react-dom/server";
 import { renderToPipeableStream } from "react-dom/server";
 import type { EntryContext, HandleDataRequestFunction } from "react-router";
 import { ServerRouter } from "react-router";
 import { isPrefetch } from "remix-utils/is-prefetch";
 import { preloadRouteAssets } from "remix-utils/preload-route-assets";
+import "./instrument";
 
-import { env } from "#app/.server/env.js";
+import { env } from "#app/env/index.server.js";
 
 // Reject all pending promises from handler functions after timeout
 export let streamTimeout = 5_000;
@@ -131,6 +131,7 @@ function applySecurityHeaders(request: Request, responseHeaders: Headers) {
 				cloudflareEmailDecodePath,
 				`'nonce-${nonce}'`,
 				"'strict-dynamic'",
+				"https://browser.sentry-cdn.com/sentry-toolbar/latest/toolbar.min.js",
 			],
 			"connect-src": [
 				"'self'",

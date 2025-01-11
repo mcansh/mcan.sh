@@ -1,10 +1,8 @@
+import githubMarkIconHref from "#app/assets/github-mark.svg";
+import linkedinIconHref from "#app/assets/linkedin.svg";
 import { cacheHeader } from "pretty-cache-header";
 import { Link, data } from "react-router";
 import spriteHref from "virtual:@mcansh/vite-plugin-svg-sprite";
-
-import githubMarkIconHref from "#app/assets/github-mark.svg";
-import linkedinIconHref from "#app/assets/linkedin.svg";
-
 import type { Route } from "./+types/resume";
 
 export function loader() {

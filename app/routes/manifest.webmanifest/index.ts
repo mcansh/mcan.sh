@@ -1,5 +1,4 @@
 import createEtag from "etag";
-
 import type { Route } from "./+types/index";
 import { iconSizes, linkColor } from "./utils";
 
