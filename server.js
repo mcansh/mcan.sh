@@ -36,7 +36,7 @@ let messages = [
 	`✅ app ready!`,
 	`📦 mode: ${process.env.NODE_ENV}`,
 	`💻 local: http://localhost:${port}`,
-	`🏡 network: ${lanUrl}`,
-];
+	lanUrl ? `🏡 network: ${lanUrl}` : undefined,
+].filter(Boolean);
 
 console.log(messages.join("\n"));
