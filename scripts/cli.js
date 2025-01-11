@@ -1,8 +1,7 @@
+import spawn from "cross-spawn";
 import console from "node:console";
 import process from "node:process";
 import { parseArgs } from "node:util";
-
-import spawn from "cross-spawn";
 
 const result = parseArgs({
 	args: process.argv.slice(2),
