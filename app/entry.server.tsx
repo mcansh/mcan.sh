@@ -109,6 +109,11 @@ function applySecurityHeaders(request: Request, responseHeaders: Headers) {
 	let upgradeInsecureRequests =
 		process.env.NODE_ENV === "production" && !url.host.includes("localhost");
 
+	let cloudflareEmailDecodePath = new URL(
+		"/cdn-cgi/scripts/*/cloudflare-static/email-decode.min.js",
+		url.origin,
+	).toString();
+
 	let nonce = createNonce();
 	let securityHeaders = createSecureHeaders({
 		"Content-Security-Policy": {
@@ -123,10 +128,7 @@ function applySecurityHeaders(request: Request, responseHeaders: Headers) {
 			"script-src": [
 				"'self'",
 				"https://cdn.usefathom.com/script.js",
-				new URL(
-					"cdn-cgi/scripts/*/cloudflare-static/email-decode.min.js",
-					url.origin,
-				).toString(),
+				cloudflareEmailDecodePath,
 				`'nonce-${nonce}'`,
 				"'strict-dynamic'",
 			],
