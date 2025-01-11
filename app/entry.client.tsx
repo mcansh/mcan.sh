@@ -11,8 +11,8 @@ import { HydratedRouter } from "react-router/dom";
 
 Sentry.init({
 	dsn: import.meta.env.VITE_SENTRY_DSN,
-	environment: import.meta.env.VITE_RAILWAY_GIT_BRANCH,
-	release: import.meta.env.VITE_RAILWAY_DEPLOYMENT_ID,
+	environment: import.meta.env.RAILWAY_GIT_BRANCH,
+	release: import.meta.env.RAILWAY_DEPLOYMENT_ID,
 	integrations: [
 		Sentry.reactRouterV7BrowserTracingIntegration({
 			useEffect: React.useEffect,

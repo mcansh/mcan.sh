@@ -5,8 +5,8 @@ import { env } from "#app/.server/env.js";
 
 Sentry.init({
 	dsn: env.VITE_SENTRY_DSN,
-	environment: env.VITE_RAILWAY_GIT_BRANCH,
-	release: env.VITE_RAILWAY_DEPLOYMENT_ID,
+	environment: env.RAILWAY_GIT_BRANCH,
+	release: env.RAILWAY_DEPLOYMENT_ID,
 	integrations: [
 		// Add our Profiling integration
 		nodeProfilingIntegration(),

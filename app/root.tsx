@@ -20,7 +20,9 @@ import { twMerge } from "tailwind-merge";
 import type { Route } from "./+types/root";
 import appStyleHref from "./assets/app.css?url";
 import fontStyleHref from "./assets/berkeley-mono.css?url";
+import { client_env } from "./client-env";
 import { iconSizes } from "./routes/manifest.webmanifest/utils";
+import { useSentryToolbar } from "./sentry-toolbar";
 import type { Match } from "./types/handle";
 
 export function links(): Route.LinkDescriptors {
@@ -42,7 +44,7 @@ function TrackPageView() {
 	let location = useLocation();
 
 	React.useEffect(() => {
-		Fathom.load(import.meta.env.VITE_FATHOM_SITE_ID, {
+		Fathom.load(client_env.VITE_FATHOM_SITE_ID, {
 			excludedDomains: ["localhost"],
 			auto: false,
 		});
@@ -74,8 +76,22 @@ export function Layout({ children }: { children: React.ReactNode }) {
 	let handleBodyClassName = useHandleBodyClassName();
 	let nonce = useNonce();
 
+	useSentryToolbar({
+		enabled: true,
+		initProps: {
+			// InitProps
+			mountPoint: typeof document === "undefined" ? undefined : document.body,
+
+			// OrgConfig
+			organizationSlug: "mcansh",
+			projectIdOrSlug: "personal-website",
+			environment: [client_env.RAILWAY_GIT_BRANCH],
+			release: client_env.RAILWAY_DEPLOYMENT_ID,
+		},
+	});
+
 	return (
-		<html lang="en" className="h-dvh">
+		<html lang="en" className="min-h-dvh">
 			<head>
 				<meta charSet="utf-8" />
 				<title>Logan McAnsh</title>

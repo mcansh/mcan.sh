@@ -130,6 +130,7 @@ function applySecurityHeaders(request: Request, responseHeaders: Headers) {
 				).toString(),
 				`'nonce-${nonce}'`,
 				"'strict-dynamic'",
+				"https://browser.sentry-cdn.com/sentry-toolbar/latest/toolbar.min.js",
 			],
 			"connect-src": [
 				"'self'",
