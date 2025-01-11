@@ -4,7 +4,7 @@ import { nodeProfilingIntegration } from "@sentry/profiling-node";
 import { env } from "#app/.server/env.js";
 
 Sentry.init({
-	dsn: env.VITE_SENTRY_DSN,
+	dsn: env.SENTRY_REPORT_URL,
 	environment: env.RAILWAY_GIT_BRANCH,
 	release: env.RAILWAY_DEPLOYMENT_ID,
 	integrations: [

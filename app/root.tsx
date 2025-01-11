@@ -16,13 +16,12 @@ import {
 	useRouteError,
 } from "react-router";
 import { twMerge } from "tailwind-merge";
-
 import type { Route } from "./+types/root";
+import { env } from "./.server/env";
 import appStyleHref from "./assets/app.css?url";
 import fontStyleHref from "./assets/berkeley-mono.css?url";
 import { client_env } from "./client-env";
 import { iconSizes } from "./routes/manifest.webmanifest/utils";
-import { useSentryToolbar } from "./sentry-toolbar";
 import type { Match } from "./types/handle";
 
 export function links(): Route.LinkDescriptors {
@@ -38,6 +37,15 @@ export function links(): Route.LinkDescriptors {
 		{ rel: "stylesheet", href: fontStyleHref },
 		{ rel: "stylesheet", href: appStyleHref },
 	];
+}
+
+export function loader() {
+	return {
+		env: {
+			RAILWAY_GIT_BRANCH: env.RAILWAY_GIT_BRANCH,
+			RAILWAY_DEPLOYMENT_ID: env.RAILWAY_DEPLOYMENT_ID,
+		},
+	};
 }
 
 function TrackPageView() {
@@ -75,20 +83,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
 	let error = useRouteError();
 	let handleBodyClassName = useHandleBodyClassName();
 	let nonce = useNonce();
-
-	useSentryToolbar({
-		enabled: true,
-		initProps: {
-			// InitProps
-			mountPoint: typeof document === "undefined" ? undefined : document.body,
-
-			// OrgConfig
-			organizationSlug: "mcansh",
-			projectIdOrSlug: "personal-website",
-			environment: [client_env.RAILWAY_GIT_BRANCH],
-			release: client_env.RAILWAY_DEPLOYMENT_ID,
-		},
-	});
 
 	return (
 		<html lang="en" className="min-h-dvh">
