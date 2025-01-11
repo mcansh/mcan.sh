@@ -1,4 +1,4 @@
-import { env } from "#app/.server/env.js";
+import { env } from "#app/env/index.server.js";
 import * as Sentry from "@sentry/node";
 import { nodeProfilingIntegration } from "@sentry/profiling-node";
 

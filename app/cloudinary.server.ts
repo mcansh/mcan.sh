@@ -1,6 +1,6 @@
 import type { TransformerOption } from "@cld-apis/types";
 import { buildUrl } from "cloudinary-build-url";
-import { env } from "./env";
+import { env } from "./env/index.server";
 
 function getCloudinaryURL(
 	publicId: string,

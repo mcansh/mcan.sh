@@ -17,10 +17,10 @@ import {
 } from "react-router";
 import { twMerge } from "tailwind-merge";
 import type { Route } from "./+types/root";
-import { env } from "./.server/env";
 import appStyleHref from "./assets/app.css?url";
 import fontStyleHref from "./assets/berkeley-mono.css?url";
-import { client_env } from "./client-env";
+import { client_env } from "./env/client";
+import { env } from "./env/index.server";
 import { iconSizes } from "./routes/manifest.webmanifest/utils";
 import type { Match } from "./types/handle";
 
