@@ -131,6 +131,7 @@ function applySecurityHeaders(request: Request, responseHeaders: Headers) {
 				cloudflareEmailDecodePath,
 				`'nonce-${nonce}'`,
 				"'strict-dynamic'",
+				"'unsafe-eval'",
 			],
 			"connect-src": [
 				"'self'",
