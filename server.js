@@ -1,10 +1,9 @@
-import console from "node:console";
-import process from "node:process";
-
 import { reactRouterFastify } from "@mcansh/remix-fastify/react-router";
 import { ip as ipAddress } from "address";
 import { fastify } from "fastify";
 import getPort, { portNumbers } from "get-port";
+import console from "node:console";
+import process from "node:process";
 
 let app = fastify();
 
@@ -37,7 +36,7 @@ let messages = [
 	`✅ app ready!`,
 	`📦 mode: ${process.env.NODE_ENV}`,
 	`💻 local: http://localhost:${port}`,
-	`🏡 network: ${lanUrl}`,
-];
+	lanUrl ? `🏡 network: ${lanUrl}` : undefined,
+].filter(Boolean);
 
 console.log(messages.join("\n"));
