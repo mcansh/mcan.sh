@@ -15,7 +15,6 @@ import {
 	useRouteError,
 } from "react-router";
 import { twMerge } from "tailwind-merge";
-
 import type { Route } from "./+types/root";
 import appStyleHref from "./assets/app.css?url";
 import fontStyleHref from "./assets/berkeley-mono.css?url";

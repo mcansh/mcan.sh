@@ -1,5 +1,3 @@
-import { PassThrough } from "node:stream";
-
 import {
 	createNonce,
 	createSecureHeaders,
@@ -8,14 +6,14 @@ import {
 import { NonceProvider } from "@mcansh/http-helmet/react";
 import { createReadableStreamFromReadable } from "@react-router/node";
 import { isbot } from "isbot";
+import { PassThrough } from "node:stream";
 import type { RenderToPipeableStreamOptions } from "react-dom/server";
 import { renderToPipeableStream } from "react-dom/server";
 import type { EntryContext, HandleDataRequestFunction } from "react-router";
 import { ServerRouter } from "react-router";
 import { isPrefetch } from "remix-utils/is-prefetch";
 import { preloadRouteAssets } from "remix-utils/preload-route-assets";
-
-import { env } from "#app/.server/env.js";
+import { env } from "./lib.server/env";
 
 // Reject all pending promises from handler functions after timeout
 export let streamTimeout = 5_000;
