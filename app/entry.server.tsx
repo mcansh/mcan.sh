@@ -135,6 +135,7 @@ function applySecurityHeaders(request: Request, responseHeaders: Headers) {
 			],
 			"connect-src": [
 				"'self'",
+				"https://o74198.ingest.sentry.io",
 				...(process.env.NODE_ENV === "development" ? ["ws:"] : []),
 			],
 			"worker-src": ["blob:"],
