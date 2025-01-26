@@ -1,11 +1,10 @@
-import Fs from "node:fs";
-
 import { fixupPluginRules } from "@eslint/compat";
 import eslint from "@eslint/js";
 import importPlugin from "eslint-plugin-import";
 import preferLet from "eslint-plugin-prefer-let";
 import reactCompiler from "eslint-plugin-react-compiler";
 import { globifyGitIgnore } from "globify-gitignore";
+import Fs from "node:fs";
 import tseslint from "typescript-eslint";
 
 let gitignoreContent = Fs.readFileSync(".gitignore", "utf-8");
@@ -34,17 +33,13 @@ export default tseslint.config(
 				"error",
 				{ argsIgnorePattern: "^_" },
 			],
+			"import/newline-after-import": "error",
 			"import/consistent-type-specifier-style": ["error", "prefer-top-level"],
-			"import/order": [
-				"error",
-				{
-					alphabetize: { caseInsensitive: true, order: "asc" },
-					groups: ["builtin", "external", "internal", "parent", "sibling"],
-					"newlines-between": "always",
-				},
-			],
 			"import/no-unresolved": ["error", { ignore: ["^virtual:"] }],
 			"import/no-named-as-default-member": "off",
+			// prettier-plugin-organize-impoets
+			"sort-imports": "off",
+			"import/order": "off",
 		},
 		settings: {
 			"import/resolver": {
