@@ -1,4 +1,4 @@
-import { getMugshotURL } from "#app/cloudinary.server.js";
+import { getMugshotURL } from "#app/lib.server/cloudinary.js";
 import type { Route } from "./+types/well-known.$";
 
 let notFound = new Response("ope not found", {

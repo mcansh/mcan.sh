@@ -15,7 +15,7 @@ import { isPrefetch } from "remix-utils/is-prefetch";
 import { preloadRouteAssets } from "remix-utils/preload-route-assets";
 import "./instrument";
 
-import { env } from "#app/env/index.server.js";
+import { env } from "#app/lib.server/env.js";
 
 // Reject all pending promises from handler functions after timeout
 export let streamTimeout = 5_000;

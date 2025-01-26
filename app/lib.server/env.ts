@@ -1,4 +1,4 @@
-import { client_env_schema } from "#app/env/client.js";
+import { client_env_schema } from "#app/lib.client/env.js";
 import { z } from "zod";
 
 let envSchema = client_env_schema.extend({

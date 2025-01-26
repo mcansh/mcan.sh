@@ -19,8 +19,8 @@ import { twMerge } from "tailwind-merge";
 import type { Route } from "./+types/root";
 import appStyleHref from "./assets/app.css?url";
 import fontStyleHref from "./assets/berkeley-mono.css?url";
-import { client_env } from "./env/client";
-import { env } from "./env/index.server";
+import { client_env } from "./lib.client/env";
+import { env } from "./lib.server/env";
 import { iconSizes } from "./routes/manifest.webmanifest/utils";
 import type { Match } from "./types/handle";
 
