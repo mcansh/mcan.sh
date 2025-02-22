@@ -126,6 +126,9 @@ importers:
       eslint-import-resolver-typescript:
         specifier: ^3.8.3
         version: 3.8.3(eslint-plugin-import@2.31.0)(eslint@9.21.0(jiti@2.4.2))
+      eslint-plugin-de-morgan:
+        specifier: ^1.1.0
+        version: 1.1.0(eslint@9.21.0(jiti@2.4.2))
       eslint-plugin-import:
         specifier: ^2.31.0
         version: 2.31.0(@typescript-eslint/parser@8.24.1(eslint@9.21.0(jiti@2.4.2))(typescript@5.8.1-rc))(eslint-import-resolver-typescript@3.8.3)(eslint@9.21.0(jiti@2.4.2))
@@ -1969,6 +1972,12 @@ packages:
         optional: true
       eslint-import-resolver-webpack:
         optional: true
+
+  eslint-plugin-de-morgan@1.1.0:
+    resolution: {integrity: sha512-68nLDXi9EJtD/8q7JrTbzbpBp3CIePTLfLQFkDivj8OHzscQeT7g2RKkNqmy5sgMDZXN6saS6npfBXsnZkvWIA==}
+    engines: {node: ^18.0.0 || >=20.0.0}
+    peerDependencies:
+      eslint: '>=8.0.0'
 
   eslint-plugin-import@2.31.0:
     resolution: {integrity: sha512-ixmkI62Rbc2/w8Vfxyh1jQRTdRTF52VxwRVHl/ykPAmqG+Nb7/kNn+byLP0LxPgI7zWA16Jt82SybJInmMia3A==}
@@ -5879,6 +5888,10 @@ snapshots:
       eslint-import-resolver-typescript: 3.8.3(eslint-plugin-import@2.31.0)(eslint@9.21.0(jiti@2.4.2))
     transitivePeerDependencies:
       - supports-color
+
+  eslint-plugin-de-morgan@1.1.0(eslint@9.21.0(jiti@2.4.2)):
+    dependencies:
+      eslint: 9.21.0(jiti@2.4.2)
 
   eslint-plugin-import@2.31.0(@typescript-eslint/parser@8.24.1(eslint@9.21.0(jiti@2.4.2))(typescript@5.8.1-rc))(eslint-import-resolver-typescript@3.8.3)(eslint@9.21.0(jiti@2.4.2)):
     dependencies:

@@ -65,6 +65,7 @@
 		"cross-spawn": "^7.0.6",
 		"eslint": "^9.21.0",
 		"eslint-import-resolver-typescript": "^3.8.3",
+		"eslint-plugin-de-morgan": "^1.1.0",
 		"eslint-plugin-import": "^2.31.0",
 		"eslint-plugin-prefer-let": "^4.0.0",
 		"eslint-plugin-react-compiler": "19.0.0-beta-df7b47d-20241124",
