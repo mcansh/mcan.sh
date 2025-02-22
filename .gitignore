@@ -8,8 +8,8 @@
 tsconfig.tsbuildinfo
 .env
 
-yalc.lock
-.yalc
+# yalc.lock
+# .yalc
 
 .react-router
 .idea

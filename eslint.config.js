@@ -1,5 +1,6 @@
 import { fixupPluginRules } from "@eslint/compat";
 import eslint from "@eslint/js";
+import deMorgan from "eslint-plugin-de-morgan";
 import importPlugin from "eslint-plugin-import";
 import preferLet from "eslint-plugin-prefer-let";
 import reactCompiler from "eslint-plugin-react-compiler";
@@ -9,7 +10,7 @@ import tseslint from "typescript-eslint";
 
 let gitignoreContent = Fs.readFileSync(".gitignore", "utf-8");
 let globs = await globifyGitIgnore(gitignoreContent);
-let ignores = globs.map((glob) => glob.glob);
+let ignores = [...globs.map((glob) => glob.glob), ".yalc", "yalc.lock"];
 
 export default tseslint.config(
 	{ ignores },
@@ -17,6 +18,7 @@ export default tseslint.config(
 	...tseslint.configs.recommended,
 	importPlugin.flatConfigs.recommended,
 	importPlugin.flatConfigs.typescript,
+	deMorgan.configs.recommended,
 	{
 		linterOptions: {
 			reportUnusedDisableDirectives: "error",
