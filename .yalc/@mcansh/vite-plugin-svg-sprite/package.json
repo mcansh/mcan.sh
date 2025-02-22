@@ -1,0 +1,58 @@
+{
+	"name": "@mcansh/vite-plugin-svg-sprite",
+	"version": "0.4.2",
+	"repository": {
+		"url": "mcansh/vite-plugin-svg-sprite",
+		"directory": "packages/vite-plugin-svg-sprite"
+	},
+	"funding": [
+		{
+			"type": "github",
+			"url": "https://github.com/sponsors/mcansh"
+		}
+	],
+	"license": "MIT",
+	"author": "Logan McAnsh <logan@mcan.sh> (https://mcan.sh)",
+	"type": "module",
+	"exports": {
+		"./package.json": "./package.json",
+		".": {
+			"require": "./dist/index.cjs",
+			"import": "./dist/index.js"
+		},
+		"./client": {
+			"types": "./client.d.ts"
+		}
+	},
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"files": [
+		"client.d.ts",
+		"dist",
+		"package.json",
+		"README.md"
+	],
+	"scripts": {
+		"build": "tsup",
+		"dev": "tsc --watch",
+		"prepublishOnly": "npm run build",
+		"attw": "attw --pack ./ --ignore-rules cjs-resolves-to-esm"
+	},
+	"dependencies": {
+		"fs-extra": "^11.3.0",
+		"hasha": "^6.0.0",
+		"svgo": "^3.3.2",
+		"svgstore": "^3.0.1"
+	},
+	"peerDependencies": {
+		"vite": "^5.2.7 || ^6.0.0"
+	},
+	"engines": {
+		"node": ">=18.0.0"
+	},
+	"publishConfig": {
+		"access": "public",
+		"provenance": true
+	},
+	"yalcSig": "723dbc5def7d62f25fe939bca38a62eb"
+}

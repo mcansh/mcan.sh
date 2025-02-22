@@ -1,0 +1,8 @@
+{
+  "version": "v1",
+  "packages": {
+    "@mcansh/vite-plugin-svg-sprite": {
+      "signature": "723dbc5def7d62f25fe939bca38a62eb"
+    }
+  }
+}
