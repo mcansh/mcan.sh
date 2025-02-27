@@ -1,7 +1,9 @@
-import spawn from "cross-spawn";
+#!/usr/bin/env zx
+
 import console from "node:console";
 import process from "node:process";
 import { parseArgs } from "node:util";
+import { $ } from "zx";
 
 const result = parseArgs({
 	args: process.argv.slice(2),
@@ -15,7 +17,7 @@ const result = parseArgs({
  */
 async function runScript(command, args = []) {
 	console.log(`> ${command} ${args.join(" ")}`);
-	return spawn(command, args, { stdio: "inherit" });
+	return $({ stdio: "inherit" })`npx ${command} ${args}`;
 }
 
 async function run() {
@@ -23,9 +25,9 @@ async function run() {
 
 	switch (command) {
 		case "typecheck": {
-			await runScript("react-router typegen");
+			await runScript("react-router", ["typegen"]);
 			await runScript("tsc");
-			break;
+			return;
 		}
 
 		case "lint": {
@@ -44,7 +46,7 @@ async function run() {
 			];
 
 			await runScript("eslint", args);
-			break;
+			return;
 		}
 
 		case "format": {
@@ -65,7 +67,7 @@ async function run() {
 			];
 
 			await runScript("prettier", args);
-			break;
+			return;
 		}
 
 		case "validate": {
@@ -74,7 +76,7 @@ async function run() {
 				runScript("node", ["--run", "lint"]),
 				runScript("node", ["--run", "format"]),
 			]);
-			break;
+			return;
 		}
 
 		default: {
