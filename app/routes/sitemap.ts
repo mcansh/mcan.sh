@@ -1,5 +1,7 @@
+import xml from "dedent";
+
 export function loader() {
- let content = `
+	let content = xml`
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
@@ -17,9 +19,9 @@ export function loader() {
 </urlset>
 `;
 
-    return new Response(content, {
-        headers: {
-            "Content-Type": "text/xml",
-        }
-    });
+	return new Response(content, {
+		headers: {
+			"Content-Type": "text/xml",
+		},
+	});
 }
