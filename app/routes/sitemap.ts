@@ -21,7 +21,7 @@ export function loader() {
 
 	return new Response(content, {
 		headers: {
-			"Content-Type": "text/xml",
+			"Content-Type": "application/xml",
 		},
 	});
 }
