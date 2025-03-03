@@ -29,6 +29,9 @@ importers:
       cross-env:
         specifier: ^7.0.3
         version: 7.0.3
+      dedent:
+        specifier: ^1.5.3
+        version: 1.5.3
       etag:
         specifier: ^1.8.1
         version: 1.8.1

@@ -31,6 +31,7 @@
     "cloudinary-build-url": "^0.2.4",
     "clsx": "^2.1.1",
     "cross-env": "^7.0.3",
+    "dedent": "^1.5.3",
     "etag": "^1.8.1",
     "fastify": "^5.2.1",
     "fathom-client": "^3.7.2",
