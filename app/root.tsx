@@ -21,6 +21,38 @@ import fontStyleHref from "./assets/berkeley-mono.css?url";
 import { iconSizes } from "./routes/manifest.webmanifest/utils";
 import type { Match } from "./types/handle";
 
+const clientLogger: Route.unstable_ClientMiddlewareFunction = async (
+	{ request },
+	next,
+) => {
+	let start = performance.now();
+
+	// Run the remaining middlewares and all route loaders
+	await next();
+
+	let duration = performance.now() - start;
+	console.log(`Navigated to ${request.url} (${duration}ms)`);
+};
+
+const serverLogger: Route.unstable_MiddlewareFunction = async (
+	{ request },
+	next,
+) => {
+	let start = performance.now();
+
+	// 👇 Grab the response here
+	let res = await next();
+
+	let duration = performance.now() - start;
+	console.log(`Navigated to ${request.url} (${duration}ms)`);
+
+	// 👇 And return it here (optional if you don't modify the response)
+	return res;
+};
+
+export const unstable_middleware = [serverLogger];
+export const unstable_clientMiddleware = [clientLogger];
+
 export function links(): Route.LinkDescriptors {
 	let icons = iconSizes.map((icon) => {
 		return { href: icon.src, sizes: icon.sizes, rel: "apple-touch-icon" };

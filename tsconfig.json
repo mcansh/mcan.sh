@@ -12,7 +12,8 @@
 		"types": [
 			"@react-router/node",
 			"vite/client",
-			"@mcansh/vite-plugin-svg-sprite/client"
+			"@mcansh/vite-plugin-svg-sprite/client",
+			"@mcansh/remix-fastify/middleware"
 		],
 		"forceConsistentCasingInFileNames": true,
 		"checkJs": true,
