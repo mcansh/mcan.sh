@@ -44,7 +44,7 @@ export function meta({ data }: Route.MetaArgs): Route.MetaDescriptors {
 	return data?.meta ?? [];
 }
 
-export const handle: RouteHandle = {
+export let handle: RouteHandle = {
 	bodyClassName: "h-full font-thin dark:bg-slate-900 dark:text-white",
 };
 

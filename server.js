@@ -24,7 +24,7 @@ await app.listen({ host, port });
 
 /** @type string | null */
 let lanUrl = null;
-const localIp = ipAddress() ?? "Unknown";
+let localIp = ipAddress() ?? "Unknown";
 // Check if the address is a private ip
 // https://en.wikipedia.org/wiki/Private_network#Private_IPv4_address_spaces
 // https://github.com/facebook/create-react-app/blob/d960b9e38c062584ff6cfb1a70e1512509a966e7/packages/react-dev-utils/WebpackDevServerUtils.js#LL48C9-L54C10
