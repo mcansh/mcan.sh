@@ -5,7 +5,7 @@ import process from "node:process";
 import { parseArgs } from "node:util";
 import { $ } from "zx";
 
-const result = parseArgs({
+let result = parseArgs({
 	args: process.argv.slice(2),
 	allowPositionals: true,
 });
