@@ -98,14 +98,14 @@ export let handleDataRequest: HandleDataRequestFunction = async (
 };
 
 function applySecurityHeaders(request: Request, responseHeaders: Headers) {
-	if (process.env.NODE_ENV === "development") {
+	if (import.meta.env.DEV) {
 		responseHeaders.set("Cache-Control", "no-cache");
 	}
 
 	let url = new URL(request.url);
 
 	let upgradeInsecureRequests =
-		process.env.NODE_ENV === "production" && !url.host.includes("localhost");
+		import.meta.env.PROD && !url.host.includes("localhost");
 
 	let cloudflareEmailDecodePath = new URL(
 		"/cdn-cgi/scripts/*/cloudflare-static/email-decode.min.js",
@@ -130,10 +130,7 @@ function applySecurityHeaders(request: Request, responseHeaders: Headers) {
 				`'nonce-${nonce}'`,
 				"'strict-dynamic'",
 			],
-			"connect-src": [
-				"'self'",
-				...(process.env.NODE_ENV === "development" ? ["ws:"] : []),
-			],
+			"connect-src": ["'self'", ...(import.meta.env.DEV ? ["ws:"] : [])],
 			"worker-src": ["blob:"],
 			"manifest-src": ["'self'"],
 			"font-src": ["'self'"],
