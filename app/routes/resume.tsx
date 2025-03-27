@@ -111,6 +111,26 @@ export function loader() {
 	);
 }
 
+export function headers({
+	loaderHeaders,
+}: Route.HeadersArgs): Headers | HeadersInit {
+	let documentHeaders = new Headers();
+	let cacheControl = loaderHeaders.get("Cache-Control");
+	let xHelloRecruiters = loaderHeaders.get("x-hello-recruiters");
+	let link = loaderHeaders.get("Link");
+
+	if (cacheControl) {
+		documentHeaders.set("Cache-Control", cacheControl);
+	}
+	if (xHelloRecruiters) {
+		documentHeaders.set("x-hello-recruiters", xHelloRecruiters);
+	}
+	if (link) {
+		documentHeaders.set("Link", link);
+	}
+	return documentHeaders;
+}
+
 export function meta({ data }: Route.MetaArgs): Route.MetaDescriptors {
 	return data?.meta ?? [];
 }
