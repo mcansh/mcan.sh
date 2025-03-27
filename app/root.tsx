@@ -76,7 +76,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 	let nonce = useNonce();
 
 	return (
-		<html lang="en" className="h-dvh">
+		<html lang="en" className="min-h-dvh">
 			<head>
 				<meta charSet="utf-8" />
 				<meta name="apple-mobile-web-app-capable" content="yes" />
