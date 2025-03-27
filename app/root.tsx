@@ -150,7 +150,7 @@ export function ErrorBoundary() {
 				<summary className="cursor-pointer">Error message</summary>
 				<pre className={boxClassName}>{error.message}</pre>
 
-				{process.env.NODE_ENV === "production" ? (
+				{import.meta.env.PROD ? (
 					<p>
 						There was an uncaught exception in your application. Check the
 						browser console and/or the server console to inspect the error.
