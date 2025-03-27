@@ -7,16 +7,6 @@
 }
 
 @layer base {
-	.h-screen {
-		height: 100vh;
-	}
-
-	@supports (-webkit-touch-callout: none) {
-		.h-screen {
-			height: -webkit-fill-available;
-		}
-	}
-
 	.fun-link-hover-gradient {
 		background-size: 100px 2px;
 	}
