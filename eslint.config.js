@@ -1,18 +1,13 @@
 import { fixupPluginRules } from "@eslint/compat";
 import eslint from "@eslint/js";
+import gitignore from "eslint-config-flat-gitignore";
 import importPlugin from "eslint-plugin-import";
 import preferLet from "eslint-plugin-prefer-let";
 import reactCompiler from "eslint-plugin-react-compiler";
-import { globifyGitIgnore } from "globify-gitignore";
-import Fs from "node:fs";
 import tseslint from "typescript-eslint";
 
-let gitignoreContent = Fs.readFileSync(".gitignore", "utf-8");
-let globs = await globifyGitIgnore(gitignoreContent);
-let ignores = globs.map((glob) => glob.glob);
-
 export default tseslint.config(
-	{ ignores },
+	gitignore(),
 	eslint.configs.recommended,
 	...tseslint.configs.recommended,
 	importPlugin.flatConfigs.recommended,
