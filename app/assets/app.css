@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-	--default-font-family: Berkeley Mono;
+	--default-font-family: Berkeley Mono, Berkeley Mono Override;
 	--color-blue-screen: #1000f2;
 	--color-link: #ea567c;
 }
