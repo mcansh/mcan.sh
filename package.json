@@ -18,7 +18,7 @@
     "format": "node ./scripts/cli.js format",
     "validate": "node ./scripts/cli.js validate",
     "prepare": "node ./scripts/prepare.js",
-    "dev": "cross-env NODE_ENV=development node --watch-path ./server.js ./server.js",
+    "dev": "cross-env NODE_ENV=development node --env-file=./.env --watch-path ./server.js ./server.js",
     "start": "cross-env NODE_ENV=production node ./server.js",
     "start:local": "cross-env NODE_ENV=production node --env-file=./.env ./server.js",
     "knip": "knip-bun"
@@ -68,6 +68,7 @@
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-prefer-let": "^4.0.0",
     "eslint-plugin-react-compiler": "19.0.0-beta-e993439-20250328",
+    "fontaine": "^0.6.0",
     "husky": "^9.1.7",
     "knip": "^5.47.0",
     "lightningcss": "^1.29.3",
@@ -95,6 +96,10 @@
       "cookie@<0.7.0": ">=0.7.0",
       "esbuild@<=0.24.2": ">=0.25.0",
       "axios@<0.30.0": ">=0.30.0"
-    }
+    },
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "husky"
+    ]
   }
 }
