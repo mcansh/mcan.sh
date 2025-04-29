@@ -95,6 +95,9 @@
       "cookie@<0.7.0": ">=0.7.0",
       "esbuild@<=0.24.2": ">=0.25.0",
       "axios@<0.30.0": ">=0.30.0"
+    },
+    "patchedDependencies": {
+      "@mcansh/vite-plugin-svg-sprite": "patches/@mcansh__vite-plugin-svg-sprite.patch"
     }
   }
 }
