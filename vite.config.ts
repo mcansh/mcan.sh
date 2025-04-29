@@ -7,7 +7,7 @@ import babel from "vite-plugin-babel";
 let ReactCompilerConfig = {};
 
 export default defineConfig({
-	build: { cssMinify: "lightningcss" },
+	build: { outDir: "build", cssMinify: "lightningcss" },
 	plugins: [
 		tailwindcss(),
 		svgSprite(),
