@@ -11,11 +11,6 @@ overrides:
   esbuild@<=0.24.2: '>=0.25.0'
   axios@<0.30.0: '>=0.30.0'
 
-patchedDependencies:
-  '@mcansh/vite-plugin-svg-sprite':
-    hash: d611af520c053e63d25841bf0a5796f9751aafdec9d51964d9bd02bdc0a634fb
-    path: patches/@mcansh__vite-plugin-svg-sprite.patch
-
 importers:
 
   .:
@@ -94,8 +89,8 @@ importers:
         specifier: ^9.24.0
         version: 9.24.0
       '@mcansh/vite-plugin-svg-sprite':
-        specifier: ^0.5.0
-        version: 0.5.0(patch_hash=d611af520c053e63d25841bf0a5796f9751aafdec9d51964d9bd02bdc0a634fb)(vite@6.2.5(@types/node@20.17.27)(jiti@2.4.2)(lightningcss@1.29.3)(tsx@4.19.3)(yaml@2.7.0))
+        specifier: https://pkg.pr.new/mcansh/vite-plugin-svg-sprite/@mcansh/vite-plugin-svg-sprite@a368e7493923a05e64861cbf34156ef78bd67dbf
+        version: https://pkg.pr.new/mcansh/vite-plugin-svg-sprite/@mcansh/vite-plugin-svg-sprite@a368e7493923a05e64861cbf34156ef78bd67dbf(vite@6.2.5(@types/node@20.17.27)(jiti@2.4.2)(lightningcss@1.29.3)(tsx@4.19.3)(yaml@2.7.0))
       '@react-router/dev':
         specifier: 7.5.0
         version: 7.5.0(@types/node@20.17.27)(jiti@2.4.2)(lightningcss@1.29.3)(react-router@7.5.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(tsx@4.19.3)(typescript@5.8.3)(vite@6.2.5(@types/node@20.17.27)(jiti@2.4.2)(lightningcss@1.29.3)(tsx@4.19.3)(yaml@2.7.0))(yaml@2.7.0)
@@ -670,11 +665,12 @@ packages:
       vite:
         optional: true
 
-  '@mcansh/vite-plugin-svg-sprite@0.5.0':
-    resolution: {integrity: sha512-JJ5B0AZWmYMlZoPZy3TZVXyIYTglNw1UgJATSopuBq9uzkUjSKgF27NYinWHC7Yp8I2DJN+fN1dPn+A1vr6Mpg==}
+  '@mcansh/vite-plugin-svg-sprite@https://pkg.pr.new/mcansh/vite-plugin-svg-sprite/@mcansh/vite-plugin-svg-sprite@a368e7493923a05e64861cbf34156ef78bd67dbf':
+    resolution: {tarball: https://pkg.pr.new/mcansh/vite-plugin-svg-sprite/@mcansh/vite-plugin-svg-sprite@a368e7493923a05e64861cbf34156ef78bd67dbf}
+    version: 0.5.0
     engines: {node: '>=18.0.0'}
     peerDependencies:
-      vite: ^5.2.7
+      vite: ^5.2.7 || ^6.0.0
 
   '@mjackson/node-fetch-server@0.2.0':
     resolution: {integrity: sha512-EMlH1e30yzmTpGLQjlFmaDAjyOeZhng1/XCd7DExR8PNAnG/G1tyruZxEoUe11ClnwGhGrtsdnyyUx1frSzjng==}
@@ -1977,8 +1973,8 @@ packages:
     resolution: {integrity: sha512-oRXApq54ETRj4eMiFzGnHWGy+zo5raudjuxN0b8H7s/RU2oW0Wvsx9O0ACRN/kRq9E8Vu/ReskGB5o3ji+FzHQ==}
     engines: {node: '>=12'}
 
-  fs-extra@11.2.0:
-    resolution: {integrity: sha512-PmDi3uwK5nFuXh7XDTlVnS17xJS7vW36is2+w3xcv8SVxiB4NyATf4ctkVY5bkSjX0Y4nbvZCq1/EjtEyr9ktw==}
+  fs-extra@11.3.0:
+    resolution: {integrity: sha512-Z4XaCL6dUDHfP/jT25jJKMmtxvuwbkrD1vNSMFlo9lNLY2c5FHYSQgHPRZUjAB26TpDEoW9HCOgplrdbaPV/ew==}
     engines: {node: '>=14.14'}
 
   fs.realpath@1.0.0:
@@ -2826,9 +2822,6 @@ packages:
   pathe@1.1.2:
     resolution: {integrity: sha512-whLdWMYL2TwI08hn8/ZqAbrVemu0LNaNNJZX73O6qaIdCTfXutsLhMkjdENX0qhsQ9uIimo4/aQOmXkoon2nDQ==}
 
-  picocolors@1.1.0:
-    resolution: {integrity: sha512-TQ92mBOW0l3LeMeyLV6mzy/kWr8lkd/hp3mTg7wYK7zJhuBStmGMBG0BdeDZS/dZx1IukaX6Bk11zcln25o1Aw==}
-
   picocolors@1.1.1:
     resolution: {integrity: sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==}
 
@@ -3440,9 +3433,6 @@ packages:
   tsconfig-paths@3.15.0:
     resolution: {integrity: sha512-2Ac2RgzDe/cn48GvOe3M+o82pEFewD3UPbyoUHHdKasHwJKjds4fLXWf/Ux5kATBKN20oaFGu+jbElp1pos0mg==}
 
-  tslib@2.6.2:
-    resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
-
   tslib@2.8.1:
     resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
 
@@ -3465,10 +3455,6 @@ packages:
   type-fest@0.8.1:
     resolution: {integrity: sha512-4dbzIzqvjtgiM5rw1k5rEHtBANKmdudhGyBEajN01fEyhaAIhsoKNy6y7+IN93IfpFtwY9iqi7kD+xwKhQsNJA==}
     engines: {node: '>=8'}
-
-  type-fest@4.26.1:
-    resolution: {integrity: sha512-yOGpmOAL7CkKe/91I5O3gPICmJNLJ1G4zFYVAsRHg7M64biSnPtRj0WNQt++bRkjYOqjWXrhnUw1utzmVErAdg==}
-    engines: {node: '>=16'}
 
   type-fest@4.31.0:
     resolution: {integrity: sha512-yCxltHW07Nkhv/1F6wWBr8kz+5BGMfP+RbRSYFnegVb0qV/UMT0G0ElBloPVerqn4M2ZV80Ir1FtCcYv1cT6vQ==}
@@ -4182,9 +4168,10 @@ snapshots:
       react-router: 7.5.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       vite: 6.2.5(@types/node@20.17.27)(jiti@2.4.2)(lightningcss@1.29.3)(tsx@4.19.3)(yaml@2.7.0)
 
-  '@mcansh/vite-plugin-svg-sprite@0.5.0(patch_hash=d611af520c053e63d25841bf0a5796f9751aafdec9d51964d9bd02bdc0a634fb)(vite@6.2.5(@types/node@20.17.27)(jiti@2.4.2)(lightningcss@1.29.3)(tsx@4.19.3)(yaml@2.7.0))':
+  '@mcansh/vite-plugin-svg-sprite@https://pkg.pr.new/mcansh/vite-plugin-svg-sprite/@mcansh/vite-plugin-svg-sprite@a368e7493923a05e64861cbf34156ef78bd67dbf(vite@6.2.5(@types/node@20.17.27)(jiti@2.4.2)(lightningcss@1.29.3)(tsx@4.19.3)(yaml@2.7.0))':
     dependencies:
-      fs-extra: 11.2.0
+      chokidar: 4.0.3
+      fs-extra: 11.3.0
       hasha: 6.0.0
       svgo: 3.3.2
       svgstore: 3.0.1
@@ -4981,7 +4968,7 @@ snapshots:
       htmlparser2: 6.1.0
       parse5: 6.0.1
       parse5-htmlparser2-tree-adapter: 6.0.1
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   chokidar@4.0.3:
     dependencies:
@@ -5197,7 +5184,7 @@ snapshots:
   dot-case@3.0.4:
     dependencies:
       no-case: 3.0.4
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   dunder-proto@1.0.1:
     dependencies:
@@ -5681,7 +5668,7 @@ snapshots:
       jsonfile: 6.1.0
       universalify: 2.0.1
 
-  fs-extra@11.2.0:
+  fs-extra@11.3.0:
     dependencies:
       graceful-fs: 4.2.11
       jsonfile: 6.1.0
@@ -5828,7 +5815,7 @@ snapshots:
   hasha@6.0.0:
     dependencies:
       is-stream: 3.0.0
-      type-fest: 4.26.1
+      type-fest: 4.38.0
 
   hasown@2.0.2:
     dependencies:
@@ -6261,7 +6248,7 @@ snapshots:
 
   lower-case@2.0.2:
     dependencies:
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   lru-cache@10.4.3: {}
 
@@ -6330,7 +6317,7 @@ snapshots:
   no-case@3.0.4:
     dependencies:
       lower-case: 2.0.2
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   node-releases@2.0.19: {}
 
@@ -6501,8 +6488,6 @@ snapshots:
   path-type@4.0.0: {}
 
   pathe@1.1.2: {}
-
-  picocolors@1.1.0: {}
 
   picocolors@1.1.1: {}
 
@@ -6868,7 +6853,7 @@ snapshots:
   snake-case@3.0.4:
     dependencies:
       dot-case: 3.0.4
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   sonic-boom@4.2.0:
     dependencies:
@@ -6979,7 +6964,7 @@ snapshots:
       css-tree: 2.3.1
       css-what: 6.1.0
       csso: 5.0.5
-      picocolors: 1.1.0
+      picocolors: 1.1.1
 
   svgstore@3.0.1:
     dependencies:
@@ -7021,10 +7006,7 @@ snapshots:
       minimist: 1.2.8
       strip-bom: 3.0.0
 
-  tslib@2.6.2: {}
-
-  tslib@2.8.1:
-    optional: true
+  tslib@2.8.1: {}
 
   tsx@4.19.3:
     dependencies:
@@ -7042,8 +7024,6 @@ snapshots:
   type-fest@0.6.0: {}
 
   type-fest@0.8.1: {}
-
-  type-fest@4.26.1: {}
 
   type-fest@4.31.0: {}
 
