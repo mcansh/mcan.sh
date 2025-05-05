@@ -11,7 +11,7 @@
     "#*": "./*"
   },
   "scripts": {
-    "build": "npm run typecheck && react-router build",
+    "build": "npm run typecheck && vite build",
     "clean": "./scripts/clean.js",
     "typecheck": "node ./scripts/cli.js typecheck",
     "lint": "node ./scripts/cli.js lint",
@@ -50,7 +50,7 @@
     "@cld-apis/types": "^0.1.6",
     "@eslint/compat": "^1.2.8",
     "@eslint/js": "^9.24.0",
-    "@mcansh/vite-plugin-svg-sprite": "https://pkg.pr.new/mcansh/vite-plugin-svg-sprite/@mcansh/vite-plugin-svg-sprite@a368e7493923a05e64861cbf34156ef78bd67dbf",
+    "@mcansh/vite-plugin-svg-sprite": "https://pkg.pr.new/mcansh/vite-plugin-svg-sprite/@mcansh/vite-plugin-svg-sprite@e546440",
     "@react-router/dev": "7.5.0",
     "@tailwindcss/vite": "4.1.3",
     "@total-typescript/tsconfig": "^1.0.4",

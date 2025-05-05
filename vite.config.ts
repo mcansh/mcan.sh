@@ -10,12 +10,7 @@ export default defineConfig({
 	build: { outDir: "build", cssMinify: "lightningcss" },
 	plugins: [
 		tailwindcss(),
-		svgSprite({
-			unstable_environment_api: {
-				client: "client",
-				ssr: "server",
-			},
-		}),
+		svgSprite(),
 		reactRouter(),
 		babel({
 			filter: /^app\/\.[jt]sx$/,
