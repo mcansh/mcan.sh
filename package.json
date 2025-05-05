@@ -50,7 +50,7 @@
     "@cld-apis/types": "^0.1.6",
     "@eslint/compat": "^1.2.8",
     "@eslint/js": "^9.24.0",
-    "@mcansh/vite-plugin-svg-sprite": "^0.5.0",
+    "@mcansh/vite-plugin-svg-sprite": "https://pkg.pr.new/mcansh/vite-plugin-svg-sprite/@mcansh/vite-plugin-svg-sprite@a368e7493923a05e64861cbf34156ef78bd67dbf",
     "@react-router/dev": "7.5.0",
     "@tailwindcss/vite": "4.1.3",
     "@total-typescript/tsconfig": "^1.0.4",
@@ -87,7 +87,7 @@
   "engines": {
     "node": ">=22"
   },
-  "packageManager": "pnpm@10.7.1+sha512.2d92c86b7928dc8284f53494fb4201f983da65f0fb4f0d40baafa5cf628fa31dae3e5968f12466f17df7e97310e30f343a648baea1b9b350685dafafffdf5808",
+  "packageManager": "pnpm@10.10.0+sha512.d615db246fe70f25dcfea6d8d73dee782ce23e2245e3c4f6f888249fb568149318637dca73c2c5c8ef2a4ca0d5657fb9567188bfab47f566d1ee6ce987815c39",
   "pnpm": {
     "overrides": {
       "axios@>=0.8.1 <0.28.0": ">=0.28.0",
@@ -95,9 +95,6 @@
       "cookie@<0.7.0": ">=0.7.0",
       "esbuild@<=0.24.2": ">=0.25.0",
       "axios@<0.30.0": ">=0.30.0"
-    },
-    "patchedDependencies": {
-      "@mcansh/vite-plugin-svg-sprite": "patches/@mcansh__vite-plugin-svg-sprite.patch"
     }
   }
 }
