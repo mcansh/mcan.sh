@@ -3,7 +3,7 @@ import eslint from "@eslint/js";
 import gitignore from "eslint-config-flat-gitignore";
 import importPlugin from "eslint-plugin-import";
 import preferLet from "eslint-plugin-prefer-let";
-import reactCompiler from "eslint-plugin-react-compiler";
+import * as reactHooks from "eslint-plugin-react-hooks";
 import tseslint from "typescript-eslint";
 
 export default tseslint.config(
@@ -12,16 +12,16 @@ export default tseslint.config(
 	...tseslint.configs.recommended,
 	importPlugin.flatConfigs.recommended,
 	importPlugin.flatConfigs.typescript,
+	reactHooks.configs.recommended,
 	{
 		linterOptions: {
 			reportUnusedDisableDirectives: "error",
 		},
 		plugins: {
 			"prefer-let": fixupPluginRules(preferLet),
-			"react-compiler": reactCompiler,
 		},
 		rules: {
-			"react-compiler/react-compiler": "error",
+			"react-hooks/react-compiler": "error",
 			"prefer-const": "off",
 			"prefer-let/prefer-let": "error",
 			"@typescript-eslint/no-unused-vars": [
