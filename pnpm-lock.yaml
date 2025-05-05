@@ -89,8 +89,8 @@ importers:
         specifier: ^9.24.0
         version: 9.24.0
       '@mcansh/vite-plugin-svg-sprite':
-        specifier: https://pkg.pr.new/mcansh/vite-plugin-svg-sprite/@mcansh/vite-plugin-svg-sprite@a368e7493923a05e64861cbf34156ef78bd67dbf
-        version: https://pkg.pr.new/mcansh/vite-plugin-svg-sprite/@mcansh/vite-plugin-svg-sprite@a368e7493923a05e64861cbf34156ef78bd67dbf(vite@6.2.5(@types/node@20.17.27)(jiti@2.4.2)(lightningcss@1.29.3)(tsx@4.19.3)(yaml@2.7.0))
+        specifier: https://pkg.pr.new/mcansh/vite-plugin-svg-sprite/@mcansh/vite-plugin-svg-sprite@e546440
+        version: https://pkg.pr.new/mcansh/vite-plugin-svg-sprite/@mcansh/vite-plugin-svg-sprite@e546440(vite@6.2.5(@types/node@20.17.27)(jiti@2.4.2)(lightningcss@1.29.3)(tsx@4.19.3)(yaml@2.7.0))
       '@react-router/dev':
         specifier: 7.5.0
         version: 7.5.0(@types/node@20.17.27)(jiti@2.4.2)(lightningcss@1.29.3)(react-router@7.5.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(tsx@4.19.3)(typescript@5.8.3)(vite@6.2.5(@types/node@20.17.27)(jiti@2.4.2)(lightningcss@1.29.3)(tsx@4.19.3)(yaml@2.7.0))(yaml@2.7.0)
@@ -665,8 +665,8 @@ packages:
       vite:
         optional: true
 
-  '@mcansh/vite-plugin-svg-sprite@https://pkg.pr.new/mcansh/vite-plugin-svg-sprite/@mcansh/vite-plugin-svg-sprite@a368e7493923a05e64861cbf34156ef78bd67dbf':
-    resolution: {tarball: https://pkg.pr.new/mcansh/vite-plugin-svg-sprite/@mcansh/vite-plugin-svg-sprite@a368e7493923a05e64861cbf34156ef78bd67dbf}
+  '@mcansh/vite-plugin-svg-sprite@https://pkg.pr.new/mcansh/vite-plugin-svg-sprite/@mcansh/vite-plugin-svg-sprite@e546440':
+    resolution: {tarball: https://pkg.pr.new/mcansh/vite-plugin-svg-sprite/@mcansh/vite-plugin-svg-sprite@e546440}
     version: 0.5.0
     engines: {node: '>=18.0.0'}
     peerDependencies:
@@ -4168,7 +4168,7 @@ snapshots:
       react-router: 7.5.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       vite: 6.2.5(@types/node@20.17.27)(jiti@2.4.2)(lightningcss@1.29.3)(tsx@4.19.3)(yaml@2.7.0)
 
-  '@mcansh/vite-plugin-svg-sprite@https://pkg.pr.new/mcansh/vite-plugin-svg-sprite/@mcansh/vite-plugin-svg-sprite@a368e7493923a05e64861cbf34156ef78bd67dbf(vite@6.2.5(@types/node@20.17.27)(jiti@2.4.2)(lightningcss@1.29.3)(tsx@4.19.3)(yaml@2.7.0))':
+  '@mcansh/vite-plugin-svg-sprite@https://pkg.pr.new/mcansh/vite-plugin-svg-sprite/@mcansh/vite-plugin-svg-sprite@e546440(vite@6.2.5(@types/node@20.17.27)(jiti@2.4.2)(lightningcss@1.29.3)(tsx@4.19.3)(yaml@2.7.0))':
     dependencies:
       chokidar: 4.0.3
       fs-extra: 11.3.0
