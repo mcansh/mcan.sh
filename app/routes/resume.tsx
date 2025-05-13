@@ -1,5 +1,6 @@
 import githubMarkIconHref from "#app/assets/github-mark.svg";
 import linkedinIconHref from "#app/assets/linkedin.svg";
+import twitterIconHref from "#app/assets/twitter.svg";
 import { cacheHeader } from "pretty-cache-header";
 import { Link, data } from "react-router";
 import spriteHref from "virtual:@mcansh/vite-plugin-svg-sprite";
@@ -84,16 +85,6 @@ export function loader() {
 				"Continuous Integration",
 				"Continuous Delivery",
 			],
-			references: [
-				{
-					name: "Ryan Florence",
-					twitter: "https://twitter.com/ryanflorence",
-				},
-				{
-					name: "Michael Jackson",
-					twitter: "https://twitter.com/mjackson",
-				},
-			],
 		},
 		{
 			headers: {
@@ -155,6 +146,19 @@ export default function ResumePage({ loaderData }: Route.ComponentProps) {
 		},
 	] as const;
 
+	let references = [
+		{
+			name: "Ryan Florence",
+			twitter: "https://twitter.com/ryanflorence",
+			icon: twitterIconHref,
+		},
+		{
+			name: "Michael Jackson",
+			twitter: "https://twitter.com/mjackson",
+			icon: twitterIconHref,
+		},
+	] as const;
+
 	return (
 		<div className="flex h-full flex-col">
 			<header className="flex flex-col items-center justify-center space-y-2 bg-stone-800 py-6 text-center text-white print:py-3">
@@ -177,7 +181,7 @@ export default function ResumePage({ loaderData }: Route.ComponentProps) {
 							<li>Shelby Township, MI</li>
 
 							{links.map((link) => {
-								let { pathname } = new URL(link.href);
+								let url = new URL(link.href);
 								return (
 									<li key={link.text}>
 										<a
@@ -185,7 +189,9 @@ export default function ResumePage({ loaderData }: Route.ComponentProps) {
 											href={link.href}
 										>
 											<span className="print:hidden">{link.text}</span>
-											<span className="hidden print:inline">{pathname}</span>
+											<span className="hidden print:inline">
+												{url.pathname}
+											</span>
 											<svg className="h-4 w-4 text-black" aria-hidden>
 												<use href={link.icon}></use>
 											</svg>
@@ -221,19 +227,19 @@ export default function ResumePage({ loaderData }: Route.ComponentProps) {
 							References
 						</h2>
 						<ul className="space-y-1 print:space-y-0.5">
-							{loaderData.references.map((reference) => {
+							{references.map((reference) => {
 								return (
 									<li key={reference.name}>
 										<h3>
 											<a
-												className="text-blue-800 underline"
+												className="flex items-center space-x-2 text-blue-800 underline md:justify-end"
 												href={reference.twitter}
 											>
-												{reference.name}
+												<span className="print:hidden">{reference.name}</span>
+												<svg className="h-4 w-4 text-black" aria-hidden>
+													<use href={reference.icon}></use>
+												</svg>
 											</a>
-											<span className="hidden print:block print:text-[5pt]">
-												{reference.twitter}
-											</span>
 										</h3>
 									</li>
 								);
