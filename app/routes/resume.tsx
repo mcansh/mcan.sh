@@ -235,7 +235,7 @@ export default function ResumePage({ loaderData }: Route.ComponentProps) {
 												className="flex items-center space-x-2 text-blue-800 underline md:justify-end"
 												href={reference.twitter}
 											>
-												<span className="print:hidden">{reference.name}</span>
+												<span>{reference.name}</span>
 												<svg className="h-4 w-4 text-black" aria-hidden>
 													<use href={reference.icon}></use>
 												</svg>
