@@ -16,8 +16,10 @@ export default defineConfig({
 		babel({
 			filter: /^app\/\.[jt]sx$/,
 			loader(path) {
+				if (/.ts$/i.test(path)) return "ts";
 				if (/.tsx$/i.test(path)) return "tsx";
-				return "jsx";
+				if (/.jsx$/i.test(path)) return "jsx";
+				return "js";
 			},
 			babelConfig: {
 				presets: ["@babel/preset-typescript"],
