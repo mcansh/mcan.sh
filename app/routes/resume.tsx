@@ -160,128 +160,131 @@ export default function ResumePage({ loaderData }: Route.ComponentProps) {
 	] as const;
 
 	return (
-		<div className="flex h-full flex-col">
-			<header className="flex flex-col items-center justify-center space-y-2 bg-stone-800 py-6 text-center text-white print:py-3">
-				<h1 className="text-3xl print:text-xl">
-					<Link to="/" className="hover:underline">
-						Logan McAnsh
-					</Link>
-				</h1>
-				<p className="text-lg print:text-base">Senior Software Engineer</p>
-			</header>
+		<>
+			<img src={spriteHref} loading="eager" />
+			<div className="flex h-full flex-col">
+				<header className="flex flex-col items-center justify-center space-y-2 bg-stone-800 py-6 text-center text-white print:py-3">
+					<h1 className="text-3xl print:text-xl">
+						<Link to="/" className="hover:underline">
+							Logan McAnsh
+						</Link>
+					</h1>
+					<p className="text-lg print:text-base">Senior Software Engineer</p>
+				</header>
 
-			<div className="grid h-full flex-1 gap-8 md:grid-cols-[300px_1fr] print:grid-cols-[175px_1fr] print:gap-4">
-				<aside className="space-y-8 bg-stone-300 p-8 md:text-right print:space-y-4 print:p-4 print:py-2">
-					<div className="print:text-[9pt]">
-						<h2 className="text-lg font-medium print:text-[11pt]">Contact</h2>
-						<ul className="space-y-1 print:space-y-0.5">
-							<li>
-								<a href="mailto:logan+resume@mcan.sh">logan+resume@mcan.sh</a>
-							</li>
-							<li>Shelby Township, MI</li>
+				<div className="grid h-full flex-1 gap-8 md:grid-cols-[300px_1fr] print:grid-cols-[175px_1fr] print:gap-4">
+					<aside className="space-y-8 bg-stone-300 p-8 md:text-right print:space-y-4 print:p-4 print:py-2">
+						<div className="print:text-[9pt]">
+							<h2 className="text-lg font-medium print:text-[11pt]">Contact</h2>
+							<ul className="space-y-1 print:space-y-0.5">
+								<li>
+									<a href="mailto:logan+resume@mcan.sh">logan+resume@mcan.sh</a>
+								</li>
+								<li>Shelby Township, MI</li>
 
-							{links.map((link) => {
-								let url = new URL(link.href);
-								return (
-									<li key={link.text}>
-										<a
-											className="flex items-center space-x-2 text-blue-800 underline md:justify-end"
-											href={link.href}
-										>
-											<span className="print:hidden">{link.text}</span>
-											<span className="hidden print:inline">
-												{url.pathname}
-											</span>
-											<svg className="h-4 w-4 text-black" aria-hidden>
-												<use href={link.icon}></use>
-											</svg>
-										</a>
-									</li>
-								);
-							})}
-						</ul>
-					</div>
-
-					<div className="print:text-[9pt]">
-						<h2 className="text-lg font-medium print:text-[11pt]">Skills</h2>
-						<ul className="space-y-1 print:space-y-0.5">
-							{loaderData.skills.map((skill) => {
-								return <li key={skill}>{skill}</li>;
-							})}
-						</ul>
-					</div>
-
-					<div className="print:text-[9pt]">
-						<h2 className="text-lg font-medium print:text-[11pt]">
-							Certifications
-						</h2>
-						<ul className="space-y-1 print:space-y-0.5">
-							{loaderData.certifications.map((certification) => {
-								return <li key={certification}>{certification}</li>;
-							})}
-						</ul>
-					</div>
-
-					<div className="print:text-[9pt]">
-						<h2 className="text-lg font-medium print:text-[11pt]">
-							References
-						</h2>
-						<ul className="space-y-1 print:space-y-0.5">
-							{references.map((reference) => {
-								return (
-									<li key={reference.name}>
-										<h3>
+								{links.map((link) => {
+									let url = new URL(link.href);
+									return (
+										<li key={link.text}>
 											<a
 												className="flex items-center space-x-2 text-blue-800 underline md:justify-end"
-												href={reference.twitter}
+												href={link.href}
 											>
-												<span>{reference.name}</span>
+												<span className="print:hidden">{link.text}</span>
+												<span className="hidden print:inline">
+													{url.pathname}
+												</span>
 												<svg className="h-4 w-4 text-black" aria-hidden>
-													<use href={reference.icon}></use>
+													<use href={link.icon}></use>
 												</svg>
 											</a>
-										</h3>
-									</li>
-								);
-							})}
-						</ul>
-					</div>
-				</aside>
+										</li>
+									);
+								})}
+							</ul>
+						</div>
 
-				<main className="space-y-8 p-8 md:py-8 md:pr-8 md:pl-0 print:space-y-4 print:px-0 print:py-2 print:text-[9pt]">
-					<div>
-						<h2 className="text-lg font-medium print:text-[11pt]">
-							Work Experience
-						</h2>
-						<ul className="mt-4 space-y-8 print:mt-2 print:space-y-4">
-							{loaderData.experience.map((job) => {
-								return (
-									<li key={job.company}>
-										<h3 className="text-xl print:text-[10pt] print:font-medium">
-											{job.company}
-										</h3>
-										<p>{job.position}</p>
-										<p>
-											{job.startDate} - {job.endDate}{" "}
-											{"note" in job ? (
-												<span className="block text-sm text-gray-600 italic md:inline">
-													{job.note}
-												</span>
-											) : null}
-										</p>
+						<div className="print:text-[9pt] ">
+							<h2 className="text-lg font-medium print:text-[11pt]">Skills</h2>
+							<ul className="space-y-1 print:space-y-0.5">
+								{loaderData.skills.map((skill) => {
+									return <li key={skill}>{skill}</li>;
+								})}
+							</ul>
+						</div>
 
-										<ul className="list-inside list-disc space-y-1 pt-2 print:space-y-0.5">
-											{job.tasks.map((task) => {
-												return <li key={task}>{task}</li>;
-											})}
-										</ul>
-									</li>
-								);
-							})}
-						</ul>
-					</div>
-				</main>
+						<div className="print:text-[9pt]">
+							<h2 className="text-lg font-medium print:text-[11pt]">
+								Certifications
+							</h2>
+							<ul className="space-y-1 print:space-y-0.5">
+								{loaderData.certifications.map((certification) => {
+									return <li key={certification}>{certification}</li>;
+								})}
+							</ul>
+						</div>
+
+						<div className="print:text-[9pt]">
+							<h2 className="text-lg font-medium print:text-[11pt]">
+								References
+							</h2>
+							<ul className="space-y-1 print:space-y-0.5">
+								{references.map((reference) => {
+									return (
+										<li key={reference.name}>
+											<h3>
+												<a
+													className="flex items-center space-x-2 text-blue-800 underline md:justify-end"
+													href={reference.twitter}
+												>
+													<span>{reference.name}</span>
+													<svg className="h-4 w-4 text-black" aria-hidden>
+														<use href={reference.icon}></use>
+													</svg>
+												</a>
+											</h3>
+										</li>
+									);
+								})}
+							</ul>
+						</div>
+					</aside>
+
+					<main className="space-y-8 p-8 md:py-8 md:pr-8 md:pl-0 print:space-y-4 print:px-0 print:py-2 print:text-[9pt]">
+						<div>
+							<h2 className="text-lg font-medium print:text-[11pt]">
+								Work Experience
+							</h2>
+							<ul className="mt-4 space-y-8 print:mt-2 print:space-y-4">
+								{loaderData.experience.map((job) => {
+									return (
+										<li key={job.company}>
+											<h3 className="text-xl print:text-[10pt] print:font-medium">
+												{job.company}
+											</h3>
+											<p>{job.position}</p>
+											<p>
+												{job.startDate} - {job.endDate}{" "}
+												{"note" in job ? (
+													<span className="block text-sm text-gray-600 italic md:inline">
+														{job.note}
+													</span>
+												) : null}
+											</p>
+
+											<ul className="list-inside list-disc space-y-1 pt-2 print:space-y-0.5">
+												{job.tasks.map((task) => {
+													return <li key={task}>{task}</li>;
+												})}
+											</ul>
+										</li>
+									);
+								})}
+							</ul>
+						</div>
+					</main>
+				</div>
 			</div>
-		</div>
+		</>
 	);
 }
