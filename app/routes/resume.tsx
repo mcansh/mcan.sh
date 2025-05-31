@@ -161,7 +161,7 @@ export default function ResumePage({ loaderData }: Route.ComponentProps) {
 
 	return (
 		<>
-			<img src={spriteHref} loading="eager" />
+			<img src={spriteHref} loading="eager" className="hidden" />
 			<div className="flex h-full flex-col">
 				<header className="flex flex-col items-center justify-center space-y-2 bg-stone-800 py-6 text-center text-white print:py-3">
 					<h1 className="text-3xl print:text-xl">
