@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "@mcansh/http-helmet": "^0.13.0",
-    "@mcansh/remix-fastify": "^4.0.8",
+    "@mcansh/remix-fastify": "^4.1.0",
     "@react-router/node": "7.6.1",
     "address": "^2.0.3",
     "cloudinary-build-url": "^0.2.4",
