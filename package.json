@@ -43,7 +43,6 @@
     "react-router-dom": "7.6.1",
     "react-scan": "^0.3.4",
     "remix-utils": "^8.7.0",
-    "shippie": "^0.17.0",
     "tailwind-merge": "^3.3.0",
     "zod": "^3.25.46"
   },
@@ -79,7 +78,6 @@
     "prettier-plugin-organize-imports": "^4.1.0",
     "prettier-plugin-tailwindcss": "^0.6.12",
     "react-compiler-runtime": "19.1.0-rc.2",
-    "shippie": "^0.17.0",
     "sonda": "^0.7.1",
     "tailwindcss": "4.1.8",
     "typescript": "^5.8.3",
