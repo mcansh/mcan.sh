@@ -1,8 +1,7 @@
-import { z } from "zod";
+import { client_env_schema } from "#app/lib/lib.client/env.ts";
+import { z } from "zod/v4-mini";
 
-export let envSchema = z.object({
-	CLOUDINARY_CLOUD_NAME: z.string().min(1),
-	SENTRY_REPORT_URL: z.string().url(),
-	VITE_FATHOM_SITE_ID: z.string().min(1),
-	VITE_SENTRY_DSN: z.string().url(),
+export let envSchema = z.extend(client_env_schema, {
+	CLOUDINARY_CLOUD_NAME: z.string().check(z.minLength(1)),
+	SENTRY_REPORT_URL: z.string().check(z.url()),
 });
