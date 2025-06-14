@@ -1,4 +1,5 @@
 import { getMugshotURL } from "#app/lib.server/cloudinary.js";
+import { adapterContext } from "#workers/app.js";
 import type { Route } from "./+types/well-known.$";
 
 let notFound = new Response("ope not found", {
@@ -7,7 +8,8 @@ let notFound = new Response("ope not found", {
 	headers: { "Content-Type": "text/plain" },
 });
 
-export function loader({ params }: Route.LoaderArgs) {
+export function loader({ context, params }: Route.LoaderArgs) {
+	let env = context.get(adapterContext);
 	let splat = params["*"];
 
 	if (!splat) throw notFound;
@@ -20,7 +22,7 @@ export function loader({ params }: Route.LoaderArgs) {
 	segments = segments.slice(0, -1);
 
 	// get the original image using our default transformations
-	let image = getMugshotURL();
+	let image = getMugshotURL(env.CLOUDINARY_CLOUD_NAME);
 
 	// split the pathname into segments
 	let pathSegments = image.pathname.split("/").filter(Boolean);
