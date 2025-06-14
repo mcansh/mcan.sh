@@ -1,8 +1,15 @@
-import createEtag from "etag";
-import type { Route } from "./+types/index";
+import type { LoaderFunctionArgs } from "react-router";
 import { iconSizes, linkColor } from "./utils";
 
-export function loader({ request }: Route.LoaderArgs) {
+async function createEtag(content: string): Promise<string> {
+	let msgUint8 = new TextEncoder().encode(content);
+	let hashBuffer = await crypto.subtle.digest("MD5", msgUint8);
+	let hashArray = Array.from(new Uint8Array(hashBuffer));
+	let hashHex = hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
+	return `W/"${hashHex}"`;
+}
+
+export async function loader({ request }: LoaderFunctionArgs) {
 	let content = {
 		name: "Logan McAnsh",
 		short_name: "LM",
@@ -16,7 +23,7 @@ export function loader({ request }: Route.LoaderArgs) {
 
 	let manifest = JSON.stringify(content, null, 2);
 
-	let etag = createEtag(manifest);
+	let etag = await createEtag(manifest);
 
 	if (request.headers.get("If-None-Match") === etag) {
 		return new Response(null, {

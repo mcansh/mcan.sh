@@ -1,13 +1,13 @@
 import type { TransformerOption } from "@cld-apis/types";
 import { buildUrl } from "cloudinary-build-url";
-import { env } from "./env";
 
 function getCloudinaryURL(
+	cloudName: string,
 	publicId: string,
 	transformations: TransformerOption = {},
 ): URL {
 	let url = buildUrl(publicId, {
-		cloud: { cloudName: env.CLOUDINARY_CLOUD_NAME },
+		cloud: { cloudName },
 		transformations: {
 			quality: "auto",
 			fetchFormat: "auto",
@@ -20,6 +20,9 @@ function getCloudinaryURL(
 
 let MUGSHOT = "website/1663416590737636005" as const;
 
-export function getMugshotURL(transformations: TransformerOption = {}): URL {
-	return getCloudinaryURL(MUGSHOT, transformations);
+export function getMugshotURL(
+	cloudName: string,
+	transformations: TransformerOption = {},
+): URL {
+	return getCloudinaryURL(cloudName, MUGSHOT, transformations);
 }

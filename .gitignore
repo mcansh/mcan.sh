@@ -1,17 +1,18 @@
 /node_modules/
 *.log
 .DS_Store
-/.cache/
 /build/
-/public/build/
-.eslintcache
-tsconfig.tsbuildinfo
+*.tsbuildinfo
 .env
+sonda-report.html
 
 yalc.lock
-.yalc
+/.yalc/
 
-.react-router
-.idea
+# React Router
+/.react-router/
 
-sonda-report.html
+# Cloudflare
+.mf
+.wrangler
+.dev.vars*

@@ -25,6 +25,7 @@ async function run() {
 
 	switch (command) {
 		case "typecheck": {
+			await runScript("node", ["--run", "cf-typegen"]);
 			await runScript("react-router", ["typegen"]);
 			await runScript("tsc");
 			return;
