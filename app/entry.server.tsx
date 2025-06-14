@@ -1,3 +1,4 @@
+import { adapterContext } from "#workers/app.js";
 import {
 	createNonce,
 	createSecureHeaders,
@@ -7,26 +8,29 @@ import { NonceProvider } from "@mcansh/http-helmet/react";
 import { isbot } from "isbot";
 import { renderToReadableStream } from "react-dom/server";
 import type {
-	AppLoadContext,
 	EntryContext,
 	HandleDataRequestFunction,
+	unstable_RouterContextProvider,
 } from "react-router";
 import { ServerRouter } from "react-router";
 import { isPrefetch } from "remix-utils/is-prefetch";
 import { preloadRouteAssets } from "remix-utils/preload-route-assets";
-import { env } from "./lib.server/env";
 
 export default async function handleRequest(
 	request: Request,
 	responseStatusCode: number,
 	responseHeaders: Headers,
 	routerContext: EntryContext,
-	_loadContext: AppLoadContext,
+	loadContext: unstable_RouterContextProvider,
 ) {
 	let shellRendered = false;
 	let userAgent = request.headers.get("user-agent");
 	preloadRouteAssets(routerContext, responseHeaders);
-	let { nonce, headers } = applySecurityHeaders(request, responseHeaders);
+	let { nonce, headers } = applySecurityHeaders(
+		loadContext,
+		request,
+		responseHeaders,
+	);
 
 	let body = await renderToReadableStream(
 		<NonceProvider nonce={nonce}>
@@ -62,7 +66,7 @@ export default async function handleRequest(
 
 export let handleDataRequest: HandleDataRequestFunction = async (
 	response,
-	{ request },
+	{ request, context },
 ) => {
 	// if it's a GET request and it's a prefetch request
 	// and it doesn't already have a Cache-Control header
@@ -75,12 +79,19 @@ export let handleDataRequest: HandleDataRequestFunction = async (
 		response.headers.set("Cache-Control", "private, max-age=10");
 	}
 
-	let { headers } = applySecurityHeaders(request, response.headers);
+	let { headers } = applySecurityHeaders(context, request, response.headers);
 
 	return new Response(response.body, { status: response.status, headers });
 };
 
-function applySecurityHeaders(request: Request, responseHeaders: Headers) {
+function applySecurityHeaders(
+	loadContext: unstable_RouterContextProvider,
+	request: Request,
+	responseHeaders: Headers,
+) {
+	let env = loadContext.get(adapterContext);
+	console.log({ env });
+
 	if (import.meta.env.DEV) {
 		responseHeaders.set("Cache-Control", "no-cache");
 	}
@@ -124,11 +135,7 @@ function applySecurityHeaders(request: Request, responseHeaders: Headers) {
 		"X-Content-Type-Options": "nosniff",
 		"X-DNS-Prefetch-Control": "on",
 		"X-XSS-Protection": "1; mode=block",
-		"Strict-Transport-Security": {
-			maxAge: 31536000,
-			includeSubDomains: true,
-			preload: true,
-		},
+		"Strict-Transport-Security": true,
 		"Permissions-Policy": {
 			accelerometer: [],
 			"ambient-light-sensor": [],

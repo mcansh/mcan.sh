@@ -1,13 +1,15 @@
 import { FunHoverLink } from "#app/components/fun-link-hover.js";
 import { getMugshotURL } from "#app/lib.server/cloudinary.js";
 import type { RouteHandle } from "#app/types/handle.js";
+import { adapterContext } from "#workers/app.js";
 import { cacheHeader } from "pretty-cache-header";
 import { data } from "react-router";
 import type { Route } from "./+types/home";
 
-export function loader() {
+export function loader({ context }: Route.LoaderArgs) {
+	let env = context.get(adapterContext);
 	let srcSet = [240, 480, 720].map((size, index) => {
-		let url = getMugshotURL({
+		let url = getMugshotURL(env.CLOUDINARY_CLOUD_NAME, {
 			resize: { type: "fill", width: size, height: size },
 		});
 
