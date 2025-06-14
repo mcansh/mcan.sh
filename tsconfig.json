@@ -1,26 +1,14 @@
 {
-	"extends": "@total-typescript/tsconfig/bundler/dom/app",
-	"include": [
-		"**/*.ts",
-		"**/*.tsx",
-		"**/.server/**/*.ts",
-		"**/.server/**/*.tsx",
-		"**/.client/**/*.ts",
-		"**/.client/**/*.tsx"
+	"files": [],
+	"references": [
+		{ "path": "./tsconfig.node.json" },
+		{ "path": "./tsconfig.cloudflare.json" }
 	],
 	"compilerOptions": {
-		"types": [
-			"@react-router/node",
-			"vite/client",
-			"@mcansh/vite-plugin-svg-sprite/client",
-			"@mcansh/remix-fastify/middleware"
-		],
-		"forceConsistentCasingInFileNames": true,
 		"checkJs": true,
-		"allowJs": true,
-		"noFallthroughCasesInSwitch": true,
-		"jsx": "react-jsx",
-		"rootDirs": [".", "./.react-router/types"],
-		"plugins": [{ "name": "@react-router/dev" }]
+		"verbatimModuleSyntax": true,
+		"skipLibCheck": true,
+		"strict": true,
+		"noEmit": true
 	}
 }
