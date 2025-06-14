@@ -1,21 +1,28 @@
-import { createRequestHandler } from "react-router";
+import { envSchema } from "#app/lib.server/env.js";
+import { createRequestHandler, unstable_createContext } from "react-router";
+import type { z } from "zod";
 
-declare module "react-router" {
-	export interface AppLoadContext {
-		cloudflare: {
-			env: Env;
-			ctx: ExecutionContext;
-		};
-	}
-}
+export const adapterContext = unstable_createContext<
+	Env & z.infer<typeof envSchema>
+>();
 
-const requestHandler = createRequestHandler(
+let requestHandler = createRequestHandler(
 	() => import("virtual:react-router/server-build"),
 	import.meta.env.MODE,
 );
 
 export default {
-	async fetch(request, env, ctx) {
-		return requestHandler(request, { cloudflare: { env, ctx } });
+	fetch(request: Request, env: Env) {
+		try {
+			let validatedEnv = envSchema.parse(env);
+			let context = new Map([[adapterContext, validatedEnv]]);
+			return requestHandler(request, context);
+		} catch (error) {
+			console.error(error);
+			return new Response("Internal Server Error", {
+				status: 500,
+				statusText: "Internal Server Error",
+			});
+		}
 	},
 } satisfies ExportedHandler<Env>;

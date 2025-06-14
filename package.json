@@ -26,7 +26,7 @@
     "knip": "knip-bun"
   },
   "dependencies": {
-    "@mcansh/http-helmet": "^0.13.0",
+    "@mcansh/http-helmet": "^0.13.1",
     "cloudinary-build-url": "^0.2.4",
     "clsx": "^2.1.1",
     "fathom-client": "^3.7.2",
