@@ -1,3 +1,4 @@
+import { cloudflare } from "@cloudflare/vite-plugin";
 import { svgSprite } from "@mcansh/vite-plugin-svg-sprite";
 import { reactRouter } from "@react-router/dev/vite";
 import tailwindcss from "@tailwindcss/vite";
@@ -10,6 +11,7 @@ let ReactCompilerConfig = {};
 export default defineConfig({
 	build: { outDir: "build", cssMinify: "lightningcss", sourcemap: true },
 	plugins: [
+		cloudflare({ viteEnvironment: { name: "ssr" } }),
 		tailwindcss(),
 		svgSprite(),
 		reactRouter(),
