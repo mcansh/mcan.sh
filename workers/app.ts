@@ -1,12 +1,13 @@
 import { envSchema } from "#app/lib.server/env.js";
 import { createRequestHandler, unstable_createContext } from "react-router";
-import type { z } from "zod";
+import type { z } from "zod/v4-mini";
 
 export const adapterContext = unstable_createContext<
 	Env & z.infer<typeof envSchema>
 >();
 
 let requestHandler = createRequestHandler(
+	// @ts-expect-error - virtual module
 	() => import("virtual:react-router/server-build"),
 	import.meta.env.MODE,
 );
