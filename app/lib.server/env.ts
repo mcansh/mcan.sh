@@ -1,4 +1,4 @@
-import { client_env_schema } from "#app/lib/lib.client/env.ts";
+import { client_env_schema } from "#app/lib/lib.client/schema.ts";
 import { z } from "zod/v4-mini";
 
 export let envSchema = z.extend(client_env_schema, {

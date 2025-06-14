@@ -18,7 +18,7 @@ import { twMerge } from "tailwind-merge";
 import type { Route } from "./+types/root";
 import appStyleHref from "./assets/app.css?url";
 import fontStyleHref from "./assets/berkeley-mono.css?url";
-import { getClientEnv } from "./lib/lib.client/env";
+import { client_env } from "./lib/lib.client/env";
 import { loggerMiddleware } from "./lib/middleware";
 import { iconSizes } from "./routes/manifest.webmanifest/utils";
 import type { Match } from "./types/handle";
@@ -44,8 +44,7 @@ function TrackPageView() {
 	let location = useLocation();
 
 	React.useEffect(() => {
-		let clientEnv = getClientEnv();
-		Fathom.load(clientEnv.VITE_FATHOM_SITE_ID, {
+		Fathom.load(client_env.VITE_FATHOM_SITE_ID, {
 			excludedDomains: ["localhost"],
 			auto: false,
 		});
