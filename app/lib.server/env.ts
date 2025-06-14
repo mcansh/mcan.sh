@@ -1,11 +1,7 @@
-import { client_env_schema } from "#app/lib.client/env.js";
-import { z } from "zod";
+import { client_env_schema } from "#app/lib/lib.client/env.ts";
+import { z } from "zod/v4-mini";
 
-let envSchema = client_env_schema.extend({
-	CLOUDINARY_CLOUD_NAME: z.string().min(1),
-	SENTRY_REPORT_URL: z.string().url(),
-	RAILWAY_GIT_BRANCH: z.string().min(1),
-	RAILWAY_DEPLOYMENT_ID: z.string().min(1),
+export let envSchema = z.extend(client_env_schema, {
+	CLOUDINARY_CLOUD_NAME: z.string().check(z.minLength(1)),
+	SENTRY_REPORT_URL: z.string().check(z.url()),
 });
-
-export let env = envSchema.parse(process.env);

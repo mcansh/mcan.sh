@@ -1,85 +1,72 @@
+import { adapterContext } from "#workers/app.js";
 import {
 	createNonce,
 	createSecureHeaders,
 	mergeHeaders,
 } from "@mcansh/http-helmet";
 import { NonceProvider } from "@mcansh/http-helmet/react";
-import { createReadableStreamFromReadable } from "@react-router/node";
 import { isbot } from "isbot";
-import { PassThrough } from "node:stream";
-import type { RenderToPipeableStreamOptions } from "react-dom/server";
-import { renderToPipeableStream } from "react-dom/server";
-import type { EntryContext, HandleDataRequestFunction } from "react-router";
+import { renderToReadableStream } from "react-dom/server";
+import type {
+	EntryContext,
+	HandleDataRequestFunction,
+	unstable_RouterContextProvider,
+} from "react-router";
 import { ServerRouter } from "react-router";
 import { isPrefetch } from "remix-utils/is-prefetch";
 import { preloadRouteAssets } from "remix-utils/preload-route-assets";
-import { env } from "./lib.server/env";
 
-// Reject all pending promises from handler functions after timeout
-export let streamTimeout = 5_000;
-// Automatically timeout the react renderer after timeout
-let ABORT_DELAY = 5_000;
-
-export default function handleRequest(
+export default async function handleRequest(
 	request: Request,
 	responseStatusCode: number,
 	responseHeaders: Headers,
 	routerContext: EntryContext,
+	loadContext: unstable_RouterContextProvider,
 ) {
-	return new Promise((resolve, reject) => {
-		let shellRendered = false;
-		let userAgent = request.headers.get("user-agent");
-		preloadRouteAssets(routerContext, responseHeaders);
-		let { nonce, headers } = applySecurityHeaders(request, responseHeaders);
+	let shellRendered = false;
+	let userAgent = request.headers.get("user-agent");
+	preloadRouteAssets(routerContext, responseHeaders);
+	let { nonce, headers } = applySecurityHeaders(
+		loadContext,
+		request,
+		responseHeaders,
+	);
 
-		// Ensure requests from bots and SPA Mode renders wait for all content to load before responding
-		// https://react.dev/reference/react-dom/server/renderToPipeableStream#waiting-for-all-content-to-load-for-crawlers-and-static-generation
-		let readyOption: keyof RenderToPipeableStreamOptions =
-			(userAgent && isbot(userAgent)) || routerContext.isSpaMode
-				? "onAllReady"
-				: "onShellReady";
-
-		let { pipe, abort } = renderToPipeableStream(
-			<NonceProvider nonce={nonce}>
-				<ServerRouter context={routerContext} url={request.url} nonce={nonce} />
-			</NonceProvider>,
-			{
-				nonce,
-				[readyOption]() {
-					shellRendered = true;
-					let body = new PassThrough();
-					let stream = createReadableStreamFromReadable(body);
-
-					headers.set("Content-Type", "text/html");
-
-					resolve(
-						new Response(stream, { headers, status: responseStatusCode }),
-					);
-
-					pipe(body);
-				},
-				onShellError(error: unknown) {
-					reject(error);
-				},
-				onError(error: unknown) {
-					responseStatusCode = 500;
-					// Log streaming rendering errors from inside the shell.  Don't log
-					// errors encountered during initial shell rendering since they'll
-					// reject and get logged in handleDocumentRequest.
-					if (shellRendered) {
-						console.error(error);
-					}
-				},
+	let body = await renderToReadableStream(
+		<NonceProvider nonce={nonce}>
+			<ServerRouter context={routerContext} url={request.url} nonce={nonce} />
+		</NonceProvider>,
+		{
+			nonce,
+			onError(error: unknown) {
+				responseStatusCode = 500;
+				// Log streaming rendering errors from inside the shell.  Don't log
+				// errors encountered during initial shell rendering since they'll
+				// reject and get logged in handleDocumentRequest.
+				if (shellRendered) {
+					console.error(error);
+				}
 			},
-		);
+		},
+	);
+	shellRendered = true;
 
-		setTimeout(abort, ABORT_DELAY);
+	// Ensure requests from bots and SPA Mode renders wait for all content to load before responding
+	// https://react.dev/reference/react-dom/server/renderToPipeableStream#waiting-for-all-content-to-load-for-crawlers-and-static-generation
+	if ((userAgent && isbot(userAgent)) || routerContext.isSpaMode) {
+		await body.allReady;
+	}
+
+	responseHeaders.set("Content-Type", "text/html");
+	return new Response(body, {
+		headers: mergeHeaders(responseHeaders, headers),
+		status: responseStatusCode,
 	});
 }
 
 export let handleDataRequest: HandleDataRequestFunction = async (
 	response,
-	{ request },
+	{ request, context },
 ) => {
 	// if it's a GET request and it's a prefetch request
 	// and it doesn't already have a Cache-Control header
@@ -92,12 +79,18 @@ export let handleDataRequest: HandleDataRequestFunction = async (
 		response.headers.set("Cache-Control", "private, max-age=10");
 	}
 
-	let { headers } = applySecurityHeaders(request, response.headers);
+	let { headers } = applySecurityHeaders(context, request, response.headers);
 
 	return new Response(response.body, { status: response.status, headers });
 };
 
-function applySecurityHeaders(request: Request, responseHeaders: Headers) {
+function applySecurityHeaders(
+	loadContext: unstable_RouterContextProvider,
+	request: Request,
+	responseHeaders: Headers,
+) {
+	let env = loadContext.get(adapterContext);
+
 	if (import.meta.env.DEV) {
 		responseHeaders.set("Cache-Control", "no-cache");
 	}
@@ -141,11 +134,7 @@ function applySecurityHeaders(request: Request, responseHeaders: Headers) {
 		"X-Content-Type-Options": "nosniff",
 		"X-DNS-Prefetch-Control": "on",
 		"X-XSS-Protection": "1; mode=block",
-		"Strict-Transport-Security": {
-			maxAge: 31536000,
-			includeSubDomains: true,
-			preload: true,
-		},
+		"Strict-Transport-Security": true,
 		"Permissions-Policy": {
 			accelerometer: [],
 			"ambient-light-sensor": [],
