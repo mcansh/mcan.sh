@@ -90,7 +90,6 @@ function applySecurityHeaders(
 	responseHeaders: Headers,
 ) {
 	let env = loadContext.get(adapterContext);
-	console.log({ env });
 
 	if (import.meta.env.DEV) {
 		responseHeaders.set("Cache-Control", "no-cache");
