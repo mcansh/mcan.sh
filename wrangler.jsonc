@@ -7,6 +7,7 @@
 		"VALUE_FROM_CLOUDFLARE": "Hello from Cloudflare",
 	},
 	"compatibility_flags": ["nodejs_compat"],
+	"placement": { "mode": "smart" },
 	"upload_source_maps": true,
 	"observability": {
 		"enabled": true,
