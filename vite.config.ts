@@ -28,6 +28,10 @@ export default defineConfig({
 				plugins: [["babel-plugin-react-compiler", ReactCompilerConfig]],
 			},
 		}),
-		Sonda({ open: false, detailed: true, sources: true }),
+		Sonda({
+			open: false,
+			sources: true,
+			deep: true,
+		}),
 	],
 });
