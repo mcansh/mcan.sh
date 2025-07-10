@@ -1,6 +1,7 @@
 import { cloudflare } from "@cloudflare/vite-plugin";
 import { svgSprite } from "@mcansh/vite-plugin-svg-sprite";
 import { reactRouter } from "@react-router/dev/vite";
+import reactScan from "@react-scan/vite-plugin-react-scan";
 import tailwindcss from "@tailwindcss/vite";
 import Sonda from "sonda/vite";
 import { defineConfig } from "vite";
@@ -33,5 +34,6 @@ export default defineConfig({
 			sources: true,
 			deep: true,
 		}),
+		reactScan(),
 	],
 });

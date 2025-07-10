@@ -35,7 +35,6 @@
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-router": "7.6.3",
-    "react-scan": "^0.4.3",
     "remix-utils": "^8.7.0",
     "tailwind-merge": "^3.3.1",
     "zod": "^3.25.67"
@@ -47,6 +46,7 @@
     "@eslint/js": "^9.30.0",
     "@mcansh/vite-plugin-svg-sprite": "^0.7.0",
     "@react-router/dev": "7.6.3",
+    "@react-scan/vite-plugin-react-scan": "^0.1.8",
     "@tailwindcss/vite": "4.1.11",
     "@total-typescript/tsconfig": "^1.0.4",
     "@types/node": "^24.0.8",
@@ -72,6 +72,7 @@
     "prettier-plugin-organize-imports": "^4.1.0",
     "prettier-plugin-tailwindcss": "^0.6.13",
     "react-compiler-runtime": "19.1.0-rc.2",
+    "react-scan": "^0.4.3",
     "sonda": "^0.8.2",
     "tailwindcss": "4.1.11",
     "typescript": "^5.8.3",
