@@ -123,6 +123,7 @@ function applySecurityHeaders(
 				`'nonce-${nonce}'`,
 				"'strict-dynamic'",
 				"'unsafe-eval'",
+				"'unsafe-inline'"
 			],
 			"connect-src": ["'self'", ...(import.meta.env.DEV ? ["ws:"] : [])],
 			"worker-src": ["blob:"],
