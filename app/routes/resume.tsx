@@ -33,6 +33,7 @@ export function loader() {
 						"Developed and implemented a new `flat routes` routing convention based on teams ideas and community feedback.",
 						"Created the `@remix-run/testing` package to enable unit testing of components using Remix's Link, Form, Fetchers, etc.",
 						"Published a custom GitHub Action that automatically added comments to resolved issues and pull requests in nightly/pre/stable releases.",
+						"Provided technical advice to developers to use best practices in our Discord server and created examples for common headaches.",
 					],
 				},
 				{
