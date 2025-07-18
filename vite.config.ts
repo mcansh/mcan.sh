@@ -5,8 +5,11 @@ import tailwindcss from "@tailwindcss/vite";
 import Sonda from "sonda/vite";
 import { defineConfig } from "vite";
 import babel from "vite-plugin-babel";
+import pkgJson from "./package.json";
 
-let ReactCompilerConfig = {};
+let ReactCompilerConfig = {
+	target: pkgJson.dependencies.react.split(".").at(0),
+};
 
 export default defineConfig({
 	build: { outDir: "build", cssMinify: "lightningcss", sourcemap: true },
@@ -28,10 +31,6 @@ export default defineConfig({
 				plugins: [["babel-plugin-react-compiler", ReactCompilerConfig]],
 			},
 		}),
-		Sonda({
-			open: false,
-			sources: true,
-			deep: true,
-		}),
+		Sonda({ open: false, sources: true, deep: true, server: true }),
 	],
 });
