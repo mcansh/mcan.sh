@@ -18,7 +18,7 @@ function getCloudinaryURL(
 	return new URL(url);
 }
 
-let MUGSHOT = "website/1663416590737636005" as const;
+let MUGSHOT = "website/xczr00kref9nmq84bgyfnn8p" as const;
 
 export function getMugshotURL(
 	cloudName: string,
