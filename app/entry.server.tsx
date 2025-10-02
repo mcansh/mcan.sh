@@ -10,7 +10,7 @@ import { renderToReadableStream } from "react-dom/server";
 import type {
 	EntryContext,
 	HandleDataRequestFunction,
-	unstable_RouterContextProvider,
+	RouterContextProvider,
 } from "react-router";
 import { ServerRouter } from "react-router";
 import { isPrefetch } from "remix-utils/is-prefetch";
@@ -21,7 +21,7 @@ export default async function handleRequest(
 	responseStatusCode: number,
 	responseHeaders: Headers,
 	routerContext: EntryContext,
-	loadContext: unstable_RouterContextProvider,
+	loadContext: RouterContextProvider,
 ) {
 	let shellRendered = false;
 	let userAgent = request.headers.get("user-agent");
@@ -85,7 +85,7 @@ export let handleDataRequest: HandleDataRequestFunction = async (
 };
 
 function applySecurityHeaders(
-	loadContext: unstable_RouterContextProvider,
+	loadContext: RouterContextProvider,
 	request: Request,
 	responseHeaders: Headers,
 ) {
