@@ -1,5 +1,9 @@
 import { envSchema } from "#app/lib.server/env.js";
-import { createContext, createRequestHandler } from "react-router";
+import {
+	createContext,
+	createRequestHandler,
+	RouterContextProvider,
+} from "react-router";
 import type * as z from "zod/mini";
 
 export const adapterContext = createContext<Env & z.infer<typeof envSchema>>();
@@ -14,7 +18,9 @@ export default {
 	fetch(request: Request, env: Env) {
 		try {
 			let validatedEnv = envSchema.parse(env);
-			let context = new Map([[adapterContext, validatedEnv]]);
+			let context = new RouterContextProvider();
+			context.set(adapterContext, { ...env, ...validatedEnv });
+			// let context = new RouterContextProvider([[adapterContext, validatedEnv]]);
 			return requestHandler(request, context);
 		} catch (error) {
 			console.error(error);
