@@ -1,3 +1,3 @@
-import { unstable_createLoggerMiddleware } from "remix-utils/middleware/logger";
+import { createLoggerMiddleware } from "remix-utils/middleware/logger";
 
-export const [loggerMiddleware] = unstable_createLoggerMiddleware();
+export const [loggerMiddleware] = createLoggerMiddleware();

@@ -1,5 +1,5 @@
 import { client_env_schema } from "#app/lib.client/schema.js";
-import { z } from "zod/v4-mini";
+import * as z from "zod/mini";
 
 export let envSchema = z.extend(client_env_schema, {
 	CLOUDINARY_CLOUD_NAME: z.string().check(z.minLength(1)),
