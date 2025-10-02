@@ -85,7 +85,7 @@ export let handleDataRequest: HandleDataRequestFunction = async (
 };
 
 function applySecurityHeaders(
-	loadContext: RouterContextProvider,
+	loadContext: Readonly<RouterContextProvider>,
 	request: Request,
 	responseHeaders: Headers,
 ) {
