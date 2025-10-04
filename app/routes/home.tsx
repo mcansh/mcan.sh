@@ -87,8 +87,10 @@ export default function IndexPage({ loaderData }: Route.ComponentProps) {
 								src={loaderData.me.url}
 								width={loaderData.me.size}
 								height={loaderData.me.size}
-								alt="Logan McAnsh"
-								className="relative w-64 h-64 rounded-full object-cover border-4 border-white shadow-2xl"
+								fetchPriority="high"
+								srcSet={loaderData.srcSet}
+								alt=""
+								className="relative size-64 rounded-full object-cover border-4 border-white shadow-2xl"
 							/>
 						</div>
 					</div>
