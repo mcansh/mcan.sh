@@ -9,7 +9,7 @@ import type { Route } from "./+types/home";
 
 export function loader({ context }: Route.LoaderArgs) {
 	let env = context.get(adapterContext);
-	let srcSet = [240, 480, 720].map((size, index) => {
+	let srcSet = [256, 512, 768].map((size, index) => {
 		let url = getMugshotURL(env.CLOUDINARY_CLOUD_NAME, {
 			resize: { type: "fill", width: size, height: size },
 		});
