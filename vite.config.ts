@@ -2,6 +2,7 @@ import { cloudflare } from "@cloudflare/vite-plugin";
 import { svgSprite } from "@mcansh/vite-plugin-svg-sprite";
 import { reactRouter } from "@react-router/dev/vite";
 import tailwindcss from "@tailwindcss/vite";
+import { fontless } from "fontless";
 import Sonda from "sonda/vite";
 import { defineConfig } from "vite";
 import babel from "vite-plugin-babel";
@@ -30,6 +31,28 @@ export default defineConfig({
 				presets: ["@babel/preset-typescript"],
 				plugins: [["babel-plugin-react-compiler", ReactCompilerConfig]],
 			},
+		}),
+		fontless({
+			providers: {
+				google: false,
+				bunny: false,
+				fontshare: false,
+				fontsource: false,
+				adobe: false,
+			},
+			families: [
+				{
+					name: "Berkeley Mono",
+					src: [
+						{
+							url: "/app/assets/fonts/berkeley-mono-variable-regular.woff2",
+							format: "woff2",
+						},
+					],
+					weight: [100, 900],
+					style: ["normal"],
+				},
+			],
 		}),
 		Sonda({ open: false, sources: true, deep: true, server: true }),
 	],
