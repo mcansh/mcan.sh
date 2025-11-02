@@ -40,6 +40,19 @@ export default defineConfig({
 				fontsource: false,
 				adobe: false,
 			},
+			families: [
+				{
+					name: "Berkeley Mono",
+					src: [
+						{
+							url: "/app/assets/fonts/berkeley-mono-variable-regular.woff2",
+							format: "woff2",
+						},
+					],
+					weight: [100, 900],
+					style: ["normal"],
+				},
+			],
 		}),
 		Sonda({ open: false, sources: true, deep: true, server: true }),
 	],
