@@ -63,6 +63,7 @@
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-prefer-let": "^4.0.0",
     "eslint-plugin-react-hooks": "6.1.0",
+    "fontless": "^0.0.2",
     "husky": "^9.1.7",
     "knip": "^5.64.1",
     "lightningcss": "^1.30.2",
