@@ -171,8 +171,8 @@ importers:
         specifier: ^4.40.3
         version: 4.40.3
       zx:
-        specifier: ^8.8.4
-        version: 8.8.4
+        specifier: ^8.8.5
+        version: 8.8.5
 
 packages:
 
@@ -4393,8 +4393,8 @@ packages:
   zod@4.1.11:
     resolution: {integrity: sha512-WPsqwxITS2tzx1bzhIKsEs19ABD5vmCVa4xBo2tq/SrV4RNZtfws1EnCWQXM6yh8bD08a1idvkB5MZSBiZsjwg==}
 
-  zx@8.8.4:
-    resolution: {integrity: sha512-44GcD+ZlM/v1OQtbwnSxLPcoE1ZEUICmR+RSbJZLAqfIixNLuMjLyh0DcS75OyfJ/sWYAwCWDmDvJ4hdnANAPQ==}
+  zx@8.8.5:
+    resolution: {integrity: sha512-SNgDF5L0gfN7FwVOdEFguY3orU5AkfFZm9B5YSHog/UDHv+lvmd82ZAsOenOkQixigwH2+yyH198AwNdKhj+RA==}
     engines: {node: '>= 12.17.0'}
     hasBin: true
 
@@ -8500,4 +8500,4 @@ snapshots:
 
   zod@4.1.11: {}
 
-  zx@8.8.4: {}
+  zx@8.8.5: {}
