@@ -12,7 +12,7 @@ export default tseslint.config(
 	...tseslint.configs.recommended,
 	importPlugin.flatConfigs.recommended,
 	importPlugin.flatConfigs.typescript,
-	reactHooks.configs.flat.recommended,
+	reactHooks.configs.flat["recommended-latest"],
 	{
 		linterOptions: {
 			reportUnusedDisableDirectives: "error",
