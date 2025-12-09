@@ -31,7 +31,7 @@ export default tseslint.config(
 			"import/consistent-type-specifier-style": ["error", "prefer-top-level"],
 			"import/no-unresolved": ["error", { ignore: ["^virtual:"] }],
 			"import/no-named-as-default-member": "off",
-			// prettier-plugin-organize-impoets
+			// prettier-plugin-organize-imports
 			"sort-imports": "off",
 			"import/order": "off",
 		},
