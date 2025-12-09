@@ -66,6 +66,14 @@ export let handle: RouteHandle = {
 	bodyClassName: "h-full font-thin dark:bg-slate-900 dark:text-white",
 };
 
+/**
+ * Render the home page with a centered profile section, name/title, current and past roles, and navigation links.
+ *
+ * @param loaderData - Route loader data containing the profile image and related resources:
+ *   - `me`: `{ url: string, size: number }` primary mugshot URL and its pixel size
+ *   - `srcSet`: `string` responsive image sources with density descriptors
+ * @returns The React element tree for the index page layout
+ */
 export default function IndexPage({ loaderData }: Route.ComponentProps) {
 	return (
 		<div className="mx-auto flex h-full max-w-screen-md flex-col items-center justify-between px-4 text-center">

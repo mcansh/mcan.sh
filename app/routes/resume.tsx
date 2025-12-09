@@ -133,6 +133,12 @@ export function links(): Route.LinkDescriptors {
 	];
 }
 
+/**
+ * Render the resume page for Logan McAnsh with contact information, skills, certifications, references, and work experience.
+ *
+ * @param loaderData - Route loader data containing `meta`, `experience` (job entries with company, position, startDate, endDate, optional `note`, and `tasks`), `certifications`, and `skills`.
+ * @returns The React element for the resume page.
+ */
 export default function ResumePage({ loaderData }: Route.ComponentProps) {
 	let links = [
 		{
