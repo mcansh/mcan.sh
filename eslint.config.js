@@ -12,7 +12,7 @@ export default tseslint.config(
 	...tseslint.configs.recommended,
 	importPlugin.flatConfigs.recommended,
 	importPlugin.flatConfigs.typescript,
-	reactHooks.configs.recommended,
+	reactHooks.configs.flat.recommended,
 	{
 		linterOptions: {
 			reportUnusedDisableDirectives: "error",
@@ -21,7 +21,6 @@ export default tseslint.config(
 			"prefer-let": fixupPluginRules(preferLet),
 		},
 		rules: {
-			"react-hooks/react-compiler": "error",
 			"prefer-const": "off",
 			"prefer-let/prefer-let": "error",
 			"@typescript-eslint/no-unused-vars": [
