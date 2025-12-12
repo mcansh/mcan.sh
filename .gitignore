@@ -16,3 +16,6 @@ yalc.lock
 .mf
 .wrangler
 .dev.vars*
+
+# Test coverage
+coverage/
