@@ -13,7 +13,7 @@ let result = parseArgs({
 /**
  * @param {string} command
  * @param {string} [args]
- * @returns {void}
+ * @returns {Promise<void>}
  */
 async function runScript(command, args = []) {
 	console.log(`> ${command} ${args.join(" ")}`);
@@ -27,7 +27,7 @@ async function run() {
 		case "typecheck": {
 			await runScript("node", ["--run", "cf-typegen"]);
 			await runScript("react-router", ["typegen"]);
-			await runScript("tsc");
+			await runScript("tsgo");
 			return;
 		}
 

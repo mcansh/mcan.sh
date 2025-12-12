@@ -3,15 +3,4 @@
 @theme {
 	--default-font-family: Berkeley Mono;
 	--color-blue-screen: #1000f2;
-	--color-link: #ea567c;
-}
-
-@layer base {
-	.fun-link-hover-gradient {
-		background-size: 100px 2px;
-	}
-
-	.fun-link-hover-gradient:hover {
-		background-size: 100px 100%;
-	}
 }
