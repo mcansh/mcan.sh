@@ -4,8 +4,8 @@ export default {
 	ssr: true,
 	future: {
 		unstable_optimizeDeps: true,
-		unstable_splitRouteModules: true,
-		unstable_viteEnvironmentApi: true,
 		v8_middleware: true,
+		v8_splitRouteModules: "enforce",
+		v8_viteEnvironmentApi: true,
 	},
 } as Config;

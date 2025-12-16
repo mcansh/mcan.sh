@@ -12,6 +12,7 @@
 	],
 	"placement": { "mode": "smart" },
 	"upload_source_maps": true,
+	"preview_urls": true,
 	"observability": {
 		"enabled": true,
 	},
