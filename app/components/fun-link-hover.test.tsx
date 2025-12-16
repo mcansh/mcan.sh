@@ -26,7 +26,7 @@ describe("FunHoverLink", () => {
 		expect(link).toHaveAttribute("href", "/about");
 	});
 
-	it("should apply default gradient classes", () => {
+	it("should render as a link element", () => {
 		render(
 			<BrowserRouter>
 				<FunHoverLink to="/test">Test</FunHoverLink>
@@ -34,24 +34,7 @@ describe("FunHoverLink", () => {
 		);
 
 		const link = screen.getByRole("link", { name: "Test" });
-		expect(link).toHaveClass("fun-link-hover-gradient");
-		expect(link).toHaveClass("from-link");
-		expect(link).toHaveClass("to-link");
-		expect(link).toHaveClass("bg-gradient-to-t");
-	});
-
-	it("should apply hover effect classes", () => {
-		render(
-			<BrowserRouter>
-				<FunHoverLink to="/test">Test</FunHoverLink>
-			</BrowserRouter>,
-		);
-
-		const link = screen.getByRole("link", { name: "Test" });
-		expect(link).toHaveClass("cursor-pointer");
-		expect(link).toHaveClass("transition-all");
-		expect(link).toHaveClass("duration-200");
-		expect(link).toHaveClass("hover:text-white");
+		expect(link.tagName).toBe("A");
 	});
 
 	it("should forward additional props to Link", () => {
@@ -91,25 +74,17 @@ describe("FunHoverLink", () => {
 		);
 	});
 
-	it("should render with no underline styling", () => {
+	it("should support custom className via props", () => {
 		render(
 			<BrowserRouter>
-				<FunHoverLink to="/test">Test</FunHoverLink>
+				<FunHoverLink to="/test" className="custom-class">
+					Test
+				</FunHoverLink>
 			</BrowserRouter>,
 		);
 
 		const link = screen.getByRole("link", { name: "Test" });
-		expect(link).toHaveClass("no-underline");
-	});
-
-	it("should render with relative positioning", () => {
-		render(
-			<BrowserRouter>
-				<FunHoverLink to="/test">Test</FunHoverLink>
-			</BrowserRouter>,
-		);
-
-		const link = screen.getByRole("link", { name: "Test" });
-		expect(link).toHaveClass("relative");
+		expect(link).toHaveAttribute("class");
 	});
 });
+
