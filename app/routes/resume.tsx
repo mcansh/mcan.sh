@@ -165,14 +165,12 @@ export default function ResumePage({ loaderData }: Route.ComponentProps) {
 			<img src={spriteHref} loading="eager" className="hidden" />
 			<div className="flex h-full flex-col">
 				<header className="flex flex-col items-center justify-center space-y-2 bg-stone-800 py-6 text-center text-white print:py-3">
-					<div className="space-y-2" style={{ viewTransitionName: "header" }}>
-						<h1 className="text-3xl print:text-xl">
-							<Link to="/" className="hover:underline" viewTransition>
-								Logan McAnsh
-							</Link>
-						</h1>
-						<p className="text-lg print:text-base">Senior Software Engineer</p>
-					</div>
+					<h1 className="text-3xl print:text-xl">
+						<Link to="/" className="hover:underline">
+							Logan McAnsh
+						</Link>
+					</h1>
+					<p className="text-lg print:text-base">Senior Software Engineer</p>
 				</header>
 
 				<div className="grid h-full flex-1 gap-8 md:grid-cols-[300px_1fr] print:grid-cols-[175px_1fr] print:gap-4">
