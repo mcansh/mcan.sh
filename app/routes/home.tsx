@@ -80,19 +80,17 @@ export default function IndexPage({ loaderData }: Route.ComponentProps) {
 					srcSet={loaderData.srcSet}
 				/>
 				<div className="mt-4 space-y-2">
-					<div className="space-y-2" style={{ viewTransitionName: "header" }}>
-						<h1 className="text-4xl">Logan McAnsh</h1>
-						<p className="max-w-xs text-center text-lg sm:text-xl md:max-w-sm">
-							Senior Software Engineer
-						</p>
-					</div>
+					<h1 className="text-4xl">Logan McAnsh</h1>
+					<p className="max-w-xs text-center text-lg sm:text-xl md:max-w-sm">
+						Senior Software Engineer
+					</p>
 					<h2>Current: United Wholesale Mortgage</h2>
 					<pre className="font-thin">Past: Shopify x Remix</pre>
 				</div>
 			</div>
 			<div className="flex space-x-4 pt-5 pb-8 [@media(display-mode:standalone)]:pb-0">
 				<FunHoverLink to="https://github.com/mcansh">GitHub</FunHoverLink>
-				<FunHoverLink to="/resume" prefetch="intent" viewTransition>
+				<FunHoverLink to="/resume" prefetch="intent">
 					Resume
 				</FunHoverLink>
 			</div>
