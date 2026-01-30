@@ -150,15 +150,19 @@ export default function ResumePage({ loaderData }: Route.ComponentProps) {
 	let references = [
 		{
 			name: "Ryan Florence",
-			twitter: "https://twitter.com/ryanflorence",
+			url: "https://twitter.com/ryanflorence",
 			icon: twitterIconHref,
 		},
 		{
 			name: "Michael Jackson",
-			twitter: "https://twitter.com/mjackson",
+			url: "https://twitter.com/mjackson",
 			icon: twitterIconHref,
 		},
-	] as const;
+		{
+			name: "Matt Brophy",
+			url: "https://brophy.org",
+		},
+	];
 
 	return (
 		<>
@@ -236,12 +240,14 @@ export default function ResumePage({ loaderData }: Route.ComponentProps) {
 											<h3>
 												<a
 													className="flex items-center space-x-2 text-blue-800 underline md:justify-end"
-													href={reference.twitter}
+													href={reference.url}
 												>
 													<span>{reference.name}</span>
-													<svg className="h-4 w-4 text-black" aria-hidden>
-														<use href={reference.icon}></use>
-													</svg>
+													{reference.icon ? (
+														<svg className="h-4 w-4 text-black" aria-hidden>
+															<use href={reference.icon}></use>
+														</svg>
+													) : null}
 												</a>
 											</h3>
 										</li>
