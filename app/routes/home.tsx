@@ -26,6 +26,21 @@ export function loader({ context }: Route.LoaderArgs) {
 			meta: [
 				{ title: "Logan McAnsh" },
 				{ name: "description", content: "personal website for Logan McAnsh" },
+				{
+					"script:ld+json": {
+						"@context": "https://schema.org",
+						"@type": "Person",
+						name: "Logan McAnsh",
+						url: "https://mcan.sh",
+						jobTitle: "Senior Software Engineer",
+						image: me.url,
+						sameAs: [
+							"https://github.com/mcansh",
+							"https://linkedin.com/in/loganmcansh",
+							"https://x.com/loganmcansh",
+						],
+					},
+				},
 			],
 		},
 		{
@@ -81,23 +96,6 @@ export default function IndexPage({ loaderData }: Route.ComponentProps) {
 					fetchPriority="high"
 					src={loaderData.me.url}
 					srcSet={loaderData.srcSet}
-				/>
-				<script
-					type="application/ld+json"
-					dangerouslySetInnerHTML={{
-						__html: JSON.stringify({
-							"@context": "https://schema.org",
-							"@type": "Person",
-							name: "Logan McAnsh",
-							url: "https://mcan.sh",
-							jobTitle: "Senior Software Engineer",
-							image: loaderData.me.url,
-							sameAs: [
-								"https://github.com/mcansh",
-								"https://linkedin.com/in/loganmcansh",
-							],
-						}),
-					}}
 				/>
 				<div className="mt-4 space-y-2">
 					<h1 className="text-4xl">Logan McAnsh</h1>
