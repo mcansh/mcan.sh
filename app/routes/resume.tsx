@@ -1,3 +1,4 @@
+import bskyIconHref from "#app/assets/bsky.svg";
 import githubMarkIconHref from "#app/assets/github-mark.svg";
 import linkedinIconHref from "#app/assets/linkedin.svg";
 import twitterIconHref from "#app/assets/twitter.svg";
@@ -163,7 +164,8 @@ export default function ResumePage({ loaderData }: Route.ComponentProps) {
 		},
 		{
 			name: "Matt Brophy",
-			url: "https://brophy.org",
+			url: "https://bsky.app/profile/brophdawg11.com",
+			icon: bskyIconHref,
 		},
 	];
 
