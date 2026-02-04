@@ -18,6 +18,7 @@ import { twMerge } from "tailwind-merge";
 import type { Route } from "./+types/root";
 import appStyleHref from "./assets/app.css?url";
 import fontStyleHref from "./assets/berkeley-mono.css?url";
+import fontHref from "./assets/fonts/berkeley-mono-variable-regular.woff2?url";
 import { client_env } from "./lib.client/env";
 import { loggerMiddleware } from "./lib/middleware";
 import { iconSizes } from "./routes/manifest.webmanifest/utils";
@@ -35,6 +36,13 @@ export function links(): Route.LinkDescriptors {
 		{ rel: "manifest", href: "/manifest.webmanifest" },
 		{ rel: "icon", href: "/favicon.png", type: "image/png" },
 		{ rel: "icon", href: "/favicon.ico" },
+		{
+			rel: "preload",
+			href: fontHref,
+			as: "font",
+			type: "font/woff2",
+			crossOrigin: "anonymous",
+		},
 		{ rel: "stylesheet", href: fontStyleHref },
 		{ rel: "stylesheet", href: appStyleHref },
 	];
