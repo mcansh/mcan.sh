@@ -1,14 +1,14 @@
-export async function loader() {
-	let domain = "https://mcan.sh";
-	let content = `
+export async function loader({ request }: { request: Request }) {
+	let url = new URL(request.url);
+	let content = `<?xml version="1.0" encoding="UTF-8"?>
 		<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 			<url>
-				<loc>${domain}/</loc>
+				<loc>${url.origin}/</loc>
 				<priority>1.0</priority>
 				<changefreq>daily</changefreq>
 			</url>
 			<url>
-				<loc>${domain}/resume</loc>
+				<loc>${url.origin}/resume</loc>
 				<priority>0.8</priority>
 				<changefreq>monthly</changefreq>
 			</url>
@@ -19,8 +19,6 @@ export async function loader() {
 		headers: {
 			"Content-Type": "application/xml",
 			"Cache-Control": "public, max-age=3600",
-			"xml-version": "1.0",
-			encoding: "UTF-8",
 		},
 	});
 }
