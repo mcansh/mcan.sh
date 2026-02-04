@@ -97,7 +97,10 @@ export function loader() {
 				}),
 				"x-hello-recruiters": "1",
 				// preload the sprite
-				Link: `<${spriteHref}>; rel=preload; as=image; type=image/svg+xml`,
+				Link: [
+					`<${spriteHref}>; rel=preload; as=image; type=image/svg+xml`,
+					`<https://mcan.sh/resume>; rel=canonical`,
+				].join(", "),
 			},
 		},
 	);

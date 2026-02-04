@@ -36,7 +36,10 @@ export function loader({ context }: Route.LoaderArgs) {
 					staleWhileRevalidate: "2 hours",
 					sMaxage: "1 hour",
 				}),
-				Link: `<${me.url.origin}>; rel=preconnect`,
+				Link: [
+					`<${me.url.origin}>; rel=preconnect`,
+					`<https://mcan.sh/>; rel=canonical`,
+				].join(", "),
 			},
 		},
 	);
@@ -73,11 +76,28 @@ export default function IndexPage({ loaderData }: Route.ComponentProps) {
 				<img
 					width={loaderData.me.size}
 					height={loaderData.me.size}
-					alt=""
+					alt="Logan McAnsh"
 					className="mx-auto size-60 rounded-full"
 					fetchPriority="high"
 					src={loaderData.me.url}
 					srcSet={loaderData.srcSet}
+				/>
+				<script
+					type="application/ld+json"
+					dangerouslySetInnerHTML={{
+						__html: JSON.stringify({
+							"@context": "https://schema.org",
+							"@type": "Person",
+							name: "Logan McAnsh",
+							url: "https://mcan.sh",
+							jobTitle: "Senior Software Engineer",
+							image: loaderData.me.url,
+							sameAs: [
+								"https://github.com/mcansh",
+								"https://linkedin.com/in/loganmcansh",
+							],
+						}),
+					}}
 				/>
 				<div className="mt-4 space-y-2">
 					<h1 className="text-4xl">Logan McAnsh</h1>
