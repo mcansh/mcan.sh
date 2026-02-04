@@ -26,6 +26,21 @@ export function loader({ context }: Route.LoaderArgs) {
 			meta: [
 				{ title: "Logan McAnsh" },
 				{ name: "description", content: "personal website for Logan McAnsh" },
+				{
+					"script:ld+json": {
+						"@context": "https://schema.org",
+						"@type": "Person",
+						name: "Logan McAnsh",
+						url: "https://mcan.sh",
+						jobTitle: "Senior Software Engineer",
+						image: me.url,
+						sameAs: [
+							"https://github.com/mcansh",
+							"https://linkedin.com/in/loganmcansh",
+							"https://x.com/loganmcansh",
+						],
+					},
+				},
 			],
 		},
 		{
@@ -36,7 +51,10 @@ export function loader({ context }: Route.LoaderArgs) {
 					staleWhileRevalidate: "2 hours",
 					sMaxage: "1 hour",
 				}),
-				Link: `<${me.url.origin}>; rel=preconnect`,
+				Link: [
+					`<${me.url.origin}>; rel=preconnect`,
+					`<https://mcan.sh/>; rel=canonical`,
+				].join(", "),
 			},
 		},
 	);
@@ -68,12 +86,12 @@ export let handle: RouteHandle = {
 
 export default function IndexPage({ loaderData }: Route.ComponentProps) {
 	return (
-		<div className="mx-auto flex h-full max-w-screen-md flex-col items-center justify-between px-4 text-center">
+		<main className="mx-auto flex h-full max-w-screen-md flex-col items-center justify-between px-4 text-center">
 			<div className="flex flex-1 flex-col items-center justify-center">
 				<img
 					width={loaderData.me.size}
 					height={loaderData.me.size}
-					alt=""
+					alt="Logan McAnsh"
 					className="mx-auto size-60 rounded-full"
 					fetchPriority="high"
 					src={loaderData.me.url}
@@ -94,6 +112,6 @@ export default function IndexPage({ loaderData }: Route.ComponentProps) {
 					Resume
 				</FunHoverLink>
 			</div>
-		</div>
+		</main>
 	);
 }

@@ -1,3 +1,4 @@
+import bskyIconHref from "#app/assets/bsky.svg";
 import githubMarkIconHref from "#app/assets/github-mark.svg";
 import linkedinIconHref from "#app/assets/linkedin.svg";
 import twitterIconHref from "#app/assets/twitter.svg";
@@ -97,7 +98,10 @@ export function loader() {
 				}),
 				"x-hello-recruiters": "1",
 				// preload the sprite
-				Link: `<${spriteHref}>; rel=preload; as=image; type=image/svg+xml`,
+				Link: [
+					`<${spriteHref}>; rel=preload; as=image; type=image/svg+xml`,
+					`<https://mcan.sh/resume>; rel=canonical`,
+				].join(", "),
 			},
 		},
 	);
@@ -160,13 +164,14 @@ export default function ResumePage({ loaderData }: Route.ComponentProps) {
 		},
 		{
 			name: "Matt Brophy",
-			url: "https://brophy.org",
+			url: "https://bsky.app/profile/brophdawg11.com",
+			icon: bskyIconHref,
 		},
 	];
 
 	return (
 		<>
-			<img src={spriteHref} loading="eager" className="hidden" />
+			<img src={spriteHref} loading="eager" className="hidden" alt="" />
 			<div className="flex h-full flex-col">
 				<header className="flex flex-col items-center justify-center space-y-2 bg-stone-800 py-6 text-center text-white print:py-3">
 					<h1 className="text-3xl print:text-xl">
@@ -194,6 +199,7 @@ export default function ResumePage({ loaderData }: Route.ComponentProps) {
 											<a
 												className="flex items-center space-x-2 text-blue-800 underline md:justify-end"
 												href={link.href}
+												aria-label={`Visit ${link.text}`}
 											>
 												<span className="print:hidden">{link.text}</span>
 												<span className="hidden print:inline">
