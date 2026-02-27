@@ -1,19 +1,29 @@
 /** @type {import('prettier').Config} */
 export default {
-	plugins: ["prettier-plugin-tailwindcss", "prettier-plugin-organize-imports"],
+	plugins: [
+		"prettier-plugin-tailwindcss",
+		"prettier-plugin-organize-imports",
+		"prettier-plugin-packagejson",
+	],
 	useTabs: true,
 	tabWidth: 2,
+	semi: false,
 	htmlWhitespaceSensitivity: "ignore",
-	tailwindAttributes: ["class", "className", "ngClass", ".*[cC]lassName"],
+	tailwindAttributes: ["class", "className", ".*[cC]lassName"],
 	tailwindFunctions: ["clsx", "cn", "cva"],
 	overrides: [
-		// formatting the package.json with anything other than spaces will cause
-		// issues when running install...
 		{
 			files: ["**/package.json"],
 			options: {
 				useTabs: false,
 			},
 		},
+		{
+			files: ["pnpm-workspace.yaml"],
+			options: {
+				useTabs: false,
+				singleQuote: true,
+			},
+		},
 	],
-};
+}

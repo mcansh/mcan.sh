@@ -1,0 +1,16 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "personal-website",
+	"compatibility_date": "2025-05-05",
+	"main": "./app/entry.server.ts",
+	"compatibility_flags": [
+		"nodejs_compat",
+		"nodejs_compat_populate_process_env",
+	],
+	"placement": { "mode": "smart" },
+	"upload_source_maps": true,
+	"preview_urls": true,
+	"observability": {
+		"enabled": true,
+	},
+}

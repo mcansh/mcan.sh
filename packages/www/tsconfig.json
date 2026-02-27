@@ -1,0 +1,16 @@
+{
+	"extends": "@total-typescript/tsconfig/bundler/dom",
+	"compilerOptions": {
+		"jsx": "react-jsx",
+		"jsxImportSource": "remix/component",
+		"strict": true,
+		"types": [
+			"vite/client",
+			"@jacob-ebey/vite-plugin-remix/types",
+			"@mcansh/vite-plugin-svg-sprite/client"
+		],
+		"allowImportingTsExtensions": true,
+		"target": "es2023",
+		"lib": ["es2023", "dom", "dom.iterable"]
+	}
+}

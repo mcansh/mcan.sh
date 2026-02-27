@@ -1,0 +1,16 @@
+diff --git a/dist/plugin-B4MlD0Bd.js b/dist/plugin-B4MlD0Bd.js
+index 7ddbbcf1630129b133dbf3e8621942478b5348b8..a3b18ab9429f932d58d559905944aa12a162b522 100644
+--- a/dist/plugin-B4MlD0Bd.js
++++ b/dist/plugin-B4MlD0Bd.js
+@@ -193,10 +193,8 @@ function assetsPlugin(pluginOpts) {
+ 			fs.writeFileSync(path.join(outDir, BUILD_ASSETS_MANIFEST_NAME), `export default ${serializeValueWithRuntime(manifest)};`);
+ 			const clientOutDir = builder.environments["client"].config.build.outDir;
+ 			for (const asset of Object.values(bundleMap[environmentName])) if (asset.type === "asset") {
+-				const srcFile = path.join(outDir, asset.fileName);
+ 				const destFile = path.join(clientOutDir, asset.fileName);
+-				fs.mkdirSync(path.dirname(destFile), { recursive: true });
+-				fs.copyFileSync(srcFile, destFile);
++				fs.writeFileSync(destFile, asset.source)
+ 			}
+ 		}
+ 	}

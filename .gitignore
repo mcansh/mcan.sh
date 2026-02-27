@@ -1,17 +1,10 @@
-/node_modules/
+node_modules/
 *.log
 .DS_Store
-/build/
+build/
+dist/
 *.tsbuildinfo
 .env
-/.sonda/
-
-yalc.lock
-/.yalc/
-
-# React Router
-/.react-router/
-
 # Cloudflare
 .mf
 .wrangler

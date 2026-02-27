@@ -1,0 +1,51 @@
+{
+  "name": "personal-website",
+  "private": true,
+  "homepage": "https://mcan.sh",
+  "repository": "https://github.com/mcansh/mcan.sh",
+  "license": "MIT",
+  "author": "Logan McAnsh <logan@mcan.sh> (https://mcan.sh)",
+  "sideEffects": false,
+  "type": "module",
+  "imports": {
+    "#*": "./*"
+  },
+  "scripts": {
+    "build": "node --run typecheck && vite build",
+    "cf-typegen": "wrangler types",
+    "deploy": "node --run build && wrangler deploy",
+    "dev": "vite dev",
+    "postinstall": "node --run cf-typegen",
+    "preview": "node --run build && vite preview",
+    "test": "vitest",
+    "typecheck": "node --run cf-typegen && tsc"
+  },
+  "dependencies": {
+    "@mcansh/http-helmet": "^0.13.2",
+    "cloudinary-build-url": "^0.2.4",
+    "clsx": "^2.1.1",
+    "dedent": "catalog:",
+    "remix": "catalog:",
+    "remix-utils": "^9.0.0",
+    "tailwind-merge": "^3.3.1"
+  },
+  "devDependencies": {
+    "@cld-apis/types": "^0.1.6",
+    "@cloudflare/vite-plugin": "^1.13.8",
+    "@jacob-ebey/vite-plugin-remix": "workspace:",
+    "@mcansh/vite-plugin-svg-sprite": "https://pkg.pr.new/mcansh/vite-plugin-svg-sprite/@mcansh/vite-plugin-svg-sprite@58",
+    "@tailwindcss/vite": "4.1.14",
+    "@total-typescript/tsconfig": "catalog:",
+    "@types/node": "^24.6.2",
+    "happy-dom": "catalog:",
+    "tailwindcss": "4.1.14",
+    "typescript": "^5.9.3",
+    "vite": "8.0.0-beta.3",
+    "vitest": "catalog:",
+    "wrangler": "^4.40.3"
+  },
+  "packageManager": "pnpm@10.25.0+sha512.5e82639027af37cf832061bcc6d639c219634488e0f2baebe785028a793de7b525ffcd3f7ff574f5e9860654e098fe852ba8ac5dd5cefe1767d23a020a92f501",
+  "engines": {
+    "node": ">=22"
+  }
+}
