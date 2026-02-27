@@ -31,18 +31,18 @@
   },
   "devDependencies": {
     "@cld-apis/types": "^0.1.6",
-    "@cloudflare/vite-plugin": "^1.13.8",
+    "@cloudflare/vite-plugin": "catalog:",
     "@jacob-ebey/vite-plugin-remix": "workspace:",
     "@mcansh/vite-plugin-svg-sprite": "https://pkg.pr.new/mcansh/vite-plugin-svg-sprite/@mcansh/vite-plugin-svg-sprite@58",
-    "@tailwindcss/vite": "4.1.14",
+    "@tailwindcss/vite": "catalog:",
     "@total-typescript/tsconfig": "catalog:",
-    "@types/node": "^24.6.2",
+    "@types/node": "catalog:",
     "happy-dom": "catalog:",
-    "tailwindcss": "4.1.14",
+    "tailwindcss": "catalog:",
     "typescript": "^5.9.3",
     "vite": "8.0.0-beta.3",
     "vitest": "catalog:",
-    "wrangler": "^4.40.3"
+    "wrangler": "catalog:"
   },
   "packageManager": "pnpm@10.25.0+sha512.5e82639027af37cf832061bcc6d639c219634488e0f2baebe785028a793de7b525ffcd3f7ff574f5e9860654e098fe852ba8ac5dd5cefe1767d23a020a92f501",
   "engines": {
