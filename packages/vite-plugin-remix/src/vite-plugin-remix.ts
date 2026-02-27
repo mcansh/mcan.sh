@@ -13,7 +13,7 @@ export function remix({
 	serverEnvironments: _environments = ["ssr"],
 	serverHandler = true,
 }: {
-	serverEnvironments?: string[]
+	serverEnvironments?: Array<string>
 	serverHandler?: boolean
 } = {}): PluginOption {
 	const environments = new Set(_environments)
@@ -84,7 +84,7 @@ function removeUseClient(ms: MagicString, program: Program) {
 	}
 }
 
-function hasDirective(body: (Directive | Statement)[], directive: string) {
+function hasDirective(body: Array<Directive | Statement>, directive: string) {
 	return body.some(
 		(node) =>
 			node.type === "ExpressionStatement" &&
@@ -100,7 +100,7 @@ type ExportedFunction = {
 	end: number
 }
 
-function getExportedFunctions(body: (Statement | Directive)[]) {
+function getExportedFunctions(body: Array<Statement | Directive>) {
 	const exportedFunctions: Array<ExportedFunction> = []
 
 	for (const node of body) {
@@ -172,14 +172,13 @@ function reExportAsHydrated(
 	ms.append(hydratedExport)
 }
 
-function hasHydrateImport(body: (Directive | Statement)[]) {
+function hasHydrateImport(body: Array<Directive | Statement>) {
 	return body.some((node) => {
 		if (
 			node.type === "ImportDeclaration" &&
 			node.source.type === "Literal" &&
 			node.source.value === "remix/component"
 		) {
-			// TODO: also support named imports here and in `addHydrateImport`
 			return node.specifiers.some((spec) => {
 				return (
 					spec.type === "ImportNamespaceSpecifier" &&

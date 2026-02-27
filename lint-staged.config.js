@@ -10,8 +10,8 @@ export default (allStagedFiles) => {
 	)
 
 	if (filesNeedingLintAndTypecheck.length > 0) {
-		commands.push("typecheck", "lint")
+		commands.push("typecheck")
 	}
 
-	return commands.map((command) => `npm run ${command} --`)
+	return commands.map((command) => `node --run ${command} --`)
 }
