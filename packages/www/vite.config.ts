@@ -15,7 +15,7 @@ export default defineConfig({
 			},
 		},
 	},
-	build: { target: "es2023", cssTarget: "es2023" },
+	build: { target: "es2023", cssTarget: "es2023", outDir: "build" },
 	plugins: [
 		remix({ serverHandler: false }),
 		cloudflare({ viteEnvironment: { name: "ssr" } }),
