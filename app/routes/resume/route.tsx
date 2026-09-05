@@ -144,6 +144,10 @@ export function links(): Route.LinkDescriptors {
 	];
 }
 
+export const handle = {
+	bodyClassName: "min-h-screen bg-neutral-50",
+};
+
 export default function ResumePage({ loaderData }: Route.ComponentProps) {
 	let references = [
 		{
@@ -155,38 +159,27 @@ export default function ResumePage({ loaderData }: Route.ComponentProps) {
 			name: "Michael Jackson",
 			href: "https://twitter.com/mjackson",
 			icon: twitterIconHref,
-    },
-    {
-      name: "Matt Brophy",
-      href: "https://twitter.com/brophdawg11",
-      icon: twitterIconHref,
-    }
+		},
+		{
+			name: "Matt Brophy",
+			href: "https://twitter.com/brophdawg11",
+			icon: twitterIconHref,
+		},
 	] as const;
 
 	return (
 		<>
 			<img src={spriteHref} loading="eager" className="hidden" />
-			<div className="min-h-screen bg-neutral-50 py-16 px-8">
+			<div className="py-16 md:px-8 px-4">
 				<div className="max-w-[1000px] mx-auto bg-white shadow-sm">
 					<ResumeHeader />
 
-					<div className="px-16 py-12 grid grid-cols-3 gap-12">
+					<div className="md:px-16 py-12 grid md:grid-cols-3 gap-12 px-8">
 						<div className="col-span-2 space-y-10">
-							<ExperienceSection
-								experiences={loaderData.experience.map((e) => {
-									return {
-										company: e.company,
-										startDate: e.startDate,
-										endDate: e.endDate,
-										position: e.position,
-										tasks: e.tasks,
-										note: e.note,
-									};
-								})}
-							/>
+							<ExperienceSection experiences={loaderData.experience} />
 						</div>
 
-						<div className="space-y-10 border-l border-neutral-200 pl-8">
+						<div className="space-y-10 md:border-l md:border-neutral-200 md:pl-8 col-span-2 md:col-span-1">
 							<SkillsSection skills={loaderData.skills} />
 							<CertificationsSection
 								certifications={loaderData.certifications}
