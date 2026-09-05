@@ -1,18 +1,4 @@
-/node_modules/
-*.log
+node_modules/
+db/*.sqlite
+tmp/
 .DS_Store
-/build/
-*.tsbuildinfo
-.env
-/.sonda/
-
-yalc.lock
-/.yalc/
-
-# React Router
-/.react-router/
-
-# Cloudflare
-.mf
-.wrangler
-.dev.vars*
