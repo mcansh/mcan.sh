@@ -155,7 +155,12 @@ export default function ResumePage({ loaderData }: Route.ComponentProps) {
 			name: "Michael Jackson",
 			href: "https://twitter.com/mjackson",
 			icon: twitterIconHref,
-		},
+    },
+    {
+      name: "Matt Brophy",
+      href: "https://twitter.com/brophdawg11",
+      icon: twitterIconHref,
+    }
 	] as const;
 
 	return (
