@@ -1,10 +1,10 @@
 export function ResumeHeader() {
 	return (
-		<div className="border-b border-neutral-200 px-16 py-12">
+		<div className="border-b border-neutral-200 px-8 md:px-16 py-12">
 			<h1 className="mb-1 tracking-tight">Logan McAnsh</h1>
 			<p className="text-neutral-600 mb-6">Senior Software Engineer</p>
 
-			<div className="grid grid-cols-2 gap-x-8 gap-y-1 text-sm text-neutral-600">
+			<div className="grid md:grid-cols-2 gap-x-8 gap-y-1 text-sm text-neutral-600">
 				<div>
 					<span className="text-neutral-900">Email:</span>{" "}
 					<a
@@ -64,9 +64,11 @@ export function ExperienceSection({
 					return (
 						<div className="relative" key={experience.company}>
 							<div className="mb-4">
-								<div className="flex items-start justify-between mb-1">
+								<div className="flex flex-col md:flex-row items-start justify-between mb-1">
 									<h3 className="text-neutral-900">{experience.company}</h3>
-									<span className="text-sm text-neutral-500 whitespace-nowrap ml-4">{`${experience.startDate} - ${experience.endDate}`}</span>
+									<span className="text-sm text-neutral-500 whitespace-nowrap md:ml-4">
+										{experience.startDate} - {experience.endDate}
+									</span>
 								</div>
 								<p className="text-neutral-600">{experience.position}</p>
 								{experience.note ? (
