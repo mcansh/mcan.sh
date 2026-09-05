@@ -25,11 +25,6 @@
 }
 
 @layer app {
-  body {
-    font-family: "Berkeley Mono";
-    font-weight: 100;
-  }
-
   :root {
     --breakpoint-md: 48rem;
     --container-xs: 20rem;
@@ -47,5 +42,15 @@
     --text-3xl--line-height: calc(2.25 / 1.875);
     --text-4xl: 2.25rem;
     --text-4xl--line-height: calc(2.5 / 2.25);
+  }
+
+  body {
+    font-family: "Inter", system-ui;
+  }
+
+  pre,
+  code {
+    font-family: "Berkeley Mono";
+    font-weight: 100;
   }
 }
