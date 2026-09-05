@@ -1,10 +1,10 @@
-import os from "node:os";
-import path from "node:path";
+import os from "node:os"
+import path from "node:path"
 
-import { createAssetServer } from "remix/assets";
-import { loadConfig } from "remix/cli";
-import { createFsFileStorage } from "remix/file-storage/fs";
-import { uiHmr } from "remix/ui-hmr/assets";
+import { createAssetServer } from "remix/assets"
+import { loadConfig } from "remix/cli"
+import { createFsFileStorage } from "remix/file-storage/fs"
+import { uiHmr } from "remix/ui-hmr/assets"
 
 const nodeEnv = process.env.NODE_ENV ?? "development"
 const isDevelopment = nodeEnv === "development"

@@ -1,9 +1,9 @@
-import type { Handle } from "remix/ui"
-import { css } from "remix/ui"
+import type { Handle } from "remix/ui";
+import { css } from "remix/ui";
 
-import { routes } from "../routes.ts"
-import { Document } from "./document.tsx"
-import { spaceX, spaceY } from "./public/css-mixins.ts"
+import { routes } from "../routes.ts";
+import { Document } from "./document.tsx";
+import { spaceX, spaceY } from "./public/css-mixins.ts";
 
 type HomePageProps = {
   me: {
@@ -67,18 +67,29 @@ export function HomePage(handle: Handle<HomePageProps>) {
             src={handle.props.me.url}
             srcSet={handle.props.me.srcSet}
           />
-          <div mix={spaceY("0.5rem")}>
+          <div
+            mix={[
+              spaceY("0.5rem"),
+              css({
+                marginBlockStart: "1rem",
+                maxWidth: "var(--container-xs)",
+                "@media (width >= 48rem)": {
+                  maxWidth: "var(--container-sm)",
+                },
+              }),
+            ]}
+          >
             <h1
               mix={css({
                 fontSize: "var(--text-4xl)",
                 lineHeight: "var(--text-4xl--line-height)",
+                fontWeight: 500,
               })}
             >
               Logan McAnsh
             </h1>
             <p
               mix={css({
-                maxWidth: "var(--container-xs)",
                 fontSize: "var(--text-lg)",
                 lineHeight: "var(--text-lg--line-height)",
 
@@ -86,16 +97,12 @@ export function HomePage(handle: Handle<HomePageProps>) {
                   fontSize: "var(--text-xl)",
                   lineHeight: "var(--text-xl--line-height)",
                 },
-
-                "@media (width >= 48rem)": {
-                  maxWidth: "var(--container-sm)",
-                },
               })}
             >
               Senior Software Engineer
             </p>
             <h2>Current: United Wholesale Mortgage</h2>
-            <pre className="font-thin">Past: Shopify x Remix</pre>
+            <code>Past: Shopify x Remix</code>
           </div>
         </div>
         <div
@@ -124,7 +131,7 @@ function HomeHead() {
       <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       <link
         rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
       />
     </>
   )
