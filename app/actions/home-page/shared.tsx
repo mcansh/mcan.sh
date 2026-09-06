@@ -27,29 +27,91 @@ export function DesignSwitcher(handle: Handle<{ designIndex: number; fontIndex: 
     let prevDesign = ((designIndex - 1 + DESIGN_CONFIGS.length) % DESIGN_CONFIGS.length) + 1
     let nextFont = ((fontIndex + 1) % FONT_CONFIGS.length) + 1
     return (
-      <nav
-        aria-label="Design and font preview switcher"
+      <details
         mix={css({
           position: "fixed",
           bottom: "1rem",
           right: "1rem",
           zIndex: 100,
           display: "flex",
-          flexDirection: "column",
+          flexDirection: "column-reverse",
+          alignItems: "flex-end",
           gap: "0.5rem",
-          padding: "0.75rem",
-          borderRadius: "0.75rem",
-          border: "1px solid rgb(0 0 0 / 0.1)",
-          backgroundColor: "rgb(255 255 255 / 0.9)",
-          backdropFilter: "blur(8px)",
           fontSize: "var(--text-sm)",
           lineHeight: "var(--text-sm--line-height)",
+          "& summary": {
+            listStyle: "none",
+            cursor: "pointer",
+            position: "relative",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "2.5rem",
+            height: "2.5rem",
+            borderRadius: "9999px",
+            border: "1px solid rgb(0 0 0 / 0.1)",
+            backgroundColor: "rgb(255 255 255 / 0.9)",
+            backdropFilter: "blur(8px)",
+            color: "inherit",
+          },
+          "& summary::-webkit-details-marker": { display: "none" },
+          "& summary::marker": { content: "none" },
+          "& summary:focus-visible": {
+            outline: "2px solid currentColor",
+            outlineOffset: "2px",
+          },
           "@media (prefers-color-scheme: dark)": {
-            borderColor: "rgb(255 255 255 / 0.15)",
-            backgroundColor: "rgb(0 0 0 / 0.85)",
+            "& summary": {
+              borderColor: "rgb(255 255 255 / 0.15)",
+              backgroundColor: "rgb(0 0 0 / 0.85)",
+            },
           },
         })}
       >
+        <summary aria-label="Show design and font options" title="Design and font options">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" />
+          </svg>
+          <span
+            aria-hidden="true"
+            mix={css({
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              width: "max(100%, 3rem)",
+              height: "max(100%, 3rem)",
+              transform: "translate(-50%, -50%)",
+              "@media (pointer: fine)": { display: "none" },
+            })}
+          />
+        </summary>
+        <nav
+          aria-label="Design and font preview switcher"
+          mix={css({
+            display: "flex",
+            flexDirection: "column",
+            gap: "0.5rem",
+            padding: "0.75rem",
+            borderRadius: "0.75rem",
+            border: "1px solid rgb(0 0 0 / 0.1)",
+            backgroundColor: "rgb(255 255 255 / 0.9)",
+            backdropFilter: "blur(8px)",
+            "@media (prefers-color-scheme: dark)": {
+              borderColor: "rgb(255 255 255 / 0.15)",
+              backgroundColor: "rgb(0 0 0 / 0.85)",
+            },
+          })}
+        >
         <div
           mix={css({
             display: "flex",
@@ -185,7 +247,8 @@ export function DesignSwitcher(handle: Handle<{ designIndex: number; fontIndex: 
             </a>
           ))}
         </div>
-      </nav>
+        </nav>
+      </details>
     )
   }
 }
