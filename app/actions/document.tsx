@@ -7,13 +7,50 @@ export interface DocumentProps {
   head?: RemixNode
   title?: string
   mix?: MixInput<HTMLElement>
+  fontIndex?: number
 }
 
 const DEFAULT_TITLE = readAppDisplayName("Logan McAnsh")
 
+// Font configurations: [display name, Google Fonts URL, CSS font-family, CSS font stack]
+const FONT_CONFIGS = [
+  [
+    "Inter (Default)",
+    "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap",
+    "Inter",
+    '"Inter", system-ui',
+  ],
+  [
+    "Geist",
+    "https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&display=swap",
+    "Geist",
+    '"Geist", system-ui',
+  ],
+  [
+    "Instrument Sans",
+    "https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;700&display=swap",
+    "Instrument Sans",
+    '"Instrument Sans", system-ui',
+  ],
+  [
+    "DM Sans",
+    "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap",
+    "DM Sans",
+    '"DM Sans", system-ui',
+  ],
+  [
+    "Space Grotesk",
+    "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap",
+    "Space Grotesk",
+    '"Space Grotesk", system-ui',
+  ],
+] as const
+
 export function Document(handle: Handle<DocumentProps>) {
   return () => {
-    let { children, head, title = DEFAULT_TITLE, mix } = handle.props
+    let { children, head, title = DEFAULT_TITLE, mix, fontIndex = 0 } = handle.props
+    let fontConfig = FONT_CONFIGS[fontIndex] ?? FONT_CONFIGS[0]
+    let [, fontUrl, , fontFamily] = fontConfig
 
     return (
       <html lang="en" mix={mix}>
@@ -48,8 +85,17 @@ export function Document(handle: Handle<DocumentProps>) {
                   url("${fonts.berkeleyMono.href}") format("woff2");
                 src: url("${fonts.berkeleyMono.href}") format("woff2") tech("variations");
               }
+              :root {
+                --font-sans: ${fontFamily};
+              }
+              body {
+                font-family: var(--font-sans);
+              }
             `}
           />
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+          <link rel="stylesheet" href={fontUrl} />
         </head>
         <body>{children}</body>
       </html>
