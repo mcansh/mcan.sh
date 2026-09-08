@@ -1,22 +1,23 @@
-import type { Handle, MixInput } from "remix/ui";
-import { css, Frame } from "remix/ui";
+import type { Handle, MixInput } from "remix/ui"
+import { css, Frame } from "remix/ui"
 
-import { Document } from "../document.tsx";
+import { routes } from "../../routes.ts"
+import { Document } from "../document.tsx"
 
 export type HomePageProps = {
   me: {
-    url: string;
-    size: string;
+    url: string
+    size: string
     srcSet: string
-    width: number;
-    height: number;
+    width: number
+    height: number
   }
   designIndex?: number
   fontIndex?: number
 }
 
 export function previewHref(design: number): string {
-  return `/preview?design=${design}`
+  return routes.preview.href(undefined, { searchParams: { design } })
 }
 
 export function HomeShell(handle: Handle<HomePageProps & { bodyMix: MixInput<HTMLElement> }>) {
@@ -139,9 +140,12 @@ export function DesignSwitcher(handle: Handle<{ designIndex: number; fontIndex: 
             })}
           >
             <a
+              data-rmx-document
               data-rmx-target="preview"
               data-rmx-src={previewHref(prevDesign)}
-              href={`/?design=${prevDesign}&font=${fontIndex + 1}`}
+              href={routes.home.href(undefined, {
+                searchParams: { design: prevDesign, font: fontIndex + 1 },
+              })}
               aria-label="Previous design"
               mix={css({
                 padding: "0.25rem 0.5rem",
@@ -166,9 +170,12 @@ export function DesignSwitcher(handle: Handle<{ designIndex: number; fontIndex: 
               {DESIGN_CONFIGS[designIndex]?.[0]} ({designIndex + 1}/{DESIGN_CONFIGS.length})
             </span>
             <a
+              data-rmx-document
               data-rmx-target="preview"
               data-rmx-src={previewHref(nextDesign)}
-              href={`/?design=${nextDesign}&font=${fontIndex + 1}`}
+              href={routes.home.href(undefined, {
+                searchParams: { design: nextDesign, font: fontIndex + 1 },
+              })}
               aria-label="Next design"
               mix={css({
                 padding: "0.25rem 0.5rem",
@@ -192,27 +199,30 @@ export function DesignSwitcher(handle: Handle<{ designIndex: number; fontIndex: 
               maxWidth: "16rem",
             })}
           >
-            {DESIGN_CONFIGS.map(([name], i) => (
+            {DESIGN_CONFIGS.map(([name], index) => (
               <a
                 key={name}
+                data-rmx-document
                 data-rmx-target="preview"
-                data-rmx-src={previewHref(i + 1)}
-                href={`/?design=${i + 1}&font=${fontIndex + 1}`}
-                aria-current={i === designIndex ? "true" : undefined}
+                data-rmx-src={previewHref(index + 1)}
+                href={routes.home.href(undefined, {
+                  searchParams: { design: index + 1, font: fontIndex + 1 },
+                })}
+                aria-current={index === designIndex ? "true" : undefined}
                 mix={css({
                   padding: "0.125rem 0.5rem",
                   borderRadius: "9999px",
                   border: "1px solid",
-                  borderColor: i === designIndex ? "currentColor" : "rgb(0 0 0 / 0.1)",
-                  fontWeight: i === designIndex ? 700 : 400,
+                  borderColor: index === designIndex ? "currentColor" : "rgb(0 0 0 / 0.1)",
+                  fontWeight: index === designIndex ? 700 : 400,
                   textDecoration: "none",
                   color: "inherit",
                   "@media (prefers-color-scheme: dark)": {
-                    borderColor: i === designIndex ? "currentColor" : "rgb(255 255 255 / 0.2)",
+                    borderColor: index === designIndex ? "currentColor" : "rgb(255 255 255 / 0.2)",
                   },
                 })}
               >
-                {i + 1}
+                {index + 1}
               </a>
             ))}
           </div>
@@ -232,7 +242,9 @@ export function DesignSwitcher(handle: Handle<{ designIndex: number; fontIndex: 
             <span mix={css({ fontWeight: 500 })}>{FONT_CONFIGS[fontIndex]?.[0]}</span>
             <a
               data-rmx-document
-              href={`/?design=${designIndex + 1}&font=${nextFont}`}
+              href={routes.home.href(undefined, {
+                searchParams: { design: designIndex + 1, font: nextFont },
+              })}
               mix={css({ color: "inherit" })}
             >
               Next font →
@@ -312,5 +324,7 @@ const DESIGN_CONFIGS = [
 ] as const
 
 function fontHref(design: number, font: number): string {
-  return `/?design=${design}&font=${font}`
+  return routes.home.href(undefined, {
+    searchParams: { design, font },
+  })
 }

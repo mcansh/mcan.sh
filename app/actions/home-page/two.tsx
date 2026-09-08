@@ -4,13 +4,13 @@
 // Left-aligned layout with avatar, detailed bio, tech stack, and social links
 // Following section-layout.md: left-aligned sections, proper container pattern
 
-import type { Handle } from "remix/ui";
-import { css } from "remix/ui";
+import type { Handle } from "remix/ui"
+import { css } from "remix/ui"
 
-import { routes } from "../../routes.ts";
-import { spaceY } from "../public/css-mixins.ts";
-import type { HomePageProps } from "./shared.tsx";
-import { DesignSwitcher } from "./shared.tsx";
+import { routes } from "../../routes.ts"
+import { spaceY } from "../public/css-mixins.ts"
+import type { HomePageProps } from "./shared.tsx"
+import { DesignSwitcher } from "./shared.tsx"
 
 export const homePageOption2Body = css({
   "&, body": {
@@ -81,7 +81,7 @@ export function HomePageOption2Content(handle: Handle<HomePageProps>) {
                   height: "39rem",
                   width: "20rem",
                   objectFit: "contain",
-                  objectPosition: "unset"
+                  objectPosition: "unset",
                 },
               })}
               width={handle.props.me.width}

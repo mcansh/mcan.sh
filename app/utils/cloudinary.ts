@@ -1,5 +1,5 @@
-import type { TransformerOption } from "@cld-apis/types";
-import { buildUrl } from "cloudinary-build-url";
+import type { TransformerOption } from "@cld-apis/types"
+import { buildUrl } from "cloudinary-build-url"
 
 export function getCloudinaryURL(
   cloudName: string,
