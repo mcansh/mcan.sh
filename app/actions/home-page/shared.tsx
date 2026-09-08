@@ -1,15 +1,34 @@
-import { css, type Handle } from "remix/ui";
+import type { Handle, MixInput } from "remix/ui";
+import { css, Frame } from "remix/ui";
+
+import { Document } from "../document.tsx";
 
 export type HomePageProps = {
   me: {
-    size: number
-    url: string
+    url: string;
+    size: string;
     srcSet: string
+    width: number;
+    height: number;
   }
   designIndex?: number
   fontIndex?: number
 }
 
+export function previewHref(design: number): string {
+  return `/preview?design=${design}`
+}
+
+export function HomeShell(handle: Handle<HomePageProps & { bodyMix: MixInput<HTMLElement> }>) {
+  return () => {
+    let { designIndex = 0, fontIndex = 0, bodyMix } = handle.props
+    return (
+      <Document head={<HomeHead />} fontIndex={fontIndex} mix={[bodyMix]}>
+        <Frame name="preview" src={previewHref(designIndex + 1)} />
+      </Document>
+    )
+  }
+}
 
 export function HomeHead() {
   return () => (
@@ -112,141 +131,144 @@ export function DesignSwitcher(handle: Handle<{ designIndex: number; fontIndex: 
             },
           })}
         >
-        <div
-          mix={css({
-            display: "flex",
-            alignItems: "center",
-            gap: "0.5rem",
-          })}
-        >
-          <a
-            data-rmx-document
-            href={`/?design=${prevDesign}&font=${fontIndex + 1}`}
-            aria-label="Previous design"
+          <div
             mix={css({
-              padding: "0.25rem 0.5rem",
-              borderRadius: "0.375rem",
-              border: "1px solid rgb(0 0 0 / 0.1)",
-              textDecoration: "none",
-              color: "inherit",
-              "@media (prefers-color-scheme: dark)": {
-                borderColor: "rgb(255 255 255 / 0.2)",
-              },
+              display: "flex",
+              alignItems: "center",
+              gap: "0.5rem",
             })}
           >
-            ←
-          </a>
-          <span
-            mix={css({
-              fontWeight: 500,
-              minWidth: "9rem",
-              textAlign: "center",
-            })}
-          >
-            {DESIGN_CONFIGS[designIndex]?.[0]} ({designIndex + 1}/{DESIGN_CONFIGS.length})
-          </span>
-          <a
-            data-rmx-document
-            href={`/?design=${nextDesign}&font=${fontIndex + 1}`}
-            aria-label="Next design"
-            mix={css({
-              padding: "0.25rem 0.5rem",
-              borderRadius: "0.375rem",
-              border: "1px solid rgb(0 0 0 / 0.1)",
-              textDecoration: "none",
-              color: "inherit",
-              "@media (prefers-color-scheme: dark)": {
-                borderColor: "rgb(255 255 255 / 0.2)",
-              },
-            })}
-          >
-            →
-          </a>
-        </div>
-        <div
-          mix={css({
-            display: "flex",
-            flexWrap: "wrap",
-            gap: "0.375rem",
-            maxWidth: "16rem",
-          })}
-        >
-          {DESIGN_CONFIGS.map(([name], i) => (
             <a
-              key={name}
-              data-rmx-document
-              href={`/?design=${i + 1}&font=${fontIndex + 1}`}
-              aria-current={i === designIndex ? "true" : undefined}
+              data-rmx-target="preview"
+              data-rmx-src={previewHref(prevDesign)}
+              href={`/?design=${prevDesign}&font=${fontIndex + 1}`}
+              aria-label="Previous design"
               mix={css({
-                padding: "0.125rem 0.5rem",
-                borderRadius: "9999px",
-                border: "1px solid",
-                borderColor: i === designIndex ? "currentColor" : "rgb(0 0 0 / 0.1)",
-                fontWeight: i === designIndex ? 700 : 400,
+                padding: "0.25rem 0.5rem",
+                borderRadius: "0.375rem",
+                border: "1px solid rgb(0 0 0 / 0.1)",
                 textDecoration: "none",
                 color: "inherit",
                 "@media (prefers-color-scheme: dark)": {
-                  borderColor: i === designIndex ? "currentColor" : "rgb(255 255 255 / 0.2)",
+                  borderColor: "rgb(255 255 255 / 0.2)",
                 },
               })}
             >
-              {i + 1}
+              ←
             </a>
-          ))}
-        </div>
-        <div
-          mix={css({
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: "0.5rem",
-            borderTop: "1px solid rgb(0 0 0 / 0.08)",
-            paddingTop: "0.5rem",
-            "@media (prefers-color-scheme: dark)": {
-              borderTopColor: "rgb(255 255 255 / 0.12)",
-            },
-          })}
-        >
-          <span mix={css({ fontWeight: 500 })}>{FONT_CONFIGS[fontIndex]?.[0]}</span>
-          <a
-            data-rmx-document
-            href={`/?design=${designIndex + 1}&font=${nextFont}`}
-            mix={css({ color: "inherit" })}
-          >
-            Next font →
-          </a>
-        </div>
-        <div
-          mix={css({
-            display: "flex",
-            flexWrap: "wrap",
-            gap: "0.375rem",
-            maxWidth: "16rem",
-          })}
-        >
-          {FONT_CONFIGS.map(([name], i) => (
-            <a
-              key={name}
-              data-rmx-document
-              href={fontHref(designIndex + 1, i + 1)}
-              aria-current={i === fontIndex ? "true" : undefined}
+            <span
               mix={css({
-                padding: "0.125rem 0.5rem",
-                borderRadius: "9999px",
-                border: "1px solid",
-                borderColor: i === fontIndex ? "currentColor" : "rgb(0 0 0 / 0.1)",
-                fontWeight: i === fontIndex ? 700 : 400,
+                fontWeight: 500,
+                minWidth: "9rem",
+                textAlign: "center",
+              })}
+            >
+              {DESIGN_CONFIGS[designIndex]?.[0]} ({designIndex + 1}/{DESIGN_CONFIGS.length})
+            </span>
+            <a
+              data-rmx-target="preview"
+              data-rmx-src={previewHref(nextDesign)}
+              href={`/?design=${nextDesign}&font=${fontIndex + 1}`}
+              aria-label="Next design"
+              mix={css({
+                padding: "0.25rem 0.5rem",
+                borderRadius: "0.375rem",
+                border: "1px solid rgb(0 0 0 / 0.1)",
                 textDecoration: "none",
                 color: "inherit",
                 "@media (prefers-color-scheme: dark)": {
-                  borderColor: i === fontIndex ? "currentColor" : "rgb(255 255 255 / 0.2)",
+                  borderColor: "rgb(255 255 255 / 0.2)",
                 },
               })}
             >
-              {name}
+              →
             </a>
-          ))}
-        </div>
+          </div>
+          <div
+            mix={css({
+              display: "flex",
+              flexWrap: "wrap",
+              gap: "0.375rem",
+              maxWidth: "16rem",
+            })}
+          >
+            {DESIGN_CONFIGS.map(([name], i) => (
+              <a
+                key={name}
+                data-rmx-target="preview"
+                data-rmx-src={previewHref(i + 1)}
+                href={`/?design=${i + 1}&font=${fontIndex + 1}`}
+                aria-current={i === designIndex ? "true" : undefined}
+                mix={css({
+                  padding: "0.125rem 0.5rem",
+                  borderRadius: "9999px",
+                  border: "1px solid",
+                  borderColor: i === designIndex ? "currentColor" : "rgb(0 0 0 / 0.1)",
+                  fontWeight: i === designIndex ? 700 : 400,
+                  textDecoration: "none",
+                  color: "inherit",
+                  "@media (prefers-color-scheme: dark)": {
+                    borderColor: i === designIndex ? "currentColor" : "rgb(255 255 255 / 0.2)",
+                  },
+                })}
+              >
+                {i + 1}
+              </a>
+            ))}
+          </div>
+          <div
+            mix={css({
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: "0.5rem",
+              borderTop: "1px solid rgb(0 0 0 / 0.08)",
+              paddingTop: "0.5rem",
+              "@media (prefers-color-scheme: dark)": {
+                borderTopColor: "rgb(255 255 255 / 0.12)",
+              },
+            })}
+          >
+            <span mix={css({ fontWeight: 500 })}>{FONT_CONFIGS[fontIndex]?.[0]}</span>
+            <a
+              data-rmx-document
+              href={`/?design=${designIndex + 1}&font=${nextFont}`}
+              mix={css({ color: "inherit" })}
+            >
+              Next font →
+            </a>
+          </div>
+          <div
+            mix={css({
+              display: "flex",
+              flexWrap: "wrap",
+              gap: "0.375rem",
+              maxWidth: "16rem",
+            })}
+          >
+            {FONT_CONFIGS.map(([name], i) => (
+              <a
+                key={name}
+                data-rmx-document
+                href={fontHref(designIndex + 1, i + 1)}
+                aria-current={i === fontIndex ? "true" : undefined}
+                mix={css({
+                  padding: "0.125rem 0.5rem",
+                  borderRadius: "9999px",
+                  border: "1px solid",
+                  borderColor: i === fontIndex ? "currentColor" : "rgb(0 0 0 / 0.1)",
+                  fontWeight: i === fontIndex ? 700 : 400,
+                  textDecoration: "none",
+                  color: "inherit",
+                  "@media (prefers-color-scheme: dark)": {
+                    borderColor: i === fontIndex ? "currentColor" : "rgb(255 255 255 / 0.2)",
+                  },
+                })}
+              >
+                {name}
+              </a>
+            ))}
+          </div>
         </nav>
       </details>
     )
@@ -288,7 +310,6 @@ const DESIGN_CONFIGS = [
   ["Showcase", "Experience timeline + projects"],
   ["Split", "Desktop split / mobile stacked"],
 ] as const
-
 
 function fontHref(design: number, font: number): string {
   return `/?design=${design}&font=${font}`

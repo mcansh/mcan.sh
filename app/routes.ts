@@ -3,6 +3,7 @@ import { get, route } from "remix/routes"
 export const routes = route({
   assets: get("/assets/*path"),
   home: "/",
+  preview: get("/preview"),
   resume: "/resume",
   wellKnown: "/.well-known/*path",
   sitemap: "/sitemap.xml",
