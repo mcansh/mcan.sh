@@ -1,0 +1,24 @@
+diff --git a/dist/lib/hmr.js b/dist/lib/hmr.js
+--- a/dist/lib/hmr.js
++++ b/dist/lib/hmr.js
+@@ -376,6 +376,8 @@
+   if (!delta) return true
+
+   let script = document.createElement('script')
++  let nonce = document.querySelector('script[data-rmx-import-map][nonce]')?.nonce
++  if (nonce) script.nonce = nonce
+   script.setAttribute('data-rmx-import-map', '')
+   script.type = 'importmap'
+   script.textContent = JSON.stringify(delta)
+diff --git a/src/lib/hmr.ts b/src/lib/hmr.ts
+--- a/src/lib/hmr.ts
++++ b/src/lib/hmr.ts
+@@ -427,6 +427,8 @@
+   if (!delta) return true
+
+   let script = document.createElement('script')
++  let nonce = document.querySelector('script[data-rmx-import-map][nonce]')?.nonce
++  if (nonce) script.nonce = nonce
+   script.setAttribute('data-rmx-import-map', '')
+   script.type = 'importmap'
+   script.textContent = JSON.stringify(delta)

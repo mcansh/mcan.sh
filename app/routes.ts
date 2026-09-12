@@ -1,10 +1,11 @@
-import type { RouteConfig } from "@react-router/dev/routes";
-import { index, route } from "@react-router/dev/routes";
+import { get, route } from "remix/routes"
 
-export default [
-	index("./routes/home.tsx"),
-	route("/.well-known/*", "./routes/well-known.$.ts"),
-	route("/resume", "./routes/resume/route.tsx"),
-	route("/sitemap.xml", "./routes/sitemap[.]xml.ts"),
-	route("/manifest.webmanifest", "./routes/manifest.webmanifest/index.ts"),
-] satisfies RouteConfig;
+export const routes = route({
+  assets: get("/assets/*path"),
+  home: get("/"),
+  preview: get("/preview"),
+  resume: get("/resume"),
+  wellKnownAvatar: get("/.well-known(/*path)/avatar"),
+  sitemap: get("/sitemap.xml"),
+  manifest: get("/manifest.:ext"),
+})
