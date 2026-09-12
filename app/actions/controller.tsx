@@ -3,6 +3,7 @@ import { createController } from "remix/router"
 import { assets } from "../assets.ts"
 import { routes } from "../routes.ts"
 import { DESIGN_OPTIONS, FONT_OPTIONS, getHomePage, getMe, HomeShell } from "./home-page/shared.tsx"
+import { ResumePage } from "./resume-page.tsx"
 
 function getDesignIndex(url: URL): number {
   let param = url.searchParams.get("design")
@@ -63,7 +64,7 @@ export default createController(routes, {
     },
 
     resume(context) {
-      return Response.json({}, { status: 404 })
+      return context.render(<ResumePage />)
     },
 
     sitemap(context) {
