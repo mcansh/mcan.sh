@@ -24,7 +24,7 @@ export const homePageOptions = css({
 export function HomePage(handle: Handle<HomePageProps>) {
   let experience = [
     {
-      role: "Senior Frontend Engineer",
+      role: "Senior Frontend Developer",
       company: "United Wholesale Mortgage",
       period: "2024 — Present",
       description: "Building, improving developer experience, and modernizing the tech stack.",
