@@ -21,7 +21,6 @@ export function Document(handle: Handle<DocumentProps>) {
   return () => {
     let fontConfig = FONT_CONFIGS[fontIndex] ?? FONT_CONFIGS[0]
     let [, fontUrl, fontFamily] = fontConfig
-    console.log({ fontIndex, fontConfig })
 
     return (
       <html lang="en" mix={mix}>
