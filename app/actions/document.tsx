@@ -4,6 +4,7 @@ import { ImportMap } from "remix/ui/server"
 
 import { getAssetEntry } from "../middleware/assets.ts"
 import { getNonce } from "../middleware/security-headers.ts"
+import { routes } from "../routes.ts"
 import { FONT_CONFIGS } from "./home-page/shared.tsx"
 
 export interface DocumentProps {
@@ -31,6 +32,8 @@ export function Document(handle: Handle<DocumentProps>) {
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta name="color-scheme" content="light dark" />
           <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+          <link rel="manifest" href={routes.manifest.href({ ext: "webmanifest" })} />
+          <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
           {Object.entries(assetEntry.stylesheets).map(([name, current]) => (
             <Fragment key={name}>
               <link rel="preload" href={current.href} as="style" />

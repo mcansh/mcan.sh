@@ -90,13 +90,119 @@ test("production requires a valid CSP reporting URL", () => {
   }
   let reportUrl = "https://reports.example.com/csp"
   assert.equal(
-    parseEnv(
-      { CLOUDINARY_CLOUD_NAME: "website-test", SENTRY_REPORT_URL: reportUrl },
-      "production",
-    ).SENTRY_REPORT_URL,
+    parseEnv({ CLOUDINARY_CLOUD_NAME: "website-test", SENTRY_REPORT_URL: reportUrl }, "production")
+      .SENTRY_REPORT_URL,
     reportUrl,
   )
   for (let nodeEnv of ["development", "test"]) {
     assert.doesNotThrow(() => parseEnv({ CLOUDINARY_CLOUD_NAME: "website-test" }, nodeEnv))
+  }
+})
+
+test("manifest aliases serve existing icons and support conditional requests", async () => {
+  let first = await router.fetch("https://mcan.sh/manifest.webmanifest")
+  assert.equal(first.status, 200)
+  assert.match(first.headers.get("Content-Type")!, /^application\/manifest\+json/)
+  assert.equal(first.headers.get("Cache-Control"), "public, max-age=60, must-revalidate")
+  let etag = first.headers.get("ETag")!
+  let content = await first.text()
+  let manifest = JSON.parse(content)
+  assert.equal(manifest.name, "Logan McAnsh")
+  assert.equal(manifest.start_url, "/?homescreen=1")
+  assert.equal(manifest.display, "standalone")
+  assert.equal(manifest.theme_color, "#e53a40")
+  for (let icon of manifest.icons) {
+    let response = await router.fetch(
+      new Request(new URL(icon.src, "https://mcan.sh"), { method: "HEAD" }),
+    )
+    assert.equal(response.status, 200, icon.src)
+    assert.match(response.headers.get("Content-Type")!, /image\/png/)
+  }
+  let alias = await router.fetch("https://mcan.sh/manifest.json")
+  assert.equal(await alias.text(), content)
+  assert.equal(alias.headers.get("ETag"), etag)
+  for (let condition of [etag, etag.slice(2), `"old", ${etag}`, "*"]) {
+    let cached = await router.fetch(
+      new Request("https://mcan.sh/manifest.webmanifest", {
+        headers: { "If-None-Match": condition },
+      }),
+    )
+    assert.equal(cached.status, 304)
+    assert.equal(cached.body, null)
+    assert.equal(cached.headers.get("ETag"), etag)
+    assert.equal(cached.headers.get("Cache-Control"), first.headers.get("Cache-Control"))
+    assert.ok(cached.headers.has("Content-Security-Policy"))
+  }
+  let stale = await router.fetch(
+    new Request("https://mcan.sh/manifest.json", { headers: { "If-None-Match": '"stale"' } }),
+  )
+  assert.equal(stale.status, 200)
+  await stale.body?.cancel()
+  let homepage = await router.fetch("https://mcan.sh/")
+  assert.match(await homepage.text(), /<link rel="manifest" href="\/manifest.webmanifest"/)
+})
+
+test("sitemap lists the homepage and resume on the request origin", async () => {
+  let response = await router.fetch("https://preview.example.com/sitemap.xml")
+  assert.equal(response.status, 200)
+  assert.match(response.headers.get("Content-Type")!, /application\/xml/)
+  assert.equal(response.headers.get("Cache-Control"), "public, max-age=3600")
+  let xml = await response.text()
+  assert.ok(xml.includes('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'))
+  assert.ok(xml.includes("<loc>https://preview.example.com/</loc>"))
+  assert.ok(xml.includes("<loc>https://preview.example.com/resume</loc>"))
+  assert.equal([...xml.matchAll(/<url>/g)].length, 2)
+})
+
+test("restored resource routes support HEAD, reject writes, and return 404 for unknown well-known paths", async () => {
+  for (let path of ["/manifest.json", "/manifest.webmanifest", "/sitemap.xml"]) {
+    let response = await router.fetch(new Request(`https://mcan.sh${path}`, { method: "HEAD" }))
+    assert.equal(response.status, 200)
+    assert.equal(response.body, null)
+  }
+  for (let path of [
+    "/manifest.json",
+    "/manifest.webmanifest",
+    "/sitemap.xml",
+    "/.well-known/avatar",
+  ]) {
+    let response = await router.fetch(new Request(`https://mcan.sh${path}`, { method: "POST" }))
+    assert.equal(response.status, 405)
+    await response.body?.cancel()
+  }
+  for (let path of ["/.well-known/", "/.well-known/security.txt", "/.well-known/avatar/extra"]) {
+    let response = await router.fetch(`https://mcan.sh${path}`)
+    assert.equal(response.status, 404)
+    await response.body?.cancel()
+  }
+})
+
+test("well-known avatar forwards transformations, cancellation, and the image response", async () => {
+  let { createWellKnownResponse } = await import("./actions/well-known.ts")
+  for (let path of ["avatar", "w_48/h_48/c_fill/avatar"]) {
+    let request = new Request(`https://mcan.sh/.well-known/${path}`)
+    let upstream = new Response(new Uint8Array([1, 2, 3]), {
+      headers: {
+        "Content-Type": "image/png",
+        "Cache-Control": "public, max-age=60",
+        ETag: '"image"',
+      },
+    })
+    let response = await createWellKnownResponse(path, request, async (input, init) => {
+      assert.ok(input instanceof URL)
+      assert.equal(input.origin, "https://res.cloudinary.com")
+      assert.ok(input.pathname.startsWith("/website-test/image/upload/"))
+      assert.ok(input.pathname.endsWith("/website/2498016352165139482"))
+      assert.ok(input.pathname.includes("q_auto"))
+      assert.ok(input.pathname.includes("f_auto"))
+      if (path !== "avatar") assert.ok(input.pathname.includes(",w_48,h_48,c_fill/"))
+      assert.equal(init?.signal, request.signal)
+      assert.equal(init?.method, "GET")
+      return upstream
+    })
+    assert.equal(response, upstream)
+    assert.equal(response.headers.get("Content-Type"), "image/png")
+    assert.equal(response.headers.get("Cache-Control"), "public, max-age=60")
+    assert.deepEqual(new Uint8Array(await response.arrayBuffer()), new Uint8Array([1, 2, 3]))
   }
 })

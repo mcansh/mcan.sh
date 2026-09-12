@@ -45,7 +45,7 @@ test("router protects documents, static files, compiled assets, and missing rout
     ["/favicon.svg", 200],
     [entry, 200],
     ["/missing", 404],
-    ["/manifest.json", 404],
+    ["/manifest.json", 200],
   ] as const) {
     let response = await router.fetch(new URL(path, "https://mcan.sh"))
     assert.equal(response.status, status, path)

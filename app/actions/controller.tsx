@@ -3,7 +3,10 @@ import { createController } from "remix/router"
 import { assets } from "../assets.ts"
 import { routes } from "../routes.ts"
 import { DESIGN_OPTIONS, FONT_OPTIONS, getHomePage, getMe, HomeShell } from "./home-page/shared.tsx"
+import { createManifestResponse } from "./manifest.ts"
 import { ResumePage } from "./resume-page.tsx"
+import { createSitemapResponse } from "./sitemap.ts"
+import { createWellKnownResponse } from "./well-known.ts"
 
 function getDesignIndex(url: URL): number {
   let param = url.searchParams.get("design")
@@ -56,11 +59,14 @@ export default createController(routes, {
     },
 
     manifest(context) {
-      return Response.json({}, { status: 404 })
+      if (!["json", "webmanifest"].includes(context.params.ext)) {
+        return new Response("Not Found", { status: 404 })
+      }
+      return createManifestResponse(context.request)
     },
 
     wellKnown(context) {
-      return Response.json({}, { status: 404 })
+      return createWellKnownResponse(context.params.path, context.request)
     },
 
     resume(context) {
@@ -68,7 +74,7 @@ export default createController(routes, {
     },
 
     sitemap(context) {
-      return Response.json({}, { status: 404 })
+      return createSitemapResponse(context.request)
     },
   },
 })
