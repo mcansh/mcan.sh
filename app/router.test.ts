@@ -62,7 +62,7 @@ test("read-only pages accept GET and HEAD and reject write methods", async () =>
   }
 })
 
-test("CSP enforcement and startup work without any Sentry configuration", async () => {
+test("non-production CSP enforcement and startup work without Sentry configuration", async () => {
   assert.doesNotThrow(() => parseEnv({ CLOUDINARY_CLOUD_NAME: "website-test" }))
   assert.equal(
     parseEnv({ CLOUDINARY_CLOUD_NAME: "website-test", SENTRY_REPORT_URL: "" }).SENTRY_REPORT_URL,
@@ -77,4 +77,26 @@ test("CSP enforcement and startup work without any Sentry configuration", async 
   assert.match(csp, /default-src 'none'/)
   assert.doesNotMatch(csp, /report-uri|undefined/)
   await response.body?.cancel()
+})
+
+test("production requires a valid CSP reporting URL", () => {
+  for (let reportUrl of [undefined, "", "not a URL"]) {
+    assert.throws(() =>
+      parseEnv(
+        { CLOUDINARY_CLOUD_NAME: "website-test", SENTRY_REPORT_URL: reportUrl },
+        "production",
+      ),
+    )
+  }
+  let reportUrl = "https://reports.example.com/csp"
+  assert.equal(
+    parseEnv(
+      { CLOUDINARY_CLOUD_NAME: "website-test", SENTRY_REPORT_URL: reportUrl },
+      "production",
+    ).SENTRY_REPORT_URL,
+    reportUrl,
+  )
+  for (let nodeEnv of ["development", "test"]) {
+    assert.doesNotThrow(() => parseEnv({ CLOUDINARY_CLOUD_NAME: "website-test" }, nodeEnv))
+  }
 })
