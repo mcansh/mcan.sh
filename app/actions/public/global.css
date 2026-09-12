@@ -17,7 +17,7 @@
   kbd,
   samp,
   pre {
-    font-family: var(--default-mono-font-family);
+    font-family: var(--default-mono-font-family, ui-monospace, monospace);
     font-feature-settings: var(--default-mono-font-feature-settings, normal);
     font-variation-settings: var(--default-mono-font-variation-settings, normal);
     font-size: 1em;

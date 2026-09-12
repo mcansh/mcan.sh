@@ -279,7 +279,7 @@ export function HomePage(handle: Handle<HomePageProps>) {
                 Resume
               </a>
               <a
-                href="https://linkedin.com/in/loganmcanish"
+                href="https://linkedin.com/in/loganmcansh"
                 mix={css({
                   display: "inline-flex",
                   alignItems: "center",

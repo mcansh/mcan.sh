@@ -80,8 +80,8 @@ export function HomePage(handle: Handle<HomePageProps>) {
                     height: "16rem",
                   },
                 })}
-                width={handle.props.me.size}
-                height={handle.props.me.size}
+                width={handle.props.me.width}
+                height={handle.props.me.height}
                 alt="Logan McAnsh"
                 fetchPriority="high"
                 src={handle.props.me.url}

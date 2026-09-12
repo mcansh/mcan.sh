@@ -60,8 +60,8 @@ export function HomePage(handle: Handle<HomePageProps>) {
               outlineColor: "rgb(255 255 255 / 0.1)",
             },
           })}
-          width={handle.props.me.size}
-          height={handle.props.me.size}
+          width={handle.props.me.width}
+          height={handle.props.me.height}
           alt="Logan McAnsh"
           fetchPriority="high"
           src={handle.props.me.url}

@@ -1,7 +1,8 @@
 import type { TransformerOption } from "@cld-apis/types"
 import type { Handle, MixInput } from "remix/ui"
-import { css, Frame } from "remix/ui"
+import { css, Fragment, Frame } from "remix/ui"
 
+import { getNonce } from "../../middleware/security-headers.ts"
 import { routes } from "../../routes.ts"
 import { getCloudinaryURL } from "../../utils/cloudinary.ts"
 import { env } from "../../utils/env.ts"
@@ -24,10 +25,36 @@ export function previewHref(design: number, font: number): string {
 }
 
 export function HomeShell(handle: Handle<HomePageProps & { bodyMix: MixInput<HTMLElement> }>) {
+  let nonce = getNonce()
   return () => {
     let { designIndex, fontIndex, bodyMix } = handle.props
     return (
-      <Document mix={bodyMix} fontIndex={fontIndex}>
+      <Document
+        mix={bodyMix}
+        fontIndex={fontIndex}
+        head={
+          <Fragment>
+            <meta name="description" content="personal website for Logan McAnsh" />
+            <script
+              type="application/ld+json"
+              nonce={nonce}
+              innerHTML={JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Person",
+                name: "Logan McAnsh",
+                url: "https://mcan.sh",
+                jobTitle: "Senior Software Engineer",
+                image: handle.props.me.url,
+                sameAs: [
+                  "https://github.com/mcansh",
+                  "https://linkedin.com/in/loganmcansh",
+                  "https://x.com/loganmcansh",
+                ],
+              }).replace(/</g, "\\u003c")}
+            />
+          </Fragment>
+        }
+      >
         <Frame name="preview" src={previewHref(designIndex + 1, fontIndex + 1)} />
       </Document>
     )
@@ -357,13 +384,13 @@ export function getMe(designIndex: number) {
   if (designIndex === 1) {
     srcSet = createSrcSet(
       [
-        [4032, 1443],
-        [4032, 1443],
+        [624, 224],
+        [1248, 448],
       ],
       "website/k0aidnurzmmz1zpo92e8ei1i",
       (h, w) => ({
         resize: {
-          type: "crop",
+          type: "fill",
           height: h,
           width: w,
         },
@@ -389,7 +416,7 @@ export function getMe(designIndex: number) {
     )
   }
 
-  let me = srcSet.at(1)
+  let me = srcSet.at(designIndex === 1 ? 0 : 1)
   if (me === undefined) throw new Error("Failed to get mugshot")
 
   return {
