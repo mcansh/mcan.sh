@@ -1,9 +1,3 @@
-// ============================================================================
-// DESIGN OPTION 2: Profile-Focused with Bio & Skills
-// ============================================================================
-// Left-aligned layout with avatar, detailed bio, tech stack, and social links
-// Following section-layout.md: left-aligned sections, proper container pattern
-
 import type { Handle } from "remix/ui"
 import { css } from "remix/ui"
 
@@ -12,7 +6,12 @@ import { spaceY } from "../public/css-mixins.ts"
 import type { HomePageProps } from "./shared.tsx"
 import { DesignSwitcher } from "./shared.tsx"
 
-export const homePageOption2Body = css({
+// ============================================================================
+// DESIGN OPTION 2: Profile-Focused with Bio & Skills
+// ============================================================================
+// Left-aligned layout with avatar, detailed bio, tech stack, and social links
+// Following section-layout.md: left-aligned sections, proper container pattern
+export const homePageOptions = css({
   "&, body": {
     minHeight: "100dvh",
     "@media (prefers-color-scheme: dark)": {
@@ -22,7 +21,7 @@ export const homePageOption2Body = css({
   },
 })
 
-export function HomePageOption2Content(handle: Handle<HomePageProps>) {
+export function HomePage(handle: Handle<HomePageProps>) {
   let designIndex = handle.props.designIndex ?? 0
   let fontIndex = handle.props.fontIndex ?? 0
   return () => (
@@ -150,9 +149,10 @@ export function HomePageOption2Content(handle: Handle<HomePageProps>) {
                 },
               })}
             >
-              I build scalable web applications and developer tools. Currently leading frontend
-              architecture at United Wholesale Mortgage. Previously on the Remix team at Shopify,
-              where I worked on the framework, developer experience, and open source ecosystem.
+              I build scalable web applications and developer tools. Currently building developer
+              tools and improving architecture at United Wholesale Mortgage. Previously on the Remix
+              team at Shopify, where I worked on the framework, developer experience, and open
+              source ecosystem.
             </p>
 
             {/* Tech Stack */}

@@ -1,17 +1,17 @@
-import { css } from "remix/ui"
 import type { Handle } from "remix/ui"
+import { css } from "remix/ui"
 
 import { routes } from "../../routes.ts"
 import { spaceY } from "../public/css-mixins.ts"
-import { DesignSwitcher } from "./shared.tsx"
 import type { HomePageProps } from "./shared.tsx"
+import { DesignSwitcher } from "./shared.tsx"
 
 // ============================================================================
 // DESIGN OPTION 3: Work/Project Showcase
 // ============================================================================
 // Features work experience timeline and featured projects
 // Following landing-pages.md: consistent button styles, container styles
-export const homePageOption3Body = css({
+export const homePageOptions = css({
   "&, body": {
     minHeight: "100dvh",
     "@media (prefers-color-scheme: dark)": {
@@ -21,14 +21,13 @@ export const homePageOption3Body = css({
   },
 })
 
-export function HomePageOption3Content(handle: Handle<HomePageProps>) {
+export function HomePage(handle: Handle<HomePageProps>) {
   let experience = [
     {
       role: "Senior Frontend Engineer",
       company: "United Wholesale Mortgage",
       period: "2024 — Present",
-      description:
-        "Leading frontend architecture for the mortgage platform. Building design systems, improving developer experience, and modernizing the tech stack with Remix, TypeScript, and Cloudflare Workers.",
+      description: "Building, improving developer experience, and modernizing the tech stack.",
     },
     {
       role: "Senior Software Engineer – Remix",

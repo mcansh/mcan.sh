@@ -15,5 +15,5 @@
     "jsxImportSource": "remix/ui",
     "noEmit": true
   },
-  "exclude": ["dist"]
+  "exclude": ["dist", "old-app"]
 }

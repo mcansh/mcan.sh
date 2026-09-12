@@ -1,8 +1,12 @@
+import type { TransformerOption } from "@cld-apis/types"
 import type { Handle, MixInput } from "remix/ui"
 import { css, Frame } from "remix/ui"
 
 import { routes } from "../../routes.ts"
+import { getCloudinaryURL } from "../../utils/cloudinary.ts"
+import { env } from "../../utils/env.ts"
 import { Document } from "../document.tsx"
+import { getAssetEntry } from "../../middleware/assets.ts"
 
 export type HomePageProps = {
   me: {
@@ -323,8 +327,87 @@ const DESIGN_CONFIGS = [
   ["Split", "Desktop split / mobile stacked"],
 ] as const
 
+export const DESIGN_OPTIONS = DESIGN_CONFIGS.length
+export const FONT_OPTIONS = FONT_CONFIGS.length
+
 function fontHref(design: number, font: number): string {
   return routes.home.href(undefined, {
     searchParams: { design, font },
   })
+}
+
+export async function getHomePage(designIndex: number) {
+  switch (designIndex) {
+    case 0:
+    default:
+      return await import("./one.tsx")
+    case 1:
+      return await import("./two.tsx")
+    case 2:
+      return await import("./three.tsx")
+    case 3:
+      return await import("./four.tsx")
+  }
+}
+
+function createSrcSet(
+  sizes: [h: number, w: number][],
+  publicId: string,
+  transformations: (h: number, w: number) => TransformerOption,
+) {
+  return sizes.map(([h, w], index) => {
+    let url = getCloudinaryURL(env.CLOUDINARY_CLOUD_NAME, publicId, transformations(h, w))
+
+    return { url, size: `${h}x${w}`, density: index + 1, width: w, height: h }
+  })
+}
+
+export function getMe(designIndex: number) {
+  let srcSet: ReturnType<typeof createSrcSet>
+
+  if (designIndex === 1) {
+    srcSet = createSrcSet(
+      [
+        [4032, 1443],
+        [4032, 1443],
+      ],
+      "website/k0aidnurzmmz1zpo92e8ei1i",
+      (h, w) => ({
+        resize: {
+          type: "crop",
+          height: h,
+          width: w,
+        },
+      }),
+    )
+  } else {
+    srcSet = createSrcSet(
+      [
+        [240, 240],
+        [480, 480],
+        [720, 720],
+      ],
+      "website/2498016352165139482",
+      (h, w) => ({
+        resize: {
+          type: "thumb",
+          height: h,
+          width: w,
+        },
+        zoom: 0.5,
+        gravity: "face",
+      }),
+    )
+  }
+
+  let me = srcSet.at(1)
+  if (me === undefined) throw new Error("Failed to get mugshot")
+
+  return {
+    url: me.url.toString(),
+    size: me.size,
+    srcSet: srcSet.map((x) => `${x.url.toString()} ${x.density}x`).join(", "),
+    height: me.height,
+    width: me.width,
+  }
 }

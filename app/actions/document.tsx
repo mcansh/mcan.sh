@@ -1,6 +1,9 @@
+import { Fragment } from "remix/ui"
 import type { Handle, MixInput, RemixNode } from "remix/ui"
+import { ImportMap } from "remix/ui/server"
 
-import { entryHref, entryPreloads, fonts, globalCssHref, globalCssPreloads } from "../assets.ts"
+import { getAssetEntry } from "../middleware/assets.ts"
+import {} from "../middleware/assets.ts"
 
 export interface DocumentProps {
   children?: RemixNode
@@ -48,9 +51,8 @@ const FONT_CONFIGS = [
 
 export function Document(handle: Handle<DocumentProps>) {
   return () => {
-    let { children, head, title = DEFAULT_TITLE, mix, fontIndex = 0 } = handle.props
-    let fontConfig = FONT_CONFIGS[fontIndex] ?? FONT_CONFIGS[0]
-    let [, fontUrl, , fontFamily] = fontConfig
+    let assetEntry = getAssetEntry()
+    let { children, head, title = DEFAULT_TITLE, mix } = handle.props
 
     return (
       <html lang="en" mix={mix}>
@@ -59,45 +61,34 @@ export function Document(handle: Handle<DocumentProps>) {
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta name="color-scheme" content="light dark" />
           <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-          <link rel="stylesheet" href={globalCssHref} />
-          {globalCssPreloads.map((href) => (
-            <link key={href} rel="preload" href={href} as="style" />
+          {Object.entries(assetEntry.stylesheets).map(([name, current]) => (
+            <Fragment key={name}>
+              <link rel="preload" href={current.href} as="style" />
+              <link
+                data-rmx-key={`stylesheet:${name}`}
+                data-remix-stylesheet={name}
+                data-rmx-preserve-dom
+                rel="stylesheet"
+                href={current.href}
+              />
+            </Fragment>
           ))}
           <title>{title}</title>
           {head}
-          {entryPreloads.map((href) => (
-            <link key={href} rel="modulepreload" href={href} />
+          <ImportMap value={assetEntry.scriptEntry.importMap} />
+          {assetEntry.scriptEntry.preloads.map((href) => (
+            <link
+              key={href}
+              data-rmx-key={`modulepreload:${href}`}
+              rel="modulepreload"
+              href={href}
+            />
           ))}
-          <script type="module" src={entryHref} />
-
-          <style
-            key="fonts"
-            data-rmx-key="fonts"
-            data-rmx-preserve-dom
-            innerHTML={`
-              @font-face {
-                font-family: "Berkeley Mono";
-                font-weight: 100 900;
-                font-display: swap;
-                font-style: normal;
-                src:
-                  url("${fonts.berkeleyMono.href}") format("woff2-variations"),
-                  url("${fonts.berkeleyMono.href}") format("woff2");
-                src: url("${fonts.berkeleyMono.href}") format("woff2") tech("variations");
-              }
-              :root {
-                --font-sans: ${fontFamily};
-              }
-              body {
-                font-family: var(--font-sans);
-              }
-            `}
-          />
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-          <link rel="stylesheet" href={fontUrl} />
         </head>
-        <body>{children}</body>
+        <body>
+          {children}
+          <script type="module" src={assetEntry.scriptEntry.href} />
+        </body>
       </html>
     )
   }

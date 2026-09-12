@@ -11,7 +11,7 @@ import type { HomePageProps } from "./shared.tsx"
 // ============================================================================
 // A polished version of the existing design with better typography,
 // proper dark mode, and improved spacing following ui.sh guidelines
-export const homePageOption1Body = css({
+export const homePageOptions = css({
   "&, body": {
     height: "100dvh",
     "@media (prefers-color-scheme: dark)": {
@@ -21,7 +21,7 @@ export const homePageOption1Body = css({
   },
 })
 
-export function HomePageOption1Content(handle: Handle<HomePageProps>) {
+export function HomePage(handle: Handle<HomePageProps>) {
   let designIndex = handle.props.designIndex ?? 0
   let fontIndex = handle.props.fontIndex ?? 0
   return () => (
