@@ -110,6 +110,7 @@ export function HomePage(handle: Handle<HomePageProps>) {
           width={handle.props.me.width}
           height={handle.props.me.height}
           alt="Logan McAnsh"
+          crossOrigin="anonymous"
           fetchPriority="high"
           src={handle.props.me.url}
           srcSet={handle.props.me.srcSet}

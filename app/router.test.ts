@@ -13,6 +13,7 @@ test("every homepage design renders numeric image dimensions and search metadata
   for (let design = 1; design <= 4; design++) {
     let response = await router.fetch(`https://mcan.sh/?design=${design}`)
     assert.equal(response.status, 200)
+    assert.equal(response.headers.get("Cross-Origin-Embedder-Policy"), "require-corp")
     let html = await response.text()
     let head = html.match(/<head>([\s\S]*?)<\/head>/)![1]!
     assert.match(head, /<meta name="description" content="personal website for Logan McAnsh"/)
@@ -25,6 +26,7 @@ test("every homepage design renders numeric image dimensions and search metadata
     assert.equal(data.jobTitle, "Senior Software Engineer")
     assert.ok(data.sameAs.includes("https://linkedin.com/in/loganmcansh"))
     let image = html.match(/<img[^>]+alt="Logan McAnsh"[^>]*>/)![0]
+    assert.match(image, /crossorigin="anonymous"/)
     assert.match(image, design === 2 ? /width="224"/ : /width="480"/)
     assert.match(image, design === 2 ? /height="624"/ : /height="480"/)
     if (design === 2) {
