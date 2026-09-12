@@ -54,9 +54,10 @@ const noTypescriptAccessibilityRule = defineRule({
 })
 
 /**
- * Enforces the repo's class style rules by rejecting TypeScript accessibility
- * modifiers and parameter properties. In this codebase we rely on native class
- * fields, implicit public members, and `#private` state instead of TS-only syntax.
+ * Rejects TypeScript accessibility modifiers on fields, methods, and parameter
+ * properties, plus redundant public constructors. Private and protected
+ * constructors are allowed because native JavaScript has no equivalent way to
+ * restrict construction while permitting static factories or subclasses.
  */
 export default definePlugin({
   meta: {
