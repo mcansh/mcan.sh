@@ -15,32 +15,23 @@ export type HomePageProps = {
     width: number
     height: number
   }
-  designIndex?: number
-  fontIndex?: number
+  designIndex: number
+  fontIndex: number
 }
 
-export function previewHref(design: number): string {
-  return routes.preview.href(undefined, { searchParams: { design } })
+export function previewHref(design: number, font: number): string {
+  return routes.preview.href(undefined, { searchParams: { design, font } })
 }
 
 export function HomeShell(handle: Handle<HomePageProps & { bodyMix: MixInput<HTMLElement> }>) {
   return () => {
-    let { designIndex = 0, fontIndex = 0, bodyMix } = handle.props
+    let { designIndex, fontIndex, bodyMix } = handle.props
     return (
-      <Document head={<HomeHead />} fontIndex={fontIndex} mix={[bodyMix]}>
-        <Frame name="preview" src={previewHref(designIndex + 1)} />
+      <Document mix={bodyMix} fontIndex={fontIndex}>
+        <Frame name="preview" src={previewHref(designIndex + 1, fontIndex + 1)} />
       </Document>
     )
   }
-}
-
-export function HomeHead() {
-  return () => (
-    <>
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-    </>
-  )
 }
 
 export function DesignSwitcher(handle: Handle<{ designIndex: number; fontIndex: number }>) {
@@ -145,7 +136,7 @@ export function DesignSwitcher(handle: Handle<{ designIndex: number; fontIndex: 
             <a
               data-rmx-document
               data-rmx-target="preview"
-              data-rmx-src={previewHref(prevDesign)}
+              data-rmx-src={previewHref(prevDesign, fontIndex + 1)}
               href={routes.home.href(undefined, {
                 searchParams: { design: prevDesign, font: fontIndex + 1 },
               })}
@@ -175,7 +166,7 @@ export function DesignSwitcher(handle: Handle<{ designIndex: number; fontIndex: 
             <a
               data-rmx-document
               data-rmx-target="preview"
-              data-rmx-src={previewHref(nextDesign)}
+              data-rmx-src={previewHref(nextDesign, fontIndex + 1)}
               href={routes.home.href(undefined, {
                 searchParams: { design: nextDesign, font: fontIndex + 1 },
               })}
@@ -207,7 +198,7 @@ export function DesignSwitcher(handle: Handle<{ designIndex: number; fontIndex: 
                 key={name}
                 data-rmx-document
                 data-rmx-target="preview"
-                data-rmx-src={previewHref(index + 1)}
+                data-rmx-src={previewHref(index + 1, fontIndex + 1)}
                 href={routes.home.href(undefined, {
                   searchParams: { design: index + 1, font: fontIndex + 1 },
                 })}
@@ -290,8 +281,7 @@ export function DesignSwitcher(handle: Handle<{ designIndex: number; fontIndex: 
   }
 }
 
-// Font configurations matching Document
-const FONT_CONFIGS = [
+export const FONT_CONFIGS = [
   [
     "Inter (Default)",
     "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap",
@@ -317,14 +307,14 @@ const FONT_CONFIGS = [
     "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap",
     "Space Grotesk",
   ],
-] as const
+] as const satisfies readonly [displayName: string, url: string, fontFamily: string][]
 
 const DESIGN_CONFIGS = [
   ["Minimal", "Clean centered layout"],
   ["Profile", "Left-aligned with bio & skills"],
   ["Showcase", "Experience timeline + projects"],
   ["Split", "Desktop split / mobile stacked"],
-] as const
+] as const satisfies readonly [displayName: string, description: string][]
 
 export const DESIGN_OPTIONS = DESIGN_CONFIGS.length
 export const FONT_OPTIONS = FONT_CONFIGS.length
