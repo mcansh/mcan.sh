@@ -29,18 +29,18 @@ test("router protects documents, static files, compiled assets, and missing rout
   let csp = assertPolicy(document)
   let html = await document.text()
   let nonce = csp.match(/'nonce-([^']+)'/)![1]
-  let scripts = [...html.matchAll(/<script\b[^>]*>/g)].map(([tag]) => tag)
+  let scripts = [...html.matchAll(/<script\b[^>]*>/gi)].map(([tag]) => tag)
   assert.ok(scripts.some((tag) => tag.includes('type="importmap"')))
   assert.ok(scripts.some((tag) => tag.includes('type="module"')))
   for (let script of scripts) {
     if (!script.includes('type="application/json"'))
       assert.ok(script.includes(`nonce="${nonce}"`), script)
   }
-  assert.match(csp, /style-src 'self' 'unsafe-inline' https:\/\/fonts.googleapis.com/)
-  assert.match(csp, /font-src 'self' https:\/\/fonts.gstatic.com/)
-  assert.match(csp, /https:\/\/res.cloudinary.com\/security-test\/image\/upload\//)
+  assert.match(csp, /style-src 'self' 'unsafe-inline' https:\/\/fonts\.googleapis\.com/)
+  assert.match(csp, /font-src 'self' https:\/\/fonts\.gstatic\.com/)
+  assert.match(csp, /https:\/\/res\.cloudinary\.com\/security-test\/image\/upload\//)
   assert.match(html, /data-rmx-style/)
-  let entry = html.match(/<script[^>]+src="([^"]+)"/)![1]!
+  let entry = html.match(/<script[^>]+src="([^"]+)"/i)![1]!
   for (let [path, status] of [
     ["/favicon.svg", 200],
     [entry, 200],

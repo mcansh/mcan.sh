@@ -21,13 +21,17 @@ test("every homepage design renders numeric image dimensions and search metadata
     let head = html.match(/<head>([\s\S]*?)<\/head>/)![1]!
     assert.match(head, /<meta name="description" content="personal website for Logan McAnsh"/)
     let data = JSON.parse(
-      head.match(/<script[^>]+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/)![1]!,
+      head.match(/<script[^>]+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/i)![1]!,
     )
     assert.equal(data["@type"], "Person")
     assert.equal(data.name, "Logan McAnsh")
     assert.equal(data.url, "https://mcan.sh")
     assert.equal(data.jobTitle, "Senior Software Engineer")
-    assert.ok(data.sameAs.includes("https://linkedin.com/in/loganmcansh"))
+    assert.deepEqual(data.sameAs, [
+      "https://github.com/mcansh",
+      "https://linkedin.com/in/loganmcansh",
+      "https://x.com/loganmcansh",
+    ])
     let image = html.match(/<img[^>]+alt="Logan McAnsh"[^>]*>/)![0]
     assert.match(image, /crossorigin="anonymous"/)
     assert.match(image, design === 2 ? /width="224"/ : /width="480"/)
@@ -48,7 +52,7 @@ test("every homepage design renders numeric image dimensions and search metadata
     assert.ok(data.image.includes("res.cloudinary.com/website-test/"))
     assert.doesNotMatch(html, /loganmcanish/)
     if (design === 2 || design === 3)
-      assert.match(html, /href="https:\/\/linkedin.com\/in\/loganmcansh"/)
+      assert.match(html, /href="https:\/\/linkedin\.com\/in\/loganmcansh"/)
   }
 })
 
