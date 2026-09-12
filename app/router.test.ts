@@ -47,6 +47,19 @@ test("every homepage design renders numeric image dimensions and search metadata
   }
 })
 
+test("read-only pages accept GET and HEAD and reject write methods", async () => {
+  for (let path of ["/", "/resume"]) {
+    for (let method of ["GET", "HEAD", "POST", "PUT", "PATCH", "DELETE"]) {
+      let response = await router.fetch(new Request(`https://mcan.sh${path}`, { method }))
+      let read = method === "GET" || method === "HEAD"
+      assert.equal(response.status, read ? 200 : 405, `${method} ${path}`)
+      if (!read) assert.match(response.headers.get("Allow")!, /GET/)
+      if (method === "HEAD") assert.equal(response.body, null)
+      await response.body?.cancel()
+    }
+  }
+})
+
 test("CSP enforcement and startup work without any Sentry configuration", async () => {
   assert.doesNotThrow(() => parseEnv({ CLOUDINARY_CLOUD_NAME: "website-test" }))
   assert.equal(
