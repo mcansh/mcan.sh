@@ -43,14 +43,4 @@
     --text-4xl: 2.25rem;
     --text-4xl--line-height: calc(2.5 / 2.25);
   }
-
-  body {
-    font-family: "Inter", system-ui;
-  }
-
-  pre,
-  code {
-    font-family: "Berkeley Mono";
-    font-weight: 100;
-  }
 }

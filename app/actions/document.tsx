@@ -1,58 +1,27 @@
-import { Fragment } from "remix/ui"
 import type { Handle, MixInput, RemixNode } from "remix/ui"
+import { Fragment } from "remix/ui"
 import { ImportMap } from "remix/ui/server"
 
 import { getAssetEntry } from "../middleware/assets.ts"
-import {} from "../middleware/assets.ts"
+import { FONT_CONFIGS } from "./home-page/shared.tsx"
 
 export interface DocumentProps {
   children?: RemixNode
   head?: RemixNode
   title?: string
   mix?: MixInput<HTMLElement>
-  fontIndex?: number
+  fontIndex: number
 }
 
 const DEFAULT_TITLE = readAppDisplayName("Logan McAnsh")
 
-// Font configurations: [display name, Google Fonts URL, CSS font-family, CSS font stack]
-const FONT_CONFIGS = [
-  [
-    "Inter (Default)",
-    "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap",
-    "Inter",
-    '"Inter", system-ui',
-  ],
-  [
-    "Geist",
-    "https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&display=swap",
-    "Geist",
-    '"Geist", system-ui',
-  ],
-  [
-    "Instrument Sans",
-    "https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;700&display=swap",
-    "Instrument Sans",
-    '"Instrument Sans", system-ui',
-  ],
-  [
-    "DM Sans",
-    "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap",
-    "DM Sans",
-    '"DM Sans", system-ui',
-  ],
-  [
-    "Space Grotesk",
-    "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap",
-    "Space Grotesk",
-    '"Space Grotesk", system-ui',
-  ],
-] as const
-
 export function Document(handle: Handle<DocumentProps>) {
+  let assetEntry = getAssetEntry()
+  let { children, head, title = DEFAULT_TITLE, mix, fontIndex } = handle.props
   return () => {
-    let assetEntry = getAssetEntry()
-    let { children, head, title = DEFAULT_TITLE, mix } = handle.props
+    let fontConfig = FONT_CONFIGS[fontIndex] ?? FONT_CONFIGS[0]
+    let [, fontUrl, fontFamily] = fontConfig
+    console.log({ fontIndex, fontConfig })
 
     return (
       <html lang="en" mix={mix}>
@@ -84,6 +53,22 @@ export function Document(handle: Handle<DocumentProps>) {
               href={href}
             />
           ))}
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+
+          <link rel="stylesheet" href={fontUrl} />
+          <style
+            key="fonts"
+            data-rmx-key="fonts"
+            innerHTML={`
+              :root {
+                --font-sans: ${fontFamily};
+              }
+              body {
+                font-family: var(--font-sans);
+              }
+            `}
+          />
         </head>
         <body>
           {children}
