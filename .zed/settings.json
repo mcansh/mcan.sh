@@ -181,7 +181,13 @@
       ]
     },
     "TypeScript": {
-      "language_servers": ["typescript-ls", "!vtsls", "!typescript-language-server"],
+      "language_servers": [
+        "typescript-ls",
+        "oxlint",
+        "oxfmt",
+        "!vtsls",
+        "!typescript-language-server"
+      ],
       "format_on_save": "on",
       "prettier": {
         "allowed": false
@@ -195,7 +201,13 @@
       ]
     },
     "TSX": {
-      "language_servers": ["typescript-ls", "!vtsls", "!typescript-language-server"],
+      "language_servers": [
+        "typescript-ls",
+        "oxlint",
+        "oxfmt",
+        "!vtsls",
+        "!typescript-language-server"
+      ],
       "format_on_save": "on",
       "prettier": {
         "allowed": false
