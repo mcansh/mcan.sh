@@ -13,11 +13,5 @@
     "files": {
       "extensions": [".avif", ".gif", ".jpeg", ".jpg", ".png", ".svg", ".webp", ".woff2"]
     }
-  },
-  "test": {
-    "setup": "./test/setup.ts",
-    "playwright": {
-      "configFile": "./playwright.config.ts"
-    }
   }
 }
