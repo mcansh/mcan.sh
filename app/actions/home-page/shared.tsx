@@ -6,7 +6,6 @@ import { routes } from "../../routes.ts"
 import { getCloudinaryURL } from "../../utils/cloudinary.ts"
 import { env } from "../../utils/env.ts"
 import { Document } from "../document.tsx"
-import { getAssetEntry } from "../../middleware/assets.ts"
 
 export type HomePageProps = {
   me: {
