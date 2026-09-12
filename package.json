@@ -63,5 +63,8 @@
     "husky": true,
     "unrs-resolver": true,
     "workerd": true
+  },
+  "patchedDependencies": {
+    "@remix-run/assets@0.7.0": "patches/@remix-run+assets@0.7.0.patch"
   }
 }
