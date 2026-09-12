@@ -3,6 +3,7 @@ import { Fragment } from "remix/ui"
 import { ImportMap } from "remix/ui/server"
 
 import { getAssetEntry } from "../middleware/assets.ts"
+import { getNonce } from "../middleware/security-headers.ts"
 import { FONT_CONFIGS } from "./home-page/shared.tsx"
 
 export interface DocumentProps {
@@ -17,6 +18,7 @@ const DEFAULT_TITLE = readAppDisplayName("Logan McAnsh")
 
 export function Document(handle: Handle<DocumentProps>) {
   let assetEntry = getAssetEntry()
+  let nonce = getNonce()
   let { children, head, title = DEFAULT_TITLE, mix, fontIndex } = handle.props
   return () => {
     let fontConfig = FONT_CONFIGS[fontIndex] ?? FONT_CONFIGS[0]
@@ -43,11 +45,12 @@ export function Document(handle: Handle<DocumentProps>) {
           ))}
           <title>{title}</title>
           {head}
-          <ImportMap value={assetEntry.scriptEntry.importMap} />
+          <ImportMap nonce={nonce} value={assetEntry.scriptEntry.importMap} />
           {assetEntry.scriptEntry.preloads.map((href) => (
             <link
               key={href}
               data-rmx-key={`modulepreload:${href}`}
+              nonce={nonce}
               rel="modulepreload"
               href={href}
             />
@@ -71,7 +74,7 @@ export function Document(handle: Handle<DocumentProps>) {
         </head>
         <body>
           {children}
-          <script type="module" src={assetEntry.scriptEntry.href} />
+          <script nonce={nonce} type="module" src={assetEntry.scriptEntry.href} />
         </body>
       </html>
     )

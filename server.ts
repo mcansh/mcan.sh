@@ -2,6 +2,7 @@ import * as http from "node:http"
 
 import { createRequestListener } from "remix/node-fetch-server"
 
+import { applySecurityHeaders } from "./app/middleware/security-headers.ts"
 import { router } from "./app/router.ts"
 
 const port = process.env.PORT ? Number.parseInt(process.env.PORT, 10) : 44100
@@ -17,7 +18,7 @@ const server = http.createServer(
       if (!(request.signal.aborted && error === request.signal.reason)) {
         console.error(error)
       }
-      return new Response("Internal Server Error", { status: 500 })
+      return applySecurityHeaders(new Response("Internal Server Error", { status: 500 }), request)
     }
   }),
 )
