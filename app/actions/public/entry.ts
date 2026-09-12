@@ -1,28 +1,26 @@
 import {
-    detectMultipleImportMapSupport,
-    importModule,
-    preloadShim,
-} from "remix/multiple-import-maps-polyfill";
-import { run } from "remix/ui";
+  detectMultipleImportMapSupport,
+  importModule,
+  preloadShim,
+} from "remix/multiple-import-maps-polyfill"
+import { run } from "remix/ui"
 
 const app = run({
   async loadModule(src, exportName) {
     let mod = await importModule(src)
     let exp = mod[exportName]
 
-    if (typeof exp !== "function") {
-      throw new Error(
-        `Expected module ${src} to export a function named ${exportName}, but got ${typeof exp}`,
-      )
+    if (!(exp instanceof Function)) {
+      throw new Error(`Expected module ${src} to export a function named ${exportName}`)
     }
 
     return exp
   },
-    async processClientEntryPreloads(preloads) {
-    if (await detectMultipleImportMapSupport()) return preloads;
+  async processClientEntryPreloads(preloads) {
+    if (await detectMultipleImportMapSupport()) return preloads
 
-    preloadShim(preloads);
-    return [];
+    preloadShim(preloads)
+    return []
   },
   async resolveFrame(src, options) {
     let response = await fetch(src, {
@@ -43,17 +41,17 @@ const app = run({
 if (import.meta.hot) {
   import.meta.hot.on("server:update", async () => {
     try {
-      await app.ready();
-      await app.frames.top.reload();
+      await app.ready()
+      await app.frames.top.reload()
     } catch (error) {
-      console.error("Error reloading top frame on server update", error);
+      console.error("Error reloading top frame on server update", error)
     }
-  });
+  })
 }
 
 app.addEventListener("error", (event) => {
-  console.error(event.error);
-});
+  console.error(event.error)
+})
 
 function getRequestBody(
   formData?: FormData,
@@ -65,9 +63,9 @@ function getRequestBody(
 
   let body = new URLSearchParams()
   for (let [name, value] of formData) {
-    body.append(name, typeof value === "string" ? value : value.name)
+    body.append(name, value instanceof File ? value.name : value)
   }
   return body
 }
 
-await app.ready();
+await app.ready()

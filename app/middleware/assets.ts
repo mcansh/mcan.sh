@@ -1,23 +1,17 @@
-import * as path from "node:path";
+import * as path from "node:path"
 
-import type { ScriptEntry } from "remix/assets";
-import { getContext } from "remix/middleware/async-context";
-import type { Middleware, RequestContext } from "remix/router";
-import { createContextKey } from "remix/router";
+import type { ScriptEntry } from "remix/assets"
+import { getContext } from "remix/middleware/async-context"
+import type { Middleware, RequestContext } from "remix/router"
+import { createContextKey } from "remix/router"
 
-import { assets } from "../assets.ts";
+import { assets } from "../assets.ts"
 
-type FontName = "berkeleyMono"
 type StylesheetName = "global"
 
 type AssetEntry = {
-  fonts: Record<FontName, FontAsset>
   scriptEntry: ScriptEntry
   stylesheets: Record<StylesheetName, StylesheetAsset>
-}
-
-type FontAsset = {
-  href: string
 }
 
 type StylesheetAsset = {
@@ -32,15 +26,6 @@ const stylesheetEntries = {
   global: path.resolve(import.meta.dirname, "../actions/public/global.css"),
 } as const
 
-const fontEntries = {
-  berkeleyMono: {
-    href: path.resolve(
-      import.meta.dirname,
-      "../actions/public/fonts/berkeley-mono-variable-regular.woff2",
-    ),
-  },
-}
-
 export type AssetEntryContextEntry = {
   key: typeof assetEntryKey
   value: AssetEntry
@@ -48,39 +33,27 @@ export type AssetEntryContextEntry = {
 
 export function loadAssetEntry(entry = defaultEntry): Middleware<AssetEntryContextEntry> {
   return async (context, next) => {
-    let [fonts, scriptEntry, stylesheets] = await Promise.all([
-      Promise.all(
-        Object.entries(fontEntries).map(async ([name, fontEntry]) => {
-          let href = await assets.getHref(fontEntry.href)
-          return [name, { href }] as const
-        }),
-      ).then((entries) => Object.fromEntries(entries) as Record<FontName, FontAsset>),
+    let [scriptEntry, stylesheetHref] = await Promise.all([
       assets.getScriptEntry(entry),
-      Promise.all(
-        Object.entries(stylesheetEntries).map(async ([name, stylesheetEntry]) => {
-          let href = await assets.getHref(stylesheetEntry)
-          return [name, { href }] as const
-        }),
-      ).then((entries) => Object.fromEntries(entries) as Record<StylesheetName, StylesheetAsset>),
+      assets.getHref(stylesheetEntries.global),
     ])
 
     context.set(assetEntryKey, {
-      fonts,
       scriptEntry,
-      stylesheets,
+      stylesheets: { global: { href: stylesheetHref } },
     })
     return next()
   }
 }
 
-export function getAssetEntry(context: RequestContext<any, any> = getContext()): AssetEntry {
+export function getAssetEntry(context: Pick<RequestContext, "get"> = getContext()): AssetEntry {
   let entry = getOptionalAssetEntry(context)
   if (!entry) throw new Error("Asset entry is not loaded")
   return entry
 }
 
 export function getOptionalAssetEntry(
-  context: RequestContext<any, any> = getContext(),
+  context: Pick<RequestContext, "get"> = getContext(),
 ): AssetEntry | undefined {
-  return context.get(assetEntryKey) as AssetEntry | undefined
+  return context.get(assetEntryKey)
 }
