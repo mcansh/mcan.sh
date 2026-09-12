@@ -5,7 +5,7 @@ export const routes = route({
   home: get("/"),
   preview: get("/preview"),
   resume: get("/resume"),
-  wellKnown: get("/.well-known/*path"),
+  wellKnownAvatar: get("/.well-known(/*path)/avatar"),
   sitemap: get("/sitemap.xml"),
   manifest: get("/manifest.:ext"),
 })

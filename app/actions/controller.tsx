@@ -65,7 +65,7 @@ export default createController(routes, {
       return createManifestResponse(context.request)
     },
 
-    wellKnown(context) {
+    wellKnownAvatar(context) {
       return createWellKnownResponse(context.params.path, context.request)
     },
 

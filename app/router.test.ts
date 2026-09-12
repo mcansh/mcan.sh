@@ -179,6 +179,8 @@ test("restored resource routes support HEAD, reject writes, and return 404 for u
 
 test("well-known avatar forwards transformations, cancellation, and the image response", async () => {
   let { createWellKnownResponse } = await import("./actions/well-known.ts")
+  let { createRouter } = await import("remix/router")
+  let { routes } = await import("./routes.ts")
   for (let path of ["avatar", "w_48/h_48/c_fill/avatar"]) {
     let request = new Request(`https://mcan.sh/.well-known/${path}`)
     let upstream = new Response(new Uint8Array([1, 2, 3]), {
@@ -188,18 +190,22 @@ test("well-known avatar forwards transformations, cancellation, and the image re
         ETag: '"image"',
       },
     })
-    let response = await createWellKnownResponse(path, request, async (input, init) => {
-      assert.ok(input instanceof URL)
-      assert.equal(input.origin, "https://res.cloudinary.com")
-      assert.ok(input.pathname.startsWith("/website-test/image/upload/"))
-      assert.ok(input.pathname.endsWith("/website/2498016352165139482"))
-      assert.ok(input.pathname.includes("q_auto"))
-      assert.ok(input.pathname.includes("f_auto"))
-      if (path !== "avatar") assert.ok(input.pathname.includes(",w_48,h_48,c_fill/"))
-      assert.equal(init?.signal, request.signal)
-      assert.equal(init?.method, "GET")
-      return upstream
-    })
+    let avatarRouter = createRouter()
+    avatarRouter.get(routes.wellKnownAvatar, (context) =>
+      createWellKnownResponse(context.params.path, context.request, async (input, init) => {
+        assert.ok(input instanceof URL)
+        assert.equal(input.origin, "https://res.cloudinary.com")
+        assert.ok(input.pathname.startsWith("/website-test/image/upload/"))
+        assert.ok(input.pathname.endsWith("/website/2498016352165139482"))
+        assert.ok(input.pathname.includes("q_auto"))
+        assert.ok(input.pathname.includes("f_auto"))
+        if (path !== "avatar") assert.ok(input.pathname.includes(",w_48,h_48,c_fill/"))
+        assert.equal(init?.signal, request.signal)
+        assert.equal(init?.method, "GET")
+        return upstream
+      }),
+    )
+    let response = await avatarRouter.fetch(request)
     assert.equal(response, upstream)
     assert.equal(response.headers.get("Content-Type"), "image/png")
     assert.equal(response.headers.get("Cache-Control"), "public, max-age=60")
