@@ -68,7 +68,7 @@ export function DesignSwitcher(handle: Handle<{ designIndex: number; fontIndex: 
     let prevDesign = ((designIndex - 1 + DESIGN_CONFIGS.length) % DESIGN_CONFIGS.length) + 1
     let nextFont = ((fontIndex + 1) % FONT_CONFIGS.length) + 1
     return (
-      <details
+      <div
         mix={css({
           position: "fixed",
           bottom: "1rem",
@@ -80,8 +80,7 @@ export function DesignSwitcher(handle: Handle<{ designIndex: number; fontIndex: 
           gap: "0.5rem",
           fontSize: "var(--text-sm)",
           lineHeight: "var(--text-sm--line-height)",
-          "& summary": {
-            listStyle: "none",
+          "& button": {
             cursor: "pointer",
             position: "relative",
             display: "flex",
@@ -95,21 +94,24 @@ export function DesignSwitcher(handle: Handle<{ designIndex: number; fontIndex: 
             backdropFilter: "blur(8px)",
             color: "inherit",
           },
-          "& summary::-webkit-details-marker": { display: "none" },
-          "& summary::marker": { content: "none" },
-          "& summary:focus-visible": {
+          "& button:focus-visible": {
             outline: "2px solid currentColor",
             outlineOffset: "2px",
           },
           "@media (prefers-color-scheme: dark)": {
-            "& summary": {
+            "& button": {
               borderColor: "rgb(255 255 255 / 0.15)",
               backgroundColor: "rgb(0 0 0 / 0.85)",
             },
           },
         })}
       >
-        <summary aria-label="Show design and font options" title="Design and font options">
+        <button
+          type="button"
+          popoverTarget="design-font-picker"
+          aria-label="Show design and font options"
+          title="Design and font options"
+        >
           <svg
             width="16"
             height="16"
@@ -135,11 +137,20 @@ export function DesignSwitcher(handle: Handle<{ designIndex: number; fontIndex: 
               "@media (pointer: fine)": { display: "none" },
             })}
           />
-        </summary>
+        </button>
         <nav
+          id="design-font-picker"
+          popover="auto"
           aria-label="Design and font preview switcher"
           mix={css({
-            display: "flex",
+            "&:popover-open": { display: "flex" },
+            position: "fixed",
+            inset: "auto 1rem 4.5rem auto",
+            margin: 0,
+            maxWidth: "calc(100vw - 2rem)",
+            maxHeight: "calc(100dvh - 5.5rem)",
+            overflowY: "auto",
+            color: "inherit",
             flexDirection: "column",
             gap: "0.5rem",
             padding: "0.75rem",
@@ -303,7 +314,7 @@ export function DesignSwitcher(handle: Handle<{ designIndex: number; fontIndex: 
             ))}
           </div>
         </nav>
-      </details>
+      </div>
     )
   }
 }

@@ -15,6 +15,9 @@ test("every homepage design renders numeric image dimensions and search metadata
     assert.equal(response.status, 200)
     assert.equal(response.headers.get("Cross-Origin-Embedder-Policy"), "require-corp")
     let html = await response.text()
+    assert.match(html, /<button[^>]+popovertarget="design-font-picker"/)
+    assert.match(html, /<nav[^>]+id="design-font-picker"[^>]+popover="auto"/)
+    assert.doesNotMatch(html, /<details|<summary/)
     let head = html.match(/<head>([\s\S]*?)<\/head>/)![1]!
     assert.match(head, /<meta name="description" content="personal website for Logan McAnsh"/)
     let data = JSON.parse(
