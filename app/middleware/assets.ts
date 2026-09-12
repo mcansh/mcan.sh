@@ -1,11 +1,11 @@
-import * as path from "node:path"
+import * as path from "node:path";
 
-import type { ScriptEntry } from "remix/assets"
-import { getContext } from "remix/middleware/async-context"
-import { createContextKey } from "remix/router"
-import type { Middleware, RequestContext } from "remix/router"
+import type { ScriptEntry } from "remix/assets";
+import { getContext } from "remix/middleware/async-context";
+import type { Middleware, RequestContext } from "remix/router";
+import { createContextKey } from "remix/router";
 
-import { assets } from "../assets.ts"
+import { assets } from "../assets.ts";
 
 type FontName = "berkeleyMono"
 type StylesheetName = "global"
@@ -26,12 +26,6 @@ type StylesheetAsset = {
 
 const assetEntryKey = createContextKey<AssetEntry>()
 
-console.log({
-  dirname: import.meta.dirname,
-  up: path.resolve(import.meta.dirname, "../"),
-  mono: path.resolve(import.meta.dirname, "../actions/public/fonts/berkeley-mono-variable-regular.woff2"),
-})
-
 const defaultEntry = path.resolve(import.meta.dirname, "../actions/public/entry.ts")
 
 const stylesheetEntries = {
@@ -40,7 +34,10 @@ const stylesheetEntries = {
 
 const fontEntries = {
   berkeleyMono: {
-    href: path.resolve(import.meta.dirname, "../actions/public/fonts/berkeley-mono-variable-regular.woff2"),
+    href: path.resolve(
+      import.meta.dirname,
+      "../actions/public/fonts/berkeley-mono-variable-regular.woff2",
+    ),
   },
 }
 
