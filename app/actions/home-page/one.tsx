@@ -1,10 +1,10 @@
-import { css } from "remix/ui"
 import type { Handle } from "remix/ui"
+import { css } from "remix/ui"
 
 import { routes } from "../../routes.ts"
 import { spaceY } from "../public/css-mixins.ts"
-import { DesignSwitcher } from "./shared.tsx"
 import type { HomePageProps } from "./shared.tsx"
+import { DesignSwitcher } from "./shared.tsx"
 
 // ============================================================================
 // DESIGN OPTION 1: Minimal & Clean (Current style refined)
@@ -145,6 +145,7 @@ export function HomePage(handle: Handle<HomePageProps>) {
           href="https://github.com/mcansh"
           mix={css({
             fontSize: "var(--text-sm)",
+            lineHeight: "var(--text-sm--line-height)",
             fontWeight: 500,
             color: "inherit",
             textDecoration: "none",
@@ -162,6 +163,7 @@ export function HomePage(handle: Handle<HomePageProps>) {
           href={routes.resume.href()}
           mix={css({
             fontSize: "var(--text-sm)",
+            lineHeight: "var(--text-sm--line-height)",
             fontWeight: 500,
             color: "inherit",
             textDecoration: "none",

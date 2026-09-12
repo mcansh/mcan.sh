@@ -330,6 +330,7 @@ export function HomePage(handle: Handle<HomePageProps>) {
                   gap: "0.375rem",
                   marginTop: "auto",
                   fontSize: "var(--text-sm)",
+                  lineHeight: "var(--text-sm--line-height)",
                   fontWeight: 500,
                   color: "inherit",
                   textDecoration: "none",
@@ -381,6 +382,7 @@ export function HomePage(handle: Handle<HomePageProps>) {
             href="https://github.com/mcansh"
             mix={css({
               fontSize: "var(--text-sm)",
+              lineHeight: "var(--text-sm--line-height)",
               fontWeight: 500,
               color: "inherit",
               textDecoration: "none",
@@ -398,6 +400,7 @@ export function HomePage(handle: Handle<HomePageProps>) {
             href={routes.resume.href()}
             mix={css({
               fontSize: "var(--text-sm)",
+              lineHeight: "var(--text-sm--line-height)",
               fontWeight: 500,
               color: "inherit",
               textDecoration: "none",
@@ -413,6 +416,7 @@ export function HomePage(handle: Handle<HomePageProps>) {
             href="https://linkedin.com/in/loganmcansh"
             mix={css({
               fontSize: "var(--text-sm)",
+              lineHeight: "var(--text-sm--line-height)",
               fontWeight: 500,
               color: "inherit",
               textDecoration: "none",

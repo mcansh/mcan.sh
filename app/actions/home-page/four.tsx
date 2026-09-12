@@ -109,6 +109,7 @@ export function HomePage(handle: Handle<HomePageProps>) {
                   gap: "0.5rem",
                   padding: "0.5rem 1rem",
                   fontSize: "var(--text-sm)",
+                  lineHeight: "var(--text-sm--line-height)",
                   fontWeight: 500,
                   color: "rgb(0 0 0 / 0.7)",
                   textDecoration: "none",
@@ -151,6 +152,7 @@ export function HomePage(handle: Handle<HomePageProps>) {
                   gap: "0.5rem",
                   padding: "0.5rem 1rem",
                   fontSize: "var(--text-sm)",
+                  lineHeight: "var(--text-sm--line-height)",
                   fontWeight: 500,
                   color: "rgb(0 0 0 / 0.7)",
                   textDecoration: "none",
@@ -202,6 +204,7 @@ export function HomePage(handle: Handle<HomePageProps>) {
               <p
                 mix={css({
                   fontSize: "var(--text-sm)",
+                  lineHeight: "var(--text-sm--line-height)",
                   fontWeight: 500,
                   textTransform: "uppercase",
                   letterSpacing: "0.1em",

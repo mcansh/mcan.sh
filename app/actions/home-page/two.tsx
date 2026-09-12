@@ -167,6 +167,7 @@ export function HomePage(handle: Handle<HomePageProps>) {
               <span
                 mix={css({
                   fontSize: "var(--text-xs)",
+                  lineHeight: "var(--text-xs--line-height)",
                   fontWeight: 500,
                   textTransform: "uppercase",
                   letterSpacing: "0.05em",
@@ -191,6 +192,7 @@ export function HomePage(handle: Handle<HomePageProps>) {
                   key={tech}
                   mix={css({
                     fontSize: "var(--text-sm)",
+                    lineHeight: "var(--text-sm--line-height)",
                     fontWeight: 500,
                     padding: "0.25rem 0.75rem",
                     borderRadius: "9999px",
@@ -223,6 +225,7 @@ export function HomePage(handle: Handle<HomePageProps>) {
                   alignItems: "center",
                   gap: "0.5rem",
                   fontSize: "var(--text-sm)",
+                  lineHeight: "var(--text-sm--line-height)",
                   fontWeight: 500,
                   color: "inherit",
                   textDecoration: "none",
@@ -252,6 +255,7 @@ export function HomePage(handle: Handle<HomePageProps>) {
                   alignItems: "center",
                   gap: "0.5rem",
                   fontSize: "var(--text-sm)",
+                  lineHeight: "var(--text-sm--line-height)",
                   fontWeight: 500,
                   color: "inherit",
                   textDecoration: "none",
@@ -285,6 +289,7 @@ export function HomePage(handle: Handle<HomePageProps>) {
                   alignItems: "center",
                   gap: "0.5rem",
                   fontSize: "var(--text-sm)",
+                  lineHeight: "var(--text-sm--line-height)",
                   fontWeight: 500,
                   color: "inherit",
                   textDecoration: "none",
