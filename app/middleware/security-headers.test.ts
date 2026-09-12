@@ -3,7 +3,6 @@ import { test } from "node:test"
 
 process.env.CLOUDINARY_CLOUD_NAME = "security-test"
 process.env.SENTRY_REPORT_URL = "https://reports.example.com/csp"
-process.env.SENTRY_DSN = "https://reports.example.com/dsn"
 
 const { router } = await import("../router.ts")
 const { applySecurityHeaders } = await import("./security-headers.ts")
@@ -15,6 +14,7 @@ function assertPolicy(response: Response) {
   assert.match(response.headers.get("Strict-Transport-Security")!, /max-age=/)
   assert.match(response.headers.get("Permissions-Policy")!, /camera=\(\)/)
   let csp = response.headers.get("Content-Security-Policy")!
+  assert.ok(csp.includes("report-uri https://reports.example.com/csp"))
   assert.match(csp, /default-src 'none'/)
   assert.match(csp, /frame-ancestors 'none'/)
   assert.match(csp, /script-src 'self' 'nonce-[^']+' 'strict-dynamic'/)

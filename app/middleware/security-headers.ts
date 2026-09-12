@@ -1,3 +1,4 @@
+import type { ContentSecurityPolicy } from "@mcansh/http-helmet"
 import { createNonce, createSecureHeaders, mergeHeaders } from "@mcansh/http-helmet"
 import { getContext } from "remix/middleware/async-context"
 import type { Middleware } from "remix/router"
@@ -31,29 +32,28 @@ export function applySecurityHeaders(
   let isLocalhost =
     ["localhost", "127.0.0.1", "[::1]"].includes(url.hostname) ||
     url.hostname.endsWith(".localhost")
+  let contentSecurityPolicy: ContentSecurityPolicy = {
+    "default-src": ["'none'"],
+    "base-uri": ["'self'"],
+    "frame-ancestors": ["'none'"],
+    "img-src": ["'self'", `https://res.cloudinary.com/${env.CLOUDINARY_CLOUD_NAME}/image/upload/`],
+    // The import-map polyfill uses a WebAssembly module parser.
+    "script-src": ["'self'", `'nonce-${nonce}'`, "'strict-dynamic'", "'wasm-unsafe-eval'"],
+    "connect-src": [
+      "'self'",
+      ...(isDevelopment ? ["ws:", "wss:", process.env.HMR_EVENT_ORIGIN] : []),
+    ],
+    "worker-src": ["blob:"],
+    "manifest-src": ["'self'"],
+    "font-src": ["'self'", "https://fonts.gstatic.com"],
+    // Remix's css() renderer emits style tags without nonce support.
+    "style-src": ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+    "upgrade-insecure-requests": process.env.NODE_ENV === "production" && !isLocalhost,
+  }
+  if (env.SENTRY_REPORT_URL) contentSecurityPolicy["report-uri"] = [env.SENTRY_REPORT_URL]
+
   let securityHeaders = createSecureHeaders({
-    "Content-Security-Policy": {
-      "default-src": ["'none'"],
-      "base-uri": ["'self'"],
-      "frame-ancestors": ["'none'"],
-      "img-src": [
-        "'self'",
-        `https://res.cloudinary.com/${env.CLOUDINARY_CLOUD_NAME}/image/upload/`,
-      ],
-      // The import-map polyfill uses a WebAssembly module parser.
-      "script-src": ["'self'", `'nonce-${nonce}'`, "'strict-dynamic'", "'wasm-unsafe-eval'"],
-      "connect-src": [
-        "'self'",
-        ...(isDevelopment ? ["ws:", "wss:", process.env.HMR_EVENT_ORIGIN] : []),
-      ],
-      "worker-src": ["blob:"],
-      "manifest-src": ["'self'"],
-      "font-src": ["'self'", "https://fonts.gstatic.com"],
-      // Remix's css() renderer emits style tags without nonce support.
-      "style-src": ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
-      "report-uri": [env.SENTRY_REPORT_URL],
-      "upgrade-insecure-requests": process.env.NODE_ENV === "production" && !isLocalhost,
-    },
+    "Content-Security-Policy": contentSecurityPolicy,
     "X-Frame-Options": "DENY",
     "X-Content-Type-Options": "nosniff",
     "X-DNS-Prefetch-Control": "on",
