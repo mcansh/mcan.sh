@@ -38,7 +38,7 @@ importers:
         version: 0.2.4
       remix:
         specifier: 3.0.0-rc.2
-        version: 3.0.0-rc.2(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)
+        version: 3.0.0-rc.2(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(playwright@1.63.0)
     devDependencies:
       '@cld-apis/types':
         specifier: ^0.1.6
@@ -58,6 +58,9 @@ importers:
       oxlint-tsgolint:
         specifier: ^7.0.2001
         version: 7.0.2001
+      playwright:
+        specifier: ^1.63.0
+        version: 1.63.0
       typescript:
         specifier: ^7.0.2
         version: 7.0.2
@@ -2010,6 +2013,36 @@ packages:
     resolution: {integrity: sha512-NPE8TDbzl/3YQYY7CSS228s3g2ollTFnc+Qi3tqmqJp9Vg2ovUpixcJEo2HJScN2Ez+kEaal6y70c0ehqJBJeA==}
     engines: {node: '>=10'}
 
+  playwright-core@1.63.0:
+    resolution: {integrity: sha512-rYCsBF/M5HjUch52bbtVONEFjv6Xu8sm8h72dNlR5bzIE1fvC/bxgspzkjSfU+MweEMmPM8KJebG6nnyxo5mCg==}
+    engines: {node: '>=20'}
+    hasBin: true
+    peerDependencies:
+      bufferutil: '*'
+      chromium-bidi: '*'
+      electron: '*'
+      kerberos: '*'
+      utf-8-validate: '*'
+      zod: '*'
+    peerDependenciesMeta:
+      bufferutil:
+        optional: true
+      chromium-bidi:
+        optional: true
+      electron:
+        optional: true
+      kerberos:
+        optional: true
+      utf-8-validate:
+        optional: true
+      zod:
+        optional: true
+
+  playwright@1.63.0:
+    resolution: {integrity: sha512-+7ziBLidS4NaNCdt57SUDT+wYmmd5fmiQejUic/kb+YsYSCPyOOE9sebzMjNmQrsnNpDJqd4WHvV/8lfKfUDUg==}
+    engines: {node: '>=20'}
+    hasBin: true
+
   please-upgrade-node@3.2.0:
     resolution: {integrity: sha512-gQR3WpIgNIKwBMVLkpMUeR3e1/E1y42bqDQZfql+kDeXd8COYfM8PQA4X6y7a8u9Ua9FHmsrrmirW2vHs45hWg==}
 
@@ -2743,7 +2776,7 @@ snapshots:
       '@remix-run/fetch-router': 0.22.0
       '@remix-run/session': 0.4.2
 
-  '@remix-run/cli@0.7.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)':
+  '@remix-run/cli@0.7.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(playwright@1.63.0)':
     dependencies:
       '@remix-run/assets': 0.7.0(patch_hash=77745a19db99caada1f0c765ebed3a5d2e1d6888f28be4e34ca2bfafd226d3d3)(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)
       '@remix-run/data-table': 0.5.1
@@ -2751,13 +2784,12 @@ snapshots:
       '@remix-run/data-table-postgres': 0.5.2
       '@remix-run/data-table-sqlite': 0.6.2
       '@remix-run/terminal': 0.1.1
-      '@remix-run/test': 0.6.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)
+      '@remix-run/test': 0.6.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(playwright@1.63.0)
       jsonc-parser: 3.3.1
       semver: 7.8.5
     transitivePeerDependencies:
       - mysql2
       - pg
-      - playwright
 
   '@remix-run/compression-middleware@0.1.14':
     dependencies:
@@ -2923,7 +2955,7 @@ snapshots:
 
   '@remix-run/terminal@0.1.1': {}
 
-  '@remix-run/test@0.6.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)':
+  '@remix-run/test@0.6.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(playwright@1.63.0)':
     dependencies:
       '@remix-run/node-tsx': 0.1.1(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)
       '@remix-run/terminal': 0.1.1
@@ -2935,6 +2967,7 @@ snapshots:
       istanbul-reports: 3.2.0
       magic-string: 0.30.21
       oxc-resolver: 11.24.2
+      playwright: 1.63.0
       source-map-js: 1.2.1
       v8-to-istanbul: 9.3.0
 
@@ -3722,6 +3755,19 @@ snapshots:
     dependencies:
       find-up: 5.0.0
 
+  playwright-core@1.63.0: {}
+
+  playwright@1.63.0:
+    dependencies:
+      playwright-core: 1.63.0
+    transitivePeerDependencies:
+      - bufferutil
+      - chromium-bidi
+      - electron
+      - kerberos
+      - utf-8-validate
+      - zod
+
   please-upgrade-node@3.2.0:
     dependencies:
       semver-compare: 1.0.0
@@ -3752,14 +3798,14 @@ snapshots:
 
   readdirp@5.1.1: {}
 
-  remix@3.0.0-rc.2(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2):
+  remix@3.0.0-rc.2(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(playwright@1.63.0):
     dependencies:
       '@remix-run/assert': 0.3.0
       '@remix-run/assets': 0.7.0(patch_hash=77745a19db99caada1f0c765ebed3a5d2e1d6888f28be4e34ca2bfafd226d3d3)(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)
       '@remix-run/async-context-middleware': 0.3.6
       '@remix-run/auth': 0.3.1
       '@remix-run/auth-middleware': 0.2.6
-      '@remix-run/cli': 0.7.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)
+      '@remix-run/cli': 0.7.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(playwright@1.63.0)
       '@remix-run/compression-middleware': 0.1.14
       '@remix-run/cookie': 0.6.0
       '@remix-run/cop-middleware': 0.1.9
@@ -3799,13 +3845,13 @@ snapshots:
       '@remix-run/static-middleware': 0.4.15
       '@remix-run/tar-parser': 0.7.1
       '@remix-run/terminal': 0.1.1
-      '@remix-run/test': 0.6.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)
+      '@remix-run/test': 0.6.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(playwright@1.63.0)
       '@remix-run/ui': 0.9.0
       '@remix-run/ui-hmr': 0.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)
+      playwright: 1.63.0
     transitivePeerDependencies:
       - mysql2
       - pg
-      - playwright
       - redis
 
   resolve-from@4.0.0: {}

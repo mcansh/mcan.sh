@@ -28,6 +28,7 @@
     "oxfmt": "^0.67.0",
     "oxlint": "^1.81.0",
     "oxlint-tsgolint": "^7.0.2001",
+    "playwright": "^1.63.0",
     "typescript": "^7.0.2"
   },
   "overrides": {
