@@ -9,6 +9,33 @@ delete process.env.VITE_SENTRY_DSN
 const { router } = await import("./router.ts")
 const { parseEnv } = await import("./utils/env.ts")
 
+test("preview navigation includes the selected design's document styles", async () => {
+  let initial = await (await router.fetch("https://mcan.sh/?design=1&font=2")).text()
+  let links = [...initial.matchAll(/<a\b[^>]*>/g)]
+    .map(([link]) => link)
+    .filter((link) => /href="\/\?design=/.test(link))
+  assert.ok(links.length > 0)
+
+  for (let link of links) {
+    assert.doesNotMatch(link, /data-rmx-document/)
+    let href = link.match(/\shref="([^"]+)"/)![1]!.replaceAll("&amp;", "&")
+    let src = link.match(/data-rmx-src="([^"]+)"/)?.[1]?.replaceAll("&amp;", "&") ?? href
+    let navigated = await (await router.fetch(new URL(src, "https://mcan.sh"))).text()
+    let refreshed = await (await router.fetch(new URL(href, "https://mcan.sh"))).text()
+    assert.equal(
+      navigated.match(/<html\b[^>]*>/)?.[0],
+      refreshed.match(/<html\b[^>]*>/)?.[0],
+      `${href} must update the document's design styles`,
+    )
+    assert.equal(
+      navigated.match(/<style[^>]*data-rmx-key="fonts"[^>]*>[\s\S]*?<\/style>/)?.[0],
+      refreshed.match(/<style[^>]*data-rmx-key="fonts"[^>]*>[\s\S]*?<\/style>/)?.[0],
+      `${href} must update the document's font styles`,
+    )
+    assert.doesNotMatch(link, /data-rmx-target="preview"/)
+  }
+})
+
 test("every homepage design renders numeric image dimensions and search metadata", async () => {
   for (let design = 1; design <= 4; design++) {
     let response = await router.fetch(`https://mcan.sh/?design=${design}`)
@@ -146,7 +173,7 @@ test("manifest aliases serve existing icons and support conditional requests", a
   assert.equal(stale.status, 200)
   await stale.body?.cancel()
   let homepage = await router.fetch("https://mcan.sh/")
-  assert.match(await homepage.text(), /<link rel="manifest" href="\/manifest.webmanifest"/)
+  assert.match(await homepage.text(), /<link\b[^>]*\brel="manifest"[^>]*\bhref="\/manifest.webmanifest"/)
 })
 
 test("sitemap lists the homepage and resume on the request origin", async () => {
