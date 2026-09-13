@@ -368,78 +368,76 @@ export function HomePage(handle: Handle<HomePageProps>) {
             ))}
           </div>
         </section>
-      </div>
 
-      {/* Footer Links */}
-      <footer
-        mix={css({
-          marginTop: "5rem",
-          textAlign: "center",
-          "@media (width >= 64rem)": { marginTop: "7rem" },
-        })}
-      >
-        <div
+        {/* Footer Links */}
+        <footer
           mix={css({
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "center",
-            gap: "1.5rem",
+            textAlign: "center",
           })}
         >
-          <a
-            href="https://github.com/mcansh"
+          <div
             mix={css({
-              fontSize: "var(--text-sm)",
-              lineHeight: "var(--text-sm--line-height)",
-              fontWeight: 500,
-              color: "inherit",
-              textDecoration: "none",
-              borderBottom: "1px solid currentColor",
-              paddingBottom: "2px",
-              transition: "opacity 0.15s ease",
-              "&:hover": { opacity: 0.7 },
-            })}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            GitHub
-          </a>
-          <a
-            href={routes.resume.href()}
-            mix={css({
-              fontSize: "var(--text-sm)",
-              lineHeight: "var(--text-sm--line-height)",
-              fontWeight: 500,
-              color: "inherit",
-              textDecoration: "none",
-              borderBottom: "1px solid currentColor",
-              paddingBottom: "2px",
-              transition: "opacity 0.15s ease",
-              "&:hover": { opacity: 0.7 },
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "center",
+              gap: "1.5rem",
             })}
           >
-            Resume
-          </a>
-          <a
-            href="https://linkedin.com/in/loganmcansh"
-            mix={css({
-              fontSize: "var(--text-sm)",
-              lineHeight: "var(--text-sm--line-height)",
-              fontWeight: 500,
-              color: "inherit",
-              textDecoration: "none",
-              borderBottom: "1px solid currentColor",
-              paddingBottom: "2px",
-              transition: "opacity 0.15s ease",
-              "&:hover": { opacity: 0.7 },
-            })}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            LinkedIn
-          </a>
-        </div>
-      </footer>
+            <a
+              href="https://github.com/mcansh"
+              mix={css({
+                fontSize: "var(--text-sm)",
+                lineHeight: "var(--text-sm--line-height)",
+                fontWeight: 500,
+                color: "inherit",
+                textDecoration: "none",
+                borderBottom: "1px solid currentColor",
+                paddingBottom: "2px",
+                transition: "opacity 0.15s ease",
+                "&:hover": { opacity: 0.7 },
+              })}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GitHub
+            </a>
+            <a
+              href={routes.resume.href()}
+              mix={css({
+                fontSize: "var(--text-sm)",
+                lineHeight: "var(--text-sm--line-height)",
+                fontWeight: 500,
+                color: "inherit",
+                textDecoration: "none",
+                borderBottom: "1px solid currentColor",
+                paddingBottom: "2px",
+                transition: "opacity 0.15s ease",
+                "&:hover": { opacity: 0.7 },
+              })}
+            >
+              Resume
+            </a>
+            <a
+              href="https://linkedin.com/in/loganmcansh"
+              mix={css({
+                fontSize: "var(--text-sm)",
+                lineHeight: "var(--text-sm--line-height)",
+                fontWeight: 500,
+                color: "inherit",
+                textDecoration: "none",
+                borderBottom: "1px solid currentColor",
+                paddingBottom: "2px",
+                transition: "opacity 0.15s ease",
+                "&:hover": { opacity: 0.7 },
+              })}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              LinkedIn
+            </a>
+          </div>
+        </footer>
+      </div>
       <DesignSwitcher designIndex={designIndex} fontIndex={fontIndex} />
     </main>
   )
