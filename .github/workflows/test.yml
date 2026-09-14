@@ -1,0 +1,25 @@
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Set up Nub
+        uses: nubjs/setup-nub@21b317c170eee658503996209cf87b63481be35a # v0
+
+      - name: Install dependencies
+        run: nub install --frozen-lockfile
+
+      - name: Run tests
+        run: nub run test
