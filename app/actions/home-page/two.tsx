@@ -65,6 +65,7 @@ export function HomePage(handle: Handle<HomePageProps>) {
             })}
           >
             <img
+              data-preview-portrait
               mix={css({
                 width: "14rem",
                 height: "14rem",

@@ -25,6 +25,59 @@
 }
 
 @layer app {
+  /* View-transition experiment: tune these two durations to compare the feel. */
+  :root {
+    --preview-fade-duration: 180ms;
+    --preview-move-duration: 320ms;
+  }
+
+  [data-preview-portrait] {
+    view-transition-name: preview-portrait;
+  }
+
+  [popovertarget="design-font-picker"] {
+    view-transition-name: preview-toggle;
+  }
+
+  #design-font-picker {
+    view-transition-name: preview-picker;
+  }
+
+  ::view-transition-group(*) {
+    animation-duration: var(--preview-move-duration);
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: var(--preview-fade-duration);
+  }
+
+  ::view-transition-group(preview-picker),
+  ::view-transition-group(preview-toggle) {
+    z-index: 1;
+  }
+
+  ::view-transition-old(preview-picker),
+  ::view-transition-old(preview-toggle) {
+    animation: none;
+    opacity: 0;
+  }
+
+  ::view-transition-new(preview-picker),
+  ::view-transition-new(preview-toggle) {
+    animation: none;
+    mix-blend-mode: normal;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    ::view-transition-group(*),
+    ::view-transition-old(*),
+    ::view-transition-new(*) {
+      animation: none !important;
+    }
+  }
+
   :root {
     --breakpoint-md: 48rem;
     --container-xs: 20rem;
