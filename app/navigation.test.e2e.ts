@@ -1,7 +1,7 @@
-import type { Page } from "playwright"
 import * as assert from "remix/assert"
 import { createTestServer } from "remix/node-fetch-server/test"
 import { test } from "remix/test"
+import type { TestContext } from "remix/test"
 
 process.env.CLOUDINARY_CLOUD_NAME = "website-test"
 delete process.env.SENTRY_REPORT_URL
@@ -9,6 +9,8 @@ delete process.env.SENTRY_DSN
 delete process.env.VITE_SENTRY_DSN
 
 const { router } = await import("./router.ts")
+
+type Page = Awaited<ReturnType<TestContext["serve"]>>
 
 test("preview clicks reconcile document styles and fonts like a fresh load", async (t) => {
   let server = await createTestServer((request) => router.fetch(request))
