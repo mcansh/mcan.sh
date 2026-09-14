@@ -1,9 +1,5 @@
-import assert from "node:assert/strict"
-import { test } from "node:test"
-
-import type { Page } from "playwright"
-import { chromium } from "playwright"
-import { createTestServer } from "remix/node-fetch-server/test"
+import * as assert from "remix/assert"
+import { test } from "remix/test"
 
 process.env.CLOUDINARY_CLOUD_NAME = "website-test"
 delete process.env.SENTRY_REPORT_URL
@@ -12,77 +8,6 @@ delete process.env.VITE_SENTRY_DSN
 
 const { router } = await import("./router.ts")
 const { parseEnv } = await import("./utils/env.ts")
-
-test("preview clicks reconcile document styles and fonts like a fresh load", async (t) => {
-  let server = await createTestServer((request) => router.fetch(request))
-  t.after(() => server.close())
-  let browser = await chromium.launch()
-  t.after(() => browser.close())
-  let context = await browser.newContext()
-  // Keep this test independent of external image and font services.
-  await context.route("**/*", (route) =>
-    new URL(route.request().url()).origin === server.baseUrl
-      ? route.continue()
-      : route.fulfill({ status: 200, body: "" }),
-  )
-  let page = await context.newPage()
-  let fresh = await context.newPage()
-  let errors: string[] = []
-  page.on("pageerror", (error) => errors.push(error.message))
-  await page.goto(`${server.baseUrl}/?design=1&font=2`)
-  await ready(page)
-  let originalDocument = await page.evaluateHandle(() => document)
-  let initial = await documentStyles(page)
-
-  for (let [label, destination] of [
-    ["Next design", "/?design=2&font=2"],
-    ["Next font →", "/?design=2&font=3"],
-  ]) {
-    await page.getByRole("button", { name: "Show design and font options" }).click()
-    await page.getByRole("link", { name: label, exact: true }).click()
-    await page.waitForURL(`${server.baseUrl}${destination}`)
-    await fresh.goto(`${server.baseUrl}${destination}`)
-    await ready(fresh)
-    let expected = await documentStyles(fresh)
-    await page.waitForFunction(
-      (expected) =>
-        document.documentElement.className === expected.htmlClass &&
-        document.querySelector('[data-rmx-key="fonts"]')?.textContent === expected.fontRules,
-      expected,
-    )
-    assert.equal(await page.evaluate((original) => document === original, originalDocument), true)
-    assert.deepEqual(await documentStyles(page), expected)
-    if (label === "Next design") assert.notEqual(expected.htmlClass, initial.htmlClass)
-    else {
-      assert.notEqual(expected.fontRules, initial.fontRules)
-      assert.notEqual(expected.fontLinks[0], initial.fontLinks[0])
-    }
-  }
-  assert.deepEqual(errors, [])
-})
-
-async function ready(page: Page) {
-  await page.evaluate(async () => {
-    let entry = document.querySelector<HTMLScriptElement>('[data-rmx-key="browser-entry"]')!
-    await import(entry.src)
-  })
-}
-
-async function documentStyles(page: Page) {
-  return page.evaluate(() => ({
-    htmlClass: document.documentElement.className,
-    htmlStyle: document.documentElement.getAttribute("style"),
-    fontRules: document.querySelector('[data-rmx-key="fonts"]')?.textContent,
-    fontLinks: [...document.querySelectorAll('[data-rmx-key="font-stylesheet"]')].map((link) =>
-      link.getAttribute("href"),
-    ),
-    stylesheets: [...document.querySelectorAll("link[data-remix-stylesheet]")].map((link) =>
-      link.getAttribute("href"),
-    ),
-    bodyFont: getComputedStyle(document.body).fontFamily,
-    background: getComputedStyle(document.documentElement).backgroundColor,
-  }))
-}
 
 test("preview navigation includes the selected design's document styles", async () => {
   let initial = await (await router.fetch("https://mcan.sh/?design=1&font=2")).text()

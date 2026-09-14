@@ -11,7 +11,7 @@
     "dev": "NODE_ENV=development node --env-file-if-exists=.env --watch --import remix/node-tsx server.ts",
     "hmr": "NODE_ENV=development node --env-file-if-exists=.env hmr.ts",
     "start": "NODE_ENV=production node --import remix/node-tsx server.ts",
-    "test": "NODE_ENV=test node --import remix/node-tsx --test",
+    "test": "NODE_ENV=test remix test",
     "typecheck": "tsc --noEmit",
     "format": "oxfmt",
     "lint": "oxlint --fix"
