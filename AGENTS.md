@@ -13,6 +13,10 @@ npm test
 npm run typecheck
 ```
 
+Tests use `remix/test` and `remix/assert`, with `t.serve()` managing the navigation E2E browser and server.
+Install the browser used by the navigation regression test with `npx playwright install chromium`
+before running `npm test` for the first time (use `--with-deps` on Linux CI).
+
 ## Building Features
 
 Refer to ./.agents/skills/remix/SKILL.md

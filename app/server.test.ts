@@ -1,8 +1,9 @@
-import assert from "node:assert/strict"
 import { spawn } from "node:child_process"
 import { once } from "node:events"
-import { test } from "node:test"
 import { fileURLToPath } from "node:url"
+
+import * as assert from "remix/assert"
+import { test } from "remix/test"
 
 process.env.CLOUDINARY_CLOUD_NAME = "website-test"
 const { parseEnv } = await import("./utils/env.ts")

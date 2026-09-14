@@ -21,5 +21,8 @@ jobs:
       - name: Install dependencies
         run: nub install --frozen-lockfile
 
+      - name: Install browsers
+        run: nubx playwright install
+
       - name: Run tests
         run: nub run test
