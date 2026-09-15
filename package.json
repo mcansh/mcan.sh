@@ -25,7 +25,7 @@
     "@cld-apis/types": "^0.1.6",
     "@oxlint/plugins": "^1.81.0",
     "@types/node": "^26.4.1",
-    "oxfmt": "^0.67.0",
+    "oxfmt": "^0.68.0",
     "oxlint": "^1.81.0",
     "oxlint-tsgolint": "^7.0.2001",
     "typescript": "^7.0.2"
