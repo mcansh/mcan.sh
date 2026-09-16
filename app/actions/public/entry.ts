@@ -5,6 +5,8 @@ import {
 } from "remix/multiple-import-maps-polyfill"
 import { run } from "remix/ui"
 
+import { installPreviewTransitions } from "./preview-transitions.ts"
+
 const app = run({
   async loadModule(src, exportName) {
     let mod = await importModule(src)
@@ -40,3 +42,4 @@ app.addEventListener("error", (event) => {
 })
 
 await app.ready()
+installPreviewTransitions()

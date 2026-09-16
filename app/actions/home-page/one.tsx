@@ -48,6 +48,7 @@ export function HomePage(handle: Handle<HomePageProps>) {
         })}
       >
         <img
+          data-preview-portrait
           mix={css({
             "--size": "15rem",
             marginInline: "auto",

@@ -71,6 +71,7 @@ export function HomePage(handle: Handle<HomePageProps>) {
           >
             <div mix={css({ position: "relative" })}>
               <img
+                data-preview-portrait
                 mix={css({
                   width: "12rem",
                   height: "12rem",
