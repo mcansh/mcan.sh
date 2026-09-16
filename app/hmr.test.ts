@@ -1,8 +1,9 @@
-import assert from "node:assert/strict"
 import { createRequire } from "node:module"
-import { test } from "node:test"
 import { pathToFileURL } from "node:url"
 import { runInNewContext } from "node:vm"
+
+import * as assert from "remix/assert"
+import { test } from "remix/test"
 
 // Exercise the actual installed dependency so dropping the patch fails this test.
 const requireFromRemix = createRequire(import.meta.resolve("remix/assets"))

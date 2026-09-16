@@ -28,25 +28,42 @@ export function Document(handle: Handle<DocumentProps>) {
     return (
       <html lang="en" mix={mix}>
         <head>
-          <meta charSet="utf-8" />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <meta name="color-scheme" content="light dark" />
-          <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-          <link rel="manifest" href={routes.manifest.href({ ext: "webmanifest" })} />
-          <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+          {/* Stable keys retain these nodes when route-owned head content changes. */}
+          <meta data-rmx-key="charset" charSet="utf-8" />
+          <meta
+            data-rmx-key="viewport"
+            name="viewport"
+            content="width=device-width, initial-scale=1"
+          />
+          <meta data-rmx-key="color-scheme" name="color-scheme" content="light dark" />
+          <link data-rmx-key="favicon" rel="icon" type="image/svg+xml" href="/favicon.svg" />
+          <link
+            data-rmx-key="manifest"
+            rel="manifest"
+            href={routes.manifest.href({ ext: "webmanifest" })}
+          />
+          <link
+            data-rmx-key="apple-touch-icon"
+            rel="apple-touch-icon"
+            href="/apple-touch-icon.png"
+          />
           {Object.entries(assetEntry.stylesheets).map(([name, current]) => (
             <Fragment key={name}>
-              <link rel="preload" href={current.href} as="style" />
+              <link
+                data-rmx-key={`stylesheet-preload:${name}`}
+                rel="preload"
+                href={current.href}
+                as="style"
+              />
               <link
                 data-rmx-key={`stylesheet:${name}`}
                 data-remix-stylesheet={name}
-                data-rmx-preserve-dom
                 rel="stylesheet"
                 href={current.href}
               />
             </Fragment>
           ))}
-          <title>{title}</title>
+          <title data-rmx-key="title">{title}</title>
           {head}
           <ImportMap nonce={nonce} value={assetEntry.scriptEntry.importMap} />
           {assetEntry.scriptEntry.preloads.map((href) => (
@@ -58,10 +75,19 @@ export function Document(handle: Handle<DocumentProps>) {
               href={href}
             />
           ))}
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+          <link
+            data-rmx-key="font-styles-preconnect"
+            rel="preconnect"
+            href="https://fonts.googleapis.com"
+          />
+          <link
+            data-rmx-key="font-files-preconnect"
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossOrigin="anonymous"
+          />
 
-          <link rel="stylesheet" href={fontUrl} />
+          <link data-rmx-key="font-stylesheet" rel="stylesheet" href={fontUrl} />
           <style
             key="fonts"
             data-rmx-key="fonts"
@@ -77,7 +103,12 @@ export function Document(handle: Handle<DocumentProps>) {
         </head>
         <body>
           {children}
-          <script nonce={nonce} type="module" src={assetEntry.scriptEntry.href} />
+          <script
+            data-rmx-key="browser-entry"
+            nonce={nonce}
+            type="module"
+            src={assetEntry.scriptEntry.href}
+          />
         </body>
       </html>
     )
