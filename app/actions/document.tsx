@@ -1,5 +1,5 @@
 import type { Handle, MixInput, RemixNode } from "remix/ui"
-import { Fragment } from "remix/ui"
+import { Fragment, unsafeHTML } from "remix/ui"
 import { ImportMap } from "remix/ui/server"
 
 import { getAssetEntry } from "../middleware/assets.ts"
@@ -65,14 +65,14 @@ export function Document(handle: Handle<DocumentProps>) {
           <style
             key="fonts"
             data-rmx-key="fonts"
-            innerHTML={`
+            innerHTML={unsafeHTML(`
               :root {
                 --font-sans: ${fontFamily};
               }
               body {
                 font-family: var(--font-sans);
               }
-            `}
+            `)}
           />
         </head>
         <body>

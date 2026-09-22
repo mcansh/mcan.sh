@@ -19,7 +19,7 @@
   "dependencies": {
     "@mcansh/http-helmet": "^0.13.2",
     "cloudinary-build-url": "^0.2.4",
-    "remix": "3.0.0-rc.2"
+    "remix": "^3.0.0-rc.3"
   },
   "devDependencies": {
     "@cld-apis/types": "^0.1.6",
@@ -65,6 +65,6 @@
     "workerd": true
   },
   "patchedDependencies": {
-    "@remix-run/assets@0.7.0": "patches/@remix-run+assets@0.7.0.patch"
+    "@remix-run/assets@0.7.1": "patches/@remix-run+assets@0.7.1.patch"
   }
 }

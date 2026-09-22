@@ -1,6 +1,6 @@
 import type { TransformerOption } from "@cld-apis/types"
 import type { Handle, MixInput } from "remix/ui"
-import { css, Fragment, Frame } from "remix/ui"
+import { css, Fragment, Frame, unsafeHTML } from "remix/ui"
 
 import { getNonce } from "../../middleware/security-headers.ts"
 import { routes } from "../../routes.ts"
@@ -38,19 +38,21 @@ export function HomeShell(handle: Handle<HomePageProps & { bodyMix: MixInput<HTM
             <script
               type="application/ld+json"
               nonce={nonce}
-              innerHTML={JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "Person",
-                name: "Logan McAnsh",
-                url: "https://mcan.sh",
-                jobTitle: "Senior Software Engineer",
-                image: handle.props.me.url,
-                sameAs: [
-                  "https://github.com/mcansh",
-                  "https://linkedin.com/in/loganmcansh",
-                  "https://x.com/loganmcansh",
-                ],
-              }).replace(/</g, "\\u003c")}
+              innerHTML={unsafeHTML(
+                JSON.stringify({
+                  "@context": "https://schema.org",
+                  "@type": "Person",
+                  name: "Logan McAnsh",
+                  url: "https://mcan.sh",
+                  jobTitle: "Senior Software Engineer",
+                  image: handle.props.me.url,
+                  sameAs: [
+                    "https://github.com/mcansh",
+                    "https://linkedin.com/in/loganmcansh",
+                    "https://x.com/loganmcansh",
+                  ],
+                }).replace(/</g, "\\u003c"),
+              )}
             />
           </Fragment>
         }
