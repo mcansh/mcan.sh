@@ -3,7 +3,7 @@ import { routes } from "../routes.ts"
 export function createSitemapResponse(request: Request): Response {
   let origin = new URL(request.url).origin
   let home = new URL(routes.home.href(), origin).href.replaceAll("&", "&amp;")
-  let resume = new URL(routes.resume.href(), origin).href.replaceAll("&", "&amp;")
+  let resume = new URL(routes.resume.index.href(), origin).href.replaceAll("&", "&amp;")
   return new Response(
     `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

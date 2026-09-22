@@ -398,7 +398,7 @@ export function HomePage(handle: Handle<HomePageProps>) {
             GitHub
           </a>
           <a
-            href={routes.resume.href()}
+            href={routes.resume.index.href()}
             mix={css({
               fontSize: "var(--text-sm)",
               lineHeight: "var(--text-sm--line-height)",

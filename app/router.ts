@@ -5,12 +5,14 @@ import type { MiddlewareContext } from "remix/router"
 import { createRouter } from "remix/router"
 
 import controller from "./actions/controller.tsx"
+import { resume } from "./actions/resume/controller.tsx"
 import { assets } from "./assets.ts"
 import { loadAssetEntry } from "./middleware/assets.ts"
 import { securityHeaders } from "./middleware/security-headers.ts"
 import { routes } from "./routes.ts"
 
 const renderMiddleware = render({ assets })
+
 type AppContext = MiddlewareContext<[typeof renderMiddleware]>
 
 declare module "remix/router" {
@@ -30,3 +32,4 @@ export const router = createRouter<AppContext>({
 })
 
 router.map(routes, controller)
+router.map(routes.resume, resume)

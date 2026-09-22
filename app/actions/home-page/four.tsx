@@ -146,7 +146,7 @@ export function HomePage(handle: Handle<HomePageProps>) {
                 <span>GitHub</span>
               </a>
               <a
-                href={routes.resume.href()}
+                href={routes.resume.index.href()}
                 mix={css({
                   display: "inline-flex",
                   alignItems: "center",

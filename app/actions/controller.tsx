@@ -4,7 +4,6 @@ import { assets } from "../assets.ts"
 import { routes } from "../routes.ts"
 import { DESIGN_OPTIONS, FONT_OPTIONS, getHomePage, getMe, HomeShell } from "./home-page/shared.tsx"
 import { createManifestResponse } from "./manifest.ts"
-import { ResumePage } from "./resume-page.tsx"
 import { createSitemapResponse } from "./sitemap.ts"
 import { createWellKnownResponse } from "./well-known.ts"
 
@@ -67,10 +66,6 @@ export default createController(routes, {
 
     wellKnownAvatar(context) {
       return createWellKnownResponse(context.params.path, context.request)
-    },
-
-    resume(context) {
-      return context.render(<ResumePage />)
     },
 
     sitemap(context) {
