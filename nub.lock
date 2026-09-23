@@ -33,6 +33,9 @@ importers:
       '@mcansh/http-helmet':
         specifier: ^0.13.2
         version: 0.13.2(react@19.2.8)(react-dom@19.2.8(react@19.2.8))
+      cloudflare:
+        specifier: ^7.1.0
+        version: 7.1.0
       cloudinary-build-url:
         specifier: ^0.2.4
         version: 0.2.4
@@ -1564,6 +1567,10 @@ packages:
 
   ci-info@2.0.0:
     resolution: {integrity: sha512-5tK7EtrZ0N+OLFMthtqOj4fI2Jeb88C4CAZPu25LDVUgXJ0A3Js4PMGqrn0JU1W0Mh1/Z8wZzYPxqUrXeBboCQ==}
+
+  cloudflare@7.1.0:
+    resolution: {integrity: sha512-eb6WtiAbhuqdWmBdVo6fuXQgEBkYjhOeujRDYLEUWEZIECuABvDLz2DUYTwpN/4KyFecM4JtMHgZn5prlFUjLg==}
+    hasBin: true
 
   cloudinary-build-url@0.2.4:
     resolution: {integrity: sha512-Wi0aZPHOa90xDCCC4k9eoTVPIm3aWNyycO+rJUXvOyusQqmkPSprHSuJh3s2zNxEtuGj24aCM13iLDpilWMpSw==}
@@ -3178,6 +3185,8 @@ snapshots:
   ci-env@1.17.0: {}
 
   ci-info@2.0.0: {}
+
+  cloudflare@7.1.0: {}
 
   cloudinary-build-url@0.2.4:
     dependencies:

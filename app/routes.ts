@@ -4,7 +4,10 @@ export const routes = route({
   assets: get("/assets/*path"),
   home: get("/"),
   preview: get("/preview"),
-  resume: get("/resume"),
+  resume: {
+    index: get("/resume"),
+    pdf: get("/resume.pdf"),
+  },
   wellKnownAvatar: get("/.well-known(/*path)/avatar"),
   sitemap: get("/sitemap.xml"),
   manifest: get("/manifest.:ext"),

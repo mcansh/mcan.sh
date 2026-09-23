@@ -11,10 +11,13 @@ test("production uses a configured public origin for Node requests", async () =>
   let input = {
     CLOUDINARY_CLOUD_NAME: "website-test",
     SENTRY_REPORT_URL: "https://reports.example.com/csp",
+    CLOUDFLARE_ACCOUNT_ID: "test-account",
+    CLOUDFLARE_API_TOKEN: "test-token",
   }
-  assert.equal(parseEnv(input, "production").PUBLIC_ORIGIN, "https://mcan.sh")
+  assert.throws(() => parseEnv(input, "production"))
   assert.equal(parseEnv(input, "development").PUBLIC_ORIGIN, undefined)
   for (let value of [
+    "",
     "https://example.com/path",
     "https://user:pass@example.com",
     "https://example.com/?x=1",
@@ -22,14 +25,13 @@ test("production uses a configured public origin for Node requests", async () =>
   ]) {
     assert.throws(() => parseEnv({ ...input, PUBLIC_ORIGIN: value }, "production"))
   }
-  for (let configuredOrigin of [undefined, "https://preview.example.com:8443"]) {
-    let origin = configuredOrigin ?? "https://mcan.sh"
+  for (let origin of ["https://mcan.sh", "https://preview.example.com:8443"]) {
     let child = spawn(process.execPath, ["--import", "remix/node-tsx", "server.ts"], {
       cwd: fileURLToPath(new URL("../", import.meta.url)),
       env: {
         ...process.env,
         ...input,
-        PUBLIC_ORIGIN: configuredOrigin,
+        PUBLIC_ORIGIN: origin,
         NODE_ENV: "production",
         PORT: "0",
         HMR_PROXY_PORT: "",
