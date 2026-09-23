@@ -2,6 +2,7 @@ import { createController } from "remix/router"
 
 import { assets } from "../assets.ts"
 import { routes } from "../routes.ts"
+import { CACHE } from "../utils/cache-control.ts"
 import { DESIGN_OPTIONS, FONT_OPTIONS, getHomePage, getMe, HomeShell } from "./home-page/shared.tsx"
 import { createManifestResponse } from "./manifest.ts"
 import { createSitemapResponse } from "./sitemap.ts"
@@ -44,6 +45,9 @@ export default createController(routes, {
           fontIndex={fontIndex}
           bodyMix={design.homePageOptions}
         />,
+        {
+          headers: CACHE.DOCUMENT,
+        },
       )
     },
 
