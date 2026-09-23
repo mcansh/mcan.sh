@@ -34,7 +34,7 @@ export function createManifestResponse(request: Request): Response {
   }
 
   let ifNoneMatch = IfNoneMatch.from(request.headers.get("If-None-Match"))
-  let matches = ifNoneMatch.matches(etag)
+  let matches = ifNoneMatch.matches(etag) || ifNoneMatch.matches(etag.slice(2))
 
   return new Response(matches ? null : MANIFEST_STRING, { status: matches ? 304 : 200, headers })
 }
