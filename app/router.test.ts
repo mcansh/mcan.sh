@@ -87,18 +87,18 @@ test("non-production CSP enforcement and startup work without Sentry configurati
 })
 
 test("production requires a valid CSP reporting URL", () => {
+  let input = {
+    CLOUDINARY_CLOUD_NAME: "website-test",
+    PUBLIC_ORIGIN: "https://mcan.sh",
+    CLOUDFLARE_ACCOUNT_ID: "test-account",
+    CLOUDFLARE_API_TOKEN: "test-token",
+  }
   for (let reportUrl of [undefined, "", "not a URL"]) {
-    assert.throws(() =>
-      parseEnv(
-        { CLOUDINARY_CLOUD_NAME: "website-test", SENTRY_REPORT_URL: reportUrl },
-        "production",
-      ),
-    )
+    assert.throws(() => parseEnv({ ...input, SENTRY_REPORT_URL: reportUrl }, "production"))
   }
   let reportUrl = "https://reports.example.com/csp"
   assert.equal(
-    parseEnv({ CLOUDINARY_CLOUD_NAME: "website-test", SENTRY_REPORT_URL: reportUrl }, "production")
-      .SENTRY_REPORT_URL,
+    parseEnv({ ...input, SENTRY_REPORT_URL: reportUrl }, "production").SENTRY_REPORT_URL,
     reportUrl,
   )
   for (let nodeEnv of ["development", "test"]) {
