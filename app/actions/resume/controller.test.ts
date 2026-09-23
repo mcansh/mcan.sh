@@ -1,6 +1,7 @@
 import assert from "node:assert/strict"
 import { after, before, test } from "node:test"
 
+import Cloudflare from "cloudflare"
 import { PDF } from "cloudflare/resources/browser-rendering/pdf"
 import { render } from "remix/middleware/render"
 import { createRouter } from "remix/router"
@@ -51,8 +52,15 @@ test("PDF requests share a render and cache, expire, and recover after failures"
 
   now += 60 * 60 * 1000
   finish = Promise.withResolvers<Response>()
-  finish.resolve(new Response("unavailable", { status: 503 }))
-  assert.equal((await request()).status, 503)
+  let providerError = new Cloudflare.InternalServerError(
+    503,
+    { errors: [{ code: 1000, message: "Renderer unavailable" }] },
+    "Renderer unavailable",
+    new Headers(),
+  )
+  let providerFailure = assert.rejects(request(), (error) => error === providerError)
+  finish.reject(providerError)
+  await providerFailure
   assert.equal(calls, 2)
 
   finish = Promise.withResolvers<Response>()
@@ -67,4 +75,29 @@ test("PDF requests share a render and cache, expire, and recover after failures"
   assert.equal(await (await request()).text(), "pdf-two")
   assert.equal(await (await request("?fresh=1")).text(), "pdf-two")
   assert.equal(calls, 4)
+})
+
+test("missing either Cloudflare credential returns 401 without rendering", async (t) => {
+  let { resume } = await import("./controller.tsx")
+  let { routes } = await import("../../routes.ts")
+  let { env } = await import("../../utils/env.ts")
+  let credentials = {
+    CLOUDFLARE_ACCOUNT_ID: env.CLOUDFLARE_ACCOUNT_ID,
+    CLOUDFLARE_API_TOKEN: env.CLOUDFLARE_API_TOKEN,
+  }
+  t.after(() => Object.assign(env, credentials))
+  let renderPdf = t.mock.method(PDF.prototype, "create", () => {
+    assert.fail("Missing credentials must not invoke Cloudflare")
+  })
+  let router = createRouter({ middleware: [render()] })
+  router.map(routes.resume, resume)
+
+  for (let key of ["CLOUDFLARE_ACCOUNT_ID", "CLOUDFLARE_API_TOKEN"] as const) {
+    Object.assign(env, credentials)
+    env[key] = undefined
+    let response = await router.fetch("https://mcan.sh/resume.pdf")
+    assert.equal(response.status, 401)
+    assert.equal(await response.text(), "Unauthorized")
+  }
+  assert.equal(renderPdf.mock.callCount(), 0)
 })

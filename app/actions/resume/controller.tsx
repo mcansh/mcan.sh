@@ -26,9 +26,7 @@ export const resume = createController(routes.resume, {
 
       pendingPdf ??= renderPdf(env.CLOUDFLARE_ACCOUNT_ID, env.CLOUDFLARE_API_TOKEN)
         .then((response) => {
-          if (response.ok) {
-            cachedPdf = { response, expiresAt: Date.now() + 60 * 60 * 1000 }
-          }
+          cachedPdf = { response, expiresAt: Date.now() + 60 * 60 * 1000 }
           return response
         })
         .finally(() => {
@@ -54,13 +52,6 @@ async function renderPdf(accountId: string, apiToken: string) {
       margin: { top: "20", bottom: "20", left: "20", right: "20" },
     },
   })
-
-  if (!result.ok) {
-    return new Response(await result.blob(), {
-      status: result.status,
-      headers: result.headers,
-    })
-  }
 
   let headers = new Headers(result.headers)
 
