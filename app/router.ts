@@ -8,6 +8,7 @@ import controller from "./actions/controller.tsx"
 import { resume } from "./actions/resume/controller.tsx"
 import { assets } from "./assets.ts"
 import { loadAssetEntry } from "./middleware/assets.ts"
+import { rateLimit } from "./middleware/rate-limit.ts"
 import { securityHeaders } from "./middleware/security-headers.ts"
 import { routes } from "./routes.ts"
 
@@ -28,6 +29,7 @@ export const router = createRouter<AppContext>({
     staticFiles("./public", { index: false, lastModified: true }),
     renderMiddleware,
     loadAssetEntry(),
+    rateLimit(),
   ],
 })
 
