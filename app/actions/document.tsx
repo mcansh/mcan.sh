@@ -1,6 +1,6 @@
-import type { Handle, MixInput, RemixNode } from "remix/ui"
-import { Fragment, unsafeHTML } from "remix/ui"
-import { ImportMap } from "remix/ui/server"
+import type { Handle, MixInput, RemixNode } from "remix/component"
+import { Fragment, unsafeHTML } from "remix/component"
+import { ImportMap } from "remix/component/server"
 
 import { getAssetEntry } from "../middleware/assets.ts"
 import { getNonce } from "../middleware/security-headers.ts"

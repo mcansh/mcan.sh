@@ -1,6 +1,6 @@
 import type { TransformerOption } from "@cld-apis/types"
-import type { Handle, MixInput } from "remix/ui"
-import { css, Fragment, Frame, unsafeHTML } from "remix/ui"
+import type { Handle, MixInput } from "remix/component"
+import { css, Fragment, Frame, unsafeHTML } from "remix/component"
 
 import { getNonce } from "../../middleware/security-headers.ts"
 import { routes } from "../../routes.ts"
