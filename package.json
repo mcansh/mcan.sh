@@ -25,46 +25,20 @@
     "@cld-apis/types": "^0.1.6",
     "@oxlint/plugins": "^1.81.0",
     "@types/node": "^26.4.1",
-    "oxfmt": "^0.68.0",
+    "oxfmt": "^0.72.0",
     "oxlint": "^1.81.0",
     "oxlint-tsgolint": "^7.0.2001",
     "typescript": "^7.0.2"
   },
-  "overrides": {
-    "@octokit/plugin-paginate-rest@>=1.0.0 <9.2.2": ">=9.2.2",
-    "@octokit/plugin-paginate-rest@>=9.3.0-beta.1 <11.4.1": ">=11.4.1",
-    "@octokit/request-error@>=1.0.0 <5.1.1": ">=5.1.1",
-    "@octokit/request@>=1.0.0 <8.4.1": ">=8.4.1",
-    "axios@<0.30.0": ">=0.30.0",
-    "axios@>=0.8.1 <0.28.0": ">=0.28.0",
-    "cookie@<0.7.0": ">=0.7.0",
-    "esbuild@<=0.24.2": ">=0.25.0",
-    "lodash@>=4.0.0 <=4.17.22": ">=4.17.23",
-    "rollup@<2.79.2": ">=2.79.2",
-    "tar@<7.5.7": ">=7.5.7",
-    "tar@<=7.5.2": ">=7.5.3",
-    "tar@<=7.5.3": ">=7.5.4",
-    "undici@>=7.0.0 <7.18.2": ">=7.18.2",
-    "wrangler@>=4.0.0 <4.59.1": ">=4.59.1"
-  },
   "devEngines": {
     "packageManager": {
-      "name": "nub",
-      "version": "^0.9.0",
-      "onFail": "ignore"
+      "name": "pnpm",
+      "version": "^12.9.1",
+      "onFail": "warn"
     }
   },
   "engines": {
     "node": ">=24.3.0"
   },
-  "allowScripts": {
-    "@tailwindcss/oxide": true,
-    "esbuild": true,
-    "husky": true,
-    "unrs-resolver": true,
-    "workerd": true
-  },
-  "patchedDependencies": {
-    "@remix-run/assets@0.7.1": "patches/@remix-run+assets@0.7.1.patch"
-  }
+  "packageManager": "pnpm@12.9.1+sha512.06b055fff5cd20dc12781de173ced3310ce0951bf2ec620211a16045d5444d5c93a663210764ef29a653a610459ba0368f0e74f84d80c54723cf95aae7bc0d6d"
 }

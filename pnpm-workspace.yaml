@@ -1,0 +1,15 @@
+shellEmulator: true
+
+overrides:
+  axios@<0.30.0: '>=0.30.0'
+  rollup@<2.79.2: '>=2.79.2'
+
+patchedDependencies:
+  '@remix-run/assets@1.0.0': patches/@remix-run+assets@1.0.0.patch
+
+allowBuilds:
+  '@tailwindcss/oxide': true
+  esbuild: true
+  husky: true
+  unrs-resolver: true
+  workerd: true
