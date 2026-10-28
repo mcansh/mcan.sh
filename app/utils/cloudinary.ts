@@ -23,3 +23,14 @@ const MUGSHOT = "website/2498016352165139482" as const
 export function getMugshotURL(cloudName: string, transformations: TransformerOption = {}): URL {
   return getCloudinaryURL(cloudName, MUGSHOT, transformations)
 }
+
+export function getOpenGraphImageUrl(cloudName: string): string {
+  return getMugshotURL(cloudName, {
+    resize: {
+      type: "fill",
+      width: 1200,
+      height: 630,
+    },
+    gravity: "face",
+  }).href
+}

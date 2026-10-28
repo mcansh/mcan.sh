@@ -10,7 +10,7 @@ test("production uses a configured public origin and rejects invalid values", ()
     CLOUDINARY_CLOUD_NAME: "website-test",
     SENTRY_REPORT_URL: "https://reports.example.com/csp",
   }
-  assert.equal(parseEnv(input, "production").PUBLIC_ORIGIN, "https://mcan.sh")
+  assert.equal(parseEnv(input, "production").PUBLIC_ORIGIN, "https://www.mcan.sh")
   assert.equal(parseEnv(input, "development").PUBLIC_ORIGIN, undefined)
   for (let value of [
     "https://example.com/path",
