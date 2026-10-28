@@ -1,9 +1,9 @@
 import { routes } from "../routes.ts"
+import { getPublicHref } from "../utils/public-origin.ts"
 
 export function createSitemapResponse(request: Request): Response {
-  let origin = new URL(request.url).origin
-  let home = new URL(routes.home.href(), origin).href.replaceAll("&", "&amp;")
-  let resume = new URL(routes.resume.href(), origin).href.replaceAll("&", "&amp;")
+  let home = getPublicHref(routes.home.href(), request).replaceAll("&", "&amp;")
+  let resume = getPublicHref(routes.resume.href(), request).replaceAll("&", "&amp;")
   return new Response(
     `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
