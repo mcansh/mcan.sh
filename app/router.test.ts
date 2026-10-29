@@ -219,3 +219,53 @@ test("well-known avatar forwards transformations, cancellation, and the image re
     assert.deepEqual(new Uint8Array(await response.arrayBuffer()), new Uint8Array([1, 2, 3]))
   }
 })
+
+test("documents load only the active Google font and preconnect, with picker previews deferred", async () => {
+  let home = await router.fetch("https://mcan.sh/")
+  let homeHtml = await home.text()
+  assert.match(homeHtml, /<link rel="preconnect" href="https:\/\/fonts\.googleapis\.com" \/>/)
+  assert.match(
+    homeHtml,
+    /<link rel="preconnect" href="https:\/\/fonts\.gstatic\.com" crossorigin="anonymous" \/>/,
+  )
+  let homeSheets = googleFontStylesheets(homeHtml)
+  assert.equal(homeSheets.length, 1)
+  assert.match(homeSheets[0]!, /family=Inter:wght@400\.\.700&amp;display=swap/)
+  assert.doesNotMatch(homeSheets[0]!, /text=/)
+  assert.doesNotMatch(homeSheets[0]!, /Geist|Instrument|DM\+Sans|Space\+Grotesk/)
+  assert.match(homeHtml, /data-picker-fonts="https:\/\/fonts\.googleapis\.com\/css2\?[^"]+text=/)
+  assert.match(homeHtml, /data-picker-fonts="[^"]*family=Geist:wght@400/)
+  assert.match(homeHtml, /data-picker-fonts="[^"]*family=Instrument\+Sans:wght@400/)
+  assert.match(homeHtml, /data-picker-fonts="[^"]*family=DM\+Sans:wght@400/)
+  assert.match(homeHtml, /data-picker-fonts="[^"]*family=Space\+Grotesk:wght@400/)
+  assert.doesNotMatch(homeHtml, /data-picker-fonts="[^"]*family=Inter/)
+  assert.doesNotMatch(homeHtml, /berkeley-mono/)
+
+  let geist = await router.fetch("https://mcan.sh/?font=2")
+  let geistHtml = await geist.text()
+  let geistSheets = googleFontStylesheets(geistHtml)
+  assert.equal(geistSheets.length, 1)
+  assert.match(geistSheets[0]!, /family=Geist:wght@400\.\.700&amp;display=swap/)
+  assert.match(geistHtml, /data-picker-fonts="[^"]*family=Inter:wght@400/)
+  assert.doesNotMatch(geistHtml, /data-picker-fonts="[^"]*family=Geist/)
+
+  let resume = await router.fetch("https://mcan.sh/resume")
+  let resumeHtml = await resume.text()
+  let resumeSheets = googleFontStylesheets(resumeHtml)
+  assert.equal(resumeSheets.length, 1)
+  assert.match(resumeSheets[0]!, /family=Inter:wght@400\.\.700&amp;display=swap/)
+  assert.doesNotMatch(resumeHtml, /data-picker-fonts/)
+  assert.doesNotMatch(resumeHtml, /design-font-picker/)
+  assert.doesNotMatch(resumeHtml, /berkeley-mono/)
+
+  let preview = await router.fetch("https://mcan.sh/preview")
+  let previewHtml = await preview.text()
+  assert.equal(googleFontStylesheets(previewHtml).length, 0)
+  assert.match(previewHtml, /data-picker-fonts="https:\/\/fonts\.googleapis\.com\/css2\?/)
+})
+
+function googleFontStylesheets(html: string): string[] {
+  return [
+    ...html.matchAll(/<link rel="stylesheet" href="(https:\/\/fonts\.googleapis\.com\/[^"]+)"/g),
+  ].map((match) => match[1]!)
+}

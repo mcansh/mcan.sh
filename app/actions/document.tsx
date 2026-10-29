@@ -5,7 +5,7 @@ import { ImportMap } from "remix/component/server"
 import { getAssetEntry } from "../middleware/assets.ts"
 import { getNonce } from "../middleware/security-headers.ts"
 import { routes } from "../routes.ts"
-import { FONT_CONFIGS } from "./home-page/shared.tsx"
+import { bodyFontStylesheetUrl, fontConfigAt } from "./fonts.ts"
 
 export interface DocumentProps {
   children?: RemixNode
@@ -22,8 +22,8 @@ export function Document(handle: Handle<DocumentProps>) {
   let nonce = getNonce()
   let { children, head, title = DEFAULT_TITLE, mix, fontIndex } = handle.props
   return () => {
-    let fontConfig = FONT_CONFIGS[fontIndex] ?? FONT_CONFIGS[0]
-    let [, fontUrl, fontFamily] = fontConfig
+    let [, fontFamily] = fontConfigAt(fontIndex)
+    let fontUrl = bodyFontStylesheetUrl(fontFamily)
 
     return (
       <html lang="en" mix={mix}>

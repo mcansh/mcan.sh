@@ -7,6 +7,14 @@ import { routes } from "../../routes.ts"
 import { getCloudinaryURL } from "../../utils/cloudinary.ts"
 import { env } from "../../utils/env.ts"
 import { Document } from "../document.tsx"
+import {
+  cssFontFamilyValue,
+  FONT_CONFIGS,
+  fontConfigAt,
+  pickerPreviewStylesheetUrl,
+} from "../fonts.ts"
+
+export { FONT_CONFIGS, FONT_OPTIONS } from "../fonts.ts"
 
 export type HomePageProps = {
   me: {
@@ -69,6 +77,8 @@ export function DesignSwitcher(handle: Handle<{ designIndex: number; fontIndex: 
     let nextDesign = ((designIndex + 1) % DESIGN_CONFIGS.length) + 1
     let prevDesign = ((designIndex - 1 + DESIGN_CONFIGS.length) % DESIGN_CONFIGS.length) + 1
     let nextFont = ((fontIndex + 1) % FONT_CONFIGS.length) + 1
+    let [, activeFamily] = fontConfigAt(fontIndex)
+    let pickerFontsHref = pickerPreviewStylesheetUrl(activeFamily)
     return (
       <div
         mix={css({
@@ -143,6 +153,7 @@ export function DesignSwitcher(handle: Handle<{ designIndex: number; fontIndex: 
         <nav
           id="design-font-picker"
           popover="auto"
+          data-picker-fonts={pickerFontsHref}
           aria-label="Design and font preview switcher"
           mix={css({
             "&:popover-open": { display: "flex" },
@@ -292,12 +303,13 @@ export function DesignSwitcher(handle: Handle<{ designIndex: number; fontIndex: 
               maxWidth: "16rem",
             })}
           >
-            {FONT_CONFIGS.map(([name], i) => (
+            {FONT_CONFIGS.map(([name, family], i) => (
               <a
                 key={name}
                 data-rmx-document
                 href={fontHref(designIndex + 1, i + 1)}
                 aria-current={i === fontIndex ? "true" : undefined}
+                style={{ fontFamily: cssFontFamilyValue(family) }}
                 mix={css({
                   padding: "0.125rem 0.5rem",
                   borderRadius: "9999px",
@@ -321,34 +333,6 @@ export function DesignSwitcher(handle: Handle<{ designIndex: number; fontIndex: 
   }
 }
 
-export const FONT_CONFIGS = [
-  [
-    "Inter (Default)",
-    "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap",
-    "Inter",
-  ],
-  [
-    "Geist",
-    "https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&display=swap",
-    "Geist",
-  ],
-  [
-    "Instrument Sans",
-    "https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;700&display=swap",
-    "Instrument Sans",
-  ],
-  [
-    "DM Sans",
-    "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap",
-    "DM Sans",
-  ],
-  [
-    "Space Grotesk",
-    "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap",
-    "Space Grotesk",
-  ],
-] as const satisfies readonly [displayName: string, url: string, fontFamily: string][]
-
 const DESIGN_CONFIGS = [
   ["Minimal", "Clean centered layout"],
   ["Profile", "Left-aligned with bio & skills"],
@@ -357,7 +341,6 @@ const DESIGN_CONFIGS = [
 ] as const satisfies readonly [displayName: string, description: string][]
 
 export const DESIGN_OPTIONS = DESIGN_CONFIGS.length
-export const FONT_OPTIONS = FONT_CONFIGS.length
 
 function fontHref(design: number, font: number): string {
   return routes.home.href(undefined, {

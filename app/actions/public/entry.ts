@@ -5,6 +5,10 @@ import {
   preloadShim,
 } from "remix/multiple-import-maps-polyfill"
 
+import { installPickerFontLoader } from "./picker-fonts.ts"
+
+installPickerFontLoader()
+
 const app = run({
   async loadModule(src, exportName) {
     let mod = await importModule(src)
