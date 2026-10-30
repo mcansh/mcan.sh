@@ -2,6 +2,8 @@ import * as assert from "remix/assert"
 import { createTestServer } from "remix/node-fetch-server/test"
 import { test } from "remix/test"
 
+import { routes } from "../../routes.ts"
+
 process.env.CLOUDINARY_CLOUD_NAME = "website-test"
 delete process.env.SENTRY_REPORT_URL
 const { router } = await import("../../router.ts")
@@ -13,10 +15,13 @@ test("picker navigation updates document styles and the selected font", async (t
   await page.route("https://fonts.googleapis.com/**", (route) =>
     route.fulfill({ contentType: "text/css", body: "" }),
   )
-  await page.goto("/?design=4")
+  await page.goto(routes.home.href(undefined, { searchParams: { design: 4 } }))
   await page.getByRole("button", { name: "Show design and font options" }).click()
   await page.getByRole("link", { name: "1", exact: true }).click()
-  await page.waitForURL("**/?design=1&font=1")
+  await page.waitForURL(
+    new URL(routes.home.href(undefined, { searchParams: { design: 1, font: 1 } }), server.baseUrl)
+      .href,
+  )
   await page.evaluate(() => window.navigation.transition?.finished)
 
   let documentStyles = () =>
@@ -30,7 +35,10 @@ test("picker navigation updates document styles and the selected font", async (t
 
   await page.getByRole("button", { name: "Show design and font options" }).click()
   await page.getByRole("link", { name: "Geist", exact: true }).click()
-  await page.waitForURL("**/?design=1&font=2")
+  await page.waitForURL(
+    new URL(routes.home.href(undefined, { searchParams: { design: 1, font: 2 } }), server.baseUrl)
+      .href,
+  )
   await page.evaluate(() => window.navigation.transition?.finished)
   await page.locator('link[rel="stylesheet"][href*="family=Geist"]').waitFor({ state: "attached" })
   assert.equal(

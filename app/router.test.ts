@@ -1,6 +1,8 @@
 import assert from "node:assert/strict"
 import { test } from "node:test"
 
+import { routes } from "./routes.ts"
+
 process.env.CLOUDINARY_CLOUD_NAME = "website-test"
 delete process.env.SENTRY_REPORT_URL
 delete process.env.SENTRY_DSN
@@ -207,7 +209,6 @@ test("restored resource routes support HEAD, reject writes, and return 404 for u
 test("well-known avatar forwards transformations, cancellation, and the image response", async () => {
   let { createWellKnownResponse } = await import("./actions/well-known.ts")
   let { createRouter } = await import("remix/router")
-  let { routes } = await import("./routes.ts")
   for (let path of ["avatar", "w_48/h_48/c_fill/avatar"]) {
     let request = new Request(`https://mcan.sh/.well-known/${path}`)
     let upstream = new Response(new Uint8Array([1, 2, 3]), {
@@ -241,7 +242,9 @@ test("well-known avatar forwards transformations, cancellation, and the image re
 })
 
 test("design links navigate the document so layout styles update with the preview", async () => {
-  let response = await router.fetch("https://mcan.sh/?design=4")
+  let response = await router.fetch(
+    new URL(routes.home.href(undefined, { searchParams: { design: 4 } }), "https://mcan.sh").href,
+  )
   let html = await response.text()
   let links = [...html.matchAll(/<a\b[^>]*>/g)]
     .map(([tag]) => tag)
@@ -251,7 +254,7 @@ test("design links navigate the document so layout styles update with the previe
 })
 
 test("documents load only the active Google font and preconnect, with picker previews deferred", async () => {
-  let home = await router.fetch("https://mcan.sh/")
+  let home = await router.fetch(new URL(routes.home.href(), "https://mcan.sh").href)
   let homeHtml = await home.text()
   assert.match(homeHtml, /<link rel="preconnect" href="https:\/\/fonts\.googleapis\.com" \/>/)
   assert.match(
@@ -271,7 +274,9 @@ test("documents load only the active Google font and preconnect, with picker pre
   assert.doesNotMatch(homeHtml, /data-picker-fonts="[^"]*family=Inter/)
   assert.doesNotMatch(homeHtml, /berkeley-mono/)
 
-  let geist = await router.fetch("https://mcan.sh/?font=2")
+  let geist = await router.fetch(
+    new URL(routes.home.href(undefined, { searchParams: { font: 2 } }), "https://mcan.sh").href,
+  )
   let geistHtml = await geist.text()
   let geistSheets = googleFontStylesheets(geistHtml)
   assert.equal(geistSheets.length, 1)
@@ -279,7 +284,7 @@ test("documents load only the active Google font and preconnect, with picker pre
   assert.match(geistHtml, /data-picker-fonts="[^"]*family=Inter:wght@400/)
   assert.doesNotMatch(geistHtml, /data-picker-fonts="[^"]*family=Geist/)
 
-  let resume = await router.fetch("https://mcan.sh/resume")
+  let resume = await router.fetch(new URL(routes.resume.href(), "https://mcan.sh").href)
   let resumeHtml = await resume.text()
   let resumeSheets = googleFontStylesheets(resumeHtml)
   assert.equal(resumeSheets.length, 1)
@@ -288,7 +293,7 @@ test("documents load only the active Google font and preconnect, with picker pre
   assert.doesNotMatch(resumeHtml, /design-font-picker/)
   assert.doesNotMatch(resumeHtml, /berkeley-mono/)
 
-  let preview = await router.fetch("https://mcan.sh/preview")
+  let preview = await router.fetch(new URL(routes.preview.href(), "https://mcan.sh").href)
   let previewHtml = await preview.text()
   assert.equal(googleFontStylesheets(previewHtml).length, 0)
   assert.match(previewHtml, /data-picker-fonts="https:\/\/fonts\.googleapis\.com\/css2\?/)
