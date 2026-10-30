@@ -5,14 +5,14 @@ import { test } from "node:test"
 import { fileURLToPath } from "node:url"
 
 process.env.CLOUDINARY_CLOUD_NAME = "website-test"
-const { parseEnv } = await import("./utils/env.ts")
+const { DEFAULT_PUBLIC_ORIGIN, parseEnv } = await import("./utils/env.ts")
 
 test("production uses a configured public origin for Node requests", async () => {
   let input = {
     CLOUDINARY_CLOUD_NAME: "website-test",
     SENTRY_REPORT_URL: "https://reports.example.com/csp",
   }
-  assert.equal(parseEnv(input, "production").PUBLIC_ORIGIN, "https://mcan.sh")
+  assert.equal(parseEnv(input, "production").PUBLIC_ORIGIN, DEFAULT_PUBLIC_ORIGIN)
   assert.equal(parseEnv(input, "development").PUBLIC_ORIGIN, undefined)
   for (let value of [
     "https://example.com/path",
@@ -23,7 +23,7 @@ test("production uses a configured public origin for Node requests", async () =>
     assert.throws(() => parseEnv({ ...input, PUBLIC_ORIGIN: value }, "production"))
   }
   for (let configuredOrigin of [undefined, "https://preview.example.com:8443"]) {
-    let origin = configuredOrigin ?? "https://mcan.sh"
+    let origin = configuredOrigin ?? DEFAULT_PUBLIC_ORIGIN
     let child = spawn(process.execPath, ["--import", "remix/node-tsx", "server.ts"], {
       cwd: fileURLToPath(new URL("../", import.meta.url)),
       env: {

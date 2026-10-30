@@ -7,7 +7,16 @@ delete process.env.SENTRY_DSN
 delete process.env.VITE_SENTRY_DSN
 
 const { router } = await import("./router.ts")
-const { parseEnv } = await import("./utils/env.ts")
+const { DEFAULT_PUBLIC_ORIGIN, parseEnv } = await import("./utils/env.ts")
+
+function jsonLdGraph(head: string, type: string) {
+  let graphs = [
+    ...head.matchAll(/<script[^>]+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi),
+  ].map((match) => JSON.parse(match[1]!))
+  let graph = graphs.find((entry) => entry["@type"] === type)
+  assert.ok(graph, `missing ${type} JSON-LD`)
+  return graph
+}
 
 test("every homepage design renders numeric image dimensions and search metadata", async () => {
   for (let design = 1; design <= 4; design++) {
@@ -20,10 +29,21 @@ test("every homepage design renders numeric image dimensions and search metadata
     assert.doesNotMatch(html, /<details|<summary/)
     let head = html.match(/<head>([\s\S]*?)<\/head>/)![1]!
     assert.match(head, /<meta name="description" content="personal website for Logan McAnsh"/)
-    let data = JSON.parse(
-      head.match(/<script[^>]+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/i)![1]!,
+    assert.ok(head.includes('<link rel="canonical" href="https://mcan.sh/"'))
+    assert.match(head, /<meta property="og:title" content="Logan McAnsh"/)
+    assert.match(
+      head,
+      /<meta property="og:description" content="personal website for Logan McAnsh"/,
     )
-    assert.equal(data["@type"], "Person")
+    assert.ok(head.includes('<meta property="og:url" content="https://mcan.sh/"'))
+    assert.match(
+      head,
+      /<meta property="og:image" content="https:\/\/res\.cloudinary\.com\/website-test\/[^"]*w_1200[^"]*h_630[^"]*"/,
+    )
+    assert.match(head, /<meta property="og:type" content="website"/)
+    assert.match(head, /<meta name="twitter:card" content="summary_large_image"/)
+    let data = jsonLdGraph(head, "Person")
+    let website = jsonLdGraph(head, "WebSite")
     assert.equal(data.name, "Logan McAnsh")
     assert.equal(data.url, "https://mcan.sh")
     assert.equal(data.jobTitle, "Senior Software Engineer")
@@ -32,6 +52,8 @@ test("every homepage design renders numeric image dimensions and search metadata
       "https://linkedin.com/in/loganmcansh",
       "https://x.com/loganmcansh",
     ])
+    assert.equal(website.name, "Logan McAnsh")
+    assert.equal(website.url, "https://mcan.sh/")
     let image = html.match(/<img[^>]+alt="Logan McAnsh"[^>]*>/)![0]
     assert.match(image, /crossorigin="anonymous"/)
     assert.match(image, design === 2 ? /width="224"/ : /width="480"/)
@@ -159,6 +181,46 @@ test("sitemap lists the homepage and resume on the request origin", async () => 
   assert.ok(xml.includes("<loc>https://preview.example.com/</loc>"))
   assert.ok(xml.includes("<loc>https://preview.example.com/resume</loc>"))
   assert.equal([...xml.matchAll(/<url>/g)].length, 2)
+})
+
+test("canonical host, robots.txt, and sitemap agree, and listed pages return 200", async () => {
+  let robots = await router.fetch(`${DEFAULT_PUBLIC_ORIGIN}/robots.txt`)
+  assert.equal(robots.status, 200)
+  let robotsText = await robots.text()
+  assert.ok(robotsText.includes(`Sitemap: ${DEFAULT_PUBLIC_ORIGIN}/sitemap.xml`))
+
+  let sitemap = await router.fetch(`${DEFAULT_PUBLIC_ORIGIN}/sitemap.xml`)
+  assert.equal(sitemap.status, 200)
+  let xml = await sitemap.text()
+  let locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]!)
+  assert.deepEqual(locs, [`${DEFAULT_PUBLIC_ORIGIN}/`, `${DEFAULT_PUBLIC_ORIGIN}/resume`])
+
+  for (let loc of locs) {
+    let page = await router.fetch(loc)
+    assert.equal(page.status, 200, loc)
+    let html = await page.text()
+    assert.ok(html.includes(`<link rel="canonical" href="${loc}"`))
+    assert.ok(html.includes(`<meta property="og:url" content="${loc}"`))
+    assert.match(html, /<meta name="twitter:card" content="summary_large_image"/)
+  }
+})
+
+test("resume keeps visible contact details and adds ProfilePage schema plus social tags", async () => {
+  let response = await router.fetch(`${DEFAULT_PUBLIC_ORIGIN}/resume`)
+  assert.equal(response.status, 200)
+  let html = await response.text()
+  let head = html.match(/<head>([\s\S]*?)<\/head>/)![1]!
+  assert.ok(html.includes("Shelby Township, MI"))
+  assert.ok(html.includes("logan+resume@mcan.sh"))
+  assert.ok(html.includes('href="https://mcan.sh"'))
+  assert.ok(head.includes(`<link rel="canonical" href="${DEFAULT_PUBLIC_ORIGIN}/resume"`))
+  assert.match(head, /<meta property="og:title" content="Resume \| Logan McAnsh"/)
+  assert.match(head, /<meta property="og:type" content="profile"/)
+  let profile = jsonLdGraph(head, "ProfilePage")
+  assert.equal(profile.url, `${DEFAULT_PUBLIC_ORIGIN}/resume`)
+  assert.equal(profile.mainEntity["@type"], "Person")
+  assert.equal(profile.mainEntity.name, "Logan McAnsh")
+  assert.equal(profile.mainEntity.url, DEFAULT_PUBLIC_ORIGIN)
 })
 
 test("restored resource routes support HEAD, reject writes, and return 404 for unknown well-known paths", async () => {
