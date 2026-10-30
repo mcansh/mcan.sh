@@ -220,6 +220,16 @@ test("well-known avatar forwards transformations, cancellation, and the image re
   }
 })
 
+test("design links navigate the document so layout styles update with the preview", async () => {
+  let response = await router.fetch("https://mcan.sh/?design=4")
+  let html = await response.text()
+  let links = [...html.matchAll(/<a\b[^>]*>/g)]
+    .map(([tag]) => tag)
+    .filter((tag) => tag.includes('data-rmx-target="preview"'))
+  assert.ok(links.length > 0)
+  for (let link of links) assert.match(link, /\bdata-rmx-document(?:\s|=|>)/)
+})
+
 test("documents load only the active Google font and preconnect, with picker previews deferred", async () => {
   let home = await router.fetch("https://mcan.sh/")
   let homeHtml = await home.text()

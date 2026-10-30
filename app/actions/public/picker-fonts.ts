@@ -22,6 +22,7 @@ function loadPickerPreviewFonts(picker: HTMLElement) {
   link.rel = "stylesheet"
   link.href = href
   link.setAttribute(LOADED_ATTR, "picker-preview")
+  link.addEventListener("error", () => link.remove(), { once: true })
   document.head.append(link)
 }
 
