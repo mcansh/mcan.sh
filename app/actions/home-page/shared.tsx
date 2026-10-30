@@ -12,7 +12,7 @@ import {
   FONT_CONFIGS,
   fontConfigAt,
   pickerPreviewStylesheetUrl,
-} from "../fonts.ts"
+} from "../public/fonts.ts"
 
 export type HomePageProps = {
   me: {

@@ -1,6 +1,9 @@
+import { FONT_CONFIGS, pickerPreviewStylesheetUrl } from "./fonts.ts"
+
 const PICKER_ID = "design-font-picker"
 const PICKER_BUTTON = '[popovertarget="design-font-picker"]'
 const LOADED_ATTR = "data-font-role"
+const PICKER_STYLESHEET_URLS = FONT_CONFIGS.map(([, family]) => pickerPreviewStylesheetUrl(family))
 
 function pickerElement(): HTMLElement | null {
   let node = document.getElementById(PICKER_ID)
@@ -14,8 +17,9 @@ function isOpenToggle(event: Event): boolean {
 }
 
 function loadPickerPreviewFonts(picker: HTMLElement) {
-  let href = picker.getAttribute("data-picker-fonts")
-  if (href === null || href === "") return
+  let requestedHref = picker.getAttribute("data-picker-fonts")
+  let href = PICKER_STYLESHEET_URLS.find((url) => url === requestedHref)
+  if (href === undefined) return
   if (document.querySelector(`link[${LOADED_ATTR}="picker-preview"]`) !== null) return
 
   let link = document.createElement("link")

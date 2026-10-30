@@ -1,6 +1,7 @@
 import * as assert from "remix/assert"
 import { test } from "remix/test"
 
+import { pickerPreviewStylesheetUrl } from "./public/fonts.ts"
 import { installPickerFontLoader } from "./public/picker-fonts.ts"
 
 test("picker fonts load on interaction, deduplicate, and retry after a stylesheet error", async () => {
@@ -9,7 +10,8 @@ test("picker fonts load on interaction, deduplicate, and retry after a styleshee
   let picker = document.createElement("nav")
   picker.id = "design-font-picker"
   picker.popover = "auto"
-  picker.dataset.pickerFonts = "data:text/css,body%7B%7D"
+  let stylesheetUrl = pickerPreviewStylesheetUrl("Inter")
+  picker.dataset.pickerFonts = stylesheetUrl
   let unrelated = document.createElement("input")
   document.body.append(button, picker, unrelated)
   installPickerFontLoader()
@@ -19,6 +21,18 @@ test("picker fonts load on interaction, deduplicate, and retry after a styleshee
   assert.equal(links().length, 0)
   unrelated.focus()
   assert.equal(links().length, 0)
+
+  for (let href of [
+    "javascript:alert(1)",
+    "data:text/css,body%7B%7D",
+    "https://example.com/fonts.css",
+    "https://fonts.googleapis.com/css2?family=Roboto&display=swap",
+  ]) {
+    picker.dataset.pickerFonts = href
+    button.dispatchEvent(new PointerEvent("pointerenter"))
+    assert.equal(links().length, 0)
+  }
+  picker.dataset.pickerFonts = stylesheetUrl
 
   button.focus()
   assert.equal(links().length, 1)

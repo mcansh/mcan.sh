@@ -7,7 +7,7 @@ import {
   FONT_CONFIGS,
   fontConfigAt,
   pickerPreviewStylesheetUrl,
-} from "./fonts.ts"
+} from "./public/fonts.ts"
 
 test("body stylesheets load only the selected variable font without a text subset", () => {
   for (let [, family] of FONT_CONFIGS) {

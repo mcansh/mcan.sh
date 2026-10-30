@@ -5,7 +5,7 @@ import { ImportMap } from "remix/component/server"
 import { getAssetEntry } from "../middleware/assets.ts"
 import { getNonce } from "../middleware/security-headers.ts"
 import { routes } from "../routes.ts"
-import { bodyFontStylesheetUrl, fontConfigAt } from "./fonts.ts"
+import { bodyFontStylesheetUrl, fontConfigAt } from "./public/fonts.ts"
 
 export interface DocumentProps {
   children?: RemixNode
