@@ -185,7 +185,6 @@ export function DesignSwitcher(handle: Handle<{ designIndex: number; fontIndex: 
             })}
           >
             <a
-              data-rmx-document
               data-rmx-target="preview"
               data-rmx-src={previewHref(prevDesign, fontIndex + 1)}
               href={routes.home.href(undefined, {
@@ -215,7 +214,6 @@ export function DesignSwitcher(handle: Handle<{ designIndex: number; fontIndex: 
               {DESIGN_CONFIGS[designIndex]?.[0]} ({designIndex + 1}/{DESIGN_CONFIGS.length})
             </span>
             <a
-              data-rmx-document
               data-rmx-target="preview"
               data-rmx-src={previewHref(nextDesign, fontIndex + 1)}
               href={routes.home.href(undefined, {
@@ -247,7 +245,7 @@ export function DesignSwitcher(handle: Handle<{ designIndex: number; fontIndex: 
             {DESIGN_CONFIGS.map(([name], index) => (
               <a
                 key={name}
-                data-rmx-document
+
                 data-rmx-target="preview"
                 data-rmx-src={previewHref(index + 1, fontIndex + 1)}
                 href={routes.home.href(undefined, {
@@ -286,7 +284,6 @@ export function DesignSwitcher(handle: Handle<{ designIndex: number; fontIndex: 
           >
             <span mix={css({ fontWeight: 500 })}>{FONT_CONFIGS[fontIndex]?.[0]}</span>
             <a
-              data-rmx-document
               href={routes.home.href(undefined, {
                 searchParams: { design: designIndex + 1, font: nextFont },
               })}
@@ -306,7 +303,7 @@ export function DesignSwitcher(handle: Handle<{ designIndex: number; fontIndex: 
             {FONT_CONFIGS.map(([name, family], i) => (
               <a
                 key={name}
-                data-rmx-document
+
                 href={fontHref(designIndex + 1, i + 1)}
                 aria-current={i === fontIndex ? "true" : undefined}
                 style={{ fontFamily: cssFontFamilyValue(family) }}
