@@ -24,3 +24,20 @@ pnpm run dev
 ```
 
 Then open <http://localhost:3000> in your browser to see it running.
+
+## Testing
+
+Run the Node tests:
+
+```sh
+pnpm test
+```
+
+For browser and end-to-end tests, install Chromium and its system dependencies before running the suite:
+
+```sh
+pnpm exec playwright install --with-deps chromium
+pnpm test:browser
+```
+
+Repeat the install step after updating Playwright. On Linux, `--with-deps` may require administrator privileges.
