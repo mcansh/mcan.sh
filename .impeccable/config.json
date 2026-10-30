@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "app/router.test.ts"
+        ],
+        "createdAt": "2026-10-30T00:40:28.903Z",
+        "reason": "Codex review: this test matches serialized img markup with a regular expression; it does not render an image or define an image src."
+      }
+    ]
+  }
+}

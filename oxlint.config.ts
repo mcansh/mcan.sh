@@ -50,6 +50,7 @@ export default defineConfig({
     },
   },
   rules: {
+    "typescript/no-non-null-assertion": "error",
     "anti-slop/no-chained-type-assertions": "error",
     "anti-slop/no-conditional-empty-object-spread": "error",
     "anti-slop/no-known-value-widening": "error",

@@ -18,11 +18,15 @@ test("every homepage design renders numeric image dimensions and search metadata
     assert.match(html, /<button[^>]+popovertarget="design-font-picker"/)
     assert.match(html, /<nav[^>]+id="design-font-picker"[^>]+popover="auto"/)
     assert.doesNotMatch(html, /<details|<summary/)
-    let head = html.match(/<head>([\s\S]*?)<\/head>/)![1]!
+    let headMatch = html.match(/<head>([\s\S]*?)<\/head>/)
+    assert.ok(headMatch)
+    let head = headMatch[1]
     assert.match(head, /<meta name="description" content="personal website for Logan McAnsh"/)
-    let data = JSON.parse(
-      head.match(/<script[^>]+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/i)![1]!,
+    let dataMatch = head.match(
+      /<script[^>]+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/i,
     )
+    assert.ok(dataMatch)
+    let data = JSON.parse(dataMatch[1])
     assert.equal(data["@type"], "Person")
     assert.equal(data.name, "Logan McAnsh")
     assert.equal(data.url, "https://mcan.sh")
@@ -32,21 +36,25 @@ test("every homepage design renders numeric image dimensions and search metadata
       "https://linkedin.com/in/loganmcansh",
       "https://x.com/loganmcansh",
     ])
-    let image = html.match(/<img[^>]+alt="Logan McAnsh"[^>]*>/)![0]
+    let imageMatch = html.match(/<img[^>]+alt="Logan McAnsh"[^>]*>/)
+    assert.ok(imageMatch)
+    let image = imageMatch[0]
     assert.match(image, /crossorigin="anonymous"/)
     assert.match(image, design === 2 ? /width="224"/ : /width="480"/)
     assert.match(image, design === 2 ? /height="624"/ : /height="480"/)
     if (design === 2) {
-      let srcSet = image.match(/srcset="([^"]+)"/)![1]!
+      let srcSetMatch = image.match(/srcset="([^"]+)"/)
+      assert.ok(srcSetMatch)
+      let srcSet = srcSetMatch[1]
       let candidates = srcSet.split(/, (?=https:)/)
       assert.equal(candidates.length, 2)
-      assert.match(candidates[0]!, /c_fill/)
-      assert.match(candidates[0]!, /h_624/)
-      assert.match(candidates[0]!, /w_224/)
-      assert.match(candidates[0]!, / 1x$/)
-      assert.match(candidates[1]!, /h_1248/)
-      assert.match(candidates[1]!, /w_448/)
-      assert.match(candidates[1]!, / 2x$/)
+      assert.match(candidates[0], /c_fill/)
+      assert.match(candidates[0], /h_624/)
+      assert.match(candidates[0], /w_224/)
+      assert.match(candidates[0], / 1x$/)
+      assert.match(candidates[1], /h_1248/)
+      assert.match(candidates[1], /w_448/)
+      assert.match(candidates[1], / 2x$/)
       assert.ok(data.image.includes("h_624"))
     }
     assert.ok(data.image.includes("res.cloudinary.com/website-test/"))
@@ -62,7 +70,11 @@ test("read-only pages accept GET and HEAD and reject write methods", async () =>
       let response = await router.fetch(new Request(`https://mcan.sh${path}`, { method }))
       let read = method === "GET" || method === "HEAD"
       assert.equal(response.status, read ? 200 : 405, `${method} ${path}`)
-      if (!read) assert.match(response.headers.get("Allow")!, /GET/)
+      if (!read) {
+        let allow = response.headers.get("Allow")
+        assert.ok(allow)
+        assert.match(allow, /GET/)
+      }
       if (method === "HEAD") assert.equal(response.body, null)
       await response.body?.cancel()
     }
@@ -80,7 +92,8 @@ test("non-production CSP enforcement and startup work without Sentry configurati
   )
   let response = await router.fetch("https://mcan.sh/")
   assert.equal(response.status, 200)
-  let csp = response.headers.get("Content-Security-Policy")!
+  let csp = response.headers.get("Content-Security-Policy")
+  assert.ok(csp)
   assert.match(csp, /default-src 'none'/)
   assert.doesNotMatch(csp, /report-uri|undefined/)
   await response.body?.cancel()
@@ -109,9 +122,12 @@ test("production requires a valid CSP reporting URL", () => {
 test("manifest aliases serve existing icons and support conditional requests", async () => {
   let first = await router.fetch("https://mcan.sh/manifest.webmanifest")
   assert.equal(first.status, 200)
-  assert.match(first.headers.get("Content-Type")!, /^application\/manifest\+json/)
+  let contentType = first.headers.get("Content-Type")
+  assert.ok(contentType)
+  assert.match(contentType, /^application\/manifest\+json/)
   assert.equal(first.headers.get("Cache-Control"), "public, max-age=60, must-revalidate")
-  let etag = first.headers.get("ETag")!
+  let etag = first.headers.get("ETag")
+  assert.ok(etag)
   let content = await first.text()
   let manifest = JSON.parse(content)
   assert.equal(manifest.name, "Logan McAnsh")
@@ -123,7 +139,9 @@ test("manifest aliases serve existing icons and support conditional requests", a
       new Request(new URL(icon.src, "https://mcan.sh"), { method: "HEAD" }),
     )
     assert.equal(response.status, 200, icon.src)
-    assert.match(response.headers.get("Content-Type")!, /image\/png/)
+    let imageType = response.headers.get("Content-Type")
+    assert.ok(imageType)
+    assert.match(imageType, /image\/png/)
   }
   let alias = await router.fetch("https://mcan.sh/manifest.json")
   assert.equal(await alias.text(), content)
@@ -152,7 +170,9 @@ test("manifest aliases serve existing icons and support conditional requests", a
 test("sitemap lists the homepage and resume on the request origin", async () => {
   let response = await router.fetch("https://preview.example.com/sitemap.xml")
   assert.equal(response.status, 200)
-  assert.match(response.headers.get("Content-Type")!, /application\/xml/)
+  let contentType = response.headers.get("Content-Type")
+  assert.ok(contentType)
+  assert.match(contentType, /application\/xml/)
   assert.equal(response.headers.get("Cache-Control"), "public, max-age=3600")
   let xml = await response.text()
   assert.ok(xml.includes('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'))
@@ -240,9 +260,9 @@ test("documents load only the active Google font and preconnect, with picker pre
   )
   let homeSheets = googleFontStylesheets(homeHtml)
   assert.equal(homeSheets.length, 1)
-  assert.match(homeSheets[0]!, /family=Inter:wght@400\.\.700&amp;display=swap/)
-  assert.doesNotMatch(homeSheets[0]!, /text=/)
-  assert.doesNotMatch(homeSheets[0]!, /Geist|Instrument|DM\+Sans|Space\+Grotesk/)
+  assert.match(homeSheets[0], /family=Inter:wght@400\.\.700&amp;display=swap/)
+  assert.doesNotMatch(homeSheets[0], /text=/)
+  assert.doesNotMatch(homeSheets[0], /Geist|Instrument|DM\+Sans|Space\+Grotesk/)
   assert.match(homeHtml, /data-picker-fonts="https:\/\/fonts\.googleapis\.com\/css2\?[^"]+text=/)
   assert.match(homeHtml, /data-picker-fonts="[^"]*family=Geist:wght@400/)
   assert.match(homeHtml, /data-picker-fonts="[^"]*family=Instrument\+Sans:wght@400/)
@@ -255,7 +275,7 @@ test("documents load only the active Google font and preconnect, with picker pre
   let geistHtml = await geist.text()
   let geistSheets = googleFontStylesheets(geistHtml)
   assert.equal(geistSheets.length, 1)
-  assert.match(geistSheets[0]!, /family=Geist:wght@400\.\.700&amp;display=swap/)
+  assert.match(geistSheets[0], /family=Geist:wght@400\.\.700&amp;display=swap/)
   assert.match(geistHtml, /data-picker-fonts="[^"]*family=Inter:wght@400/)
   assert.doesNotMatch(geistHtml, /data-picker-fonts="[^"]*family=Geist/)
 
@@ -263,7 +283,7 @@ test("documents load only the active Google font and preconnect, with picker pre
   let resumeHtml = await resume.text()
   let resumeSheets = googleFontStylesheets(resumeHtml)
   assert.equal(resumeSheets.length, 1)
-  assert.match(resumeSheets[0]!, /family=Inter:wght@400\.\.700&amp;display=swap/)
+  assert.match(resumeSheets[0], /family=Inter:wght@400\.\.700&amp;display=swap/)
   assert.doesNotMatch(resumeHtml, /data-picker-fonts/)
   assert.doesNotMatch(resumeHtml, /design-font-picker/)
   assert.doesNotMatch(resumeHtml, /berkeley-mono/)
@@ -277,5 +297,5 @@ test("documents load only the active Google font and preconnect, with picker pre
 function googleFontStylesheets(html: string): string[] {
   return [
     ...html.matchAll(/<link rel="stylesheet" href="(https:\/\/fonts\.googleapis\.com\/[^"]+)"/g),
-  ].map((match) => match[1]!)
+  ].map((match) => match[1])
 }
