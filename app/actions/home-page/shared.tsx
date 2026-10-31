@@ -34,6 +34,12 @@ export function HomeShell(handle: Handle<HomePageProps & { bodyMix: MixInput<HTM
         fontIndex={fontIndex}
         head={
           <Fragment>
+            <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+            <meta
+              name="theme-color"
+              content={designIndex === 3 ? "#0a0a0a" : "#000000"}
+              media="(prefers-color-scheme: dark)"
+            />
             <meta name="description" content="personal website for Logan McAnsh" />
             <script
               type="application/ld+json"
