@@ -20,6 +20,16 @@ test("every homepage design renders numeric image dimensions and search metadata
     assert.doesNotMatch(html, /<details|<summary/)
     let head = html.match(/<head>([\s\S]*?)<\/head>/)![1]!
     assert.match(head, /<meta name="description" content="personal website for Logan McAnsh"/)
+    assert.match(
+      head,
+      /<meta name="theme-color" content="#ffffff" media="\(prefers-color-scheme: light\)"/,
+    )
+    let darkThemeColor = design === 4 ? "#0a0a0a" : "#000000"
+    assert.ok(
+      head.includes(
+        `<meta name="theme-color" content="${darkThemeColor}" media="(prefers-color-scheme: dark)"`,
+      ),
+    )
     let data = JSON.parse(
       head.match(/<script[^>]+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/i)![1]!,
     )
@@ -117,7 +127,8 @@ test("manifest aliases serve existing icons and support conditional requests", a
   assert.equal(manifest.name, "Logan McAnsh")
   assert.equal(manifest.start_url, "/?homescreen=1")
   assert.equal(manifest.display, "standalone")
-  assert.equal(manifest.theme_color, "#e53a40")
+  assert.equal(manifest.theme_color, "#ffffff")
+  assert.equal(manifest.background_color, "#ffffff")
   for (let icon of manifest.icons) {
     let response = await router.fetch(
       new Request(new URL(icon.src, "https://mcan.sh"), { method: "HEAD" }),
