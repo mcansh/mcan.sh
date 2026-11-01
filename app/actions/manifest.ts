@@ -7,8 +7,8 @@ const manifest = JSON.stringify(
     short_name: "LM",
     description: "personal website for logan mcansh",
     start_url: "/?homescreen=1",
-    background_color: "#e53a40",
-    theme_color: "#e53a40",
+    background_color: "#ffffff",
+    theme_color: "#ffffff",
     display: "standalone",
     icons: [
       ...iconSizes.map((size) => ({
