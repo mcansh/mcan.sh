@@ -5,6 +5,7 @@ import { test } from "node:test"
 import { fileURLToPath } from "node:url"
 
 process.env.CLOUDINARY_CLOUD_NAME = "website-test"
+delete process.env.SENTRY_REPORT_URL
 const { parseEnv } = await import("./utils/env.ts")
 
 test("production uses a configured public origin for Node requests", async () => {

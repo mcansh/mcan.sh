@@ -12,6 +12,7 @@
     "hmr": "NODE_ENV=development node --env-file-if-exists=.env hmr.ts",
     "start": "NODE_ENV=production node --import remix/node-tsx server.ts",
     "test": "NODE_ENV=test node --import remix/node-tsx --test",
+    "test:browser": "remix test --type browser --type e2e",
     "typecheck": "tsc --noEmit",
     "format": "oxfmt",
     "lint": "oxlint --fix"
@@ -28,6 +29,7 @@
     "oxfmt": "^0.72.0",
     "oxlint": "^1.81.0",
     "oxlint-tsgolint": "^7.0.2001",
+    "playwright": "^1.64.1",
     "typescript": "^7.0.2"
   },
   "devEngines": {

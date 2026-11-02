@@ -2,28 +2,20 @@ import { createController } from "remix/router"
 
 import { assets } from "../assets.ts"
 import { routes } from "../routes.ts"
-import { DESIGN_OPTIONS, FONT_OPTIONS, getHomePage, getMe, HomeShell } from "./home-page/shared.tsx"
+import { getIndex } from "./home-page/selection.ts"
+import { DESIGN_OPTIONS, getHomePage, getMe, HomeShell } from "./home-page/shared.tsx"
 import { createManifestResponse } from "./manifest.ts"
+import { FONT_OPTIONS } from "./public/fonts.ts"
 import { ResumePage } from "./resume-page.tsx"
 import { createSitemapResponse } from "./sitemap.ts"
 import { createWellKnownResponse } from "./well-known.ts"
 
 function getDesignIndex(url: URL): number {
-  let param = url.searchParams.get("design")
-  if (param) {
-    let n = parseInt(param, 10)
-    if (!isNaN(n) && n >= 1 && n <= DESIGN_OPTIONS) return n - 1
-  }
-  return 0
+  return getIndex(url.searchParams.get("design"), DESIGN_OPTIONS)
 }
 
 function getFontIndex(url: URL): number {
-  let param = url.searchParams.get("font")
-  if (param) {
-    let n = parseInt(param, 10)
-    if (!isNaN(n) && n >= 1 && n <= FONT_OPTIONS) return n - 1
-  }
-  return 0
+  return getIndex(url.searchParams.get("font"), FONT_OPTIONS)
 }
 
 export default createController(routes, {

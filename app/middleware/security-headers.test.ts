@@ -11,14 +11,19 @@ function assertPolicy(response: Response) {
   assert.equal(response.headers.get("X-Frame-Options"), "DENY")
   assert.equal(response.headers.get("X-Content-Type-Options"), "nosniff")
   assert.equal(response.headers.get("Referrer-Policy"), "same-origin")
-  assert.match(response.headers.get("Strict-Transport-Security")!, /max-age=/)
-  assert.match(response.headers.get("Permissions-Policy")!, /camera=\(\)/)
-  let csp = response.headers.get("Content-Security-Policy")!
+  let hsts = response.headers.get("Strict-Transport-Security")
+  assert.ok(hsts)
+  assert.match(hsts, /max-age=/)
+  let permissions = response.headers.get("Permissions-Policy")
+  assert.ok(permissions)
+  assert.match(permissions, /camera=\(\)/)
+  let csp = response.headers.get("Content-Security-Policy")
+  assert.ok(csp)
   assert.ok(csp.includes("report-uri https://reports.example.com/csp"))
   assert.match(csp, /default-src 'none'/)
   assert.match(csp, /frame-ancestors 'none'/)
   assert.match(csp, /script-src 'self' 'nonce-[^']+' 'strict-dynamic'/)
-  assert.doesNotMatch(csp.split("script-src ")[1]!.split(";")[0]!, /'unsafe-inline'|'unsafe-eval'/)
+  assert.doesNotMatch(csp.split("script-src ")[1].split(";")[0], /'unsafe-inline'|'unsafe-eval'/)
   assert.match(csp, /'wasm-unsafe-eval'/)
   return csp
 }
@@ -28,7 +33,9 @@ test("router protects documents, static files, compiled assets, and missing rout
   assert.equal(document.status, 200)
   let csp = assertPolicy(document)
   let html = await document.text()
-  let nonce = csp.match(/'nonce-([^']+)'/)![1]
+  let nonceMatch = csp.match(/'nonce-([^']+)'/)
+  assert.ok(nonceMatch)
+  let nonce = nonceMatch[1]
   let scripts = [...html.matchAll(/<script\b[^>]*>/gi)].map(([tag]) => tag)
   assert.ok(scripts.some((tag) => tag.includes('type="importmap"')))
   assert.ok(scripts.some((tag) => tag.includes('type="module"')))
@@ -40,7 +47,9 @@ test("router protects documents, static files, compiled assets, and missing rout
   assert.match(csp, /font-src 'self' https:\/\/fonts\.gstatic\.com/)
   assert.match(csp, /https:\/\/res\.cloudinary\.com\/security-test\/image\/upload\//)
   assert.match(html, /data-rmx-style/)
-  let entry = html.match(/<script[^>]+src="([^"]+)"/i)![1]!
+  let entryMatch = html.match(/<script[^>]+src="([^"]+)"/i)
+  assert.ok(entryMatch)
+  let entry = entryMatch[1]
   for (let [path, status] of [
     ["/favicon.svg", 200],
     [entry, 200],

@@ -27,7 +27,8 @@ test("HMR installs import maps with the document nonce before inserting them", (
           // A nonce-bearing policy rejects an inline map at insertion time.
           assert.equal(script.nonce, nonce)
           assert.equal(script.type, "importmap")
-          assert.deepEqual(JSON.parse(script.textContent!), { imports: { added: "/added.js" } })
+          assert.ok(script.textContent)
+          assert.deepEqual(JSON.parse(script.textContent), { imports: { added: "/added.js" } })
           inserted = true
         },
       },
