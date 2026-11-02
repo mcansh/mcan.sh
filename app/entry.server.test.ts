@@ -1,6 +1,8 @@
 import assert from "node:assert/strict"
 import { test } from "node:test"
 
+import { getClient } from "@sentry/cloudflare"
+
 process.env.CLOUDINARY_CLOUD_NAME = "website-test"
 process.env.PUBLIC_ORIGIN = "https://preview.example.com:8443"
 process.env.SENTRY_REPORT_URL = "https://reports.example.com/csp"
@@ -32,4 +34,10 @@ test("a double-slash pathname cannot replace the public origin in the sitemap", 
   )
   assert.equal(response.status, 404)
   assert.ok(!(await response.text()).includes("<loc>https://untrusted.example/"))
+})
+
+test("fetch with no env leaves the Sentry client without a DSN", async () => {
+  let response = await worker.default.fetch(new Request("https://preview.example.com:8443/"))
+  assert.equal(response instanceof Response, true)
+  assert.equal(getClient()?.getOptions().dsn, undefined)
 })

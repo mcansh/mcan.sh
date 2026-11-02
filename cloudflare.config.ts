@@ -15,6 +15,7 @@ export default defineConfig({
       PUBLIC_ORIGIN: bindings.secret(),
       CLOUDINARY_CLOUD_NAME: bindings.secret(),
       SENTRY_REPORT_URL: bindings.secret(),
+      SENTRY_DSN: bindings.secret(),
     },
   },
 })

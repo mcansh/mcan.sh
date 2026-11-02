@@ -19,6 +19,8 @@ pnpm install
 
 Put Worker values in `.dev.vars`. If that file is missing, the Vite plugin also reads `.env`. Names must be declared in `cloudflare.config.ts` or the Worker never sees them. `CLOUDINARY_CLOUD_NAME` is required. `SENTRY_REPORT_URL` is required in production. `PUBLIC_ORIGIN` is optional. Production defaults it to `https://mcan.sh` when it is unset. In development it stays unset unless you set it in `.dev.vars`. A `.dev.vars` file replaces shell environment values for those declared names.
 
+`SENTRY_DSN` is optional. If you leave it unset, the Worker still serves the site and does not send errors to Sentry. To report errors from the local Worker, add `SENTRY_DSN` to `.dev.vars`. `cloudflare.config.ts` declares that name, so the Worker reads it from `.dev.vars`. To set the production secret, run `pnpm exec cf workers secrets update SENTRY_DSN`. Do not set this secret through the Cloudflare API. An API-written secret breaks `cf` builds that use `--strict`.
+
 ```sh
 CLOUDINARY_CLOUD_NAME=your-cloud-name
 ```

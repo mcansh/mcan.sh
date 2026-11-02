@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@mcansh/http-helmet": "^0.13.2",
+    "@sentry/cloudflare": "^11.10.0",
     "cloudinary-build-url": "^0.2.4",
     "pitlane": "1.0.0-alpha.2",
     "remix": "3.0.0"
