@@ -12,6 +12,7 @@ export default defineConfig({
       traces: { enabled: true },
     },
     env: {
+      PUBLIC_ORIGIN: bindings.secret(),
       CLOUDINARY_CLOUD_NAME: bindings.secret(),
       SENTRY_REPORT_URL: bindings.secret(),
     },

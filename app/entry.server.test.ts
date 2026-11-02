@@ -25,3 +25,11 @@ test("the worker fetch handler rewrites sitemap locations to the public origin",
   assert.ok(xml.includes("<loc>https://preview.example.com:8443/resume</loc>"))
   assert.ok(!xml.includes("internal.example") && !xml.includes("untrusted.example"))
 })
+
+test("a double-slash pathname cannot replace the public origin in the sitemap", async () => {
+  let response = await worker.default.fetch(
+    new Request("http://internal.example:5173//untrusted.example/sitemap.xml"),
+  )
+  assert.equal(response.status, 404)
+  assert.ok(!(await response.text()).includes("<loc>https://untrusted.example/"))
+})

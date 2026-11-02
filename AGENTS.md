@@ -28,7 +28,7 @@ Refer to ./.agents/skills/remix/SKILL.md
 - `app/entry.server.tsx` is the Cloudflare Worker fetch handler
 - `app/assets.ts` resolves browser script and stylesheet URLs from the Pitlane Vite manifest
 - `vite.config.ts` composes Pitlane's Remix plugin with the Cloudflare Vite plugin
-- `cloudflare.config.ts` names the Worker and its secret bindings
+- `cloudflare.config.ts` names the Worker and its environment bindings
 - Root `public/` contains static files served unchanged from the app root
 
 ## Route Ownership

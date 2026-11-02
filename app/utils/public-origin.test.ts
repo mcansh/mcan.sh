@@ -29,3 +29,19 @@ test("drops a non-default incoming port when the public origin uses the default 
   )
   assert.equal(rewritten.url, "https://mcan.sh/sitemap.xml")
 })
+
+test("keeps the configured origin when the incoming pathname starts with a double slash", () => {
+  let rewritten = applyPublicOrigin(
+    new Request("https://mcan.sh//untrusted.example/sitemap.xml"),
+    "https://mcan.sh",
+  )
+  assert.equal(rewritten.url, "https://mcan.sh//untrusted.example/sitemap.xml")
+})
+
+test("does not throw when the incoming pathname is not a valid URL reference", () => {
+  let rewritten = applyPublicOrigin(
+    new Request("https://mcan.sh//%/sitemap.xml"),
+    "https://mcan.sh",
+  )
+  assert.equal(rewritten.url, "https://mcan.sh//%/sitemap.xml")
+})
