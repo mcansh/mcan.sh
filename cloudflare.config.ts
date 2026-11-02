@@ -2,7 +2,7 @@ import { bindings, defineConfig } from "cf/config"
 
 export default defineConfig({
   worker: {
-    name: "mcan-sh",
+    name: "personal-website",
     entrypoint: "./app/entry.server.tsx",
     compatibilityDate: "2026-10-19",
     compatibilityFlags: ["nodejs_compat"],
