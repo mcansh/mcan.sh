@@ -1,6 +1,5 @@
 import { createController } from "remix/router"
 
-import { assets } from "../assets.ts"
 import { routes } from "../routes.ts"
 import { getIndex } from "./home-page/selection.ts"
 import { DESIGN_OPTIONS, getHomePage, getMe, HomeShell } from "./home-page/shared.tsx"
@@ -20,11 +19,6 @@ function getFontIndex(url: URL): number {
 
 export default createController(routes, {
   actions: {
-    async assets(context) {
-      let asset = await assets.fetch(context.request)
-      return asset ?? new Response("Not Found", { status: 404 })
-    },
-
     async home(context) {
       let designIndex = getDesignIndex(context.url)
       let fontIndex = getFontIndex(context.url)

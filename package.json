@@ -8,9 +8,10 @@
   "type": "module",
   "sideEffects": false,
   "scripts": {
-    "dev": "NODE_ENV=development node --env-file-if-exists=.env --watch --import remix/node-tsx server.ts",
-    "hmr": "NODE_ENV=development node --env-file-if-exists=.env hmr.ts",
-    "start": "NODE_ENV=production node --import remix/node-tsx server.ts",
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "vite preview",
     "test": "NODE_ENV=test node --import remix/node-tsx --test",
     "test:browser": "remix test --type browser --type e2e",
     "typecheck": "tsc --noEmit",
@@ -20,17 +21,21 @@
   "dependencies": {
     "@mcansh/http-helmet": "^0.13.2",
     "cloudinary-build-url": "^0.2.4",
-    "remix": "^3.0.0-rc.3"
+    "pitlane": "1.0.0-alpha.2",
+    "remix": "3.0.0"
   },
   "devDependencies": {
     "@cld-apis/types": "^0.1.6",
+    "@cloudflare/vite-plugin": "2.0.0-beta.v.0",
     "@oxlint/plugins": "^1.81.0",
     "@types/node": "^26.4.1",
+    "cf": "1.0.0-beta.17",
     "oxfmt": "^0.72.0",
     "oxlint": "^1.81.0",
     "oxlint-tsgolint": "^7.0.2001",
     "playwright": "^1.64.1",
-    "typescript": "^7.0.2"
+    "typescript": "^7.0.2",
+    "vite": "8.3.5"
   },
   "devEngines": {
     "packageManager": {

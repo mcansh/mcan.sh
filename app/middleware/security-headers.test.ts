@@ -24,11 +24,10 @@ function assertPolicy(response: Response) {
   assert.match(csp, /frame-ancestors 'none'/)
   assert.match(csp, /script-src 'self' 'nonce-[^']+' 'strict-dynamic'/)
   assert.doesNotMatch(csp.split("script-src ")[1].split(";")[0], /'unsafe-inline'|'unsafe-eval'/)
-  assert.match(csp, /'wasm-unsafe-eval'/)
   return csp
 }
 
-test("router protects documents, static files, compiled assets, and missing routes", async () => {
+test("router protects documents, static files, and missing routes", async () => {
   let document = await router.fetch("https://mcan.sh/")
   assert.equal(document.status, 200)
   let csp = assertPolicy(document)
@@ -49,10 +48,10 @@ test("router protects documents, static files, compiled assets, and missing rout
   assert.match(html, /data-rmx-style/)
   let entryMatch = html.match(/<script[^>]+src="([^"]+)"/i)
   assert.ok(entryMatch)
-  let entry = entryMatch[1]
+  assert.match(entryMatch[1], /^\/test-entry\.js$/)
+  assert.match(html, /href="\/test-global\.css"/)
   for (let [path, status] of [
     ["/favicon.svg", 200],
-    [entry, 200],
     ["/missing", 404],
     ["/manifest.json", 200],
   ] as const) {
@@ -92,14 +91,12 @@ test("preserves immutable redirects, cookies, cache metadata, bodies, and error 
 
 test("production upgrade policy excludes only loopback hosts and dev connections stay dev-only", () => {
   let previous = process.env.NODE_ENV
-  let previousHmrOrigin = process.env.HMR_EVENT_ORIGIN
-  process.env.HMR_EVENT_ORIGIN = "http://127.0.0.1:44101"
   try {
     process.env.NODE_ENV = "production"
     for (let host of ["mcan.sh", "localhost.evil.example"]) {
       let csp = assertPolicy(applySecurityHeaders(new Response(), new Request(`http://${host}/`)))
       assert.match(csp, /upgrade-insecure-requests/)
-      assert.doesNotMatch(csp, /wss?:|http:\/\/127.0.0.1:44101/)
+      assert.doesNotMatch(csp, /wss?:/)
     }
     for (let host of ["localhost:44100", "127.0.0.1:44100", "[::1]:44100"]) {
       let csp = assertPolicy(applySecurityHeaders(new Response(), new Request(`http://${host}/`)))
@@ -107,11 +104,9 @@ test("production upgrade policy excludes only loopback hosts and dev connections
     }
     process.env.NODE_ENV = "development"
     let csp = assertPolicy(applySecurityHeaders(new Response(), new Request("http://localhost/")))
-    assert.match(csp, /connect-src 'self' ws: wss: http:\/\/127.0.0.1:44101/)
+    assert.match(csp, /connect-src 'self' ws: wss:/)
     assert.doesNotMatch(csp, /upgrade-insecure-requests/)
   } finally {
-    if (previousHmrOrigin === undefined) delete process.env.HMR_EVENT_ORIGIN
-    else process.env.HMR_EVENT_ORIGIN = previousHmrOrigin
     if (previous === undefined) delete process.env.NODE_ENV
     else process.env.NODE_ENV = previous
   }

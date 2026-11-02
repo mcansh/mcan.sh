@@ -3,3 +3,10 @@ db/*.sqlite
 tmp/
 .DS_Store
 .env
+.env.*
+!.env.example
+.dev.vars
+.dev.vars.*
+dist/
+.cloudflare/
+.wrangler/

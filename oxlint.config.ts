@@ -19,6 +19,8 @@ export const IGNORE_PATTERNS = [
   "pnpm-workspace.yaml",
   "tools/oxlint/anti-slop/**",
   "old-app/**",
+  "dist/**",
+  ".cloudflare/**",
 ] as const satisfies OxlintConfig["ignorePatterns"]
 
 export default defineConfig({

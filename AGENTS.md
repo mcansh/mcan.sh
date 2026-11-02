@@ -7,7 +7,8 @@ This app was scaffolded with `remix new`. Use these conventions when continuing 
 ```sh
 npm i
 npm run dev
-npm run hmr
+npm run build
+npm run preview
 npm run start
 npm test
 npm run typecheck
@@ -24,7 +25,10 @@ Refer to ./.agents/skills/remix/SKILL.md
 - `app/actions/public/` contains the browser runtime entry and interactive prompt button
 - `app/routes.ts` defines the shared route contract used by server and browser modules for type-safe hrefs
 - `app/router.ts` wires routes to route handlers and installs the standard Remix UI renderer used by actions
-- `app/assets.ts` owns the server-side asset pipeline used by the asset route and render middleware
+- `app/entry.server.tsx` is the Cloudflare Worker fetch handler
+- `app/assets.ts` resolves browser script and stylesheet URLs from the Pitlane Vite manifest
+- `vite.config.ts` composes Pitlane's Remix plugin with the Cloudflare Vite plugin
+- `cloudflare.config.ts` names the Worker and its secret bindings
 - Root `public/` contains static files served unchanged from the app root
 
 ## Route Ownership
