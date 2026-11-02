@@ -41,3 +41,12 @@ test("fetch with no env leaves the Sentry client without a DSN", async () => {
   assert.equal(response instanceof Response, true)
   assert.equal(getClient()?.getOptions().dsn, undefined)
 })
+
+test("HEAD with no env still serves and leaves the Sentry client without a DSN", async () => {
+  let response = await worker.default.fetch(
+    new Request("https://preview.example.com:8443/", { method: "HEAD" }),
+  )
+  assert.equal(response.status, 200)
+  assert.equal(response.body, null)
+  assert.equal(getClient()?.getOptions().dsn, undefined)
+})

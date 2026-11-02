@@ -12,6 +12,7 @@ export type SentryBindings = {
 export type ErrorOnlySentryOptions = {
   dsn: SentryDsn
   tracesSampleRate: 0
+  tracesSampler: () => 0
   dataCollection: {
     userInfo: false
     cookies: false
@@ -27,6 +28,7 @@ export function sentryOptions(env: SentryBindings | undefined): ErrorOnlySentryO
   return {
     dsn,
     tracesSampleRate: 0,
+    tracesSampler: () => 0,
     dataCollection: {
       userInfo: false,
       cookies: false,

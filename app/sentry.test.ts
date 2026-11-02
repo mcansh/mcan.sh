@@ -28,6 +28,7 @@ test("a present DSN is error-only and matches the declared secret", () => {
   assert.ok(options)
   assert.equal(options.dsn, present)
   assert.equal(options.tracesSampleRate, 0)
+  assert.equal(options.tracesSampler(), 0)
   assert.deepEqual(options.dataCollection, {
     userInfo: false,
     cookies: false,
