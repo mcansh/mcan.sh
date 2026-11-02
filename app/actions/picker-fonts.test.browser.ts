@@ -4,7 +4,7 @@ import { test } from "remix/test"
 import { pickerPreviewStylesheetUrl } from "./public/fonts.ts"
 import { installPickerFontLoader } from "./public/picker-fonts.ts"
 
-test("picker fonts load on interaction, deduplicate, and retry after a stylesheet error", async () => {
+test("picker fonts load on already-open popover, interaction, deduplicate, and retry after a stylesheet error", async () => {
   let button = document.createElement("button")
   button.setAttribute("popovertarget", "design-font-picker")
   let picker = document.createElement("nav")
@@ -14,11 +14,21 @@ test("picker fonts load on interaction, deduplicate, and retry after a styleshee
   picker.dataset.pickerFonts = stylesheetUrl
   let unrelated = document.createElement("input")
   document.body.append(button, picker, unrelated)
-  installPickerFontLoader()
 
   let links = () =>
     document.querySelectorAll<HTMLLinkElement>('link[data-font-role="picker-preview"]')
+
+  picker.showPopover()
   assert.equal(links().length, 0)
+  installPickerFontLoader()
+  assert.equal(links().length, 1)
+  let alreadyOpenLink = links()[0]
+  assert.ok(alreadyOpenLink)
+  assert.equal(alreadyOpenLink.href, picker.dataset.pickerFonts)
+  picker.hidePopover()
+  alreadyOpenLink.remove()
+  assert.equal(links().length, 0)
+
   unrelated.focus()
   assert.equal(links().length, 0)
 

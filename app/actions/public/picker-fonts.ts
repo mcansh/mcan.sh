@@ -61,4 +61,9 @@ export function installPickerFontLoader() {
     if (picker === null) return
     loadPickerPreviewFonts(picker)
   })
+
+  let picker = pickerElement()
+  if (picker !== null && picker.matches(":popover-open")) {
+    loadPickerPreviewFonts(picker)
+  }
 }
