@@ -37,16 +37,10 @@ export function applySecurityHeaders(
     "base-uri": ["'self'"],
     "frame-ancestors": ["'none'"],
     "img-src": ["'self'", `https://res.cloudinary.com/${env.CLOUDINARY_CLOUD_NAME}/image/upload/`],
-    // The import-map polyfill uses a WebAssembly module parser.
-    "script-src": ["'self'", `'nonce-${nonce}'`, "'strict-dynamic'", "'wasm-unsafe-eval'"],
-    "connect-src": [
-      "'self'",
-      ...(isDevelopment ? ["ws:", "wss:", process.env.HMR_EVENT_ORIGIN] : []),
-    ],
-    "worker-src": ["blob:"],
+    "script-src": ["'self'", `'nonce-${nonce}'`, "'strict-dynamic'"],
+    "connect-src": ["'self'", ...(isDevelopment ? ["ws:", "wss:"] : [])],
     "manifest-src": ["'self'"],
     "font-src": ["'self'", "https://fonts.gstatic.com"],
-    // Remix's css() renderer emits style tags without nonce support.
     "style-src": ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
     "upgrade-insecure-requests": process.env.NODE_ENV === "production" && !isLocalhost,
   }

@@ -1,0 +1,20 @@
+import { bindings, defineConfig } from "cf/config"
+
+export default defineConfig({
+  worker: {
+    name: "personal-website",
+    entrypoint: "./app/entry.server.tsx",
+    compatibilityDate: "2026-10-19",
+    compatibilityFlags: ["nodejs_compat"],
+    observability: {
+      enabled: true,
+      logs: { enabled: true },
+      traces: { enabled: true },
+    },
+    env: {
+      PUBLIC_ORIGIN: bindings.secret(),
+      CLOUDINARY_CLOUD_NAME: bindings.secret(),
+      SENTRY_REPORT_URL: bindings.secret(),
+    },
+  },
+})

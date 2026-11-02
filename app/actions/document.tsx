@@ -1,8 +1,8 @@
 import type { Handle, MixInput, RemixNode } from "remix/component"
-import { Fragment, unsafeHTML } from "remix/component"
+import { unsafeHTML } from "remix/component"
 import { ImportMap } from "remix/component/server"
 
-import { getAssetEntry } from "../middleware/assets.ts"
+import { scriptEntry, stylesheetHref } from "../assets.ts"
 import { getNonce } from "../middleware/security-headers.ts"
 import { routes } from "../routes.ts"
 import { bodyFontStylesheetUrl, fontConfigAt } from "./public/fonts.ts"
@@ -18,7 +18,6 @@ export interface DocumentProps {
 const DEFAULT_TITLE = readAppDisplayName("Logan McAnsh")
 
 export function Document(handle: Handle<DocumentProps>) {
-  let assetEntry = getAssetEntry()
   let nonce = getNonce()
   let { children, head, title = DEFAULT_TITLE, mix, fontIndex } = handle.props
   return () => {
@@ -34,29 +33,13 @@ export function Document(handle: Handle<DocumentProps>) {
           <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
           <link rel="manifest" href={routes.manifest.href({ ext: "webmanifest" })} />
           <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-          {Object.entries(assetEntry.stylesheets).map(([name, current]) => (
-            <Fragment key={name}>
-              <link rel="preload" href={current.href} as="style" />
-              <link
-                data-rmx-key={`stylesheet:${name}`}
-                data-remix-stylesheet={name}
-                data-rmx-preserve-dom
-                rel="stylesheet"
-                href={current.href}
-              />
-            </Fragment>
-          ))}
+          <link rel="preload" href={stylesheetHref} as="style" />
+          <link rel="stylesheet" href={stylesheetHref} />
           <title>{title}</title>
           {head}
-          <ImportMap nonce={nonce} value={assetEntry.scriptEntry.importMap} />
-          {assetEntry.scriptEntry.preloads.map((href) => (
-            <link
-              key={href}
-              data-rmx-key={`modulepreload:${href}`}
-              nonce={nonce}
-              rel="modulepreload"
-              href={href}
-            />
+          <ImportMap nonce={nonce} value={scriptEntry.importMap} />
+          {scriptEntry.preloads.map((href) => (
+            <link key={href} nonce={nonce} rel="modulepreload" href={href} />
           ))}
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -77,7 +60,7 @@ export function Document(handle: Handle<DocumentProps>) {
         </head>
         <body>
           {children}
-          <script nonce={nonce} type="module" src={assetEntry.scriptEntry.href} />
+          <script nonce={nonce} type="module" src={scriptEntry.href} />
         </body>
       </html>
     )
