@@ -15,7 +15,9 @@ export type ErrorOnlySentryOptions = {
   dataCollection: {
     userInfo: false
     cookies: false
+    httpHeaders: false
     httpBodies: []
+    urlQueryParams: false
   }
 }
 
@@ -25,7 +27,13 @@ export function sentryOptions(env: SentryBindings | undefined): ErrorOnlySentryO
   return {
     dsn,
     tracesSampleRate: 0,
-    dataCollection: { userInfo: false, cookies: false, httpBodies: [] },
+    dataCollection: {
+      userInfo: false,
+      cookies: false,
+      httpHeaders: false,
+      httpBodies: [],
+      urlQueryParams: false,
+    },
   }
 }
 

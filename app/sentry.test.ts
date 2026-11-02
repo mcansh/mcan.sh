@@ -31,6 +31,8 @@ test("a present DSN is error-only and matches the declared secret", () => {
   assert.deepEqual(options.dataCollection, {
     userInfo: false,
     cookies: false,
+    httpHeaders: false,
     httpBodies: [],
+    urlQueryParams: false,
   })
 })
