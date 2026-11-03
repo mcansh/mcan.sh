@@ -1,4 +1,5 @@
 import { captureException, withSentry } from "@sentry/cloudflare"
+import { ContentType } from "remix/headers/content-type"
 
 import { applySecurityHeaders } from "./middleware/security-headers.ts"
 import { router } from "./router.tsx"
@@ -10,8 +11,10 @@ export default withSentry(
     dsn: env.SENTRY_DSN,
     enabled: process.env.NODE_ENV === "production" && Boolean(env.SENTRY_DSN),
     environment: process.env.NODE_ENV,
-    isStreamingResponse: (response) =>
-      response.headers.get("Content-Type")?.startsWith("text/html") ? true : undefined,
+    isStreamingResponse: (response) => {
+      let contentType = ContentType.from(response.headers.get("Content-Type"))
+      return contentType.mediaType === "text/html" ? true : undefined
+    },
     dataCollection: {
       userInfo: false,
       cookies: false,
