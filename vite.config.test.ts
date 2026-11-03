@@ -6,6 +6,8 @@ import * as assert from "remix/assert"
 import { test } from "remix/test"
 import { build, loadConfigFromFile } from "vite"
 
+import { stubEnv } from "./test/env.ts"
+
 const configFile = new URL("./vite.config.ts", import.meta.url).pathname
 
 for (let fixture of [
@@ -24,11 +26,9 @@ for (let fixture of [
   test(`production browser builds expose only the public Sentry DSN with ${fixture.name}`, async (t) => {
     let directory = await mkdtemp(join(tmpdir(), "mcan-sentry-build-"))
     let previousDirectory = process.cwd()
-    let previousDsn = process.env.SENTRY_DSN
+    stubEnv(t, "SENTRY_DSN", fixture.input)
     t.after(async () => {
       process.chdir(previousDirectory)
-      if (previousDsn === undefined) delete process.env.SENTRY_DSN
-      else process.env.SENTRY_DSN = previousDsn
       await rm(directory, { recursive: true, force: true })
     })
     process.chdir(directory)
@@ -42,8 +42,6 @@ for (let fixture of [
       "SENTRY_DSN=https://file@ingest.example.com/123\nSENTRY_AUTH_TOKEN=private-token-fixture\nSENTRY_DSN_PRIVATE=private-dsn-fixture\n",
     )
 
-    if (fixture.input === undefined) delete process.env.SENTRY_DSN
-    else process.env.SENTRY_DSN = fixture.input
     let loaded = await loadConfigFromFile({ command: "build", mode: "production" }, configFile)
     assert.ok(loaded)
     let result = await build({
