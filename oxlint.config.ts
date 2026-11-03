@@ -104,8 +104,10 @@ export default defineConfig({
       jsPlugins: [
         "./tools/oxlint/prefer-let-locals-plugin.ts",
         "./tools/oxlint/canonical-header-names-plugin.ts",
+        "./tools/oxlint/jsx-no-leaked-render-plugin.ts",
       ],
       rules: {
+        "remix-jsx/jsx-no-leaked-render": "error",
         "remix-headers/canonical-header-name": "error",
         "remix-style/prefer-const-module-scope": "error",
         "remix-style/prefer-let-locals": "error",
