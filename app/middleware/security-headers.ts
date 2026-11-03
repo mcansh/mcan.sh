@@ -38,13 +38,20 @@ export function applySecurityHeaders(
     "frame-ancestors": ["'none'"],
     "img-src": ["'self'", `https://res.cloudinary.com/${env.CLOUDINARY_CLOUD_NAME}/image/upload/`],
     "script-src": ["'self'", `'nonce-${nonce}'`, "'strict-dynamic'"],
-    "connect-src": ["'self'", ...(isDevelopment ? ["ws:", "wss:"] : [])],
+    "connect-src": [
+      "'self'",
+      ...(isDevelopment ? ["ws:", "wss:"] : []),
+      ...(env.SENTRY_DSN ? [new URL(env.SENTRY_DSN).origin] : []),
+    ],
     "manifest-src": ["'self'"],
     "font-src": ["'self'", "https://fonts.gstatic.com"],
     "style-src": ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
     "upgrade-insecure-requests": process.env.NODE_ENV === "production" && !isLocalhost,
   }
-  if (env.SENTRY_REPORT_URL) contentSecurityPolicy["report-uri"] = [env.SENTRY_REPORT_URL]
+  if (env.SENTRY_REPORT_URL) {
+    contentSecurityPolicy["report-uri"] = [env.SENTRY_REPORT_URL]
+    contentSecurityPolicy["report-to"] = ["csp-endpoint"]
+  }
 
   let securityHeaders = createSecureHeaders({
     "Content-Security-Policy": contentSecurityPolicy,
@@ -94,6 +101,9 @@ export function applySecurityHeaders(
   })
 
   let headers = mergeHeaders(new Headers(response.headers), securityHeaders)
+  if (env.SENTRY_REPORT_URL) {
+    headers.set("Reporting-Endpoints", `csp-endpoint="${env.SENTRY_REPORT_URL}"`)
+  }
 
   return new Response(response.body, {
     status: response.status,

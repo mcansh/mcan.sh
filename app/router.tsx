@@ -1,3 +1,4 @@
+import { captureException } from "@sentry/cloudflare"
 import { asyncContext } from "remix/middleware/async-context"
 import { render } from "remix/middleware/render"
 import { staticFiles } from "remix/middleware/static"
@@ -10,7 +11,13 @@ import { securityHeaders } from "./middleware/security-headers.ts"
 import { routes } from "./routes.ts"
 import { NotFoundPage } from "./ui/not-found-page.tsx"
 
-const renderMiddleware = render({ assets })
+const renderMiddleware = render({
+  assets,
+  onError(error) {
+    captureException(error)
+    console.error(error)
+  },
+})
 type AppContext = MiddlewareContext<[typeof renderMiddleware]>
 
 declare module "remix/router" {

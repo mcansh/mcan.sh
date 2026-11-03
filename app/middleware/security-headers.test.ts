@@ -3,6 +3,7 @@ import { test } from "node:test"
 
 process.env.CLOUDINARY_CLOUD_NAME = "security-test"
 process.env.SENTRY_REPORT_URL = "https://reports.example.com/csp"
+process.env.SENTRY_DSN = "https://public@ingest.example.com/123"
 
 const { router } = await import("../router.tsx")
 const { applySecurityHeaders } = await import("./security-headers.ts")
@@ -20,6 +21,13 @@ function assertPolicy(response: Response) {
   let csp = response.headers.get("Content-Security-Policy")
   assert.ok(csp)
   assert.ok(csp.includes("report-uri https://reports.example.com/csp"))
+  assert.match(csp, /report-to csp-endpoint/)
+  assert.equal(
+    response.headers.get("Reporting-Endpoints"),
+    'csp-endpoint="https://reports.example.com/csp"',
+  )
+  assert.match(csp, /connect-src [^;]*https:\/\/ingest\.example\.com/)
+  assert.doesNotMatch(csp, /public@/)
   assert.match(csp, /default-src 'none'/)
   assert.match(csp, /frame-ancestors 'none'/)
   assert.match(csp, /script-src 'self' 'nonce-[^']+' 'strict-dynamic'/)
@@ -32,6 +40,7 @@ test("router protects documents, static files, and missing routes", async () => 
   assert.equal(document.status, 200)
   let csp = assertPolicy(document)
   let html = await document.text()
+  assert.match(html, /<meta name="sentry-dsn" content="https:\/\/public@ingest\.example\.com\/123"/)
   let nonceMatch = csp.match(/'nonce-([^']+)'/)
   assert.ok(nonceMatch)
   let nonce = nonceMatch[1]

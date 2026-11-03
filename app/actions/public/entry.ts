@@ -1,7 +1,23 @@
+import { captureException, init } from "@sentry/browser"
 import { revalidate } from "pitlane/vite-plugin-remix/hmr"
 import { run } from "remix/component"
 
 import { installPickerFontLoader } from "./picker-fonts.ts"
+
+const dsn = document.querySelector<HTMLMetaElement>('meta[name="sentry-dsn"]')?.content
+
+init({
+  dsn,
+  enabled: import.meta.env.PROD && Boolean(dsn),
+  environment: import.meta.env.MODE,
+  dataCollection: {
+    userInfo: false,
+    cookies: false,
+    httpHeaders: false,
+    httpBodies: [],
+    urlQueryParams: false,
+  },
+})
 
 installPickerFontLoader()
 
@@ -23,6 +39,7 @@ if (import.meta.hot) {
 }
 
 app.addEventListener("error", (event) => {
+  captureException(event.error)
   console.error(event.error)
 })
 
