@@ -1,5 +1,5 @@
-import assert from "node:assert/strict"
-import { test } from "node:test"
+import * as assert from "remix/assert"
+import { test } from "remix/test"
 
 process.env.CLOUDINARY_CLOUD_NAME = "website-test"
 delete process.env.PUBLIC_ORIGIN
