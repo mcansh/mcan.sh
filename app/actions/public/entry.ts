@@ -4,7 +4,7 @@ import { run } from "remix/component"
 
 import { installPickerFontLoader } from "./picker-fonts.ts"
 
-const dsn = document.querySelector<HTMLMetaElement>('meta[name="sentry-dsn"]')?.content
+const dsn = import.meta.env.SENTRY_DSN
 
 init({
   dsn,

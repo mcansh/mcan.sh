@@ -8,7 +8,6 @@ import { getContext } from "remix/middleware/async-context"
 import { scriptEntry, stylesheetHref } from "../assets.ts"
 import { getNonce } from "../middleware/security-headers.ts"
 import { routes } from "../routes.ts"
-import { env } from "../utils/env.ts"
 import { getCanonicalHref, getSeo } from "../utils/public-origin.ts"
 import { bodyFontStylesheetUrl, fontConfigAt } from "./public/fonts.ts"
 
@@ -124,7 +123,6 @@ export function Document(handle: Handle<DocumentProps>) {
           <meta charSet="utf-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta name="color-scheme" content="light dark" />
-          {env.SENTRY_DSN && <meta name="sentry-dsn" content={env.SENTRY_DSN} />}
           <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
           <link rel="manifest" href={routes.manifest.href({ ext: "webmanifest" })} />
           <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
