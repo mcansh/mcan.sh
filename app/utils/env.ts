@@ -1,7 +1,7 @@
 import * as s from "remix/data-schema"
 import * as c from "remix/data-schema/checks"
 
-function createEnvSchema(nodeEnv: string | undefined) {
+function createEnvSchema(mode: string) {
   let reportUrl = s
     .string()
     .pipe(c.url())
@@ -46,7 +46,7 @@ function createEnvSchema(nodeEnv: string | undefined) {
           )
         }, "Expected an HTTP(S) Sentry DSN with a public key and numeric project ID"),
     ),
-    SENTRY_REPORT_URL: nodeEnv === "production" ? reportUrl : s.optional(reportUrl),
+    SENTRY_REPORT_URL: mode === "production" ? reportUrl : s.optional(reportUrl),
   })
 }
 
@@ -54,7 +54,7 @@ export const DEFAULT_PUBLIC_ORIGIN = "https://www.mcan.sh"
 
 export function parseEnv(
   input: Record<string, string | undefined>,
-  nodeEnv = process.env.NODE_ENV,
+  mode = process.env.NODE_ENV || "development",
 ) {
   let sentryDsn = input.SENTRY_DSN || undefined
   let reportUrl = input.SENTRY_REPORT_URL || undefined
@@ -67,13 +67,16 @@ export function parseEnv(
     url.search = new URLSearchParams({ sentry_key: publicKey }).toString()
     reportUrl = url.href
   }
-  return s.parse(createEnvSchema(nodeEnv), {
+  let parsed = s.parse(createEnvSchema(mode), {
     ...input,
     PUBLIC_ORIGIN:
-      input.PUBLIC_ORIGIN || (nodeEnv === "production" ? DEFAULT_PUBLIC_ORIGIN : undefined),
+      input.PUBLIC_ORIGIN || (mode === "production" ? DEFAULT_PUBLIC_ORIGIN : undefined),
     SENTRY_REPORT_URL: reportUrl,
     SENTRY_DSN: sentryDsn,
   })
+  return { ...parsed, mode }
 }
+
+export type AppConfig = Readonly<ReturnType<typeof parseEnv>>
 
 export const env = parseEnv(process.env)

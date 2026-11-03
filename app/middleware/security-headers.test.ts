@@ -5,8 +5,19 @@ process.env.CLOUDINARY_CLOUD_NAME = "security-test"
 process.env.SENTRY_REPORT_URL = "https://reports.example.com/csp"
 process.env.SENTRY_DSN = "https://public@ingest.example.com/123"
 
-const { router } = await import("../router.tsx")
+const { createApp } = await import("../router.tsx")
+const { parseEnv } = await import("../utils/env.ts")
 const { applySecurityHeaders } = await import("./security-headers.ts")
+
+const config = parseEnv(
+  {
+    CLOUDINARY_CLOUD_NAME: "security-test",
+    SENTRY_REPORT_URL: "https://reports.example.com/csp",
+    SENTRY_DSN: "https://public@ingest.example.com/123",
+  },
+  "test",
+)
+const router = createApp(config)
 
 function assertPolicy(response: Response) {
   assert.equal(response.headers.get("X-Frame-Options"), "DENY")
@@ -76,7 +87,11 @@ test("router protects documents, static files, and missing routes", async () => 
 
 test("preserves immutable redirects, cookies, cache metadata, bodies, and error status", async () => {
   let request = new Request("https://mcan.sh/")
-  let redirect = applySecurityHeaders(Response.redirect("https://mcan.sh/resume", 302), request)
+  let redirect = applySecurityHeaders(
+    Response.redirect("https://mcan.sh/resume", 302),
+    request,
+    config,
+  )
   assert.equal(redirect.status, 302)
   assert.equal(redirect.headers.get("Location"), "https://mcan.sh/resume")
   assertPolicy(redirect)
@@ -86,6 +101,7 @@ test("preserves immutable redirects, cookies, cache metadata, bodies, and error 
   let response = applySecurityHeaders(
     new Response("Internal Server Error", { status: 500, statusText: "Failure", headers }),
     request,
+    config,
   )
   assertPolicy(response)
   assert.equal(response.status, 500)
@@ -94,28 +110,31 @@ test("preserves immutable redirects, cookies, cache metadata, bodies, and error 
   assert.equal(response.headers.get("ETag"), '"version"')
   assert.deepEqual(response.headers.getSetCookie(), headers.getSetCookie())
   assert.equal(await response.text(), "Internal Server Error")
-  assert.equal(applySecurityHeaders(new Response(null, { status: 304 }), request).body, null)
+  assert.equal(
+    applySecurityHeaders(new Response(null, { status: 304 }), request, config).body,
+    null,
+  )
 })
 
 test("production upgrade policy excludes only loopback hosts and dev connections stay dev-only", () => {
-  let previous = process.env.NODE_ENV
-  try {
-    process.env.NODE_ENV = "production"
-    for (let host of ["mcan.sh", "localhost.evil.example"]) {
-      let csp = assertPolicy(applySecurityHeaders(new Response(), new Request(`http://${host}/`)))
-      assert.match(csp, /upgrade-insecure-requests/)
-      assert.doesNotMatch(csp, /wss?:/)
-    }
-    for (let host of ["localhost:44100", "127.0.0.1:44100", "[::1]:44100"]) {
-      let csp = assertPolicy(applySecurityHeaders(new Response(), new Request(`http://${host}/`)))
-      assert.doesNotMatch(csp, /upgrade-insecure-requests/)
-    }
-    process.env.NODE_ENV = "development"
-    let csp = assertPolicy(applySecurityHeaders(new Response(), new Request("http://localhost/")))
-    assert.match(csp, /connect-src 'self' ws: wss:/)
-    assert.doesNotMatch(csp, /upgrade-insecure-requests/)
-  } finally {
-    if (previous === undefined) delete process.env.NODE_ENV
-    else process.env.NODE_ENV = previous
+  let productionConfig = { ...config, mode: "production" }
+  for (let host of ["mcan.sh", "localhost.evil.example"]) {
+    let csp = assertPolicy(
+      applySecurityHeaders(new Response(), new Request(`http://${host}/`), productionConfig),
+    )
+    assert.match(csp, /upgrade-insecure-requests/)
+    assert.doesNotMatch(csp, /wss?:/)
   }
+  for (let host of ["localhost:44100", "127.0.0.1:44100", "[::1]:44100"]) {
+    let csp = assertPolicy(
+      applySecurityHeaders(new Response(), new Request(`http://${host}/`), productionConfig),
+    )
+    assert.doesNotMatch(csp, /upgrade-insecure-requests/)
+  }
+  let developmentConfig = { ...config, mode: "development" }
+  let csp = assertPolicy(
+    applySecurityHeaders(new Response(), new Request("http://localhost/"), developmentConfig),
+  )
+  assert.match(csp, /connect-src 'self' ws: wss:/)
+  assert.doesNotMatch(csp, /upgrade-insecure-requests/)
 })

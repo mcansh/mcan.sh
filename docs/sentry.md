@@ -24,6 +24,8 @@
 
 The browser SDK captures unhandled exceptions, rejected promises, and Remix component errors. The Cloudflare SDK captures caught request failures and streamed rendering errors. Request cancellation does not report the abort reason. The native Worker wrapper skips instrumentation for `HEAD` and `OPTIONS` requests.
 
+The Worker validates its runtime bindings when creating an app and reuses that app for subsequent requests with the same bindings object. Sentry and response security headers use the same validated configuration. Route handlers receive it through `context.config`. Tests can import `createApp` and `createWorker` and supply configuration directly.
+
 Both SDKs disable automatic collection of user identity, cookies, HTTP headers, HTTP bodies, and URL query parameters. Tracing, session replay, and source-map uploads are not configured.
 
 ## Configure CSP reporting
