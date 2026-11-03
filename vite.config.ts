@@ -1,8 +1,13 @@
 import { cloudflare } from "@cloudflare/vite-plugin"
 import { remix } from "pitlane/vite-plugin-remix"
-import { defineConfig } from "vite"
+import { defineConfig, loadEnv } from "vite"
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
+  define: {
+    "import.meta.env.SENTRY_DSN": JSON.stringify(
+      loadEnv(mode, process.cwd(), "SENTRY_DSN").SENTRY_DSN || "",
+    ),
+  },
   plugins: [
     remix({
       serverHandler: false,
@@ -12,4 +17,4 @@ export default defineConfig({
     cloudflare({ viteEnvironment: { name: "ssr" } }),
   ],
   server: { port: 44100 },
-})
+}))

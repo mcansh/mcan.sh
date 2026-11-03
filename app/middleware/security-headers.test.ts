@@ -40,7 +40,7 @@ test("router protects documents, static files, and missing routes", async () => 
   assert.equal(document.status, 200)
   let csp = assertPolicy(document)
   let html = await document.text()
-  assert.match(html, /<meta name="sentry-dsn" content="https:\/\/public@ingest\.example\.com\/123"/)
+  assert.doesNotMatch(html, /<meta\b[^>]*name="sentry-dsn"/)
   let nonceMatch = csp.match(/'nonce-([^']+)'/)
   assert.ok(nonceMatch)
   let nonce = nonceMatch[1]
