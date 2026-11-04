@@ -5,9 +5,11 @@ import { Document } from "./document.tsx"
 
 const resumeStyle = css({
   colorScheme: "light dark",
-  "& body": { margin: 0 },
+  color: "CanvasText",
+  backgroundColor: "Canvas",
+  "& body": { margin: 0, color: "CanvasText", backgroundColor: "Canvas" },
   "& main": {
-    maxWidth: "52rem",
+    maxWidth: "70ch",
     marginInline: "auto",
     padding: "clamp(1.25rem, 5vw, 4rem)",
     lineHeight: 1.6,
@@ -47,7 +49,7 @@ export function ResumePage() {
   return () => (
     <Document
       title="Resume | Logan McAnsh"
-      fontIndex={0}
+      fontIndex={2}
       mix={resumeStyle}
       head={
         <meta
