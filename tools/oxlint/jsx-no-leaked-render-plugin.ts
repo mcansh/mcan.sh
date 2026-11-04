@@ -125,7 +125,13 @@ export const jsxNoLeakedRenderRule = defineRule({
           checkRendered(node.alternate)
           break
         case "AssignmentExpression":
-          if (node.operator === "=") checkRendered(node.right)
+          if (
+            node.operator === "=" ||
+            node.operator === "||=" ||
+            node.operator === "&&=" ||
+            node.operator === "??="
+          )
+            checkRendered(node.right)
           break
         case "AwaitExpression":
           checkRendered(node.argument)
