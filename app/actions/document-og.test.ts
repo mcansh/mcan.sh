@@ -6,7 +6,7 @@ delete process.env.SENTRY_REPORT_URL
 delete process.env.SENTRY_DSN
 delete process.env.VITE_SENTRY_DSN
 
-const { router } = await import("../router.ts")
+const { router } = await import("../router.tsx")
 
 test("home and resume name the Open Graph card and its 1200 by 630 size", async () => {
   for (let path of ["/", "/resume"]) {
