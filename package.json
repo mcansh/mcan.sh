@@ -1,9 +1,9 @@
 {
   "name": "personal-website",
   "private": true,
-  "homepage": "https://mcan.sh",
+  "homepage": "https://www.mcan.sh",
   "license": "MIT",
-  "author": "Logan McAnsh <logan@mcan.sh> (https://mcan.sh)",
+  "author": "Logan McAnsh <logan@mcan.sh> (https://www.mcan.sh)",
   "repository": "https://github.com/mcansh/mcan.sh",
   "type": "module",
   "sideEffects": false,

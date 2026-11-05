@@ -2,7 +2,7 @@
 
 Senior Software Engineer
 
-Shelby Township, MI · logan+resume@mcan.sh · [mcan.sh](https://mcan.sh) · [GitHub](https://github.com/mcansh) · [LinkedIn](https://linkedin.com/in/loganmcansh)
+Shelby Township, MI · logan+resume@mcan.sh · [mcan.sh](https://www.mcan.sh/) · [GitHub](https://github.com/mcansh) · [LinkedIn](https://linkedin.com/in/loganmcansh)
 
 Senior software engineer focused on web frameworks, developer tooling, and application architecture. Former Remix Core Team member with experience building routing conventions, testing tools, release automation, and deployment integrations. Currently building developer tools and modernizing the technology stack at United Wholesale Mortgage.
 
