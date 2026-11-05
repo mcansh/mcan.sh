@@ -35,12 +35,22 @@ export default createController(routes, {
     },
 
     async preview(context) {
+      let headers = {
+        "Cache-Control": "no-store",
+        Vary: "X-Remix-Frame",
+        "X-Robots-Tag": "noindex",
+      }
+      if (context.headers.get("X-Remix-Frame") !== "true") {
+        return new Response("Not Found", { status: 404, headers })
+      }
+
       let designIndex = getDesignIndex(context.url)
       let fontIndex = getFontIndex(context.url)
       let design = await getHomePage(designIndex)
 
       return context.render(
         <design.HomePage me={getMe(designIndex)} designIndex={designIndex} fontIndex={fontIndex} />,
+        { headers },
       )
     },
 

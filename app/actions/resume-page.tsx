@@ -1,7 +1,12 @@
 import { css } from "remix/component"
+import { getContext } from "remix/middleware/async-context"
 
+import { getNonce } from "../middleware/security-headers.ts"
 import { routes } from "../routes.ts"
-import { Document } from "./document.tsx"
+import { getOpenGraphImageUrl } from "../utils/cloudinary.ts"
+import { env } from "../utils/env.ts"
+import { getPublicHref, getPublicOrigin } from "../utils/public-origin.ts"
+import { createPersonSchema, createProfilePageJsonLd, Document, jsonLd } from "./document.tsx"
 
 const resumeStyle = css({
   colorScheme: "light dark",
@@ -43,18 +48,29 @@ const resumeStyle = css({
   },
 })
 
+const RESUME_DESCRIPTION =
+  "Logan McAnsh’s resume — senior software engineer focused on web frameworks, developer tooling, and application architecture."
+
 export function ResumePage() {
+  let nonce = getNonce()
+  let request = getContext().request
+  let ogImage = getOpenGraphImageUrl(env.CLOUDINARY_CLOUD_NAME)
   return () => (
     <Document
       title="Resume | Logan McAnsh"
+      description={RESUME_DESCRIPTION}
+      ogImage={ogImage}
+      ogType="profile"
       fontIndex={0}
       mix={resumeStyle}
-      head={
-        <meta
-          name="description"
-          content="Logan McAnsh’s resume — senior software engineer focused on web frameworks, developer tooling, and application architecture."
-        />
-      }
+      head={jsonLd(
+        createProfilePageJsonLd(
+          getPublicHref(routes.resume.href(), request),
+          RESUME_DESCRIPTION,
+          createPersonSchema(getPublicOrigin(request), ogImage),
+        ),
+        nonce,
+      )}
     >
       <main>
         <nav aria-label="Resume navigation">

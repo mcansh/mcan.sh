@@ -1,0 +1,12 @@
+diff --git a/dist/components/seo.d.ts b/dist/components/seo.d.ts
+--- a/dist/components/seo.d.ts
++++ b/dist/components/seo.d.ts
+@@ -16,7 +16,7 @@
+     /** Open Graph facts for a page, beyond its title and description. */
+     interface OpenGraph {
+         /** `og:type`. Defaults to `"website"`. */
+-        type?: "website" | "article";
++        type?: "website" | "article" | "profile";
+         /** Absolute image URL for the social card — build it with `seo.absolute()`. */
+         image?: string;
+         /** Alternative text for the card image, for the consumers that expose it. */

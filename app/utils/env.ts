@@ -25,6 +25,8 @@ function createEnvSchema(nodeEnv: string | undefined) {
   })
 }
 
+export const DEFAULT_PUBLIC_ORIGIN = "https://www.mcan.sh"
+
 export function parseEnv(
   input: Record<string, string | undefined>,
   nodeEnv = process.env.NODE_ENV,
@@ -32,7 +34,7 @@ export function parseEnv(
   return s.parse(createEnvSchema(nodeEnv), {
     ...input,
     PUBLIC_ORIGIN:
-      input.PUBLIC_ORIGIN || (nodeEnv === "production" ? "https://mcan.sh" : undefined),
+      input.PUBLIC_ORIGIN || (nodeEnv === "production" ? DEFAULT_PUBLIC_ORIGIN : undefined),
     SENTRY_REPORT_URL: input.SENTRY_REPORT_URL || undefined,
   })
 }

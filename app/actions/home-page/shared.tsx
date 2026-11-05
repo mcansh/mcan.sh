@@ -1,12 +1,14 @@
 import type { TransformerOption } from "@cld-apis/types"
 import type { Handle, MixInput } from "remix/component"
-import { css, Fragment, Frame, unsafeHTML } from "remix/component"
+import { css, Fragment, Frame } from "remix/component"
+import { getContext } from "remix/middleware/async-context"
 
 import { getNonce } from "../../middleware/security-headers.ts"
 import { routes } from "../../routes.ts"
-import { getCloudinaryURL } from "../../utils/cloudinary.ts"
+import { getCloudinaryURL, getOpenGraphImageUrl } from "../../utils/cloudinary.ts"
 import { env } from "../../utils/env.ts"
-import { Document } from "../document.tsx"
+import { getPublicOrigin, getSeo } from "../../utils/public-origin.ts"
+import { createPersonJsonLd, Document, jsonLd } from "../document.tsx"
 import {
   cssFontFamilyValue,
   FONT_CONFIGS,
@@ -32,12 +34,19 @@ export function previewHref(design: number, font: number): string {
 
 export function HomeShell(handle: Handle<HomePageProps & { bodyMix: MixInput<HTMLElement> }>) {
   let nonce = getNonce()
+  let request = getContext().request
+  let origin = getPublicOrigin(request)
+  let seo = getSeo(request)
+  let ogImage = getOpenGraphImageUrl(env.CLOUDINARY_CLOUD_NAME)
   return () => {
     let { designIndex, fontIndex, bodyMix } = handle.props
     return (
       <Document
         mix={bodyMix}
         fontIndex={fontIndex}
+        description={seo.site.description}
+        ogImage={ogImage}
+        ogType="website"
         head={
           <Fragment>
             <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
@@ -46,26 +55,8 @@ export function HomeShell(handle: Handle<HomePageProps & { bodyMix: MixInput<HTM
               content={designIndex === 3 ? "#0a0a0a" : "#000000"}
               media="(prefers-color-scheme: dark)"
             />
-            <meta name="description" content="personal website for Logan McAnsh" />
-            <script
-              type="application/ld+json"
-              nonce={nonce}
-              innerHTML={unsafeHTML(
-                JSON.stringify({
-                  "@context": "https://schema.org",
-                  "@type": "Person",
-                  name: "Logan McAnsh",
-                  url: "https://mcan.sh",
-                  jobTitle: "Senior Software Engineer",
-                  image: handle.props.me.url,
-                  sameAs: [
-                    "https://github.com/mcansh",
-                    "https://linkedin.com/in/loganmcansh",
-                    "https://x.com/loganmcansh",
-                  ],
-                }).replace(/</g, "\\u003c"),
-              )}
-            />
+            {jsonLd(createPersonJsonLd(origin, handle.props.me.url), nonce)}
+            {jsonLd(seo.schema.website({ url: routes.home.href() }), nonce)}
           </Fragment>
         }
       >

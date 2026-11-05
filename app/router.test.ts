@@ -9,7 +9,16 @@ delete process.env.SENTRY_DSN
 delete process.env.VITE_SENTRY_DSN
 
 const { router } = await import("./router.ts")
-const { parseEnv } = await import("./utils/env.ts")
+const { DEFAULT_PUBLIC_ORIGIN, parseEnv } = await import("./utils/env.ts")
+
+function jsonLdGraph(head: string, type: string) {
+  let graphs = [
+    ...head.matchAll(/<script[^>]+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi),
+  ].map((match) => JSON.parse(match[1]))
+  let graph = graphs.find((entry) => entry["@type"] === type)
+  assert.ok(graph, `missing ${type} JSON-LD`)
+  return graph
+}
 
 test("every homepage design renders numeric image dimensions and search metadata", async () => {
   for (let design = 1; design <= 4; design++) {
@@ -23,7 +32,9 @@ test("every homepage design renders numeric image dimensions and search metadata
     let headMatch = html.match(/<head>([\s\S]*?)<\/head>/)
     assert.ok(headMatch)
     let head = headMatch[1]
-    assert.match(head, /<meta name="description" content="personal website for Logan McAnsh"/)
+    let description =
+      "Logan McAnsh is a senior software engineer building web frameworks, developer tools, and modern applications. Former Remix Core Team member at Shopify."
+    assert.ok(head.includes(`<meta name="description" content="${description}"`))
     assert.match(
       head,
       /<meta name="theme-color" content="#ffffff" media="\(prefers-color-scheme: light\)"/,
@@ -34,12 +45,22 @@ test("every homepage design renders numeric image dimensions and search metadata
         `<meta name="theme-color" content="${darkThemeColor}" media="(prefers-color-scheme: dark)"`,
       ),
     )
-    let dataMatch = head.match(
-      /<script[^>]+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/i,
+    assert.ok(head.includes('<link rel="canonical" href="https://mcan.sh/"'))
+    assert.match(head, /<meta property="og:title" content="Logan McAnsh"/)
+    assert.ok(head.includes(`<meta property="og:description" content="${description}"`))
+    assert.ok(head.includes('<meta property="og:url" content="https://mcan.sh/"'))
+    assert.match(
+      head,
+      /<meta property="og:image" content="https:\/\/res\.cloudinary\.com\/website-test\/[^"]*w_1200[^"]*h_630[^"]*"/,
     )
-    assert.ok(dataMatch)
-    let data = JSON.parse(dataMatch[1])
-    assert.equal(data["@type"], "Person")
+    assert.match(head, /<meta property="og:type" content="website"/)
+    assert.match(head, /<meta name="twitter:card" content="summary_large_image"/)
+    assert.match(head, /<meta property="og:site_name" content="Logan McAnsh"/)
+    assert.match(head, /<meta name="twitter:title" content="Logan McAnsh"/)
+    assert.ok(head.includes(`<meta name="twitter:description" content="${description}"`))
+    assert.match(head, /<meta name="twitter:image" content="https:\/\/res\.cloudinary\.com\//)
+    let data = jsonLdGraph(head, "Person")
+    let website = jsonLdGraph(head, "WebSite")
     assert.equal(data.name, "Logan McAnsh")
     assert.equal(data.url, "https://mcan.sh")
     assert.equal(data.jobTitle, "Senior Software Engineer")
@@ -48,6 +69,17 @@ test("every homepage design renders numeric image dimensions and search metadata
       "https://linkedin.com/in/loganmcansh",
       "https://x.com/loganmcansh",
     ])
+    assert.equal(website.name, "Logan McAnsh")
+    assert.equal(website.description, description)
+    assert.equal(website.url, "https://mcan.sh/")
+    let policy = response.headers.get("Content-Security-Policy")
+    assert.ok(policy)
+    let nonceMatch = policy.match(/'nonce-([^']+)'/)
+    assert.ok(nonceMatch)
+    let nonce = nonceMatch[1]
+    for (let script of head.matchAll(/<script[^>]+type="application\/ld\+json"[^>]*>/g)) {
+      assert.ok(script[0].includes(`nonce="${nonce}"`))
+    }
     let imageMatch = html.match(/<img[^>]+alt="Logan McAnsh"[^>]*>/)
     assert.ok(imageMatch)
     let image = imageMatch[0]
@@ -74,6 +106,46 @@ test("every homepage design renders numeric image dimensions and search metadata
     if (design === 2 || design === 3)
       assert.match(html, /href="https:\/\/linkedin\.com\/in\/loganmcansh"/)
   }
+})
+
+test("preview rejects direct navigation and stays out of search indexes", async () => {
+  for (let method of ["GET", "HEAD"]) {
+    for (let frame of [undefined, "false"]) {
+      let response = await router.fetch(
+        new Request("https://mcan.sh/preview?design=2", {
+          method,
+          headers: frame ? { "X-Remix-Frame": frame } : {},
+        }),
+      )
+      assert.equal(response.status, 404)
+      assert.equal(response.headers.get("X-Robots-Tag"), "noindex")
+      assert.equal(response.headers.get("Cache-Control"), "no-store")
+      assert.equal(response.headers.get("Vary"), "X-Remix-Frame")
+      if (method === "HEAD") assert.equal(response.body, null)
+      else assert.equal(await response.text(), "Not Found")
+    }
+  }
+})
+
+test("Remix frame requests can render every preview design without indexing it", async () => {
+  for (let design = 1; design <= 4; design++) {
+    let response = await router.fetch(
+      new Request(`https://mcan.sh/preview?design=${design}&font=2`, {
+        headers: { "X-Remix-Frame": "true", "X-Remix-Target": "preview" },
+      }),
+    )
+    assert.equal(response.status, 200)
+    assert.equal(response.headers.get("X-Robots-Tag"), "noindex")
+    assert.equal(response.headers.get("Cache-Control"), "no-store")
+    assert.equal(response.headers.get("Vary"), "X-Remix-Frame")
+    let html = await response.text()
+    assert.ok(html.includes("Logan McAnsh"))
+    assert.ok(html.includes('id="design-font-picker"'))
+    assert.ok(!html.includes("<html"))
+  }
+  let home = await router.fetch("https://mcan.sh/")
+  assert.equal(home.headers.get("X-Robots-Tag"), null)
+  await home.body?.cancel()
 })
 
 test("read-only pages accept GET and HEAD and reject write methods", async () => {
@@ -194,6 +266,49 @@ test("sitemap lists the homepage and resume on the request origin", async () => 
   assert.equal([...xml.matchAll(/<url>/g)].length, 2)
 })
 
+test("canonical host, robots.txt, and sitemap agree, and listed pages return 200", async () => {
+  let robots = await router.fetch(`${DEFAULT_PUBLIC_ORIGIN}/robots.txt`)
+  assert.equal(robots.status, 200)
+  let robotsText = await robots.text()
+  assert.ok(robotsText.includes(`Sitemap: ${DEFAULT_PUBLIC_ORIGIN}/sitemap.xml`))
+
+  let sitemap = await router.fetch(`${DEFAULT_PUBLIC_ORIGIN}/sitemap.xml`)
+  assert.equal(sitemap.status, 200)
+  let xml = await sitemap.text()
+  let locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1])
+  assert.deepEqual(locs, [`${DEFAULT_PUBLIC_ORIGIN}/`, `${DEFAULT_PUBLIC_ORIGIN}/resume`])
+
+  for (let loc of locs) {
+    let page = await router.fetch(loc)
+    assert.equal(page.status, 200, loc)
+    let html = await page.text()
+    assert.ok(html.includes(`<link rel="canonical" href="${loc}"`))
+    assert.ok(html.includes(`<meta property="og:url" content="${loc}"`))
+    assert.match(html, /<meta name="twitter:card" content="summary_large_image"/)
+  }
+})
+
+test("resume keeps visible contact details and adds ProfilePage schema plus social tags", async () => {
+  let response = await router.fetch(`${DEFAULT_PUBLIC_ORIGIN}/resume`)
+  assert.equal(response.status, 200)
+  let html = await response.text()
+  let headMatch = html.match(/<head>([\s\S]*?)<\/head>/)
+  assert.ok(headMatch)
+  let head = headMatch[1]
+  assert.ok(html.includes("Shelby Township, MI"))
+  assert.ok(html.includes("logan+resume@mcan.sh"))
+  assert.ok(html.includes('href="https://mcan.sh"'))
+  assert.ok(head.includes(`<link rel="canonical" href="${DEFAULT_PUBLIC_ORIGIN}/resume"`))
+  assert.match(head, /<meta property="og:title" content="Resume \| Logan McAnsh"/)
+  assert.match(head, /<meta property="og:type" content="profile"/)
+  assert.equal([...head.matchAll(/<meta property="og:type"/g)].length, 1)
+  let profile = jsonLdGraph(head, "ProfilePage")
+  assert.equal(profile.url, `${DEFAULT_PUBLIC_ORIGIN}/resume`)
+  assert.equal(profile.mainEntity["@type"], "Person")
+  assert.equal(profile.mainEntity.name, "Logan McAnsh")
+  assert.equal(profile.mainEntity.url, DEFAULT_PUBLIC_ORIGIN)
+})
+
 test("restored resource routes support HEAD, reject writes, and return 404 for unknown well-known paths", async () => {
   for (let path of ["/manifest.json", "/manifest.webmanifest", "/sitemap.xml"]) {
     let response = await router.fetch(new Request(`https://mcan.sh${path}`, { method: "HEAD" }))
@@ -304,7 +419,11 @@ test("documents load only the active Google font and preconnect, with picker pre
   assert.doesNotMatch(resumeHtml, /design-font-picker/)
   assert.doesNotMatch(resumeHtml, /berkeley-mono/)
 
-  let preview = await router.fetch(new URL(routes.preview.href(), "https://mcan.sh").href)
+  let preview = await router.fetch(
+    new Request(new URL(routes.preview.href(), "https://mcan.sh"), {
+      headers: { "X-Remix-Frame": "true" },
+    }),
+  )
   let previewHtml = await preview.text()
   assert.equal(googleFontStylesheets(previewHtml).length, 0)
   assert.match(previewHtml, /data-picker-fonts="https:\/\/fonts\.googleapis\.com\/css2\?/)
