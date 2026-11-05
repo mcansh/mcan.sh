@@ -133,7 +133,13 @@ export function Document(handle: Handle<DocumentProps>) {
             description={description}
             canonical={canonicalUrl}
             site={seo.site}
-            og={{ type: ogType, image: ogImage }}
+            og={{
+              type: ogType,
+              image: ogImage,
+              imageAlt: "Logan McAnsh",
+              imageWidth: 1200,
+              imageHeight: 630,
+            }}
             robots={robots}
           />
           {head}
