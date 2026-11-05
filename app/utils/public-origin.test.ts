@@ -31,7 +31,7 @@ test("leaves the request unchanged when no public origin is configured", () => {
 
 test("drops a non-default incoming port when the public origin uses the default port", () => {
   let rewritten = applyPublicOrigin(
-    new Request("http://127.0.0.1:5173/sitemap.xml"),
+    new Request("http://127.0.0.1:44100/sitemap.xml"),
     "https://mcan.sh",
   )
   assert.equal(rewritten.url, "https://mcan.sh/sitemap.xml")
