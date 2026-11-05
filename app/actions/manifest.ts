@@ -1,11 +1,13 @@
 import { createHash } from "node:crypto"
 
+import { HOME_PAGE_DESCRIPTION } from "../utils/public-origin.ts"
+
 const iconSizes = [32, 57, 72, 96, 120, 128, 144, 152, 195, 228]
 const manifest = JSON.stringify(
   {
     name: "Logan McAnsh",
     short_name: "LM",
-    description: "personal website for logan mcansh",
+    description: HOME_PAGE_DESCRIPTION,
     start_url: "/?homescreen=1",
     background_color: "#ffffff",
     theme_color: "#ffffff",

@@ -2,12 +2,14 @@ import { createSeo } from "@sdxc/seo"
 
 import { env } from "./env.ts"
 
+export const HOME_PAGE_DESCRIPTION =
+  "Logan McAnsh is a senior software engineer focused on web frameworks, developer tooling, and application architecture. Former Remix Core Team member at Shopify, now building developer tools at United Wholesale Mortgage."
+
 export function getSeo(request: Request) {
   return createSeo({
     baseUrl: getPublicOrigin(request),
     siteName: "Logan McAnsh",
-    defaultDescription:
-      "Logan McAnsh is a senior software engineer building web frameworks, developer tools, and modern applications. Former Remix Core Team member at Shopify.",
+    defaultDescription: HOME_PAGE_DESCRIPTION,
   })
 }
 
