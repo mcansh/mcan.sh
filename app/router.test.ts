@@ -33,7 +33,7 @@ test("every homepage design renders numeric image dimensions and search metadata
     assert.ok(headMatch)
     let head = headMatch[1]
     let description =
-      "Logan McAnsh is a senior software engineer building web frameworks, developer tools, and modern applications. Former Remix Core Team member at Shopify."
+      "Logan McAnsh is a senior software engineer focused on web frameworks, developer tooling, and application architecture. Former Remix Core Team member at Shopify, now building developer tools at United Wholesale Mortgage."
     assert.ok(head.includes(`<meta name="description" content="${description}"`))
     assert.match(
       head,
