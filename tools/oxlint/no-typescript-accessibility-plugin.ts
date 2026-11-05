@@ -8,9 +8,7 @@ const noTypescriptAccessibilityRule = defineRule({
   create(context: Context) {
     return {
       PropertyDefinition(node: ESTree.PropertyDefinition) {
-        if (node.accessibility == null) {
-          return
-        }
+        if (node.accessibility == null) return
 
         context.report({
           node,
@@ -18,9 +16,7 @@ const noTypescriptAccessibilityRule = defineRule({
         })
       },
       MethodDefinition(node: ESTree.MethodDefinition) {
-        if (node.accessibility == null) {
-          return
-        }
+        if (node.accessibility == null) return
 
         if (node.kind !== "constructor") {
           context.report({
@@ -39,9 +35,7 @@ const noTypescriptAccessibilityRule = defineRule({
         }
       },
       TSParameterProperty(node: ESTree.TSParameterProperty) {
-        if (node.accessibility == null) {
-          return
-        }
+        if (node.accessibility == null) return
 
         context.report({
           node,

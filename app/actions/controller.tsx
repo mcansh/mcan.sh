@@ -40,9 +40,8 @@ export default createController(routes, {
         Vary: "X-Remix-Frame",
         "X-Robots-Tag": "noindex",
       }
-      if (context.headers.get("X-Remix-Frame") !== "true") {
+      if (context.headers.get("X-Remix-Frame") !== "true")
         return new Response("Not Found", { status: 404, headers })
-      }
 
       let designIndex = getDesignIndex(context.url)
       let fontIndex = getFontIndex(context.url)
@@ -55,9 +54,9 @@ export default createController(routes, {
     },
 
     manifest(context) {
-      if (!["json", "webmanifest"].includes(context.params.ext)) {
+      if (!["json", "webmanifest"].includes(context.params.ext))
         return new Response("Not Found", { status: 404 })
-      }
+
       return createManifestResponse(context.request)
     },
 

@@ -17,9 +17,9 @@ test("production uses a configured public origin and rejects invalid values", ()
     "https://user:pass@example.com",
     "https://example.com/?x=1",
     "ftp://example.com",
-  ]) {
+  ])
     assert.throws(() => parseEnv({ ...input, PUBLIC_ORIGIN: value }, "production"))
-  }
+
   assert.equal(
     parseEnv({ ...input, PUBLIC_ORIGIN: "https://preview.example.com:8443" }, "production")
       .PUBLIC_ORIGIN,

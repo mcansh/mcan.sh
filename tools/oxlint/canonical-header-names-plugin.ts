@@ -51,13 +51,9 @@ function isNewHeadersExpression(node: ESTree.Expression): boolean {
 }
 
 function isLikelyHeadersReceiver(node: ESTree.Expression): boolean {
-  if (isIdentifierReference(node)) {
-    return isHeadersIdentifierName(node.name)
-  }
+  if (isIdentifierReference(node)) return isHeadersIdentifierName(node.name)
 
-  if (isStaticMemberExpression(node)) {
-    return node.property.name === "headers"
-  }
+  if (isStaticMemberExpression(node)) return node.property.name === "headers"
 
   return isNewHeadersExpression(node)
 }
@@ -70,17 +66,11 @@ function quoteLike(raw: string | null, value: string): string {
 }
 
 function getStaticPropertyName(node: ESTree.ObjectProperty): string | null {
-  if (node.computed) {
-    return null
-  }
+  if (node.computed) return null
 
-  if (node.key.type === "Identifier") {
-    return node.key.name
-  }
+  if (node.key.type === "Identifier") return node.key.name
 
-  if (isStringLiteral(node.key)) {
-    return node.key.value
-  }
+  if (isStringLiteral(node.key)) return node.key.value
 
   return null
 }
@@ -89,9 +79,7 @@ function getHeaderPropertyKeyFixText(
   node: ESTree.IdentifierName | ESTree.StringLiteral,
   canonicalName: string,
 ): string {
-  if (node.type === "Literal") {
-    return quoteLike(node.raw, canonicalName)
-  }
+  if (node.type === "Literal") return quoteLike(node.raw, canonicalName)
 
   return canonicalName
 }
@@ -107,14 +95,10 @@ function reportHeaderName(
   node: ESTree.IdentifierName | ESTree.StringLiteral,
   name: string,
 ): void {
-  if (!headerNamePattern.test(name)) {
-    return
-  }
+  if (!headerNamePattern.test(name)) return
 
   let canonicalName = canonicalHeaderName(name)
-  if (name === canonicalName) {
-    return
-  }
+  if (name === canonicalName) return
 
   context.report({
     node,
@@ -127,18 +111,12 @@ function reportHeaderName(
 
 function checkHeadersInitObject(context: Context, node: ESTree.ObjectExpression): void {
   for (let property of node.properties) {
-    if (property.type !== "Property") {
-      continue
-    }
+    if (property.type !== "Property") continue
 
     let headerName = getStaticPropertyName(property)
-    if (headerName == null) {
-      continue
-    }
+    if (headerName == null) continue
 
-    if (!isHeaderPropertyKey(property.key)) {
-      continue
-    }
+    if (!isHeaderPropertyKey(property.key)) continue
 
     reportHeaderName(context, property.key, headerName)
   }
@@ -147,9 +125,7 @@ function checkHeadersInitObject(context: Context, node: ESTree.ObjectExpression)
 function isHeadersInitPropertyValue(node: ESTree.ObjectExpression): boolean {
   let parent = node.parent
 
-  if (parent.type !== "Property" || parent.value !== node) {
-    return false
-  }
+  if (parent.type !== "Property" || parent.value !== node) return false
 
   return getStaticPropertyName(parent) === "headers"
 }
@@ -162,42 +138,28 @@ const canonicalHeaderNamesRule = defineRule({
   create(context: Context) {
     return {
       CallExpression(node: ESTree.CallExpression) {
-        if (!isStaticMemberExpression(node.callee)) {
-          return
-        }
+        if (!isStaticMemberExpression(node.callee)) return
 
         let methodName = node.callee.property.name
-        if (!headerMethods.has(methodName)) {
-          return
-        }
+        if (!headerMethods.has(methodName)) return
 
-        if (!isLikelyHeadersReceiver(node.callee.object)) {
-          return
-        }
+        if (!isLikelyHeadersReceiver(node.callee.object)) return
 
         let headerName = node.arguments[0]
-        if (headerName == null || !isStringLiteral(headerName)) {
-          return
-        }
+        if (headerName == null || !isStringLiteral(headerName)) return
 
         reportHeaderName(context, headerName, headerName.value)
       },
       NewExpression(node: ESTree.NewExpression) {
-        if (!isNewHeadersExpression(node)) {
-          return
-        }
+        if (!isNewHeadersExpression(node)) return
 
         let headersInit = node.arguments[0]
-        if (headersInit?.type !== "ObjectExpression") {
-          return
-        }
+        if (headersInit?.type !== "ObjectExpression") return
 
         checkHeadersInitObject(context, headersInit)
       },
       ObjectExpression(node: ESTree.ObjectExpression) {
-        if (!isHeadersInitPropertyValue(node)) {
-          return
-        }
+        if (!isHeadersInitPropertyValue(node)) return
 
         checkHeadersInitObject(context, node)
       },

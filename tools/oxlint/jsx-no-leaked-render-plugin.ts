@@ -137,9 +137,9 @@ export const jsxNoLeakedRenderRule = defineRule({
           checkRendered(node.argument)
           break
         case "ArrayExpression":
-          for (let element of node.elements) {
+          for (let element of node.elements)
             if (element !== null && element.type !== "SpreadElement") checkRendered(element)
-          }
+
           break
         case "SequenceExpression": {
           let last = node.expressions.at(-1)

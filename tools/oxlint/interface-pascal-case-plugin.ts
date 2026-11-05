@@ -10,9 +10,7 @@ const interfacePascalCaseRule = defineRule({
   create(context: Context) {
     return {
       TSInterfaceDeclaration(node: ESTree.TSInterfaceDeclaration) {
-        if (pascalCasePattern.test(node.id.name)) {
-          return
-        }
+        if (pascalCasePattern.test(node.id.name)) return
 
         context.report({
           node: node.id,
