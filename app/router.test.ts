@@ -124,8 +124,8 @@ test("preview rejects direct navigation and stays out of search indexes", async 
       if (method === "HEAD") assert.equal(response.body, null)
       else {
         let html = await response.text()
-        assert.ok(html.includes('<link rel="canonical" href="https://www.mcan.sh/">'))
-        assert.ok(html.includes('<meta name="robots" content="noindex">'))
+        assert.ok(html.includes('<link rel="canonical" href="https://mcan.sh/preview"'))
+        assert.ok(html.includes('<meta name="robots" content="noindex, follow" />'))
       }
     }
   }
