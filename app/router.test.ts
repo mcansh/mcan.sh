@@ -8,7 +8,7 @@ delete process.env.SENTRY_REPORT_URL
 delete process.env.SENTRY_DSN
 delete process.env.VITE_SENTRY_DSN
 
-const { router } = await import("./router.ts")
+const { router } = await import("./router.tsx")
 const { DEFAULT_PUBLIC_ORIGIN, parseEnv } = await import("./utils/env.ts")
 
 function jsonLdGraph(head: string, type: string) {
@@ -122,7 +122,11 @@ test("preview rejects direct navigation and stays out of search indexes", async 
       assert.equal(response.headers.get("Cache-Control"), "no-store")
       assert.equal(response.headers.get("Vary"), "X-Remix-Frame")
       if (method === "HEAD") assert.equal(response.body, null)
-      else assert.equal(await response.text(), "Not Found")
+      else {
+        let html = await response.text()
+        assert.ok(html.includes('<link rel="canonical" href="https://mcan.sh/preview"'))
+        assert.ok(html.includes('<meta name="robots" content="noindex, follow" />'))
+      }
     }
   }
 })

@@ -1,6 +1,7 @@
 import { createController } from "remix/router"
 
 import { routes } from "../routes.ts"
+import { NotFoundPage } from "../ui/not-found-page.tsx"
 import { getIndex } from "./home-page/selection.ts"
 import { DESIGN_OPTIONS, getHomePage, getMe, HomeShell } from "./home-page/shared.tsx"
 import { createManifestResponse } from "./manifest.ts"
@@ -41,7 +42,7 @@ export default createController(routes, {
         "X-Robots-Tag": "noindex",
       }
       if (context.headers.get("X-Remix-Frame") !== "true") {
-        return new Response("Not Found", { status: 404, headers })
+        return context.render(<NotFoundPage />, { status: 404, headers })
       }
 
       let designIndex = getDesignIndex(context.url)

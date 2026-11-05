@@ -29,7 +29,7 @@ Start the Vite dev server. It runs the Worker in workerd:
 pnpm run dev
 ```
 
-Then open <http://localhost:5173> in your browser to see it running.
+Then open <http://localhost:44100> in your browser to see it running.
 
 `cloudflare.config.ts` names the Worker `personal-website`. That name must match the Worker in the Cloudflare account. Build the production client and Worker bundles with `pnpm run build`. The build writes Cloudflare Build Output under `.cloudflare/output/`. Preview that build locally with `pnpm run preview` or `pnpm start`. After you authenticate the Cloudflare CLI, deploy the prebuilt output with `pnpm exec cf deploy --prebuilt`. Workers Builds uses the same Worker name. Its version command is `npx cf workers versions create`. Its deploy command is `npx wrangler deploy`.
 

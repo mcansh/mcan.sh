@@ -8,6 +8,7 @@ import controller from "./actions/controller.tsx"
 import { assets } from "./assets.ts"
 import { securityHeaders } from "./middleware/security-headers.ts"
 import { routes } from "./routes.ts"
+import { NotFoundPage } from "./ui/not-found-page.tsx"
 
 const renderMiddleware = render({ assets })
 type AppContext = MiddlewareContext<[typeof renderMiddleware]>
@@ -25,6 +26,9 @@ export const router = createRouter<AppContext>({
     staticFiles("./public", { index: false, lastModified: true }),
     renderMiddleware,
   ],
+  defaultHandler(context) {
+    return context.render(<NotFoundPage />, { status: 404 })
+  },
 })
 
 router.map(routes, controller)

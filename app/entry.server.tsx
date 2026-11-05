@@ -1,5 +1,5 @@
 import { applySecurityHeaders } from "./middleware/security-headers.ts"
-import { router } from "./router.ts"
+import { router } from "./router.tsx"
 import { env } from "./utils/env.ts"
 import { applyPublicOrigin } from "./utils/public-origin.ts"
 

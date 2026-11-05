@@ -6,7 +6,7 @@ import { routes } from "../../routes.ts"
 
 process.env.CLOUDINARY_CLOUD_NAME = "website-test"
 delete process.env.SENTRY_REPORT_URL
-const { router } = await import("../../router.ts")
+const { router } = await import("../../router.tsx")
 
 test("picker navigation updates document styles and the selected font", async (t) => {
   let server = await createTestServer((request) => router.fetch(request))

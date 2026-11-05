@@ -18,6 +18,7 @@ export interface DocumentProps {
   description: string
   ogImage: string
   ogType?: Seo.OpenGraph["type"]
+  robots?: string
   mix?: MixInput<HTMLElement>
   fontIndex: number
 }
@@ -108,6 +109,7 @@ export function Document(handle: Handle<DocumentProps>) {
     description,
     ogImage,
     ogType = "website",
+    robots,
     mix,
     fontIndex,
   } = handle.props
@@ -132,6 +134,7 @@ export function Document(handle: Handle<DocumentProps>) {
             canonical={canonicalUrl}
             site={seo.site}
             og={{ type: ogType, image: ogImage }}
+            robots={robots}
           />
           {head}
           <ImportMap nonce={nonce} value={scriptEntry.importMap} />

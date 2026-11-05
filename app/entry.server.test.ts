@@ -11,9 +11,9 @@ const worker = await import("./entry.server.tsx")
 
 test("the worker fetch handler rewrites sitemap locations to the public origin", async () => {
   let response = await worker.default.fetch(
-    new Request("http://internal.example:5173/sitemap.xml", {
+    new Request("http://internal.example:44100/sitemap.xml", {
       headers: {
-        Host: "internal.example:5173",
+        Host: "internal.example:44100",
         "X-Forwarded-Host": "untrusted.example",
         "X-Forwarded-Proto": "http",
       },
@@ -28,7 +28,7 @@ test("the worker fetch handler rewrites sitemap locations to the public origin",
 
 test("a double-slash pathname cannot replace the public origin in the sitemap", async () => {
   let response = await worker.default.fetch(
-    new Request("http://internal.example:5173//untrusted.example/sitemap.xml"),
+    new Request("http://internal.example:44100//untrusted.example/sitemap.xml"),
   )
   assert.equal(response.status, 404)
   assert.ok(!(await response.text()).includes("<loc>https://untrusted.example/"))
