@@ -1,16 +1,14 @@
 import { html } from "remix/html-template"
 import { createHtmlResponse } from "remix/response/html"
 
-import { routes } from "../routes.ts"
-import { getSeo } from "../utils/public-origin.ts"
+import { DEFAULT_PUBLIC_ORIGIN } from "../utils/env.ts"
 
-export function createPreviewNotFoundResponse(request: Request, headers: HeadersInit): Response {
-  let canonical = getSeo(request).canonical(routes.home.href())
+export function createPreviewNotFoundResponse(headers: HeadersInit): Response {
   let body = html`<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <link rel="canonical" href="${canonical}">
+    <link rel="canonical" href="${DEFAULT_PUBLIC_ORIGIN}/">
     <meta name="robots" content="noindex">
     <title>Not Found</title>
   </head>

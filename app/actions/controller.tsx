@@ -42,7 +42,7 @@ export default createController(routes, {
         "X-Robots-Tag": "noindex",
       }
       if (context.headers.get("X-Remix-Frame") !== "true") {
-        return createPreviewNotFoundResponse(context.request, headers)
+        return createPreviewNotFoundResponse(headers)
       }
 
       let designIndex = getDesignIndex(context.url)
