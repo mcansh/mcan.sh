@@ -167,11 +167,6 @@ const canonicalHeaderNamesRule = defineRule({
   },
 })
 
-/**
- * Encourages canonical HTTP header names in direct `Headers` method calls and
- * static `HeadersInit` objects, while staying conservative enough to avoid
- * unrelated `Map`, session, and form data APIs.
- */
 export default definePlugin({
   meta: {
     name: "remix-headers",

@@ -24,7 +24,6 @@ export const IGNORE_PATTERNS = [
 ] as const satisfies OxlintConfig["ignorePatterns"]
 
 export default defineConfig({
-  // Ensure only explicitly enabled rules are used.
   categories: {
     correctness: "off",
     nursery: "off",

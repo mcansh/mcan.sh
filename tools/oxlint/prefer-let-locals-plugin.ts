@@ -76,12 +76,6 @@ const preferConstModuleScopeRule = defineRule({
   },
 })
 
-/**
- * Enforces the repo convention that `const` is reserved for module scope and
- * local bindings should use `let` instead. Safe module-scope `let` declarations
- * are rewritten to `const`, and local `const` declarations are rewritten to
- * `let`.
- */
 export default definePlugin({
   meta: {
     name: "remix-style",
