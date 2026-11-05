@@ -11,7 +11,5 @@ export default defineConfig({
     }),
     cloudflare({ viteEnvironment: { name: "ssr" } }),
   ],
-  server: {
-    port: 5173,
-  },
+  server: { port: 44100 },
 })

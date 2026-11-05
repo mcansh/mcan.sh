@@ -7,7 +7,7 @@ delete process.env.SENTRY_REPORT_URL
 delete process.env.SENTRY_DSN
 delete process.env.VITE_SENTRY_DSN
 
-const { router } = await import("../router.ts")
+const { router } = await import("../router.tsx")
 
 test("direct preview navigation is a noindex 404 canonicalized to the preview path", async () => {
   for (let origin of ["https://www.mcan.sh", "https://mcan.sh"]) {

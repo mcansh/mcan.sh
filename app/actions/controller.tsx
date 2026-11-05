@@ -1,10 +1,7 @@
 import { createController } from "remix/router"
 
 import { routes } from "../routes.ts"
-import { getOpenGraphImageUrl } from "../utils/cloudinary.ts"
-import { env } from "../utils/env.ts"
-import { getSeo } from "../utils/public-origin.ts"
-import { Document } from "./document.tsx"
+import { NotFoundPage } from "../ui/not-found-page.tsx"
 import { getIndex } from "./home-page/selection.ts"
 import { DESIGN_OPTIONS, getHomePage, getMe, HomeShell } from "./home-page/shared.tsx"
 import { createManifestResponse } from "./manifest.ts"
@@ -45,19 +42,7 @@ export default createController(routes, {
         "X-Robots-Tag": "noindex",
       }
       if (context.headers.get("X-Remix-Frame") !== "true") {
-        let seo = getSeo(context.request)
-        return context.render(
-          <Document
-            title="Not Found"
-            description={seo.site.description}
-            ogImage={getOpenGraphImageUrl(env.CLOUDINARY_CLOUD_NAME)}
-            fontIndex={0}
-            robots={seo.robotsTag({ index: false })}
-          >
-            Not Found
-          </Document>,
-          { status: 404, headers },
-        )
+        return context.render(<NotFoundPage />, { status: 404, headers })
       }
 
       let designIndex = getDesignIndex(context.url)

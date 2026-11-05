@@ -8,7 +8,7 @@ delete process.env.SENTRY_REPORT_URL
 delete process.env.SENTRY_DSN
 delete process.env.VITE_SENTRY_DSN
 
-const { router } = await import("./router.ts")
+const { router } = await import("./router.tsx")
 const { DEFAULT_PUBLIC_ORIGIN, parseEnv } = await import("./utils/env.ts")
 
 function jsonLdGraph(head: string, type: string) {

@@ -4,7 +4,7 @@ import { test } from "node:test"
 process.env.CLOUDINARY_CLOUD_NAME = "security-test"
 process.env.SENTRY_REPORT_URL = "https://reports.example.com/csp"
 
-const { router } = await import("../router.ts")
+const { router } = await import("../router.tsx")
 const { applySecurityHeaders } = await import("./security-headers.ts")
 
 function assertPolicy(response: Response) {
