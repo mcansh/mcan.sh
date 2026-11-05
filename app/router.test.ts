@@ -77,9 +77,9 @@ test("every homepage design renders numeric image dimensions and search metadata
     let nonceMatch = policy.match(/'nonce-([^']+)'/)
     assert.ok(nonceMatch)
     let nonce = nonceMatch[1]
-    for (let script of head.matchAll(/<script[^>]+type="application\/ld\+json"[^>]*>/g)) {
+    for (let script of head.matchAll(/<script[^>]+type="application\/ld\+json"[^>]*>/g))
       assert.ok(script[0].includes(`nonce="${nonce}"`))
-    }
+
     let imageMatch = html.match(/<img[^>]+alt="Logan McAnsh"[^>]*>/)
     assert.ok(imageMatch)
     let image = imageMatch[0]
@@ -198,9 +198,8 @@ test("production requires a valid CSP reporting URL", () => {
       .SENTRY_REPORT_URL,
     reportUrl,
   )
-  for (let nodeEnv of ["development", "test"]) {
+  for (let nodeEnv of ["development", "test"])
     assert.doesNotThrow(() => parseEnv({ CLOUDINARY_CLOUD_NAME: "website-test" }, nodeEnv))
-  }
 })
 
 test("manifest aliases serve existing icons and support conditional requests", async () => {
@@ -372,9 +371,9 @@ test("design links navigate the document so layout styles update with the previe
     new URL(routes.home.href(undefined, { searchParams: { design: 4 } }), "https://mcan.sh").href,
   )
   let html = await response.text()
-  let links = [...html.matchAll(/<a\b[^>]*>/g)]
-    .map(([tag]) => tag)
-    .filter((tag) => tag.includes('data-rmx-target="preview"'))
+  let links = [...html.matchAll(/<a\b[^>]*>/g)].flatMap(([tag]) =>
+    tag.includes('data-rmx-target="preview"') ? [tag] : [],
+  )
   assert.ok(links.length > 0)
   for (let link of links) assert.match(link, /\bdata-rmx-document(?:\s|=|>)/)
 })
