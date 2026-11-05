@@ -3,9 +3,10 @@ import { getContext } from "remix/middleware/async-context"
 
 import { getNonce } from "../middleware/security-headers.ts"
 import { routes } from "../routes.ts"
+import { personUrl } from "../utils/canonical-host.ts"
 import { getOpenGraphImageUrl } from "../utils/cloudinary.ts"
 import { env } from "../utils/env.ts"
-import { getPublicHref, getPublicOrigin } from "../utils/public-origin.ts"
+import { getPublicHref } from "../utils/public-origin.ts"
 import { createPersonSchema, createProfilePageJsonLd, Document, jsonLd } from "./document.tsx"
 
 const resumeStyle = css({
@@ -67,7 +68,7 @@ export function ResumePage() {
         createProfilePageJsonLd(
           getPublicHref(routes.resume.href(), request),
           RESUME_DESCRIPTION,
-          createPersonSchema(getPublicOrigin(request), ogImage),
+          createPersonSchema(personUrl(), ogImage),
         ),
         nonce,
       )}
@@ -80,7 +81,7 @@ export function ResumePage() {
         <p>Senior Software Engineer</p>
         <p>
           Shelby Township, MI · <a href="mailto:logan+resume@mcan.sh">logan+resume@mcan.sh</a> ·{" "}
-          <a href="https://mcan.sh">mcan.sh</a> · <a href="https://github.com/mcansh">GitHub</a> ·{" "}
+          <a href="https://www.mcan.sh/">mcan.sh</a> · <a href="https://github.com/mcansh">GitHub</a> ·{" "}
           <a href="https://linkedin.com/in/loganmcansh">LinkedIn</a>
         </p>
         <p>

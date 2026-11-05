@@ -62,7 +62,7 @@ test("every homepage design renders numeric image dimensions and search metadata
     let data = jsonLdGraph(head, "Person")
     let website = jsonLdGraph(head, "WebSite")
     assert.equal(data.name, "Logan McAnsh")
-    assert.equal(data.url, "https://mcan.sh")
+    assert.equal(data.url, "https://www.mcan.sh/")
     assert.equal(data.jobTitle, "Senior Software Engineer")
     assert.deepEqual(data.sameAs, [
       "https://github.com/mcansh",
@@ -301,7 +301,7 @@ test("resume keeps visible contact details and adds ProfilePage schema plus soci
   let head = headMatch[1]
   assert.ok(html.includes("Shelby Township, MI"))
   assert.ok(html.includes("logan+resume@mcan.sh"))
-  assert.ok(html.includes('href="https://mcan.sh"'))
+  assert.ok(html.includes('href="https://www.mcan.sh/"'))
   assert.ok(head.includes(`<link rel="canonical" href="${DEFAULT_PUBLIC_ORIGIN}/resume"`))
   assert.match(head, /<meta property="og:title" content="Resume \| Logan McAnsh"/)
   assert.match(head, /<meta property="og:type" content="profile"/)
@@ -310,7 +310,7 @@ test("resume keeps visible contact details and adds ProfilePage schema plus soci
   assert.equal(profile.url, `${DEFAULT_PUBLIC_ORIGIN}/resume`)
   assert.equal(profile.mainEntity["@type"], "Person")
   assert.equal(profile.mainEntity.name, "Logan McAnsh")
-  assert.equal(profile.mainEntity.url, DEFAULT_PUBLIC_ORIGIN)
+  assert.equal(profile.mainEntity.url, "https://www.mcan.sh/")
 })
 
 test("restored resource routes support HEAD, reject writes, and return 404 for unknown well-known paths", async () => {

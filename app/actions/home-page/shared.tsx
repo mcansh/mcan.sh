@@ -5,9 +5,10 @@ import { getContext } from "remix/middleware/async-context"
 
 import { getNonce } from "../../middleware/security-headers.ts"
 import { routes } from "../../routes.ts"
+import { personUrl } from "../../utils/canonical-host.ts"
 import { getCloudinaryURL, getOpenGraphImageUrl } from "../../utils/cloudinary.ts"
 import { env } from "../../utils/env.ts"
-import { getPublicOrigin, getSeo } from "../../utils/public-origin.ts"
+import { getSeo } from "../../utils/public-origin.ts"
 import { createPersonJsonLd, Document, jsonLd } from "../document.tsx"
 import {
   cssFontFamilyValue,
@@ -35,7 +36,6 @@ export function previewHref(design: number, font: number): string {
 export function HomeShell(handle: Handle<HomePageProps & { bodyMix: MixInput<HTMLElement> }>) {
   let nonce = getNonce()
   let request = getContext().request
-  let origin = getPublicOrigin(request)
   let seo = getSeo(request)
   let ogImage = getOpenGraphImageUrl(env.CLOUDINARY_CLOUD_NAME)
   return () => {
@@ -55,7 +55,7 @@ export function HomeShell(handle: Handle<HomePageProps & { bodyMix: MixInput<HTM
               content={designIndex === 3 ? "#0a0a0a" : "#000000"}
               media="(prefers-color-scheme: dark)"
             />
-            {jsonLd(createPersonJsonLd(origin, handle.props.me.url), nonce)}
+            {jsonLd(createPersonJsonLd(personUrl(), handle.props.me.url), nonce)}
             {jsonLd(seo.schema.website({ url: routes.home.href() }), nonce)}
           </Fragment>
         }
