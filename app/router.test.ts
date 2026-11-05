@@ -10,6 +10,7 @@ delete process.env.VITE_SENTRY_DSN
 
 const { router } = await import("./router.tsx")
 const { DEFAULT_PUBLIC_ORIGIN, parseEnv } = await import("./utils/env.ts")
+const { HOME_PAGE_DESCRIPTION } = await import("./utils/public-origin.ts")
 
 function jsonLdGraph(head: string, type: string) {
   let graphs = [
@@ -32,9 +33,7 @@ test("every homepage design renders numeric image dimensions and search metadata
     let headMatch = html.match(/<head>([\s\S]*?)<\/head>/)
     assert.ok(headMatch)
     let head = headMatch[1]
-    let description =
-      "Logan McAnsh is a senior software engineer focused on web frameworks, developer tooling, and application architecture. Former Remix Core Team member at Shopify, now building developer tools at United Wholesale Mortgage."
-    assert.ok(head.includes(`<meta name="description" content="${description}"`))
+    assert.ok(head.includes(`<meta name="description" content="${HOME_PAGE_DESCRIPTION}"`))
     assert.match(
       head,
       /<meta name="theme-color" content="#ffffff" media="\(prefers-color-scheme: light\)"/,
@@ -47,7 +46,7 @@ test("every homepage design renders numeric image dimensions and search metadata
     )
     assert.ok(head.includes('<link rel="canonical" href="https://mcan.sh/"'))
     assert.match(head, /<meta property="og:title" content="Logan McAnsh"/)
-    assert.ok(head.includes(`<meta property="og:description" content="${description}"`))
+    assert.ok(head.includes(`<meta property="og:description" content="${HOME_PAGE_DESCRIPTION}"`))
     assert.ok(head.includes('<meta property="og:url" content="https://mcan.sh/"'))
     assert.match(
       head,
@@ -57,7 +56,7 @@ test("every homepage design renders numeric image dimensions and search metadata
     assert.match(head, /<meta name="twitter:card" content="summary_large_image"/)
     assert.match(head, /<meta property="og:site_name" content="Logan McAnsh"/)
     assert.match(head, /<meta name="twitter:title" content="Logan McAnsh"/)
-    assert.ok(head.includes(`<meta name="twitter:description" content="${description}"`))
+    assert.ok(head.includes(`<meta name="twitter:description" content="${HOME_PAGE_DESCRIPTION}"`))
     assert.match(head, /<meta name="twitter:image" content="https:\/\/res\.cloudinary\.com\//)
     let data = jsonLdGraph(head, "Person")
     let website = jsonLdGraph(head, "WebSite")
@@ -70,7 +69,7 @@ test("every homepage design renders numeric image dimensions and search metadata
       "https://x.com/loganmcansh",
     ])
     assert.equal(website.name, "Logan McAnsh")
-    assert.equal(website.description, description)
+    assert.equal(website.description, HOME_PAGE_DESCRIPTION)
     assert.equal(website.url, "https://mcan.sh/")
     let policy = response.headers.get("Content-Security-Policy")
     assert.ok(policy)
@@ -219,6 +218,7 @@ test("manifest aliases serve existing icons and support conditional requests", a
   let content = await first.text()
   let manifest = JSON.parse(content)
   assert.equal(manifest.name, "Logan McAnsh")
+  assert.equal(manifest.description, HOME_PAGE_DESCRIPTION)
   assert.equal(manifest.start_url, "/?homescreen=1")
   assert.equal(manifest.display, "standalone")
   assert.equal(manifest.theme_color, "#ffffff")
