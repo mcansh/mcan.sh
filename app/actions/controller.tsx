@@ -4,6 +4,7 @@ import { routes } from "../routes.ts"
 import { getIndex } from "./home-page/selection.ts"
 import { DESIGN_OPTIONS, getHomePage, getMe, HomeShell } from "./home-page/shared.tsx"
 import { createManifestResponse } from "./manifest.ts"
+import { createPreviewNotFoundResponse } from "./preview-document.ts"
 import { FONT_OPTIONS } from "./public/fonts.ts"
 import { ResumePage } from "./resume-page.tsx"
 import { createSitemapResponse } from "./sitemap.ts"
@@ -41,7 +42,7 @@ export default createController(routes, {
         "X-Robots-Tag": "noindex",
       }
       if (context.headers.get("X-Remix-Frame") !== "true") {
-        return new Response("Not Found", { status: 404, headers })
+        return createPreviewNotFoundResponse(context.request, headers)
       }
 
       let designIndex = getDesignIndex(context.url)

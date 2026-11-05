@@ -122,7 +122,11 @@ test("preview rejects direct navigation and stays out of search indexes", async 
       assert.equal(response.headers.get("Cache-Control"), "no-store")
       assert.equal(response.headers.get("Vary"), "X-Remix-Frame")
       if (method === "HEAD") assert.equal(response.body, null)
-      else assert.equal(await response.text(), "Not Found")
+      else {
+        let html = await response.text()
+        assert.ok(html.includes('<link rel="canonical" href="https://mcan.sh/">'))
+        assert.ok(html.includes('<meta name="robots" content="noindex">'))
+      }
     }
   }
 })
