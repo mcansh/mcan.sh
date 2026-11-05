@@ -7,8 +7,8 @@ import { getNonce } from "../../middleware/security-headers.ts"
 import { routes } from "../../routes.ts"
 import { getCloudinaryURL, getOpenGraphImageUrl } from "../../utils/cloudinary.ts"
 import { env } from "../../utils/env.ts"
-import { getPublicHref, getPublicOrigin } from "../../utils/public-origin.ts"
-import { createPersonJsonLd, createWebsiteJsonLd, Document, jsonLd } from "../document.tsx"
+import { getPublicOrigin, getSeo } from "../../utils/public-origin.ts"
+import { createPersonJsonLd, Document, jsonLd } from "../document.tsx"
 import {
   cssFontFamilyValue,
   FONT_CONFIGS,
@@ -36,7 +36,7 @@ export function HomeShell(handle: Handle<HomePageProps & { bodyMix: MixInput<HTM
   let nonce = getNonce()
   let request = getContext().request
   let origin = getPublicOrigin(request)
-  let homeUrl = getPublicHref(routes.home.href(), request)
+  let seo = getSeo(request)
   let ogImage = getOpenGraphImageUrl(env.CLOUDINARY_CLOUD_NAME)
   return () => {
     let { designIndex, fontIndex, bodyMix } = handle.props
@@ -44,7 +44,7 @@ export function HomeShell(handle: Handle<HomePageProps & { bodyMix: MixInput<HTM
       <Document
         mix={bodyMix}
         fontIndex={fontIndex}
-        description="personal website for Logan McAnsh"
+        description={seo.site.description}
         ogImage={ogImage}
         ogType="website"
         head={
@@ -56,7 +56,7 @@ export function HomeShell(handle: Handle<HomePageProps & { bodyMix: MixInput<HTM
               media="(prefers-color-scheme: dark)"
             />
             {jsonLd(createPersonJsonLd(origin, handle.props.me.url), nonce)}
-            {jsonLd(createWebsiteJsonLd(homeUrl), nonce)}
+            {jsonLd(seo.schema.website({ url: routes.home.href() }), nonce)}
           </Fragment>
         }
       >

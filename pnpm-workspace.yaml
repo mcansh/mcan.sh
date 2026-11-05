@@ -10,3 +10,5 @@ allowBuilds:
   husky: true
   unrs-resolver: true
   workerd: true
+patchedDependencies:
+  '@sdxc/seo@2026.11.3': patches/@sdxc+seo@2026.11.3.patch

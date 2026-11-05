@@ -7,7 +7,8 @@ delete process.env.SENTRY_REPORT_URL
 delete process.env.SENTRY_DSN
 delete process.env.VITE_SENTRY_DSN
 
-const { applyPublicOrigin, getCanonicalHref, getPublicHref, getPublicOrigin } = await import("./public-origin.ts")
+const { applyPublicOrigin, getCanonicalHref, getPublicHref, getPublicOrigin } =
+  await import("./public-origin.ts")
 
 test("rewrites host and protocol to the configured origin and ignores forwarded headers", () => {
   let request = new Request("http://internal.example:8080/sitemap.xml?design=1", {
@@ -63,5 +64,12 @@ test("canonical href keeps the path and drops search params", () => {
   assert.equal(
     getCanonicalHref(new Request("https://www.mcan.sh/?design=2&font=3")),
     "https://www.mcan.sh/",
+  )
+})
+
+test("canonical href normalizes trailing slashes and omits fragments", () => {
+  assert.equal(
+    getCanonicalHref(new Request("https://www.mcan.sh/resume/?utm_source=share#experience")),
+    "https://www.mcan.sh/resume",
   )
 })

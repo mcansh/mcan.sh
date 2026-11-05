@@ -1,3 +1,5 @@
+import type { SchemaOrg } from "@sdxc/seo"
+import { Seo } from "@sdxc/seo"
 import type { Handle, MixInput, RemixNode } from "remix/component"
 import { unsafeHTML } from "remix/component"
 import { ImportMap } from "remix/component/server"
@@ -6,7 +8,7 @@ import { getContext } from "remix/middleware/async-context"
 import { scriptEntry, stylesheetHref } from "../assets.ts"
 import { getNonce } from "../middleware/security-headers.ts"
 import { routes } from "../routes.ts"
-import { getCanonicalHref } from "../utils/public-origin.ts"
+import { getCanonicalHref, getSeo } from "../utils/public-origin.ts"
 import { bodyFontStylesheetUrl, fontConfigAt } from "./public/fonts.ts"
 
 export interface DocumentProps {
@@ -15,7 +17,7 @@ export interface DocumentProps {
   title?: string
   description: string
   ogImage: string
-  ogType?: "website" | "profile"
+  ogType?: Seo.OpenGraph["type"]
   mix?: MixInput<HTMLElement>
   fontIndex: number
 }
@@ -33,13 +35,6 @@ export type PersonJsonLd = {
   "@context": "https://schema.org"
 } & PersonSchema
 
-export type WebSiteJsonLd = {
-  "@context": "https://schema.org"
-  "@type": "WebSite"
-  name: string
-  url: string
-}
-
 export type ProfilePageJsonLd = {
   "@context": "https://schema.org"
   "@type": "ProfilePage"
@@ -49,7 +44,7 @@ export type ProfilePageJsonLd = {
   mainEntity: PersonSchema
 }
 
-type JsonLd = PersonJsonLd | WebSiteJsonLd | ProfilePageJsonLd
+type JsonLd = PersonJsonLd | SchemaOrg.WebSite | ProfilePageJsonLd
 
 const DEFAULT_TITLE = readAppDisplayName("Logan McAnsh")
 
@@ -74,15 +69,6 @@ export function createPersonJsonLd(url: string, image: string): PersonJsonLd {
   return {
     "@context": "https://schema.org",
     ...createPersonSchema(url, image),
-  }
-}
-
-export function createWebsiteJsonLd(url: string): WebSiteJsonLd {
-  return {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: "Logan McAnsh",
-    url,
   }
 }
 
@@ -114,6 +100,7 @@ export function jsonLd(data: JsonLd, nonce: string) {
 export function Document(handle: Handle<DocumentProps>) {
   let nonce = getNonce()
   let canonicalUrl = getCanonicalHref(getContext().request)
+  let seo = getSeo(getContext().request)
   let {
     children,
     head,
@@ -139,15 +126,13 @@ export function Document(handle: Handle<DocumentProps>) {
           <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
           <link rel="preload" href={stylesheetHref} as="style" />
           <link rel="stylesheet" href={stylesheetHref} />
-          <title>{title}</title>
-          <link rel="canonical" href={canonicalUrl} />
-          <meta name="description" content={description} />
-          <meta property="og:title" content={title} />
-          <meta property="og:description" content={description} />
-          <meta property="og:url" content={canonicalUrl} />
-          <meta property="og:image" content={ogImage} />
-          <meta property="og:type" content={ogType} />
-          <meta name="twitter:card" content="summary_large_image" />
+          <Seo.Meta
+            title={title}
+            description={description}
+            canonical={canonicalUrl}
+            site={seo.site}
+            og={{ type: ogType, image: ogImage }}
+          />
           {head}
           <ImportMap nonce={nonce} value={scriptEntry.importMap} />
           {scriptEntry.preloads.map((href) => (

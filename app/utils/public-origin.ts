@@ -1,15 +1,26 @@
+import { createSeo } from "@sdxc/seo"
+
 import { env } from "./env.ts"
+
+export function getSeo(request: Request) {
+  return createSeo({
+    baseUrl: getPublicOrigin(request),
+    siteName: "Logan McAnsh",
+    defaultDescription:
+      "Logan McAnsh is a senior software engineer building web frameworks, developer tools, and modern applications. Former Remix Core Team member at Shopify.",
+  })
+}
 
 export function getPublicOrigin(request: Request): string {
   return env.PUBLIC_ORIGIN ?? new URL(request.url).origin
 }
 
 export function getPublicHref(pathname: string, request: Request): string {
-  return new URL(pathname, getPublicOrigin(request)).href
+  return getSeo(request).absolute(pathname)
 }
 
 export function getCanonicalHref(request: Request): string {
-  return getPublicHref(new URL(request.url).pathname, request)
+  return getSeo(request).canonical(new URL(request.url).pathname)
 }
 
 export function applyPublicOrigin(request: Request, publicOrigin: string | undefined): Request {
