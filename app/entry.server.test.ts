@@ -1,8 +1,9 @@
+import assert from "node:assert/strict"
+import { test } from "node:test"
+
 import { getClient } from "@sentry/cloudflare"
-import * as assert from "remix/assert"
 import { Frame } from "remix/component"
 import { jsx } from "remix/component/jsx-runtime"
-import { test } from "remix/test"
 
 import { stubEnv } from "../test/env.ts"
 

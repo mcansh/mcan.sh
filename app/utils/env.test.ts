@@ -1,5 +1,5 @@
-import * as assert from "remix/assert"
-import { test } from "remix/test"
+import assert from "node:assert/strict"
+import { test } from "node:test"
 
 process.env.CLOUDINARY_CLOUD_NAME = "website-test"
 delete process.env.SENTRY_REPORT_URL

@@ -12,7 +12,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "start": "vite preview",
-    "test": "NODE_ENV=test remix test",
+    "test": "NODE_ENV=test node --import remix/node-tsx --test",
     "test:browser": "remix test --type browser --type e2e",
     "typecheck": "tsc --noEmit",
     "format": "oxfmt",

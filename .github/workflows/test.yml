@@ -21,8 +21,5 @@ jobs:
       - name: Install dependencies
         run: nub install --frozen-lockfile
 
-      - name: Install Chromium and system dependencies
-        run: nub exec playwright install --with-deps chromium
-
       - name: Run tests
-        run: nub run --node test
+        run: nub run test

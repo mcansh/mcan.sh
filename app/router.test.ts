@@ -1,5 +1,5 @@
-import * as assert from "remix/assert"
-import { test } from "remix/test"
+import assert from "node:assert/strict"
+import { test } from "node:test"
 
 import { routes } from "./routes.ts"
 
@@ -392,18 +392,23 @@ test("well-known avatar forwards transformations, cancellation, and the image re
     })
     let avatarRouter = createRouter()
     avatarRouter.get(routes.wellKnownAvatar, (context) =>
-      createWellKnownResponse(context.params.path, context.request, "website-test", async (input, init) => {
-        assert.ok(input instanceof URL)
-        assert.equal(input.origin, "https://res.cloudinary.com")
-        assert.ok(input.pathname.startsWith("/website-test/image/upload/"))
-        assert.ok(input.pathname.endsWith("/website/2498016352165139482"))
-        assert.ok(input.pathname.includes("q_auto"))
-        assert.ok(input.pathname.includes("f_auto"))
-        if (path !== "avatar") assert.ok(input.pathname.includes(",w_48,h_48,c_fill/"))
-        assert.equal(init?.signal, request.signal)
-        assert.equal(init?.method, "GET")
-        return upstream
-      }),
+      createWellKnownResponse(
+        context.params.path,
+        context.request,
+        "website-test",
+        async (input, init) => {
+          assert.ok(input instanceof URL)
+          assert.equal(input.origin, "https://res.cloudinary.com")
+          assert.ok(input.pathname.startsWith("/website-test/image/upload/"))
+          assert.ok(input.pathname.endsWith("/website/2498016352165139482"))
+          assert.ok(input.pathname.includes("q_auto"))
+          assert.ok(input.pathname.includes("f_auto"))
+          if (path !== "avatar") assert.ok(input.pathname.includes(",w_48,h_48,c_fill/"))
+          assert.equal(init?.signal, request.signal)
+          assert.equal(init?.method, "GET")
+          return upstream
+        },
+      ),
     )
     let response = await avatarRouter.fetch(request)
     assert.equal(response, upstream)

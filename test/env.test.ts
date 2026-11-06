@@ -1,5 +1,5 @@
-import * as assert from "remix/assert"
-import { afterEach, describe, test } from "remix/test"
+import assert from "node:assert/strict"
+import { afterEach, describe, test } from "node:test"
 
 import { stubEnv, unstubAllEnv } from "./env.ts"
 
@@ -7,7 +7,8 @@ const originalEnvironment = process.env
 const key = "MCAN_ENV_UTILITY_TEST"
 
 describe("test environment stubs", () => {
-  afterEach(() => {
+  afterEach((t) => {
+    if ("after" in t) unstubAllEnv(t)
     assert.equal(process.env, originalEnvironment)
   })
 

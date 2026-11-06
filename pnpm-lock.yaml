@@ -167,9 +167,7 @@ overrides:
   rollup@<2.79.2: '>=2.79.2'
 
 patchedDependencies:
-  '@sdxc/seo@2026.11.3':
-    hash: 7ca8be6fedd739259ab6d8d9e3c42e685de48ea7f352810fbfae31d215eef255
-    path: patches/@sdxc+seo@2026.11.3.patch
+  '@sdxc/seo@2026.11.3': 7ca8be6fedd739259ab6d8d9e3c42e685de48ea7f352810fbfae31d215eef255
 
 importers:
 
@@ -180,23 +178,29 @@ importers:
         version: 0.13.2
       '@sdxc/seo':
         specifier: 2026.11.3
-        version: 2026.11.3(patch_hash=7ca8be6fedd739259ab6d8d9e3c42e685de48ea7f352810fbfae31d215eef255)(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(remix@3.1.0(playwright@1.64.1))
+        version: 2026.11.3(patch_hash=7ca8be6fedd739259ab6d8d9e3c42e685de48ea7f352810fbfae31d215eef255)(@sdxc/cli@2026.11.3(remix@3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1)))(remix@3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1))
+      '@sentry/browser':
+        specifier: ^11.10.0
+        version: 11.11.0
+      '@sentry/cloudflare':
+        specifier: ^11.10.0
+        version: 11.11.0(vite@8.3.5(@types/node@26.6.4)(esbuild@0.27.7)(yaml@2.9.1))
       cloudinary-build-url:
         specifier: ^0.2.4
         version: 0.2.4
       pitlane:
         specifier: 1.0.0-alpha.2
-        version: 1.0.0-alpha.2(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(remix@3.1.0(playwright@1.64.1))(vite@8.3.5(@types/node@26.6.4)(esbuild@0.27.7)(yaml@2.9.1))
+        version: 1.0.0-alpha.2(remix@3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1))(vite@8.3.5(@types/node@26.6.4)(esbuild@0.27.7)(yaml@2.9.1))
       remix:
         specifier: 3.1.0
-        version: 3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(playwright@1.64.1)
+        version: 3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1)
     devDependencies:
       '@cld-apis/types':
         specifier: ^0.1.6
         version: 0.1.6(debug@4.4.3(supports-color@7.2.0))(supports-color@7.2.0)
       '@cloudflare/vite-plugin':
         specifier: 2.0.0-beta.v.0
-        version: 2.0.0-beta.v.0(vite@8.3.5(@types/node@26.6.4)(esbuild@0.27.7)(yaml@2.9.1))(workerd@1.20261012.1)
+        version: 2.0.0-beta.v.0(@types/node@26.6.4)(vite@8.3.5(@types/node@26.6.4)(esbuild@0.27.7)(yaml@2.9.1))(workerd@1.20261012.1)
       '@oxlint/plugins':
         specifier: ^1.81.0
         version: 1.87.0
@@ -666,6 +670,10 @@ packages:
     peerDependencies:
       '@emnapi/core': ^1.7.1 || ^2.0.0-alpha.4
       '@emnapi/runtime': ^1.7.1 || ^2.0.0-alpha.4
+
+  '@opentelemetry/api@1.10.0':
+    resolution: {integrity: sha512-lMkyes8iHrG+mk6WH7X70MdCLI2RS0FwNBY1PyQ8UemaijE2m5mv5A0Niy3HtbYTFrgkUEQjFMXmSAk2hQDuPQ==}
+    engines: {node: '>=8.0.0'}
 
   '@oxc-minify/binding-android-arm-eabi@0.121.0':
     resolution: {integrity: sha512-RcQXLj3JLLVm41n80/6+7OUion2PSQWOH5EUvlD9kCWSF1fWLXCNX1A6t/+nFNjeyaCXZ3YbIWwCTiGXhxxHEw==}
@@ -1981,6 +1989,59 @@ packages:
   '@sdxc/validate@2026.10.24':
     resolution: {integrity: sha512-wau1QK1k6twWt3NHVN9NmY2H2UaoB30LOs7m12/XME3bJqJpWIQ+LOe1M+oI/ZrCGWDbxEbsm+NPLaa9wI94Tw==}
 
+  '@sentry/browser-utils@11.11.0':
+    resolution: {integrity: sha512-sL1BK7Z7ubIBp+cnz5VIQcVPn+t4PgWTWYaK/AWklPzeA75CJ5xeeCrx0RUvg65k0BbUcc/XvWVxg5v73RQqiQ==}
+    engines: {node: '>=20.19.0 <22.0.0 || >=22.12.0 <23.0.0 || >=23.2.0'}
+
+  '@sentry/browser@11.11.0':
+    resolution: {integrity: sha512-UEq04DIcfCVUMF+T0rH9nLTEjVlymmZC8D/7JELJyZkpxMCtnf8iq3aPJ3DXICDCjSo7CuuOI9OIZ32KmmsyPA==}
+    engines: {node: '>=20.19.0 <22.0.0 || >=22.12.0 <23.0.0 || >=23.2.0'}
+
+  '@sentry/cloudflare@11.11.0':
+    resolution: {integrity: sha512-N3s9PjTDNvkIDFdoTbPtJnJsxDVUPvd0AEh/aMtZaqJK90vk2yULpP7VjU96nCIl4VMwc8E/YpNbPyBX0eAxhQ==}
+    engines: {node: '>=20.19.0 <22.0.0 || >=22.12.0 <23.0.0 || >=23.2.0'}
+    peerDependencies:
+      '@cloudflare/workers-types': ^4.x || ^5.x
+      vite: ^6.1.0 || ^7.0.0 || ^8.0.0
+      wrangler: ^4.x
+    peerDependenciesMeta:
+      '@cloudflare/workers-types':
+        optional: true
+      vite:
+        optional: true
+      wrangler:
+        optional: true
+
+  '@sentry/conventions@0.30.0':
+    resolution: {integrity: sha512-WTumd5A2iFmHTRubi6mc6gLHU8LswPQqoNaZu6T1cxiTUmy3WdEw0i8FAnVbcgxTlsumX5oh63/b4B9lY5wAPQ==}
+    engines: {node: '>=14'}
+
+  '@sentry/core@11.11.0':
+    resolution: {integrity: sha512-PRrcEdPrTYuHcbDa6DhJZR9Qg2d+2gjKVXiv2QeiTgxvhvXDxYiaVSXH0lldKTR099Er5TAEChiX7aEu4yNlUw==}
+    engines: {node: '>=20.19.0 <22.0.0 || >=22.12.0 <23.0.0 || >=23.2.0'}
+
+  '@sentry/feedback@11.11.0':
+    resolution: {integrity: sha512-KP1AYilzLYLIDcDiUD8eaEV955x5rKnwdxpXE70sJpuHUWuEB28MyyDe+tPWU8/MZtdmFGrqCxRqGQN9dNuvtw==}
+    engines: {node: '>=20.19.0 <22.0.0 || >=22.12.0 <23.0.0 || >=23.2.0'}
+
+  '@sentry/opentelemetry@11.11.0':
+    resolution: {integrity: sha512-L1lXAF1hNUSOTLG8NLkBaopvWWpXqlYgQ++cfWr8Gw4wdmReNp9ec533bEj4r6ZJ6PvIYNdIVNI22GdvmbP6xg==}
+    engines: {node: '>=20.19.0 <22.0.0 || >=22.12.0 <23.0.0 || >=23.2.0'}
+    peerDependencies:
+      '@opentelemetry/api': ^1.9.0
+
+  '@sentry/replay-canvas@11.11.0':
+    resolution: {integrity: sha512-iVI8+Y+iC6/B6oEjDv63HzxzCsOIEiyb0MzyJiU45/IgQnriP1FUehqO6GitFtjEasl9//lWQL0RwPy97Eb7NQ==}
+    engines: {node: '>=20.19.0 <22.0.0 || >=22.12.0 <23.0.0 || >=23.2.0'}
+
+  '@sentry/replay@11.11.0':
+    resolution: {integrity: sha512-di2nOSxPOu9kgNb4G3Y0uAOCX4mKmTCfzyJxTQBKaj0F9ymugUO9Epu4n5Vez7x96KpfIZPA1AzbNVArYmVX2g==}
+    engines: {node: '>=20.19.0 <22.0.0 || >=22.12.0 <23.0.0 || >=23.2.0'}
+
+  '@sentry/server-utils@11.11.0':
+    resolution: {integrity: sha512-t1lx9Zw+zhRre0ko+F3CsucG2BqB/7KOZmG1W+Wv/fSvYSnT06vg7WhIvmvH+df7BSFO+cFGBpkxwQWGq3zj+w==}
+    engines: {node: '>=20.19.0 <22.0.0 || >=22.12.0 <23.0.0 || >=23.2.0'}
+
   '@sindresorhus/is@7.2.0':
     resolution: {integrity: sha512-P1Cz1dWaFfR4IR+U13mqqiGsLFf1KbayybWwdd2vfctdV6hDpUkgCY0nKOLLTMSoRd/jJNjtbqzf13K8DCCXQw==}
     engines: {node: '>=18'}
@@ -2926,6 +2987,9 @@ packages:
       yaml:
         optional: true
 
+  web-vitals@6.2.3:
+    resolution: {integrity: sha512-Dmy+vdO1UPMqXiAtZSNayhl4f794Bxfd94W4HIj2HlYtczEQfEOon969memlcpcHrTuOKLa5baFjX7WbgmOq+A==}
+
   which-pm-runs@1.1.0:
     resolution: {integrity: sha512-n1brCuqClxfFfq/Rb0ICg9giSZqCS+pLtccdag6C2HyufBrh3fBOiy9nb6ggRMvWOVH5GrdJskj5iGTZNxd7SA==}
     engines: {node: '>=4'}
@@ -2989,6 +3053,9 @@ snapshots:
       agadoo: 2.0.0
       bundlewatch: 0.3.3(debug@4.4.3(supports-color@7.2.0))(supports-color@7.2.0)
       husky: 4.3.8
+    transitivePeerDependencies:
+      - debug
+      - supports-color
 
   '@cld-apis/utils@0.2.0':
     dependencies:
@@ -3007,6 +3074,7 @@ snapshots:
       miniflare: 5.20261012.0-beta(@types/node@26.6.4)
       workerd: 1.20261012.1
     transitivePeerDependencies:
+      - '@types/node'
       - bufferutil
       - utf-8-validate
 
@@ -3016,7 +3084,7 @@ snapshots:
     optionalDependencies:
       workerd: 1.20261012.1
 
-  '@cloudflare/vite-plugin@2.0.0-beta.v.0(vite@8.3.5(@types/node@26.6.4)(esbuild@0.27.7)(yaml@2.9.1))(workerd@1.20261012.1)':
+  '@cloudflare/vite-plugin@2.0.0-beta.v.0(@types/node@26.6.4)(vite@8.3.5(@types/node@26.6.4)(esbuild@0.27.7)(yaml@2.9.1))(workerd@1.20261012.1)':
     dependencies:
       '@cloudflare/build-output-utils': 0.9.2
       '@cloudflare/config': 0.26.0
@@ -3027,8 +3095,10 @@ snapshots:
       vite: 8.3.5(@types/node@26.6.4)(esbuild@0.27.7)(yaml@2.9.1)
       ws: 8.21.0
     transitivePeerDependencies:
+      - '@types/node'
       - bufferutil
       - utf-8-validate
+      - workerd
 
   '@cloudflare/workerd-darwin-64@1.20261012.1':
     optional: true
@@ -3283,6 +3353,15 @@ snapshots:
       '@tybys/wasm-util': 0.10.4
     optional: true
 
+  '@napi-rs/wasm-runtime@1.2.5(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)':
+    dependencies:
+      '@emnapi/core': 1.11.2
+      '@emnapi/runtime': 1.11.3
+      '@tybys/wasm-util': 0.10.4
+    optional: true
+
+  '@opentelemetry/api@1.10.0': {}
+
   '@oxc-minify/binding-android-arm-eabi@0.121.0':
     optional: true
 
@@ -3331,9 +3410,12 @@ snapshots:
   '@oxc-minify/binding-openharmony-arm64@0.121.0':
     optional: true
 
-  '@oxc-minify/binding-wasm32-wasi@0.121.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)':
+  '@oxc-minify/binding-wasm32-wasi@0.121.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)':
     dependencies:
-      '@napi-rs/wasm-runtime': 1.2.5(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)
+      '@napi-rs/wasm-runtime': 1.2.5(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)
+    transitivePeerDependencies:
+      - '@emnapi/core'
+      - '@emnapi/runtime'
     optional: true
 
   '@oxc-minify/binding-win32-arm64-msvc@0.121.0':
@@ -3393,9 +3475,12 @@ snapshots:
   '@oxc-parser/binding-openharmony-arm64@0.121.0':
     optional: true
 
-  '@oxc-parser/binding-wasm32-wasi@0.121.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)':
+  '@oxc-parser/binding-wasm32-wasi@0.121.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)':
     dependencies:
-      '@napi-rs/wasm-runtime': 1.2.5(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)
+      '@napi-rs/wasm-runtime': 1.2.5(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)
+    transitivePeerDependencies:
+      - '@emnapi/core'
+      - '@emnapi/runtime'
     optional: true
 
   '@oxc-parser/binding-win32-arm64-msvc@0.121.0':
@@ -3522,9 +3607,12 @@ snapshots:
   '@oxc-transform/binding-openharmony-arm64@0.121.0':
     optional: true
 
-  '@oxc-transform/binding-wasm32-wasi@0.121.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)':
+  '@oxc-transform/binding-wasm32-wasi@0.121.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)':
     dependencies:
-      '@napi-rs/wasm-runtime': 1.2.5(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)
+      '@napi-rs/wasm-runtime': 1.2.5(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)
+    transitivePeerDependencies:
+      - '@emnapi/core'
+      - '@emnapi/runtime'
     optional: true
 
   '@oxc-transform/binding-win32-arm64-msvc@0.121.0':
@@ -3676,39 +3764,39 @@ snapshots:
     optionalDependencies:
       vite: 8.3.5(@types/node@26.6.4)(esbuild@0.27.7)(yaml@2.9.1)
 
-  '@pitlane/content@0.4.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(remix@3.1.0(playwright@1.64.1))(vite@8.3.5(@types/node@26.6.4)(esbuild@0.27.7)(yaml@2.9.1))':
+  '@pitlane/content@0.4.0(remix@3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1))(vite@8.3.5(@types/node@26.6.4)(esbuild@0.27.7)(yaml@2.9.1))':
     dependencies:
       es-module-lexer: 2.3.2
       yaml: 2.9.1
     optionalDependencies:
-      remix: 3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(playwright@1.64.1)
+      remix: 3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1)
       vite: 8.3.5(@types/node@26.6.4)(esbuild@0.27.7)(yaml@2.9.1)
 
-  '@pitlane/crawler@0.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(remix@3.1.0(playwright@1.64.1))':
+  '@pitlane/crawler@0.3.0(remix@3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1))':
     dependencies:
-      remix: 3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(playwright@1.64.1)
+      remix: 3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1)
 
-  '@pitlane/data-table-d1@0.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(remix@3.1.0(playwright@1.64.1))':
+  '@pitlane/data-table-d1@0.3.0(remix@3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1))':
     dependencies:
-      remix: 3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(playwright@1.64.1)
+      remix: 3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1)
 
-  '@pitlane/theme@0.5.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(remix@3.1.0(playwright@1.64.1))':
+  '@pitlane/theme@0.5.0(remix@3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1))':
     dependencies:
       csstype: 3.2.3
-      remix: 3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(playwright@1.64.1)
+      remix: 3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1)
 
   '@pitlane/vite-plugin-fetch-server@0.1.0(vite@8.3.5(@types/node@26.6.4)(esbuild@0.27.7)(yaml@2.9.1))':
     dependencies:
       '@remix-run/node-fetch-server': 1.0.0
       vite: 8.3.5(@types/node@26.6.4)(esbuild@0.27.7)(yaml@2.9.1)
 
-  '@pitlane/vite-plugin-remix@0.8.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(remix@3.1.0(playwright@1.64.1))(vite@8.3.5(@types/node@26.6.4)(esbuild@0.27.7)(yaml@2.9.1))':
+  '@pitlane/vite-plugin-remix@0.8.0(remix@3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1))(vite@8.3.5(@types/node@26.6.4)(esbuild@0.27.7)(yaml@2.9.1))':
     dependencies:
       '@pitlane/assets': 0.1.0(vite@8.3.5(@types/node@26.6.4)(esbuild@0.27.7)(yaml@2.9.1))
-      '@pitlane/crawler': 0.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(remix@3.1.0(playwright@1.64.1))
+      '@pitlane/crawler': 0.3.0(remix@3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1))
       '@pitlane/vite-plugin-fetch-server': 0.1.0(vite@8.3.5(@types/node@26.6.4)(esbuild@0.27.7)(yaml@2.9.1))
       magic-string: 0.30.21
-      remix: 3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(playwright@1.64.1)
+      remix: 3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1)
       vite: 8.3.5(@types/node@26.6.4)(esbuild@0.27.7)(yaml@2.9.1)
 
   '@poppinss/colors@4.1.6':
@@ -3725,7 +3813,7 @@ snapshots:
 
   '@remix-run/assert@1.0.0': {}
 
-  '@remix-run/assets@1.0.1(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)':
+  '@remix-run/assets@1.0.1(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)':
     dependencies:
       '@oxc-project/runtime': 0.121.0
       '@remix-run/file-storage': 1.0.0
@@ -3736,12 +3824,15 @@ snapshots:
       get-tsconfig: 4.14.3
       lightningcss: 1.33.0
       magic-string: 0.30.21
-      oxc-minify: 0.121.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)
-      oxc-parser: 0.121.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)
+      oxc-minify: 0.121.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)
+      oxc-parser: 0.121.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)
       oxc-resolver: 11.24.2
-      oxc-transform: 0.121.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)
+      oxc-transform: 0.121.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)
       picomatch: 4.0.7
       source-map-js: 1.2.2
+    transitivePeerDependencies:
+      - '@emnapi/core'
+      - '@emnapi/runtime'
 
   '@remix-run/async-context-middleware@1.0.0':
     dependencies:
@@ -3757,26 +3848,32 @@ snapshots:
       '@remix-run/fetch-router': 1.0.0
       '@remix-run/session': 1.0.0
 
-  '@remix-run/cli@1.0.1(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(playwright@1.64.1)':
+  '@remix-run/cli@1.0.1(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1)':
     dependencies:
-      '@remix-run/assets': 1.0.1(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)
+      '@remix-run/assets': 1.0.1(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)
       '@remix-run/data-table': 1.0.0
       '@remix-run/data-table-mysql': 1.0.0
       '@remix-run/data-table-postgres': 1.0.0
       '@remix-run/data-table-sqlite': 1.0.0
       '@remix-run/terminal': 1.0.0
-      '@remix-run/test': 1.0.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(playwright@1.64.1)
+      '@remix-run/test': 1.0.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1)
       jsonc-parser: 3.3.1
       semver: 7.8.5
     transitivePeerDependencies:
+      - '@emnapi/core'
+      - '@emnapi/runtime'
       - mysql2
       - pg
+      - playwright
 
-  '@remix-run/component-hmr@1.0.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)':
+  '@remix-run/component-hmr@1.0.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)':
     dependencies:
       magic-string: 0.30.21
-      oxc-parser: 0.121.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)
+      oxc-parser: 0.121.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)
       source-map-js: 1.2.2
+    transitivePeerDependencies:
+      - '@emnapi/core'
+      - '@emnapi/runtime'
 
   '@remix-run/component@1.1.0':
     dependencies:
@@ -3887,24 +3984,33 @@ snapshots:
 
   '@remix-run/node-fetch-server@1.0.0': {}
 
-  '@remix-run/node-hmr@1.0.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)':
+  '@remix-run/node-hmr@1.0.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)':
     dependencies:
       '@remix-run/terminal': 1.0.0
       chokidar: 5.0.0
-      oxc-parser: 0.121.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)
+      oxc-parser: 0.121.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)
       source-map-js: 1.2.2
+    transitivePeerDependencies:
+      - '@emnapi/core'
+      - '@emnapi/runtime'
 
-  '@remix-run/node-tsx@1.0.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)':
+  '@remix-run/node-tsx@1.0.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)':
     dependencies:
       get-tsconfig: 4.14.3
-      oxc-transform: 0.121.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)
+      oxc-transform: 0.121.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)
+    transitivePeerDependencies:
+      - '@emnapi/core'
+      - '@emnapi/runtime'
 
-  '@remix-run/render-middleware@1.0.1(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)':
+  '@remix-run/render-middleware@1.0.1(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)':
     dependencies:
-      '@remix-run/assets': 1.0.1(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)
+      '@remix-run/assets': 1.0.1(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)
       '@remix-run/component': 1.1.0
       '@remix-run/fetch-router': 1.0.0
       '@remix-run/response': 1.0.1
+    transitivePeerDependencies:
+      - '@emnapi/core'
+      - '@emnapi/runtime'
 
   '@remix-run/response@1.0.1':
     dependencies:
@@ -3930,11 +4036,14 @@ snapshots:
 
   '@remix-run/session@1.0.0': {}
 
-  '@remix-run/spa@1.0.1(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)':
+  '@remix-run/spa@1.0.1(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)':
     dependencies:
       '@remix-run/component': 1.1.0
       '@remix-run/fetch-router': 1.0.0
-      '@remix-run/render-middleware': 1.0.1(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)
+      '@remix-run/render-middleware': 1.0.1(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)
+    transitivePeerDependencies:
+      - '@emnapi/core'
+      - '@emnapi/runtime'
 
   '@remix-run/static-middleware@1.0.1':
     dependencies:
@@ -3948,9 +4057,9 @@ snapshots:
 
   '@remix-run/terminal@1.0.0': {}
 
-  '@remix-run/test@1.0.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(playwright@1.64.1)':
+  '@remix-run/test@1.0.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1)':
     dependencies:
-      '@remix-run/node-tsx': 1.0.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)
+      '@remix-run/node-tsx': 1.0.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)
       '@remix-run/terminal': 1.0.0
       es-module-lexer: 2.3.2
       esbuild: 0.27.7
@@ -3964,6 +4073,9 @@ snapshots:
       v8-to-istanbul: 9.3.0
     optionalDependencies:
       playwright: 1.64.1
+    transitivePeerDependencies:
+      - '@emnapi/core'
+      - '@emnapi/runtime'
 
   '@rolldown/binding-android-arm-eabi@1.2.16':
     optional: true
@@ -4087,86 +4199,145 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.64.0':
     optional: true
 
-  '@sdxc/attribution@2026.11.3(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(remix@3.1.0(playwright@1.64.1))':
+  '@sdxc/attribution@2026.11.3(@sdxc/cli@2026.11.3(remix@3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1)))(remix@3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1))':
     dependencies:
       '@sdxc/duration': 2026.10.13
-      '@sdxc/logger': 2026.11.3(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(remix@3.1.0(playwright@1.64.1))
+      '@sdxc/logger': 2026.11.3(@sdxc/cli@2026.11.3(remix@3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1)))(remix@3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1))
       '@sdxc/result': 2026.10.13
-      '@sdxc/user-agent': 2026.11.3(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(remix@3.1.0(playwright@1.64.1))
+      '@sdxc/user-agent': 2026.11.3(remix@3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1))
       '@sdxc/validate': 2026.10.24
-      remix: 3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(playwright@1.64.1)
+      remix: 3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1)
     transitivePeerDependencies:
       - '@sdxc/cli'
 
-  '@sdxc/cli@2026.11.3(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(remix@3.1.0(playwright@1.64.1))':
+  '@sdxc/cli@2026.11.3(remix@3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1))':
     dependencies:
       '@sdxc/iife': 2026.10.23
       '@sdxc/result': 2026.10.13
       '@standard-schema/spec': 1.1.0
     optionalDependencies:
-      remix: 3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(playwright@1.64.1)
+      remix: 3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1)
 
   '@sdxc/duration@2026.10.13':
     dependencies:
       '@sdxc/result': 2026.10.13
 
-  '@sdxc/expression@2026.10.24(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(remix@3.1.0(playwright@1.64.1))':
+  '@sdxc/expression@2026.10.24(remix@3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1))':
     dependencies:
       '@sdxc/result': 2026.10.13
       '@sdxc/types': 2026.10.13
-      remix: 3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(playwright@1.64.1)
+      remix: 3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1)
 
   '@sdxc/iife@2026.10.23': {}
 
-  '@sdxc/logger@2026.11.3(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(remix@3.1.0(playwright@1.64.1))':
+  '@sdxc/logger@2026.11.3(@sdxc/cli@2026.11.3(remix@3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1)))(remix@3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1))':
     dependencies:
-      '@sdxc/expression': 2026.10.24(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(remix@3.1.0(playwright@1.64.1))
-      '@sdxc/random': 2026.10.24(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(remix@3.1.0(playwright@1.64.1))
+      '@sdxc/expression': 2026.10.24(remix@3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1))
+      '@sdxc/random': 2026.10.24(remix@3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1))
       '@sdxc/result': 2026.10.13
     optionalDependencies:
-      remix: 3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(playwright@1.64.1)
+      '@sdxc/cli': 2026.11.3(remix@3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1))
+      remix: 3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1)
 
-  '@sdxc/random@2026.10.24(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(remix@3.1.0(playwright@1.64.1))':
+  '@sdxc/random@2026.10.24(remix@3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1))':
     optionalDependencies:
-      remix: 3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(playwright@1.64.1)
+      remix: 3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1)
 
   '@sdxc/result@2026.10.13':
     dependencies:
       '@sdxc/types': 2026.10.13
 
-  '@sdxc/robots@2026.11.3(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(remix@3.1.0(playwright@1.64.1))':
+  '@sdxc/robots@2026.11.3(remix@3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1))':
     dependencies:
-      '@sdxc/cli': 2026.11.3(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(remix@3.1.0(playwright@1.64.1))
+      '@sdxc/cli': 2026.11.3(remix@3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1))
       '@sdxc/result': 2026.10.13
-      '@sdxc/structured-fields': 2026.10.25(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(remix@3.1.0(playwright@1.64.1))
-      remix: 3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(playwright@1.64.1)
+      '@sdxc/structured-fields': 2026.10.25(remix@3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1))
+      remix: 3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1)
 
-  '@sdxc/seo@2026.11.3(patch_hash=7ca8be6fedd739259ab6d8d9e3c42e685de48ea7f352810fbfae31d215eef255)(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(remix@3.1.0(playwright@1.64.1))':
+  '@sdxc/seo@2026.11.3(patch_hash=7ca8be6fedd739259ab6d8d9e3c42e685de48ea7f352810fbfae31d215eef255)(@sdxc/cli@2026.11.3(remix@3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1)))(remix@3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1))':
     dependencies:
-      '@sdxc/attribution': 2026.11.3(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(remix@3.1.0(playwright@1.64.1))
-      '@sdxc/robots': 2026.11.3(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(remix@3.1.0(playwright@1.64.1))
-      remix: 3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(playwright@1.64.1)
+      '@sdxc/attribution': 2026.11.3(@sdxc/cli@2026.11.3(remix@3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1)))(remix@3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1))
+      '@sdxc/robots': 2026.11.3(remix@3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1))
+      remix: 3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1)
     transitivePeerDependencies:
       - '@sdxc/cli'
 
-  '@sdxc/structured-fields@2026.10.25(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(remix@3.1.0(playwright@1.64.1))':
+  '@sdxc/structured-fields@2026.10.25(remix@3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1))':
     dependencies:
       '@sdxc/result': 2026.10.13
       '@standard-schema/spec': 1.1.0
-      remix: 3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(playwright@1.64.1)
+      remix: 3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1)
 
   '@sdxc/types@2026.10.13': {}
 
-  '@sdxc/user-agent@2026.11.3(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(remix@3.1.0(playwright@1.64.1))':
+  '@sdxc/user-agent@2026.11.3(remix@3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1))':
     dependencies:
-      '@sdxc/cli': 2026.11.3(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(remix@3.1.0(playwright@1.64.1))
-      remix: 3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(playwright@1.64.1)
+      '@sdxc/cli': 2026.11.3(remix@3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1))
+      remix: 3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1)
 
   '@sdxc/validate@2026.10.24':
     dependencies:
       '@sdxc/result': 2026.10.13
       '@sdxc/types': 2026.10.13
       '@standard-schema/spec': 1.1.0
+
+  '@sentry/browser-utils@11.11.0':
+    dependencies:
+      '@sentry/conventions': 0.30.0
+      '@sentry/core': 11.11.0
+      web-vitals: 6.2.3
+
+  '@sentry/browser@11.11.0':
+    dependencies:
+      '@sentry/browser-utils': 11.11.0
+      '@sentry/conventions': 0.30.0
+      '@sentry/core': 11.11.0
+      '@sentry/feedback': 11.11.0
+      '@sentry/replay': 11.11.0
+      '@sentry/replay-canvas': 11.11.0
+
+  '@sentry/cloudflare@11.11.0(vite@8.3.5(@types/node@26.6.4)(esbuild@0.27.7)(yaml@2.9.1))':
+    dependencies:
+      '@opentelemetry/api': 1.10.0
+      '@sentry/conventions': 0.30.0
+      '@sentry/core': 11.11.0
+      '@sentry/opentelemetry': 11.11.0(@opentelemetry/api@1.10.0)
+      '@sentry/server-utils': 11.11.0
+      magic-string: 0.30.21
+    optionalDependencies:
+      vite: 8.3.5(@types/node@26.6.4)(esbuild@0.27.7)(yaml@2.9.1)
+
+  '@sentry/conventions@0.30.0': {}
+
+  '@sentry/core@11.11.0':
+    dependencies:
+      '@sentry/conventions': 0.30.0
+
+  '@sentry/feedback@11.11.0':
+    dependencies:
+      '@sentry/core': 11.11.0
+
+  '@sentry/opentelemetry@11.11.0(@opentelemetry/api@1.10.0)':
+    dependencies:
+      '@opentelemetry/api': 1.10.0
+      '@sentry/conventions': 0.30.0
+      '@sentry/core': 11.11.0
+
+  '@sentry/replay-canvas@11.11.0':
+    dependencies:
+      '@sentry/core': 11.11.0
+      '@sentry/replay': 11.11.0
+
+  '@sentry/replay@11.11.0':
+    dependencies:
+      '@sentry/browser-utils': 11.11.0
+      '@sentry/core': 11.11.0
+
+  '@sentry/server-utils@11.11.0':
+    dependencies:
+      '@opentelemetry/api': 1.10.0
+      '@sentry/conventions': 0.30.0
+      '@sentry/core': 11.11.0
 
   '@sindresorhus/is@7.2.0': {}
 
@@ -4266,6 +4437,8 @@ snapshots:
   agent-base@6.0.2(supports-color@7.2.0):
     dependencies:
       debug: 4.4.3(supports-color@7.2.0)
+    transitivePeerDependencies:
+      - supports-color
 
   ansi-styles@4.3.0:
     dependencies:
@@ -4281,6 +4454,9 @@ snapshots:
       form-data: 4.0.6
       https-proxy-agent: 5.0.1(supports-color@7.2.0)
       proxy-from-env: 2.1.0
+    transitivePeerDependencies:
+      - debug
+      - supports-color
 
   balanced-match@1.0.2: {}
 
@@ -4303,6 +4479,9 @@ snapshots:
       jsonpack: 1.1.5
       lodash.merge: 4.6.2
       read-pkg-up: 7.0.1
+    transitivePeerDependencies:
+      - debug
+      - supports-color
 
   bytes@3.1.2: {}
 
@@ -4321,6 +4500,7 @@ snapshots:
       blake3-wasm: 2.1.5
       miniflare: 5.20261012.0-beta(@types/node@26.6.4)
     transitivePeerDependencies:
+      - '@types/node'
       - bufferutil
       - utf-8-validate
 
@@ -4542,6 +4722,8 @@ snapshots:
     dependencies:
       agent-base: 6.0.2(supports-color@7.2.0)
       debug: 4.4.3(supports-color@7.2.0)
+    transitivePeerDependencies:
+      - supports-color
 
   husky@4.3.8:
     dependencies:
@@ -4687,6 +4869,7 @@ snapshots:
       ws: 8.21.0
       youch: 4.1.0-beta.10
     transitivePeerDependencies:
+      - '@types/node'
       - bufferutil
       - utf-8-validate
 
@@ -4716,7 +4899,7 @@ snapshots:
 
   opencollective-postinstall@2.0.3: {}
 
-  oxc-minify@0.121.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2):
+  oxc-minify@0.121.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3):
     optionalDependencies:
       '@oxc-minify/binding-android-arm-eabi': 0.121.0
       '@oxc-minify/binding-android-arm64': 0.121.0
@@ -4734,12 +4917,15 @@ snapshots:
       '@oxc-minify/binding-linux-x64-gnu': 0.121.0
       '@oxc-minify/binding-linux-x64-musl': 0.121.0
       '@oxc-minify/binding-openharmony-arm64': 0.121.0
-      '@oxc-minify/binding-wasm32-wasi': 0.121.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)
+      '@oxc-minify/binding-wasm32-wasi': 0.121.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)
       '@oxc-minify/binding-win32-arm64-msvc': 0.121.0
       '@oxc-minify/binding-win32-ia32-msvc': 0.121.0
       '@oxc-minify/binding-win32-x64-msvc': 0.121.0
+    transitivePeerDependencies:
+      - '@emnapi/core'
+      - '@emnapi/runtime'
 
-  oxc-parser@0.121.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2):
+  oxc-parser@0.121.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3):
     dependencies:
       '@oxc-project/types': 0.121.0
     optionalDependencies:
@@ -4759,10 +4945,13 @@ snapshots:
       '@oxc-parser/binding-linux-x64-gnu': 0.121.0
       '@oxc-parser/binding-linux-x64-musl': 0.121.0
       '@oxc-parser/binding-openharmony-arm64': 0.121.0
-      '@oxc-parser/binding-wasm32-wasi': 0.121.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)
+      '@oxc-parser/binding-wasm32-wasi': 0.121.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)
       '@oxc-parser/binding-win32-arm64-msvc': 0.121.0
       '@oxc-parser/binding-win32-ia32-msvc': 0.121.0
       '@oxc-parser/binding-win32-x64-msvc': 0.121.0
+    transitivePeerDependencies:
+      - '@emnapi/core'
+      - '@emnapi/runtime'
 
   oxc-resolver@11.24.2:
     optionalDependencies:
@@ -4786,7 +4975,7 @@ snapshots:
       '@oxc-resolver/binding-win32-arm64-msvc': 11.24.2
       '@oxc-resolver/binding-win32-x64-msvc': 11.24.2
 
-  oxc-transform@0.121.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2):
+  oxc-transform@0.121.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3):
     optionalDependencies:
       '@oxc-transform/binding-android-arm-eabi': 0.121.0
       '@oxc-transform/binding-android-arm64': 0.121.0
@@ -4804,10 +4993,13 @@ snapshots:
       '@oxc-transform/binding-linux-x64-gnu': 0.121.0
       '@oxc-transform/binding-linux-x64-musl': 0.121.0
       '@oxc-transform/binding-openharmony-arm64': 0.121.0
-      '@oxc-transform/binding-wasm32-wasi': 0.121.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)
+      '@oxc-transform/binding-wasm32-wasi': 0.121.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)
       '@oxc-transform/binding-win32-arm64-msvc': 0.121.0
       '@oxc-transform/binding-win32-ia32-msvc': 0.121.0
       '@oxc-transform/binding-win32-x64-msvc': 0.121.0
+    transitivePeerDependencies:
+      - '@emnapi/core'
+      - '@emnapi/runtime'
 
   oxfmt@0.72.0:
     dependencies:
@@ -4908,19 +5100,17 @@ snapshots:
 
   picomatch@4.0.7: {}
 
-  pitlane@1.0.0-alpha.2(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(remix@3.1.0(playwright@1.64.1))(vite@8.3.5(@types/node@26.6.4)(esbuild@0.27.7)(yaml@2.9.1)):
+  pitlane@1.0.0-alpha.2(remix@3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1))(vite@8.3.5(@types/node@26.6.4)(esbuild@0.27.7)(yaml@2.9.1)):
     dependencies:
       '@pitlane/assets': 0.1.0(vite@8.3.5(@types/node@26.6.4)(esbuild@0.27.7)(yaml@2.9.1))
-      '@pitlane/content': 0.4.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(remix@3.1.0(playwright@1.64.1))(vite@8.3.5(@types/node@26.6.4)(esbuild@0.27.7)(yaml@2.9.1))
-      '@pitlane/crawler': 0.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(remix@3.1.0(playwright@1.64.1))
-      '@pitlane/data-table-d1': 0.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(remix@3.1.0(playwright@1.64.1))
-      '@pitlane/theme': 0.5.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(remix@3.1.0(playwright@1.64.1))
+      '@pitlane/content': 0.4.0(remix@3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1))(vite@8.3.5(@types/node@26.6.4)(esbuild@0.27.7)(yaml@2.9.1))
+      '@pitlane/crawler': 0.3.0(remix@3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1))
+      '@pitlane/data-table-d1': 0.3.0(remix@3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1))
+      '@pitlane/theme': 0.5.0(remix@3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1))
       '@pitlane/vite-plugin-fetch-server': 0.1.0(vite@8.3.5(@types/node@26.6.4)(esbuild@0.27.7)(yaml@2.9.1))
-      '@pitlane/vite-plugin-remix': 0.8.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(remix@3.1.0(playwright@1.64.1))(vite@8.3.5(@types/node@26.6.4)(esbuild@0.27.7)(yaml@2.9.1))
-      remix: 3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(playwright@1.64.1)
+      '@pitlane/vite-plugin-remix': 0.8.0(remix@3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1))(vite@8.3.5(@types/node@26.6.4)(esbuild@0.27.7)(yaml@2.9.1))
+      remix: 3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1)
       vite: 8.3.5(@types/node@26.6.4)(esbuild@0.27.7)(yaml@2.9.1)
-    transitivePeerDependencies:
-      - satteri
 
   pkg-dir@5.0.0:
     dependencies:
@@ -4959,16 +5149,16 @@ snapshots:
 
   readdirp@5.1.1: {}
 
-  remix@3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(playwright@1.64.1):
+  remix@3.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1):
     dependencies:
       '@remix-run/assert': 1.0.0
-      '@remix-run/assets': 1.0.1(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)
+      '@remix-run/assets': 1.0.1(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)
       '@remix-run/async-context-middleware': 1.0.0
       '@remix-run/auth': 1.0.0
       '@remix-run/auth-middleware': 1.0.0
-      '@remix-run/cli': 1.0.1(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(playwright@1.64.1)
+      '@remix-run/cli': 1.0.1(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1)
       '@remix-run/component': 1.1.0
-      '@remix-run/component-hmr': 1.0.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)
+      '@remix-run/component-hmr': 1.0.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)
       '@remix-run/compression-middleware': 1.0.1
       '@remix-run/cookie': 1.0.1
       '@remix-run/cop-middleware': 1.0.0
@@ -4995,26 +5185,25 @@ snapshots:
       '@remix-run/multipart-parser': 1.1.0
       '@remix-run/multiple-import-maps-polyfill': 1.0.0
       '@remix-run/node-fetch-server': 1.0.0
-      '@remix-run/node-hmr': 1.0.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)
-      '@remix-run/node-tsx': 1.0.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)
-      '@remix-run/render-middleware': 1.0.1(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)
+      '@remix-run/node-hmr': 1.0.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)
+      '@remix-run/node-tsx': 1.0.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)
+      '@remix-run/render-middleware': 1.0.1(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)
       '@remix-run/response': 1.0.1
       '@remix-run/route-pattern': 1.0.0
       '@remix-run/session': 1.0.0
       '@remix-run/session-middleware': 1.0.1
       '@remix-run/session-storage-memcache': 1.0.0
       '@remix-run/session-storage-redis': 1.0.0
-      '@remix-run/spa': 1.0.1(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)
+      '@remix-run/spa': 1.0.1(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)
       '@remix-run/static-middleware': 1.0.1
       '@remix-run/tar-parser': 1.0.1
       '@remix-run/terminal': 1.0.0
-      '@remix-run/test': 1.0.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)(playwright@1.64.1)
+      '@remix-run/test': 1.0.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(playwright@1.64.1)
     optionalDependencies:
       playwright: 1.64.1
     transitivePeerDependencies:
-      - mysql2
-      - pg
-      - redis
+      - '@emnapi/core'
+      - '@emnapi/runtime'
 
   resolve-from@4.0.0: {}
 
@@ -5223,6 +5412,8 @@ snapshots:
       esbuild: 0.27.7
       fsevents: 2.3.3
       yaml: 2.9.1
+
+  web-vitals@6.2.3: {}
 
   which-pm-runs@1.1.0: {}
 

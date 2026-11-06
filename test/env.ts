@@ -1,4 +1,4 @@
-import type { TestContext } from "remix/test"
+import type { TestContext } from "node:test"
 
 type EnvTestContext = Pick<TestContext, "after">
 

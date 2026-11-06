@@ -17,7 +17,7 @@ Get the dependencies:
 pnpm install
 ```
 
-Put Worker values in `.dev.vars`. If that file is missing, the Vite plugin also reads `.env`. Names must be declared in `cloudflare.config.ts` or the Worker never sees them. `CLOUDINARY_CLOUD_NAME` is required. `SENTRY_REPORT_URL` is required in production. `PUBLIC_ORIGIN` is optional. Production defaults it to `https://www.mcan.sh` when it is unset. In development it stays unset unless you set it in `.dev.vars`. A `.dev.vars` file replaces shell environment values for those declared names.
+Put Worker values in `.dev.vars`. If that file is missing, the Vite plugin also reads `.env`. Names must be declared in `cloudflare.config.ts` or the Worker never sees them. `CLOUDINARY_CLOUD_NAME` is required. `SENTRY_REPORT_URL` is required in production. `SENTRY_DSN` is optional and enables error reporting when set in production. `PUBLIC_ORIGIN` is optional. Production defaults it to `https://www.mcan.sh` when it is unset. In development it stays unset unless you set it in `.dev.vars`. A `.dev.vars` file replaces shell environment values for those declared names. Browser reporting also needs `SENTRY_DSN` in the production build environment. See [Configure Sentry](docs/sentry.md).
 
 ```sh
 CLOUDINARY_CLOUD_NAME=your-cloud-name
