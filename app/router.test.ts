@@ -8,9 +8,51 @@ delete process.env.SENTRY_REPORT_URL
 delete process.env.SENTRY_DSN
 delete process.env.VITE_SENTRY_DSN
 
-const { router } = await import("./router.tsx")
+const { createApp, router } = await import("./router.tsx")
 const { DEFAULT_PUBLIC_ORIGIN, parseEnv } = await import("./utils/env.ts")
 const { HOME_PAGE_DESCRIPTION } = await import("./utils/public-origin.ts")
+
+test("concurrent applications keep their image and CSP configuration isolated", async () => {
+  let first = createApp(
+    parseEnv(
+      {
+        CLOUDINARY_CLOUD_NAME: "first-website",
+        SENTRY_DSN: "https://public@first-ingest.example.com/123",
+      },
+      "production",
+    ),
+  )
+  let second = createApp(
+    parseEnv(
+      {
+        CLOUDINARY_CLOUD_NAME: "second-website",
+        SENTRY_DSN: "https://public@second-ingest.example.com/456",
+      },
+      "production",
+    ),
+  )
+
+  let [firstResponse, secondResponse] = await Promise.all([
+    first.fetch("https://mcan.sh/"),
+    second.fetch("https://mcan.sh/"),
+  ])
+  assert.equal(firstResponse.status, 200)
+  assert.equal(secondResponse.status, 200)
+  let [firstHtml, secondHtml] = await Promise.all([firstResponse.text(), secondResponse.text()])
+  assert.match(firstHtml, /res\.cloudinary\.com\/first-website\/image\/upload\//)
+  assert.doesNotMatch(firstHtml, /second-website/)
+  assert.match(secondHtml, /res\.cloudinary\.com\/second-website\/image\/upload\//)
+  assert.doesNotMatch(secondHtml, /first-website/)
+
+  let firstCsp = firstResponse.headers.get("Content-Security-Policy")
+  let secondCsp = secondResponse.headers.get("Content-Security-Policy")
+  assert.ok(firstCsp)
+  assert.ok(secondCsp)
+  assert.match(firstCsp, /connect-src [^;]*https:\/\/first-ingest\.example\.com/)
+  assert.doesNotMatch(firstCsp, /second-ingest\.example\.com|second-website/)
+  assert.match(secondCsp, /connect-src [^;]*https:\/\/second-ingest\.example\.com/)
+  assert.doesNotMatch(secondCsp, /first-ingest\.example\.com|first-website/)
+})
 
 function jsonLdGraph(head: string, type: string) {
   let graphs = [
@@ -350,18 +392,23 @@ test("well-known avatar forwards transformations, cancellation, and the image re
     })
     let avatarRouter = createRouter()
     avatarRouter.get(routes.wellKnownAvatar, (context) =>
-      createWellKnownResponse(context.params.path, context.request, async (input, init) => {
-        assert.ok(input instanceof URL)
-        assert.equal(input.origin, "https://res.cloudinary.com")
-        assert.ok(input.pathname.startsWith("/website-test/image/upload/"))
-        assert.ok(input.pathname.endsWith("/website/2498016352165139482"))
-        assert.ok(input.pathname.includes("q_auto"))
-        assert.ok(input.pathname.includes("f_auto"))
-        if (path !== "avatar") assert.ok(input.pathname.includes(",w_48,h_48,c_fill/"))
-        assert.equal(init?.signal, request.signal)
-        assert.equal(init?.method, "GET")
-        return upstream
-      }),
+      createWellKnownResponse(
+        context.params.path,
+        context.request,
+        "website-test",
+        async (input, init) => {
+          assert.ok(input instanceof URL)
+          assert.equal(input.origin, "https://res.cloudinary.com")
+          assert.ok(input.pathname.startsWith("/website-test/image/upload/"))
+          assert.ok(input.pathname.endsWith("/website/2498016352165139482"))
+          assert.ok(input.pathname.includes("q_auto"))
+          assert.ok(input.pathname.includes("f_auto"))
+          if (path !== "avatar") assert.ok(input.pathname.includes(",w_48,h_48,c_fill/"))
+          assert.equal(init?.signal, request.signal)
+          assert.equal(init?.method, "GET")
+          return upstream
+        },
+      ),
     )
     let response = await avatarRouter.fetch(request)
     assert.equal(response, upstream)

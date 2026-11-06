@@ -7,7 +7,6 @@ import { getNonce } from "../../middleware/security-headers.ts"
 import { routes } from "../../routes.ts"
 import { personUrl } from "../../utils/canonical-host.ts"
 import { getCloudinaryURL, getOpenGraphImageUrl } from "../../utils/cloudinary.ts"
-import { env } from "../../utils/env.ts"
 import { getSeo } from "../../utils/public-origin.ts"
 import { createPersonJsonLd, Document, jsonLd } from "../document.tsx"
 import {
@@ -37,7 +36,7 @@ export function HomeShell(handle: Handle<HomePageProps & { bodyMix: MixInput<HTM
   let nonce = getNonce()
   let request = getContext().request
   let seo = getSeo(request)
-  let ogImage = getOpenGraphImageUrl(env.CLOUDINARY_CLOUD_NAME)
+  let ogImage = getOpenGraphImageUrl(getContext().config.CLOUDINARY_CLOUD_NAME)
   return () => {
     let { designIndex, fontIndex, bodyMix } = handle.props
     return (
@@ -356,22 +355,24 @@ export async function getHomePage(designIndex: number) {
 }
 
 function createSrcSet(
+  cloudName: string,
   sizes: [h: number, w: number][],
   publicId: string,
   transformations: (h: number, w: number) => TransformerOption,
 ) {
   return sizes.map(([h, w], index) => {
-    let url = getCloudinaryURL(env.CLOUDINARY_CLOUD_NAME, publicId, transformations(h, w))
+    let url = getCloudinaryURL(cloudName, publicId, transformations(h, w))
 
     return { url, size: `${h}x${w}`, density: index + 1, width: w, height: h }
   })
 }
 
-export function getMe(designIndex: number) {
+export function getMe(designIndex: number, cloudName: string) {
   let srcSet: ReturnType<typeof createSrcSet>
 
   if (designIndex === 1) {
     srcSet = createSrcSet(
+      cloudName,
       [
         [624, 224],
         [1248, 448],
@@ -387,6 +388,7 @@ export function getMe(designIndex: number) {
     )
   } else {
     srcSet = createSrcSet(
+      cloudName,
       [
         [240, 240],
         [480, 480],

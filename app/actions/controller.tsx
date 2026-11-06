@@ -27,7 +27,7 @@ export default createController(routes, {
 
       return context.render(
         <HomeShell
-          me={getMe(designIndex)}
+          me={getMe(designIndex, context.config.CLOUDINARY_CLOUD_NAME)}
           designIndex={designIndex}
           fontIndex={fontIndex}
           bodyMix={design.homePageOptions}
@@ -50,7 +50,11 @@ export default createController(routes, {
       let design = await getHomePage(designIndex)
 
       return context.render(
-        <design.HomePage me={getMe(designIndex)} designIndex={designIndex} fontIndex={fontIndex} />,
+        <design.HomePage
+          me={getMe(designIndex, context.config.CLOUDINARY_CLOUD_NAME)}
+          designIndex={designIndex}
+          fontIndex={fontIndex}
+        />,
         { headers },
       )
     },
@@ -63,7 +67,11 @@ export default createController(routes, {
     },
 
     wellKnownAvatar(context) {
-      return createWellKnownResponse(context.params.path, context.request)
+      return createWellKnownResponse(
+        context.params.path,
+        context.request,
+        context.config.CLOUDINARY_CLOUD_NAME,
+      )
     },
 
     resume(context) {

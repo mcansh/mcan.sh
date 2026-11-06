@@ -21,6 +21,8 @@
   "dependencies": {
     "@mcansh/http-helmet": "^0.13.2",
     "@sdxc/seo": "2026.11.3",
+    "@sentry/browser": "^11.10.0",
+    "@sentry/cloudflare": "^11.10.0",
     "cloudinary-build-url": "^0.2.4",
     "pitlane": "1.0.0-alpha.2",
     "remix": "3.1.0"

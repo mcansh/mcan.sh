@@ -4,7 +4,7 @@ import { getContext } from "remix/middleware/async-context"
 import type { Middleware } from "remix/router"
 import { createContextKey } from "remix/router"
 
-import { env } from "../utils/env.ts"
+import type { AppConfig } from "../utils/env.ts"
 
 const nonceKey = createContextKey<string>()
 
@@ -14,21 +14,24 @@ export function getNonce(): string {
   return nonce
 }
 
-export function securityHeaders(): Middleware<{ key: typeof nonceKey; value: string }> {
+export function securityHeaders(
+  config: AppConfig,
+): Middleware<{ key: typeof nonceKey; value: string }> {
   return async (context, next) => {
     let nonce = createNonce()
     context.set(nonceKey, nonce)
-    return applySecurityHeaders(await next(), context.request, nonce)
+    return applySecurityHeaders(await next(), context.request, config, nonce)
   }
 }
 
 export function applySecurityHeaders(
   response: Response,
   request: Request,
+  config: AppConfig,
   nonce = createNonce(),
 ): Response {
   let url = new URL(request.url)
-  let isDevelopment = process.env.NODE_ENV === "development"
+  let isDevelopment = config.mode === "development"
   let isLocalhost =
     ["localhost", "127.0.0.1", "[::1]"].includes(url.hostname) ||
     url.hostname.endsWith(".localhost")
@@ -36,15 +39,25 @@ export function applySecurityHeaders(
     "default-src": ["'none'"],
     "base-uri": ["'self'"],
     "frame-ancestors": ["'none'"],
-    "img-src": ["'self'", `https://res.cloudinary.com/${env.CLOUDINARY_CLOUD_NAME}/image/upload/`],
+    "img-src": [
+      "'self'",
+      `https://res.cloudinary.com/${config.CLOUDINARY_CLOUD_NAME}/image/upload/`,
+    ],
     "script-src": ["'self'", `'nonce-${nonce}'`, "'strict-dynamic'"],
-    "connect-src": ["'self'", ...(isDevelopment ? ["ws:", "wss:"] : [])],
+    "connect-src": [
+      "'self'",
+      ...(isDevelopment ? ["ws:", "wss:"] : []),
+      ...(config.SENTRY_DSN ? [new URL(config.SENTRY_DSN).origin] : []),
+    ],
     "manifest-src": ["'self'"],
     "font-src": ["'self'", "https://fonts.gstatic.com"],
     "style-src": ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
-    "upgrade-insecure-requests": process.env.NODE_ENV === "production" && !isLocalhost,
+    "upgrade-insecure-requests": config.mode === "production" && !isLocalhost,
   }
-  if (env.SENTRY_REPORT_URL) contentSecurityPolicy["report-uri"] = [env.SENTRY_REPORT_URL]
+  if (config.SENTRY_REPORT_URL) {
+    contentSecurityPolicy["report-uri"] = [config.SENTRY_REPORT_URL]
+    contentSecurityPolicy["report-to"] = ["csp-endpoint"]
+  }
 
   let securityHeaders = createSecureHeaders({
     "Content-Security-Policy": contentSecurityPolicy,
@@ -94,6 +107,9 @@ export function applySecurityHeaders(
   })
 
   let headers = mergeHeaders(new Headers(response.headers), securityHeaders)
+  if (config.SENTRY_REPORT_URL) {
+    headers.set("Reporting-Endpoints", `csp-endpoint="${config.SENTRY_REPORT_URL}"`)
+  }
 
   return new Response(response.body, {
     status: response.status,
