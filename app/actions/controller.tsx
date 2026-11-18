@@ -63,6 +63,7 @@ export default createController(routes, {
       if (!["json", "webmanifest"].includes(context.params.ext)) {
         return new Response("Not Found", { status: 404 })
       }
+
       return createManifestResponse(context.request)
     },
 

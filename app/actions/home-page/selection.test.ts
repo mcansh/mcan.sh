@@ -5,9 +5,7 @@ import { getIndex } from "./selection.ts"
 
 test("selection query values become zero-based indices", () => {
   for (let max of [4, 5]) {
-    for (let value = 1; value <= max; value++) {
-      assert.equal(getIndex(String(value), max), value - 1)
-    }
+    for (let value = 1; value <= max; value++) assert.equal(getIndex(String(value), max), value - 1)
   }
 })
 

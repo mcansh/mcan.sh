@@ -130,8 +130,10 @@ export const jsxNoLeakedRenderRule = defineRule({
             node.operator === "||=" ||
             node.operator === "&&=" ||
             node.operator === "??="
-          )
+          ) {
             checkRendered(node.right)
+          }
+
           break
         case "AwaitExpression":
           checkRendered(node.argument)
@@ -140,6 +142,7 @@ export const jsxNoLeakedRenderRule = defineRule({
           for (let element of node.elements) {
             if (element !== null && element.type !== "SpreadElement") checkRendered(element)
           }
+
           break
         case "SequenceExpression": {
           let last = node.expressions.at(-1)
@@ -155,8 +158,10 @@ export const jsxNoLeakedRenderRule = defineRule({
         if (
           node.parent.type === "JSXAttribute" &&
           (node.parent.name.type !== "JSXIdentifier" || node.parent.name.name !== "children")
-        )
+        ) {
           return
+        }
+
         checkRendered(node.expression)
       },
     }
