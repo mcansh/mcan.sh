@@ -51,7 +51,7 @@ export default defineConfig({
     },
   },
   rules: {
-    curly: ["error", "multi-or-nest"],
+    curly: ["error", "multi-line"],
     "oxc/no-accumulating-spread": "error",
     "typescript/no-non-null-assertion": "error",
     "anti-slop/no-array-filter-map": "error",

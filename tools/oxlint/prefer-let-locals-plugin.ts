@@ -6,8 +6,9 @@ function isModuleScopeDeclaration(node: ESTree.VariableDeclaration) {
 
   if (parent.type === "Program") return true
 
-  if (parent.type !== "ExportNamedDeclaration" && parent.type !== "ExportDefaultDeclaration")
+  if (parent.type !== "ExportNamedDeclaration" && parent.type !== "ExportDefaultDeclaration") {
     return false
+  }
 
   return parent.parent.type === "Program"
 }

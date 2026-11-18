@@ -10,8 +10,9 @@ const app = run({
     let mod = await import(/* @vite-ignore */ moduleUrl)
     let exported = mod[exportName]
 
-    if (!(exported instanceof Function))
+    if (!(exported instanceof Function)) {
       throw new Error(`Expected module ${moduleUrl} to export a function named ${exportName}`)
+    }
 
     return exported
   },

@@ -77,8 +77,9 @@ test("every homepage design renders numeric image dimensions and search metadata
     let nonceMatch = policy.match(/'nonce-([^']+)'/)
     assert.ok(nonceMatch)
     let nonce = nonceMatch[1]
-    for (let script of head.matchAll(/<script[^>]+type="application\/ld\+json"[^>]*>/g))
+    for (let script of head.matchAll(/<script[^>]+type="application\/ld\+json"[^>]*>/g)) {
       assert.ok(script[0].includes(`nonce="${nonce}"`))
+    }
 
     let imageMatch = html.match(/<img[^>]+alt="Logan McAnsh"[^>]*>/)
     assert.ok(imageMatch)
@@ -103,8 +104,9 @@ test("every homepage design renders numeric image dimensions and search metadata
     }
     assert.ok(data.image.includes("res.cloudinary.com/website-test/"))
     assert.doesNotMatch(html, /loganmcanish/)
-    if (design === 2 || design === 3)
+    if (design === 2 || design === 3) {
       assert.match(html, /href="https:\/\/linkedin\.com\/in\/loganmcansh"/)
+    }
   }
 })
 
@@ -192,14 +194,16 @@ test("production requires a valid CSP reporting URL", () => {
       ),
     )
   }
+
   let reportUrl = "https://reports.example.com/csp"
   assert.equal(
     parseEnv({ CLOUDINARY_CLOUD_NAME: "website-test", SENTRY_REPORT_URL: reportUrl }, "production")
       .SENTRY_REPORT_URL,
     reportUrl,
   )
-  for (let nodeEnv of ["development", "test"])
+  for (let nodeEnv of ["development", "test"]) {
     assert.doesNotThrow(() => parseEnv({ CLOUDINARY_CLOUD_NAME: "website-test" }, nodeEnv))
+  }
 })
 
 test("manifest aliases serve existing icons and support conditional requests", async () => {

@@ -39,9 +39,11 @@ test("router protects documents, static files, and missing routes", async () => 
   assert.ok(scripts.some((tag) => tag.includes('type="importmap"')))
   assert.ok(scripts.some((tag) => tag.includes('type="module"')))
   for (let script of scripts) {
-    if (!script.includes('type="application/json"'))
+    if (!script.includes('type="application/json"')) {
       assert.ok(script.includes(`nonce="${nonce}"`), script)
+    }
   }
+
   assert.match(csp, /style-src 'self' 'unsafe-inline' https:\/\/fonts\.googleapis\.com/)
   assert.match(csp, /font-src 'self' https:\/\/fonts\.gstatic\.com/)
   assert.match(csp, /https:\/\/res\.cloudinary\.com\/security-test\/image\/upload\//)
