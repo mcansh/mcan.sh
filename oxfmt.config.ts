@@ -6,6 +6,5 @@ export default defineConfig({
   ignorePatterns: IGNORE_PATTERNS,
   sortImports: true,
   sortPackageJson: true,
-  sortTailwindcss: true,
   semi: false,
 })
