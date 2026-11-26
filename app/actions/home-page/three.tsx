@@ -6,11 +6,6 @@ import { spaceY } from "../public/css-mixins.ts"
 import type { HomePageProps } from "./shared.tsx"
 import { DesignSwitcher } from "./shared.tsx"
 
-// ============================================================================
-// DESIGN OPTION 3: Work/Project Showcase
-// ============================================================================
-// Features work experience timeline and featured projects
-// Following landing-pages.md: consistent button styles, container styles
 export const homePageOptions = css({
   "&, body": {
     minHeight: "100dvh",
@@ -84,7 +79,6 @@ export function HomePage(handle: Handle<HomePageProps>) {
         "@media (width >= 64rem)": { paddingBlock: "8rem" },
       })}
     >
-      {/* Hero Section */}
       <section
         mix={css({
           maxWidth: "48rem",
@@ -150,7 +144,6 @@ export function HomePage(handle: Handle<HomePageProps>) {
         </p>
       </section>
 
-      {/* Experience Section */}
       <section
         mix={css({
           maxWidth: "48rem",
@@ -240,7 +233,6 @@ export function HomePage(handle: Handle<HomePageProps>) {
         </div>
       </section>
 
-      {/* Projects Section */}
       <section
         mix={css({
           maxWidth: "48rem",
@@ -363,7 +355,6 @@ export function HomePage(handle: Handle<HomePageProps>) {
         </div>
       </section>
 
-      {/* Footer Links */}
       <footer
         mix={css({
           marginTop: "5rem",

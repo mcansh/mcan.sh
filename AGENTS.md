@@ -5,13 +5,13 @@ This app was scaffolded with `remix new`. Use these conventions when continuing 
 ## Commands
 
 ```sh
-npm i
-npm run dev
-npm run build
-npm run preview
-npm run start
-npm test
-npm run typecheck
+pnpm i
+pnpm run dev
+pnpm run build
+pnpm run preview
+pnpm run start
+pnpm test
+pnpm run typecheck
 ```
 
 ## Building Features
@@ -21,8 +21,8 @@ Refer to ./.agents/skills/remix/SKILL.md
 ## Starter Layout
 
 - `app/actions/controller.tsx` owns the top-level route actions
-- `app/actions/home-page.tsx` and `app/actions/document.tsx` render the route-owned starter UI
-- `app/actions/public/` contains the browser runtime entry and interactive prompt button
+- `app/actions/home-page/` and `app/actions/document.tsx` render the route-owned starter UI
+- `app/actions/public/` contains the browser runtime entry and the design/font popover
 - `app/routes.ts` defines the shared route contract used by server and browser modules for type-safe hrefs
 - `app/router.ts` wires routes to route handlers and installs the standard Remix UI renderer used by actions
 - `app/entry.server.tsx` is the Cloudflare Worker fetch handler

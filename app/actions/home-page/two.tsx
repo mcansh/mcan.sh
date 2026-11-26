@@ -6,11 +6,6 @@ import { spaceY } from "../public/css-mixins.ts"
 import type { HomePageProps } from "./shared.tsx"
 import { DesignSwitcher } from "./shared.tsx"
 
-// ============================================================================
-// DESIGN OPTION 2: Profile-Focused with Bio & Skills
-// ============================================================================
-// Left-aligned layout with avatar, detailed bio, tech stack, and social links
-// Following section-layout.md: left-aligned sections, proper container pattern
 export const homePageOptions = css({
   "&, body": {
     minHeight: "100dvh",
@@ -31,7 +26,6 @@ export function HomePage(handle: Handle<HomePageProps>) {
         minHeight: "inherit",
       })}
     >
-      {/* Section wrapper - vertical padding */}
       <div
         mix={css({
           maxWidth: "56rem",
@@ -43,7 +37,6 @@ export function HomePage(handle: Handle<HomePageProps>) {
           justifyContent: "center",
         })}
       >
-        {/* Inner container - max-width, centering, horizontal padding */}
         <div
           mix={css({
             display: "flex",
@@ -56,7 +49,6 @@ export function HomePage(handle: Handle<HomePageProps>) {
             },
           })}
         >
-          {/* Avatar column - fixed width on desktop */}
           <div
             mix={css({
               width: "100%",
@@ -93,7 +85,6 @@ export function HomePage(handle: Handle<HomePageProps>) {
             />
           </div>
 
-          {/* Content column - flexible */}
           <div
             mix={css({
               minWidth: 0,
@@ -156,7 +147,6 @@ export function HomePage(handle: Handle<HomePageProps>) {
               source ecosystem.
             </p>
 
-            {/* Tech Stack */}
             <div
               mix={css({
                 marginBlockStart: "2rem",
@@ -210,7 +200,6 @@ export function HomePage(handle: Handle<HomePageProps>) {
               ))}
             </div>
 
-            {/* Social Links */}
             <div
               mix={css({
                 marginBlockStart: "2rem",

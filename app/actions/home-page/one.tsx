@@ -6,11 +6,6 @@ import { spaceY } from "../public/css-mixins.ts"
 import type { HomePageProps } from "./shared.tsx"
 import { DesignSwitcher } from "./shared.tsx"
 
-// ============================================================================
-// DESIGN OPTION 1: Minimal & Clean (Current style refined)
-// ============================================================================
-// A polished version of the existing design with better typography,
-// proper dark mode, and improved spacing following ui.sh guidelines
 export const homePageOptions = css({
   "&, body": {
     height: "100dvh",
