@@ -34,9 +34,7 @@ const app = run({
   },
 })
 
-if (import.meta.hot) {
-  import.meta.hot.on("server:update", () => revalidate(app))
-}
+if (import.meta.hot) import.meta.hot.on("server:update", () => revalidate(app))
 
 app.addEventListener("error", (event) => {
   captureException(event.error)

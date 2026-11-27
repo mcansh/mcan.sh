@@ -121,6 +121,7 @@ test("every homepage design renders numeric image dimensions and search metadata
     for (let script of head.matchAll(/<script[^>]+type="application\/ld\+json"[^>]*>/g)) {
       assert.ok(script[0].includes(`nonce="${nonce}"`))
     }
+
     let imageMatch = html.match(/<img[^>]+alt="Logan McAnsh"[^>]*>/)
     assert.ok(imageMatch)
     let image = imageMatch[0]
@@ -144,8 +145,9 @@ test("every homepage design renders numeric image dimensions and search metadata
     }
     assert.ok(data.image.includes("res.cloudinary.com/website-test/"))
     assert.doesNotMatch(html, /loganmcanish/)
-    if (design === 2 || design === 3)
+    if (design === 2 || design === 3) {
       assert.match(html, /href="https:\/\/linkedin\.com\/in\/loganmcansh"/)
+    }
   }
 })
 
@@ -237,6 +239,7 @@ test("production requires a valid CSP reporting URL", () => {
       ),
     )
   }
+
   let reportUrl = "https://reports.example.com/csp"
   assert.equal(
     parseEnv({ CLOUDINARY_CLOUD_NAME: "website-test", SENTRY_REPORT_URL: reportUrl }, "production")
@@ -423,9 +426,9 @@ test("design links navigate the document so layout styles update with the previe
     new URL(routes.home.href(undefined, { searchParams: { design: 4 } }), "https://mcan.sh").href,
   )
   let html = await response.text()
-  let links = [...html.matchAll(/<a\b[^>]*>/g)]
-    .map(([tag]) => tag)
-    .filter((tag) => tag.includes('data-rmx-target="preview"'))
+  let links = [...html.matchAll(/<a\b[^>]*>/g)].flatMap(([tag]) =>
+    tag.includes('data-rmx-target="preview"') ? [tag] : [],
+  )
   assert.ok(links.length > 0)
   for (let link of links) assert.match(link, /\bdata-rmx-document(?:\s|=|>)/)
 })

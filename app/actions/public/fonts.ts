@@ -36,9 +36,7 @@ export function bodyFontStylesheetUrl(family: string): string {
 }
 
 export function pickerPreviewStylesheetUrl(activeFamily: string): string {
-  let families = FONT_CONFIGS.map(([, family]) => family).filter(
-    (family) => family !== activeFamily,
-  )
+  let families = FONT_CONFIGS.flatMap(([, family]) => (family === activeFamily ? [] : [family]))
   return googleFontsStylesheetUrl(families, "400", PICKER_PREVIEW_TEXT)
 }
 
