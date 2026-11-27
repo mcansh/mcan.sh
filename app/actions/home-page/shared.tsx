@@ -19,7 +19,6 @@ import {
 export type HomePageProps = {
   me: {
     url: string
-    size: string
     srcSet: string
     width: number
     height: number
@@ -326,11 +325,11 @@ export function DesignSwitcher(handle: Handle<{ designIndex: number; fontIndex: 
 }
 
 const DESIGN_CONFIGS = [
-  ["Minimal", "Clean centered layout"],
-  ["Profile", "Left-aligned with bio & skills"],
-  ["Showcase", "Experience timeline + projects"],
-  ["Split", "Desktop split / mobile stacked"],
-] as const satisfies readonly [displayName: string, description: string][]
+  ["Minimal"],
+  ["Profile"],
+  ["Showcase"],
+  ["Split"],
+] as const satisfies readonly [displayName: string][]
 
 export const DESIGN_OPTIONS = DESIGN_CONFIGS.length
 
@@ -363,7 +362,7 @@ function createSrcSet(
   return sizes.map(([h, w], index) => {
     let url = getCloudinaryURL(cloudName, publicId, transformations(h, w))
 
-    return { url, size: `${h}x${w}`, density: index + 1, width: w, height: h }
+    return { url, density: index + 1, width: w, height: h }
   })
 }
 
@@ -412,7 +411,6 @@ export function getMe(designIndex: number, cloudName: string) {
 
   return {
     url: me.url.toString(),
-    size: me.size,
     srcSet: srcSet.map((x) => `${x.url.toString()} ${x.density}x`).join(", "),
     height: me.height,
     width: me.width,

@@ -47,7 +47,7 @@ export type ProfilePageJsonLd = {
 
 type JsonLd = PersonJsonLd | SchemaOrg.WebSite | ProfilePageJsonLd
 
-const DEFAULT_TITLE = readAppDisplayName("Logan McAnsh")
+const DEFAULT_TITLE = "Logan McAnsh"
 
 const PERSON_SAME_AS = [
   "https://github.com/mcansh",
@@ -171,8 +171,4 @@ export function Document(handle: Handle<DocumentProps>) {
       </html>
     )
   }
-}
-
-function readAppDisplayName(value: string): string {
-  return value.startsWith("%%") ? "Logan McAnsh" : decodeURIComponent(value)
 }

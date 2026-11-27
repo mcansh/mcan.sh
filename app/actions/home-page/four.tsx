@@ -6,12 +6,6 @@ import { spaceY } from "../public/css-mixins.ts"
 import type { HomePageProps } from "./shared.tsx"
 import { DesignSwitcher } from "./shared.tsx"
 
-// ============================================================================
-// DESIGN OPTION 4: Split Layout (Desktop) / Stacked (Mobile)
-// ============================================================================
-// Visual split with avatar on left, content on right (desktop)
-// Collapses to stacked centered layout on mobile
-// Following responsive-design.md: mobile-first, proper breakpoint usage
 export const homePageOptions = css({
   "&, body": {
     minHeight: "100dvh",
@@ -43,7 +37,6 @@ export function HomePage(handle: Handle<HomePageProps>) {
           maxWidth: "var(--container-5xl)",
         })}
       >
-        {/* Split layout on desktop, stacked on mobile */}
         <div
           mix={css({
             display: "grid",
@@ -56,7 +49,6 @@ export function HomePage(handle: Handle<HomePageProps>) {
             },
           })}
         >
-          {/* Left: Avatar & Visual */}
           <div
             mix={css({
               display: "flex",
@@ -195,7 +187,6 @@ export function HomePage(handle: Handle<HomePageProps>) {
             </div>
           </div>
 
-          {/* Right: Content */}
           <div>
             <div
               mix={css({
