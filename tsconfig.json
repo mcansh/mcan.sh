@@ -15,5 +15,5 @@
     "jsxImportSource": "remix/component",
     "noEmit": true
   },
-  "exclude": ["dist", "old-app", ".cloudflare"]
+  "exclude": ["dist", ".cloudflare"]
 }
